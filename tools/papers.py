@@ -96,7 +96,9 @@ def papers():
 def run_texmacs(calls):
     """Run Scheme CALLS in a headless TeXmacs with the private profile."""
     tm = os.environ.get("TEXMACS_BIN", "/Applications/TeXmacs.app/Contents/MacOS/TeXmacs")
-    cmd = (f"(begin (catch #t (lambda () {calls}) (lambda args (display \"SCHEME-ERROR \")"
+    # style-clear-cache: TeXmacs caches style environments in the profile,
+    # so changes to the style packages would otherwise be ignored.
+    cmd = (f"(begin (catch #t (lambda () (style-clear-cache) {calls}) (lambda args (display \"SCHEME-ERROR \")"
            f" (write args) (newline))) (quit-TeXmacs))")
     TM_HOME.mkdir(exist_ok=True)
     if not (TM_HOME / "plugins").exists():

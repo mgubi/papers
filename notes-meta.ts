@@ -39,6 +39,8 @@
   <assign|paper-index|<macro|<with|font-shape|italic|(The list of papers,
   generated from index.json by tools/papers.py index.)>>>
 
+  <assign|html-title|Papers of Massimiliano<nbsp>Gubinelli>
+
   <assign|html-head-favicon|resources/favicon-32x32.png>
 
   <assign|html-head-javascript-src|<tuple|resources/theme.js>>
