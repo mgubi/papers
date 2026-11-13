@@ -1,0 +1,2949 @@
+\documentclass[a4paper,11pt]{article}
+%\usepackage{}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,graphicx,stmaryrd,mathrsfs,xcolor,latexsym,theorem}
+%\usepackage[dvipsnames]{xcolor}
+\usepackage{xcolor}
+\usepackage[left= 2.5cm, bottom = 4cm, top = 3.5cm, right= 2.5cm]{geometry}
+\usepackage[citecolor=blue,colorlinks=true]{hyperref}
+\usepackage{authblk} % for affiliations
+\usepackage{tikz}
+%\usepackage{refcheck}
+
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\assign}{:=}
+\newcommand{\backassign}{=:}
+\newcommand{\cdummy}{\cdot}
+\newcommand{\mathd}{\mathrm{d}}
+\newcommand{\precprec}{\prec\!\!\!\prec}
+\newcommand{\tmaffiliation}[1]{\\ #1}
+\newcommand{\tmcolor}[2]{{\color{#1}{#2}}}
+\newcommand{\tmemail}[1]{\\ \textit{Email:} \texttt{#1}}
+\newcommand{\tmmathbf}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\tmrsup}[1]{\textsuperscript{#1}}
+\newcommand{\tmtextit}[1]{{\itshape{#1}}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+{\theorembodyfont{\rmfamily}\newtheorem{remark}[theorem]{Remark}}
+
+\numberwithin{equation}{section}
+\newcommand{\tmkeywords}{\textbf{Keywords:} }
+%%%%%%%%%% End TeXmacs macros
+
+
+\iffalse
+% old trees
+\newcommand{\tthree}[1]{#1\!\tmrsup{\resizebox{.6em}{!}{\includegraphics{trees/3_tree.eps}}}}
+\newcommand{\ttwor}[1]{#1\!\tmrsup{\resizebox{.6em}{!}{\includegraphics{trees/2r_tree_res.eps}}}}
+\newcommand{\tthreer}[1]{#1\!\tmrsup{\!\resizebox{.6em}{!}{\includegraphics{trees/3r_tree_res.eps}}}}
+\newcommand{\tthreeone}[1]{#1\!^{\!\resizebox{.6em}{!}{\includegraphics{trees/31_tree.eps}}}}
+\newcommand{\ttwo}[1]{#1\!\tmrsup{\!\resizebox{.7em}{!}{\includegraphics{trees/2_tree.eps}}}}
+\newcommand{\ttwothree}[1]{#1\!\tmrsup{\resizebox{.6em}{!}{\includegraphics{trees/23_tree.eps}}}}
+\newcommand{\tthreethree}[1]{#1\!\tmrsup{\resizebox{.9em}{!}{\includegraphics{trees/33_tree.eps}}}}
+\newcommand{\tthreetwo}[1]{#1\!\tmrsup{\resizebox{.9em}{!}{\includegraphics{trees/32_tree.eps}}}}
+\newcommand{\tthreethreer}[1]{#1\!^{\resizebox{.9em}{!}{\includegraphics{trees/33_tree_res.eps}}}}
+\newcommand{\tthreethreebr}[1]{#1\!\tmrsup{\resizebox{.9em}{!}{\includegraphics{trees/2a1_tree_res.eps}}}}
+\newcommand{\ttwoone}[1]{#1\!^{\resizebox{.6em}{!}{\includegraphics{trees/21_tree.eps}}}}
+\newcommand{\ttwothreer}[1]{#1\!^{\resizebox{.9em}{!}{\includegraphics{trees/23_tree_res.eps}}}}
+\newcommand{\tthreetwor}[1]{#1\!^{\resizebox{.9em}{!}{\includegraphics{trees/32_tree_res.eps}}}}
+\newcommand{\tone}[1]{#1\!\tmrsup{\resizebox{.4em}{!}{\includegraphics{trees/1_tree_mod.eps}}}}
+\newcommand{\tzero}[1]{#1\!\tmrsup{{\varnothing}}}
+\fi
+
+% new trees
+\newcommand{\tone}[1]{#1^{\resizebox{0.4em}{!}{\input{trees-tikz/1_tree_mod.tikz}}}}
+\newcommand{\tzero}[1]{#1^{\varnothing}}
+\newcommand{\tthree}[1]{#1^{\resizebox{0.6em}{!}{\input{trees-tikz/3_tree.tikz}}}}
+\newcommand{\ttwor}[1]{#1\tmrsup{\resizebox{0.6em}{!}{\input{trees-tikz/2r_tree_res.tikz}}}}
+\newcommand{\tthreer}[1]{#1\tmrsup{\!\resizebox{0.6em}{!}{\input{trees-tikz/3r_tree_res.tikz}}}}
+\newcommand{\ttwo}[1]{#1^{\!\resizebox{0.6em}{!}{\input{trees-tikz/2_tree.tikz}}}}
+
+\newcommand{\tthreeone}[1]{#1^{\!\resizebox{0.6em}{!}{\input{trees-tikz/31_tree.tikz}}}}
+\newcommand{\ttwoone}[1]{#1^{\!\resizebox{0.6em}{!}{\input{trees-tikz/21_tree_mod.tikz}}}}
+
+\newcommand{\tthreethree}[1]{#1\tmrsup{\!\resizebox{!}{.8em}{\input{trees-tikz/33_tree.tikz}}}}
+\newcommand{\tthreetwo}[1]{#1\tmrsup{\!\resizebox{!}{.8em}{\input{trees-tikz/32_tree.tikz}}}}
+\newcommand{\tthreethreer}[1]{#1^{\!\resizebox{!}{.8em}{\input{trees-tikz/33_tree_res.tikz}}}}
+\newcommand{\tthreethreerprime}[1]{#1^{\prime\!\resizebox{!}{.8em}{\input{trees-tikz/33_tree_res.tikz}}}}
+\newcommand{\ttwothreer}[1]{#1^{\!\resizebox{!}{.8em}{\input{trees-tikz/23_tree_res.tikz}}}}
+\newcommand{\tthreetwor}[1]{#1^{\!\resizebox{!}{.8em}{\input{trees-tikz/32_tree_res.tikz}}}}
+
+
+
+
+
+
+\newcommand{\CC}{\mathscr{C} \hspace{.1em}}
+\newcommand{\CD}{D{\hspace{.1em}}}
+\newcommand{\CF}{F{\hspace{.1em}}}
+\newcommand{\CB}{B{\hspace{.1em}}}
+\newcommand{\CA}{A{\hspace{.1em}}}
+\newcommand{\DD}{D{\hspace{.1em}}}
+\newcommand{\LL}{\mathscr{L} \hspace{.2em}}
+\newcommand{\Q}{\mathscr{Q} \hspace{.2em}}
+\newcommand{\SSS}{S{\hspace{.1em}}}
+\newcommand{\PP}{P{\hspace{.1em}}}
+\newcommand{\XX}{X}
+\newcommand{\UU}{\mathscr{U}}
+\newcommand{\VV}{V}
+%
+
+%
+
+\newcommand{\axiomtext}{Assumption}
+
+\begin{document}
+
+\title{A PDE construction of \\ the Euclidean $\Phi^4_3$ quantum field theory}
+
+\author[1]{Massimiliano Gubinelli}
+\author[2]{Martina Hofmanov\'a}
+\affil[1]{\small Hausdorff Center for Mathematics\\ \& Institute for Applied Mathematics\\ University of Bonn\\
+Endenicher Allee 60\\
+53115 Bonn, Germany.  \href{mailto:gubinelli@iam.uni-bonn.de}{gubinelli@iam.uni-bonn.de} }
+
+\affil[2]{\small Fakult\"at f\"ur Mathematik, Universit\"at Bielefeld, Postfach 10 01 31, 33501 Bielefeld, Germany. \href{mailto:hofmanova@math.uni-bielefeld.de}{hofmanova@math.uni-bielefeld.de}}
+
+
+
+\maketitle
+
+\begin{abstract}
+  We present a self-contained construction of the Euclidean $\Phi^4$ quantum
+  field theory on $\mathbb{R}^3$ based on PDE arguments. More precisely, we
+  consider an approximation of the stochastic quantization equation on
+  $\mathbb{R}^3$ defined on a periodic lattice of mesh size $\varepsilon$ and
+  side length $M$. We introduce 
+  an energy method and prove tightness of the corresponding Gibbs measures as
+  $\varepsilon \rightarrow 0$, $M \rightarrow \infty$. We show that every limit point satisfies reflection positivity, translation invariance and non-triviality (i.e. non-Gaussianity). Our argument applies to arbitrary positive coupling constant and also to multicomponent models with $O(N)$ symmetry.
+\end{abstract}
+
+\tmkeywords{stochastic quantization, Euclidean quantum field theory,
+paracontrolled calculus}
+
+{\tableofcontents}
+
+\section{Introduction}
+
+\label{sec:intro}
+
+
+The existence and non-triviality of the 3 dimensional Euclidean $\Phi^{4}$ quantum field theory was a grand achievement of the constructive quantum field theory program carried out in the '70 and '80. The complexity of the problem attracted the interest of a large group of researchers and gave rise to various advanced mathematical tools.
+We refer the reader to the classical book by Glimm and Jaffe~\cite{MR887102} as well as the references therein, and to Albeverio and Kusuoka~{\cite{albeverio_invariant_2017}} for
+further historical background. Since the first construction, more streamlined arguments and simpler proofs has been found, see e.g.~Brydges, Fr\"ohlich, Sokal~\cite{MR723546} and Sokal~\cite{S82}, and overall the Euclidean $\Phi^4_3$ field theory has been constructed in
+at least five different ways. Note that one of the main challenges in the construction is to verify the non-triviality (i.e. non-Gaussianity) of the resulting field theory as well as its further physical properties, formulated as the so-called Osterwalder--Schrader axioms, see~\cite{MR887102}.
+
+
+
+Very recently, there has been a great progress in the field of singular
+stochastic PDEs due to Hairer~\cite{hairer_theory_2014} and Gubinelli, Imkeller, Perkowski~\cite{GIP}. New ideas were introduced which allowed to solve certain stochastic PDEs that are analytically ill-posed, as for instance the $\Phi_{3}^{4}$ stochastic quantization equation describing the natural reversible dynamics for the $\Phi^{4}_{3}$ for the quantum field theory. The first results established  local-in-time well-posedness in a finite volume, see Hairer~\cite{hairer_theory_2014}, Catellier, Chouk~\cite{CC}. In a finite volume, lattice approximation was given by Zhu, Zhu in~\cite{ZZ18} and long time behavior  was studied by Hairer, Mattingly~\cite{Hairer:2018:10.1214/17-AIHP840} and Mourrat, Weber~\cite{MWcomedown}. The first global space-time solutions were constructed by the authors  in~\cite{GH18}.
+
+\ 
+
+In the present paper, we bring the ideas from the classical PDE theory as well as the field of singular SPDEs into the constructive quantum field theory and present a simple construction of the Euclidean $\Phi^{4}$ on $\mathbb{R}^{3}$.
+More precisely, we consider the Gibbs measure $\nu_{M, \varepsilon}$ on
+$\mathbb{R}^{\Lambda_{M, \varepsilon}}$ proportional to
+\begin{equation}
+  \exp \left\{ - 2 \varepsilon^d  \sum_{x \in \Lambda_{M, \varepsilon}} \left[
+  \frac{\lambda}{4} | \varphi |^4 + \frac{- 3 a_{M, \varepsilon} + 3 b_{M,
+  \varepsilon} + m^2}{2} | \varphi |^2 + \frac{1}{2} | \nabla_{\varepsilon}
+  \varphi |^2 \right] (x) \right\}  \prod_{x \in \Lambda_{M, \varepsilon}}
+  \mathd \varphi (x), \label{eq:gibbs}
+\end{equation}
+where $\nabla_{\varepsilon}$ denotes the discrete gradient and $a_{M,
+\varepsilon}, b_{M, \varepsilon}$ are suitable renormalization constants, $m^2
+> 0$ is the mass, $\lambda > 0$ the coupling constant and the lattice
+$\Lambda_{M, \varepsilon} = (\varepsilon (\mathbb{Z}/ M\mathbb{Z}))^3$ is
+chosen periodic with mesh size $\varepsilon$ and side length $M$.
+We show that it is possible to choose the renormalization constants $(a_{M, \varepsilon},
+b_{M, \varepsilon})_{M, \varepsilon}$ such that the family  $(\nu_{M,
+\varepsilon})_{M, \varepsilon}$ is tight as a family of probability measures
+on $\mathcal{S}' (\mathbb{R}^3)$. Accordingly, we are able  remove both the ultraviolet
+ $(\varepsilon \rightarrow 0)$ and the infrared regularization ($M
+\rightarrow \infty$) and to prove the existence of a non-Gaussian measure $\nu$
+on $\mathcal{S}' (\mathbb{R}^3)$ satisfying the Osterwalder--Schrader axioms
+for Euclidean bosonic quantum field theories, see Glimm and Jaffe~{\cite{MR887102}}.
+
+
+
+In order to derive bounds which are strong enough to perform the above outlined strategy, we rely on PDE
+arguments. To be more precise, we study a lattice approximation of the stochastic
+quantization equation
+\begin{equation}
+  (\partial_t + m^2 - \Delta) \varphi + \varphi^3 - \infty \varphi =
+  \xi, \qquad (t, x) \in \mathbb{R}_+ \times \mathbb{R}^3,
+  \label{eq:P4}
+\end{equation}
+where $\xi$ is a space-time white noise on $\mathbb{R}^3$. The lattice
+dynamics is a system of stochastic differential equation which is globally
+well-posed and has $\nu_{M, \varepsilon}$ as its unique invariant measure. We
+can therefore consider its stationary solution 
+$\varphi_{M, \varepsilon}$ having at each time the law $\nu_{M, \varepsilon}$. We introduce a suitable decomposition of the lattice dynamics together with an energy method in the framework of weighted Besov spaces that allows us, on the one hand, to track down and renormalize the short scale singularities present in the model
+as $\varepsilon \rightarrow 0$, and on the other hand, to control the divergencies appearing as $M\to\infty$.
+
+Consequently, we obtain the desired uniform bounds on the approximate solutions $(\varphi_{M, \varepsilon})_{M, \varepsilon}$.
+Starting from the lattice approximation guarantees that the limit measure $\nu$ on $\mathcal{S}' (\mathbb{R}^d)$ is translation invariant, reflection positive and non-trivial. Our
+method applies to arbitrary values of the coupling constant $\lambda > 0$ as well as to the
+vector version of the model where the scalar field $\varphi : \mathbb{R}^3
+\rightarrow \mathbb{R}$ is replaced by a vector valued one $\varphi :
+\mathbb{R}^3 \rightarrow \mathbb{R}^N$ for some $N \geqslant 1$ and the
+measures $\nu_{M, \varepsilon}$ are given by a similar expression as~{\eqref{eq:gibbs}},
+where the norm $| \varphi |$ is understood as the Euclidean norm in
+$\mathbb{R}^N$.
+
+
+Our proof is conceptually quite straightforward and partly inspired by the work of
+Albeverio and Kusuoka~{\cite{albeverio_invariant_2017}} which pointed out that one could use the renormalized stochastic dynamics to prove tightness of the finite volume $\Phi^4_3$ theory. 
+The details of the
+renormalized energy method rely on recent developments in the analysis of
+singular PDEs and in particular in the paracontrolled calculus of Gubinelli,
+Imkeller and Perkowski~{\cite{GIP}} and in the tools developed
+in~{\cite{GH18}} to deal with paracontrolled analysis in weighted spaces,
+necessary to get uniform bounds in the infinite volume limit. 
+
+
+
+However, the method introduced in the present paper is very different from the above cited works. In particular, we are  less concerned with the continuum dynamics itself:  we do not try to obtain estimates for strong solutions and instead rely on certain cancellations in the energy estimate, which permit to significantly simplify the estimations. The obtained bounds are sufficient to provide a quite clear picture of any limit measure $\nu$ and its physical properties and therefore it  is not necessary to pass to the limit in the equation.
+
+  
+
+
+
+To conclude this introductory part, let us compare our result with other  constructions of the $\Phi^{4}$ field theory. The most
+straightforward and simplest available proof has been given by Brydges,
+Fr{\"o}hlich and Sokal~{\cite{MR723546}} using skeleton equations and
+correlation inequalities. All the other methods employ technically involved
+machineries and various kinds of expansions (they are, however, able to
+deduce more precise results in the small coupling regime).
+Compared to the existing methods, ours bears similarity in conceptual
+simplicity to that of ~{\cite{MR723546}}, with some advantages and some disadvantages:
+\begin{itemize}
+  \item Our method applies to any $O (N)$ model with $N \geqslant 1$, whereas {\cite{MR723546}} can deal only with  models where $N = 0, 1, 2$.
+  
+  \item We can prove non-triviality for any value of $\lambda$ and any $N
+  \geqslant 1$, whereas~{\cite{MR723546}} obtain  non-triviality only for small coupling constants.
+  
+  \item We do not have any control of the mass gap, whereas~{\cite{MR723546}} do.
+  
+  \item Like~{\cite{MR723546}} we do not have a proof of rotational invariance for the
+  limiting measure.
+  
+  \item We obtain bounds for any correlation function and assuming a correlation inequality (as in~{\cite{MR723546}}) we can recover
+  the regularity and analyticity axiom of Osterwalder--Schrader. \
+  
+ 
+\end{itemize}
+
+\
+
+The paper is organized as follows. Section \ref{s:not} gives a summary of notation used throughout the paper. Section \ref{sec:tight} and Section~\ref{s:ax} present our main results. First, in Section \ref{sec:tight} we construct a Euclidean quantum field theory $\nu$ as a limit of approximate Gibbs measures $\nu_{M,
+\varepsilon}$. To this end, we first introduce the lattice dynamics as well as
+its decomposition. The main energy estimate is established in Theorem~\ref{th:energy-estimate} and consequently the desired tightness as well as the moment bounds are proven in
+Theorem~\ref{thm:main}. In Section~\ref{s:ax}
+we show the translation invariance, reflection positivity and non-triviality of the limiting quantum field theory. Finally, in Section~\ref{s:app} we collect a number of technical results needed in the main body of the paper.
+
+
+\paragraph{Acknowledgement.} The authors would like to thank the Isaac Newton Institute for Mathematical Sciences for support and hospitality during the programme Scaling limits, rough paths, quantum field theory when work on this paper was undertaken. This work was supported by EPSRC Grant Number EP/R014604/1. M. G. is partially supported by the German Research Foundation (DFG) via CRC 1060.
+
+
+
+\section{Notation}
+
+\label{s:not}Within this paper we are concerned with the $\Phi^4_3$ model in
+discrete as well as continuous setting. In particular, we denote by
+$\Lambda_{\varepsilon} = (\varepsilon \mathbb{Z})^d$ for $\varepsilon = 2^{-
+N}$, $N \in \mathbb{N}_0$, the rescaled lattice $\mathbb{Z}^d$ and by
+$\Lambda_{M, \varepsilon} = \varepsilon \mathbb{Z}^d \cap \mathbb{T}^d_M =
+\varepsilon \mathbb{Z}^d \cap \left[ - \frac{M}{2}, \frac{M}{2} \right)^d$ its
+periodic counterpart of size $M > 0$. For notational simplicity, we use the
+convention that the case $\varepsilon = 0$ always refers to the continuous
+setting. For instance, we denote by $\Lambda_0$ the full space $\Lambda_0
+=\mathbb{R}^d$ and by $\Lambda_{M, 0}$ the continuous torus $\Lambda_{M, 0}
+=\mathbb{T}^d_M$. With the slight abuse of notation, the parameter
+$\varepsilon$ is always taken either of the form $\varepsilon = 2^{- N}$ for
+some $N \in \mathbb{N}_0$, $N \geqslant N_0$, for certain $N_0 \in
+\mathbb{N}_0$ that will be chosen as a consequence of Lemma~\ref{lem:equiv}
+below, or $\varepsilon = 0$. Various proofs below will be formulated generally
+for $\varepsilon \in \mathcal{A} \assign \{ 0, 2^{- N} ; N \in \mathbb{N}_0, N
+\geqslant N_0 \}$ and it is understood that the case $\varepsilon = 0$ or
+alternatively $N = \infty$ refers to the continuous setting. All the proportionality constants will be independent of $M,\varepsilon$.
+
+\medskip
+
+
+For $f \in \ell^1
+(\Lambda_{\varepsilon})$ and $g \in L^1 (\hat{\Lambda}_{\varepsilon})$, respectively, we define the Fourier and the inverse Fourier transform as
+\[ \mathcal{F} f (k) = \varepsilon^d \sum_{x \in \Lambda_{\varepsilon}} f (x)
+   e^{- 2 \pi i k \cdummy x}, \qquad \mathcal{F}^{- 1} g (x) = \int_{(\varepsilon^{- 1} \mathbb{T})^d} g (k)
+   e^{2 \pi i k \cdummy x} \mathd k, \]
+   where $k \in (\varepsilon^{- 1} \mathbb{T})^d
+   \backassign \hat{\Lambda}_{\varepsilon}$ and $x \in \Lambda_{\varepsilon}$.
+These definitions can be extended to discrete Schwartz distributions in a
+natural way, we refer to {\cite{MP17}} for more details. In general, we do not
+specify on which lattice the Fourier transform is taken as it will be clear
+from the context.
+
+Consider a smooth dyadic partition of unity $(\varphi_j)_{j \geqslant - 1}$
+such that $\varphi_{- 1}$ is supported in a ball around $0$ of radius
+$\frac{1}{2}$, $\varphi_0$ is supported in an annulus, $\varphi_j (\cdummy) =
+\varphi_0 (2^{- j} \cdummy)$ for $j \geqslant 0$ and if $| i - j | > 1$ then
+$\tmop{supp} \varphi_i \cap \tmop{supp} \varphi_j = \emptyset$. For the
+definition of Besov spaces on the lattice $\Lambda_{\varepsilon}$ for
+$\varepsilon = 2^{- N}$, we introduce a suitable periodic partition of unity
+on $\hat{\Lambda}_{\varepsilon}$ as follows
+\begin{equation}
+  \varphi^{\varepsilon}_j (x) \assign \left\{ \begin{array}{lll}
+    \varphi_j (x), &  & j < N - J,\\
+    1 - \sum_{j < N - J} \varphi_j (x), &  & j = N - J,
+  \end{array} \right. \label{eq:p1}
+\end{equation}
+where $x \in \hat{\Lambda}_{\varepsilon}$ and the parameter $J \in
+\mathbb{N}_0$, whose precise value will be chosen below independently on
+$\varepsilon \in \mathcal{A}$, satisfies $0 \leqslant N - J \leqslant
+J_{\varepsilon} \assign \inf \{ j : \tmop{supp} \varphi_j \cap \partial
+(\varepsilon^{- 1} \mathbb{T})^d \neq \emptyset \} \rightarrow \infty$ as
+$\varepsilon \rightarrow 0$. We note that by construction there exists $\ell
+\in \mathbb{Z}$ independent of $\varepsilon = 2^{- N}$ such that
+$J_{\varepsilon} = N - \ell$.
+
+Then {\eqref{eq:p1}} yields a periodic partition of unity on
+$\hat{\Lambda}_{\varepsilon}$. The reason for choosing the upper index as $N -
+J$ and not the maximal choice $J_{\varepsilon}$ will become clear in Lemma
+\ref{lem:equiv} below, where it allows us to define suitable localization
+operators needed for our analysis. The choice of parameters $N_0$ and $J$ is
+related in the following way: A given partition unity $(\varphi_j)_{j
+\geqslant - 1}$ determines the parameters $J_{\varepsilon}$ in the form
+$J_{\varepsilon} = N - \ell$ for some $\ell \in \mathbb{Z}$. By the condition
+$N - J \leqslant J_{\varepsilon}$ we obtain the first lower bound on $J$. Then
+Lemma~\ref{lem:equiv} yields a (possibly larger) value of $J$ which is fixed
+throughout the paper. Finally, the condition $0 \leqslant N - J$ implies
+the necessary lower bound $N_0$ for $N$, or alternatively the upper bound for
+$\varepsilon = 2^{- N} \leqslant 2^{- N_0}$ and defines the set $\mathcal{A}$.
+We stress that once the parameters $J, N_0$ are chosen, they remain fixed
+throughout the paper.
+
+Remark that according to our convention, $(\varphi^0_j)_{j \geqslant - 1}$
+denotes the original partition of unity $(\varphi_j)_{j \geqslant - 1}$ on
+$\mathbb{R}^d$, which can be also read from {\eqref{eq:p1}} using the
+fact that for $\varepsilon = 0$ we have $J_{\varepsilon} = \infty$.
+
+Now we may define the Littlewood--Paley blocks for distributions on
+$\Lambda_{\varepsilon}$ by
+\[ \Delta_j^{\varepsilon} f \assign \mathcal{F}^{- 1} (\varphi_j^{\varepsilon}
+   \mathcal{F} f), \]
+which leads us to the definition of weighted Besov spaces. Throughout the paper, $\rho$ denotes a polynomial weight of the form  $\rho (x) =
+\langle x \rangle^{- \nu} = (1 + | x |^2)^{- \nu / 2}$ for some $\nu \geqslant
+0$. Such weights satisfy the admissibility condition $\rho(x)/\rho(y)\lesssim \rho^{-1}(x-y)$
+for all $ x, y
+   \in \mathbb{R}^d . $
+For $\alpha \in \mathbb{R}$, $p, q \in [1, \infty]$ and $\varepsilon \in [0,
+1]$ we define the weighted Besov spaces on $\Lambda_{\varepsilon}$ by the norm
+\[ \| f \|_{B^{\alpha, \varepsilon}_{p, q} (\rho)} = \Bigg( \sum_{- 1
+   \leqslant j \leqslant N - J} 2^{\alpha j q} \| \Delta_j^{\varepsilon} f
+   \|_{L^{p, \varepsilon} (\rho)}^q \Bigg)^{1 / q} = \Bigg( \sum_{- 1
+   \leqslant j \leqslant N - J} 2^{\alpha j q} \| \rho \Delta_j^{\varepsilon}
+   f \|_{L^{p, \varepsilon}}^q \Bigg)^{1 / q}, \]
+where $L^{p, \varepsilon}$ for $\varepsilon \in \mathcal{A} \setminus \{ 0 \}$
+stands for the $L^p$ space on $\Lambda_{\varepsilon}$ given by the norm
+\[ \| f \|_{L^{p, \varepsilon}} = \Bigg( \varepsilon^d \sum_{x \in
+   \Lambda_{\varepsilon}} | f (x) |^p \Bigg)^{1 / p} \]
+(with the usual modification if $p = \infty$). Analogically, we may define the weighted Besov spaces for explosive polynomial weights of the form $\rho^{-1}$. Note that if $\varepsilon = 0$
+then $B^{\alpha, \varepsilon}_{p, q} (\rho)$ is the classical weighted Besov
+space $B^{\alpha}_{p, q} (\rho)$. In the sequel, we also employ the following
+notations
+\[ \CC^{\alpha, \varepsilon} (\rho) \assign B^{\alpha, \varepsilon}_{\infty,
+   \infty} (\rho), \qquad H^{\alpha, \varepsilon} (\rho) \assign B^{\alpha,
+   \varepsilon}_{2, 2} (\rho) . \]
+In Lemma \ref{lem:equiv2}  we show that one can pull the weight
+inside the Littlewood--Paley blocks in the definition of the weighted Besov
+spaces. Namely, under suitable assumptions on the weight that are satisfied by
+polynomial weights we have
+$ \| f \|_{B^{\alpha, \varepsilon}_{p, q} (\rho)} \sim \| \rho f
+   \|_{B^{\alpha, \varepsilon}_{p, q}} $
+in the sense of equivalence of norms, uniformly in $\varepsilon$.   We define the duality product on
+$\Lambda_{\varepsilon}$ by
+\[ \langle f, g \rangle_{\varepsilon} \assign \varepsilon^d \sum_{x \in
+   \Lambda_{\varepsilon}} f (x) g (x)  \]
+and Lemma~\ref{lem:dual2} shows that $B^{- \alpha, \varepsilon}_{p', q'} (\rho^{- 1})$ is
+included in the topological dual of $B^{\alpha, \varepsilon}_{p, q} (\rho)$
+for conjugate exponents $p, p'$ and $q, q'$.
+
+
+
+
+
+
+\medskip
+
+
+Throughout the paper we employ the tools from paracontrolled calculus as
+introduced in {\cite{GIP}}. The reader is also referred to {\cite{BCD}} for
+further details. We shall then freely use the decomposition $f g = f \prec g +
+f \circ g + f \succ g$, where $f \succ g = g \succ f$ and $f \circ g$,
+respectively, stands for the paraproduct of $f$ and $g$ and the corresponding
+resonant term, defined in terms of Littlewood--Paley decomposition. More
+precisely, for $f, g \in \mathcal{S}' (\Lambda_{\varepsilon})$ we let
+\[ f \prec g \assign \sum_{1 \leqslant i, j \leqslant N - J, i < j - 1}
+   \Delta^{\varepsilon}_i f \Delta^{\varepsilon}_j g, \qquad f \circ g \assign
+   \sum_{1 \leqslant i, j \leqslant N - J, i \sim j} \Delta^{\varepsilon}_i f
+   \Delta^{\varepsilon}_j g. \]
+For notational simplicity, we do not stress the dependence of the paraproduct
+and the resonant term on $\varepsilon$ in the sequel. These paraproducts
+satisfy the usual estimates uniformly in $\varepsilon$, see e.g.
+{\cite{MP17}}, Lemma 4.2, which can be naturally extended to general
+$B^{\alpha, \varepsilon}_{p, q} (\rho)$ Besov spaces as in {\cite{MW17}},
+Theorem 3.17.   
+   
+
+
+
+
+\section{Construction of the Euclidean $\Phi^4$ field theory}
+
+\label{sec:tight}This section is devoted to our main result. More precisely,
+we consider a discrete approximation of {\eqref{eq:P4}} posed on a periodic
+lattice $\Lambda_{M, \varepsilon}$, which for every $\varepsilon \in (0, 1)$
+and $M > 0$ possesses a unique invariant measure that is a Gibbs measure. Then
+we derive new estimates on stationary solutions sampled from these measures
+which hold true uniformly in $\varepsilon$ and $M$. As a consequence, we
+obtain tightness of the invariant measures while sending both the mesh size as
+well as the volume to their respective limits, i.e. $\varepsilon \rightarrow
+0$, $M \rightarrow \infty$.
+
+\subsection{Lattice dynamics}
+
+Throughout this section we set $d = 3$. Let $\xi$ be a space-time white noise
+on $\mathbb{R}^d$, let $\xi_M$ denote its periodization on $\mathbb{T}^d_M$
+given by
+\[ \xi_M (h) \assign \xi (h_M), \qquad \tmop{where} \quad h_M (t, x) \assign
+   \tmmathbf{1}_{\left[ - \frac{M}{2}, \frac{M}{2} \right)^d} (x) \sum_{y \in
+   M\mathbb{Z}^d} h (t, x + y), \]
+and define the corresponding spatial discretization by
+\[ \xi_{M, \varepsilon} (t, x) \assign \varepsilon^{- d} \langle \xi_M (t,
+   \cdummy), \tmmathbf{1}_{| \cdummy - x | \leqslant \varepsilon / 2} \rangle,
+   \qquad (t, x) \in \mathbb{R} \times \Lambda_{M, \varepsilon} . \]
+We introduce a discrete version of {\eqref{eq:P4}} given by
+\begin{equation}
+  \LL_{\varepsilon} \varphi + \varphi_{}^3 + (- 3 a_{M, \varepsilon} + 3 b_{M,
+  \varepsilon}) \varphi = \xi_{M, \varepsilon}, \qquad x \in \Lambda_{M,
+  \varepsilon} . \label{eq:moll}
+\end{equation}
+Here $a_{M, \varepsilon}, b_{M, \varepsilon} \in \mathbb{R}$ stand for
+suitable renormalization constants, $\LL_{\varepsilon} \assign \partial_t +
+\Q_{\varepsilon}$, $\Q_{\varepsilon} \assign m^{2} - \Delta_{\varepsilon}$ and
+$\Delta_{\varepsilon}$ is the discrete Laplacian on $\Lambda_{\varepsilon}$
+given by
+\[ \Delta_{\varepsilon} f (x) = \varepsilon^{- 2} \sum_{i = 1}^d (f (x +
+   \varepsilon e_i) - 2 f (x) + f (x - \varepsilon e_i)), \qquad x \in
+   \Lambda_{\varepsilon}, \]
+where $(e_i)_{i = 1, \ldots, d}$ is the canonical basis of $\mathbb{R}^d$. It
+can be checked by a direct computation that the integration by parts formula
+\[ \langle \Delta_{\varepsilon} f, g \rangle_{M, \varepsilon} = - \langle
+   \nabla_{\varepsilon} f, \nabla_{\varepsilon} g \rangle_{M, \varepsilon} = -
+   \varepsilon^d \sum_{x \in \Lambda_{M, \varepsilon}} \sum_{i = 1}^d \frac{f
+   (x + \varepsilon e_i) - f (x)}{\varepsilon}  \frac{g (x + \varepsilon e_i)
+   - g (x)}{\varepsilon} \]
+holds for the discrete gradient
+\[ \nabla_{\varepsilon} f (x) = \left( \frac{f (x + \varepsilon e_i) - f
+   (x)}{\varepsilon} \right)_{i = 1, \ldots, d} . \]
+Then {\eqref{eq:moll}} is a finite-dimensional SDE in the gradient form
+\[ \partial_t \varphi_{\varepsilon} = - \frac{\delta V_{M, \varepsilon}
+   (\varphi_{\varepsilon})}{\delta \varphi_{\varepsilon}} + \xi_{M,
+   \varepsilon}, \]
+with
+\begin{equation}\label{eq:20} V_{M, \varepsilon} (\varphi) = \varepsilon^d \sum_{x \in \Lambda_{M,
+   \varepsilon}} \left[ \frac{1}{4} | \varphi |^4 + \frac{- 3 a_{M,
+   \varepsilon} + 3 b_{M, \varepsilon} + m^{2}}{2} | \varphi |^2 + \frac{1}{2} |
+   \nabla_{\varepsilon} \varphi |^2 \right]  (x) .
+   \end{equation}
+Therefore, it has a unique invariant measure $\nu_{M, \varepsilon}$ given by
+the formula
+\begin{equation}\label{eq:19}
+ \nu_{M, \varepsilon} (\mathd \varphi) = \frac{1}{Z_{M, \varepsilon}} \exp
+   \{ - 2 V_{M, \varepsilon} (\varphi) \} \prod_{x \in \Lambda_{M,
+   \varepsilon}} \mathd \varphi (x),
+   \end{equation}
+where $Z_{M, \varepsilon}$ is a normalization constant  and $\mathd \varphi$ denotes the Lebesgue measure.
+
+\subsection{Stochastic terms}
+
+\label{ssec:stoch}Let $X_{M, \varepsilon}$ be a stationary solution to
+$\LL_{\varepsilon} X_{M, \varepsilon} = \xi_{M, \varepsilon}$ and define
+$\llbracket X_{M, \varepsilon}^2 \rrbracket \assign X_{M, \varepsilon}^2 -
+a_{M, \varepsilon}$ and $\llbracket X_{M, \varepsilon}^3 \rrbracket \assign
+X_{M, \varepsilon}^3 - 3 a_{M, \varepsilon} X_{M, \varepsilon}$, where $a_{M,
+\varepsilon}$ is a suitable renormalization constant. All the distributions on
+$\Lambda_{M, \varepsilon}$ are extended periodically to the full lattice
+$\Lambda_{\varepsilon}$. Let $\LL_{\varepsilon}^{- 1}$ to be the inverse of
+$\LL_{\varepsilon}$ on $\Lambda_{\varepsilon}$ such that $\LL_{\varepsilon}^{-
+1} f = v$ is a solution to $\LL_{\varepsilon} v = f$, $v (0) = 0.$ Then we let
+$\tthreeone{X_{M, \varepsilon}}$ be a stationary solution to
+$\LL_{\varepsilon} \tthreeone{X_{M, \varepsilon}} = \llbracket X_{M,
+\varepsilon}^3 \rrbracket$, that is, $\tthreeone{X_{M, \varepsilon}} =
+\tthreeone{X_{M, \varepsilon}} (0) + \LL_{\varepsilon}^{- 1} \llbracket X_{M,
+\varepsilon}^3 \rrbracket$ with $\tthreeone{X_{M, \varepsilon}} (0) = \int_{-
+\infty}^0 P^{\varepsilon}_{- s} \llbracket X_{M, \varepsilon}^3 \rrbracket (s)
+\mathd s$, where $P^{\varepsilon}_t$ denotes the semigroup generated by
+$\LL_{\varepsilon}$ on $\Lambda_{\varepsilon}$. Then it holds for every
+$\kappa, \sigma > 0$ and some $\beta > 0$ small
+\[ \| \tthreeone{X_{M, \varepsilon}} \|_{C_T \CC^{1 / 2 - \kappa,
+   \varepsilon} (\rho^{\sigma})} + \| \tthreeone{X_{M, \varepsilon}}
+   \|_{C_T^{\beta / 2} L^{\infty, \varepsilon} (\rho^{\sigma})} \lesssim
+   1, \]
+uniformly in $M, \varepsilon$ thanks to the presence of the weight. Throughout
+our analysis, we fix $\kappa, \beta > 0$ in the above estimate such that
+$\beta \geqslant 3 \kappa$. This condition will be needed for the control of
+a parabolic commutator  in Lemma
+\ref{lemma:bounds-rhs1} below. On the other hand, the parameter $\sigma > 0$
+varies from line to line and can be arbitrarily small.
+
+If $\UU^{\varepsilon}_{>}$ is a localizer defined for some given constant $L >
+0$ according to Lemma \ref{lem:loc}, we let $Y_{M, \varepsilon}$ be the
+solution of
+\begin{equation}
+  \LL_{\varepsilon} Y_{M, \varepsilon} = - \llbracket X_{M, \varepsilon}^3
+  \rrbracket - 3 \left( \UU^{\varepsilon}_{>} \llbracket X_{M, \varepsilon}^2
+  \rrbracket \right) \succ Y_{M, \varepsilon}, \qquad Y_{M, \varepsilon} (0) =
+  - \tthreeone{X_{M, \varepsilon}} (0) . \label{eq:Y1}
+\end{equation}
+Consequently, {\eqref{eq:Y1}} rewrites as
+\begin{equation}\label{eq:YY}
+Y_{M, \varepsilon} = -
+\tthreeone{X_{M, \varepsilon}} - \LL_{\varepsilon}^{- 1} [ 3 (
+\UU^{\varepsilon}_{>} \llbracket X_{M, \varepsilon}^2 \rrbracket ) \succ Y_{M,
+\varepsilon} ].
+\end{equation}
+Note that this is an equation for $Y_{M, \varepsilon}$,
+which also implies that $Y_{M, \varepsilon}$ is not a polynomial of the
+Gaussian noise. However, as shown in the following lemma, $Y_{M, \varepsilon}$
+can be constructed as a fixed point provided $L$ is large enough.
+
+\begin{lemma}
+  \label{lem:Y1}There exists $L > 0$ such that {\eqref{eq:Y1}} has a unique
+  solution $Y_{M, \varepsilon}$ that belongs to $C_T \CC^{1 / 2 - \kappa}
+  (\rho^{\sigma}) \cap C_T^{\beta / 2} L^{\infty} (\rho^{\sigma})$.
+  Furthermore, it holds
+  \[ \| Y_{M, \varepsilon} \|_{C_T \CC^{1 / 2 - \kappa, \varepsilon}
+     (\rho^{\sigma})} \lesssim \| \tthreeone{X_{M, \varepsilon}}
+     \|_{C_T \CC^{1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})}, \]
+  \[ \| Y_{M, \varepsilon} \|_{C_T^{\beta / 2} L^{\infty, \varepsilon}
+     (\rho^{\sigma})} \lesssim \| \tthreeone{X_{M, \varepsilon}}
+     \|_{C_T \CC^{1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} +
+     \| \tthreeone{X_{M, \varepsilon}} \|_{C_T^{\beta / 2}
+     L^{\infty, \varepsilon} (\rho^{\sigma})}, \]
+  where the proportionality constant is independent of $\varepsilon$.
+\end{lemma}
+
+\begin{proof}
+  We define a fixed point map $\mathcal{K} : \tilde{Y} \mapsto Y$ where $Y
+  \assign - \tthreeone{X_{M, \varepsilon}} - \LL_{\varepsilon}^{- 1} [ 3
+  ( \UU^{\varepsilon}_{>} \llbracket X_{M, \varepsilon}^2 \rrbracket ) \succ
+  \tilde{Y} ]$ for some $L > 0$ to be chosen below. Then it holds in
+  view of the Schauder estimates from Lemma~3.4 in {\cite{MP17}}, the
+  paraproduct estimates as well as Lemma \ref{lem:loc} that
+  \[ \| \mathcal{K} \tilde{Y}_1 - \mathcal{K} \tilde{Y}_2 \|_{C_T \CC^{1 / 2 -
+     \kappa, \varepsilon} (\rho^{\sigma})} \lesssim \left\| \left(
+     \UU^{\varepsilon}_{>} \llbracket X_{M, \varepsilon}^2 \rrbracket \right)
+     \succ (\tilde{Y_1} - \tilde{Y_2}) \right\|_{C_T \CC^{- 3 / 2 -
+     \kappa, \varepsilon} (\rho^{\sigma})} \]
+  \[ \leqslant C 2^{- L / 2} \| \llbracket X_{M, \varepsilon}^2 \rrbracket
+     \|_{C_T \CC^{- 1 - \kappa, \varepsilon} (\rho^{\sigma})} \|
+     \tilde{Y_1} - \tilde{Y_2} \|_{C_T L^{\infty, \varepsilon}
+     (\rho^{\sigma})} \leqslant \delta \| \tilde{Y_1} - \tilde{Y_2}
+     \|_{C_T \CC^{1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} \]
+  for some $\delta \in (0, 1) $provided $L$ in the definition of the localizer
+  $\UU_{>}$ was chosen such that
+  \[ \left\| \UU^{\varepsilon}_{>} \llbracket X_{M, \varepsilon}^2 \rrbracket
+     \right\|_{C_T \CC^{- 3 / 2 - \kappa, \varepsilon} (\rho^0)} \leqslant C
+     2^{- L / 2} \| \llbracket X_{M, \varepsilon}^2 \rrbracket \|_{C_T \CC^{-
+     1 - \kappa, \varepsilon} (\rho^{\sigma})} \leqslant \delta . \]
+  For future use we note that Lemma \ref{lem:loc} implies the following bound for the
+  complementary operator
+  \begin{equation}
+    \left\| \UU^{\varepsilon}_{\leqslant} \llbracket X_{M, \varepsilon}^2
+    \rrbracket \right\|_{C_T \CC^{- 1 / 2 - \kappa, \varepsilon} (\rho^{2
+    \sigma})} \leqslant C 2^{L / 2} \| \llbracket X_{M, \varepsilon}^2
+    \rrbracket \|_{C_T \CC^{- 1 - \kappa, \varepsilon} (\rho^{\sigma})} .
+    \label{eq:U11}
+  \end{equation}
+  Similarly,
+  \[ \| \mathcal{K} \tilde{Y} \|_{C_T \CC^{1 / 2 - \kappa, \varepsilon}
+     (\rho^{\sigma})} \leqslant \| \tthreeone{X_{M, \varepsilon}}
+     \|_{C_T \CC^{1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} + C
+     \left\| \left( \UU^{\varepsilon}_{>} \llbracket X_{M, \varepsilon}^2
+     \rrbracket \right) \succ \tilde{Y} \right\|_{C_T \CC^{- 3 / 2 - \kappa,
+     \varepsilon} (\rho^{\sigma})} \]
+  \[ \leqslant \| \tthreeone{X_{M, \varepsilon}} \|_{C_T \CC^{1 / 2
+     - \kappa, \varepsilon} (\rho^{\sigma})} + \delta \| \tilde{Y} \|_{C_T
+     \CC^{1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} . \]
+  Therefore we deduce that $\mathcal{K}$ leaves balls in $C_T \CC^{1 / 2 -
+  \kappa, \varepsilon} (\rho^{\sigma})$ invariant and is a contraction on $C_T
+  \CC^{1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})$. Hence there exists a
+  unique fixed point $Y_{M, \varepsilon}$ and the first bound follows. Next,
+  we use the Schauder estimates (see Lemma 3.9 in {\cite{MP17}}) to bound the
+  time regularity as follows
+  \[ \| Y_{M, \varepsilon} \|_{C_T^{\beta / 2} L^{\infty, \varepsilon}
+     (\rho^{\sigma})} \leqslant \| \tthreeone{X_{M, \varepsilon}}
+     \|_{C_T^{\beta / 2} L^{\infty, \varepsilon} (\rho^{\sigma})} + C
+     \left\| \left( \UU^{\varepsilon}_{>} \llbracket X_{M, \varepsilon}^2
+     \rrbracket \right) \succ Y_{M, \varepsilon} \right\|_{C_T \CC^{- 3 / 2 -
+     \kappa, \varepsilon} (\rho^{\sigma})} \]
+  \[ \leqslant \| \tthreeone{X_{M, \varepsilon}} \|_{C_T^{\beta /
+     2} L^{\infty, \varepsilon} (\rho^{\sigma})} + \delta \| Y_{M,
+     \varepsilon} \|_{C_T \CC^{1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})}
+  \]
+  \[ \lesssim \| \tthreeone{X_{M, \varepsilon}} \|_{C_T^{\beta / 2}
+     L^{\infty, \varepsilon} (\rho^{\sigma})} + \| \tthreeone{X_{M,
+     \varepsilon}} \|_{C_T \CC^{1 / 2 - \kappa, \varepsilon}
+     (\rho^{\sigma})} . \]
+  The proof is complete.
+\end{proof}
+
+According to this result, we remark that $Y_{M, \varepsilon}$ itself is not a
+polynomial in the noise terms, but with our choice of localization it allows
+for a polynomial bound of its norm.
+As the next step, we introduce further stochastic objects needed below.
+Namely,
+\[ \ttwoone{X_{M, \varepsilon}} \assign \LL_{\varepsilon}^{- 1} \llbracket
+   X_{M, \varepsilon}^2 \rrbracket, \qquad \tthreetwor{X_{M, \varepsilon}} =
+   X_{M, \varepsilon} \circ \tthreeone{X_{M, \varepsilon}}, \]
+\[ \ttwothreer{X_{M, \varepsilon}} \assign 9 \llbracket X_{M, \varepsilon}^2
+   \rrbracket \circ \Q_{\varepsilon}^{- 1} \llbracket X_{M, \varepsilon}^2
+   \rrbracket - 3 b_{M, \varepsilon}, \]
+\[ \ttwothreer{\tilde{X}_{M, \varepsilon}} = 9 \llbracket X_{M, \varepsilon}^2
+   \rrbracket \circ \ttwoone{X_{M, \varepsilon}} - 3 \tilde{b}_{M,
+   \varepsilon} (t), \qquad \tthreethreer{X_{M, \varepsilon}} = 3 \llbracket
+   X_{M, \varepsilon}^2 \rrbracket \circ \tthreeone{X_{M, \varepsilon}} - 3
+   b_{M, \varepsilon} X_{M, \varepsilon}, \]
+where $b_{M, \varepsilon}, \tilde{b}_{M, \varepsilon} (t)$ are suitable
+renormalization constants. It follows from standard estimates that $|
+\tilde{b}_{M, \varepsilon} (t) - b_{M, \varepsilon} | \lesssim | \log t |$
+uniformly in $M, \varepsilon$. We denote collectively
+\[ \mathbb{X}_{M, \varepsilon} \assign (X_{M, \varepsilon}, \llbracket X_{M,
+   \varepsilon}^2 \rrbracket, \tthreeone{X_{M, \varepsilon}},
+   \tthreetwor{X_{M, \varepsilon}}, \ttwothreer{X_{M, \varepsilon}},
+   \ttwothreer{\tilde{X}_{M, \varepsilon}}, \tthreethreer{X_{M, \varepsilon}})
+   . \]
+Note that we do not include $\ttwoone{X_{M, \varepsilon}}$ in $\mathbb{X}_{M,
+\varepsilon}$ since it can be controlled by $\llbracket X_{M, \varepsilon}^2
+\rrbracket$ using Schauder estimates. Throughout the paper, $Q_{\rho}
+(\mathbb{X}_{M, \varepsilon})$ denotes a polynomial in the $\rho$-weigthed
+norms of the noise terms $\mathbb{X}_{M, \varepsilon}$, whose coefficients
+depend on $\rho$ but are independent of $\varepsilon$, and change from line to
+line. More precisely, $Q_{\rho} (\mathbb{X}_{M, \varepsilon})$ depends on the
+following norms
+\[ \| X_{M, \varepsilon} \|_{C_T \CC^{- 1 / 2 - \kappa, \varepsilon}
+   (\rho^{\sigma})}, \quad \| \llbracket X_{M, \varepsilon}^2 \rrbracket
+   \|_{C_T \CC^{- 1 - \kappa, \varepsilon} (\rho^{\sigma})}, \quad \|
+   \tthreeone{X_{M, \varepsilon}} \|_{C_T \CC^{1 / 2 - \kappa,
+   \varepsilon} (\rho^{\sigma})}, \]
+\[ \quad \| \tthreeone{X_{M, \varepsilon}} \|_{C^{\beta / 2}
+   L^{\infty, \varepsilon} (\rho^{\sigma})}, \qquad \| \tthreetwor{X_{M,
+   \varepsilon}} \|_{C_T \CC^{- \kappa, \varepsilon} (\rho^{\sigma})},
+\]
+\[ \| \ttwothreer{X_{M, \varepsilon}} \|_{C \CC^{- \kappa, \varepsilon}
+   (\rho^{\sigma})}, \quad \| \ttwothreer{\tilde{X}_{M, \varepsilon}} \|_{C_T
+   \CC^{- \kappa, \varepsilon} (\rho^{\sigma})}, \quad \| \tthreethreer{X_{M,
+   \varepsilon}} \|_{C_T \CC^{- 1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})},
+\]
+in a uniform way with respect to $M, \varepsilon$.
+
+\subsection{Decomposition and uniform estimates}
+
+With the above stochastic objects at hand, we let $\varphi_{M, \varepsilon}$
+be a stationary solution to {\eqref{eq:moll}} on $\Lambda_{M, \varepsilon}$
+having at each time $t \geqslant 0$ the law $\nu_{M, \varepsilon}$. We
+consider its decomposition $\varphi_{M, \varepsilon} = X_{M, \varepsilon} + Y_{M, \varepsilon} +
+  \phi_{M, \varepsilon}$
+and deduce that $\phi_{M, \varepsilon}$ satisfies
+\begin{equation}
+  \begin{array}{lll}
+    \LL_{\varepsilon} \phi_{M, \varepsilon} + \phi_{M, \varepsilon}^3 & = & -
+    3 \llbracket X_{M, \varepsilon}^2 \rrbracket \succ \phi_{M, \varepsilon} -
+    3 \llbracket X_{M, \varepsilon}^2 \rrbracket \preccurlyeq (Y_{M,
+    \varepsilon} + \phi_{M, \varepsilon})\\
+    &  & - 3 b_{M, \varepsilon} (X_{M, \varepsilon} + Y_{M, \varepsilon} +
+    \phi_{M, \varepsilon}) - 3 ( \UU^{\varepsilon}_{\leqslant L}
+    \llbracket X_{M, \varepsilon}^2 \rrbracket ) \succ Y_{M,
+    \varepsilon}\\
+    &  & - 3 X_{M, \varepsilon} (Y_{M, \varepsilon} + \phi_{M,
+    \varepsilon})^2 - Y_{M, \varepsilon}^3 - 3 Y_{M, \varepsilon}^2 \phi_{M,
+    \varepsilon} - 3 Y_{M, \varepsilon} \phi_{M, \varepsilon}^2 .
+  \end{array} \label{eq:phi-eq}
+\end{equation}
+Our next goal is to derive energy estimates for {\eqref{eq:phi-eq}} which hold
+true uniformly in both parameters $M, \varepsilon$. To this end, we recall
+that all the distributions above were extended periodically to the full
+lattice $\Lambda_{\varepsilon}$. Consequently, apart from the stochastic
+objects, the renormalization constants and the initial conditions, all the
+operations in {\eqref{eq:phi-eq}} are independent of $M$. Therefore, for
+notational simplicity, we fix the parameter $M$ and omit the dependence on $M$
+throughout the rest of this subsection. The following series of lemmas serves
+as a preparation for our main energy estimate established in Theorem
+\ref{th:energy-estimate}. Here, we make use of the approximate duality operator $D_{\rho^{4},\varepsilon}$ as well as the commutators $C_{\varepsilon},\,\tilde C_{\varepsilon}$ and $\bar C_{\varepsilon}$ introduced Section \ref{s:l2}.
+
+\begin{lemma}
+  \label{lem:energy12}It holds
+  \begin{equation}
+    \frac{1}{2} \partial_t \| \rho^2 \phi_{\varepsilon} \|_{L^{2,
+    \varepsilon}}^2 + \| \rho \phi_{\varepsilon} \|_{L^{4, \varepsilon}}^4 +
+    m^{2} \| \rho^2 \psi_{\varepsilon} \|_{L^{2, \varepsilon}}^2 + \| \rho^2
+    \nabla_{\varepsilon} \psi_{\varepsilon} \|_{L^{2, \varepsilon}}^2 =
+    \Theta_{\rho^4, \varepsilon} + \Psi_{\rho^4, \varepsilon} \label{eq:en12}
+  \end{equation}
+  with
+  \begin{equation}
+    \psi_{\varepsilon} \assign \phi_{\varepsilon} + \Q_{\varepsilon}^{- 1} [3
+    \llbracket X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}],
+    \label{eq:psi1}
+  \end{equation}
+  \[ \Theta_{\rho^4, \varepsilon} = - \langle [\nabla_{\varepsilon}, \rho^4]
+     \psi_{\varepsilon}, \nabla_{\varepsilon} \psi_{\varepsilon} \rangle_{\varepsilon} +
+     \left\langle \left[ \Q_{\varepsilon}, \rho^4 \right] \Q_{\varepsilon}^{-
+     1} [3 \llbracket X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}],
+     \psi_{\varepsilon} \right\rangle_{\varepsilon} + \langle \rho^4
+     \phi_{\varepsilon}^2, \ttwothreer{X_{\varepsilon}} \rangle_{\varepsilon} \]
+  \[ + D_{\rho^4, \varepsilon} (\phi_{\varepsilon}, - 3 \llbracket
+     X_{\varepsilon}^2 \rrbracket, \phi_{\varepsilon}) + \langle \rho^4
+     \phi_{\varepsilon}, \tilde{C}_{\varepsilon} (\phi_{\varepsilon}, 3
+     \llbracket X_{\varepsilon}^2 \rrbracket, 3 \llbracket X_{\varepsilon}^2
+     \rrbracket) \rangle_{\varepsilon} \]
+  \[ + D_{\rho^4, \varepsilon} \left( \phi_{\varepsilon}, 3 \llbracket
+     X_{\varepsilon}^2 \rrbracket, \Q_{\varepsilon}^{- 1} [3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}] \right), \]
+  \[ \Psi_{\rho^4, \varepsilon} \assign \langle \rho^4 \phi_{\varepsilon}, - 3
+     \llbracket X_{\varepsilon}^2 \rrbracket \prec (Y_{\varepsilon} +
+     \phi_{\varepsilon}) - 3 X_{\varepsilon} (Y_{\varepsilon} +
+     \phi_{\varepsilon})^2 - Y_{\varepsilon}^3 - 3 Y_{\varepsilon}^2
+     \phi_{\varepsilon} - 3 Y_{\varepsilon} \phi_{\varepsilon}^2 \rangle_{\varepsilon} \]
+  \[ + \langle \rho^4 \phi_{\varepsilon}, - 3 \left( \UU^{\varepsilon}_{\leqslant}
+     \llbracket X_{\varepsilon}^2 \rrbracket \right) \succ Y_{\varepsilon} +
+     Z_{\varepsilon} \rangle_{\varepsilon}, \]
+  and
+  \[ Z_{\varepsilon} \assign \tthreethreer{X_{\varepsilon}} +
+     \ttwothreer{\tilde{X}_{\varepsilon}} Y_{\varepsilon} + 3
+     (\tilde{b}_{\varepsilon} - b_{\varepsilon}) Y_{\varepsilon} +
+     \bar{C}_{\varepsilon} (Y_{\varepsilon}, 3 \llbracket X_{\varepsilon}^2
+     \rrbracket, 3 \llbracket X_{\varepsilon}^2 \rrbracket) - 3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \circ \LL_{\varepsilon}^{- 1} \left( 3
+     \UU^{\varepsilon}_{\leqslant} \llbracket X_{\varepsilon}^2 \rrbracket
+     \succ Y_{\varepsilon} \right) . \]
+\end{lemma}
+
+\begin{proof}
+  Noting that {\eqref{eq:phi-eq}} is of the form $\LL_{\varepsilon}
+  \phi_{\varepsilon} + \phi_{\varepsilon}^3 = U_{\varepsilon}$, we may test
+  this equation by $\rho^4 \phi_{\varepsilon}$ to deduce
+  \[ \frac{1}{2} \partial_t \langle \rho^2 \phi_{\varepsilon}, \rho^2
+     \phi_{\varepsilon} \rangle_{\varepsilon} + \langle \rho^2 \phi_{\varepsilon}, \rho^2
+     \phi_{\varepsilon}^3 \rangle_{\varepsilon} = \Phi_{\rho^4, \varepsilon} + \Psi_{\rho^4,
+     \varepsilon}, \]
+  with
+  \[ \Phi_{\rho^4, \varepsilon} \assign \langle \rho^4 \phi_{\varepsilon}, -
+     \Q_{\varepsilon} \phi_{\varepsilon} - 3 \llbracket X_{\varepsilon}^2
+     \rrbracket \succ \phi_{\varepsilon} - 3 \llbracket X_{\varepsilon}^2
+     \rrbracket \circ \phi_{\varepsilon} - 3 b_{\varepsilon}
+     \phi_{\varepsilon} \rangle_{\varepsilon}, \]
+  and
+  \[ \Psi_{\rho^4, \varepsilon} \assign \langle \rho^4 \phi_{\varepsilon}, - 3
+     \llbracket X_{\varepsilon}^2 \rrbracket \prec (Y_{\varepsilon} +
+     \phi_{\varepsilon}) - 3 X_{\varepsilon} (Y_{\varepsilon} +
+     \phi_{\varepsilon})^2 - Y_{\varepsilon}^3 - 3 Y_{\varepsilon}^2
+     \phi_{\varepsilon} - 3 Y_{\varepsilon} \phi_{\varepsilon}^2 \rangle_{\varepsilon} \]
+  \[ + \langle \rho^4 \phi_{\varepsilon}, - 3 \left(
+     \UU^{\varepsilon}_{\leqslant L} \llbracket X_{\varepsilon}^2 \rrbracket
+     \right) \succ Y_{\varepsilon} - 3 \llbracket X_{\varepsilon}^2 \rrbracket
+     \circ Y_{\varepsilon} - 3 b_{\varepsilon} (X_{\varepsilon} +
+     Y_{\varepsilon}) \rangle_{\varepsilon} . \]
+  We use the fact that $(f \succ)$ is an approximate adjoint to $(f \circ)$
+  according to Lemma \ref{lem:dual1} to rewrite the resonant term as
+  \[ \langle \rho^4 \phi_{\varepsilon}, - 3 \llbracket X_{\varepsilon}^2
+     \rrbracket \circ \phi_{\varepsilon} \rangle_{\varepsilon} = \langle \rho^4
+     \phi_{\varepsilon}, - 3 \llbracket X_{\varepsilon}^2 \rrbracket \succ
+     \phi_{\varepsilon} \rangle_{\varepsilon} + D_{\rho^4, \varepsilon} (\phi_{\varepsilon},
+     - 3 \llbracket X_{\varepsilon}^2 \rrbracket, \phi_{\varepsilon}), \]
+  and use the definition of $\psi$ in {\eqref{eq:psi1}} to rewrite
+  $\Phi_{\rho, \varepsilon}$ as
+  \[ \Phi_{\rho^4, \varepsilon} = \langle \rho^4 \psi_{\varepsilon}, -
+     \Q_{\varepsilon} \psi_{\varepsilon} \rangle_{\varepsilon} + \left\langle \left[
+     \Q_{\varepsilon}, \rho^4 \right] \Q_{\varepsilon}^{- 1} [3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}],
+     \psi_{\varepsilon} \right\rangle_{\varepsilon} \]
+  \[ + \langle \rho^4 [3 \llbracket X_{\varepsilon}^2 \rrbracket \succ
+     \phi_{\varepsilon}], \Q_{\varepsilon}^{- 1} [3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}] \rangle_{\varepsilon} - 3
+     b_{\varepsilon} \langle \rho^4 \phi_{\varepsilon}, \phi_{\varepsilon}
+     \rangle_{\varepsilon} + D_{\rho^4, \varepsilon} (\phi_{\varepsilon}, - 3 \llbracket
+     X_{\varepsilon}^2 \rrbracket, \phi_{\varepsilon}) . \]
+  For the first term we write
+  \[ \langle \rho^4 \psi_{\varepsilon}, - \Q_{\varepsilon} \psi_{\varepsilon}
+     \rangle_{\varepsilon} = - m^{2} \langle \rho^4 \psi_{\varepsilon}, \psi_{\varepsilon}
+     \rangle_{\varepsilon} - \langle \rho^4 \nabla_{\varepsilon} \psi_{\varepsilon},
+     \nabla_{\varepsilon} \psi_{\varepsilon} \rangle_{\varepsilon} - \langle
+     [\nabla_{\varepsilon}, \rho^4] \psi_{\varepsilon}, \nabla_{\varepsilon}
+     \psi_{\varepsilon} \rangle_{\varepsilon} . \]
+  Next, we use again Lemma \ref{lem:dual1} to simplify the quadratic term as
+  \[ \langle \rho^4 3 \llbracket X_{\varepsilon}^2 \rrbracket \succ
+     \phi_{\varepsilon}, \Q_{\varepsilon}^{- 1} [3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}] \rangle_{\varepsilon} =
+     \left\langle \rho^4 \phi_{\varepsilon}, 3 \llbracket X_{\varepsilon}^2
+     \rrbracket \circ \Q_{\varepsilon}^{- 1} [3 \llbracket X_{\varepsilon}^2
+     \rrbracket \succ \phi_{\varepsilon}] \right\rangle_{\varepsilon} \]
+  \[ + D_{\rho^4,\varepsilon} \left( \phi_{\varepsilon}, 3 \llbracket X_{\varepsilon}^2
+     \rrbracket, \Q_{\varepsilon}^{- 1} [3 \llbracket X_{\varepsilon}^2
+     \rrbracket \succ \phi_{\varepsilon}] \right), \]
+  hence Lemma \ref{lem:comm1} leads to
+  \[ = \left\langle \rho^4 \phi_{\varepsilon}^2, 9 \llbracket
+     X_{\varepsilon}^2 \rrbracket \circ \Q_{\varepsilon}^{- 1} \llbracket
+     X_{\varepsilon}^2 \rrbracket \right\rangle_{\varepsilon} + \langle \rho^4
+     \phi_{\varepsilon}, \tilde{C}_{\varepsilon} (\phi, 3 \llbracket
+     X_{\varepsilon}^2 \rrbracket, 3 \llbracket X_{\varepsilon}^2 \rrbracket)
+     \rangle_{\varepsilon} \]
+  \[ + D_{\rho^4,\varepsilon} \left( \phi_{\varepsilon}, 3 \llbracket X_{\varepsilon}^2
+     \rrbracket, \Q_{\varepsilon}^{- 1} [3 \llbracket X_{\varepsilon}^2
+     \rrbracket \succ \phi_{\varepsilon}] \right) . \]
+  We conclude that
+  \[ \Phi_{\rho^4, \varepsilon} = - m^{2} \langle \rho^4 \psi_{\varepsilon},
+     \psi_{\varepsilon} \rangle_{\varepsilon} - \langle \rho^4 \nabla_{\varepsilon}
+     \psi_{\varepsilon}, \nabla_{\varepsilon} \psi_{\varepsilon} \rangle_{\varepsilon} \]
+  \[ - \langle [\nabla_{\varepsilon}, \rho^4] \psi_{\varepsilon},
+     \nabla_{\varepsilon} \psi_{\varepsilon} \rangle_{\varepsilon} + \left\langle \left[
+     \Q_{\varepsilon}, \rho^4 \right] \Q_{\varepsilon}^{- 1} [3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}],
+     \psi_{\varepsilon} \right\rangle_{\varepsilon} + \left\langle \rho^4
+     \phi_{\varepsilon}^2, 9 \llbracket X_{\varepsilon}^2 \rrbracket \circ
+     \Q_{\varepsilon}^{- 1} \llbracket X_{\varepsilon}^2 \rrbracket - 3
+     b_{\varepsilon} \right\rangle_{\varepsilon} \]
+  \[ + D_{\rho^4, \varepsilon} (\phi_{\varepsilon}, - 3 \llbracket
+     X_{\varepsilon}^2 \rrbracket, \phi_{\varepsilon}) + \langle \rho^4
+     \phi_{\varepsilon}, \tilde{C}_{\varepsilon} (\phi_{\varepsilon}, 3
+     \llbracket X_{\varepsilon}^2 \rrbracket, 3 \llbracket X_{\varepsilon}^2
+     \rrbracket) \rangle_{\varepsilon} \]
+  \[ + D_{\rho^4, \varepsilon} \left( \phi_{\varepsilon}, 3 \llbracket
+     X_{\varepsilon}^2 \rrbracket, \Q_{\varepsilon}^{- 1} [3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}] \right) . \]
+  As the next step, we justify the definition of the resonant product
+  appearing in $\Psi_{\rho^4, \varepsilon}$ and show that it is given by
+  $Z_{\varepsilon}$ from the statement of the lemma. To this end, let
+  \[ Z_{\varepsilon} \assign - 3 \llbracket X_{\varepsilon}^2 \rrbracket \circ
+     Y_{\varepsilon} - 3 b_{\varepsilon} (X_{\varepsilon} + Y_{\varepsilon}),
+  \]
+  and recall the definition of $Y_{M,\varepsilon}$ \eqref{eq:YY}. Hence by Lemma
+  \ref{lem:comm1}
+  \[ Z_{\varepsilon} = 3 \llbracket X_{\varepsilon}^2 \rrbracket \circ
+     \tthreeone{X_{\varepsilon}} - 3 b_{\varepsilon} X_{\varepsilon} + 3
+     \llbracket X_{\varepsilon}^2 \rrbracket \circ \LL_{\varepsilon}^{- 1} (3
+     \llbracket X_{\varepsilon}^2 \rrbracket \succ Y_{\varepsilon}) - 3
+     b_{\varepsilon} Y_{\varepsilon} \]
+  \[ - 3 \llbracket X_{\varepsilon}^2 \rrbracket \circ \LL_{\varepsilon}^{- 1}
+     \left( 3 \UU^{\varepsilon}_{\leqslant} \llbracket X_{\varepsilon}^2
+     \rrbracket \succ Y_{\varepsilon} \right) \]
+  \[ = (3 \llbracket X_{\varepsilon}^2 \rrbracket \circ
+     \tthreeone{X_{\varepsilon}} - 3 b_{\varepsilon} X_{\varepsilon}) + \left(
+     3 \llbracket X_{\varepsilon}^2 \rrbracket \circ \LL_{\varepsilon}^{- 1} 3
+     \llbracket X_{\varepsilon}^2 \rrbracket - 3 \tilde{b}_{\varepsilon}
+     \right) Y_{\varepsilon} + 3 (\tilde{b}_{\varepsilon} - b_{\varepsilon})
+     Y_{\varepsilon} \]
+  \[ + \bar{C}_{\varepsilon} (Y_{\varepsilon}, 3 \llbracket X_{\varepsilon}^2
+     \rrbracket, 3 \llbracket X_{\varepsilon}^2 \rrbracket) - 3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \circ \LL_{\varepsilon}^{- 1} \left( 3
+     \UU_{\leqslant} \llbracket X_{\varepsilon}^2 \rrbracket \succ
+     Y_{\varepsilon} \right), \]
+  which is the desired formula. In this formulation we clearly see
+  the structure of the renormalization and the appropriate combinations of
+  resonant products and the counterterms.
+\end{proof}
+
+As the next step, we estimate the new stochastic terms appearing in Lemma
+\ref{lem:energy12}.
+
+\begin{lemma}
+  \label{lem:Z}It holds true
+  \[ \| Z_{\varepsilon} (t) \|_{\CC^{- 1 / 2 - \kappa, \varepsilon}
+     (\rho^{\sigma})} \leqslant (| \log t | + 1) Q_{\rho}
+     (\mathbb{X}_{\varepsilon}), \]
+  \[ \| X_{\varepsilon} Y_{\varepsilon} \|_{C_T \CC^{- 1 / 2 - \kappa,
+     \varepsilon} (\rho^{\sigma})} + \| X_{\varepsilon} Y_{\varepsilon}^2
+     \|_{C_T \CC^{- 1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} \leqslant
+     Q_{\rho} (\mathbb{X}_{\varepsilon}) . \]
+\end{lemma}
+
+\begin{proof}
+  By definition of $Z_{\varepsilon}$ and the discussion in Section
+  \ref{ssec:stoch}, Lemma \ref{lem:Y1} and Lemma \ref{lem:comm1} and Lemma
+  \ref{lem:loc} and {\eqref{eq:U11}} we have (since the choice of exponent
+  $\sigma > 0$ of the weight corresponding to the stochastic objects is
+  arbitrary, $\sigma$ changes from line to line in the sequel)
+  \[ \| Z_{\varepsilon} (t) \|_{\CC^{- 1 / 2 - \kappa, \varepsilon} (\rho^{3
+     \sigma})} \lesssim \| \tthreethreer{X_{\varepsilon}} \|_{C_T
+     \CC^{- 1 / 2 - \kappa, \varepsilon} (\rho^{3 \sigma})} + \|
+     \ttwothreer{\tilde{X}_{\varepsilon}} \|_{C_T \CC^{- \kappa,
+     \varepsilon} (\rho^{\sigma})} \| Y_{\varepsilon} \|_{C_T \CC^{1 / 2 -
+     \kappa, \varepsilon} (\rho^{\sigma})} \]
+  \[ + | \log t | \| Y_{\varepsilon} \|_{C_T \CC^{1 / 2 - \kappa, \varepsilon}
+     (\rho^{\sigma})} + \big( \| Y_{\varepsilon} \|_{C \CC^{1 / 2 - \kappa,
+     \varepsilon} (\rho^{\sigma})} + \| Y_{\varepsilon} \|_{C_T^{\beta / 2}
+     L^{\infty, \varepsilon} (\rho^{\sigma})} \big) \| \llbracket
+     X_{\varepsilon}^2 \rrbracket \|^2_{C \CC^{- 1 - \kappa, \varepsilon}
+     (\rho^{\sigma})} \]
+  \[ + C_L \| \llbracket X_{\varepsilon}^2 \rrbracket \|_{C_T \CC^{- 1 -
+     \kappa, \varepsilon} (\rho^{\sigma})}^2 \| Y_{\varepsilon} \|_{C_T \CC^{1
+     / 2 - \kappa, \varepsilon} (\rho^{\sigma})} \leqslant Q_{\rho}
+     (\mathbb{X}_{\varepsilon}) \]
+  and the first claim follows since $\sigma > 0$ was chosen arbitrarily.
+  
+  Next, we recall \eqref{eq:YY} and the fact that
+  $\tthreetwor{X_{\varepsilon}} = X_{\varepsilon} \circ
+  \tthreeone{X_{\varepsilon}}$ can be constructed without any renormalization
+  in $C_T \CC^{- \kappa, \varepsilon} (\rho^{\sigma})$. As a consequence, the
+  resonant term reads
+  \[ X_{\varepsilon} \circ Y_{\varepsilon} = - \tthreetwor{X_{\varepsilon}} -
+     X_{\varepsilon} \circ \LL_{\varepsilon}^{- 1} \left[ 3 \left(
+     \UU^{\varepsilon}_{>} \llbracket X_{\varepsilon}^2 \rrbracket \right)
+     \succ Y_{\varepsilon} \right], \]
+  where the for the second term we have by the choice of $L$ in Lemma
+  \ref{lem:Y1} that
+  \[ \left\| X_{\varepsilon} \circ \LL_{\varepsilon}^{- 1} \left[ 3 \left(
+     \UU^{\varepsilon}_{>} \llbracket X_{\varepsilon}^2 \rrbracket \right)
+     \succ Y_{\varepsilon} \right] \right\|_{C_T \CC^{1 / 2 - 2 \kappa,
+     \varepsilon} (\rho^{3 \sigma})} \]
+  \[ \lesssim \| X_{\varepsilon} \|_{C_T \CC^{- 1 / 2 - \kappa, \varepsilon}
+     (\rho^{\sigma})} \left\| \left( \UU^{\varepsilon}_{>} \llbracket
+     X_{\varepsilon}^2 \rrbracket \right) \succ Y_{\varepsilon} \right\|_{C_T
+     \CC^{- 1 - \kappa, \varepsilon} (\rho^{2 \sigma})} \]
+  \[ \lesssim \| X_{\varepsilon} \|_{C_T \CC^{- 1 / 2 - \kappa, \varepsilon}
+     (\rho^{\sigma})} \| \llbracket X_{\varepsilon}^2 \rrbracket \|_{C_T
+     \CC^{- 1 - \kappa, \varepsilon} (\rho^{\sigma})} \| Y_{\varepsilon}
+     \|_{C_T L^{\infty, \varepsilon} (\rho^{\sigma})} \leqslant Q_{\rho}
+     (\mathbb{X}_{\varepsilon}) . \]
+  For the two paraproducts we obtain directly
+  \[ \| X_{\varepsilon} \prec Y_{\varepsilon} \|_{C_T \CC^{- 2 \kappa,
+     \varepsilon} (\rho^{3 \sigma})} \lesssim \| X_{\varepsilon} \|_{C_T
+     \CC^{- 1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} \| Y_{\varepsilon}
+     \|_{C_T \CC^{1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} \leqslant
+     Q_{\rho} (\mathbb{X}_{\varepsilon}), \]
+  \[ \| X_{\varepsilon} \succ Y_{\varepsilon} \|_{C_T \CC^{- 1 / 2 - \kappa,
+     \varepsilon} (\rho^{3 \sigma})} \lesssim \| X_{\varepsilon} \|_{C_T
+     \CC^{- 1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} \| Y_{\varepsilon}
+     \|_{C_T L^{\infty, \varepsilon} (\rho^{\sigma})} \leqslant Q_{\rho}
+     (\mathbb{X}_{\varepsilon}) . \]
+  This gives the second bound from the statement of the lemma.
+  
+  We proceed similarly for the remaining term, which is quadratic in
+  $Y_{\varepsilon}$. We have
+  \[ X_{\varepsilon} \circ Y_{\varepsilon}^2 = X_{\varepsilon} \circ (2
+     Y_{\varepsilon} \prec Y_{\varepsilon}) + X_{\varepsilon} \circ
+     (Y_{\varepsilon} \circ Y_{\varepsilon}) \]
+  \[ = - X_{\varepsilon} \circ ( 2 Y_{\varepsilon} \prec \tthreeone{X}
+     ) - X_{\varepsilon} \circ \left( 2 Y_{\varepsilon} \prec
+     \LL_{\varepsilon}^{- 1} \left[ 3 \left( \UU_{>} \llbracket
+     X_{\varepsilon}^2 \rrbracket \right) \succ Y_{\varepsilon} \right]
+     \right) + X_{\varepsilon} \circ (Y_{\varepsilon} \circ Y_{\varepsilon})
+  \]
+  \[ = - 2 \tthreetwor{X_{\varepsilon}} Y_{\varepsilon} - C_{\varepsilon}
+     ( Y_{\varepsilon}, 2 \tthreeone{X_{\varepsilon}}, X_{\varepsilon}
+     ) - X_{\varepsilon} \circ \left( 2 Y_{\varepsilon} \prec
+     \LL_{\varepsilon}^{- 1} \left[ 3 \left( \UU^{\varepsilon}_{>} \llbracket
+     X_{\varepsilon}^2 \rrbracket \right) \succ Y_{\varepsilon} \right]
+     \right) + X_{\varepsilon} \circ (Y_{\varepsilon} \circ Y_{\varepsilon}) .
+  \]
+  Accordingly,
+  \[ \| X_{\varepsilon} \circ Y_{\varepsilon}^2 \|_{C_T \CC^{- \kappa,
+     \varepsilon} (\rho^{4 \sigma})} \lesssim \|
+     \tthreetwor{X_{\varepsilon}} \|_{C_T \CC^{- \kappa, \varepsilon}
+     (\rho^{\sigma})} \| Y_{\varepsilon} \|_{C_T \CC^{1 / 2 - \kappa,
+     \varepsilon} (\rho^{\sigma})} \]
+  \[ + \| Y_{\varepsilon} \|_{C \CC^{1 / 2 - \kappa, \varepsilon}
+     (\rho^{\sigma})} \| \tthreeone{X_{\varepsilon}} \|_{C_T \CC^{1
+     / 2 - \kappa, \varepsilon} (\rho^{\sigma})} \| X_{\varepsilon} \|_{C_T
+     \CC^{- 1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} \]
+  \[ + \| X_{\varepsilon} \|_{C_T \CC^{- 1 / 2 - \kappa, \varepsilon}
+     (\rho^{\sigma})} \| Y_{\varepsilon} \|_{C_T \CC^{1 / 2 - \kappa,
+     \varepsilon} (\rho^{\sigma})}^2 \| \llbracket X_{\varepsilon}^2
+     \rrbracket \|_{C_T \CC^{- 1 - \kappa, \varepsilon} (\rho^{\sigma})} \]
+  \[ + \| X_{\varepsilon} \|_{C_T \CC^{- 1 / 2 - \kappa, \varepsilon}
+     (\rho^{\sigma})} \| Y_{\varepsilon} \|^2_{C_T \CC^{1 / 2 - \kappa,
+     \varepsilon} (\rho^{\sigma})} \leqslant Q_{\rho}
+     (\mathbb{X}_{\varepsilon}) \]
+  and for the paraproducts
+  \[ \| X_{\varepsilon} \prec Y_{\varepsilon}^2 \|_{C_T \CC^{- 2 \kappa,
+     \varepsilon} (\rho^{4 \sigma})} \lesssim \| X_{\varepsilon} \|_{C_T
+     \CC^{- 1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} \| Y_{\varepsilon}
+     \|^2_{C_T \CC^{1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} \leqslant
+     Q_{\rho} (\mathbb{X}_{\varepsilon}), \]
+  \[ \| X_{\varepsilon} \succ Y_{\varepsilon}^2 \|_{C_T \CC^{- 1 / 2 - \kappa,
+     \varepsilon} (\rho^{4 \sigma})} \lesssim \| X_{\varepsilon} \|_{C_T
+     \CC^{- 1 / 2 - \kappa, \varepsilon} (\rho^{\sigma})} \| Y_{\varepsilon}
+     \|^2_{C_T L^{\infty, \varepsilon} (\rho^{\sigma})} \leqslant Q_{\rho}
+     (\mathbb{X}_{\varepsilon}) . \]
+\end{proof}
+
+Let us now proceed with our main energy estimate. In view of Lemma
+\ref{lem:energy12}, our goal is to control the terms in $\Theta_{\rho^4,
+\varepsilon} + \Psi_{\rho^4, \varepsilon}$ by quantities of the from
+\[ Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta (\| \rho \phi_{\varepsilon}
+   \|_{L^{4, \varepsilon}}^4 + m^{2} \| \rho^2 \psi_{\varepsilon} \|_{L^{2,
+   \varepsilon}}^2 + \| \rho^2 \nabla_{\varepsilon} \psi_{\varepsilon}
+   \|_{L^{2, \varepsilon}}^2), \]
+where $\delta > 0$ is a small constant which can change from line to line.
+Indeed, with such a bound in hand it will be possible to absorb the norms of
+$\phi_{\varepsilon}, \psi_{\varepsilon}$ from the right hand side of
+{\eqref{eq:en12}} into the left hand side and a bound for $\phi_{\varepsilon},
+\psi_{\varepsilon}$ in terms of the noise terms will follow.
+
+\begin{lemma}
+  \label{lemma:bounds-rhs1}Let $\rho$ be a weight such that $\rho^{\iota} \in
+  L^{4, 0}$ for some $\iota \in (0, 1)$. Then it holds
+  \[ | \Theta_{\rho^4, \varepsilon} | + | \Psi_{\rho^4, \varepsilon} |
+     \leqslant (| \log t | + 1) Q_{\rho} (\mathbb{X}_{\varepsilon}) \]
+  \[ + \delta (\| \rho \phi_{\varepsilon} \|_{L^{4, \varepsilon}}^4 + \|
+     \rho^2 \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2 + \|
+     \rho^2 \psi \|^2_{L^{2, \varepsilon}} + \| \rho^2 \nabla_{\varepsilon}
+     \psi \|^2_{L^{2, \varepsilon}}) . \]
+\end{lemma}
+
+\begin{proof}
+  Since the weight $\rho$ is polynomial and vanishes at infinity, we may
+  assume without loss of generality that $0 < \rho \leqslant 1$ and
+  consequently $\rho^{\alpha} \leqslant \rho^{\beta}$ whenever $\alpha
+  \geqslant \beta \geqslant 0$. We also observe that due to the integrability
+  of the weight it holds (see Lemma~\ref{lem:15})
+  \[ \| \rho^{1 + \iota} \phi_{\varepsilon} \|_{L^{2, \varepsilon}} \lesssim
+     \| \rho \phi_{\varepsilon} \|_{L^{4, \varepsilon}} \]
+  with a constant that depends only on $\rho$. In the sequel, we repeatedly
+  use various results for discrete Besov spaces established in Section
+  \ref{s:app}. Namely, the equivalent formulation of the Besov norms (Lemma
+  \ref{lem:equiv2}), the duality estimate (Lemma \ref{lem:dual2}),
+  interpolation (Lemma \ref{lem:int}), embedding (Lemma \ref{lem:emb}), a
+  bound for powers of functions (Lemma \ref{lem:mult}) as well as  bounds for the commutators (Lemma \ref{lem:comm1}).
+  
+  In view of Lemma \ref{lem:energy12} we shall bound each term on the right
+  hand side of {\eqref{eq:en12}}. We have
+  \[ | \langle [\nabla_{\varepsilon}, \rho^4] \psi_{\varepsilon},
+     \nabla_{\varepsilon} \psi_{\varepsilon} \rangle_{\varepsilon} | \leqslant
+     C_{\rho} \| \rho^2 \psi_{\varepsilon} \|_{L^{2, \varepsilon}} \| \rho^2
+     \nabla_{\varepsilon} \psi_{\varepsilon} \|_{L^{2, \varepsilon}} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) \| \rho^{2 - \sigma}
+     \phi_{\varepsilon} \|_{L^{2, \varepsilon}} \| \rho^2 \nabla_{\varepsilon}
+     \psi_{\varepsilon} \|_{L^{2, \varepsilon}} \leqslant Q_{\rho}
+     (\mathbb{X}) \| \rho \phi_{\varepsilon} \|_{L^{4, \varepsilon}} \| \rho^2
+     \nabla_{\varepsilon} \psi_{\varepsilon} \|_{L^{2, \varepsilon}} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta (\| \rho
+     \phi_{\varepsilon} \|^4_{L^{4, \varepsilon}} + \| \rho^2
+     \nabla_{\varepsilon} \psi_{\varepsilon} \|^2_{L^{2, \varepsilon}}), \]
+  where the constant $C_{\rho}$ only depends on $\rho$ and $\| \rho^2
+  \psi_{\varepsilon} \|_{L^{2, \varepsilon}}$ was estimated using the
+  paracontrolled ansatz {\eqref{eq:psi1}} as follows
+  \[ \| \rho^2 \psi_{\varepsilon} \|_{L^{2, \varepsilon}} \leqslant \| \rho^2
+     \phi_{\varepsilon} \|_{L^{2, \varepsilon}} + \left\| \rho^2 \Q^{-
+     1}_{\varepsilon} [3 \llbracket X_{\varepsilon}^2 \rrbracket \succ
+     \phi_{\varepsilon}] \right\|_{L^{2, \varepsilon}} \leqslant \| \rho^2
+     \phi_{\varepsilon} \|_{L^{2, \varepsilon}} + Q_{\rho}
+     (\mathbb{X}_{\varepsilon}) \| \rho^{2 - \sigma} \phi_{\varepsilon}
+     \|_{L^{2, \varepsilon}} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) \| \rho^{2 - \sigma}
+     \phi_{\varepsilon} \|_{L^{2, \varepsilon}} . \]
+  Next,
+  \[ \left| \left\langle \left[ \Q_{\varepsilon}, \rho^4 \right]
+     \Q_{\varepsilon}^{- 1} [3 \llbracket X_{\varepsilon}^2 \rrbracket \succ
+     \phi_{\varepsilon}], \psi_{\varepsilon} \right\rangle_{\varepsilon}
+     \right| \leqslant \left| \left\langle \Q_{\varepsilon}^{- 1} [3
+     \llbracket X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}], \left[
+     \Q_{\varepsilon}, \rho^4 \right] \psi_{\varepsilon}
+     \right\rangle_{\varepsilon} \right| \]
+  and we estimate explicitly
+  \[ \left\| \rho^{- 2} \left[ \Q_{\varepsilon}, \rho^4 \right]
+     \psi_{\varepsilon} \right\|_{L^{2, \varepsilon}} \leqslant C_{\rho} (\|
+     \rho^2 \psi_{\varepsilon} \|_{L^{2, \varepsilon}} + \| \rho^2
+     \nabla_{\varepsilon} \psi_{\varepsilon} \|_{L^{2, \varepsilon}
+     (\rho^2)}), \]
+  and consequently
+  \[ \left| \left\langle \left[ \Q_{\varepsilon}, \rho^4 \right]
+     \Q_{\varepsilon}^{- 1} [3 \llbracket X_{\varepsilon}^2 \rrbracket \succ
+     \phi_{\varepsilon}], \psi_{\varepsilon} \right\rangle_{\varepsilon}
+     \right| \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) \| \rho^{2 -
+     \sigma} \phi_{\varepsilon} \|_{L^{2, \varepsilon}} (\| \rho^2
+     \psi_{\varepsilon} \|_{L^{2, \varepsilon}} + \| \rho^2
+     \nabla_{\varepsilon} \psi_{\varepsilon} \|_{L^{2, \varepsilon}}) \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta (\| \rho
+     \phi_{\varepsilon} \|^4_{L^{2, \varepsilon}} + \| \rho^2
+     \psi_{\varepsilon} \|^2_{L^{2, \varepsilon}} + \| \rho^2
+     \nabla_{\varepsilon} \psi_{\varepsilon} \|^2_{L^{2, \varepsilon}}), \]
+  since $\sigma$ is sufficiently small.
+  
+  Using Lemma \ref{lem:dual2}, Lemma \ref{lem:mult}, Young's inequality and
+  the embedding $H^{1 - 2 \kappa, \varepsilon} (\rho^2) \subset H^{2 \kappa,
+  \varepsilon} (\rho^{3 - \iota - \sigma})$, we obtain
+  \[ | \langle \rho^4 \phi_{\varepsilon}^2, \ttwothreer{X_{\varepsilon}}
+     \rangle_{\varepsilon} | \lesssim \| \rho^{\sigma} \ttwothreer{X_{\varepsilon}}
+     \|_{\CC^{- \kappa, \varepsilon}} \| \rho^{4 - \sigma}
+     \phi_{\varepsilon}^2 \|_{B^{\kappa, \varepsilon}_{1, 1}} \lesssim \|
+     \rho^{\sigma} \ttwothreer{X_{\varepsilon}} \|_{\CC^{- \kappa,
+     \varepsilon}} \| \rho^{1 + \iota} \phi_{\varepsilon} \|_{L^{2,
+     \varepsilon}} \| \rho^{3 - \iota - \sigma} \phi_{\varepsilon} \|_{H^{2
+     \kappa, \varepsilon}} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) \| \rho \phi_{\varepsilon}
+     \|_{L^{4, \varepsilon}} \| \rho^2 \phi_{\varepsilon} \|_{H^{1 - 2 \kappa,
+     \varepsilon}} \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta (\|
+     \rho \phi_{\varepsilon} \|_{L^{4, \varepsilon}}^4 + \| \rho^2
+     \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2) . \]
+  Recall that since $\sigma$ is chosen small, we have the interpolation
+  inequality (see Lemma \ref{lem:int})
+  \[ \| \phi_{\varepsilon} \|_{H^{1 / 2 + \kappa, \varepsilon} (\rho^{2 -
+     \sigma / 2})} \leqslant \| \phi_{\varepsilon} \|_{L^{2, \varepsilon}
+     (\rho^{1 + \iota})}^{\theta} \| \phi_{\varepsilon} \|_{H^{1 - 2 \kappa,
+     \varepsilon} (\rho^2)}^{1 - \theta} \]
+  where $\theta = \frac{1 / 2 - 3 \kappa}{1 - 2 \kappa}$. Similar
+  interpolation inequalities will also be employed below. Then, in view of
+  Lemma \ref{lem:dual1} and Young's inequality, we have
+  \[ | D_{\rho^4, \varepsilon} (\phi_{\varepsilon}, - 3 \llbracket
+     X_{\varepsilon}^2 \rrbracket, \phi_{\varepsilon}) | \lesssim \|
+     \rho^{\sigma} \llbracket X_{\varepsilon}^2 \rrbracket \|_{\CC^{- 1 -
+     \kappa, \varepsilon}} \| \rho^{2 - \sigma / 2} \phi_{\varepsilon}
+     \|_{H^{1 / 2 + \kappa, \varepsilon}}^2 \]
+  \[ \lesssim \| \rho^{\sigma} \llbracket X_{\varepsilon}^2 \rrbracket
+     \|_{\CC^{- 1 - \kappa, \varepsilon}} \| \rho^{1 + \iota}
+     \phi_{\varepsilon} \|_{L^{2, \varepsilon}}^{2 \theta} \| \rho^2
+     \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^{2 (1 - \theta)} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) \| \rho \phi_{\varepsilon}
+     \|_{L^{4, \varepsilon}}^{2 \theta} \| \rho^2 \phi_{\varepsilon} \|_{H^{1
+     - 2 \kappa, \varepsilon}}^{2 (1 - \theta)} \leqslant Q_{\rho}
+     (\mathbb{X}_{\varepsilon}) + \delta (\| \rho \phi_{\varepsilon} \|_{L^{4,
+     \varepsilon}}^4 + \| \rho^2 \phi_{\varepsilon} \|_{H^{1 - 2 \kappa,
+     \varepsilon}}^2) . \]
+  Similarly,
+  \[ \left| D_{\rho^4, \varepsilon} \left( \phi_{\varepsilon}, 3 \llbracket
+     X_{\varepsilon}^2 \rrbracket, \Q_{\varepsilon}^{- 1} [3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}] \right) \right| \]
+  \[ \lesssim \| \rho^{\sigma} \llbracket X_{\varepsilon}^2 \rrbracket
+     \|_{\CC^{- 1 - \kappa, \varepsilon}} \| \rho^{3 - \iota - 2 \sigma}
+     \phi_{\varepsilon} \|_{H^{4 \kappa, \varepsilon}} \left\| \rho^{1 + \iota
+     + \sigma} \Q_{\varepsilon}^{- 1} [3 \llbracket X_{\varepsilon}^2
+     \rrbracket \succ \phi_{\varepsilon}] \right\|_{H^{1 - 2 \kappa,
+     \varepsilon}}, \]
+  where we further estimate by Schauder and paraproduct estimates
+  \[ \left\| \rho^{1 + \iota + \sigma} \Q_{\varepsilon}^{- 1} [3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}] \right\|_{H^{1 - 2
+     \kappa, \varepsilon}} \lesssim \| \rho^{1 + \iota + \sigma} \llbracket
+     X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon} \|_{H^{- 1 - 2
+     \kappa, \varepsilon}} \]
+  \[ \lesssim \| \rho^{\sigma} \llbracket X_{\varepsilon}^2 \rrbracket
+     \|_{\CC^{- 1 - \kappa, \varepsilon}} \| \rho^{1 + \iota}
+     \phi_{\varepsilon} \|_{L^{2, \varepsilon}} \]
+  and hence we deduce by embedding that
+  \[ \left| D_{\rho^4, \varepsilon} \left( \phi_{\varepsilon}, 3 \llbracket
+     X_{\varepsilon}^2 \rrbracket, \Q_{\varepsilon}^{- 1} [3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}] \right) \right|
+     \lesssim \| \llbracket X_{\varepsilon}^2 \rrbracket \|^2_{\CC^{- 1 -
+     \kappa, \varepsilon}} \| \rho^{1 + \iota} \phi_{\varepsilon} \|_{L^{2,
+     \varepsilon}} \| \rho^2 \phi_{\varepsilon} \|_{H^{4 \kappa, \varepsilon}}
+  \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta (\| \rho
+     \phi_{\varepsilon} \|_{L^{4, \varepsilon}}^4 + \| \rho^2
+     \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2) . \]
+  Due to Lemma \ref{lem:comm1} and interpolation, we obtain for $\theta =
+  \frac{1 - 5 \kappa}{1 - 2 \kappa}$
+  \[ | \langle \rho^4 \phi_{\varepsilon}, \tilde{C} (\phi_{\varepsilon}, 3
+     \llbracket X_{\varepsilon}^2 \rrbracket, 3 \llbracket X_{\varepsilon}^2
+     \rrbracket) \rangle_{\varepsilon} | \lesssim \| \rho^{\sigma} \llbracket
+     X_{\varepsilon}^2 \rrbracket \|_{\CC^{- 1 - \kappa, \varepsilon}}^2 \|
+     \rho^{2 - \sigma} \phi_{\varepsilon} \|^2_{H^{3 \kappa, \varepsilon}} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) \| \rho^{1 + \iota}
+     \phi_{\varepsilon} \|^{2 \theta}_{L^{2, \varepsilon}} \| \rho^2
+     \phi_{\varepsilon} \|^{2 (1 - \theta)}_{H^{1 - 2 \kappa, \varepsilon}} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta (\| \rho
+     \phi_{\varepsilon} \|_{L^{4, \varepsilon}}^4 + \| \rho^2
+     \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2) . \]
+  Then we use the paraproduct estimates, the embedding $\CC^{1 / 2 - \kappa,
+  \varepsilon} (\rho^{\sigma}) \subset H^{1 / 2 - 2 \kappa, \varepsilon}
+  (\rho^{2 - \sigma / 2})$ (whjich holds due to the integrability of $\rho^{4
+  \iota}$ for some $\iota \in (0, 1)$ and the fact that $\sigma$ can be chosen
+  small), together with Lemma \ref{lem:Y1} and interpolation to deduce for
+  $\theta = \frac{1 / 2 + 5 \kappa}{1 - 2 \kappa}$ that
+  \[ | \langle \rho^4 \phi_{\varepsilon}, - 3 \llbracket X_{\varepsilon}^2
+     \rrbracket \prec (Y_{\varepsilon} + \phi_{\varepsilon}) \rangle_{\varepsilon} | \]
+  \[ \lesssim \| \rho^{\sigma} \llbracket X_{\varepsilon}^2 \rrbracket
+     \|_{\CC^{- 1 - \kappa, \varepsilon}} \| \rho^{2 - \sigma / 2}
+     (Y_{\varepsilon} + \phi_{\varepsilon}) \|_{H^{1 / 2 - 2 \kappa,
+     \varepsilon}} \| \rho^{2 - \sigma / 2} \phi_{\varepsilon} \|_{H^{1 / 2 +
+     3 \kappa, \varepsilon}} \]
+  \[ \lesssim \| \rho^{\sigma} \llbracket X_{\varepsilon}^2 \rrbracket
+     \|_{\CC^{- 1 - \kappa, \varepsilon}} \| \rho^{2 - \sigma / 2}
+     Y_{\varepsilon} \|_{H^{1 / 2 - 2 \kappa, \varepsilon}} \| \rho^{2 -
+     \sigma / 2} \phi_{\varepsilon} \|_{H^{1 / 2 + 3 \kappa, \varepsilon}} \]
+  \[ + \| \rho^{\sigma} \llbracket X_{\varepsilon}^2 \rrbracket \|_{\CC^{- 1 -
+     \kappa, \varepsilon}} \| \rho^{2 - \sigma / 2} \phi_{\varepsilon}
+     \|_{H^{1 / 2 + 3 \kappa, \varepsilon}}^2 \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) (1 + \| \rho^{1 + \iota}
+     \phi_{\varepsilon} \|_{L^{2, \varepsilon}}^{2 \theta} + \| \rho^2
+     \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^{2 (1 - \theta)})
+  \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta (\| \rho
+     \phi_{\varepsilon} \|_{L^{4, \varepsilon}}^4 + \| \rho^2
+     \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2) . \]
+  Next, we have
+  \[ | \langle \rho^4 \phi_{\varepsilon}, - 3 X_{\varepsilon} (Y_{\varepsilon}
+     + \phi_{\varepsilon})^2 \rangle_{\varepsilon} | \lesssim \| \rho^{\sigma}
+     X_{\varepsilon} \|_{\CC^{- 1 / 2 - \kappa, \varepsilon}} \| \rho^{4 -
+     \sigma} \phi_{\varepsilon}^3 \|_{B_{1, 1}^{1 / 2 + \kappa, \varepsilon}}
+  \]
+  \[ + \| \rho^{\sigma} X_{\varepsilon} Y_{\varepsilon} \|_{\CC^{- 1 / 2 -
+     \kappa, \varepsilon}} \| \rho^{4 - \sigma} \phi_{\varepsilon}^2 \|_{B_{1,
+     1}^{1 / 2 + \kappa, \varepsilon}} + \| \rho^{\sigma} X_{\varepsilon}
+     Y_{\varepsilon}^2 \|_{\CC^{- 1 / 2 - \kappa, \varepsilon}} \| \rho^{4 -
+     \sigma} \phi_{\varepsilon} \|_{B_{1, 1}^{1 / 2 + \kappa, \varepsilon}} .
+  \]
+  Here we employ Lemma \ref{lem:mult} and interpolation to obtain for $\theta
+  = \frac{1 / 2 - 4 \kappa}{1 - 2 \kappa}$
+  \[ \| \rho^{\sigma} X_{\varepsilon} \|_{\CC^{- 1 / 2 - \kappa, \varepsilon}}
+     \| \rho^{4 - \sigma} \phi_{\varepsilon}^3 \|_{B_{1, 1}^{1 / 2 + \kappa,
+     \varepsilon}} \lesssim \| \rho^{\sigma} X_{\varepsilon} \|_{\CC^{- 1 / 2
+     - \kappa, \varepsilon}} \| \rho \phi_{\varepsilon} \|^2_{L^{4,
+     \varepsilon}} \| \rho^{2 - \sigma} \phi_{\varepsilon} \|_{H^{1 / 2 + 2
+     \kappa, \varepsilon}} \]
+  \[ \lesssim \| \rho^{\sigma} X_{\varepsilon} \|_{\CC^{- 1 / 2 - \kappa,
+     \varepsilon}} \| \rho \phi_{\varepsilon} \|_{L^{4, \varepsilon}}^2 \|
+     \rho^{1 + \iota} \phi_{\varepsilon} \|_{L^{2, \varepsilon}}^{\theta} \|
+     \rho^2 \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^{1 - \theta}
+  \]
+  \[ \lesssim Q_{\rho} (\mathbb{X}_{\varepsilon}) \| \rho \phi_{\varepsilon}
+     \|_{L^{4, \varepsilon}}^{2 + \theta} \| \rho^2 \phi_{\varepsilon}
+     \|_{H^{1 - 2 \kappa, \varepsilon}}^{1 - \theta} \leqslant Q_{\rho}
+     (\mathbb{X}_{\varepsilon}) + \delta (\| \rho \phi_{\varepsilon} \|_{L^{4,
+     \varepsilon}}^4 + \| \rho^2 \phi_{\varepsilon} \|_{H^{1 - 2 \kappa,
+     \varepsilon}}^2) \]
+  and similarly for the other two terms, where we also use Lemma \ref{lem:Z}
+  and the embedding $H^{1 - 2 \kappa, \varepsilon} (\rho^2) \subset H^{1 / 2 +
+  2 \kappa, \varepsilon} (\rho^{3 - \iota - \sigma})$ and $H^{1 / 2 + 2
+  \kappa, \varepsilon} (\rho^2) = B_{2, 2}^{1 / 2 + 2 \kappa, \varepsilon}
+  (\rho^2) \subset B_{1, 1}^{1 / 2 + \kappa, \varepsilon} (\rho^{4 - \sigma})$
+  \[ \| \rho^{\sigma} X_{\varepsilon} Y_{\varepsilon} \|_{\CC^{- 1 / 2 -
+     \kappa, \varepsilon}} \| \rho^{4 - \sigma} \phi_{\varepsilon}^2 \|_{B_{1,
+     1}^{1 / 2 + \kappa, \varepsilon}} + \| \rho^{\sigma} X_{\varepsilon}
+     Y_{\varepsilon}^2 \|_{\CC^{- 1 / 2 - \kappa, \varepsilon}} \| \rho^{4 -
+     \sigma} \phi_{\varepsilon} \|_{B_{1, 1}^{1 / 2 + \kappa, \varepsilon}} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) (\| \rho^{1 + \iota}
+     \phi_{\varepsilon} \|_{L^{2, \varepsilon}} \| \rho^{3 - \iota - \sigma}
+     \phi_{\varepsilon} \|_{H^{1 / 2 + 2 \kappa, \varepsilon}} + \| \rho^2
+     \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}) \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta (\| \rho
+     \phi_{\varepsilon} \|_{L^{4, \varepsilon}}^4 + \| \rho^2
+     \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2) . \]
+  Next, we obtain
+  \[ | \langle \rho^4 \phi_{\varepsilon}, - Y_{\varepsilon}^3 \rangle_{\varepsilon} |
+     \lesssim \| \rho^{\sigma} Y_{\varepsilon} \|_{\CC^{1 / 2 - \kappa,
+     \varepsilon}}^3 \| \rho^{4 - 3 \sigma} \phi \|_{B^{\kappa,
+     \varepsilon}_{1, 1}} \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) +
+     \delta \| \rho^2 \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2,
+  \]
+  and using Lemma \ref{lem:mult} again
+  \[ | \langle \rho^4 \phi_{\varepsilon}, - 3 Y_{\varepsilon}^2
+     \phi_{\varepsilon} \rangle_{\varepsilon} | \lesssim \| \rho^{\sigma} Y_{\varepsilon}
+     \|_{\CC^{1 / 2 - \kappa, \varepsilon}}^2 \| \rho^{4 - \sigma}
+     \phi_{\varepsilon}^2 \|_{B_{1, 1}^{\kappa, \varepsilon}} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) \| \rho^{1 + \iota}
+     \phi_{\varepsilon} \|_{L^{2, \varepsilon}} \| \rho^{3 - i - \sigma}
+     \phi_{\varepsilon} \|_{H^{2 \kappa, \varepsilon}} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta (\| \rho
+     \phi_{\varepsilon} \|_{L^{4, \varepsilon}}^4 + \| \rho^2
+     \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2), \]
+  and by interpolation it holds for $\theta = \frac{1 - 4 \kappa}{1 - 2
+  \kappa}$
+  \[ | \langle \rho^4 \phi_{\varepsilon}, - 3 Y_{\varepsilon}
+     \phi_{\varepsilon}^2 \rangle_{\varepsilon} | \lesssim \| \rho^{\sigma} Y_{\varepsilon}
+     \|_{\CC^{1 / 2 - \kappa, \varepsilon}} \| \rho^{4 - \sigma}
+     \phi_{\varepsilon}^3 \|_{B^{\kappa, \varepsilon}_{1, 1}} \lesssim \|
+     \rho^{\sigma} Y_{\varepsilon} \|_{\CC^{1 / 2 - \kappa, \varepsilon}} \|
+     \rho \phi_{\varepsilon} \|^2_{L^{4, \varepsilon}} \| \rho^{2 - \sigma}
+     \phi_{\varepsilon} \|_{H^{2 \kappa, \varepsilon}} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) \| \rho \phi_{\varepsilon}
+     \|_{L^{4, \varepsilon}}^{2 + \theta} \| \rho^2 \phi_{\varepsilon}
+     \|_{H^{1 - 2 \kappa, \varepsilon}}^{1 - \theta} \leqslant Q_{\rho}
+     (\mathbb{X}_{\varepsilon}) + \delta (\| \rho \phi_{\varepsilon} \|_{L^{4,
+     \varepsilon}}^4 + \| \rho^2 \phi_{\varepsilon} \|_{H^{1 - 2 \kappa,
+     \varepsilon}}^2) . \]
+  Then, by {\eqref{eq:U11}}
+  \[ \left| \langle \rho^4 \phi_{\varepsilon}, - 3 \left(
+     \UU^{\varepsilon}_{\leqslant L} \llbracket X^2 \rrbracket \right) \succ
+     Y_{\varepsilon} \rangle_{\varepsilon} \right| \lesssim C_L \| \rho^{\sigma} \llbracket
+     X_{\varepsilon}^2 \rrbracket \|_{\CC^{- 1 - \kappa, \varepsilon}} \|
+     \rho^{\sigma} Y_{\varepsilon} \|_{L^{\infty, \varepsilon}} \| \rho^{4 - 3
+     \sigma} \phi_{\varepsilon} \|_{B^{1 / 2 + \kappa, \varepsilon}_{1, 1}} \]
+  \[ \leqslant Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta \| \rho^2
+     \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2, \]
+  and finally
+  \[ | \langle \rho^4 \phi_{\varepsilon}, Z_{\varepsilon}
+     \rangle_{\varepsilon} | \lesssim \| \rho^{\sigma} Z_{\varepsilon}
+     \|_{\CC^{- 1 / 2 - \kappa, \varepsilon}} \| \rho^{4 - \sigma}
+     \phi_{\varepsilon} \|_{B_{1, 1}^{1 / 2 + \kappa, \varepsilon}} \leqslant
+     (| \log t | + 1) Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta \| \rho^2
+     \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2 . \]
+  The proof is complete.
+\end{proof}
+
+Now we have all in hand to establish our main energy estimate.
+
+\begin{theorem}
+  \label{th:energy-estimate}Let $\rho$ be a weight such that $\rho^{\iota} \in
+  L^{4, 0}$ for some $\iota \in (0, 1)$. There exists a constant $\alpha =
+  \alpha (m^{2}) > 0$ such that
+  \begin{equation}
+    \frac{1}{2} \partial_t \| \rho^2 \phi_{\varepsilon} \|_{L^{2,
+    \varepsilon}}^2 + \alpha \| \rho \phi_{\varepsilon} \|_{L^{4,
+    \varepsilon}}^4 + \alpha \| \rho^2 \psi_{\varepsilon} \|_{L^{2,
+    \varepsilon}}^2 + \alpha \| \rho^2 \nabla_{\varepsilon} \psi_{\varepsilon}
+    \|_{L^{2, \varepsilon}}^2 + \| \rho^2 \phi_{\varepsilon} \|_{H^{1 - 2
+    \kappa, \varepsilon}}^2 \label{eq:d18}
+  \end{equation}
+  \[ \leqslant (| \log t | + 1) Q_{\rho} (\mathbb{X}_{\varepsilon}) . \]
+\end{theorem}
+
+\begin{proof}
+  As a consequence of {\eqref{eq:psi1}}, we have according to Lemma
+  \ref{lem:grad}, Lemma \ref{lem:emb}, Lemma \ref{lem:equiv2}
+  \[ \| \rho^2 \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2
+     \leqslant \left\| \rho^2 \Q_{\varepsilon}^{- 1} [3 \llbracket
+     X_{\varepsilon}^2 \rrbracket \succ \phi_{\varepsilon}] \right\|_{H^{1 - 2
+     \kappa, \varepsilon}}^2 + \| \rho^2 \psi_{\varepsilon} \|_{H^{1 - 2
+     \kappa, \varepsilon}}^2 \]
+  \[ \lesssim \| \rho^{\sigma} \llbracket X_{\varepsilon}^2 \rrbracket
+     \|^2_{\CC^{- 1 - \kappa, \varepsilon}} \| \rho^{2 - \sigma}
+     \phi_{\varepsilon} \|^2_{L^{2, \varepsilon}} + \| \rho^2
+     \psi_{\varepsilon} \|_{H^{1 - \kappa, \varepsilon}}^2 \]
+  \begin{equation}
+    \lesssim Q_{\rho} (\mathbb{X}_{\varepsilon}) + \| \rho \phi_{\varepsilon}
+    \|_{L^{4, \varepsilon}}^4 + \| \rho^2 \psi_{\varepsilon} \|_{L^{2,
+    \varepsilon}}^2 + \| \rho^2 \nabla_{\varepsilon} \psi_{\varepsilon}
+    \|_{L^{2, \varepsilon}}^2 . \label{eq:17}
+  \end{equation}
+  Therefore, according to Lemma \ref{lemma:bounds-rhs1} we obtain that
+  \[ \frac{1}{2} \partial_t \| \rho^2 \phi_{\varepsilon} \|_{L^{2,
+     \varepsilon}}^2 + \| \rho \phi_{\varepsilon} \|_{L^{4, \varepsilon}}^4 +
+     m^{2} \| \rho^2 \psi_{\varepsilon} \|_{L^{2, \varepsilon}}^2 + \| \rho^2
+     \nabla_{\varepsilon} \psi_{\varepsilon} \|_{L^{2, \varepsilon}}^2 + \|
+     \rho^2 \phi_{\varepsilon} \|_{H^{1 - 2 \kappa, \varepsilon}}^2 \]
+  \[ \leqslant (| \log t | + 1) Q_{\rho} (\mathbb{X}_{\varepsilon}) + \delta
+     (\| \rho \phi_{\varepsilon} \|_{L^{4, \varepsilon}}^4 + \| \rho^2
+     \psi_{\varepsilon} \|_{L^{2, \varepsilon}}^2 + \| \rho^2
+     \nabla_{\varepsilon} \psi_{\varepsilon} \|_{L^{2, \varepsilon}}^2). \]
+Choosing $\delta > 0$ sufficiently small allows to absorb the norms of
+  $\phi_{\varepsilon}, \psi_{\varepsilon}$ form the right hand side into the
+  left hand side and the claim follows.
+\end{proof}
+
+\begin{corollary}
+  \label{cor:Lp}Let $\rho$ be a weight such that $\rho^{\iota} \in L^{4, 0}$
+  for some $\iota \in (0, 1)$. Then
+  for all $p \in [1, \infty)$
+  \begin{equation}\label{eq:lp} \frac{1}{2 p} \partial_t \| \rho^2 \phi_{\varepsilon} \|_{L^{2,
+     \varepsilon}}^{2 p} + \| \rho^2 \phi_{\varepsilon} \|_{L^{2,
+     \varepsilon}}^{2 p + 2} \leqslant ((| \log t | + 1) Q_{\rho}
+     (\mathbb{X}_{\varepsilon}))^{(p + 1) / 2} .
+     \end{equation}
+\end{corollary}
+
+\begin{proof}
+  Based on {\eqref{eq:d18}} we obtain
+  \[ \frac{1}{2 p} \partial_t \| \rho^2 \phi_{\varepsilon} \|_{L^{2,
+     \varepsilon}}^{2 p} + \| \rho^2 \phi_{\varepsilon} \|_{L^{2,
+     \varepsilon}}^{2 (p - 1)} \| \rho \phi_{\varepsilon} \|_{L^{4,
+     \varepsilon}}^4 \leqslant (| \log t | + 1) \| \rho^2 \phi_{\varepsilon}
+     \|_{L^{2, \varepsilon}}^{2 (p - 1)} Q_{\rho} (\mathbb{X}_{\varepsilon}) .
+  \]
+  The $L^4$-norm on the left hand side can be estimated from below by the
+  $L^2$-norm, whereas on the right hand side we use Young's inequality to
+  deduce
+  \[ \frac{1}{2 p} \partial_t \| \rho^2 \phi_{\varepsilon} \|_{L^{2,
+     \varepsilon}}^{2 p} + \| \rho^2 \phi_{\varepsilon} \|_{L^{2,
+     \varepsilon}}^{2 p + 2} \leqslant ((| \log t | + 1) Q_{\rho}
+     (\mathbb{X}_{\varepsilon}))^{(p + 1) / 2} + \delta \| \rho^2
+     \phi_{\varepsilon} \|_{L^{2, \varepsilon}}^{2 p + 2} .\]
+Hence we may absorb the second term from the right hand side into the left hand
+  side.
+\end{proof}
+
+\subsection{Tightness for the invariant measures}
+
+\label{ss:tight}Recall that $\varphi_{M, \varepsilon}$ is a stationary
+solution to {\eqref{eq:moll}} having at time $t \geqslant 0$ law given by the
+Gibbs measure $\nu_{M, \varepsilon}$. Moreover, we have the decomposition
+$\varphi_{M, \varepsilon} = X_{M, \varepsilon} + Y_{M, \varepsilon} + \phi_{M,
+\varepsilon}$, where $X_{M, \varepsilon}$ is stationary as well. By our construction, all equations are solved on a common
+probability space, say $(\Omega, \mathcal{F}, \mathbb{P})$, and we denote by
+$\mathbb{E}$ the corresponding expected value.
+
+\begin{theorem}
+  \label{thm:tight}Let $\rho$ be a weight such that $\rho^{\iota} \in L^{4,
+  0}$ for some $\iota \in (0, 1)$. Then for every $p \in [1, \infty)$ it holds
+  \[ \sup_{\varepsilon \in \mathcal{A}, M > 0} \mathbb{E} \| \varphi_{M,
+     \varepsilon} (0) - X_{M, \varepsilon} (0) \|_{H^{1 / 2 - 2 \kappa,
+     \varepsilon} (\rho^2)}^2 +\sup_{\varepsilon \in \mathcal{A}, M > 0} \mathbb{E} \| \varphi_{M,
+     \varepsilon} (0) - X_{M, \varepsilon} (0) \|_{L^{2, \varepsilon}
+     (\rho^2)}^{2 p}< \infty.\]
+\end{theorem}
+
+\begin{proof}
+  Let us  show the first claim. Due to stationarity of $\varphi_{M,
+  \varepsilon} - X_{M, \varepsilon} = Y_{M, \varepsilon} + \phi_{M,
+  \varepsilon}$, it holds
+  \[ \mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (0) - X_{M, \varepsilon}
+     (0)) \|_{H^{1 / 2 - 2 \kappa, \varepsilon}}^2 = \frac{1}{\tau}
+     \int_0^{\tau} \mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (s) - X_{M,
+     \varepsilon} (s)) \|_{H^{1 / 2 - 2 \kappa, \varepsilon}}^2 \mathd s \]
+  \[ = \frac{1}{\tau} \int_0^{\tau} \mathbb{E} \| \rho^2 (\phi_{M,
+     \varepsilon} (s) + Y_{M, \varepsilon} (s)) \|_{H^{1 / 2 - 2 \kappa,
+     \varepsilon}}^2 \mathd s \]
+  \[ \lesssim \frac{1}{\tau} \int_0^{\tau} \mathbb{E} \| \rho^2 \phi_{M,
+     \varepsilon} (s) \|_{H^{1 / 2 - 2 \kappa, \varepsilon}}^2 \mathd s +
+     \frac{1}{\tau} \int_0^{\tau} \mathbb{E} \| \rho^2 Y_{M, \varepsilon} (s)
+     \|_{H^{1 / 2 - 2 \kappa, \varepsilon}}^2 \mathd s. \]
+  In order to estimate the first term on the right hand side, we employ the
+  bound {\eqref{eq:17}} as well as Lemma \ref{lem:Y1} to obtain
+  \[ \mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (0) - X_{M, \varepsilon}
+     (0)) \|_{H^{1 / 2 - 2 \kappa, \varepsilon}}^2 \lesssim \mathbb{E}Q_{\rho}
+     (\mathbb{X}_{M, \varepsilon}) \]
+  \begin{equation}
+    + \frac{1}{\tau} \int_0^{\tau} \mathbb{E} \| \rho \phi_{M, \varepsilon}
+    (s) \|_{L^{4, \varepsilon}}^4 +\mathbb{E} \| \rho^2 \psi_{M, \varepsilon}
+    (s) \|_{L^{2, \varepsilon}}^2 +\mathbb{E} \| \rho^2 \nabla_{\varepsilon}
+    \psi_{M, \varepsilon} (s) \|_{L^{2, \varepsilon}}^2 \mathd s.
+    \label{eq:18}
+  \end{equation}
+  On the other hand, we note that the energy inequality from Theorem
+  \ref{th:energy-estimate} together with Lemma~\ref{lem:Y1} gives
+  \[ \alpha \int_0^{\tau} (\mathbb{E} \| \rho \phi_{M, \varepsilon} (s)
+     \|_{L^{4, \varepsilon}}^4 +\mathbb{E} \| \rho^2 \psi_{M, \varepsilon} (s)
+     \|_{L^{2, \varepsilon}}^2 +\mathbb{E} \| \rho^2 \nabla_{\varepsilon}
+     \psi_{M, \varepsilon} (s) \|_{L^{2, \varepsilon}}^2) \mathd s \]
+  \[ \leqslant \int_0^{\tau} (| \log s | + 1) \mathd s\mathbb{E}Q_{\rho}
+     (\mathbb{X}_{M, \varepsilon}) + \frac{1}{2} \mathbb{E} \| \rho^2 \phi_{M,
+     \varepsilon} (0) \|_{L^{2, \varepsilon}}^2 \]
+  \[ \leqslant C_{\tau} \mathbb{E}Q_{\rho} (\mathbb{X}_{M, \varepsilon}) +
+     2\mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (0) - X_{M, \varepsilon}
+     (0)) \|_{L^{2, \varepsilon}}^2 + 2\mathbb{E} \| \rho^2 Y_{\varepsilon}
+     (0) \|_{L^{2, \varepsilon}}^2 \]
+  \[ \leqslant C_{\tau} \mathbb{E}Q_{\rho} (\mathbb{X}_{M, \varepsilon}) +
+     2\mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (0) - X_{M, \varepsilon}
+     (0)) \|_{L^{2, \varepsilon}}^2 \]
+  and plugging this bound into {\eqref{eq:18}} yields
+  \[ \mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (0) - X_{M, \varepsilon}
+     (0)) \|_{H^{1 / 2 - 2 \kappa, \varepsilon}}^2 \lesssim C_{\tau}
+     \mathbb{E}Q_{\rho} (\mathbb{X}_{M, \varepsilon}) + \frac{2}{\alpha \tau}
+     \mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (0) - X_{M, \varepsilon}
+     (0)) \|_{L^{2, \varepsilon}}^2 . \]
+  Finally, taking $\tau > 0$ large enough, we may absorb the second term from
+  the right hand side into the left hand side to deduce
+  \[ \mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (0) - X_{M, \varepsilon}
+     (0)) \|_{H^{1 / 2 - 2 \kappa, \varepsilon}}^2 \leqslant C_{\tau}
+     \mathbb{E}Q_{\rho} (\mathbb{X}_{M, \varepsilon}) . \]
+  Observing that the right hand side is bounded uniformly in $M,\varepsilon$, completes the proof of the first claim.
+  
+  Now, we show the second claim for $p \in [2, \infty)$. The case $p \in [1,
+  2)$ then follows easily. Using stationarity as above we have
+  \[ \mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (0) - X_{M, \varepsilon}
+     (0)) \|_{L^{2, \varepsilon}}^{2 p} = \frac{1}{\tau} \int_0^{\tau}
+     \mathbb{E} \| \rho^2 (\phi_{M, \varepsilon} (s) + Y_{M, \varepsilon} (s))
+     \|_{L^{2, \varepsilon}}^{2 p} \mathd s \]
+  \[ \  \]
+  \begin{equation}
+    \lesssim \frac{1}{\tau} \int_0^{\tau} \mathbb{E} \| \rho^2 \phi_{M,
+    \varepsilon} (s) \|_{L^{2, \varepsilon}}^{2 p} \mathd s + \frac{1}{\tau}
+    \int_0^{\tau} \mathbb{E} \| \rho^2 Y_{M, \varepsilon} (s) \|_{L^{2,
+    \varepsilon}}^{2 p} \mathd s. \label{eq:d21}
+  \end{equation}
+  Due to Corollary \ref{cor:Lp} applied to $p - 1$ we deduce
+  \[ \alpha \int_0^{\tau} \mathbb{E} \| \rho^2 \phi_{M, \varepsilon} (s)
+     \|_{L^{2, \varepsilon}}^{2 p} \mathd s \leqslant C_{\tau} \mathbb{E}
+     [Q_{\rho} (\mathbb{X}_{\varepsilon})^{p / 2}] + \frac{1}{2 (p - 1)}
+     \mathbb{E} \| \rho^2 \phi_{M, \varepsilon} (0) \|_{L^{2, \varepsilon}}^{2
+     (p - 1)} \]
+  \[ \leqslant C_{\tau} \mathbb{E} [Q_{\rho} (\mathbb{X}_{\varepsilon})^{p /
+     2}] + C_p \mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (0) - X_{M,
+     \varepsilon} (0)) \|_{L^{2, \varepsilon}}^{2 (p - 1)} + C_p \mathbb{E} \|
+     \rho^2 Y_{M, \varepsilon} (0) \|_{L^{2, \varepsilon}}^{2 (p - 1)} . \]
+  Plugging this back into {\eqref{eq:d21}} and using Young's inequality we
+  obtain
+  \[ \mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (0) - X_{M, \varepsilon}
+     (0)) \|_{L^{2, \varepsilon}}^{2 p} \leqslant C_{\tau} \mathbb{E}
+     [Q_{\rho} (\mathbb{X}_{\varepsilon})^{p / 2}] + \delta \frac{C_p}{\alpha
+     \tau} \int_0^{\tau} \mathbb{E} \| \rho^2 (\varphi_{M, \varepsilon} (0) -
+     X_{M, \varepsilon} (0)) \|_{L^{2, \varepsilon}}^{2 p} \]
+  \[ + C_{\delta, p} + C_p \mathbb{E} \| \rho^2 Y_{M, \varepsilon} (0)
+     \|_{L^{2, \varepsilon}}^{2 (p - 1)} \]
+  hence the second claim follows by choosing $\delta>0$ small enough.
+\end{proof}
+
+The above result directly implies the desired tightness of the approximate
+Gibbs measures $\nu_{M, \varepsilon}$. To formulate this precisely we make use
+of the extension operators $\mathcal{E}^{\varepsilon}$ for distributions on
+$\Lambda_{\varepsilon}$ constructed in Section \ref{s:ext}.
+We recall that on
+the approximate level the stationary process $\varphi_{M, \varepsilon}$ admits the decomposition
+$ \varphi_{M, \varepsilon} = X_{M, \varepsilon} + Y_{M, \varepsilon} +
+   \phi_{M, \varepsilon}, $
+where $X_{M,\varepsilon}$ is stationary and $Y_{M,\varepsilon}$ is given by \eqref{eq:YY} with $\tthreeone{X_{M, \varepsilon}}$ being also stationary.
+Accordingly, letting
+\[ \zeta_{M, \varepsilon} := - \LL_{\varepsilon}^{- 1} \left[ 3 \left(
+   \UU^{\varepsilon}_{>} \llbracket X_{M, \varepsilon}^2 \rrbracket \right)
+   \succ Y_{M, \varepsilon} \right] + \phi_{M, \varepsilon} \backassign
+   \eta_{M, \varepsilon} + \phi_{M, \varepsilon} \]
+we obtain $\varphi_{M, \varepsilon} = X_{M, \varepsilon} - \tthreeone{X_{M,
+\varepsilon}} + \zeta_{M, \varepsilon}$, where all the summands are
+stationary.
+
+
+The next result shows that the family of joint laws of $( \mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon},
+\mathcal{E}^{\varepsilon} X_{M, \varepsilon}, \mathcal{E}^{\varepsilon}
+\tthreeone{X_{M, \varepsilon}}, \mathcal{E}^{\varepsilon} \zeta_{M,
+\varepsilon} )$ at any chosen time $t\geqslant 0$ is tight. In addition, we obtain bounds for arbitrary moments of the limiting measure. To this end, we denote by $(\varphi,X,\tthreeone{X},\zeta)$ a canonical representative of the random variables under consideration.
+
+
+\begin{theorem}\label{thm:main}
+Let $\rho$ be a weight such that $\rho^{\iota} \in L^4$ for
+  some $\iota \in (0, 1)$. Then 
+  the family of joint laws of $( \mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon},
+\mathcal{E}^{\varepsilon} X_{M, \varepsilon}, \mathcal{E}^{\varepsilon}
+\tthreeone{X_{M, \varepsilon}}, \mathcal{E}^{\varepsilon} \zeta_{M,
+\varepsilon} )$, $\varepsilon\in\mathcal{A},M>0,$ evaluated at an arbitrary time $t \geqslant 0$ is tight. Moreover, any limit probability measure $\mu$ 
+   satisfies $\varphi=X-\tthreeone{X}+\zeta$ $\mu$-a.s. and for all $p \in [1, \infty)$ it holds
+  \[ \mathbb{E}_{\mu} \| \varphi \|_{H^{- 1 / 2 - 2\kappa} (\rho^2)}^{2 p} +\mathbb{E}_{\mu} \| X \|_{\CC^{- 1 / 2 -
+   \kappa} (\rho^{\sigma})}^{2p}+\mathbb{E}_{\mu} \|
+   \tthreeone{X} \|_{\CC^{1 / 2 - \kappa} (\rho^{\sigma})}^{2p}<\infty, \]
+\[
+\mathbb{E}_{\mu} \| \zeta  \|^{2p}_{L^{2}
+   (\rho^2)}+\mathbb{E}_{\mu} \| \zeta \|_{H^{1 - 2 \kappa}
+   (\rho^2)}^2+\mathbb{E}_{\mu} \| \zeta  \|_{B^{0}_{4, \infty}
+   (\rho)}^4<\infty.
+\]
+
+
+\end{theorem}
+
+\begin{proof}
+ Since by Lemma \ref{lem:ext}
+  \[ \mathbb{E} \|
+     \mathcal{E}^{\varepsilon} X_{M, \varepsilon} (0) \|_{H^{- 1 / 2 - 2
+     \kappa} (\rho^2)}^{2p} \lesssim 
+     \mathbb{E} \| X_{M, \varepsilon} (0) \|_{\CC^{- 1 / 2 - \kappa,
+     \varepsilon} (\rho^{\sigma})}^{2p} \lesssim 1, \]
+     uniformly in $M,\varepsilon$,  we deduce from Theorem \ref{thm:tight} that
+   \[  \mathbb{E} \|
+   \mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon} (0) \|_{H^{- 1 / 2 - 2
+     \kappa} (\rho^2)}^2+ \mathbb{E} \|\mathcal{E}^{\varepsilon}
+     \varphi_{M, \varepsilon} (0) \|_{H^{- 1 / 2 - 2
+     \kappa} (\rho^2)}^{2 p} \lesssim 1  \]
+ uniformly in $M,\varepsilon$.
+  Integrating \eqref{eq:lp} in time and using the decomposition of $\varphi_{M,\varepsilon}$ leads to
+\[ \| \rho^2 \phi_{M,\varepsilon} (t) \|_{L^{2, \varepsilon}}^{2 p} \leqslant \|
+   \rho^2 \phi_{M,\varepsilon} (0) \|_{L^{2, \varepsilon}}^{2 p} + C_t Q_{\rho}
+   (\mathbb{X}_{M,\varepsilon})^{(p + 1) / 2} \]
+\[ \leqslant C_p \| \rho^2 (\varphi_{M,\varepsilon} (0) - X_{M,\varepsilon} (0))
+   \|_{L^{2, \varepsilon}}^{2 p} + C_p \| \rho^2 Y_{M,\varepsilon} (0) \|_{L^{2,
+   \varepsilon}}^{2 p} + C_t Q_{\rho} (\mathbb{X}_{\varepsilon})^{(p + 1) / 2}.
+\]
+Hence due to Theorem \ref{thm:tight} we obtain a uniform bound for 
+$  \| \rho^2 \phi_{M,\varepsilon} (t) \|_{L^{2, \varepsilon}}^{2 p}
+   $
+for all $t\geqslant 0$.
+In addition, the following expressions are bounded uniformly in
+$M, \varepsilon$ according to Lemma \ref{lem:Y1} and Theorem \ref{th:energy-estimate}
+\[ \mathbb{E} \| \eta_{M, \varepsilon} \|_{C_T \CC^{1 - \kappa, \varepsilon}
+   (\rho^{\sigma})}^{2p}, \qquad \int_0^T \mathbb{E} \| \phi_{M, \varepsilon} (t)
+   \|_{L^{4, \varepsilon} (\rho)}^4 \mathd t, \qquad \int_0^T \mathbb{E} \|
+   \phi_{M, \varepsilon} (t) \|_{H^{1 - 2 \kappa, \varepsilon} (\rho^2)}^2
+   \mathd t, \]
+whenever the weight $\rho$ is such
+that $\rho^{\iota} \in L^4$ for some $\iota \in (0, 1)$. In view of
+stationarity of $\zeta_{M, \varepsilon}$ and the embedding $\CC^{1 -
+\kappa, \varepsilon} (\rho^{\sigma}) \subset H^{1 - 2 \kappa, \varepsilon}
+(\rho^2)$, we therefore obtain a uniform bound for
+$ \mathbb{E} \| \zeta_{M, \varepsilon} (t) \|_{H^{1 - 2 \kappa, \varepsilon}
+   (\rho^2)}^2 $ as well as $ \mathbb{E} \| \zeta_{M, \varepsilon} (t) \|_{L^{2,\varepsilon}
+   (\rho^2)}^{2p} $
+for every $t \geqslant 0$. Similarly, using stationarity together with the
+embedding $\CC^{1 - \kappa, \varepsilon} (\rho^{\sigma}) \subset B^{0,
+\varepsilon}_{4, \infty} (\rho)$ as well as $L^{4, \varepsilon} (\rho) \subset
+B^{0, \varepsilon}_{4, \infty}(\rho)$ we deduce a uniform bound for
+$\mathbb{E} \| \zeta_{M, \varepsilon} (t) \|_{B^{0, \varepsilon}_{4, \infty}
+   (\rho)}^4 $
+for every $t \geqslant 0$.
+
+
+Consequently, by Lemma~\ref{lem:ext} the same
+bounds hold for the corresponding extended distributions and hence the family joint laws of
+$( \mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon},
+\mathcal{E}^{\varepsilon} X_{M, \varepsilon}, \mathcal{E}^{\varepsilon}
+\tthreeone{X_{M, \varepsilon}}, \mathcal{E}^{\varepsilon} \zeta_{M,
+\varepsilon} )$ at any time $t\geqslant 0$ is tight.
+Therefore up to a subsequence we may pass to the
+limit as $\varepsilon \rightarrow 0$, $M \rightarrow \infty$ and the uniform moment bounds are preserved for every limit point.\end{proof}
+
+
+The marginal of $\mu$ corresponding to $\varphi$ is the desired Euclidean $\Phi^{4}$ field theory, which we denote by $\nu$. According to the above result, $\nu$ is obtained as a limit (up to a subsequence) of the continuum extensions of the Gibbs measures $\nu_{M,\varepsilon}$ given by \eqref{eq:19}, \eqref{eq:20} as $\varepsilon \rightarrow 0$, $M \rightarrow \infty$.
+
+
+
+
+
+
+
+
+
+\section{Osterwalder--Schrader axioms and nontriviality}
+
+\label{s:ax}
+
+The goal of this section is to establish several important properties of any limit   measure $\nu$ obtained in the previous section. More precisely, a Euclidean quantum field theory shall satisfy the so-called Osterwalder--Schrader axioms and shall be non-trivial, i.e. non-Gaussian. The reader is referred to  \cite{MR887102} for a detailed exposition. Below we prove that the measure $\nu$ is translation invariant, reflection positive and non-Gaussian.
+
+\subsection{Translation invariance}
+
+For $h \in \mathbb{R}^d$ we denote by $\mathcal{T}_h : \mathcal{S}'
+(\mathbb{R}^d) \rightarrow \mathcal{S}' (\mathbb{R}^d)$ the translation
+operator, namely, $\mathcal{T}_h f (x) \assign f (x - h)$. Analogically, for a
+measure $\mu$ on $\mathcal{S}' (\mathbb{R}^d)$ we define its translation by
+$\mathcal{T}_h \mu (F) \assign \mu (F \circ \mathcal{T}_h)$ where $F \in C_b
+(\mathcal{S}' (\mathbb{R}^d))$. We say that $\mu$ is translation invariant if
+for all $h \in \mathbb{R}^d$ it holds $\mathcal{T}_h \mu = \mu$.
+
+\begin{proposition}
+ Any limit measure $\nu$ constructed via the procedure in Section \ref{sec:tight} is translation
+  invariant.
+\end{proposition}
+
+\begin{proof}
+  By their definition in {\eqref{eq:19}}, {\eqref{eq:20}}, the approximate
+  measures $\nu_{M, \varepsilon}$ are translation invariant under lattice
+  shifts. That is, for $h_{\varepsilon} \in \Lambda_{\varepsilon}$ it holds
+  $\mathcal{T}_{h_{\varepsilon}} \nu_{M, \varepsilon} = \nu_{M, \varepsilon}$.
+  In other words, the processes $\varphi_{M, \varepsilon}$ and
+  $\mathcal{T}_{h_{\varepsilon}} \varphi_{M, \varepsilon}$ coincide in law. In
+  addition, since the translation $\mathcal{T}_{h_{\varepsilon}}$ commutes
+  with the extension operator $\mathcal{E}^{\varepsilon}$, it follows that
+  $\mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon}$ and
+  $\mathcal{T}_{h_{\varepsilon}} \mathcal{E}^{\varepsilon} \varphi_{M,
+  \varepsilon}$ coincide in law. Now we recall that the limiting measure $\nu$
+  was obtained as a weak limit of the laws of $\mathcal{E}^{\varepsilon}
+  \varphi_{M, \varepsilon}$ on $H^{- 1 / 2 - \kappa} (\rho^{2 + \gamma})$. If
+  $h \in \mathbb{R}^d$ is given, there exists a sequence $h_{\varepsilon} \in
+  \Lambda_{\varepsilon}$ such that $h_{\varepsilon} \rightarrow h$. Let
+  $\kappa \in (0, 1)$ be small and arbitrary. Then we have for $F \in C^{0,
+  1}_b (H^{- 1 / 2 - 2 \kappa} (\rho^{2 + \gamma}))$ that
+  \[ \mathcal{T}_h \nu (F) = \nu (F \circ \mathcal{T}_h) = \lim_{\varepsilon
+     \rightarrow 0, M \rightarrow \infty} \mathbb{P} \circ
+     (\mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon})^{- 1} (F \circ
+     \mathcal{T}_h) = \lim_{\varepsilon \rightarrow 0, M \rightarrow \infty}
+     \mathbb{E} [F (\mathcal{T}_h \mathcal{E}^{\varepsilon} \varphi_{M,
+     \varepsilon})] \]
+  \[ \  \]
+  \[ = \lim_{\varepsilon \rightarrow 0, M \rightarrow \infty} \mathbb{E} [F
+     (\mathcal{T}_{h_{\varepsilon}} \mathcal{E}^{\varepsilon} \varphi_{M,
+     \varepsilon})] = \lim_{\varepsilon \rightarrow 0, M \rightarrow \infty}
+     \mathbb{E} [F (\mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon})] = \nu
+     (F), \]
+  where in the third inequality we used the regularity of $F$ and Corollary
+  \ref{cor:tight} as follows
+  \[ \mathbb{E} [F (\mathcal{T}_h \mathcal{E}^{\varepsilon} \varphi_{M,
+     \varepsilon}) - F (\mathcal{T}_{h_{\varepsilon}}
+     \mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon})] \leqslant \| F
+     \|_{C^{0, 1}_b} \mathbb{E} \| \mathcal{T}_h \mathcal{E}^{\varepsilon}
+     \varphi_{M, \varepsilon} - \mathcal{T}_{h_{\varepsilon}}
+     \mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon} \|_{H^{- 1 / 2 - 2
+     \kappa} (\rho^{2 + \gamma})} \]
+  \[ \lesssim (h - h_{\varepsilon})^{\kappa} \mathbb{E} \|
+     \mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon} \|_{H^{- 1 / 2 -
+     \kappa} (\rho^{2 + \gamma})} \lesssim (h - h_{\varepsilon})^{\kappa}
+     \rightarrow 0 \quad \tmop{as} \quad \varepsilon \rightarrow 0. \]
+  If $F \in C_b (H^{- 1 / 2 - 2 \kappa} (\rho^{2 + \gamma}))$, then by
+  approximation and dominated convergence theorem we also get $\mathcal{T}_h
+  \nu (F) = \nu (F)$, which completes the proof.
+\end{proof}
+
+\subsection{Reflection positivity}
+
+As the next step we recover the reflection positivity of the measure $\nu$.
+We fix an index $i \in \{ 1, \ldots, d \}$ and establish
+reflection positivity of $\nu$ with respect to the reflection given by the
+hyperplane $\mathbb{R}^{i - 1} \times \{ 0 \} \times \mathbb{R}^{d - i}$. To
+this end, we denote $\mathbb{R}^d_+ = \{ x \in \mathbb{R}^d ; x_i > 0 \}$ and
+define the space of functionals $F$ depending on fields restricted to
+$\mathbb{R}^d_+$ by
+\[   \mathcal{H}_+ = \left\{ \sum_{k=1}^{K}c_{k}e^{i\varphi (f_k)}  ; c_k \in \mathbb{C}, f_k \in C^{\infty}_0 (\mathbb{R}^d_+), K \in
+   \mathbb{N} \right\} . \]
+For a function $f : \mathbb{R}^d \rightarrow \mathbb{R}$ we define its
+reflection 
+\[ (\theta f) (x) \assign (\theta^i f) (x) \assign f (x_1, \ldots, x_{i - 1},
+   - x_i, x_{i + 1}, \ldots, x_d) \]
+and extend it to $F\in\mathcal{H}_+$ by
+$ \theta F (\varphi (f_1), \ldots, \varphi (f_k)) \assign F (\varphi (\theta
+   f_1), \ldots, \varphi (\theta f_k)) . $
+Hence for $F \in \mathcal{H}_+$ the reflection $\theta F$ depends on $\varphi$
+evaluated at $x \in \mathbb{R}^d$ with $x_i < 0$. We say that a measure $\mu$
+is reflection positive if
+\[ \mathbb{E}_{\mu} [\overline{\theta F} F] = \int \overline{\theta F
+   (\varphi)} F (\varphi) \mu (\mathd \varphi) \geqslant 0 \]
+for all $F \in \mathcal{H}_+$.
+
+\begin{proposition}
+ Any limit measure $\nu$ constructed via the procedure in Section \ref{sec:tight} is reflection
+  positive with respect to all reflections $\theta = \theta^i$, $i \in \{ 1,
+  \ldots, d \}$.
+\end{proposition}
+
+\begin{proof}
+  We recall that our Euclidean quantum field theory $\nu$ was obtained as a
+  limit of (suitable continuum extensions of) the measures $\nu_{M,
+  \varepsilon}$ given by {\eqref{eq:19}}, {\eqref{eq:20}}. It is known that
+  for every $\varepsilon, M$ the measures $\nu_{M, \varepsilon}$ reflection
+  positive, see \cite{MR887102}. Therefore, we obtain
+  \[ \mathbb{E}_{\nu} [\overline{\theta F} F] = \lim_{\varepsilon \rightarrow
+     0, M \rightarrow \infty} \mathbb{E} [\overline{\theta F
+     (\mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon})} F
+     (\mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon})] = \lim_{\varepsilon
+     \rightarrow 0, M \rightarrow \infty} \mathbb{E} [\overline{F (\theta
+     \mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon})} F
+     (\mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon})] . \]
+  Next, we observe that since the function $w$ in the definition of the
+  extension operator $\mathcal{E}^{\varepsilon}$ was chosen radially
+  symmetric, the reflection and the extension operator commute. Moreover, if
+  $F \in \mathcal{H}_+$ then also $F \circ \mathcal{E}^{\varepsilon} \in
+  \mathcal{H}_+$ and therefore due to the reflection positivity of $\nu_{M,
+  \varepsilon}$
+  \[ \mathbb{E}_{\nu} [\overline{\theta F} F] = \lim_{\varepsilon \rightarrow
+     0, M \rightarrow \infty} \mathbb{E} [\overline{F
+     (\mathcal{E}^{\varepsilon} \theta \varphi_{M, \varepsilon})} F
+     (\mathcal{E}^{\varepsilon} \varphi_{M, \varepsilon})] \]
+  \[ = \lim_{\varepsilon \rightarrow 0, M \rightarrow \infty} \mathbb{E}
+     [\overline{\theta (F \circ \mathcal{E}^{\varepsilon}) \varphi_{M,
+     \varepsilon}} (F \circ \mathcal{E}^{\varepsilon}) \varphi_{M,
+     \varepsilon}] \geqslant 0, \]
+  which completes the proof.
+\end{proof}
+
+\subsection{Nontriviality}
+
+This section is devoted to the proof of nontriviality, that is,
+non-Gaussianity.
+
+
+
+
+\begin{theorem}
+ Any limit measure $\nu$ constructed via the procedure in Section \ref{sec:tight} is non-Gaussian.
+\end{theorem}
+
+\begin{proof}
+  In order to show that the limiting measure $\nu$ is non-Gaussian, it is
+  sufficient to prove that the connected four-point function is nonzero, see \cite{MR723546}. In other words, we shall prove that the
+  distribution
+  \[ U^{\nu}_4 (x_1, \ldots, x_4) \assign \mathbb{E}_{\nu} [\varphi (x_1)
+     \cdots \varphi (x_4)] \]
+  \[ -\mathbb{E}_{\nu} [\varphi (x_1) \varphi (x_2)] \mathbb{E}_{\nu} [\varphi
+     (x_3) \varphi (x_4)] -\mathbb{E}_{\nu} [\varphi (x_1) \varphi (x_3)]
+     \mathbb{E}_{\nu} [\varphi (x_2) \varphi (x_4)] \]
+  \[ -\mathbb{E}_{\nu} [\varphi (x_1) \varphi (x_4)] \mathbb{E}_{\nu} [\varphi
+     (x_2) \varphi (x_3)], \qquad x_1, \ldots, x_4 \in \mathbb{R}^d, \]
+  is nonzero.
+  
+  To this end, we recall that in Theorem \ref{thm:main} we obtained a limit measure $\mu$ which was the joint law of $(\varphi,X,\tthreeone{X},\zeta)$ and that $\nu$ is the marginal corresponding to the first component. let $K_i = \mathcal{F}^{- 1} \varphi_i$ be a Littlewood--Paley
+  projector and consider the connected four-point function $U^{\nu}_4$
+  convolved with $(K_i, K_i, K_i, K_i)$ and evaluated at $(x_{1},\dots,x_{4})=(0,\dots, 0)$, that
+  is,
+  \[ U^{\nu}_4 \ast (K_i, K_i, K_i, K_i) (0, 0, 0, 0) =\mathbb{E}_{\nu}
+     [(\Delta_i \varphi)^4 (0)] - 3\mathbb{E}_{\nu} [(\Delta_i \varphi)^2
+     (0)]^2 \]
+  \[ =\mathbb{E}_{\mu} [(\Delta_i \varphi)^4 (0)] - 3\mathbb{E}_{\mu}
+     [(\Delta_i \varphi)^2 (0)]^2 \backassign L (\varphi, \varphi, \varphi,
+     \varphi), \]
+  where $L$ is a quadrilinear form. Since under the limit $\mu$ we have the
+   decomposition $\varphi = X - \tthreeone{X} + \zeta$, we may write
+  \begin{equation}
+    L (\varphi, \varphi, \varphi, \varphi) = L (X, X, X, X) - 4 L ( X, X,
+    X, \tthreeone{X} ) + R \label{eq:L24}
+  \end{equation}
+  where $R$ contains terms which are at least bilinear in $\tthreeone{X}$ or
+  linear in $\zeta$. Due to Gaussianity of $X$, the first term on the right
+  hand side of {\eqref{eq:L24}} vanishes. Our goal is to show that the second
+  term behaves like $2^i$ whereas the terms in $R$ are more regular, namely,
+  bounded by $2^{i (1 / 2 + \kappa)}$. In other words, $R$ cannot compensate
+  $L ( X, X, X, \tthreeone{X} )$ and as a consequence $L (\varphi,
+  \varphi, \varphi, \varphi) \neq 0$.
+  
+  Let us begin with $L ( X, X, X, \tthreeone{X} )$. To this end, we denote $k_{[123]}=k_{1}+k_{2}+k_{3}$ and
+  recall that
+  \[ (\Delta_i X) (0) = \int_{\mathbb{R}^d} \varphi_i (k) \int_{- \infty}^0
+     e^{- [m^{2} + | k |^2] (- s)} \hat{\xi} (\mathd s, \mathd k), \]
+  \[ ( \Delta_i \tthreeone{X} ) (0) = \int^0_{- \infty} \mathd s
+     \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} \varphi_i
+     (k_{[123]}) e^{- [m^{2} + | k_{[123]} |^2] (- s)} \]
+  \[ \times \left\llbracket \prod_{l = 1, 2, 3} \int^s_{- \infty} e^{- [m^{2}+ |
+     k_l |^2] (s - s_l)} \hat{\xi} (\mathd s_l, \mathd k_l) \right\rrbracket,
+  \]
+  where $\llbracket\cdot\rrbracket$ denotes Wick's product.
+Hence denoting $H:=- 
+     [4m + | k_{[123]} |^2+|k_{1}|^{2}+|k_{2}|^{2}+|k_{3}|^{2}] (-s)$ we obtain
+  \[ L ( X, X, X, \tthreeone{X} ) =\mathbb{E} \left[ (\Delta_i X)
+     (0) (\Delta_i X) (0) (\Delta_i X) (0) ( \Delta_i \tthreeone{X}
+     ) (0) \right] \]
+  \[ = 3! \int^0_{- \infty} \mathd s \int_{\mathbb{R}^d}
+     \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} \varphi_i (k_{[123]})  e^{H}  \prod_{l = 1, 2, 3} \left[ \int_{- \infty}^s e^{- 
+     2[m^{2}+| k_l |^2] (s - s_l)} \varphi_i (k_l) \mathd s_l \mathd k_l \right]
+  \]
+  \[ = \frac{3!}{8} \int^0_{- \infty} \mathd s
+     \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} \varphi_i
+     (k_{[123]}) e^{H} \prod_{l = 1,
+     2, 3} \left[ \varphi_i (k_l) \frac{\mathd k_l}{m^{2} + | k_l |^2} \right] \]
+  \[ \  \]
+  \[ = \frac{3!}{8} \int_{\mathbb{R}^d} \int_{\mathbb{R}^d}
+     \int_{\mathbb{R}^d} \frac{\varphi_i (k_{[123]})}{H} \prod_{l = 1, 2, 3} \left[ \varphi_i (k_l) \frac{\mathd k_l}{m^{2} +
+     | k_l |^2} \right] \approx 2^{i (- 8 + 9)} \approx 2^i . \]
+  
+  
+  Let us now estimate various terms in $R$. The terms containing only
+  combinations of $X, \tthreeone{X}$ can be estimated directly whereas for
+  term where $\zeta$ appears it is necessary to use stationarity due to the
+  limited integrability in space. For instance,
+  \[ \left| \mathbb{E} \left[ (\Delta_i X) (0) (\Delta_i X) (0) (
+     \Delta_i \tthreeone{X} ) (0) ( \Delta_i \tthreeone{X} )
+     (0) \right] \right| \]
+  \[ \lesssim 2^{- 2 i (- 1 / 2 - \kappa)} 2^{- 2 i (1 / 2 - \kappa)}
+     \mathbb{E} \left[ \| X \|_{\CC^{- 1 / 2 - \kappa} (\rho^{\sigma})}^2
+     \| \tthreeone{X} \|_{\CC^{1 / 2 - \kappa} (\rho^{\sigma})}^2
+     \right] \lesssim 2^{i4 \kappa} \]
+  and similarly for the other terms without $\zeta$. For the remaining terms,
+  we fix a weight $\rho$ as above and use stationarity. In addition, we shall
+  be careful about having the necessary integrability. For instance, for the
+  most irregular term we have
+  \[ \mathbb{E} [(\Delta_i X)^3 (0) (\Delta_i \zeta) (0)] =
+     \int_{\mathbb{R}^d} \rho^4 (x) \mathbb{E} [(\Delta_i X)^3 (x) (\Delta_i
+     \zeta) (x)] \mathd x =\mathbb{E} \langle \rho^4, (\Delta_i X)^3 (\Delta_i
+     \zeta) \rangle \]
+  and we bound this quantity as
+  \[ | \mathbb{E} [(\Delta_i X)^3 (0) (\Delta_i \zeta) (0)] | \leqslant
+     \mathbb{E} [\| \Delta_i X_{\varepsilon} \|_{L^{\infty} (\rho^{\sigma})}^3
+     \| \Delta_i \zeta \|_{L^1 (\rho^{4 - 3 \sigma})}] \lesssim \mathbb{E} [\|
+     \Delta_i X_{\varepsilon} \|_{L^{\infty} (\rho^{\sigma})}^3 \| \Delta_i
+     \zeta \|_{L^2 (\rho^2)}] \]
+  \[ \lesssim 2^{- 3 i (- 1 / 2 - \kappa)} 2^{- i (1 - 2 \kappa)} \mathbb{E}
+     \left[ \| X \|^3_{\CC^{- 1 / 2 - \kappa} (\rho^{\sigma})} \| \zeta
+     \|_{B^{1 - 2 \kappa}_{2, \infty} (\rho^2)} \right] \]
+  \[ \lesssim 2^{- 3 i (- 1 / 2 - \kappa)} 2^{i (- 1 + 2 \kappa)} \mathbb{E}
+     \left[ \| X \|^3_{\CC^{- 1 / 2 - \kappa} (\rho^{\sigma})} \| \zeta
+     \|_{B^{1 - 2 \kappa}_{2, 2} (\rho^2)} \right] \lesssim 2^{i (1 / 2 + 5
+     \kappa)} . \]
+  Next,
+  \[ | \mathbb{E} [(\Delta_i X)^2 (0) (\Delta_i \zeta)^2 (0)] | \leqslant
+     \mathbb{E} [\| \Delta_i X \|^2_{L^{\infty} (\rho^{\sigma})} \| \Delta_i
+     \zeta \|_{L^2 (\rho^{1 + \iota})} \| \Delta_i \zeta \|_{L^2 (\rho^2)}] \]
+  \[ \leqslant 2^{- 2 i (- 1 / 2 - \kappa)} 2^{- i (1 - 2 \kappa)} \mathbb{E}
+     [\| X \|^2_{L^{\infty} (\rho^{\sigma})} \| \zeta \|_{B^0_{4, \infty}
+     (\rho)} \| \Delta_i \zeta \|_{H^{1 - 2 \kappa} (\rho^2)}] \lesssim 2^{i 4
+     \kappa}, \]
+  and
+  \[ | \mathbb{E} [(\Delta_i X) (0) (\Delta_i \zeta)^3 (0)] | \leqslant
+     \mathbb{E} [\| \Delta_i X \|_{L^{\infty} (\rho^{\sigma})} \| \Delta_i
+     \zeta \|^3_{L^3 (\rho^{(4 - \sigma) / 3})}] \]
+  \[ \leqslant \mathbb{E} [\| \Delta_i X \|_{L^{\infty} (\rho^{\sigma})} \|
+     \Delta_i \zeta \|^3_{L^4 (\rho)}] \lesssim 2^{- i (- 1 / 2 - \kappa)}
+     \mathbb{E} \left[ \| X \|_{\CC^{- 1 / 2 - \kappa} (\rho^{\sigma})} \|
+     \zeta \|^3_{B^0_{4, \infty} (\rho)} \right] \lesssim 2^{i (1 / 2 +
+     \kappa)}, \]
+  \[ | \mathbb{E} [(\Delta_i \zeta)^4 (0)] | = | \mathbb{E} \langle \rho^4,
+     (\Delta_i \zeta)^4 \rangle | \leqslant \mathbb{E} \| (\Delta_i \zeta)
+     \|^4_{L^4 (\rho)} \leqslant \mathbb{E} [\| \zeta \|^4_{B^0_{4, \infty}
+     (\rho)}] \lesssim 1. \]
+  Proceeding similarly for the other terms we finally obtain the desired bound
+  \[ | R | \lesssim 2^{i (1 / 2 + 5 \kappa)} . \]
+  Therefore if $i$ is large enough we conclude that
+  \[ \mathbb{E} [(\Delta_i \varphi)^4 (0)] - 3 (\mathbb{E} [(\Delta_i
+     \varphi)^2 (0)^2])^2 \lesssim -2^i < 0 \]
+  and the proof is complete.
+\end{proof}
+
+
+\appendix
+\section{Technical results}
+
+\label{s:app}
+In this section we present  auxiliary results needed in
+the main body of the paper.
+
+\subsection{Besov spaces}
+First, we cover various properties of the
+discrete weighted Besov spaces such as an equivalent formulation of the norms,
+duality, interpolation, embeddings, bounds for powers of functions and a
+weighted Young's inequality.
+
+\begin{lemma}
+  \label{lem:equiv2}Let $\alpha \in \mathbb{R}$, $p, q \in [1, \infty]$. Fix
+  $n > | \alpha |$ and assume that $\rho$ is a weight such that
+  \[ \| \rho \|_{B^{n + 1, \varepsilon}_{\infty, \infty} (\rho^{- 1})} + \|
+     \rho^{- 1} \|_{B^{n + 1, \varepsilon}_{\infty, \infty} (\rho)} \lesssim 1
+  \]
+  uniformly in $\varepsilon$. Then
+  \[ \| f \|_{B^{\alpha, \varepsilon}_{p, q} (\rho)} \sim \| \rho f
+     \|_{B^{\alpha, \varepsilon}_{p, q}}, \]
+  where the proportionality constant does not depend on $\varepsilon$.
+\end{lemma}
+
+\begin{proof}
+  We write $\rho f = \rho \prec f + \rho \succcurlyeq f$ and estimate by
+  paraproduct estimates
+  \[ \| \rho \prec f \|_{B^{\alpha, \varepsilon}_{p, q}} = \| \rho \prec f
+     \|_{B^{\alpha, \varepsilon}_{p, q} (\rho^{- 1} \rho)} \lesssim \| \rho
+     \|_{L^{\infty, \varepsilon} (\rho^{- 1})} \| f \|_{B^{\alpha,
+     \varepsilon}_{p, q} (\rho)} \lesssim \| f \|_{B^{\alpha, \varepsilon}_{p,
+     q} (\rho)}, \]
+  \[ \| \rho \succcurlyeq f \|_{B^{\alpha, \varepsilon}_{p, q}} = \| \rho
+     \succcurlyeq f \|_{B^{\alpha, \varepsilon}_{p, q} (\rho^{- 1} \rho)}
+     \lesssim \| f \|_{B^{\alpha, \varepsilon}_{p, \infty} (\rho)} \| \rho
+     \|_{B^{n, \varepsilon}_{\infty, q} (\rho^{- 1})} \lesssim \| f
+     \|_{B^{\alpha, \varepsilon}_{p, q} (\rho)} \| \rho \|_{B^{n + 1,
+     \varepsilon}_{\infty, \infty} (\rho^{- 1})} \]
+  \[ \lesssim \| f \|_{B^{\alpha, \varepsilon}_{p, q} (\rho)}, \]
+  which implies one inequality. For the converse one, we write $f = \rho^{- 1}
+  \prec (\rho f) + \rho^{- 1} \succcurlyeq (\rho f)$, and estimate
+  \[ \| \rho^{- 1} \prec (\rho f) \|_{B^{\alpha, \varepsilon}_{p, q} (\rho)}
+     \lesssim \| \rho^{- 1} \|_{L^{\infty, \varepsilon} (\rho)} \| \rho f
+     \|_{B^{\alpha, \varepsilon}_{p, q}}, \]
+  \[ \| \rho^{- 1} \succcurlyeq (\rho f) \|_{B^{\alpha, \varepsilon}_{p, q}
+     (\rho)} \lesssim \| \rho f \|_{B^{\alpha, \varepsilon}_{p, \infty}} \|
+     \rho^{- 1} \|_{B^{n, \varepsilon}_{\infty, q} (\rho)} \lesssim \| \rho f
+     \|_{B^{\alpha, \varepsilon}_{p, q}} \| \rho^{- 1} \|_{B^{n + 1,
+     \varepsilon}_{\infty, \infty} (\rho)} . \]
+\end{proof}
+
+\begin{lemma}
+  \label{lem:dual2}Let $\alpha \in \mathbb{R}$, $p, p', q, q' \in [1, \infty]$
+  such that $p, p'$ and $q, q'$ are conjugate exponents. Let $\rho$ be a
+  weight as in Lemma \ref{lem:equiv2}. Then
+  \[ \langle f, g \rangle_{\varepsilon} \lesssim \| f \|_{B_{p, q}^{\alpha,
+     \varepsilon} (\rho)} \| g \|_{B_{p', q'}^{- \alpha, \varepsilon}
+     (\rho^{- 1})} \]
+  with a proportionality constant independent of $\varepsilon$. Consequently,
+  $B^{- \alpha, \varepsilon}_{p', q'} (\rho^{- 1}) \subset (B^{\alpha,
+  \varepsilon}_{p, q} (\rho^{- 1}))^{\ast}$.
+\end{lemma}
+
+\begin{proof}
+  In view of Lemma \ref{lem:equiv2} it is sufficient to consider the
+  unweighted case. Let $f \in B^{\alpha, \varepsilon}_{p, q}$ and $g \in B^{-
+  \alpha, \varepsilon}_{p', q'}$. Then by Parseval's theorem and H{\"o}lder's
+  inequality we have
+  \[ \varepsilon^d \sum_{x \in \Lambda_{\varepsilon}} f (x) g (x) = \sum_{- 1
+     \leqslant i, j \leqslant N - J} \varepsilon^d \sum_{x \in
+     \Lambda_{\varepsilon}} \Delta_i^{\varepsilon} f (x)
+     \Delta_j^{\varepsilon} g (x) \]
+  \[ = \sum_{- 1 \leqslant i, j \leqslant N - J, i \sim j}
+     \int_{\hat{\Lambda}_{\varepsilon}} \varphi_i (k) \mathcal{F} f (k)
+     \varphi_j (k) \mathcal{F} g (k) \mathd k \]
+  \[ = \sum_{- 1 \leqslant i, j \leqslant N - J, i \sim j} 2^{\alpha j} 2^{-
+     \alpha j} \varepsilon^d \sum_{x \in \Lambda_{\varepsilon}}
+     \Delta_i^{\varepsilon} f (x) \Delta_j^{\varepsilon} g (x) \lesssim \| f
+     \|_{B_{p, q}^{\alpha, \varepsilon}} \| g \|_{B_{p', q'}^{- \alpha,
+     \varepsilon}} . \]
+\end{proof}
+
+\begin{lemma}
+  \label{lem:int}Let $\varepsilon \in \mathcal{A}$. Let $\alpha, \alpha_0,
+  \alpha_1, \beta, \beta_0, \beta_1 \in \mathbb{R}$, $p, p_0, p_1, q, q_0, q_1
+  \in [1, \infty]$ and $\theta \in [0, 1]$ such that
+  \[ \alpha = \theta \alpha_0 + (1 - \theta) \alpha_1, \quad \beta = \theta
+     \beta_0 + (1 - \theta) \beta_1, \quad \frac{1}{p} = \frac{\theta}{p_0} +
+     \frac{1 - \theta}{p_1}, \quad \frac{1}{q} = \frac{\theta}{q_0} + \frac{1
+     - \theta}{q_1} . \]
+  Then it holds
+  \[ \| f \|_{B^{\alpha, \varepsilon}_{p, q} (\rho^{\beta})} \leqslant \| f
+     \|^{\theta}_{B^{\alpha_0, \varepsilon}_{p_0, q_0} (\rho^{\beta_0})} \| f
+     \|^{1 - \theta}_{B^{\alpha_1, \varepsilon}_{p_1, q_1} (\rho^{\beta_1})} .
+  \]
+\end{lemma}
+
+\begin{proof}
+  The proof is a consequence of H{\"o}lder's inequality. Let us show the claim
+  for $p, p_0, p_1, q, q_0, q_1 \in [1, \infty)$ and $\varepsilon \in
+  \mathcal{A} \setminus \{ 0 \}$. If some of the exponents $p, p_0, p_1, q,
+  q_0, q_1$ are infinite or we are in the continuous setting, the proof
+  follows by obvious modifications. We write
+  \[ \| \rho^{\beta} \Delta_j^{\varepsilon} f \|_{L^{p, \varepsilon}}^p =
+     \varepsilon^d \sum_{x \in \Lambda_{\varepsilon}} | \rho^{\beta}
+     \Delta_j^{\varepsilon} f (x) |^p = \varepsilon^d \sum_{k \in
+     \Lambda_{\varepsilon}} (\rho^{\theta \beta_0 p} | \Delta_j^{\varepsilon}
+     f (x) |^{\theta p}) (\rho^{(1 - \theta) \beta_1 p} |
+     \Delta_j^{\varepsilon} f (x) |^{(1 - \theta) p}) \]
+  and apply H{\"o}lder's inequality to the conjugate exponents
+  $\frac{p_0}{\theta p}$ and $\frac{p_1}{(1 - \theta) p}$ to obtain
+  \[ \| \rho^{\beta} \Delta_j^{\varepsilon} f \|_{L^{p, \varepsilon}}^p
+     \leqslant \left( \varepsilon^d \sum_{x \in \Lambda_{\varepsilon}}
+     \rho^{\beta_0 p_0} | \Delta_j^{\varepsilon} f |^{p_0} \right)^{\theta p /
+     p_0} \left( \varepsilon^d \sum_{x \in \Lambda_{\varepsilon}}
+     \rho^{\beta_1 p_1} | \Delta_j^{\varepsilon} f |^{p_1} \right)^{(1 -
+     \theta) p / p_1} \]
+  \[ = \| \Delta_j^{\varepsilon} f \|^{\theta p}_{L^{p_0, \varepsilon}
+     (\rho^{\beta_0})} \| \Delta_j^{\varepsilon} f \|^{(1 - \theta)
+     p}_{L^{p_1, \varepsilon} (\rho^{\beta_1})} . \]
+  Consequently,
+  \[ \| f \|^q_{B^{\alpha, \varepsilon}_{p, q} (\rho^{\beta})} \leqslant
+     \sum_{- 1 \leqslant j \leqslant N - J} 2^{\alpha k q} \| \rho^{\beta}
+     \Delta_j^{\varepsilon} f \|_{L^{p, \varepsilon}}^q \]
+  \[ \leqslant \sum_{- 1 \leqslant j \leqslant N - J} \left( 2^{\theta
+     \alpha_0 k q} \| \Delta_j^{\varepsilon} f \|^{\theta q}_{L^{p_0,
+     \varepsilon} (\rho^{\beta_0})} \right) \left( 2^{(1 - \theta) \alpha_1 k
+     q} \| \Delta_j^{\varepsilon} f \|^{(1 - \theta) q}_{L^{p_1, \varepsilon}
+     (\rho^{\beta_1})} \right) \]
+  and by H{\"o}lder's inequality to the conjugate exponents $\frac{q_0}{\theta
+  q}$ and $\frac{q_1}{(1 - \theta) q}$
+  \[ \| f \|^q_{B^{\alpha, \varepsilon}_{p, q} (\rho^{\beta})} \]
+  \[ \leqslant \left( \sum_{- 1 \leqslant j \leqslant N - J} 2^{\alpha_0 k
+     q_0} \| \Delta_j^{\varepsilon} f \|^{q_0}_{L^{p_0, \varepsilon}
+     (\rho^{\beta_0})} \right)^{\theta q / q_0} \left( \sum_{- 1 \leqslant j
+     \leqslant N - J} 2^{\alpha_1 k q_1} \| \Delta_j^{\varepsilon} f
+     \|^{q_1}_{L^{p_1, \varepsilon} (\rho^{\beta_1})} \right)^{(1 - \theta) q
+     / q_1} \]
+  \[ = \| f \|^{\theta q}_{B^{\alpha_0, \varepsilon}_{p_0, q_0}
+     (\rho^{\beta_0})} \| f \|^{(1 - \theta) q}_{B^{\alpha_1,
+     \varepsilon}_{p_1, q_1} (\rho^{\beta_1})} . \]
+\end{proof}
+
+We note that by our construction of the Littlewood--Paley projectors on
+$\Lambda_{\varepsilon}$, in each of the cases $j = - 1$, $j \in \{ 0, \ldots,
+N - J - 1 \}$ and $j = N - J$, there exists an $L^1$-kernel $\mathcal{K}$ such
+that the Littlewood--Paley block $\Delta^{\varepsilon}_j f$ is given by a
+convolution with $2^{j d} \mathcal{K} (2^j \cdummy)$. See Lemma~A.2 in
+{\cite{MP17}} for more details. For notational simplicity we omit the
+dependence of $\mathcal{K}$ on the three cases above.
+
+\begin{lemma}
+  \label{lem:emb}Let $\varepsilon \in \mathcal{A}$ and let $\beta > 0$. Then
+  it holds
+  \[ L^{2, \varepsilon} (\rho) = B^{0, \varepsilon}_{2, 2} (\rho), \qquad
+     L^{4, \varepsilon} (\rho) \subset B^{0, \varepsilon}_{4, \infty} (\rho)
+  \]
+  and the proportional constants do not depend on $\varepsilon$.
+\end{lemma}
+
+\begin{proof}
+  Due to Lemma \ref{lem:equiv2} together with Parseval's equality we directly
+  obtain the first claim. Consequently, by Young's inequality together with
+  the fact that $\frac{\rho (y)}{\rho (x)} \lesssim \rho^{- 1} (x - y)$ (for a
+  universal proportionality constant that depends only on $\rho$) we have that
+  \[ \| f \|_{B^{0, \varepsilon}_{4, \infty} (\rho)} = \sup_{- 1 \leqslant
+     j \leqslant N - J} \| \Delta_j^{\varepsilon} f \|_{L^{4, \varepsilon}
+     (\rho)} = \sup_{- 1 \leqslant j \leqslant N - J} \| 2^{j d} \mathcal{K}
+     (2^j \cdummy) \ast f \|_{L^{4, \varepsilon} (\rho)} \]
+  \[ \lesssim \sup_{- 1 \leqslant j \leqslant N - J} \| 2^{j d} \mathcal{K}
+     (2^j \cdummy) \|_{L^{1, \varepsilon} (\rho^{- 1})} \| f \|_{L^{4,
+     \varepsilon} (\rho)} \lesssim \| f \|_{L^{4, \varepsilon} (\rho)} . \]
+\end{proof}
+
+\begin{lemma}
+  \label{lem:grad}Let $\kappa \in (0, 1)$, $p \in [1, \infty]$ and let $\rho$
+  be a polynomial weight
+  \[ \| f \|_{B^{1 - \kappa, \varepsilon}_{p, p} (\rho)} \lesssim \| f
+     \|_{B^{- \kappa, \varepsilon}_{p, p} (\rho)} + \| \nabla_{\varepsilon} f
+     \|_{B^{- \kappa, \varepsilon}_{p, p} (\rho)}, \]
+  where the proportionality constant does not depend on $\varepsilon$.
+\end{lemma}
+
+\begin{proof}
+  Let $j \geqslant 0$. Let $K_j = K_{j, \varepsilon} = \mathcal{F}^{- 1}
+  \varphi^{\varepsilon}_j$ and denote $\bar{K}_j = \bar{K}_{j, \varepsilon} =
+  \sum_{i \sim j} K_{i, \varepsilon}$. Then it holds that
+  $\Delta^{\varepsilon}_j f = \bar{K}_j \ast \Delta^{\varepsilon}_j f$ and we
+  write
+  \[ \bar{K}_j \ast \Delta^{\varepsilon}_j f = (\tmop{Id} -
+     \Delta_{\varepsilon})^{- 1} (\tmop{Id} - \Delta_{\varepsilon}) (\bar{K}_j
+     \ast \Delta^{\varepsilon}_j f) \]
+  \begin{equation}
+    = (\tmop{Id} - \Delta_{\varepsilon})^{- 1} (\bar{K}_j \ast
+    \Delta^{\varepsilon}_j f) - (\tmop{Id} - \Delta_{\varepsilon})^{- 1}
+    \nabla^{\ast}_{\varepsilon} \nabla_{\varepsilon} (\bar{K}_j \ast
+    \Delta^{\varepsilon}_j f) . \label{eq:16}
+  \end{equation}
+  For the second term it holds by translation invariance of
+  $\nabla_{\varepsilon}$
+  \[ (\tmop{Id} - \Delta_{\varepsilon})^{- 1} \nabla^{\ast}_{\varepsilon}
+     \nabla_{\varepsilon} (\bar{K}_j \ast \Delta^{\varepsilon}_j f) =
+     ((\tmop{Id} - \Delta_{\varepsilon})^{- 1} \nabla^{\ast}_{\varepsilon}
+     \bar{K}_j) \ast (\Delta^{\varepsilon}_j \nabla_{\varepsilon} f) . \]
+  hence by Young inequality
+  \[ \| ((\tmop{Id} - \Delta_{\varepsilon})^{- 1} \nabla^{\ast}_{\varepsilon}
+     \bar{K}_j) \ast (\Delta^{\varepsilon}_j \nabla_{\varepsilon} f) \|_{L^{p,
+     \varepsilon} (\rho)} \lesssim \| (\tmop{Id} - \Delta_{\varepsilon})^{- 1}
+     \nabla^{\ast}_{\varepsilon} \bar{K}_j \|_{L^{1, \varepsilon} (\rho^{-
+     1})} \| \Delta^{\varepsilon}_j \nabla_{\varepsilon} f \|_{L^{p,
+     \varepsilon} (\rho)} \]
+  The kernel $\mathcal{V}_{j, \ell} \assign (\tmop{Id} -
+  \Delta_{\varepsilon})^{- 1} \nabla^{\ast}_{\varepsilon, \ell} \bar{K}_j$ is
+  given by
+  \[ \mathcal{V}_{j, \ell} (k) = \int_{\hat{\Lambda}_{\varepsilon}} e^{2 \pi
+     ik \cdot x} \frac{\varepsilon^{- 1}  (1 - e^{- 2 \pi i \varepsilon
+     x_{\ell} })}{1 + 2 \sum_{p = 1}^d \varepsilon^{- 2} \sin^2 (\pi i
+     \varepsilon x_p)} \bar{\varphi}^{\varepsilon}_j (x) \mathd x \]
+  where $\bar{\varphi}_j^{\varepsilon} = \sum_{i \sim j}
+  \varphi^{\varepsilon}_i$. Now using $(1 + 2^{2 j} \Delta_x)^M e^{2 \pi ik
+  \cdot x} = (1 + 2^{2 j} | 2 \pi k |^2)^M e^{2 \pi ik \cdot x}$ and
+  integrating by parts $(1 + \Delta_x)^M$ we have
+  \[ | (1 + 2^{2 j} | 2 \pi k |^2)^M \mathcal{V}_{j, \ell} (k) | \leqslant
+     \int_{\hat{\Lambda}_{\varepsilon}} \left| (1 + 2^{2 j} \Delta_x)^M \left[
+     \frac{\varepsilon^{- 1}  (1 - e^{- 2 \pi i \varepsilon x_{\ell} })}{1 + 2
+     \sum_{p = 1}^d \varepsilon^{- 2} \sin^2 (\pi i \varepsilon x_p)}
+     \bar{\varphi}^{\varepsilon}_j (x) \right] \right| \mathd x \]
+  and it is possible to check that (using that $\varepsilon 2^j \lesssim 1$)
+  \[ \left| (1 + 2^{2 j} \Delta_x)^M \left[ \frac{\varepsilon^{- 1}  (1 - e^{-
+     2 \pi i \varepsilon x_{\ell} })}{1 + 2 \sum_{p = 1}^d \varepsilon^{- 2}
+     \sin^2 (\pi i \varepsilon x_p)} \bar{\varphi}^{\varepsilon}_j (x) \right]
+     \right| \lesssim 2^{- j} \mathbb{I}_{2^j \tilde{\mathcal{A}}} \]
+  uniformly in $j$ where $\tilde{\mathcal{A}}$ is an annulus centered at the
+  origin. Therefore
+  \[ | \mathcal{V}_{j, \ell} (k) | \lesssim 2^{- j} 2^{d j} (1 + 2^{2 j} | 2
+     \pi k |^2)^{- M} \]
+  and from this is easy to deduce that $\| \mathcal{V}_{j, \ell} \|_{L^{1,
+  \varepsilon} (\rho^{- 1})} \lesssim 2^{- j}$ uniformly in $j$ and
+  $\varepsilon$.
+  
+  A similar computation applies to the first term in {\eqref{eq:16}} to obtain
+  \[ \| (\tmop{Id} - \Delta_{\varepsilon})^{- 1} (\bar{K}_j \ast
+     \Delta^{\varepsilon}_j f) \|_{L^{p, \varepsilon} (\rho)} \lesssim \|
+     (\tmop{Id} - \Delta_{\varepsilon})^{- 1} \bar{K}_j \|_{L^{1, \varepsilon}
+     (\rho^{- 1})} \| \Delta^{\varepsilon}_j f \|_{L^{p, \varepsilon} (\rho)}
+     \lesssim 2^{- 2 j} \| \Delta^{\varepsilon}_j f \|_{L^{p, \varepsilon}
+     (\rho)} \]
+  and the proof of complete.
+\end{proof}
+
+\begin{lemma}
+  \label{lem:15}Let $\varepsilon \in \mathcal{A}$ and let $\iota > 0$. Let
+  $\rho$ be a weight such that $\rho^{\iota} \in L^{4, 0}$. Then
+  \[ \| \rho^{1 + \iota} f \|_{L^{2, \varepsilon}} \lesssim \| \rho f
+     \|_{L^{4, \varepsilon}}, \]
+  where the proportionality constant does not depend on $\varepsilon$.
+\end{lemma}
+
+\begin{proof}
+  By H{\"o}lder's inequality
+  \[ \| \rho^{1 + \iota} f \|_{L^{2, \varepsilon}} \leqslant \| \rho^{\iota}
+     \|_{L^{4, \varepsilon}} \| \rho f \|_{L^{4, \varepsilon}}, \]
+  and since for $| x - y | \leqslant 1$ the quotient $\frac{\rho (x)}{\rho
+  (y)}$ is uniformly bounded above and below, it follows from Lemma A.3
+  {\cite{MP17}} that
+  \[ \| \rho^{\iota} \|_{L^{4, \varepsilon}}^4 = \varepsilon^d \sum_{x \in
+     \Lambda_{\varepsilon}} \rho^{4 \iota} (x) \lesssim \int_{\mathbb{R}^d}
+     \rho^{4 \iota} (x) \mathd x < \infty, \]
+  where the proportional constant only depends on $\rho$.
+\end{proof}
+
+\begin{lemma}
+  \label{lem:mult}Let $\alpha > 0$. Let $\rho_1, \rho_2$ be weights. Then for
+  every $\beta > 0$ it holds true
+  \[ \| f^2 \|_{B^{\alpha, \varepsilon}_{1, 1} (\rho_1 \rho_2)} \lesssim \| f
+     \|_{L^{2, \varepsilon} (\rho_1)} \| f \|_{H^{\alpha + 2 \beta,
+     \varepsilon} (\rho_2)}, \]
+  \[ \| f^3 \|_{B^{\alpha, \varepsilon}_{1, 1} (\rho_1^2 \rho_2)} \lesssim \|
+     f \|_{L^{4, \varepsilon} (\rho_1)}^2 \| f \|_{H^{\alpha + 2 \beta,
+     \varepsilon} (\rho_2)}, \]
+  where the proportionality constants do not depend on $\varepsilon$.
+\end{lemma}
+
+\begin{proof}
+  Due to the paraproduct estimates and the embeddings of Besov spaces, we have
+  for every $\beta > 0$
+  \[ \| f^2 \|_{B^{\alpha, \varepsilon}_{1, 1} (\rho_1 \rho_2)} \lesssim \| f
+     \|_{B_{2, \infty}^{- \beta, \varepsilon} (\rho_1)} \| f \|_{B_{2,
+     1}^{\alpha + \beta, \varepsilon} (\rho_2)} \lesssim \| f \|_{B_{2, 2}^{-
+     \beta, \varepsilon} (\rho_1)} \| f \|_{B_{2, 2}^{\alpha + 2 \beta,
+     \varepsilon} (\rho_2)} \]
+  \[ \lesssim \| f \|_{L^{2, \varepsilon} (\rho_1)} \| f \|_{H^{\alpha + 2
+     \beta, \varepsilon} (\rho_2)} . \]
+  For the cubic term, we write
+  \[ \| f^3 \|_{B^{\alpha, \varepsilon}_{1, 1} (\rho_1^2 \rho_2)} \lesssim \|
+     f \prec f^2 \|_{B^{\alpha, \varepsilon}_{1, 1} (\rho_1^2 \rho_2)} + \| f
+     \succ f^2 \|_{B^{\alpha, \varepsilon}_{1, 1} (\rho_1^2 \rho_2)} + \| f
+     \circ f^2 \|_{B^{\alpha, \varepsilon}_{1, 1} (\rho_1^2 \rho_2)} \]
+  and estimate each term separately. The second and the third term can be
+  estimated directly by
+  \[ \| f \succ f^2 \|_{B^{\alpha, \varepsilon}_{1, 1} (\rho_1^2 \rho_2)} + \|
+     f \circ f^2 \|_{B^{\alpha, \varepsilon}_{1, 1} (\rho_1^2 \rho_2)}
+     \lesssim \| f^2 \|_{B^{- \beta, \varepsilon}_{2, \infty} (\rho_1^2)} \| f
+     \|_{B^{\alpha + \beta, \varepsilon}_{2, 1} (\rho_2)} \]
+  \[ \lesssim \| f^2 \|_{B^{- \beta, \varepsilon}_{2, 2} (\rho_1^2)} \| f
+     \|_{B^{\alpha + 2 \beta, \varepsilon}_{2, 2} (\rho_2)} \lesssim \| f
+     \|_{L^{4, \varepsilon} (\rho_1)}^2 \| f \|_{H^{\alpha + 2 \beta,
+     \varepsilon} (\rho_2)} . \]
+  For the remaining term, we have
+  \[ \| f \prec f^2 \|_{B^{\alpha, \varepsilon}_{1, 1} (\rho_1^2 \rho_2)}
+     \lesssim \| f \|_{B^{- \beta, \varepsilon}_{4, \infty} (\rho_1)} \| f^2
+     \|_{B^{\alpha + \beta, \varepsilon}_{4 / 3, 1} (\rho_1 \rho_2)} \]
+  where by the paraproduct estimates and Lemma \ref{lem:emb}
+  \[ \| f^2 \|_{B^{\alpha + \beta, \varepsilon}_{4 / 3, 1} (\rho_1 \rho_2)}
+     \lesssim \| f \|_{B^{- \beta, \varepsilon}_{4, \infty} (\rho_1)} \| f
+     \|_{B^{\alpha + 2 \beta, \varepsilon}_{2, 1} (\rho_2)} \lesssim \| f
+     \|_{L^{4, \varepsilon} (\rho_1)} \| f \|_{H^{\alpha + 2 \beta,
+     \varepsilon} (\rho_2)} \]
+  which completes the proof.
+\end{proof}
+
+\begin{lemma}
+  \label{lem:young}Let $\rho$ be a polynomial weight. Let $p, q, r \in [1,
+  \infty]$ be such that $\frac{1}{r} + 1 = \frac{1}{p} + \frac{1}{q}$. Then
+  \[ \| f \ast_{\varepsilon} g \|_{L^{r, \varepsilon} (\rho)} \lesssim \| f \|_{L^{p,
+     \varepsilon} (\rho^{- 1})} \| g \|_{L^{q, \varepsilon} (\rho)}, \]
+  \[ \| f \ast_{\varepsilon} g \|_{L^{r, 0} (\rho)} \lesssim \sup_{y \in \mathbb{R}^d} \|
+     (\rho^{- 1} f) (y - \cdummy) \|_{L^{p, \varepsilon}}^{\frac{r - p}{r}} \|
+     f \|^{\frac{p}{r}}_{L^{p, 0} (\rho^{- 1})} \| g \|_{L^{q,
+     \varepsilon} (\rho)}, \]
+     where  $\ast_{\varepsilon}$  denotes the convolution on 
+$\Lambda_{\varepsilon}$ and the proportionality constants are independent of $\varepsilon$.
+\end{lemma}
+
+\begin{proof}
+  We observe that for a polynomial weight of the form $\rho (x) = \langle x
+  \rangle^{- \nu}$ for some $\nu \geqslant 0$, it holds that $\rho (y)
+  \lesssim \rho (x) \rho^{- 1} (x - y)$. Accordingly,
+  \[ | f \ast g (y) \rho (y) | = \left| \varepsilon^d \sum_{x \in
+     \Lambda_{\varepsilon}} f (y - x) g (x) \rho (y) \right| \lesssim
+     \varepsilon^d \sum_{x \in \Lambda_{\varepsilon}} | \rho f (y - x) |
+     \rho^{- 1} (x - y) | g (x) | \rho (x) \]
+  hence the claim follows by (unweighted) Young's inequality. For the second
+  bound, we write
+  \[ | f \ast g (y) \rho (y) | \lesssim \varepsilon^d \sum_{x \in
+     \Lambda_{\varepsilon}} (| (\rho^{- 1} f) (y - x) |^p | (\rho g) (x)
+     |^q)^{\frac{1}{r}} | (\rho^{- 1} f) (y - x) |^{\frac{r - p}{r}} | (\rho
+     g) (x) |^{\frac{r - q}{r}} \]
+  and apply H{\"o}lder's inequality with exponents $r, \frac{r p}{r - p},
+  \frac{r q}{r - q}$
+  \[ | f \ast g (y) \rho (y) | \lesssim \left( \varepsilon^d \sum_{x \in
+     \Lambda_{\varepsilon}} | (\rho^{- 1} f) (y - x) |^p | \rho g (x) |^q
+     \right)^{\frac{1}{r}} \| (\rho^{- 1} f) (y - \cdummy) \|_{L^{p,
+     \varepsilon}}^{\frac{r - p}{r}} \| \rho g \|_{L^{q,
+     \varepsilon}}^{\frac{r - q}{r}} \]
+  \[ \leqslant \left( \varepsilon^d \sum_{x \in \Lambda_{\varepsilon}} |
+     (\rho^{- 1} f) (y - x) |^p | \rho g (x) |^q \right)^{\frac{1}{r}} \sup_{y
+     \in \mathbb{R}^d} \| (\rho^{- 1} f) (y - \cdummy) \|_{L^{p,
+     \varepsilon}}^{\frac{r - p}{r}} \| \rho g \|_{L^{q,
+     \varepsilon}}^{\frac{r - q}{r}} . \]
+  Finally, taking the $r$th power and integrating completes the proof.
+\end{proof}
+
+
+
+
+  
+  \subsection{Localizers}
+  \label{s:l1}
+As the next step, we introduce another equivalent formulation of the weighted
+Besov spaces $B^{\alpha, \varepsilon}_{\infty, \infty} (\rho)$ in terms of
+suitable point evaluation of the Littlewood--Paley decomposition. First, for
+$J \in \mathbb{N}_0$ such that $N - J \leqslant J_{\varepsilon}$, $\alpha \in
+\mathbb{R}$ and $\varepsilon \in \mathcal{A}$ we define the Besov space
+$b^{\alpha, \varepsilon}_{\infty, \infty} (\rho)$ of sequences $\lambda =
+(\lambda_{j, m})_{- 1 \leqslant j \leqslant N - J, m \in \mathbb{Z}^d}$ by the
+norm
+\[ \| \lambda \|_{b^{\alpha, \varepsilon}_{\infty, \infty} (\rho)} \assign
+   \sup_{- 1 \leqslant j \leqslant N - J} 2^{\alpha j} \sup_{m \in
+   \mathbb{Z}^d} \rho (2^{- j - J} m) | \lambda_{j, m} | . \]
+Note that we do not stress the dependence of $b^{\alpha, \varepsilon}_{\infty,
+\infty} (\rho)$ on the parameter $J$ as in the sequel we only consider one
+fixed $J$ for all $\varepsilon \in \mathcal{A}$ given by Lemma \ref{lem:equiv}
+below.
+The next result shows that the desired equivalence.
+
+\begin{lemma}
+  \label{lem:equiv}Let $\alpha \in \mathbb{R}$, $\varepsilon \in \mathcal{A}$
+  and let $\rho$ be a weight. There exists $J \in \mathbb{N}_0$ (independent
+  of $\varepsilon$) with the following property: $f \in B^{\alpha,
+  \varepsilon}_{\infty, \infty} (\rho)$ if and only if it is represented by
+  $\lambda = (\lambda_{j, m})_{- 1 \leqslant j \leqslant N - J, m \in
+  \mathbb{Z}^d} \in b^{\alpha, \varepsilon}_{\infty, \infty} (\rho)$ such that
+  \begin{equation}
+    \| f \|_{B_{\infty, \infty}^{\alpha, \varepsilon} (\rho)} \sim \| \lambda
+    \|_{b^{\alpha, \varepsilon}_{\infty, \infty} (\rho)}, \label{eq:d3}
+  \end{equation}
+  where the proportionality constants do not depend on $\varepsilon$. In
+  particular, given $f \in B^{\alpha, \varepsilon}_{\infty, \infty} (\rho)$
+  the coefficients $\lambda$ are defined by
+  \begin{equation}
+    \lambda_{j, m} (f) \assign \Delta_j^{\varepsilon} f (2^{- j - J} m),
+    \qquad - 1 \leqslant j \leqslant N - J, \hspace{1em} m \in \mathbb{Z}^d,
+    \label{eq:d1}
+  \end{equation}
+  and given $\lambda \in b^{\alpha, \varepsilon}_{\infty, \infty} (\rho)$ the
+  distribution $f$ is recovered via the formula
+  \begin{equation}
+    f = \sum_{- 1 \leqslant j \leqslant N - J} \sum_{m \in \mathbb{Z}^d}
+    \mathcal{F}^{- 1} (\mathcal{F}_{2^{- j - J} \mathbb{Z}^d} (\lambda_{j,
+    m})), \label{eq:d2}
+  \end{equation}
+  where $\mathcal{F}_{2^{- j - J} \mathbb{Z}^d}$ denotes the Fourier transform
+  on the lattice $2^{- j - J} \mathbb{Z}^d$.
+\end{lemma}
+
+  
+ \begin{proof} 
+  Let us first discuss the decomposition {\eqref{eq:d2}}. We recall that if $f
+  \in \mathcal{S}' (\Lambda_{\varepsilon})$ then $\mathcal{F} f = \sum_{- 1
+  \leqslant j \leqslant N - J} \varphi^{\varepsilon}_j \mathcal{F} f$ where
+  for $j < N - J$ the function $\varphi^{\varepsilon}_j \mathcal{F} f$ is
+  supported in a ball of radius proportional to $2^j$. Let $j < N - J$ and let
+  $B_j \subset \mathbb{R}^d$ be a cube centered at the origin with length
+  $2^{j + J}$. We choose $J \in \mathbb{N}_0$ such that $\tmop{supp}
+  \varphi^{\varepsilon}_j \subset B_j$. Next, we identify $B_j$ with $(2^{j +
+  J} \mathbb{T})^d \subset (2^N \mathbb{T})^d$ and regard
+  $\varphi^{\varepsilon}_j \mathcal{F} f$ as a periodic function on $(2^{j +
+  J} \mathbb{T})^d$. Then using a Fourier series expansion we may write
+  \[ (\varphi^{\varepsilon}_j \mathcal{F} f) (z) = 2^{(- j - J) d} \sum_{m
+     \in \mathbb{Z}^d} \lambda_{j, m} (f) e^{- 2 \pi i 2^{- j - J} m \cdummy
+     z} = \mathcal{F}_{2^{- j - J} \mathbb{Z}^d} (\lambda_{j, m} (f)) (z) \]
+  where
+  \[ \lambda_{j, m} (f) \assign \int_{B_j} (\varphi^{\varepsilon}_j
+     \mathcal{F} f) (y) e^{2 \pi i 2^{- j - J} m \cdummy y} \mathd y =
+     \mathcal{F}^{- 1} (\varphi^{\varepsilon}_j \mathcal{F} f) (2^{- j - J} m)
+     = \Delta_j^{\varepsilon} f (2^{- j - J} m) . \]
+  If $j = N - J$ then by definition of $\varphi^{\varepsilon}_j$ we see that
+  $\varphi^{\varepsilon}_j \mathcal{F} f$ is a periodic function on $(2^N
+  \mathbb{T})^d$. Hence we obtain the same formula (since $- j - J = - N$)
+  \[ \lambda_{j, m} (f) \assign \int_{(2^N \mathbb{T})^d}
+     (\varphi^{\varepsilon}_j \mathcal{F} f) (y) e^{2 \pi i 2^{- j - J} m
+     \cdummy y} \mathd y = \Delta_j^{\varepsilon} f (2^{- j - J} m) . \]
+  Therefore, we have derived the decomposition {\eqref{eq:d2}} with
+  coefficients given by {\eqref{eq:d1}}.
+  
+  It remains to establish the equivalence of norms {\eqref{eq:d3}}. One
+  direction is immediate, namely, for every $N - J \leqslant J_{\varepsilon}$
+  we have
+  \[ \sup_{- 1 \leqslant j \leqslant N - J} 2^{\alpha j} \sup_{m \in
+     \mathbb{Z}^d} \rho (2^{- j - J} m) | \lambda_{j, m} (f) | = \sup_{- 1
+     \leqslant j \leqslant N - J} 2^{\alpha j} \sup_{m \in \mathbb{Z}^d} \rho
+     (2^{- j - J} m) | \Delta^{\varepsilon}_j f (2^{- j - J} m) | \]
+  \[ \leqslant \sup_{- 1 \leqslant j \leqslant N - J} 2^{\alpha j} \sup_{x \in
+     \Lambda_{\varepsilon}} \rho (x) | \Delta^{\varepsilon}_j f (x) | . \]
+  Conversely, if $x \in \Lambda_{\varepsilon}$ belongs to the cube of size
+  $2^{- j - J}$ centered at $2^{- j - J} m$, we write
+  \begin{equation}
+    | \Delta^{\varepsilon}_j f (x) | \leqslant | \Delta^{\varepsilon}_j f (x)
+    - \Delta^{\varepsilon}_j f (2^{- j - J} m) | + | \Delta^{\varepsilon}_j f
+    (2^{- j - J} m) |, \label{eq:25}
+  \end{equation}
+  Now we shall multiply the above inequality by $\rho (x)$ and estimate. To
+  this end, we recall that due to the admissibility condition for polynomial
+  weights there exists $\nu \geqslant 0$ and $c_1 > 0$ (depending only on
+  $\rho$) such that
+  \[ \frac{\rho (x)}{\rho (z)} \lesssim \big( 1 + \big| \sqrt{d} 2^{- j - J
+     - 1} \big|^2 \big)^{\nu / 2} \lesssim c_1 \quad \tmop{whenever} \quad
+     | x - z | \leqslant \sqrt{d} 2^{- j - J - 1} . \]
+  In addition, to estimate the first term in {\eqref{eq:25}}, we recall that
+  for $- 1 \leqslant j < N - J$ the Fourier transform of
+  $\Delta^{\varepsilon}_j f$ is supported in a ball of radius proportional to
+  $2^j$ hence by a computation similar to Bernstein's lemma (since by our
+  construction $| x - 2^{- j - J} m | \leqslant \sqrt{d} 2^{- j - J - 1}$)
+  \[ \rho (x) | \Delta^{\varepsilon}_j f (x) - \Delta^{\varepsilon}_j f (2^{-
+     j - J} m) | \leqslant c_2 2^{- J - 1} \| \Delta^{\varepsilon}_j f
+     \|_{L^{\infty, \varepsilon} (\rho)}, \]
+  for some universal constant $c_2 > 0$ independent of $f$ and $\varepsilon$.
+  If $j = N - J$ then $\Lambda_{\varepsilon}$ coincides with the lattice $2^{-
+  j - J} \mathbb{Z}^d$ and therefore we do not need to do anything.
+  Consequently it follows from {\eqref{eq:25}} that
+  \[ \| \Delta^{\varepsilon}_j f \|_{L^{\infty, \varepsilon} (\rho)} \leqslant
+     c_2 2^{- J - 1} \| \Delta^{\varepsilon}_j f \|_{L^{\infty, \varepsilon}
+     (\rho)} + c_1 \sup_{m \in \mathbb{Z}^d} \rho (2^{- j - J} m) |
+     \Delta^{\varepsilon}_j f (2^{- j - J} m) | . \]
+  Hence, making $J \in \mathbb{N}_0$ possibly larger such that $c_2 2^{- J -
+  1} < 1$, we may absorb the first term on the right hand side into the left
+  hand side and the claim follows.
+  \end{proof}
+  
+
+
+\begin{remark}
+  Throughout the paper, the parameter $J \in \mathbb{N}_0$ is fixed as in Lemma
+  \ref{lem:equiv}. Consequently, from the condition $0 \leqslant N - J$ we
+  obtain the necessary lower bound $N_0$ for $N$, or alternatively the upper
+  bound for $\varepsilon = 2^{- N} \leqslant 2^{- N_0}$ and defines the set
+  $\mathcal{A}$. These parameters remain fixed for the rest of the paper.
+\end{remark}
+
+\begin{remark}
+  \label{rem:3}Note that the formulas {\eqref{eq:d1}}, {\eqref{eq:d2}} depend
+  on the chosen partition of unity $(\varphi_j)_{j \geqslant - 1}$ and our
+  construction of the associated periodic partitions of unity on
+  $\hat{\Lambda}_{\varepsilon}$ via $\eqref{eq:p1} .$
+\end{remark}
+
+It follows from the previous lemma that we may identify $f \in B^{\alpha,
+\varepsilon}_{\infty, \infty} (\rho)$ with its coefficients $(\lambda_{j, m}
+(f))_{- 1 \leqslant j \leqslant N - J, m \in \mathbb{Z}^d} \in b^{\alpha,
+\varepsilon}_{\infty, \infty} (\rho)$. This consideration leads us to the
+definition of localization operators needed for the analysis of the $\Phi^4_3$
+model. Although the principle idea is similar to Section 2.3 in {\cite{GH18}},
+we present a different definition of the localizers here. It is based on the
+equivalent description of the Besov spaces from Lemma \ref{lem:equiv} and is
+better suited for the discrete setting.
+
+Given $(L_k)_{k \geqslant - 1} \subset (0, \infty)$ and $f \in \mathcal{S}'
+(\Lambda_{\varepsilon})$ we define
+\[ \UU_{>}^{\varepsilon} f \assign \left( \lambda_{j, m} \left(
+   \UU^{\varepsilon}_{>} f \right) \right)_{- 1 \leqslant j \leqslant N - J, m
+   \in \mathbb{Z}^d}, \qquad \UU_{\leqslant}^{\varepsilon} f \assign \left(
+   \lambda_{j, m} \left( \UU_{\leqslant}^{\varepsilon} f \right) \right)_{- 1
+   \leqslant j \leqslant N - J, m \in \mathbb{Z}^d} \]
+where
+\[ \lambda_{j, m} \left( \UU_{>}^{\varepsilon} f \right) \assign \left\{
+   \begin{array}{lll}
+     \lambda_{j, m} (f), &  & \tmop{if} | m | \sim 2^k \tmop{and} j > L_k,\\
+     0, &  & \tmop{otherwise},
+   \end{array} \right. \]
+\[ \lambda_{j, m} \left( \UU_{\leqslant}^{\varepsilon} f \right) \assign
+   \left\{ \begin{array}{lll}
+     \lambda_{j, m} (f), &  & \tmop{if} | m | \sim 2^k \tmop{and} j \leqslant
+     L_k,\\
+     0, &  & \tmop{otherwise} .
+   \end{array} \right. \]
+We observe that by definition $f = \UU_{>}^{\varepsilon} f +
+\UU_{\leqslant}^{\varepsilon} f$ and the localizers $\UU_{>}^{\varepsilon},
+\UU_{\leqslant}^{\varepsilon}$ will only depend on $\varepsilon$ through the
+cut-off of the coefficients $\lambda$ (and consequently on the construction of
+the partition of unity on $\hat{\Lambda}_{\varepsilon}$, cf. Remark
+\ref{rem:3}), whereas the sequence $(L_k)_{k \geqslant - 1}$ will be chosen
+uniformly for all $\varepsilon \in \mathcal{A}$.
+
+\begin{lemma}
+  \label{lem:loc}Let $\rho$ be a weight. Let $\alpha, \beta, \gamma \in
+  \mathbb{R}$ and $a, b, c \in \mathbb{R}$ such that $\alpha < \beta <
+  \gamma$, $a < b < c$ and $r \assign (b - a) / (\beta - \alpha) = (c - b) /
+  (\gamma - \beta) > 0$. Let $L > 0$ be given. There exists a sequence
+  $(L_k)_{k \geqslant - 1}$ defining the above localizers such that
+  \[ \left\| \UU^{\varepsilon}_{>} f \right\|_{B^{\alpha,
+     \varepsilon}_{\infty, \infty} (\rho^a)} \lesssim 2^{- (\beta - \alpha) L}
+     \| f \|_{B^{\beta, \varepsilon}_{\infty, \infty} (\rho^b)}, \]
+  \[ \left\| \UU^{\varepsilon}_{\leqslant} f \right\|_{B^{\gamma,
+     \varepsilon}_{\infty, \infty} (\rho^c)} \lesssim 2^{(\gamma - \beta) L}
+     \| f \|_{B^{\beta, \varepsilon}_{\infty, \infty} (\rho^b)}, \]
+  where the proportionality constants do not depend on $\varepsilon \in
+  \mathcal{A}$. Moreover, the sequence $(L_k)_{k \geqslant - 1}$ depends only
+  on $L, \rho$ and the ratio $r$.
+\end{lemma}
+
+
+
+\begin{proof}
+  Since $\alpha < \beta$ and $a < b$, it holds by Lemma \ref{lem:equiv}
+  \[ \left\| \UU_{>}^{\varepsilon} f \right\|_{B^{\alpha,
+     \varepsilon}_{\infty, \infty} (\rho^a)} \lesssim \sup_{- 1 \leqslant j
+     \leqslant N - J} 2^{\alpha j} \sup_{m \in \mathbb{Z}^d} \rho^a (2^{- j -
+     J} m) \left| \lambda_{j, m} \left( \UU^{\varepsilon}_{>} f \right)
+     \right| \]
+  \[ = \sup_{k \geqslant - 1} \sup_{m \sim 2^k, L_k < j \leqslant N - J}
+     2^{(\alpha - \beta) j} \rho^{a - b} (2^{- j - J} m) 2^{\beta j} \rho^b
+     (2^{- j - J} m) | \lambda_{j, m} (f) | \]
+  \[ \lesssim \| f \|_{B^{\beta, \varepsilon}_{\infty, \infty} (\rho^b)}
+     \sup_{k \geqslant - 1} \sup_{m \sim 2^k, L_k < j \leqslant N - J}
+     2^{(\alpha - \beta) j} \rho^{a - b} (2^{- j - J} m) \]
+  \[ \lesssim \| f \|_{B^{\beta, \varepsilon}_{\infty, \infty} (\rho^b)}
+     \sup_{k \geqslant - 1} 2^{(\alpha - \beta) L_k} \rho^{a - b} (2^k), \]
+  where we used the fact that $a < b$, $2^{- j} < 2^{- L_k}$ and that the
+  weight is decreasing to get
+  \[ \rho^{a - b} (2^{- j - J} m) \lesssim \rho^{a - b} (2^{- L_k - J} 2^k)
+     \lesssim \rho^{a - b} (2^k) . \]
+  Now we set $c_k = - \log_2 \rho (2^k)$ to obtain
+  \begin{equation}
+    \left\| \UU_{>}^{\varepsilon} f \right\|_{B^{\alpha, \varepsilon}_{\infty,
+    \infty} (\rho^a)} \lesssim \| f \|_{B^{\beta, \varepsilon}_{\infty,
+    \infty} (\rho^b)} \sup_{k \geqslant - 1} 2^{- (\beta - \alpha) L_k + (b -
+    a) c_k} . \label{eq:26}
+  \end{equation}
+  
+  
+  On the other hand, since $\gamma > \beta$ and $c > b$ we have by the same
+  arguments
+  \[ \left\| \UU^{\varepsilon}_{\leqslant} f \right\|_{B^{\gamma,
+     \varepsilon}_{\infty, \infty} (\rho^c)} \lesssim \sup_{- 1 \leqslant j
+     \leqslant N - J} 2^{\gamma j} \sup_{m \in \mathbb{Z}^d} \rho^c (2^{- j -
+     J} m) \left| \lambda_{j, m} \left( \UU_{\leqslant}^{\varepsilon} f
+     \right) \right| \]
+  \[ = \sup_{k \geqslant - 1} \sup_{m \sim 2^k, - 1 \leqslant j \leqslant L_k
+     \wedge (N - J)} 2^{(\gamma - \beta) j} \rho^{c - b} (2^{- j - J} m)
+     2^{\beta j} \rho^b (2^{- j - J} m) | \lambda_{j, m} (f) | \]
+  \begin{equation}
+    \lesssim \| f \|_{B^{\beta, \varepsilon}_{\infty, \infty} (\rho^b)}
+    \sup_{k \geqslant - 1} 2^{(\gamma - \beta) L_k - (c - b) c_k} .
+    \label{eq:27}
+  \end{equation}
+  We see that if the weight is decreasing at infinity, it holds $c_k
+  \rightarrow \infty$. From {\eqref{eq:26}} we obtain the condition $- (\beta
+  - \alpha) L_k + (b - a) c_k = - (\beta - \alpha) L$ hence we shall choose
+  $L_k = L + (b - a) c_k / (\beta - \alpha)$. Similarly, {\eqref{eq:27}}
+  yields $(\gamma - \beta) L_k - (c - b) c_k = (\gamma - \beta) L$ hence $L_k
+  = L + (c - b) c_k / (\gamma - \beta)$. Balancing these two conditions gives
+  $(b - a) / (\beta - \alpha) = (c - b) / (\gamma - \beta)$ and completes the
+  proof.
+  \end{proof}
+  
+  
+  \subsection{Duality and commutators}
+  \label{s:l2}
+  
+In this section we define various commutators and establish suitable bounds.  We denote by $C_{\varepsilon}$  the operator introduced in
+Lemma 4.3 {\cite{MP17}}, which for smooth functions satisfies
+\[ C_{\varepsilon} (f, g, h) = h \circ (f \prec g) - f (h \circ g) . \]
+We recall that if $p, p_1, p_2 \in [1, \infty]$ and $\alpha, \beta, \gamma \in
+\mathbb{R}$ are such that $\frac{1}{p} = \frac{1}{p_1} + \frac{1}{p_2}$,
+$\alpha + \beta + \gamma > 0$ and $\beta + \gamma \neq 0$, then the following
+bound holds
+\begin{equation}
+  \| C_{\varepsilon} (f, g, h) \|_{B^{\beta + \gamma, \varepsilon}_{p, \infty}
+  (\rho_1 \rho_2 \rho_3)} \lesssim \| f \|_{B^{\alpha, \varepsilon}_{p_1,
+  \infty} (\rho_1)} \| g \|_{B_{\infty, \infty}^{\beta, \varepsilon}
+  (\rho_2)_{}} \| h \|_{B_{p_2, \infty}^{\beta, \varepsilon} (\rho_3)_{}} .
+  \label{eq:comm}
+\end{equation}
+As the next step, we show that $g \succ$ is an approximate adjoint of $g
+\circ$ in a suitable sense, as first noted in~\cite{gubinelli_semilinear_2018}.
+  
+  \begin{lemma}
+  \label{lem:dual1}Let $\varepsilon \in \mathcal{A}$. Let $\alpha, \beta,
+  \gamma \in \mathbb{R}$ be such that $\alpha, \gamma > 0$, $\beta + \gamma <
+  0$ and $\alpha + \beta + \gamma > 0$ and let $\rho_1, \rho_2, \rho_3$ be
+  weights and let $\rho = \rho_1 \rho_2 \rho_3$. There exists a bounded
+  trilinear operator
+  \[ D_{\rho, \varepsilon} (f, g, h) : H^{\alpha, \varepsilon} (\rho_1) \times
+     \CC^{\beta, \varepsilon} (\rho_2) \times H^{\gamma, \varepsilon} (\rho_3)
+     \rightarrow \mathbb{R} \]
+  such that
+  \[ | D_{\rho, \varepsilon} (f, g, h) | \lesssim \| f \|_{H^{\alpha,
+     \varepsilon} (\rho_1)} \| g \|_{\CC^{\beta, \varepsilon} (\rho_2)} \| h
+     \|_{H^{\gamma, \varepsilon} (\rho_3)} \]
+  where the proportionality constant is independent of $\varepsilon$, and for
+  smooth functions we have
+  \[ D_{\rho, \varepsilon} (f, g, h) = \langle \rho f, g \circ h
+     \rangle_{\varepsilon} - \langle \rho (f \prec g), h \rangle_{\varepsilon}
+     . \]
+\end{lemma}
+
+
+\begin{proof}
+  We define
+  \[ D_{\rho, \varepsilon} (f, g, h) \assign \langle \rho, C_{\varepsilon} (f,
+     g, h) \rangle_{\varepsilon} - \langle \rho, (f \prec g) \succ h
+     \rangle_{\varepsilon} - \langle \rho, (f \prec g) \prec h
+     \rangle_{\varepsilon}, \]
+  where $C_{\varepsilon}$ was defined above. Hence the desired formula holds
+  for smooth functions. By {\eqref{eq:comm}} and the paraproduct estimates we
+  have
+  \[ \| C_{\varepsilon} (f, g, h) \|_{B^{\beta + \gamma - \delta,
+     \varepsilon}_{1, 1} (\rho)} \lesssim \| C_{\varepsilon} (f, g, h)
+     \|_{B^{\beta + \gamma, \varepsilon}_{1, \infty} (\rho)} \lesssim \| f
+     \|_{B^{\alpha, \varepsilon}_{2, \infty} (\rho_1)} \| g \|_{B^{\beta,
+     \varepsilon}_{\infty, \infty} (\rho_2)} \| h \|_{B^{\gamma,
+     \varepsilon}_{2, \infty} (\rho_3)}, \]
+  \[ \| (f \prec g) \succ h \|_{B^{\beta - \delta, \varepsilon}_{1, 1} (\rho)}
+     \lesssim \| (f \prec g) \succ h \|_{B^{\beta, \varepsilon}_{1, \infty}
+     (\rho)} \lesssim \| f \|_{B^{\alpha, \varepsilon}_{2, \infty} (\rho_1)}
+     \| g \|_{B^{\beta, \varepsilon}_{\infty, \infty} (\rho_2)} \| h
+     \|_{B^{\gamma, \varepsilon}_{2, \infty} (\rho_3)}, \]
+  \[ \| (f \prec g) \prec h \|_{B^{\beta + \gamma - \delta, \varepsilon}_{1,
+     1} (\rho)} \lesssim \| (f \prec g) \prec h \|_{B^{\beta + \gamma,
+     \varepsilon}_{1, \infty} (\rho)} \lesssim \| f \|_{B^{\alpha,
+     \varepsilon}_{2, \infty} (\rho_1)} \| g \|_{B^{\beta,
+     \varepsilon}_{\infty, \infty} (\rho_2)} \| h \|_{B^{\gamma,
+     \varepsilon}_{2, \infty} (\rho_3)}, \]
+  and the right hand side is estimated by
+  \[ \| f \|_{B^{\alpha, \varepsilon}_{2, \infty} (\rho_1)} \| g \|_{B^{\beta,
+     \varepsilon}_{\infty, \infty} (\rho_2)} \| h \|_{B^{\gamma,
+     \varepsilon}_{2, \infty} (\rho_3)} \lesssim \| f \|_{B^{\alpha,
+     \varepsilon}_{2, 2} (\rho_1)} \| g \|_{B^{\beta, \varepsilon}_{\infty,
+     \infty} (\rho_2)} \| h \|_{B^{\gamma, \varepsilon}_{2, 2} (\rho_3)} . \]
+  Consequently,
+  \[ | D_{\rho, \varepsilon} (f, g, h) | \lesssim \| 1 \|_{B^{- \beta +
+     \delta, \varepsilon}_{\infty, \infty}} \| f \|_{B^{\alpha,
+     \varepsilon}_{2, 2} (\rho_1)} \| g \|_{B^{\beta, \varepsilon}_{\infty,
+     \infty} (\rho_2)} \| h \|_{B^{\gamma, \varepsilon}_{2, 2} (\rho_3)} \]
+  which completes the proof.
+  \end{proof}
+
+
+Next, we show several commutator estimates. To this end, $\Delta_{\varepsilon}$ denotes the discrete
+Laplacian on $\Lambda_{\varepsilon}$ and we define the corresponding elliptic
+and parabolic operators by $\Q_{\varepsilon} \assign m^{2} -
+\Delta_{\varepsilon}$ and $\LL_{\varepsilon} \assign \partial_t +
+\Q_{\varepsilon}$, where $m^{2} > 0$.
+
+\begin{lemma}
+  \label{lem:comm1}Let $\varepsilon \in \mathcal{A}$. Let $\alpha, \beta,
+  \gamma \in \mathbb{R}$ such that $\beta + \gamma + 2 < 0$ and $\alpha +
+  \beta + \gamma + 2 > 0$. Let $\rho_1, \rho_2, \rho_3$ be space weights and
+  let $\rho_4, \rho_5, \rho_6$ be space-time weights. Then there exist bounded
+  trilinear operators
+  \[ \tilde{C}_{\varepsilon} : H^{\alpha, \varepsilon} (\rho_1) \times
+     \CC^{\beta, \varepsilon} (\rho_2) \times \CC^{\gamma + \delta,
+     \varepsilon} (\rho_3) \rightarrow H^{\beta + \gamma + 2, \varepsilon}
+     (\rho_1 \rho_2 \rho_3), \]
+  \[ \bar{C}_{\varepsilon} : C_T \CC^{\alpha, \varepsilon} (\rho_4) \times C_T
+     \CC^{\beta, \varepsilon} (\rho_5) \times C_T \CC^{\gamma + \delta,
+     \varepsilon} (\rho_6) \rightarrow C_T \CC^{\beta + \gamma + 2,
+     \varepsilon} (\rho_4 \rho_5 \rho_6) \]
+  such that for every $\delta > 0$ it holds
+  \[ \| \tilde{C}_{\varepsilon} (f, g, h) \|_{H^{\beta + \gamma + 2,
+     \varepsilon} (\rho_1 \rho_2 \rho_3)} \lesssim \| f \|_{H^{\alpha,
+     \varepsilon} (\rho_1)} \| g \|_{\CC^{\beta, \varepsilon} (\rho_2)} \| h
+     \|_{\CC^{\gamma + \delta, \varepsilon} (\rho_3)}, \]
+  \[ \| \bar{C}_{\varepsilon} (f, g, h) \|_{C_T \CC^{\beta + \gamma + 2,
+     \varepsilon} (\rho_4 \rho_5 \rho_6)} \]
+  \[ \lesssim \big( \| f \|_{C_T \CC^{\alpha, \varepsilon} (\rho_4)} + \| f
+     \|_{C_T^{\alpha / 2} L^{\infty, \varepsilon} (\rho_4)} \big) \| g
+     \|_{C_T \CC^{\beta, \varepsilon} (\rho_5)} \| h \|_{C_T \CC^{\gamma +
+     \delta, \varepsilon} (\rho_6)}, \]
+  where the proportionality constants are independent of $\varepsilon$, and
+  for smooth functions we have
+  \begin{equation}
+    \tilde{C}_{\varepsilon} (f, g, h) = h \circ \Q_{\varepsilon}^{- 1} (f
+    \prec g) - f \left( h \circ \Q_{\varepsilon}^{- 1} g \right), \label{eq:9}
+  \end{equation}
+  \[ \bar{C}_{\varepsilon} (f, g, h) = h \circ \LL_{\varepsilon}^{- 1} (f
+     \prec g) - f \left( h \circ \LL_{\varepsilon}^{- 1} g \right) . \]
+\end{lemma}
+
+
+
+
+
+
+
+
+\begin{proof}
+  First, we define
+  \[ \tilde{C}_{\varepsilon} (f, g, h) \assign h \circ \left[
+     \Q_{\varepsilon}^{- 1} (f \prec g) - f \prec \Q_{\varepsilon}^{- 1} g
+     \right] + C_{\varepsilon} \left( f, \Q_{\varepsilon}^{- 1} g, h \right),
+  \]
+  where $C_{\varepsilon}$ was introduced above. Hence for smooth functions we
+  obtain the desired formula {\eqref{eq:9}}. Moreover, by {\eqref{eq:comm}}
+  the operator $C_{\varepsilon}$ can be estimated (uniformly in $\varepsilon$)
+  for $\delta > 0$ as
+  \[ \left\| C_{\varepsilon} \left( f, \Q_{\varepsilon}^{- 1} g, h \right)
+     \right\|_{H^{\beta + \gamma + 2, \varepsilon} (\rho_1 \rho_2 \rho_3)}
+     \lesssim \left\| C_{\varepsilon} \left( f, \Q_{\varepsilon}^{- 1} g, h
+     \right) \right\|_{B_{2, \infty}^{\beta + \gamma + 2 + \delta,
+     \varepsilon} (\rho_1 \rho_2 \rho_3)} \]
+  \[ \lesssim \| f \|_{B_{2, \infty}^{\alpha, \varepsilon} (\rho_1)} \| g
+     \|_{\CC^{\beta, \varepsilon} (\rho_2)} \| h \|_{\CC^{\gamma + \delta,
+     \varepsilon} (\rho_3)} \lesssim \| f \|_{H^{\alpha, \varepsilon}
+     (\rho_1)} \| g \|_{\CC^{\beta, \varepsilon} (\rho_2)} \| h
+     \|_{\CC^{\gamma + \delta, \varepsilon} (\rho_3)} . \]
+  For the first term in $\tilde{C}_{\varepsilon}$ we write
+  \[ \Q_{\varepsilon}^{- 1} (f \prec g) - f \prec \Q_{\varepsilon}^{- 1} g =
+     \Q_{\varepsilon}^{- 1} \left[ f \prec \Q_{\varepsilon}
+     \Q_{\varepsilon}^{- 1} g - \Q_{\varepsilon} \left( f \prec
+     \Q_{\varepsilon}^{- 1} g \right) \right] \]
+  and as a consequence
+  \[ \left\| h \circ \left[ \Q_{\varepsilon}^{- 1} (f \prec g) - f \prec
+     \Q_{\varepsilon}^{- 1} g \right] \right\|_{H^{\alpha + \beta + \gamma +
+     2, \varepsilon} (\rho_1 \rho_2 \rho_3)} \]
+  \[ \lesssim \| h \|_{\CC^{\gamma + \delta, \varepsilon} (\rho_3)} \left\| f
+     \prec \Q_{\varepsilon} \Q_{\varepsilon}^{- 1} g - \Q_{\varepsilon} \left(
+     f \prec \Q_{\varepsilon}^{- 1} g \right) \right\|_{H^{\alpha + \beta -
+     \delta, \varepsilon} (\rho_1 \rho_2)} . \]
+  Finally, we observe that due to an argument similar to Lemma A.8
+  {\cite{MP17}}
+  \[ \nabla_{\varepsilon} f \prec \nabla_{\varepsilon} g \assign
+     \Delta_{\varepsilon} (f \prec g) - \Delta_{\varepsilon} f \prec g - f
+     \prec \Delta_{\varepsilon} g, \]
+  it holds that
+  \[ \left\| f \prec \Q_{\varepsilon} \Q_{\varepsilon}^{- 1} g -
+     \Q_{\varepsilon} \left( f \prec \Q_{\varepsilon}^{- 1} g \right)
+     \right\|_{H^{\alpha + \beta - \delta, \varepsilon} (\rho_1 \rho_2)} \]
+  \[ \lesssim \left\| f \prec \Q_{\varepsilon} \Q_{\varepsilon}^{- 1} g -
+     \Q_{\varepsilon} \left( f \prec \Q_{\varepsilon}^{- 1} g \right)
+     \right\|_{B_{2, \infty}^{\alpha + \beta, \varepsilon} (\rho_1 \rho_2)}
+     \lesssim \| f \|_{B_{2, \infty}^{\alpha, \varepsilon} (\rho_1)} \| g
+     \|_{\CC^{\beta, \varepsilon} (\rho_2)} \]
+  \[ \lesssim \| f \|_{H_{}^{\alpha, \varepsilon} (\rho_1)} \| g
+     \|_{\CC^{\beta, \varepsilon} (\rho_2)} . \]
+  We proceed similarly for the parabolic commutator $\bar{C}_{\varepsilon}$,
+  but include additionally a modified paraproduct given by
+  \[ f \precprec g \assign \sum_{1 \leqslant i, j \leqslant N - J, i < j - 1}
+     \Delta^{\varepsilon}_i Q_i f \Delta^{\varepsilon}_j g, \]
+  where
+  \[ Q_i f (t) = \int_{\mathbb{R}} 2^{2 i} Q (2^{2 i} (t - s)) f ((s \vee 0)
+     \wedge T) \mathd s \]
+  for some smooth, nonnegative, compactly supported function $Q : \mathbb{R}
+  \rightarrow \mathbb{R}$ that integrates to $1$. Namely, we define
+  \[ \bar{C}_{\varepsilon} (f, g, h) \assign h \circ \left[
+     \LL_{\varepsilon}^{- 1} (f \precprec g) - f \precprec
+     \LL_{\varepsilon}^{- 1} g \right] + h \circ \left[ \LL_{\varepsilon}^{-
+     1} (f \prec g - f \precprec g) \right] \]
+  \[ + h \circ \left[ f \precprec \LL_{\varepsilon}^{- 1} g - f \prec
+     \LL_{\varepsilon}^{- 1} g \right] + C_{\varepsilon} \left( f,
+     \LL_{\varepsilon}^{- 1} g, h \right), \]
+  and observe that for smooth functions it holds
+  \[ \bar{C}_{\varepsilon} (f, g, h) = h \circ \left[ \LL_{\varepsilon}^{- 1}
+     (f \prec g) - f \prec \LL_{\varepsilon}^{- 1} g \right] + \left[ h \circ
+     \left( f \prec \LL_{\varepsilon}^{- 1} g \right) - f \left( h \circ
+     \LL_{\varepsilon}^{- 1} g \right) \right] \]
+  \[ = h \circ \LL_{\varepsilon}^{- 1} (f \prec g) - f \left( h \circ
+     \LL_{\varepsilon}^{- 1} g \right), \]
+  and the desired bound follows from Lemma 4.7 in {\cite{MP17}} and
+  {\eqref{eq:comm}}.
+  \end{proof}
+
+
+
+\subsection{Extension operators}
+
+\label{s:ext}In order to construct the Euclidean quantum field theory as a
+limit of lattice approximations, we  need a suitable extension operator
+that allows extend distributions defined on the lattice
+$\Lambda_{\varepsilon}$ to the full space $\mathbb{R}^d$.
+To this end, we fix a smooth, compactly supported and radially symmetric
+nonnegative function $w \in C^{\infty}_c (\mathbb{R}^d)$ such that
+$\tmop{supp} w \subset B_{1 / 2}$ where $B_{1 / 2} \subset \mathbb{R}^d$ is
+the ball centered at $0$ with radius $1 / 2$ and $\int_{\mathbb{R}^d} w (x)
+\mathd x = 1$. Let $w^{\varepsilon} (\cdummy) \assign \varepsilon^{- d} w
+(\varepsilon^{- 1} \cdummy)$ and define the extension operator
+$\mathcal{E}^{\varepsilon}$ by
+\[ \mathcal{E}^{\varepsilon} f \assign w^{\varepsilon} \ast_{\varepsilon} f,
+   \qquad f \in \mathcal{S}' (\Lambda_{\varepsilon}), \]
+where by $\ast_{\varepsilon}$ we denote the convolution on the lattice
+$\Lambda_{\varepsilon}$.
+
+\begin{lemma}
+  \label{lem:ext}Let $\alpha \in \mathbb{R}$, $p, q \in [1, \infty]$ and let
+  $\rho$ be a weight. Then the operators
+  \[ \mathcal{E}^{\varepsilon} : B^{\alpha, \varepsilon}_{p, q} (\rho)
+     \rightarrow B^{\alpha}_{p, q} (\rho) \]
+  are bounded uniformly in $\varepsilon$.
+\end{lemma}
+
+
+
+\begin{proof}
+  Within the proof we denote $\ast$ the convolution on $\mathbb{R}^d$ whereas
+  $\ast_{\varepsilon}$ stands for the convolution on $\Lambda_{\varepsilon}$.
+  Let $K_j = \mathcal{F}^{- 1}_{\mathbb{R}^d} \varphi_j$ and
+  $K^{\varepsilon}_j = \mathcal{F}^{- 1} \varphi^{\varepsilon}_j$. First, we
+  observe that for $j < N - J$ we have
+  \[ \Delta_j (\mathcal{E}^{\varepsilon} f) = K_j \ast (w^{\varepsilon}
+     \ast_{\varepsilon} f) = w^{\varepsilon} \ast (K^{\varepsilon}_j
+     \ast_{\varepsilon} \mathcal{} \mathcal{} f) = \mathcal{E}^{\varepsilon}
+     \Delta_j^{\varepsilon} f. \]
+  Consequently,
+  \[ \Delta_i (\mathcal{E}^{\varepsilon} f) = \sum_{- 1 \leqslant j \leqslant
+     N - J} \Delta_i (\mathcal{E}^{\varepsilon} \Delta^{\varepsilon}_j f) =
+     \left\{ \begin{array}{llll}
+       \sum_{- 1 \leqslant j < N - J : j \sim i} \mathcal{E}^{\varepsilon}
+       (\Delta^{\varepsilon}_j f) &  & \tmop{if} & i < N - J\\
+       \Delta_i (\mathcal{E}^{\varepsilon} \Delta^{\varepsilon}_{N - J} f) & 
+       & \tmop{if} & i \geqslant N - J
+     \end{array} \right. . \]
+  For $i < N - J$ we obtain by Young's inequality for convolutions, Lemma
+  \ref{lem:young} and the construction of $w^{\varepsilon}$,  uniformly in $\varepsilon$, that
+  \[ \| \Delta_i (\mathcal{E}^{\varepsilon} f) \|_{L^{p, 0} (\rho)} \leqslant
+     \sum_{- 1 \leqslant j < N - J : j \sim i} \| w^{\varepsilon}
+     \ast_{\varepsilon} \Delta_j^{\varepsilon} f \|_{L^{p, 0} (\rho)} \]
+  \[ \lesssim \sup_{y \in \mathbb{R}^d} \| (\rho^{- 1} w^{\varepsilon}) (y -
+     \cdummy) \|^{1 - \frac{1}{p}}_{L^{1, 0}} \| w^{\varepsilon}
+     \|^{\frac{1}{p}}_{L^{1, 0} (\rho^{- 1})} \sum_{- 1 \leqslant j < N - J :
+     j \sim i} \| \Delta_j^{\varepsilon} f \|_{L^{p, \varepsilon} (\rho)}\lesssim \sum_{- 1 \leqslant j < N - J : j \sim i} \|
+     \Delta^{\varepsilon}_j f \|_{L^{p, \varepsilon} (\rho)} .\]
+ If $i \geqslant N - J$ then we write let
+  $\bar{K}_i = \sum_{j \sim i} K_i$ and
+  \[ \Delta_i (\mathcal{E}^{\varepsilon} \Delta^{\varepsilon}_{N - J} f) = K_i
+     \ast (w^{\varepsilon} \ast_{\varepsilon} \Delta^{\varepsilon}_{N - J} f)
+     = \bar{K}_i \ast K_i \ast w^{\varepsilon} \ast_{\varepsilon}
+     \Delta^{\varepsilon}_{N - J} f = (\bar{K}_i \ast w^{\varepsilon}) \ast
+     K_i \ast_{\varepsilon} \Delta^{\varepsilon}_{N - J} f. \]
+  Hence by Lemma \ref{lem:young}
+  \[ \| \Delta_i (\mathcal{E}^{\varepsilon} \Delta^{\varepsilon}_{N - J} f)
+     \|_{L^{p, 0} (\rho)} \lesssim \| \bar{K}_i \ast w^{\varepsilon} \|_{L^{1,
+     0} (\rho^{- 1})} \| K_i \ast_{\varepsilon} \Delta^{\varepsilon}_{N - J} f
+     \|_{L^{p, 0} (\rho)} \]
+  \[ \lesssim \| \bar{K}_i \ast w^{\varepsilon} \|_{L^{1, 0} (\rho^{- 1})}
+     \sup_{y \in \mathbb{R}^d} \| (\rho^{- 1} K_i) (y - \cdummy) \|^{1 -
+     \frac{1}{p}}_{L^{1, 0}} \| K_i \|^{\frac{1}{p}}_{L^{1, 0} (\rho^{- 1})}
+     \| \Delta^{\varepsilon}_{N - J} f \|_{L^{p, \varepsilon} (\rho)} . \]
+  Now we estimate the first term on the right hand side as follows
+  \[ \| \bar{K}_i \ast w^{\varepsilon} \|_{L^{1, 0} (\rho^{- 1})} =
+     \int_{\mathbb{R}^d} \left| \int_{\mathbb{R}^d} 2^{i d} \bar{K} (2^i (x -
+     y)) \varepsilon^{- d} w \left( \frac{y}{\varepsilon} \right) \mathd y
+     \right| \rho^{- 1} (x) \mathd x \]
+  \[ = \int_{\mathbb{R}^d} \left| \int_{\mathbb{R}^d} \varepsilon^d 2^{i d}
+     \bar{K} (\varepsilon 2^i (x - y)) w (y) \mathd y \right| \rho^{- 1}
+     (\varepsilon x) \mathd x \]
+  \[ \leqslant \int_{\mathbb{R}^d} \left| \int_{\mathbb{R}^d} \varepsilon^d
+     2^{i d} \bar{K} (\varepsilon 2^i (x - y)) w (y) \mathd y \right| \rho^{-
+     1} (x) \mathd x \]
+  \[ \leqslant \sum_{\ell : 2^{\ell} \sim \varepsilon 2^i} \int_{\mathbb{R}^d}
+     \left| \int_{\mathbb{R}^d} \varepsilon^d 2^{i d} \bar{K} (\varepsilon 2^i
+     (x - y)) \Delta_{\ell} w (y) \mathd y \right| \rho^{- 1} (x) \mathd x \]
+  and using $\rho^{- 1} (x) \lesssim \rho^{- 1} (y) \rho^{- a} (x - y)$ for
+  some $a > 0$ together with the Young inequality we obtain uniformly in
+  $\varepsilon$
+  \[ \| \bar{K}_i \ast w^{\varepsilon} \|_{L^{1, 0} (\rho^{- 1})} \lesssim
+     \sum_{\ell : 2^{\ell} \sim \varepsilon 2^i} \| \Delta_{\ell} w
+     \|_{L^{\infty} (\rho^{- 1})} \| \varepsilon^d 2^{i d} \bar{K}
+     (\varepsilon 2^{i d} \cdummy) \|_{L^{1, 0} (\rho^{- a})} \]
+  \[ \lesssim \sum_{\ell : 2^{\ell} \sim \varepsilon 2^i} \| \Delta_{\ell} w
+     \|_{L^{\infty} (\rho^{- 1})} \lesssim (\varepsilon 2^i)^{- b} \| w
+     \|_{B^b_{\infty, \infty} (\rho^{- 1})} \]
+  where $b \geqslant 0$ will be chosen below. To summarize, we have shown that
+  \[ \| \Delta_i (\mathcal{E}^{\varepsilon} \Delta^{\varepsilon}_{N - J} f)
+     \|_{L^{p, 0} (\rho)} \lesssim (\varepsilon 2^i)^{- b} \|
+     \Delta^{\varepsilon}_{N - J} f \|_{L^{p, \varepsilon} (\rho)} . \]
+  Therefore,
+  \[ \| \mathcal{E}^{\varepsilon} f \|_{B^{\alpha}_{p, q} (\rho)}^q = \sum_{-
+     1 \leqslant i < N - J} 2^{\alpha i q} \| \Delta_i
+     (\mathcal{E}^{\varepsilon} f) \|^q_{L^p (\rho)} + \sum_{N - J \leqslant i
+     < \infty} 2^{\alpha i q} \| \Delta_i (\mathcal{E}^{\varepsilon} f)
+     \|^q_{L^p (\rho)} \]
+  \[ \lesssim \sum_{- 1 \leqslant j < N - J} 2^{\alpha j q} \|
+     \Delta^{\varepsilon}_j f \|^q_{L^{p, \varepsilon} (\rho)} + \|
+     \Delta^{\varepsilon}_{N - J} f \|_{L^{p, \varepsilon} (\rho)}
+     \varepsilon^{- b} \sum_{N - J \leqslant i < \infty} 2^{i (\alpha q - b)}
+     . \]
+  If $\alpha < 0$ then we may choose $b = 0$ to obtain
+  \[ \| \mathcal{E}^{\varepsilon} f \|_{B^{\alpha}_{p, q} (\rho)}^q \lesssim
+     \sum_{- 1 \leqslant j \leqslant N - J} 2^{\alpha j q} \|
+     \Delta^{\varepsilon}_j f \|^q_{L^{p, \varepsilon} (\rho)} = \| f
+     \|_{B^{\alpha, \varepsilon}_{p, q} (\rho)}^q . \]
+  If $\alpha \geqslant 0$ then we choose $b > \alpha q$ to get
+  \[ \| \mathcal{E}^{\varepsilon} f \|_{B^{\alpha}_{p, q} (\rho)}^q \lesssim
+     \sum_{- 1 \leqslant j < N - J} 2^{\alpha j q} \| \Delta^{\varepsilon}_j f
+     \|^q_{L^{p, \varepsilon} (\rho)} + \| \Delta^{\varepsilon}_{N - J} f
+     \|_{L^{p, \varepsilon} (\rho)} \varepsilon^{- b} 2^{(N - J) (\alpha q -
+     b)}, \]
+  where due to $\varepsilon = 2^{- N}$ it holds
+  $\varepsilon^{- b} 2^{(N - J) (\alpha q - b)} = 2^{N \alpha q} 2^{- J
+     (\alpha q - b)} $
+  and consequently
+  \[ \| \mathcal{E}^{\varepsilon} f \|_{B^{\alpha}_{p, q} (\rho)}^q \lesssim
+     \sum_{- 1 \leqslant j \leqslant N - J} 2^{\alpha j q} \|
+     \Delta^{\varepsilon}_j f \|^q_{L^{p, \varepsilon} (\rho)} = \| f
+     \|_{B^{\alpha, \varepsilon}_{p, q} (\rho)}^q \]
+  holds true uniformly in $\varepsilon$.
+  \end{proof}
+
+
+
+%\bibliographystyle{alpha}
+%\bibliography{../weak-solutions}
+
+\begin{thebibliography}{MW17b}
+
+\bibitem[AK17]{albeverio_invariant_2017}
+Sergio Albeverio and Seiichiro Kusuoka.
+\newblock The invariant measure and the flow associated to the
+  {$\Phi^4_3$}-quantum field model.
+\newblock {\em arXiv:1711.07108}, November 2017.
+
+\bibitem[BCD11]{BCD}
+Hajer Bahouri, Jean-Yves Chemin, and Rapha{\"e}l Danchin.
+\newblock {\em Fourier {Analysis} and {Nonlinear} {Partial} {Differential}
+  {Equations}}.
+\newblock Springer, January 2011.
+
+\bibitem[BFS83]{MR723546}
+David~C. Brydges, J\"{u}rg Fr\"{o}hlich, and Alan~D. Sokal.
+\newblock A new proof of the existence and nontriviality of the continuum
+  {$\varphi ^{4}_{2}$} and {$\varphi ^{4}_{3}$} quantum field theories.
+\newblock {\em Comm. Math. Phys.}, 91(2):141--186, 1983.
+
+\bibitem[CC18]{CC}
+R.~Catellier and K.~Chouk.
+\newblock Paracontrolled distributions and the 3-dimensional stochastic
+  quantization equation.
+\newblock {\em to appear in The Annals of Probability}, 2018.
+
+\bibitem[GH18]{GH18}
+M.~{Gubinelli} and M.~{Hofmanov{\'a}}.
+\newblock {Global solutions to elliptic and parabolic $\Phi^4$ models in
+  Euclidean space}.
+\newblock {\em ArXiv e-prints}, April 2018.
+
+\bibitem[GIP15]{GIP}
+Massimiliano Gubinelli, Peter Imkeller, and Nicolas Perkowski.
+\newblock Paracontrolled distributions and singular {PDEs}.
+\newblock {\em Forum of Mathematics. Pi}, 3:e6, 75, 2015.
+
+\bibitem[GJ87]{MR887102}
+James Glimm and Arthur Jaffe.
+\newblock {\em Quantum physics}.
+\newblock Springer-Verlag, New York, second edition, 1987.
+\newblock A functional integral point of view.
+
+\bibitem[GUZ18]{gubinelli_semilinear_2018}
+Massimiliano Gubinelli, Baris~Evren Ugurcan, and Immanuel Zachhuber.
+\newblock Semilinear evolution equations for the {Anderson} {Hamiltonian} in
+  two and three dimensions.
+  \newblock {\em ArXiv e-prints},
+\newblock July 2018.
+
+\bibitem[Hai14]{hairer_theory_2014}
+M.~Hairer.
+\newblock A theory of regularity structures.
+\newblock {\em Inventiones mathematicae}, 198(2):269--504, March 2014.
+
+\bibitem[HM18]{Hairer:2018:10.1214/17-AIHP840}
+M~Hairer and J~Mattingly.
+\newblock The strong feller property for singular stochastic pdes.
+\newblock {\em Annales de l'Institut Henri Poincare Probabilites et
+  Statistiques}, 54:1314--1340, 2018.
+
+\bibitem[MP17]{MP17}
+J.~{Martin} and N.~{Perkowski}.
+\newblock {Paracontrolled distributions on Bravais lattices and weak
+  universality of the 2d parabolic Anderson model}.
+\newblock {\em ArXiv e-prints}, April 2017.
+
+\bibitem[MW17a]{MWcomedown}
+Jean-Christophe Mourrat and Hendrik Weber.
+\newblock The dynamic {$\Phi^4_3$} model comes down from infinity.
+\newblock {\em Comm. Math. Phys.}, 356(3):673--753, 2017.
+
+\bibitem[MW17b]{MW17}
+Jean-Christophe Mourrat and Hendrik Weber.
+\newblock Global well-posedness of the dynamic {$\Phi^4$} model in the plane.
+\newblock {\em The Annals of Probability}, 45(4):2398--2476, July 2017.
+
+\bibitem[Sok82]{S82}
+Alan~D. Sokal.
+\newblock An alternate constructive constructive approach to the $\varphi^4_3$
+  quantum field theory and a possible destructive approach to $\varphi^4_4$.
+\newblock {\em Ann. Inst. Henri Poincare A}, 37:317--398, 1982.
+
+\bibitem[ZZ18]{ZZ18}
+R.~Zhu and X.~Zhu.
+\newblock Lattice approximation to the dynamical $\phi^4_3$ model.
+\newblock {\em The Annals of Probability}, 46(1):397--455, 2018.
+
+\end{thebibliography}
+
+
+%\begin{thebibliography}{1}
+%  \bibitem[1]{BCD}Hajer Bahouri, Jean-Yves Chemin, and  Rapha{\"e}l Danchin.
+%  {\newblock}\tmtextit{Fourier Analysis and Nonlinear Partial Differential
+%  Equations}. {\newblock}Springer, jan 2011.{\newblock}
+%  
+%  \bibitem[2]{GH18}M.~Gubinelli  and  M.~Hofmanov{\'a}. {\newblock}Global
+%  solutions to elliptic and parabolic $\Phi^4$ models in Euclidean space.
+%  {\newblock}\tmtextit{ArXiv e-prints}, apr 2018.{\newblock}
+%  
+%  \bibitem[3]{GIP}Massimiliano Gubinelli, Peter Imkeller, and  Nicolas
+%  Perkowski. {\newblock}Paracontrolled distributions and singular PDEs.
+%  {\newblock}\tmtextit{Forum of Mathematics. Pi}, 3:0, 2015.{\newblock}
+%  
+%  \bibitem[4]{MP17}J.~Martin  and  N.~Perkowski. {\newblock}Paracontrolled
+%  distributions on Bravais lattices and weak universality of the 2d parabolic
+%  Anderson model. {\newblock}\tmtextit{ArXiv e-prints}, apr 2017.{\newblock}
+%  
+%  \bibitem[5]{MW17}Jean-Christophe Mourrat  and  Hendrik Weber.
+%  {\newblock}Global well-posedness of the dynamic $\Phi^4$ model in the plane.
+%  {\newblock}\tmtextit{The Annals of Probability}, 45(4):2398--2476, jul
+%  2017.{\newblock}
+%\end{thebibliography}
+
+
+
+\end{document}

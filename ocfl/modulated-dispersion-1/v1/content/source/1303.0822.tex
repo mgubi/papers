@@ -1,0 +1,2633 @@
+%---------------------------------------------------------------------------------------------
+% revision log
+%---------------------------------------------------------------------------------------------
+% 20130304 | modulated-dispersion-42-arXiv.tex | arXiv version. 
+%---------------------------------------------------------------------------------------------
+
+\documentclass[a4paper,11pt,reqno]{article}
+\usepackage[body=17cm,top=3cm,bottom=4cm]{geometry}
+%\documentclass[a4paper,12pt,reqno]{amsart}
+%\documentclass[a4paper,12pt]{article}
+ \usepackage{amsrefs}
+\usepackage{amsmath,amsfonts,amsthm,amscd,amssymb}
+\usepackage[colorlinks=true]{hyperref}
+
+
+
+%\usepackage[color]{showkeys}
+%\definecolor{refkey}{rgb}{0.75,0.75,1}
+%\definecolor{labelkey}{rgb}{0.75,0.75,1}
+ 
+%%  \footnotesep 14pt
+%%  \floatsep 27pt plus 2pt minus 4pt   % Nominal is double what is in art12.sty
+%%  \textfloatsep 40pt plus 2pt minus 4pt
+%%  \intextsep 27pt plus 4pt minus 4pt
+
+%% %   Somewhat wider and taller page than in art12.sty
+%  \topmargin -0.4in  \headsep 0.4in  \textheight 9.0in
+ %  \oddsidemargin 0.02in  \evensidemargin 0.15in  
+%\textwidth 6.3in
+
+\newcommand{\note}[1]{\marginpar{$\Leftarrow$}\framebox{\texttt{#1}}}
+
+
+\DeclareMathOperator{\Dom}{Dom}
+\newcommand{\ap}{A_{o}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cX}{\mathcal{X}}
+
+\newcommand{\cba}{\cB_\alpha}
+\newcommand{\cBalpha}{\cB_\alpha}
+\newcommand{\dn}{\Delta_{n}}
+\newcommand{\dnp}{\Delta_{n+1}}
+\newcommand{\ddo}{d^{o}}
+\newcommand{\hdd}{\hat d}
+\newcommand{\hd}{\hat \delta}
+\newcommand{\hl}{\hat \Lambda}
+\newcommand{\hm}{\hat M}
+\newcommand{\id}{\mbox{Id}}
+\newcommand{\iou}{\int_{0}^{1}}
+\newcommand{\ot}{[0,t]}
+\newcommand{\ott}{[0,T]}
+\newcommand{\ou}{[0,1]}
+\newcommand{\rn}{r^{n}}
+\newcommand{\rnp}{r^{n+1}}
+\newcommand{\sst}{\Sigma^*}
+
+\DeclareMathOperator{\img}{Img}
+
+\DeclareMathOperator{\expect}{{\mathbb E}}
+\DeclareMathOperator{\prob}{{\mathbb P}}
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\Id}{Id}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\latt}{{\mathbb{Z}^d}}
+%\newcommand{\qed}{\hfill$\square$}
+%\newcommand{\proof}{{\sc Proof.}\hspace{0.3cm}}
+\makeatletter
+\newcommand{\eqcolon}{\mathrel{\mathord{=}\raise.2\p@\hbox{:}}}
+\newcommand{\coloneq}{\mathrel{\raise.2\p@\hbox{:}\mathord{=}}}
+\makeatother
+\newcommand{\der}{\delta}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\XX}{\mathbb{X}}
+\newcommand{\RR}{\mathbb{R}}
+%\DeclareMathOperator{\NN}{N}
+\newcommand{\NN}{N}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\UU}{\mathcal{U}}
+\newcommand{\QQ}{\mathcal{Q}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\CCC}{\CC\!\CC}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\renewcommand{\LL}{\mathcal{L}}
+\newcommand{\OC}{\mathcal{C}}
+\newcommand{\OB}{\Omega \mathcal{B}}
+\newcommand{\OD}{\Omega \mathcal{D}}
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\Norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\Abs}[1]{\left\lvert #1\right\rvert}
+\newcommand{\wt}{\widetilde}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% Mathbb %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\C}{\mathbb C}
+\newcommand{\D}{\mathbb D}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% Calligraphic %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\cb}{\mathcal B}
+\newcommand{\cac}{\mathcal C}
+\newcommand{\hcac}{\widehat {\mathcal C}}
+\newcommand{\ce}{\mathcal E}
+\newcommand{\cf}{\mathcal F}
+\newcommand{\ch}{\mathcal H}
+\newcommand{\ci}{\mathcal I}
+\newcommand{\cj}{\mathcal J}
+\newcommand{\cl}{\mathcal L}
+\newcommand{\cn}{\mathcal N}
+\newcommand{\cs}{\mathcal S}
+\newcommand{\cw}{\mathcal W}
+\newcommand{\crr}{\mathcal R}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% Greek %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\io}{\iota}
+\newcommand{\ga}{\gamma}
+\newcommand{\la}{\lambda}
+\newcommand{\laa}{\Lambda}
+\newcommand{\om}{\omega}
+\newcommand{\oom}{\Omega}
+\newcommand{\ssi}{\Sigma}
+\newcommand{\si}{\sigma}
+\newcommand{\te}{\theta}
+\newcommand{\vp}{\varphi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% Brackets %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lc}{\left[}
+\newcommand{\rc}{\right]}
+\newcommand{\lcl}{\left\{}
+\newcommand{\rcl}{\right\}}
+\newcommand{\lln}{\left|}
+\newcommand{\rrn}{\right|}
+\newcommand{\lla}{\left\langle}
+\newcommand{\rra}{\right\rangle}
+\newcommand{\lan}{\left\langle}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\TT}{\mathbb{T}}
+
+
+
+
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+
+\newenvironment{pseudoproof}{{\sc (Pseudo)Proof.}}{\hfill\qed?}
+
+
+
+\begin{document}
+\title{Nonlinear PDEs with modulated dispersion}
+\author{K.~Chouk, M.~Gubinelli\\
+{\small
+CEREMADE  UMR 7534}\\{\small  Universit\'e Paris--Dauphine, France
+}\\{\small \texttt{\{chouk,gubinelli\}@ceremade.dauphine.fr}
+}}
+%\email[M.~Gubinelli]{massimiliano.gubinelli@ceremade.dauphine.fr}
+%\affiliation{XXXX}
+\date{\today}
+\maketitle
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{abstract}
+We study various nonlinear PDEs under the effect of a time--inhomoge\-ne\-ous and irregular modulation of the dispersive term. In particular the modulated 1d periodic or non-periodic versions of the Korteweg--de~Vries (KdV) equation, of the modified KdV equation, of the non-linear Schr\"odinger equation (NLS) and of the derivative NLS. We introduce a deterministic notion of "irregularity" for the modulation and obtain local and global results similar to those valid without modulation. In some cases the irregularity of the modulation improves the well-posedness theory of the equations.   
+A first approach is based on novel  estimates for the regularising effect of the modulated dispersion on the non-linear term using the theory of controlled paths and estimates stemming from Young's theory of integration.  A second approach is an extension of a Strichartz estimated first obtained by Debussche and Tsutsumi in the case of the Brownian modulation for the quintic NLS. \\[.5cm]   
+\textbf{Keywords:} Dispersion management; Young integrals; Controlled paths; Stochastic Strichartz inequality; I-method; Korteweg-de~Vries equation; Non-linear Schr\"odinger equation; Regularization by noise phenomenon. 
+\end{abstract}
+
+
+
+
+
+
+
+
+
+\tableofcontents
+
+
+
+\section{Introduction}
+%\subsection{}
+
+In this paper we consider nonlinear PDEs of the form
+\begin{equation}
+\label{eq:abs}
+\frac\dd{\dd t} \varphi_t = A \varphi_t \frac{\dd w_t}{\dd t}  + \cN(\varphi_t),\qquad t\ge 0
+\end{equation}
+where $w:\RR_+\to\RR$ is an arbitrary continuous function, $A$ is an unbounded linear operator and $\cN$ some nonlinear function. The situation we have in mind is where $A$ is a dispersive  operator like the Schr\"odinger operator $i\partial^2$ or the Airy operator $\partial^3$ acting on periodic or non-periodic functions on $\RR^n$ and where $\cN$ is some polynomial non-linarity with possibly derivative terms. Our analysis will be mainly devoted to the following cases:
+\begin{enumerate}
+\item (KdV) Korteweg-de~Vries equation in $\TT$ or $\RR$, $A=\partial^3$, $\cN(\phi)=\partial \phi^2$; 
+\item (NLS) Non-linear cubic Schr\"odinger equation in $\TT^n,\RR^n$, $n=1,2$,  $A=i\partial^2$, $\cN(\phi)=i|\phi|^2\phi$; 
+\item (mKdV) Modified Korteweg-de~Vries equation in $\TT$, $A=\partial^3$, $\cN(\phi)=\partial(\phi^2-3||\phi||_{H^0}^2)\phi$;
+\item (dNLS) Non-linear (Wick-ordered) derivative cubic Schr\"odinger equation in $\TT$,   $A=i\partial^2$, $\cN(\phi)=i\partial^{\theta} (|\phi|^2-\|\phi\|_{H^0}^2)\phi$ with $\theta>0$; 
+\end{enumerate}
+in all these cases the Banach space $V$ will be taken as belonging to the scale of Sobolev spaces $H^\alpha$, $\alpha \in \RR$ defined as the completion of smooth functions with respect to the norm
+\begin{equation}
+\label{eq:H-norm}
+|\phi|_{\alpha}= \|\phi\|_{ H^\alpha} = \|\langle \xi \rangle^\alpha \hat \phi(\xi)\|_{L^2(\RR^n)}
+\end{equation}
+where $\hat \phi$ is the Fourier transform of $\phi:\RR^n\to \CC$ and $\langle \xi\rangle=(1+|\xi|^2)^{1/2}$. Similar definition holds in the periodic case where $\RR^n$ is replaced by $\TT^n$ with $\TT=[0,2\pi[$ with periodic boundary conditions. 
+
+\medskip
+
+The (randomly) modulated NLS equation has been subject of interest in recent literature (for example~\cite{kunze_ground_2005,zharnitsky_stabilizing_2001,abdullaev_soliton_2000,marty2006,hundertmark_decay_2009, deBouard20101300,Debussche2011363, hundertmark_super-exponential_2012}), especially due to the applications to soliton management in optical wave-guides. The authors do not know of any relevant application of the other models, apart from the work of Clarke et al.~\cite{clarke_dispersion_2001} on dispersion management for KdV. 
+
+Aside of specific applications we are motivated by the general problem of understanding the properties of PDEs in non-homogeneous environments and what can be expected as far as ``generic" properties of the equation are concerned. Modulated equations rule out classical techniques of Fourier analysis (e.g. Bourgain spaces in the case of KdV) and other important tools like Strichartz estimates. Many conservation laws are also not available in the modulated context affecting the analysis of global solutions.   
+
+Another of our motivations has been the study of the regularisation effect of a non-homogene\-ous time modulation in the spirit of the recent work of Flandoli, Priola and one of the authors~\cite{FGP} on the stochastic transport equation. 
+
+\medskip
+
+Eq.~\eqref{eq:abs} is only formal since the derivative of $w$ does not exists in general. If $w$ is a Brownian motion then the differential equation can be understood via stochastic calculus. Interpreting the differential in Stratonovich sense seems the most natural choiche in this context since it preserves the mild fomulation of the equation (see below).  De~Bouard and Debussche~\cite{deBouard20101300} study the Nonlinear Schr\"odinger equation with Brownian modulation and they show that it describes the homogenisation of the deterministic Nonlinear Schr\"odinger Equation with time dependent dispersion satisfying some ergodicity properties. In the more general situation  the interpretation of eq.~\eqref{eq:abs} as an It\^o or Stratonovich SPDE is not possible and we prefer to describe solutions via a mild formulation. If we denote by  $(e^{tA})_{t\in\RR}$ the group of isometries of $V=H^\alpha$ generated by $A$, the mild solution of eq.~\eqref{eq:abs} is formally given by 
+\begin{equation}
+\label{eq:mild}
+\varphi_t = U^w_t \varphi_0 +  U^w_{t} \int_0^t  (U^w_{s})^{-1}\cN( \varphi_s )\dd s
+\end{equation}
+where $U^w_t = e^{A w_t }$ is the operator obtained by a time-change of the linear evolution associated to $A$ using the function $w$. In this form the equation make sense for arbitrary continuous function $w$. 
+
+The aim of this paper is to analyse eq.~\eqref{eq:mild} under some hypothesis on the ``irregularity" of the perturbation $w$. In particular if $w$ is sufficiently irregular (in a precise sense to be specified below) then we will be able to show that the above nonlinear PDE  can be solved in spaces which are comparable to those allowed by the unmodulated equation
+\begin{equation}
+\label{eq:abs-deter}
+\frac\dd{\dd t} \varphi_t = A \varphi_t  + \cN(\varphi_t),\qquad t\ge 0
+\end{equation}
+ and that in some situations the combination of the irregularity of the perturbation and the non-linear interaction provides a strong regularizing effect on the equation. 
+ 
+ \medskip
+ 
+Let us now be more specific about the kind of solutions we are looking for. Let $\Pi_N : H^\alpha \to H^\alpha$ be the projector over Fourier modes $|\xi|\le N$: $\widehat{\Pi_N f}(\xi)= \mathbb{I}_{|\xi|\le N} \hat f(\xi)$ where $\hat f$ denotes the Fourier transform of $f\in H^\alpha$ and let $\mathcal{N}_N(\phi)= \Pi_N \mathcal{N}(\Pi_N \phi)$ be the Galerkin regularization of the non-linearity. 
+
+\begin{definition}
+\label{def:solution}
+The function $\varphi\in C(\RR_+;V)$  is a local solution to~\eqref{eq:mild} in $V$ with initial condition $\phi\in V$ if there exists $T>0 $ and such that
+$$
+\lim_{N\to \infty} \int_0^t  (U^w_{s})^{-1}  \cN_N( \varphi_s )\dd s = Q_t(\varphi)
+$$
+exists in $V$ for any $t\in[0,T]$ and  the equality
+$$
+\varphi_t = (U^w_t)[\phi + Q_t(\varphi)]
+$$
+holds in $V$ for any $t\in[0,T]$.  We say that the solution is global if the equality holds of any $t\ge 0$.
+\end{definition}
+ 
+Whenever the limit exists we write
+$$
+\lim_{N\to \infty} \int_0^t  (U^w_{s})^{-1}  \cN_N( \varphi_s )\dd s =  \int_0^t  (U^w_{s})^{-1}  \cN( \varphi_s )\dd s .
+$$ 
+It should be noted that the quantity on the r.h.s. is not a usual integral but only a convenient notation for the limit procedure. Indeed $\cN( \varphi_s )$ will exist only as a space-time distribution and not as a continuous function with values in $V$. 
+
+The next definition concerns the particular notion of "irregularity" of the perturbation that will be relevant in our analysis.
+
+\begin{definition}
+\label{def:irregularity}
+Let $\rho>0$ and $\gamma>0$. We say that a function $w\in C([0,T];\RR)$ is $(\rho,\gamma)$-irregular if  for any $T>0$:
+$$
+\|\Phi^w\|_{\mathcal{W}^{\rho,\gamma}_T} = \sup_{a\in \RR} \sup_{0\le s < t\le T} \langle a \rangle^\rho \frac{\left|\Phi^w_{s,t}(a)\right|}{|s-t|^\gamma} < +\infty
+$$
+where $\Phi^w_{s,t}(a)=\int_s^t e^{ia w_r}\dd r$. Moreover we say that $w$ is $\rho$-irregular if there exists $\gamma>1/2$ such that $w$ is $(\rho,\gamma)$-irregular.
+\end{definition}
+As it is apparent from this definition the notion of irregularity that we need is related to the \emph{occupation measure} of the function $w$~(see for example the review of Geman and Horowitz on occupation densities for deterministic and random processes~\cite{geman_occupation_1980}), in particular to the decay of its Fourier transform at large wave-vectors as measured by the exponent $\rho$. The time regularity of this Fourier transform, measured by the H\"older exponent $\gamma$, will also play an important r\^ole. 
+%In the following the parameters $\rho>0$ and $\gamma>1/2$ will always describe the irregularity of the trajectory $w$ according to the above definition.
+
+Existence of (plenty of) perturbations $w$ which are $\rho$-irregular is guaranteed by 
+\begin{theorem}
+Let $(W_t)_{t\ge 0}$ be a fractional Brownian motion of Hurst index $H\in(0,1)$ then for any $\rho < 1/2H$  there exist $\gamma > 1/2$ so that with probability one the sample paths of $W$ are $(\rho,\gamma)$-irregular.
+\end{theorem}
+In particular there exists continuous paths which are $\rho$-irregular for arbitrarily large $\rho$. Using well known properties of support of the law of the fractional Brownian motion it is also possible to show that there exists $\rho$-irregular trajectories which are arbitrarily close in the supremum norm to any smooth path. It would be interesting to study more deeply the irregularity of continuous paths ``generically". 
+
+
+In our opinion an important general contribution of our work is the observation that the regularity of the occupation measure of $w$ seems to play a major r\^ole in the understanding of the regularizing properties of $w$ in a non-linear context and it would be desirable to understand more deeply the link of the notion of $\rho$-irregularity with the path-wise properties of $w$. 
+
+Apart from the classic contribution of Geman and Horowitz~\cite{geman_occupation_1980}, the authors are not aware of any systematic study of occupation measures from the point of view of their action on spaces of functions, topic which is central to our analysis. Let us explain this better: let 
+$$
+T^w_{s,t} f(x) =   \int_s^t f(x+w_r) \dd r
+$$ 
+for measurable functions $f:\RR\to\RR$. Then $T^w_{s,t} (e^{i a\cdot})(x) =  \Phi^w_{s,t}(a) e^{i ax}$ which shows for example that if $w$ is $(\rho,\gamma)$-irregular then
+$$
+\|T^w_{s,t} f\|_{H^\rho(\RR)} \lesssim |t-s|^\gamma \|f\|_{H^0(\RR)}
+$$
+meaning that $T$ is a regularizing operator. This point of view links our research to the topic of improving bounds for averages along curves (see for example the paper of Tao and Wright~\cite{tao_lp_2003}). Inspired by the work of Davie~\cite{Davie} on pathwise uniqueness for SDEs, Catellier and Gubinelli~\cite{CatellierGubinelli} provide some analysis of the regularizing properties of random paths but much is still not very well understood. 
+
+An open problem is, for example, what happens if we replace $w$ with a regularised version $w^\eps$ or with a function which could depend on the solution itself. 
+In this respect we conjecture that if $w$ is $(\rho,\gamma)$-irregular then for any smooth function $\varphi$ the perturbed path $w^\varphi = w+\varphi$ is still $(\rho,\gamma)$-irregular but we are only able to prove this in the specific situation where $w$ is a fractional Brownian motion and $\varphi$ is a deterministic perturbation, or more generally but with a loss of $1/2$ in the $\rho$ irregularity of $w^\varphi$: both results (with precise statements) are obtained in~\cite{CatellierGubinelli}. In the case of a smooth $w$ we have the following straightforward result:
+\begin{proposition}
+Let $w:[0,T]\to\RR$ a twice differentiable function such that $c_T=\inf_{t\in[0,T]}|w'_t|>0$ for any $T>0$ and $\frac{w''}{(w')^2}\in L^1_{loc}(0,+\infty)$ then $w$ is $(1-\gamma,\gamma)$ irregular for all $\gamma\in(0,1)$.
+\end{proposition}
+\begin{proof}
+Integration by parts gives
+$$
+ia\Phi^w_{st}(a)=\frac{e^{iaw_t}-e^{iaw_{s}}}{w'_t}+\int_{s}^{t}(e^{iaw_\sigma}-e^{iaw_s})\frac{w_\sigma''}{(w_\sigma')^2}\dd\sigma
+$$
+and the result follow immediately from the hypothesis.
+\end{proof}
+\bigskip
+
+
+To deal with irregular modulations in the sense of Def.~\ref{def:irregularity} we develop two different techniques:
+\begin{enumerate}
+\item The first uses the controlled path approach and Young's integral and it is inspired by the work of one of the authors~\cite{GubinelliKdV} where the periodic KdV equation in negative Sobolev spaces (and more general Fourier-Lebesgue spaces) is studied without relying on Bourgain spaces and the time-homogeneity of the equation. This work has connection to the normal form analysis of Babin, Ilyin and Titi of the same equation~\cite{babin-kdv}.
+\item The second is based on a novel deterministic Stricharz estimate for the modulated linear equation which is a generalization of the probabilistic results of Debussche and Tsutsumi~\cite{Debussche2011363}.
+\end{enumerate}
+
+Let us summarise the main contributions of this paper, all along which we are going to make the following basic assumption:
+\begin{hypothesis}
+\label{hyp:main}
+The function $w$ is $(\rho,\gamma)$-irregular for some $\rho >0$ and $\gamma>1/2$.
+\end{hypothesis}
+
+Our first  result is about the modulated Korteweg-de~Vries (KdV) equation.
+\begin{theorem}
+\label{th:kdv}
+For any $\rho>3/4$ and $\alpha>-\rho$ the 1d periodic modulated KdV equation has a local solution in $H^\alpha(\TT)$. The solution is global if $\alpha\geq -3/2$ and $\alpha > -{\rho}/{(3-2\gamma)}$. Uniqueness holds in the space $\mathcal{D}^w(H^\alpha) \subseteq C(\RR_+;H^\alpha(\TT))$ introduced in Def.~\ref{def:controlled-paths} below. In the non-periodic setting the 1d modulated KdV equation has local solutions in $H^\alpha(\RR)$ for $\alpha > -\min(\rho,3/4)$. The solution is global if $\alpha > -\min({\rho}/{(3-2\gamma)},3/4)$. Uniqueness holds in the same space $\mathcal{D}^w(H^\alpha)$.
+\end{theorem}
+
+This theorem shows that an irregular modulation provides a \emph{regularisation effect} on the KdV equation. Indeed the unmodulated equation allows for a uniformly continuous flow only if $\alpha \ge -1/2$ in the periodic setting and only if $\alpha \ge -3/4$ in the non-periodic one~\cite{christ_asymptotics_2003}. Recall that exploiting the complete integrability of the unpertubed model it is possible to show existence of solutions up to $\alpha \ge -1$~\cite{KT}.
+
+As far as we know there are no existence results for $\alpha<-1$ for the unmodulated equation and since we obtain solutions with standard fixed point methods we have also the existence of continuous flow in situation were it is known to be false for the unmodulated equation. 
+
+Ours are the first results of regularization by noise in non-linear dispersive equations with rough initial conditions. It is known that  noise can act as to worsen the behavior of the equation, for example blow-up in NLS with multiplicative noise~\cite{de_bouard_effect_2002, de_bouard_blow-up_2005}. 
+
+For the cubic NLS equation we have the following theorem.
+\begin{theorem}
+\label{th:nls-global}
+Assume that $\rho>1/2$. Then the modulated cubic NLS equation on $\TT$ and $\RR$ has a  global solution in $H^\alpha$ for any $\alpha\ge 0$. Uniqueness holds in  $\mathcal{D}^w(H^\alpha)$ and the flow is locally Lipschitz continuous in $\mathcal{D}^w(H^\alpha)$.
+\end{theorem}
+In the case of Brownian modulation the global solution for $\alpha=0$ have already been constructed by de~Bouard et Debussche~\cite{deBouard20101300}. Here we extend their result to any $\alpha \ge 0$ and any sufficiently irregular modulation. Global solutions for any $\alpha \ge 0$ are the result of the $L^2$ conservation law and some regularity preservation estimates for the non-linear term. 
+
+For the other models we considered we obtained the partial results listed in the following theorem.
+
+\begin{theorem}
+\label{th:nse-others}
+Assuming $\rho>1/2$. We have the following results:
+\begin{enumerate}
+\item The modulated cubic NLS equation on $\mathbb R^2$ has a unique local solution in $H^{\alpha}$ if $\alpha\geq 1/2$;
+\item The modulated dNLS equation on $\mathbb T$ has  a unique local solution in $H^{\alpha}$ if $\alpha\geq 1/2$;
+\item The modulated mKdV equation on $\mathbb T$  has  a unique local solution in $H^{\alpha}$ if $\alpha\geq 1/2$.
+\end{enumerate}
+\end{theorem}
+A key argument in the proof of all these results is the use of explicit computations allowed by the polynomial character of the non-linearity. These results are however limited to  modulations irregular enough.
+ Indeed, a bit surprisingly, in the modulated context the application of controlled path techniques is easier if the modulation is very irregular. This has allowed us not to have to deal with second  order controlled expansions as has been necessary in~\cite{GubinelliKdV}. An open problem is to fill the gap between regular and irregular modulations. 
+
+\medskip
+A different line of attack to the modulated Schr\"odinger equation  comes from the application of the following Strichartz type estimate which can be proved under the same $\rho$-irregularity assumption of Hyp.~\ref{hyp:main}: 
+
+\begin{theorem}\label{theorem:strichartz-w}
+Let $A=i\partial^2_x$, $T>0$, $p\in(2,5]$,$\rho>\min(\frac{3}{2}-\frac{2}{p},1)$ then there exists a finite constant $C_{w,T}>0$  and $\gamma^{\star}(p)>0$ such that the following inequality holds:
+$$
+\left|\left|\int_{0}^{.}U^{w}_{.}(U_{s}^{w})^{-1}\psi_s\dd s\right|\right|_{L^{p}([0,T],L^{2p}(\mathbb R))}\leq C_{w}T^{\gamma^{\star}(p)}||\psi||_{L^1([0,T],L^2(\mathbb R))}
+$$
+ for all $\psi\in L^1([0,T],L^2(\mathbb R))$.
+ \end{theorem}
+
+As an application we obtain global well-posedness for the modulated NLS equation with generic power nonlinearity $ie :\cN(\phi)=|\phi|^{\mu}\phi$: 
+
+\begin{theorem}\label{th:Strich-existence}
+Let $\mu\in(1,4]$, $p=\mu+1$, $\rho>\min(1,3/2-\frac{2}{p})$ and $u^0\in L^{2}(\mathbb R)$ then there exists $T^{\star}>0$  and  a unique $u\in L^{p}([0,T],L^{2p}(\mathbb R)) $ such that the following equality holds:
+$$
+u_t=U^{w}_tu^{0}+i\int_{0}^{t}U^{w}_t(U^{w}_{s})^{-1}(|u_s|^{\mu} u_s)\dd s
+$$
+for all $t\in[0,T^{\star}]$. Moreover we have that $||u_t||_{L^2(\mathbb R)}=||u_0||_{L^2(\mathbb R)}$ and then we have a global unique solution $u\in L_{loc}^p([0,+\infty),L^{2p}(\mathbb R))$ and $u\in C([0,+\infty),L^2(\mathbb R))$. If $u^0\in H^1(\mathbb R)$ then $u\in C([0,\infty),H^{1}(\mathbb R))$.
+\end{theorem}
+%More details about this result are given in Sect.~\ref{sec:strich-NLS}. 
+ 
+We point out that all our techniques are deterministic and that they provide novel results even in the stochastic context, for example when $w$ is taken to be the sample path of a fractional Brownian motion. In the Brownian case it is not difficult to show that our solutions corresponds to limits of solutions of Stratonovich type SPDEs. Even in the Brownian setting our results on KdV, mKdV and DNLS are, to our knowledge, novel. In the case of NLS we recover the known results of Debuscche and Tsustumi adding to that existence of a continuous flow map for the SPDE, result which is usually difficult to obtain in the stochastic framework. 
+
+
+
+\bigskip
+
+\textbf{Plan.} In Sect.~\ref{sec:controlled} we illustrate the controlled path approach to solution to modulated semilinear PDEs. This approach relies on a non-linear generalisation of the Young integral~\cite{[Young-1936],Lyons1998,[Gubinelli-2004]} for which we provide complete proofs in Sect.~\ref{sec:young}. Using the non-linear Young integral we define and solve Young-type differential equations in Sect.~\ref{sec:sol}. This will  provide a general theory for the constructions  and approximation of the controlled solutions. In Sect.~\ref{sec:reg} we verify that all our models satisfy the hypothesis to apply the general theory we outlined in the previous section. In Sect.~\ref{sec:global-kdv} we  study global solutions in different $H^\alpha$ spaces: above $L^2$ by seeking suitable preservation of regularity estimates and for KdV below $L^2$ by an adaptation of the $I$-method to our context. Finally in Sect.~\ref{sec:strich-NLS} we prove the Strichartz estimate of Thm.~\ref{theorem:strichartz-w} and apply it to the study the modulated NLS equation with general non-linearity without relying on controlled solutions.
+ 
+
+
+\medskip
+\textbf{Notations.} If $V,W$ are two Hilbert spaces we let $\cL_n(V,W)$ be the Banach space of bounded operators on $V^{\otimes n}$ (considered with the Hilbert tensor product) with values in $W$ and endowed with the operator norm and set $\cL_n(V)=\cL_n(V,V)$. We let $T>0$ denote a fixed time and $\cC^\gamma V = C^\gamma([0,T],V)$ the space of $\gamma$-H\"older continuous functions form $[0,T]$ to $V$ endowed with the semi-norm
+$$
+\|f\|_{\cC^\gamma V} = \sup_{0\le s < t \le T} \frac{\|f(t)-f(s)\|_v}{|t-s|^\gamma}.
+$$
+ If $V$ is a Banach space then $\mathrm{Lip}_M(V)$ will denote the Banach space of locally Lipshitz map on $V$ with polynomial growth of order $M\ge 0$, that is maps $f:V\to V$ such that
+ $$
+ \|f\|_{\textrm{Lip}_M(V)} = \sup_{x,y\in V} \frac{\|f(x)-f(y)\|_V}{\|x-y\|_V (1+\|x\|_V+\|y\|_V)^M}<+\infty .
+ $$
+
+
+
+
+
+
+\section{Controlled paths}\label{sec:controlled}
+
+The approach we will use in proving Thms.~\ref{th:kdv},~\ref{th:nls-global} and~\ref{th:nse-others} is based on ideas coming from the theory of controlled rough paths~\cite{[Gubinelli-2004],gubperime} which have been already used in a variety of contexts:
+\begin{enumerate}
+\item alternative formulation of rough path theory with the related applications to stochastic differential equations and in general to differential equations driven by non-semimartingale noises~\cites{gubinelli_young_2006,gubinelli_rough_2010,DGT12};
+\item approximate evolution of three dimensional vortex lines in incompressible fluids where the initial condition is a non-smooth curve~\cite{bessaih_evolution_2005,brzezniak_global_2010}
+\item study of the stochastic Burgers equation (multi-dimensional target space and various kind of robust approximation results)~\cites{hairer_rough_2011,gubperime};
+\item definition of controlled (or energy, or martingale) solutions  for a class of SPDEs including the Kardar-Parisi-Zhang (KPZ) equations~\cite{gubinelli_regularization_2012};
+\item Hairer's work on the well-posedness and uniqueness theory for the KPZ equation~\cite{hairer_solving_2011};
+\end{enumerate}
+
+Recently the controlled path approach has also been used to highlight the regularisation by noise phenomenon in ODE with irregular additive perturbations~\cite{CatellierGubinelli} where techniques very similar to those used in this paper are exploited (in particular the notion of $\rho$-irregularity and the non-linear Young integral).
+
+ Controlled paths are functions which ``looks like" some given reference object. In the case of eq.~\eqref{eq:mild} it looks quite clear that the solution should have the form $\varphi_t = U^w_t \psi_t$ for $\psi_t$ another continuous path in $V$ such that $\varphi_0 = \psi_0$. If we stipulate that $\psi$ has a nice time behavior then $\varphi$ is somehow "following" the flow of a free solution of the linear equation, modulo a time-dependent slowly varying modulation. The space of controlled paths $\mathcal{D}^w$ (to be defined below) in which we will set up the equation will then be given by functions $\varphi$ such that an H\"older condition holds for $\psi_t = (U^w_{t})^{-1}\varphi_t$. Note that this space depends on the modulation and that different driving functions $w$ and $w'$ would give rise a priory to different spaces $\mathcal{D}^w$ and $\mathcal{D}^{w'}$ of controlled functions. This difference is somehow crucial and make the spaces of controlled paths to be more effective in the analysis of the non-linearities. Let us try to explain why. Assume that $\varphi$ is the simplest path controlled by $w$, that is the solution of the free evolution $\varphi_t = U_t^w \phi$ for some fixed $\phi\in V$ (i.e. not depending on time). In this case the non-linear term in eq.~\eqref{eq:mild} takes the form
+$$
+\Phi_t= U_t \int_0^t  (U^w_{s})^{-1}\cN( U^w_s \phi) \dd s= U_t X_t(\phi)
+$$
+where  $X_t : V\to V$ is the time-inhomogeneous map given by
+\begin{equation}
+\label{eq:X}
+X_t(\phi) =  \int_0^t  (U^w_{s})^{-1}\cN( U^w_s \phi) \dd s
+\end{equation}
+We will show that, in the specific settings we will consider, it is possible to actually prove the following regularity requirement:
+\begin{hypothesis}
+\label{hyp:X}
+The map $X_{s t}=X_t - X_s$ is almost surely a locally \emph{Lipshitz} map on $V$ satisfying the H\"older estimate
+$$
+\|X_{st}(\phi)-X_{st}(\phi')\|_V \lesssim   |t-s|^{\gamma} (1+\|\phi\|_V+\|\phi'\|_V)^M \|\phi-\phi'\|_V
+$$
+for some $\gamma > 1/2$ and  $M\ge 0$. 
+\end{hypothesis}
+
+In this situation we see that $\Phi_t$ is a controlled path such that $\Psi_t = (U^w_t)^{-1} \Phi_t$ belongs at least to $C^{1/2}(V)$. If we want a space of controlled paths stable under the fixed point map 
+$$
+\Gamma(\varphi)_t = U^w_t \varphi_0 + U^w_t \int_0^t  (U^w_{s})^{-1}\cN( \varphi_s) \dd s
+$$
+we have to require $t\mapsto (U^w_t)^{-1}\Gamma(\varphi)_t$ to be at most in $C^{1/2}(V)$ since otherwise even the first step of the Picard iterations will get us out of the space. These considerations suggest us a  definition of controlled paths:
+\begin{definition}
+\label{def:controlled-paths}
+The space of paths $\mathcal{D}^w(V)$ controlled by $w$ is given by all the paths $\varphi$ in $C([0,T],V)$ such that $t \mapsto \varphi^w_t =  (U^w)^{-1}_t \varphi_t$ belongs to $C^{1/2}(V)$. 
+\end{definition}
+
+At this point it is still not clear that the non-linear term is well defined for every controlled paths. Hypothesis~\ref{hyp:X} ensure that the non-linearity is well defined when the controlled path $\varphi$ is such that $\varphi^w$ is constant in time. To allow for more general controlled paths we consider a smooth (in space and time) path $f$: in this case the following computations can be easily justified in all the models we will consider:
+$$
+ \int_0^t  (U_{s}^w)^{-1}\cN( U^w_s f_s) \dd s  = \int_0^t \left[\frac{\dd}{\dd s}X_{s} \right](f_s) \dd s = \int_0^t X_{\dd s}(f_s) .
+$$ 
+where the last integral in the r.h.s. should be interpreted as the limit of suitable Riemman sums:
+$$
+\int_0^t X_{ds}(f_s) := \lim_{|\Pi_{0,t}| \to 0} \sum_{i} X_{ t_i  t_{i+1}}(f_{t_i}).
+$$
+A key observation is that the map $f \mapsto \int_0^t X_{\dd s}(f_s)$ can be extended by continuity to all the functions $f\in C^{1/2}(V)$ using the theory of Young integrals, indeed note that $X$ is a path of Lipshitz maps with H\"older regularity $\gamma >1/2$ and that this is enough to integrate functions of H\"older regularity $1/2$ since the sum of these two regularities exceed $1$. Since the kind of Young integral we use is not  standard we will provide  proofs and estimates in a self-contained fashion below. This allows us to give a  natural definition of the nonlinear term for all controlled paths $\varphi$, indeed it is now easy to prove the following claim:
+\begin{lemma}
+\label{lemma:non-linearity}
+Let $\varphi\in \mathcal{D}^w$ and let $(\varphi_{n})_{n\ge 0}$ a sequence of elements of $\varphi\in \mathcal{D}^w$ which are smooth  and compactly supported in space and such that $\varphi_n \to \varphi$ in $ \mathcal{D}^w$. Then
+$$
+\int_0^t (U^w_{s})^{-1} \cN( (\varphi_n)_s ) \dd s \to \int_0^t X_{\dd s}(\varphi^w_s)
+$$
+in $V$ uniformly in $t$.
+\end{lemma}
+As it should be clear by now, the time-integral of the non-linearity (even if not the non-linearity itself) is a well defined space distribution for all controlled paths and it is explicitly given by a Young integral involving the modulated operator $X$. We can then recast the mild equation~\eqref{eq:mild} as a Young-type differential equation for controlled paths:
+\begin{equation}
+\label{eq:Young}
+\varphi^w_t = \varphi_0 + \int_0^t X_{\dd s}(\varphi^w_s) .
+\end{equation}
+Any solution of this equation corresponds to a controlled path $\varphi_t = U^w_t \varphi^w_t$ which solves~\eqref{eq:mild} where the r.h.s. should be understood according to Lemma~\ref{lemma:non-linearity}.
+
+The Young equation~\eqref{eq:Young}
+can then be solved, at least locally in time and in a unique way, in $C^{1/2}(\RR_+,V)$ by a standard fixed point argument. In some cases it is also possible to prove the existence of a conservation law which imply $\|\varphi_t\|_V=\|\varphi_0\|_V$ and obtain global solutions. Another byproduct of this approach is the existence of a Lipshitz flow map on $V$.
+
+\section{The nonlinear Young integral}
+\label{sec:young}
+
+Young theory of integration is well known~\cite{[Young-1936],Lyons1998,[LionsStFlour],[FrizVictoir]}. Here we introduce a non-linear variant which is not covered by the standard assumptions. For the sake of completeness we derive here the main estimates in our specific context.
+
+\begin{theorem}[Young]
+\label{th:young}
+Let $f\in\cC^\gamma \mathrm{Lip}_M(V)$ and $g\in \cC^\rho V $ with $\gamma+\rho>1$ then the limit of Riemann sums
+$$
+I_t = \int_0^t f_{\dd u}(g_u) =  \lim_{|\Pi| \to 0} \sum_{i} f_{t_{i+1}}( g_{t_i}) -f_{ t_i}( g_{t_i})
+$$
+exists in $V$ as the partition $\Pi$ of $[0,t]$ is refined, it is independent of the partition, and we have
+$$
+\|I_t-I_s -(f_t-f_s)(g_s)\|_{V} \le (1-2^{1-\gamma-\rho})^{-1} \|f\|_{\cC^\gamma  \mathrm{Lip}_M(V)} \|g\|_{\cC^\rho V } (1+\|g\|_{\cC^0 V})^M |t-s|^{\gamma+\rho}.
+$$
+\end{theorem}
+
+\begin{proof}
+We give a new proof of this fact. Let $f,g$ be smooth functions in $\mathrm{Lip}_M(V)$ and $V$ respectively. Define the bilinear forms
+$
+I_{s,t}(f,g) = \int_s^t  (\dd_u f_u)(g_u)
+$ 
+and  $J_{s,t}(f,g) = I_{s,t}(f,g)-f_{s,t}(g_s)$ where $f_{s,t}=f_t-f_s$ and note that these last satisfy
+$
+J_{s,t}(f,g) = J_{s,u}(f,g) + J_{u,t}(f,g) + (f_{u,t}(g_u)- f_{u,t}(g_s))
+$
+for all $s\le u \le t$.
+Let $t^n_k = s+(t-s)k2^{-n}$ for $k=0,\dots,2^{n}$. By induction:
+$$
+J_{s,t}(f,g) = \sum_{i=0}^{2^n-1} J_{t^n_{i},t^n_{i+1}}(f,g) + \sum_{k=0}^n \sum_{i=0}^{2^k-1}
+(f_{t^k_{2i+1},t^k_{2i+2}}(g_{t^k_{2i+1}})-f_{t^k_{2i+1},t^k_{2i+2}}(g_{t^k_{2i}}))
+$$
+Since $f,g$ are smooth $\|J_{t^n_i,t^n_{i+1}}(f,g)\|_{V} \lesssim_{f,g} |t^n_{i+1}-t^n_i|^2\lesssim_{f,g}  2^{-2n}$ so that
+$
+\|\sum_{i=0}^{2^n-1} J_{t^n_i,t^n_{i+1}}(f,g)\|_{V} \lesssim_{f,g} 2^{-n} \to 0 
+$
+as $n\to \infty$. Then we can estimate
+$$
+\|J_{s,t}(f,g)\|_{V} 
+\le \sum_{k=0}^\infty  2^{k(1-\gamma-\rho)}\|f\|_{\cC^\gamma  \mathrm{Lip}_M(V)} \|g\|_{\cC^\rho V } (1+\|g\|_{\cC^0 V})^M
+$$
+$$
+\le  (1-2^{1-\gamma-\rho})^{-1} \|f\|_{\cC^\gamma  \mathrm{Lip}_M(V)} \|g\|_{\cC^\rho V } (1+\|g\|_{\cC^0 V})^M
+$$
+
+Now assume that $f\in \cC^\gamma  \mathrm{Lip}_M(V)$ and $g\in \cC^\rho V$. Then there exists sequences of smooth function $f_n$ and $g_n$ such that $f_n \to f$ in $\cC^{\gamma'}  \mathrm{Lip}_M(V)$ and $g_n \to g$ in 
+$\cC^{\rho'} V$ for all $\gamma'<\gamma$ and all $\rho'<\rho$ and moreover such that $\|f_n\|_{\cC^\gamma  \mathrm{Lip}_M(V)} \le \|f\|_{\cC^\gamma  \mathrm{Lip}_M(V)}$ and $\|g_n\|_{\cC^\rho V} \le \|f\|_{\cC^\rho V}$ . The above estimate implies the convergence of  $J_{s,t}(f_n,g_n)\to J_{s,t}(f,g)$ in $V$ for all $s,t$. In turn this implies that, by passing to the limit in the estimate we have also
+$
+\|J_{s,t}(f,g)\|_{V} \le  (1-2^{1-\gamma-\rho})^{-1} \|f\|_{\cC^\gamma  \mathrm{Lip}_M(V)} \|g\|_{\cC^\rho V} (1+\|g\|_{\cC^0 V})^M.
+$
+Which means that we can define 
+$$
+I_{s,t}(f,g) = \int_s^t f_{\dd u}(g_u) = f_{s,t}(g_s) + J_{s,t}(f,g)
+$$
+for any $f\in \cC^\gamma \mathrm{Lip}_M(V)$ and $g\in \cC^\rho V$.
+Now assume that $\Pi =\{s\le t_0< t_1 < \cdots < t_n \le t\}$ is a partition of $[s,t]$ and denote with
+$
+S_\Pi = \sum_{i=0}^{n-1} f_{t_i,t_{i+1}}(g_{t_i})
+$
+the associate Riemman sum. By the above construction we have $ f_{t_i,t_{i+1}}(g_{t_i})=I_{t_{i+1} t_i}(f,g)-J_{t_{i+1} t_i}(f,g)$ with 
+$
+\|J_{ t_i,t_{i+1}}(f,g)\| \lesssim_{f,g} |t_{i+1}-t_i|^{\gamma+\rho}
+$
+and so
+$$
+S_\Pi = \sum_{i=0}^{n-1}I_{ t_i,t_{i+1}}(f,g)+\sum_{i=0}^{n-1}J_{ t_i,t_{i+1}}(f,g)=I_{s,t}(f,g) +\sum_{i=0}^{n-1}J_{ t_i,t_{i+1}}(f,g)
+$$
+moreover
+$
+\left\|\sum_{i=0}^{n-1}J_{ t_i,t_{i+1}}(f,g)\right\|_{V} \lesssim_{f,g} \sum_{i=0}^{n-1} |t_{i+1}-t_i|^{\gamma+\rho}  \lesssim_{f,g}  |\Pi|^{\gamma+\rho-1} |t-s|
+$
+which implies that $S_\Pi \to I_{s,t}(f,g)$ as $|\Pi|\to 0$ and the integral which we defined above by the continuous extension of the bilinear forms $I_{s,t}(f,g)$ coincides indeed with the limit of Riemann sums on arbitrary partitions.
+\end{proof}
+
+\section{Young solutions}
+\label{sec:sol}
+
+With the estimates of Young integral we can set up a standard fixed point procedure to prove existence of local solution and their uniqueness assuming suitable regularity of $X$. We assume that $X_t(0)=0$ for simplicity.
+Define standard Picard's iterations by
+$$
+\psi^{(n+1)}_t = \psi_0 + \int_0^t X_{\dd s}(\psi^{(n)}_s) 
+$$
+with $\psi^{(0)}_t = \psi_0$. 
+Now
+$$
+\|\int_0^t X_{\dd s}(\psi^{(n)}_s) -X_{t}(\psi_0)\|_V\lesssim T^{\gamma+1/2} \|X\| (1+\|\psi^{(n)}\|_{\cC^0 V})^M \|\psi^{(n)}\|_{\cC^{1/2}V}
+$$
+$$
+\lesssim T^{\gamma} \|X\| (1+\|\psi_0\|_V+T^{1/2}\|\psi^{(n)}\|_{\cC^{1/2} V})^{M+1} 
+$$
+and
+$$
+\|\psi^{(n+1)}\|_{\cC^{1/2}V} \lesssim \|X\| T^{\gamma} (1+\|\psi_0\|_V+T^{1/2}\|\psi^{(n)}\|_{\cC^{1/2} V})^{M+1}
+$$
+which means that for sufficiently small $T$ (depending only on $\|\psi_0\|_V$) we can have $T^{1/2} \|\psi^{(n)}\|_{\cC^{1/2}V} \le 1$ for all $n\ge 0$. Moreover in this case
+$$
+\|\psi^{(n+2)}-\psi^{(n+1)}\|_{\cC^{1/2} V} \lesssim_{\|\psi_0\|_V} \|X\| T^{\gamma-1/2}\|\psi^{(n+1)}-\psi^{(n)}\|_{\cC^{1/2} V}
+$$
+which for $\|X\| T^{\gamma-1/2} \lesssim_{\|\psi_0\|_V}1/2$ implies that $(\psi^{(n)})_{n\ge 0}$ converges in $\cC^{1/2} V$ to a limit $\psi$  which by continuity of the Young integral and of the operator $X$ satisfies
+$$
+\psi_t = \psi_0 +  \int_0^t X_{\dd s}(\psi_s). 
+$$
+This solution exists at least until $t\le T$ where $T$ depends only on the norm of $X$ and $\|\psi_0\|_{V}$. Note that a posteriori $\psi$ belongs to $\cC^\gamma V$ and not only to $\cC^{1/2} V$. Uniqueness in $\cC^{1/2} V$ is now obvious.
+
+ Of course if $M=0$ it is easy to prove that the existence time $T$ of the local solution does not depend on $\|\phi_0\|_V$ and this imply existence of solution on arbitrary intervals. In the general case we need further assumptions on the properties of $X$:
+\begin{lemma}
+\label{lemma:global}
+Assume that for all $\phi\in V$ such that $\|\phi\|_V\le R$  we have 
+ $$|\|\phi+X_{s,t}(\phi)\|_V-\|\phi\|_V|\lesssim C_R |t-s|^{\rho}$$ 
+ where $\rho > 1$, then $\|\psi_t\|_V = \|\psi_0\|_V$  and there exists a unique global solution of the Young equation.
+\end{lemma}
+\begin{proof}
+Consider $M_t = \|\psi_t\|_{V}$ which satisfy 
+$$
+|M_t - M_s| = |\|\psi_s + X_{s,t}(\psi_s) + R_{s,t}\|_{V} -\|\psi_s\|_V|
+$$
+$$ \le |\|\psi_s + X_{s,t}(\psi_s) \|_{V} -\|\psi_s\|_V|+ \| R_{s,t}\|_V
+$$
+by assumption and by the Young estimates on $R$ we have
+$$
+\lesssim_{\|\psi_0\|_V} |t-s|^\rho + |t-s|^{1/2+\gamma}.
+$$
+This relation implies that $M_t$ must be a constant function since both $\rho>1$ and $1/2+\gamma > 1$.Then  $M_t = M_0$ for all $t<T$. The conservation of the $V$ norm allows then to extend the solution to an arbitrary interval and obtain a global solution. 
+\end{proof}
+
+\subsection{Euler Scheme}
+Young equations allow for a straightforward Euler approximation scheme. Let $\psi\in \mathcal C^{\gamma}V$ the solution of the Young equation defined before and $T$ the life time of this solution. For any $n\geq 0$ let $\psi_0^n=\psi_0\in V$ and define recursively 
+$$
+\psi_i^n=\psi_{i-1}^n+X_{\frac{i-1}{n}\frac{i}{n}}(\psi_{i-1}^n).
+$$
+\begin{theorem}
+Let for $n\geq0$ and $0\leq i\leq nT$, $\Delta^n_i=\psi_i^n-\psi_{\frac{i}{n}}$ then 
+$$
+\max_{0\leq i<j\leq \lfloor nT\rfloor}\frac{|\Delta_j^n-\Delta_i^n|}{|i-j|^{\gamma}}=O(n^{1-2\gamma})
+$$
+\end{theorem} 
+\begin{proof}
+We remark that $\psi_j^n-\psi_i^n=\sum_{l=i}^{j-1}X_{\frac{l}{n}\frac{l+1}{n}}(\psi_i^n)$ and for $0\leq i<j\leq \lfloor nT\rfloor$ and define the partition of $[i/n,j/n]$ by $\pi^{j-i+1}=(t_k^n)_{i\leq k\leq j}$ with $t^n_k=\frac{k}{n}$. Denote by $M_{ij}^{\pi^{j-i+1}}=\sum_{l=i}^{j-1}X_{t_l^nt_{l+1}^n}(\psi_l^n)$, now consider the partition $\pi^{j-i}=\pi^{j-i+1}-\{t^n_k\}$ for $i<k<j$ and then  
+$$
+M^{\pi^{j-i+1}}_{ij}=M^{\pi^{j-i}}_{ij}+X_{t^n_kt^n_{k+1}}(\psi_k^n)-X_{t_k^nt_{k+1}^n}(\psi_{k-1}^n)
+$$
+and by induction we obtain immediately that 
+$$
+\psi_j^n-\psi_i^n=X_{t_i^nt_j^n}(\psi_i^n)+\sum_{k=i+1}^{j-1}X_{t^n_kt^n_{k+1}}(\psi_k^n)-X_{t_k^nt_{k+1}^n}(\psi_{k-1}^n)
+$$
+now for some convenience we denote by $p_{lk}^{n}=X_{t_l^nt_k^n}(\psi_q^n)$ and $q_{lk}^n=X_{t_l^nt_k^n}(\psi_{q/n})$ then using that $\psi$ satisfies the Young equation we obtain  
+$$
+\psi_{j/n}-\psi_{i/n}=q_{ij}^n+\sum_{k=i+1}^{j-1}X_{t^n_kt^n_{k+1}}(\psi_{k/n})-X_{t^n_kt^n_{k+1}}(\psi_{(k-1)/n})+R_{ij}^n
+$$
+where 
+$$
+R_{ij}^n=\sum_{k=i}^{j-1}\int_{t_k^n}^{t_{k+1}^n}X_{\dd\sigma}(\psi_{\sigma})-X_{t_k^nt_{k+1}^n}(\psi_{t_k^n})
+$$
+For this term we have the  bound 
+$$
+|R_{ij}^n|\lesssim_{|\psi|_{\gamma}+|\psi|_{0},||X||}(j-i)n^{-2\gamma}.
+$$
+Now consider
+$$
+\Delta_j^n-\Delta_i^n=p_{ij}^n-q_{ij}-R_{ij}^n+\sum_{k=i+1}^{j-1}X_{t^n_kt^n_{k+1}}(\psi_k^n)-X_{t_k^nt_{k+1}^n}(\psi_{k-1}^n)-X_{t^n_kt^n_{k+1}}(\psi_{k/n})+X_{t^n_kt^n_{k+1}}(\psi_{(k-1)/n})
+$$
+and let 
+$$
+B_l^n=\max_{0\leq i<j\leq l}\left(\frac{j-i}{n}\right)^{-1}\left|\Delta_j^n-\Delta_i^n-p_{ij}^n-q_{ij}+R_{ij}^n\right|.
+$$
+To prove our result is suffices to show that $B_{{\lfloor} nT\rfloor}^n=O(n^{1-2\gamma})$. Observe that when $|i-j|<l$ the sum appearing in the expression of 
+$ \Delta_i^n-\Delta_j^n $ can be bounded by $B_{l-1}^n$: in fact we have that 
+$$
+|X_{t^n_kt^n_{k+1}}(\psi_k^n)-X_{t_k^nt_{k+1}^n}(\psi_{k-1}^n)-X_{t^n_kt^n_{k+1}}(\psi_{k/n})+X_{t^n_kt^n_{k+1}}(\psi_{(k-1)/n})|\leq C(\frac{j-i}{n})^{2\gamma}(1+B_{l-1}^n)^{M}(n^{1-2\gamma}+B_{l-1}^n)
+$$ 
+where $C=C(\psi^0,||X||)$ and 
+$$
+B_l^n\leq C(1+B_{l-1}^n)^M(B_{l-1}^n+n^{1-2\gamma})(l/n)^{2\gamma-1}.
+$$  
+When $l=1$ we have that $B_1^n=0$ and the result is clearly true. Now assume that for some $l$ we have that $B_{l-1}^n\leq A$ and  define the increasing  map 
+$\theta(x)=(l/n)^{2\gamma-1}(1+x)^{M+1}$. Remark that $\theta(n^{2\gamma-1}B_l^n)\leq n^{2\gamma-1}B_{l-1}^n$. Then if $l/n$ is small enough we have that  $\theta$ admits a  fixed point and that $n^{1-2\gamma}B_l^n\leq A<+\infty$ where we take $A$ is the limit  of the sequence $(x_i)$ defined by $x_{i+1}=\theta(x_i)$ and $x_0=0$. Now is suffice to iterate this argument to prove that bound hold for $l\leq\lfloor nT\rfloor$.  
+\end{proof}
+
+
+
+
+\subsection{Regular equation}
+In this section we study the convergence of approximations given by a standard PDE to the solution of the Young equations. Consider the following regularized problem 
+\begin{equation}\label{eq:Cauchy-reg}
+\left\{
+\begin{split}
+\partial_t \varphi_t& = A \varphi_t\partial_tn_t + \Pi_{L}\cN(\Pi_{L}\varphi_t),\qquad t\ge 0
+\\&\varphi(0,x)=\Pi_{L} \phi(x)\in C^{\infty}(\mathbb T)
+\end{split}
+\right.
+\end{equation}
+with $n$ is a differentiable function, $\phi\in L^2(\mathbb T)$, $A=\partial^3_x$ or $i\partial^2_x$ and $\cN$ is the non linearity given in the previous section, of course this Cauchy problem is equivalent to the mild formulation 
+\begin{equation}\label{eq:mild-phi}
+\varphi_t=U^{n}_t\Pi_{L}\phi+\int_{0}^{t}U^{n}_t(U^{n}_{s})^{-1}\Pi_{L}\cN(\Pi_{L}\varphi_s)\dd s
+\end{equation}
+or equivalently
+\begin{equation}\label{eq:mild-reg}
+\psi_t=\Pi_{L}\phi+\int_{0}^{t}(U^{n}_{s})^{-1}\Pi_{L}\cN(\Pi_{L}U^{n}_s\psi_s)\dd s
+\end{equation}
+with $U^{n}_t=e^{An_t}$ and $\psi_t=(U^{n})^{-1}_t\varphi_t$, In the rest of this section we take $A=\partial_x^3$ and $\mathcal N(\phi)=\partial_x\phi^2$ for the case of the Schr\"odinger  equation we can adapt exactly the same argument. Now we can check easily that  the modulated operator $X^{n,L}$ associated to the equation~\eqref{eq:mild-reg} is well defined and satisfy 
+$$
+||X_{st}^{n,L}||_{\mathcal L^2(H_{\alpha_1},H_{\alpha_2})}\lesssim_{n,L}|t-s|
+$$
+for all $\alpha_1,\alpha_2\in \mathbb R$., and then by a fixed point argument we obtain the existence of a unique Young local solution $\varphi^{n,L}\in C([0,T^{\star}],L^2)$ such that $ \psi^{n,L}_t=(U_t^{n})^{-1}\varphi^{n,L}_t\in C^{1}([0,T^{\star}],L^2)$ moreover we have that $\psi^{n,L}\in\cap_{\beta\geq0} C^{1}([0,T^{\star}],H_{\beta})$ and then clearly 
+$$
+\partial_t \varphi_t = A \varphi_t\partial_tn_t + \Pi_{L}\cN(\Pi_{L}\varphi_t)
+$$
+in the weak sense. To obtain a global solution is sufficient to remark that for all $v\in L^2$
+\begin{equation*}
+\begin{split}
+\langle v,X^{n,L}_{st}(v,v)\rangle&=\int_{s}^{t}\dd\sigma\int_{\mathbb T}\dd xU^{n}_{\sigma} v(x)\Pi_{L}\partial_{x}\left(U^{n}_{\sigma} v(x)\right)^2
+\\&=-\int_{s}^{t}\dd\sigma\int_{\mathbb T}\dd x\Pi_{L}(U^{n}v(x))^2\partial_x (\Pi_{L}U^{n}v(x))^2=0
+\end{split}
+\end{equation*}
+and then we obtain that 
+\begin{equation*}
+\begin{split}
+||\psi^{n,L}_t||^2_{L^2}&=||\psi^{n,L}_s||^2_{L^2}+||\psi^{n,L}_t-\psi^{n,L}_s||_{L^2}^2+\langle\psi^{n,L}_s,X^{n,L}_{st}(v_s,v_s)\rangle+R_{st}
+\\&=||\psi^{n,L}_s||^2_{L^2}+||\psi^{n,L}_t-\psi^{n,L}_s||_{L^2}^2+R_{st}
+\end{split}
+\end{equation*}
+for all $s,t\in[0,T^{\star}]$ with $|R_{st}|\lesssim|t-s|^2$, then we obtain that $|||\psi^{n,L}_t||^2_{L^2}-||\psi^{n,L}_s||^2_{L^2}|\lesssim |t-s|^2$ and this give us  $||\psi^{n,L}_t||=||\Pi_{L}\phi||_{L^2}$. Using this conservation law we can extend our local solution to a global one. The mild eq.~\eqref{eq:mild-reg} has a meaning even when $n$ is only continuous function. Let $R>0$, $T>0$ and assume that $\sup_{\sigma\in[0,T]}|n_\sigma|\leq R$ then we obtain  
+$$
+||\psi^{n,L}||_{C^{1-\eps}([0,T],L^2)}\lesssim_{L}T_1^{\eps}||X^{n,L}||_{C^1([0,T],\mathcal L^2)}(||\psi^{n,L}||_{C^{1-\eps}([0,T_1],L^2)}+||\Pi_{L}\phi||_{L^2})^2
+$$
+for all $T_1<\min(1,T)$, using the fact that $||X^{n,L}||_{C^1([0,T],\mathcal L^2)}\lesssim_{L}\sup_{\sigma\in[0,T]}|n_{\sigma}|\lesssim_{L}R$ and taking $T_1=T_1(||\Pi_{L}\phi||_{L^2})$ small enough we can see that $||\psi^{n,L}||_{C^{1-\eps}([0,T_1],L^2)}\lesssim_{L}R$. Finally using the conservation law and iterating these results gives us that $||\psi^{n,L}||_{C^{1-\eps}([0,T],L^2)}\lesssim_{L}R$.  By a similar argument we obtain easily 
+$
+||\psi^{n^2,L}-\psi^{n^1,L}||_{C^{1-\eps}([0,T],L^2)}\lesssim_{L,R}\sup_{\sigma\in[0,T]}|n^1_{\sigma}-n^2_{\sigma}|
+$
+for all $n_1,n_2\in C([0,T],L^2)$ such that $\sup_{\sigma\in[0,T]}|n^i_{\sigma}|\leq R$ for $i=1,2$ where $\psi^{n^1,L}$,$\psi^{n^2,L}$ are respectively the global solution of the eq.~\eqref{eq:mild-reg} associated to the dispersion $n^1$ and $n^2$. Now let $w^{N}$ a regularization of the continuous $\rho$--irregular function $w$   and assume that  
+$
+\sup_{\sigma\in[0,T]}|w^N_{\sigma}-w_{\sigma}|\to_{N\to+\infty}0
+$
+for all $T>0$. Then the solutions $(\varphi^{N,L})_{N\in\mathbb N}$ of the regularized problem~\eqref{eq:Cauchy-reg} with  dispersion $w^N$ converge in $C([0,T],L^2)$ to $\varphi^{L}$ which is the solution of the mild equation~\eqref{eq:mild-phi} with dispersion $w$:
+\begin{equation}\label{eq:reg-Galerkin}
+\varphi^{L}_t=U^{w}\Pi_{L}\phi+\int_{0}^{t}(U^{w}_t)(U^{w}_s)^{-1}\Pi_{L}\mathcal N(\Pi_{L}\varphi_s)\dd s .
+\end{equation}
+Finally we have
+\begin{theorem}\label{th:conv-Gal}
+Let $\rho>3/4$, $T>0$ and $\varphi^{L}$, $\varphi$ respectively the solution of the mild eq.~\eqref{eq:reg-Galerkin} on $[0,T]$ and the modulated KdV equation then 
+$$
+||\psi^{L}-\psi||_{C^{1/2}([0,T],L^2)}\to^{L\to+\infty}0
+$$ 
+with $\psi^L_t=(U^{w}_t)^{-1}\varphi^{L}_t$ and $\psi_t=(U_t^{w})^{-1}\varphi_t$ 
+\end{theorem}
+\begin{proof}
+Using the equation 
+$$
+\psi^{L}_t=\Pi_{L}\phi+\int_{0}^{t}X^{L}_{\dd\sigma}(\psi_{\sigma})
+$$
+we obtain that 
+$$
+||\psi^{L}||_{C^{1/2}([0,T_1],L^2)}\lesssim T_1^{\gamma-1/2}\sup_{L}||X^{L}||_{C^{\gamma}([0,T],\mathcal L^2(L^2))}(||\psi^{L}||_{C^{1/2}([0,T_1],L^2)}+||\phi||_{L^2})^2
+$$
+and then taking $T_1=T_1(||\phi||_{L^2})$ small enough we obtain that $\sup_{L}||\psi^{L}||_{C^{1/2}([0,T_1],L^2)}\lesssim\sup_{L}||X^{L}||_{C^{\gamma}([0,T],\mathcal L^2(L^2))}<+\infty$ using the conservation law we can proceed by induction to recover the interval $[0,T]$ and then $\sup_{L}||\psi^{L}||_{C^{1/2}([0,T],L^2)}<+\infty$. Now the same argument shows that 
+$$
+||\psi^{L}-\psi||_{C^{1/2}([0,T],L^2)}\lesssim_{||\phi||_{L^2}}||X^{L}-X||_{C^{1/2}([0,T],L^2)}
+$$ 
+and then suffices to use the fact that $||X-X^{L}||\to^{L\to\infty}0$ (proven in Lemma~\ref{lemma:periodic-bound} below) to deduce the needed convergence.
+
+\end{proof}
+
+\section{Regularity of $X$}
+\label{sec:reg}
+
+Let $w$ a $\rho$-irregular path, the aim of this section is to provide the necessary pathwise estimates on the modulated operator $X^{w}$ in the various models we consider.
+
+\begin{definition}
+We say that a $n$-linear operator $X$ on the Banach space $V$ belongs to $\mathcal{X}_{n,V}^w$ if 
+\begin{enumerate}
+\item For all $T>0$  we have
+$$
+|X_{st}|_{\mathcal L^n V}\leq C\|\Phi^w\|_{\mathcal{W}^{\rho,\gamma}_T}|t-s|^{\gamma}
+$$
+for $s,t\in[0,T]$ and for some finite constant $C>0$ which does not depend on $w$.
+\item If we let $X^L_{s,t}(\varphi_1,\dots,\varphi_n)= \Pi_L X_{s,t}(\Pi_L\varphi_1,\dots,\Pi_L\varphi_n)$ then
+$X_L \to X$ in $\mathcal C^{1/2}_T \mathcal L^n V$.
+\end{enumerate}
+\end{definition}
+
+Once appropriate bounds are obtained for the relevant $X$ operators, the Young theory of  Section~\ref{sec:sol} gives a complete local well-posedness theory for the equation (including convergence of approximations and the Euler scheme). For the  KdV equation and the non linear cubic Schr\"odinger equation we will see in the next section how we can obtain a global solution for an initial data $\phi\in H^{\alpha}$ with $\alpha\geq0$ using some smoothing estimates.
+
+\subsection{Periodic KdV}
+Here we will bound the modulated operator associated to the periodic KdV equation (ie: $A=\partial^3$ and $\mathcal N(\varphi)=\partial\varphi^2$) on $H^\alpha(\TT)$.
+
+\begin{lemma}\label{lemma:periodic-bound}
+ Let $\alpha\geq-\rho$ and $\rho>3/4$ then $X\in \mathcal{X}_{2,H^\alpha}^w$.
+ \end{lemma}
+\begin{proof}
+Let $\psi_1,\psi_2\in H^{\alpha}$. The Fourier transform gives
+$$
+\hat X_{st}(\psi_1,\psi_2)=ik\sum_{k_1+k_2=k}\mathbb I_{kk_1k_2\ne0}\Phi^w_{st}(kk_1k_2)\hat\psi_1(k_1)\hat\psi_2(k_2).
+$$
+From an application of Cauchy-Schwarz we obtain that
+\begin{equation}
+\begin{split}
+\left|\sum_{k_1+k_2=k}\mathbb I_{kk_1k_2\ne0}\Phi^{w}_{st}(kk_1k_2)\hat\psi_1(k_1)\hat\psi_2(k_2)\right|^2&\leq\left(\sum_{k_1+k_2=k}\mathbb I_{kk_1k_2\ne0}|k_2|^{-2\alpha}|\Phi^w_{st}(kk_1k_2)|^{2}|\hat\psi_1(k_1)|^2\right)|\psi_2|^2_{\alpha}
+\\&\leq\left(\sup_{k_1;kk_1k_2\ne0,k_1+k_2=k}\frac{|\Phi^{w}_{st}(kk_1k_2)|^2}{|k_1|^{2\alpha}|k_2|^{2\alpha}}\right)|\psi_1|_{\alpha}^2|\psi_2|_{\alpha}^2
+\end{split}
+\end{equation}
+where the supremum is taken over $k_1$. And we obtain 
+\begin{equation}
+\label{eq:kdv-operator-bound}
+|X_{st}|^2_{\mathcal L^2H^{\alpha}}\leq\left(\sum_{k}|k|^{2\alpha+2}\sup_{k_1;kk_1k_2\ne0,k_1+k_2=k}\frac{|\Phi^{w}_{st}(kk_1k_2)|^2}{|k_1|^{2\alpha}|k_2|^{2\alpha}}\right)^{1/2}
+\end{equation}
+The $\rho$-irregularity of $w$ allows to estimate this bound by
+\begin{equation*}
+\begin{split}
+ |X_{st}|^2_{\mathcal L^2H^{\alpha}}&\leq C_{\rho,T}||\Phi^w||_{\mathcal W_T^{\rho,\gamma}}|t-s|^{2\gamma}\sum_{k}|k|^{2\alpha+2-2\rho}\sup_{k_1;kk_1k_2\ne0,k_1+k_2=k}\frac{1}{{|k_1|^{2\alpha+2\rho}|k_2|^{2\alpha+2\rho}}}
+\\&\lesssim_{w,\rho,\gamma}|t-s|^{2\gamma}\sum_{k}|k|^{2-4\rho}\sup_{k_1;kk_1k_2\ne0,k_1+k_2=k}(\frac{|k|}{|k_1||k_2|})^{2\alpha+2\rho}.
+\end{split}
+\end{equation*}
+Now if we remark that $\frac{|k|}{|k_1||k_2|}\leq\frac{1}{|k_1|}+\frac{1}{|k_2|}\leq2$ and if we take $\alpha\geq-\rho$ and $\rho>3/4$  we obtain that 
+$$
+\sum_{k}|k|^{2-4\rho}\sup_{k_1;kk_1k_2\ne0,k_1+k_2=k}(\frac{|k|}{|k_1||k_2|})^{2\alpha+2-2\rho}\leq2^{2\alpha+2\rho}\sum_{k}\frac{1}{|k|^{2-4\rho}}<+\infty
+$$
+which gives the claimed regularity for X. As far as the convergence of  $X^{L}$ is concerned we let $\phi_1,\phi_2\in L^2$ and observe that
+\begin{equation*}
+\begin{split}
+ ||X^{L}_{st}(\phi_1,\phi_2)&-X_{st}(\phi_1,\phi_2)||^2_{2}
+\\ &  =\sum_{|k|< L}|k|^2\left|\sum_{k_1+k_2=k,k_1k_2\ne0}(\mathbb I_{|k_1|,|k_2|\leq L}-1)\hat \phi_1(k_1)\hat\phi_2(k_2)\Phi_{st}(kk_1k_2)\right|^2
+\\&+\sum_{|k|\geq L}|k|^2\left|\sum_{k_1+k_2=k,k_1k_2\ne0}\hat \phi_1(k_1)\hat\phi_2(k_2)\Phi^{w}_{st}(kk_1k_2)\right|^2
+\\&\lesssim |\phi_1|^2_{2}|\phi_2|^2_{2}\left(\sum_{k}|k|^2\sup_{|k_1|\geq L;k_1+k_2=k}|\Phi^{w}_{st}(kk_1k_2)|^2+\sum_{|k|\geq L}|k|^2\sup_{k_1,k_1+k_2=k}|\Phi_{st}(kk_1k_2)|^2\right).
+\end{split}
+\end{equation*}
+Using this bound with the fact that $w$ is $\rho$--irregular gives us
+$$
+||X^L-X||_{\mathcal C^{\gamma}([0,T],\mathcal L^2(L^2))}\lesssim_{w,T}\sum_{k}|k|^{2-2\rho}\sup_{|k_1|\geq L;k_1+k_2=k}|k_1|^{-2\rho}|k_2|^{-2\rho}+\sum_{|k|\geq L}|k|^{2-2\rho}\sup_{k_1}|k_1k_2|^{-2\rho}
+$$
+for some $\gamma>1/2$ and $\rho>4/3$. Now the r.h.s of this inequality vanish when $L$ goes to the infinity, in fact choosing $\theta>0$ small enough we have 
+$$
+\sum_{k}|k|^{2-2\rho}\sup_{|k_1|\geq L;k_1+k_2=k}|k_1|^{-2\rho}|k_2|^{-2\rho}\lesssim_{\theta,\rho} L^{-\theta}\sum_{k}|k|^{2-4\rho+\theta}\to^{L\to+\infty}0
+$$
+and 
+$$
+\sum_{|k|\geq L}|k|^{2-2\rho}\sup_{k_1}|k_1k_2|^{-2\rho}\lesssim_{\rho}\sum_{|k|\geq L}|k|^{2-4\rho}\to^{L\to+\infty}0
+$$
+and this finishes the proof.
+\end{proof}
+%\subsection{Smoothing effect for KdV equation}
+Now we will give an improvement of the Lemma~\ref{lemma:periodic-bound}.
+\begin{lemma}\label{lemma:smoothing}
+Let $\rho>4/3$ , $\alpha>-\rho$ and $\beta<\alpha+2\rho-\frac{3}{2}$ then there exists  $\gamma>1/2$ such that for all $T>0$ the following inequality holds 
+$$
+|X_{st}(\phi_1,\phi_2)|_{H^{\beta}}\leq C_{T,\alpha,\beta} \|\Phi^w\|_{\mathcal{W}^{\rho,\gamma}_T}|t-s|^{\gamma}|\phi_1|_{H^{\alpha}}|\phi_2|_{H^{\alpha}}
+$$
+for all $\phi_1,\phi_2\in H^{\alpha}$ where $C_{T,\alpha,\beta}<+\infty$.
+\end{lemma}
+\begin{proof}
+Eq.~\eqref{eq:kdv-operator-bound} can be modified to give
+$$
+|X_{st}(\phi_1,\phi_2)|^2_{H^{\beta}}\leq |\phi_1|^2_{H^{\alpha}}|\phi_2|^2_{H^{\alpha}} \sum_{k}|k|^{2+2\beta}\sup_{k_1}\left(\frac{|\Phi^{w}_{st}(3kk_1k_2)|^2}{|k_1|^{\alpha}|k_2|^{\alpha}}\right)
+$$
+an
+\begin{equation*}
+\begin{split}
+\sum_{k}|k|^{2+2\beta}\sup_{k_1}\left(\frac{|\Phi^{w}_{st}(3kk_1k_2)|^2}{|k_1|^{\alpha}|k_2|^{\alpha}}\right)&\leq|t-s|^{2\gamma}\sum_{k}|k|^{2+2\beta-2\rho}\sup_{k_1}|k_1k_2|^{-2\alpha-2\rho}
+\\&\lesssim_{\alpha,\beta}|t-s|^{2\gamma}\sum_{k}|k|^{2-4\rho+2\beta-2\alpha}<+\infty
+\end{split}
+\end{equation*}
+if $\beta<\alpha+2\rho-3/2$ which finishes the proof.
+\end{proof}
+
+
+
+\subsection{Periodic modified KdV}
+In the case of the periodic modified KdV equation we have $A=\partial^3$ and $\mathcal N(u)=\partial u(u^2-||u||_2^2)$ and the Fourier transform of  the  modulated operator $X$ reads
+$$
+\hat X_{st}(\psi_1,\psi_2,\psi_3)=ik\sum_{*}\hat\psi_1(k_1)\hat\psi_2(k_2)\hat\psi_3(k_3)\Phi^{w}_{st}(2(k-k_2)(k-k_1)(k-k_3))
+$$
+where the star under the sum mean that $k_1+k_2+k_3=k$,$k_1k_2k_3\ne0$ and $k_2,k_3\ne k$ and we have used the algebraic relation $k^3-k_1^3-k_2^3-k_3^3=(k-k_1)(k-k_2)(k-k_3)$. By Cauchy-Schwarz
+\begin{equation*}
+\begin{split}
+|X_{st}&(\psi_1,\psi_2,\psi_3)|^2_{H^{\alpha}}=\sum_{k}|k|^{2\alpha+2}|\sum_{*}\hat\psi_1(k_1)\hat\psi_2(k_2)\hat\psi_3(k_3)\Phi^{w}_{st}(2(k-k_2)(k-k_1)(k-k_3))|^2
+\\&\leq\sum_{k}|k|^{2\alpha+2}(\sum_{*}|k_1k_2k_3|^{-2\alpha}|\Phi^{w}_{st}(2(k-k_2)(k-k_3)(k-k_1))|^2)
+\\&\times(\sum_{*}|k_1|^{2\alpha}|k_2|^{2\alpha}|k_3|^{2\alpha}|\hat\psi_1(k_1)|^2|\hat\psi_2(k_2)|^2|\hat\psi_3(k_3)|^2)
+\\&\leq(\sup_{k\ne0}|k|^{2\alpha+2}\sum_{*}|k_1k_2k_3|^{-2\alpha}|\Phi^{w}_{st}(2(k-k_2)(k-k_3)(k-k_1))|^2)||\psi_1||_{H^{\alpha}}||\psi_2||^2_{H^{\alpha}}||\psi_3||^2_{H^{\alpha}}
+\end{split}
+\end{equation*}
+from which  we obtain that 
+\begin{equation}\label{eq:bound-op}
+|X_{st}|^2_{\mathcal L^3H^{\alpha}}\leq\sup_{k\ne0}|k|^{2\alpha+2}\sum_{*}|k_1k_2k_3|^{-2\alpha}|\Phi^{w}_{st}(2(k-k_2)(k-k_3)(k-k_1))|^2.
+\end{equation}
+Now we will give a lemma which help us to bound our operator 
+ \begin{lemma}\label{lemma:tech-bound}
+ Let $\alpha\geq1/2$ and $\rho>1/2$ then we have 
+ $$
+ \sum_{l\ne0,k}|l|^{-2\alpha}|l-k|^{-2\rho}\lesssim_{\eps,\rho,\alpha}|k|^{-\min(2\alpha,2\rho-\eps)}
+ $$ 
+for all $\eps>0$ small enough.
+\end{lemma}
+\begin{proof}
+We begin by decomposing our sum in two region in the following manner 
+\begin{equation*}
+\sum_{k_2\ne0,k}\frac{1}{|k_2|^{2\alpha}|k-k_2|^{2\rho}}=I_1+I_2
+\end{equation*}
+where 
+$$
+I_1=\sum_{k_2\ne0,k;|k-k_2|\leq2|k_2|}\frac{1}{|k_2|^{2\alpha}|k-k_2|^{2\rho}},\quad I_2=\sum_{k_2\ne0,k;|k-k_2|\geq2|k_2|}\frac{1}{|k_2|^{2\alpha}|k-k_2|^{2\rho}}.
+$$
+Remark that if $|k-k_2|\leq2|k_2|$ then $|k|\leq3|k_2|$ then we have  
+\begin{equation*}
+\begin{split}
+I_1&\lesssim\frac{1}{|k|^{2\alpha}}\sum_{k_2\ne0,k;|k-k_2|\leq2|k_2|}\frac{1}{|k-k_2|^{2\rho}}
+%\\&
+\lesssim\frac{1}{|k|^{2\alpha}}\sum_{k_2\ne k}\frac{1}{|k-k_2|^{2\rho}}
+%\\&
+=\frac{1}{|k|^{2\alpha}}\sum_{k_2\ne0}\frac{1}{|k_2|^{2\rho}}<+\infty.
+\end{split}
+\end{equation*}
+For the second term $I_2$, we begin by noting that if $|k-k_2|\geq 2|k_2|$ then $|k|\lesssim|k-k_2|$ so
+\begin{equation*}
+\begin{split}
+I_2&\lesssim\frac{1}{|k|^{2\rho-\eps}}\sum_{k_2\ne0,k;|k-k_2|\geq 2|k_2|}\frac{1}{|k_2|^{2\alpha+\eps}}<+\infty.
+\end{split}
+\end{equation*}
+\end{proof}
+Now  using the inequality~\eqref{eq:bound-op} and the $(\rho,\gamma)$--irregularity if $w$ we have 
+\begin{equation*}
+\begin{split}
+|X_{st}|_{\mathcal L^3H^{\alpha}}&\leq\sup_{k\ne0}|k|^{2\alpha+2}\sum_{*}|k_1k_2k_3|^{-2\alpha}|\Phi^{w}_{st}(2(k-k_2)(k-k_3)(k-k_1))|^2
+\\&\leq C_{w,\rho}|t-s|^{\gamma}\sup_{k\ne0}|k|^{2+2\alpha}\sum_{*}|k_1k_2k_3|^{-2\alpha}\frac{1}{|k-k_2|^{2\rho}|k-k_3|^{2\rho}|k-k_1|^{2\rho}}
+\end{split}
+\end{equation*}
+where $C_{w,\eps,T}$ is a finite  constant. 
+\begin{lemma}
+For all $\alpha\geq1/2$ and $\rho>1/2$ we have that
+$$
+I=\sup_{k\ne0}|k|^{2+2\alpha}\sum_{*}|k_1k_2k_3|^{-2\alpha}\frac{1}{|k-k_2|^{2\rho}|k-k_3|^{2\rho}|k-k_1|^{2\rho}}<+\infty
+$$
+\end{lemma}
+\begin{proof}
+Now the inequality $|k|^{2\alpha}=|-k_1+k_2+k_3|^{2\alpha}\lesssim|k_1|^{2\alpha}+|k_2|^{2\alpha}+|k_3|^{2\alpha}$ gives  
+\begin{equation*}
+\begin{split}
+I&\lesssim\sup_k|k|^2\sum_{k_2,k_3\ne0,k}|k_2k_3|^{-2\alpha}|k-k_2|^{-2\rho}|k-k_3|^{-2\rho}
+%\\&
+=\sup_k|k|^2(\sum_{k_2\ne0,k}|k|^{-2\alpha}|k-k_2|^{-2\rho})^2
+\end{split}
+\end{equation*}
+Then using the Lemma~\ref{lemma:tech-bound} we conclude that $I<+\infty$ when $\alpha\geq1/2$.
+\end{proof}
+\begin{theorem}
+Let $\rho>1/2$ then there exists $\gamma>1/2$ such that $X\in\mathcal C^{\gamma}([0,T],H^{\alpha})$ for all $\alpha\geq1/2$ and $T>0$. Moreover if $\alpha>1/2$ we have that $X\in\mathcal X_{3,H^{\alpha}}^{w}$.
+\end{theorem}
+
+\subsection{KdV on $\RR$}
+Here we treat the operator $X$ associated to the KdV equation on the non-periodic case. By a simple computation we see that the Fourier  transform  of $X$ is given by the convolution formula 
+$$
+\hat X_{st}(\psi_1,\psi_2)(x)=ix\int_{\mathbb R}\Phi^{w}_{st}(xy(x-y))\hat\psi_1(y)\hat\psi_2(x-y)dy
+$$
+We begin by treating the case  $\alpha\geq0$.  Cauchy-Schwarz inequality  gives\begin{equation*}
+\begin{split}
+||X_{st}||^2_{H^\alpha}&\leq\sup_{x\in\mathbb R}\langle x\rangle^{2\alpha}|x|^2\int_{\mathbb R}\frac{|\Phi^w_{st}(xy(x-y))|^2}{\langle y\rangle^{2\alpha}\langle x-y\rangle^{2\alpha}}\dd y
+\\&\leq ||\Phi^w||_{\mathcal W_T^{\rho,\gamma}}|t-s|^{\gamma}\sup_{x\in\mathbb R}\langle x\rangle^{2\alpha}|x|^2\int_{\mathbb R}\frac{\dd y}{\langle y\rangle^{2\alpha}\langle x-y\rangle^{2\alpha}(1+|xy(x-y)|)^{2\rho}}
+\end{split}
+\end{equation*}
+and then we have to check that 
+$$
+I(\alpha)=\sup_{x\in\mathbb R}\langle x\rangle^{2\alpha}|x|^2\int_{\mathbb R}\frac{\dd y}{\langle y\rangle^{2\alpha}\langle x-y\rangle^{2\alpha}(1+|xy(x-y)|)^{2\rho}}<+\infty
+$$
+with $\alpha\geq0$. 
+Using the fact that $\langle x\rangle^{2\alpha}\lesssim\langle y\rangle^{2\alpha}+\langle x-y\rangle^{2\alpha}$ we obtain $I(\alpha)\lesssim I(0)$ and then is sufficient to prove that $I(0)$ is finite. We will decompose this quantity as  $I(0)=I^1+I^2+I^3+I^4$ where
+\begin{equation*}
+\begin{split}
+I^1&=\sup_{|x|\geq1}|x|^2\int_{\{|y|\geq 1/2;|y-x|\geq1/2\}}\frac{\dd y}{(1+|xy(x-y)|)^{2\rho}}
+%\\&
+\lesssim\sup_{|x|\geq1}|x|^{2-4\rho}\int_{\{|y|\geq 1/2\}}|z|^{-2\rho}\dd y<+\infty
+\end{split}
+\end{equation*}
+ when $\rho>1/2$.
+ \begin{equation*}
+ \begin{split}
+ I^2=&2\sup_{|x|\geq1}|x|^{2}\int_{|y|\leq1/2}\frac{\dd y}{(1+|xy(x-y)|)^{2\rho}}
+ \\&\lesssim\sup_{|x|\geq1}|x|^2\int_{|y|\leq1/2}\frac{\dd y}{(1+x^2|y|)^{2\rho}}\lesssim\int_{\mathbb R}(1+|z|)^{-2\rho}\dd z<+\infty
+ \end{split}
+ \end{equation*}
+\begin{equation*}
+\begin{split}
+I^3&=\sup_{|x|\leq1}|x|^{2}\int_{|y|\geq2}\frac{\dd y}{(1+|xy(x-y)|)^{2\rho}}
+\\&\lesssim\sup_{|x|\leq1}|x|^2\int_{|y|\geq2}\frac{\dd y}{(1+|xy^2|)^{2\rho}}\lesssim\int_{\mathbb R}(1+|z|^2)^{-2\rho}\dd z<+\infty
+\end{split}
+\end{equation*}
+and finally the last term can easily bounded by 
+$$
+I^4=\sup_{|x|\leq1}|x|^2\int_{|y|\leq 2}(1+|yx(x-y)|)^{-2\rho}\dd y\leq 4 .
+$$
+In the case  $\alpha<0$ we will bound our operators by 
+\begin{equation*}
+\begin{split}
+||X_{st}||^2&\leq\int_{|x|\geq1}|x|^2\langle x\rangle^{2\alpha}\sup_{|y|\geq1/2;|x-y|\geq1/2}\frac{|\Phi^w_{st}(xy(x-y))|^2}{\langle y\rangle^{2\alpha}\langle x-y\rangle^{2\alpha}}\dd x
+\\ & +2\sup_{|x|\geq1}\langle x\rangle^{2\alpha}|x|^2\int_{|y|<1/2}\frac{|\Phi^w_{st}(xy(x-y))|^2}{\langle y\rangle^{2\alpha}\langle x-y\rangle^{2\alpha}}
+\\&+\sup_{|x|<1}\langle x\rangle^{2\alpha}|x|^2\int_{\mathbb R}\frac{|\Phi^w_{st}(xy(x-y))|^2}{\langle y\rangle^{2\alpha}\langle x-y\rangle^{2\alpha}}
+%\\&
+=J^1+J^2+J^3
+\end{split}
+\end{equation*}
+The integral $J_1$ correspond to the high-high-high part and cant by treated by similar argument used in the periodic setting in fact
+$$
+J^1\lesssim_{\gamma,\alpha}||\Phi^w||_{\mathcal W_T^{\rho,\gamma}}|t-s|^{\gamma}\int_{|x|\geq1}|x|^{2-4\rho}\left(\sup_{|y|,|x-y|\geq1/2}\frac{|x|}{|x-y||y|}\right)^{2\alpha+2\rho}<+\infty
+$$  
+when $\rho>3/4$ and $\alpha>-\rho$. For the term $J_2$ we remark that if $|x|\geq1$ and $|y|<1/2$ then $|x-y|\sim |x|$ and  
+$$
+J^2\lesssim||\Phi^w||_{\mathcal W_T^{\rho,\gamma}}|t-s|^{\gamma}\sup_{|x|\geq1}|x|^2\int_{|y|\leq1/2}\frac{\dd y}{(1+|x^2y|)^{2\rho}}\lesssim\int_{\mathbb R}(1+|z|)^{-2\rho}\dd z<+\infty.
+$$ 
+Now  split $J^3=J^{31}+J^{32}$ with
+$$
+J^{31}=\sup_{|x|<1}|x|^{2}\langle x\rangle^{2\alpha}\int_{|y|<2}\frac{|\Phi^w_{st}(xy(x-y))|^2}{\langle y\rangle^{2\alpha}\langle x-y\rangle^{2\alpha}}\lesssim_{\alpha}|t-s|.
+$$
+If $|x|<1$ and $|y|\geq2$ then $|x-y|\sim|y|$ and 
+\begin{equation*}
+J^{32}=\lesssim|t-s|^{\gamma}\sup_{|x|\leq1}|x|^{2}\int_{|y|\geq2}\frac{\dd y}{(1+|y|^2|x|)^{4\rho}\langle y\rangle^{4\alpha}}\lesssim\sup_{|x|\leq1}|x|^{3/2+2\alpha}\int_{\mathbb R}|y|^{-4\alpha}(1+|y|^2)^{2\rho}<+\infty
+\end{equation*}
+when $\alpha\in(-3/4,0]$ and $\alpha>-\rho$. These considerations results in the following regularity for $X$:
+\begin{proposition}
+Let $\rho>3/4$ then there exist $\gamma>1/2$ such that $X\in \mathcal C^{\gamma}([0,T],H^\alpha)$ for all $T>0$ and $\alpha>-\min(3/4,\rho)$.
+\end{proposition}
+The restriction of the regularity at $-3/4$ is imposed by the low-highy frequency term in the proof above. To bypass this difficulty we will consider distribution spaces given by the following definition. 
+\begin{definition}
+We say that $f\in\mathcal H_{\alpha,\beta}$ if $f\in S'(\mathbb R)$ and $\int_{\mathbb R}|\theta_{\alpha,\beta}(x)|^2|\hat f(x)|^2\dd x<+\infty$ where $\theta_{\alpha,\beta}(x)=\frac{|x|^{\alpha+\beta}}{(1+|x|)^{\beta}}$
+\end{definition}
+Observe that $\mathcal H^{\alpha}=\mathcal H_{\alpha,0}$ is the homogenous Sobolev space. Now as in periodic case by simple computation we have that 
+$$
+|X_{st}|^{2}_{\mathcal L^2\mathcal H^{\alpha}}\leq\int_{\mathbb R}|x|^{2+2\alpha}\sup_{y\in\mathbb R}\frac{|\Phi^{w}_{st}(xy(x-y)|^2}{|y|^{2\alpha}|x-y|^{2\alpha}}dx .
+$$
+Now the problem with this bound is that the terms in r.h.s admit a singularity at the origin which not exist in the periodic case to bypass this difficulty we will give another bound of our operator in the region which poses a problem.
+\begin{lemma}\label{lemma:op-bound}
+There exist a  universal constant $C$  such that the following inequality holds 
+\begin{equation}
+\begin{split}
+&|X_{st}|^2_{\mathcal L^2\mathcal H_{\alpha,\beta}}\leq C(\sup_{|x|\leq1}|x|^{2}|\theta_{\alpha,\beta}(x)|^{2}\int_{|y|\leq2}\frac{|\Phi^{w}_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd x
+\\&+\int_{|x|\leq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\sup_{|y|\geq 2}\frac{|\Phi^{w}_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd x
+\\ & +\sup_{|x|\geq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\int_{|y|\leq \frac{1}{2}}\frac{|\Phi^{w}_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd y
+\\&+\sup_{|x|\geq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\int_{\{|y|\geq \frac{1}{2};|y-x|\leq \frac{1}{2}\}}\frac{|\Phi^{w}_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd y
+\\&+\int_{|x|\geq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\sup_{\{|y|\geq \frac{1}{2};|y-x|\geq\frac{1}{2}\}}\frac{|\Phi^{w}_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd x)
+\end{split}
+\end{equation}
+\end{lemma}
+\begin{proof}
+Let $\psi_1,\psi_2\in \mathcal H_{\alpha,\beta}$ then by definition we have 
+\begin{equation*}
+\begin{split}
+|\hat X_{st}(\psi_1,\psi_2)|^2_{\alpha,\beta}&=\int_{\mathbb R}|x|^{2}\theta_{\alpha,\beta}^{2}(x)|\int_{\mathbb R}\Phi^{w}_{st}(xy(x-y))\hat\psi_1(y)\hat\psi_2(x-y)\dd y|^{2}\dd x
+\\&=\int_{\mathbb |x|\leq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)|\int_{\mathbb R}\Phi_{st}(xy(x-y))\hat\psi_{1}(y)\hat\psi_{2}(x-y)\dd y|^{2}\dd x
+\\&+\int_{|x|\geq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)|\int_{\mathbb R}\Phi^{w}_{st}(xy(x-y))\hat\psi_{1}(y)\hat\psi_{2}(x-y)\dd y|^{2}\dd x
+\\&=I_1+I_2
+\end{split}
+\end{equation*}
+Now we begin by study the term $I_1$, then by Cauchy-Schwarz we have:
+\begin{equation*}
+\begin{split}
+I_1&\leq2(\int_{|x|\leq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)|\int_{|y|\leq 2}\Phi^{w}_{st}(xy(x-y))\hat\psi_{1}(y)\hat\psi_{2}(x-y)dy|^{2}dx
+\\&+\int_{|x|\leq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)|\int_{|y|\geq2}\Phi^{w}_{st}(xy(x-y))\hat\psi_{1}(y)\hat\psi_{2}(x-y)dy|^{2}dx)
+%\\&\leq2\int_{|x|\leq1}|x|^2\theta_{\alpha,\beta}^{2}(x)(\int_{|y|\leq2}\frac{|\Phi^{w}_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}})\dd y(\int_{\mathbb R}|\theta_{\alpha,\beta}(y)|^{2}|\hat\psi_1(y)|^2|\theta_{\alpha,\beta}(x-y)|^{2}|\hat\psi_2(x-y)|^2dy)\dd x
+%\\&+2\int_{|x|\leq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)(\int_{|y|\geq 2}|\theta_{\alpha,\beta}(x-y)|^{-2}|\Phi^{w}_{st}(xy(x-y)|^{2}|\hat\psi_1(y)|^2\dd y)\dd x)|\psi_2|^2_{\alpha,\beta}
+\\&\leq2(\sup_{|x|\leq1}|x|^{2}|\theta_{\alpha,\beta}(x)|^{2}\int_{|y|\leq2}\frac{|\Phi^{w}_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}dx
+\\&+\int_{|x|\leq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\sup_{|y|\geq 2}(\frac{|\Phi^{w}_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}})dx)|\psi_1|^2_{\alpha,\beta}|\psi_2|^2_{\alpha,\beta}
+\end{split}
+\end{equation*}
+ By the same argument we can show that  $I_2$ satisfy the following inequality :
+\begin{equation*}
+\begin{split}
+I_2\leq& 3(\sup_{|x|\geq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\int_{|y|\leq \frac{1}{2}}\frac{|\Phi^{w}_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd y
+\\&+\sup_{|x|\geq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\int_{\{|y|\geq \frac{1}{2};|y-x|\leq \frac{1}{2}\}}\frac{|\Phi^w_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}dy\\&
++\int_{|x|\geq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\sup_{\{|y|\geq \frac{1}{2};|y-x|\geq\frac{1}{2}\}}\frac{|\Phi^w_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd x)\end{split}
+\end{equation*} 
+which finishes the proof.
+\end{proof}
+Now to obtain the Young regularity we have to bound  this five kernel 
+$$
+ I_{st}^{hhh}=\int_{|x|\geq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\sup_{\{|y|\geq \frac{1}{2};|y-x|\geq\frac{1}{2}\}}\frac{|\Phi^w_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd x 
+ $$
+$$
+ I_{st}^{ll}=\sup_{|x|\leq1}|x|^{2}|\theta_{\alpha,\beta}(x)|^{2}\int_{|y|\leq2}\frac{|\Phi^w_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd x
+ $$
+$$
+I_{st}^{lh}=\int_{|x|\leq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\sup_{|y|\geq 2}\frac{|\Phi^w_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd x
+$$
+$$
+I_{st}^{hlh}=\sup_{|x|\geq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\int_{|y|\leq \frac{1}{2}}\frac{|\Phi^w_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd y
+$$
+$$
+I_{st}^{hhl}=\sup_{|x|\geq1}|x|^{2}\theta_{\alpha,\beta}^{2}(x)\int_{\{|y|\geq \frac{1}{2};|y-x|\leq \frac{1}{2}\}}\frac{|\Phi^w_{st}(xy(x-y))|^2}{|\theta_{\alpha,\beta}(y)|^{2}|\theta_{\alpha,\beta}(x-y)|^{2}}\dd y
+$$
+Now we will begin by the term which contain the high-high-high frequency :
+\begin{equation*}
+\begin{split}
+I_{st}^{hhh}&\lesssim|t-s|^{\gamma}\int_{|x|\geq1}|x|^{2\alpha+2-2\rho}\sup_{\{|y|\geq1/2;|y-x|\geq1/2\}}\frac{1}{|y(x-y)|^{2\alpha+2\rho}}\dd x
+\\&\lesssim |t-s|^{\gamma}\int_{|x|\geq1}|x|^{2-4\rho}\sup_{\{|y|\geq1/2;|y-x|\geq1/2\}}(\frac{|x|}{|y(x-y)|})^{2\alpha+2\rho}\dd x<+\infty
+\end{split}
+\end{equation*}
+if $\alpha>-1$ and $\rho>3/4$ small enough.  Now for the term which contain the low frequency we use 
+the inequality $|\Phi^{w}_{st}(a)|\leq|t-s|$ and then : 
+\begin{equation*}
+\begin{split}
+I_{st}^{ll}&\lesssim|t-s|\sup_{|x|\leq1/2}|x|^{2(\alpha+\beta)+2}\int_{|y|\leq2}\frac{1}{|y(x-y)|^{2\alpha+2\beta}}\dd y<+\infty 
+\end{split}
+\end{equation*}
+if  $-1\leq\alpha+\beta<1/2$. Now we will focus on the low-high frequency term, and we begin by remark that by interpolation we have that $|\Phi^w_{st}(a)|\leq C\frac{|t-s|^{\gamma}}{|a|^{\rho'}}$ for one $\gamma>1/2$ and all  $\rho'\in(0,\rho]$, then using this inequality we obtain that :
+\begin{equation*}
+\begin{split}
+I_{st}^{lh}&\lesssim_{\alpha,\beta}|t-s|^{\gamma}\int_{|x|\leq1}|x|^{2(\alpha+\beta)+2-2\rho'}\sup_{|y|\geq2}\frac{1}{|y(x-y)|^{2\alpha+2\rho'}}\dd x<+\infty
+\end{split}
+\end{equation*}
+when we can choose $\rho'\in(0,\rho)\cap(-\alpha,\alpha+\beta+3/2)$ and this is possible if and only if $2\alpha+\beta>-3/2$, $\alpha>-\rho$ and $\alpha+\beta>-3/2$. Now it remains to study the two terms $I_{st}^{hlh}$  and $I_{st}^{hhl}$ but by symmetry these terms are essentially equivalent then it suffices to treat only one of them. Let us for example treat the term $I_{st}^{hlh}$ then we begin by noting that if $|x|\geq1$ and $|y|\leq1/2$ then $|x|-1/2\leq|x-y|\leq|x|+1/2$ using this fact we have :
+\begin{equation*}
+\begin{split}
+I_{st}^{hlh}&\lesssim |t-s|^{\gamma}\sup_{|x|\geq1}|x|^{2\alpha+2-2\rho'}\int_{|y|\leq1/2}\frac{1}{|y|^{2\alpha+2\beta+2\rho'}|x-y|^{2\alpha+2\rho'}}\dd y
+\\&\lesssim|t-s|^{\gamma}\sup_{|x|\geq1}|x|^{2-4\rho'}\int_{|y|\leq1/2}\frac{1}{|y|^{2\alpha+2\beta+2\rho'}}\dd y<+\infty
+\end{split}
+\end{equation*}
+when we choose $\rho'\in(0,\rho)\cap(1/2,1/2-\alpha-\beta)$ and this is possible if and only if $\alpha+\beta<0$  Then we have the following lemma.
+\begin{lemma}\label{lemma:KDV-bound}
+Let $\rho>3/4$ ,$\alpha>-\rho$ and $-\alpha>\beta\geq 0$ with $\beta+2\alpha>-3/2$  then there exist  $\gamma^{\star}>1/2$ such that for all $T>0$ the following inequality holds 
+$$
+|X_{st}|_{\mathcal L^2\mathcal H_{\alpha;\beta}}\leq C\|\Phi^w\|_{\mathcal{W}^{\rho,\gamma}_T}|t-s|^{\gamma^{\star}}
+$$
+for all $(s,t)\in[0,T]^2$ where $C=C(T,\beta,\alpha)>0$. 
+\end{lemma}
+\begin{corollary}
+Let $\rho>3/4$ and $0>\alpha>\max(-3/4,-\rho)$ then there exist $\gamma>1/2$ such that  for all $T>0 $ the following inequality holds:
+$$
+|X_{st}|_{\mathcal L^2\mathcal H^{\alpha}}\leq C||\Phi^{w}||_{\mathcal W_T^{\rho,\gamma}}|t-s|^{\gamma}
+$$
+for all $(s,t)\in[0,T]$ where $C=C(T,\alpha,\rho)>0$.
+\end{corollary}
+\begin{proof}
+The condition $\alpha>-3/4$ ensures that you can take $\beta=0$ in the Lemma~\ref{lemma:KDV-bound}
+\end{proof}
+
+\subsection{Periodic cubic NLS equation}
+
+\begin{proposition}
+\label{th:reg-1d}
+Let $\rho>1/2$ then there exist $\gamma>1/2$ such that for all $T>0$ and $\alpha\geq 0$ we have $X\in \mathcal C^{\gamma}([0,T],H^{\alpha})$. Moreover if $\alpha> 0$ then $X\in \mathcal X^{w}_{3,H^{\alpha}}$.
+\end{proposition}
+\begin{proof}
+By definition $\dot X_s(\psi_1,\psi_2,\psi_3)$ is a trilinear operator with Fourier transform given by
+\begin{equation*}
+\begin{split}
+\cF \dot X_{s}& (\psi_1, \psi_2, \psi_3) (\xi)=\cF X^{1}(\psi_1,\psi_2,\psi_3)+\cF X^{2}_{s}(\psi_1\psi_2,\psi_3)
+\\&=\psi_3\langle\psi_1,\psi_2\rangle+\psi_2\langle\psi_1,\psi_3\rangle+\sum_{\substack{\xi_1,\xi_2,\xi_3 \in \ZZ_0\\ \xi=-\xi_1+\xi_2+\xi_3}} \II_{\xi\neq \xi_2,\xi_3} e^{i w_s (\xi^2+\xi_1^2-\xi_2^2-\xi_3^2)} \, \hat \psi_1(\xi_1)^* \hat \psi_2 (\xi_2) \hat \psi_3(\xi_3) 
+\end{split}
+\end{equation*}
+where $\hat \psi_i = \cF \psi_i$. Note that $\xi^2+\xi_1^2-\xi_2^2-\xi_3^2 =2 (\xi -\xi_2)(\xi - \xi_3)$ under the condition that $\xi=-\xi_1+\xi_2+\xi_3$.
+Setting $\Xi = 2 (\xi -\xi_2)(\xi - \xi_3)$ we get
+\begin{equation*}
+|\langle \psi, X^{2}_{st}(\psi_1,\psi_2,\psi_3)\rangle| \le\sum_{\substack{\xi_1,\xi_2,\xi_3 \in\ZZ_0\\ \xi=-\xi_1+\xi_2+\xi_3}} \II_{\xi\neq \xi_2,\xi_3} |\Phi^w_{s,t}(\Xi)| \,\hat \psi(\xi)^*  \hat \psi_1(\xi_1)^* \hat \psi_2 (\xi_2) \hat \psi_3(\xi_3)
+\end{equation*}
+By by now standard application of Cauchy-Schwarz we get
+\begin{equation*}
+|\langle \psi, X^{2}_{st}(\psi_1,\psi_2,\psi_3)\rangle| \le (I_{\alpha,\rho})^{1/2} \sup_{a\in\mathbb Z_0}|a|^{-2\rho}|\Phi^w_{st}(a)|  \|\psi\|_\alpha \|\psi_1\|_\alpha \|\psi_2\|_\alpha \|\psi_3\|_\alpha
+\end{equation*}
+with
+$$
+I_{\alpha,\eta} =
+\sup_{\xi\in\ZZ_0}  \sum_{\substack{\xi_1,\xi_2,\xi_3 \in\ZZ_0\\ \xi=-\xi_1+\xi_2+\xi_3}} \II_{\xi\neq \xi_2,\xi_3}  |\xi|^{2\alpha} |\xi_1 \xi_2 \xi_3|^{-2\alpha} |\Xi|^{-2\rho}  .
+$$
+Some condition on the finiteness of the constant $I_{\alpha,\beta,\rho}$ are enough to control the regularity of the operator $X^2$. 
+Since $\alpha \ge 0$, by using that $ |\xi|^{2\alpha} \lesssim  |\xi_1|^{2\alpha}+|\xi_2|^{2\alpha}+|\xi_3|^{2\alpha}$ we have
+$
+I_{\alpha,\rho} \lesssim I_{0,\rho}
+$
+moreover
+\begin{equation*}
+I_{0,\eta}= \sup_{\xi\in\ZZ_0} \sum_{\xi_2\in\ZZ_0} \II_{\xi\neq \xi_2}  |\xi -\xi_2|^{-2\rho}  \sum_{\xi_3\in\ZZ_0} \II_{\xi\neq \xi_3} |\xi - \xi_3|^{-2\rho}
+\end{equation*}
+Is then easy to see that all these sums are finite provided $1 <2 \rho$ which means that we can take any $\rho > 1/2$. Now for the operator $X^1$ we have the following bound
+$$
+||X^1_{st}(\psi_1,\psi_2,\psi_3)||_{H^\alpha}\leq 2(t-s)||\psi_1||_{\alpha}||\psi_2||_{\alpha}||\psi_3||_{\alpha}
+$$
+and this finishes the bound of the operator $X$.
+\end{proof}
+
+
+
+\subsection{Cubic NLS equation on $\RR$}
+
+
+\begin{lemma}\label{lemma=Sch-estimates}
+Let $(\psi_i)_{i=1,..,4}\in L^2(\mathbb R)$ and define the following integral 
+\begin{equation*}
+\begin{split}
+\mathcal I(\alpha):=\int_{\mathbb R^3}\dd x_1\dd x_2\dd x_3|x_2-x_1|^{\alpha}|\Phi^{w}_{s_1s_2}(2(x_2-x_1)(x_3-x_1))|
+\\Ê\times|\hat\psi_{1}(x_1)||\hat\psi^*_{2}(x_2)||(\hat\psi_{3})^*(x_3)||(\hat\psi^*_{4})^*(-x_1+x_2+x_3)|
+\end{split}
+\end{equation*}
+then we have the following bound 
+$$
+\mathcal I(\alpha)<|s_2-s_1|^{\gamma}\Pi_{i=1,..4}|\psi_i|_{L^2(\mathbb R)}
+$$
+when $\alpha\in[0,1)$ and $\rho>1/2+\alpha$ or $\alpha=1$ and $\rho>1$
+\end{lemma}
+\begin{proof}
+ In the case $\alpha<1$ let us split $\mathbb R^{3}=\cup_{i=1,...,4}D_i$ with
+$$
+D_1=\{(x_1,x_2,x_3)\in\mathbb R^3 ;|x_2-x_1|\geq1,|x_3-x_1|\geq1\},
+$$
+$$
+D_2=\{(x_1,x_2,x_3)\in\mathbb R^3 ;|x_2-x_1|\leq1,|x_3-x_1|\leq1\},
+$$
+ $$
+ D_3=\{(x_1,x_2,x_3)\in\mathbb R^3 ;|x_2-x_1|\leq1,|x_3-x_1|\geq1\},
+ $$
+ $$
+  D_4=\{(x_1,x_2,x_3)\in\mathbb R^3 ;|x_2-x_1|\geq1,|x_3-x_1|\leq1\}.$$
+According to this split
+ $
+ \mathcal I(\alpha)=\sum_{i=1,...,4}I_i
+$.
+By Cauchy-Schwarz we have $I_l\leq J_l\Pi_{i=1}^{4}|\psi_{i}|_{L^2(\mathbb R)}$  for $l\in\{1,2,3\}$ and using the $(\rho,\gamma)$--irregularity of $w$ we have 
+\begin{equation*}
+\begin{split}
+J_1^2&=\sup_{x_1}\int_{\mathbb R^2}\dd x_2\dd x_3 \mathbb I_{\{|x_2-x_1|\geq1;|x_3-x_1|\geq1\}}|x_2-x_1|^{2\alpha}|\Phi^{w}_{s_1s_2}(2(x_2-x_1)(x_3-x_1))|^2
+\\&=\int_{\mathbb R^2}\dd y_2\dd y_3 \mathbb I_{\{|y_2|\geq1;|y_3|\geq1\}}|y_2|^{2\alpha}|\Phi^{w}_{s_1s_2}(2y_2y_3)|^2
+\\&\lesssim|s_2-s_1|^{2\gamma}(\int_{|y_2|\geq1}\frac{1}{|y_2|^{2\rho-2\alpha}}\dd y_2)(\int_{|y_3|\geq1}\frac{1}{|y_3|^{2\rho}}\dd y_3)<+\infty  
+\end{split}
+\end{equation*}
+when $\rho>\alpha+1/2$.  To bound the term $J_3$ we use again the $(\rho,\gamma)$ irregularity of $w$ and we obtain
+\begin{equation*}
+\begin{split}
+J_3^2&=\sup_{x_1}\int_{\mathbb R^2}\dd x_2\dd x_3 \mathbb I_{\{|x_2-x_1|\leq1;|x_3-x_1|\geq1\}}|x_2-x_1|^{2\alpha}|\Phi^{w}_{s_1T}(2(x_2-x_1)(x_3-x_1))|^2
+\\&=\int_{\mathbb R^2}\dd y_2\dd y_3 \mathbb I_{\{|y_2|\leq1;|y_3|\geq1\}}|y_2|^{2\alpha}|\Phi^{w}_{s_1s_2}(2y_2y_3)|^2
+\\&\lesssim|s_2-s_1|^{2\gamma}\int_{|y_2|\leq1}|y_2|^{2\alpha}(\int_{|y_3|\geq1}\frac{1}{(1+[y_2y_3|)^{2\rho}}\dd y_3)\dd y_2
+\\&\lesssim|s_2-s_1|^{2\gamma}(\int_{|y_2|\leq1}\frac{1}{|y_2|^{1-2\alpha}}\dd y_2)(\int_{\mathbb R}\frac{1}{(1+|z_3|)^{2\rho}}\dd z_3)<+\infty
+\end{split}
+\end{equation*}
+ when $\rho>1/2$, $\alpha>0$ and this give us the bound for $I_3$, we remark also in the case $\alpha=0$ the integral $I_3$ and $I_4$ are essentially the same by symmetry and can be be bounded using the same argument. Now we will focus to bound the term $J_2$ for that we use only the bound $|\Phi^{w}_{s_1s_2}(a)|\leq|s_2-s_1|$ which is valid for all $a\in \mathbb R$,
+  in fact we have 
+\begin{equation*}
+\begin{split}
+J_2^2&=\sup_{x_1}\int_{\mathbb R^2}\dd x_2\dd x_3 \mathbb I_{\{|x_2-x_1|\leq1;|x_3-x_1|\leq1\}}|x_2-x_1|^{2\alpha}|\Phi^{w}_{s_1s_2}(2(x_2-x_1)(x_3-x_1))|^2
+\\&=\int_{\mathbb R^2}\dd y_2\dd y_3 \mathbb I_{\{|y_2|\leq1;|y_3|\leq1\}}|y_2|^{2\alpha}|\Phi^{w}_{s_1T}(2y_2y_3)|^2
+\\&\leq|s_2-s_1|^2
+\end{split}
+\end{equation*}
+all these bounds give us the estimates for $(I_l)$, $l\in\{1,2,3\}$ then we will focus on the last integrals. To bound the integral $I_4$ we proceed in a different way, to simplify the notation let $\eta=2(x_2-x_1)(x_3-x_1)$ and then using the Cauchy-Schwarz inequality we have : 
+$$
+\int_{\mathbb R}\dd x_2\mathbb I_{|x_2-x_1|\geq1}|x_2-x_1|^{\alpha}|\Phi_{s_1T}(\eta)||\hat\psi_{2}(x_2)||\hat\psi_{4}(x)|\leq\sup_{x_2}( \mathbb I_{|x_2-x_1|\geq1}|x_2-x_1|^{\alpha}|\Phi_{s_1s_2}(\eta)|)|\psi_{2}|_{L^2(\mathbb R)}|\psi_{4}|_{L^2(\mathbb R)}
+$$
+now injecting this inequality in $I_4$ and using Cauchy-Schwarz and Young inequality we obtain that   
+\begin{equation*}
+\begin{split}
+I_4&\leq(\int_{\mathbb R^2}\dd x_3\dd x_1\mathbb I_{|x_3-x_1|\leq1}\sup_{x_2}( \mathbb I_{|x_2-x_1|\geq1}|x_2-x_1|^{\alpha}|\Phi^{w}_{s_1s_2}(\eta)|)|\hat\psi_{1}(x_1)||\hat\psi_{3}(x_3)|)|\psi_{2}|_{L^2(\mathbb R)}|\psi_{4}|_{L^2(\mathbb R)}
+\\&=(\int_{\mathbb R}|\hat\psi_{s_1}(x_1)|(\int_{\mathbb R}\mathbb I_{|x_3-x_1|\leq1}\sup_{x_2}( \mathbb I_{|x_2-x_1|\geq1}|x_2-x_1|^{\alpha}|\Phi^{w}_{s_1s_2}(\eta)|)|\hat\psi_{3}(x_3)|\dd x_3)\dd x_1)|\psi_{2}|_{L^2(\mathbb R)}|\psi_{4}|_{L^2(\mathbb R)}
+\\&\leq \left(\int_{\mathbb R}\left|\int_{\mathbb R}\mathbb I_{|x_3-x_1|\leq1}\sup_{x_2}(\mathbb I_{|x_2-x_1|\geq1}|x_2-x_1|^{\alpha}|\Phi^{w}_{s_1s_2}(\eta)|)|\hat\psi_{3}(x_3)|\dd x_3\right|^2\dd x_1\right)^{1/2}|\psi_{2}|_{L^2(\mathbb R)}|\psi_{4}|_{L^2(\mathbb R)}|\psi_1|_{L^2(\mathbb R)}
+\\&\leq\int_{|y_3|\leq1}\sup_{|y_2|\geq1}(|y_2|^{\alpha}|\Phi^{w}_{s_1s_2}(2y_2y_3)|)\dd y_3\Pi_{i=1}^{4}|\psi_{i}|_{L^2(\mathbb R)}
+\\&\lesssim|T-s_1|^{\gamma}\Pi_{i=1}^{4}|\psi_{i}|_{L^2(\mathbb R)}\sup_{z_2}\left(|z_2|^{\alpha}(1+|z_2|)^{-\rho}\right)\int_{|y_3|\leq1}|y|^{-\alpha}\dd y_3<+\infty
+\end{split}
+\end{equation*}
+when $\alpha<1$ and $\rho>\alpha$. As was noted previously this gives us also a bound for $I_3$ when $\alpha=0$. 
+Now to treat the case $\alpha=1$ we proceed as in~\cite{Debussche2011363}. Indeed after change of variable we can rewrite our integral as :
+$$
+I(1)=\int_{\mathbb R}|x|\left(\int_{\mathbb R}|\hat\psi_{1}(y_1)||\hat\psi_{2}(x-y_1)|\left(\int_{\mathbb R}|\hat\psi_{3}(y_2)||\hat\psi_{4}(x-y_2)||\Phi^{w}_{s_1s_2}(2x(y_2-y_1))|\dd y_2\right)\dd y_1\right)\dd x
+$$ 
+and then by Cauchy-Schwarz and Young inequality we have
+\begin{equation*}
+\begin{split}
+I(1)&\leq(\sup_x|x|\int_{\mathbb R}|\Phi^{w}_{s_1T}(2xz)|\dd z)\Pi_{i=1}^{4}|\psi_{i}|_{L^2(\mathbb R)}
+%\\&
+\leq|s_2-s_1|^{\gamma}(\int_{\mathbb R}(1+|z|)^{-\rho}\dd z)\Pi_{i=1}^{4}|\psi_{i}|_{L^2(\mathbb R)}
+\end{split}
+\end{equation*}
+and the r.h.s is finite if $\rho>1$ which finish the proof.
+\end{proof}
+\begin{proposition}
+Let $\rho>1/2$ and $X$ the modulated operator associated to the NLS on $\mathbb R$ then there exist $\gamma>1/2$ such that $X\in\mathcal C^{\gamma}([0,T],H^\alpha(\mathbb R))$ for all $\alpha\geq0$
+\end{proposition}
+\begin{proof}
+Let $(\psi_i)_{i=1,2,3}\in H^\alpha$ and $\psi_4\in H^{-\alpha}$ then by a simple computation we have that 
+\begin{equation}
+|\langle\psi_4,X_{st}(\psi_1,\psi_2,\psi_3)\rangle|\leq\int_{\mathbb R}(|x|^{-\alpha}|\hat\psi_4(x)|)|x|^{\alpha}|x_1x_2x_3|^{-4\alpha}|-x_1+x_2+x_3|^{\alpha}\Pi_{i=1,.,3}|x_i|^{\alpha}|\hat\psi_i(x_i)\dd x_1\dd x_2 \dd x_3
+\end{equation}
+with $x=-x_1+x_2+x_3$ now using the fact that $|x_i|^{\alpha}\lesssim|x_1|^{\alpha}+|x_2|^{\alpha}+|x_3|^{\alpha}$ and  the lemma~\ref{lemma=Sch-estimates} we obtain immediately 
+$
+|\langle\psi_4,X_{st}(\psi_1,\psi_2,\psi_3)\rangle|\lesssim|t-s|^{\gamma}|\psi_4|_{-\alpha}\Pi_{i=1,..,3}|\psi|_{\alpha}
+$.
+\end{proof}
+
+
+
+
+\subsection{Cubic non linear Schr\"odinger equation on $\RR^2$}
+To extend the previous results to the modulated Schr\"odinger equation on $\RR^2$ we need to obtain regularity estimates for the appropriate $X$ operators. Here $\dot X_s(\psi_1,\psi_2,\psi_3)$ is a trilinear operator with Fourier transform given by
+\begin{equation*}
+\cF \dot X_{s}(\psi_1, \psi_2, \psi_3) (\xi) = \int_{\substack{\xi_1,\xi_2,\xi_3 \in\RR^2\\ \xi=-\xi_1+\xi_2+\xi_3}} e^{i w_s (|\xi|^2+|\xi_1|^2-|\xi_2|^2-|\xi_3|^2)} \, \hat \psi_1(\xi_1)^* \hat \psi_2 (\xi_2) \hat \psi_3(\xi_3) \dd \xi_2 \dd \xi_3 .
+\end{equation*}
+ Note that  $|\xi|^2+|\xi_1|^2-|\xi_2|^2-|\xi_3|^2 =2 \langle \xi -\xi_2,\xi - \xi_3\rangle_{\RR^2}= \Xi$ under the condition that $\xi=-\xi_1+\xi_2+\xi_3$. Then $X$ has the expression
+\begin{equation*}
+\cF  X_{s,t}(\psi_1, \psi_2, \psi_3) (\xi) = \int_{\substack{\xi_1,\xi_2,\xi_3 \in\RR^d\\ \xi=-\xi_1+\xi_2+\xi_3}} \Phi^{w}_{s,t}(\Xi)\, \hat \psi_1(\xi_1)^* \hat \psi_2 (\xi_2) \hat \psi_3(\xi_3) \dd \xi_2 \dd \xi_3 .
+\end{equation*}
+Using the $(\rho,\gamma)$-iregularity of $w$ we can easily obtain that 
+
+\begin{equation*}
+|\langle \psi, X_{ts}(\psi_1,\psi_2,\psi_3)\rangle| \le
+\int_{\substack{\xi,\xi_1,\xi_2,\xi_3 \in\RR^2\\ \xi=-\xi_1+\xi_2+\xi_3}} 
+|\Phi^{w}_{s,t}(\Xi)|
+ \,|\hat \psi(\xi)|  |\hat \psi_1(\xi_1)| |\hat \psi_2 (\xi_2)| | \hat \psi_3(\xi_3)| \dd \xi_1 \dd \xi_2 \dd \xi_3
+\end{equation*}
+\begin{equation*}
+\le J^{1/2} |t-s|^\gamma\|\psi\|_{-\alpha} \|\psi_1\|_\alpha \|\psi_2\|_\alpha \|\psi_3\|_\alpha
+\end{equation*}
+with
+$$
+ J=\sup_{\xi\in\RR^2} \int_{\substack{\xi_1,\xi_2,\xi_3 \in\RR^2\\ \xi=-\xi_1+\xi_2+\xi_3}}  (1+2|\langle \xi -\xi_2,\xi - \xi_3\rangle|)^{-2\rho} (1+|\xi|^2)^{\alpha} \prod_{i=1,2,3}(1+|\xi_i|^2)^{-\alpha} \dd \xi_2 \dd \xi_3 
+$$
+
+\begin{lemma}
+The quantity $J$ is finite when $\alpha > 1/2$ and $\rho > 1/2$.
+\end{lemma}
+\begin{proof}
+Inserting the  estimate
+$
+ (1+|\xi|^2)^{\alpha} \lesssim  \sum_{i=1}^3 (1+|\xi_i|^2)^{\alpha}
+$
+we obtain that $J=J_1 + J_2$ where
+$$
+ J_1=\sup_{\xi\in\RR^2} \int_{\substack{\xi_1,\xi_2,\xi_3 \in\RR^2\\ \xi=-\xi_1+\xi_2+\xi_3}}  (1+2|\langle \xi -\xi_2,\xi - \xi_3\rangle|)^{-2\rho} (1+|\xi_2|^2)^{-\alpha} (1+|\xi_3|^2)^{-\alpha} \dd \xi_2 \dd \xi_3 
+$$
+and
+$$
+ J_2=\sup_{\xi\in\RR^2} \int_{\substack{\xi_1,\xi_2,\xi_3 \in\RR^2\\ \xi=-\xi_1+\xi_2+\xi_3}}  (1+2|\langle \xi -\xi_2,\xi - \xi_3\rangle|)^{-2\rho} (1+|\xi_2|^2)^{-\alpha} (1+|\xi_1|^2)^{-\alpha} \dd \xi_2 \dd \xi_3 
+$$
+Let us consider first the $J_1$ contribution. Let $q_i = \xi-\xi_i$, $i=2,3$
+$$
+ J_1=\sup_{\xi\in\RR^2} \int_{\RR^2}  \frac{\dd q_2}{ (1+|\xi + q_2|^2)^{\alpha}}  \int_{\RR^2} \frac{\dd q_3} { (1+2|\langle q_2,q_3\rangle|)^{2\rho} (1+|\xi + q_3|^2)^{\alpha}}
+$$
+Write $q_3^\bot,q_3^\|\in\RR$ for the perpendicular and parallel components of $q_3\in\RR^2$ with respect to $q_2$ and similarly for $\xi$ and bound
+$$
+ J_1\le\sup_{\xi\in\RR^2} \int_{\RR^2}  \frac{\dd q_2}{ (1+|\xi + q_2|^2)^{\alpha}}  \int_{\RR} \frac{\dd q^\bot_3}{(1+|\xi^\bot + q^\bot_3|^2)^{\alpha}} \int_{\RR} \frac{\dd q^\|_3} { (1+2|q_2||q^\|_3|)^{2\rho} }
+$$
+$$
+ = \sup_{\xi\in\RR^2} \int_{\RR^2}  \frac{\dd q_2}{ (1+|\xi + q_2|^2)^{\alpha}}  \int_{\RR} \frac{\dd q^\bot_3}{(1+|q^\bot_3|^2)^{\alpha}} \int_{\RR} \frac{\dd q^\|_3} { (1+2|q_2||q^\|_3|)^{2\rho} }
+$$
+now note that for $\alpha > 1/2$ and $\rho > 1/2$ we have
+$$
+\int_{\RR} \frac{\dd q^\bot_3}{(1+| q^\bot_3|^2)^{\alpha}} \int_{\RR} \frac{\dd q^\|_3} { (1+2|q_2||q^\|_3|)^{2\rho} } \lesssim |q_2|^{-1}
+$$
+so that
+$$
+ J_1\lesssim\sup_{\xi\in\RR^2} \int_{\RR^2}  \frac{\dd q_2}{ (1+|\xi + q_2|^2)^{\alpha} |q_2|} <+\infty
+$$
+for $\alpha>1/2$.  To estimate the $J_2$ integral we rewrite it as 
+$$
+ J_2=\sup_{\xi\in\RR^2} \int_{\RR^2} \int_{\RR^2} (1+2|\langle \xi_1 -\xi_2,\xi - \xi_2\rangle|)^{-2\rho} (1+|\xi_2|^2)^{-\alpha} (1+|\xi_1|^2)^{-\alpha} \dd \xi_2 \dd \xi_1 
+$$
+where we used that $\xi-\xi_3 = \xi_2-\xi_1$. By writing $q_1 = \xi_1 -\xi_2$ and $q_2 = \xi-\xi_2$ we get
+$$
+ J_2=\sup_{\xi\in\RR^2} \int_{\RR^2} \frac{\dd q_2}{(1+|\xi-q_2|^2)^{\alpha}} \int_{\RR^2}\frac{\dd q_1}{ (1+2|\langle q_1,q_2\rangle|)^{2\rho}  (1+|q_1+\xi-q_2|^2)^{\alpha} }
+$$
+Write $q_1^\bot,q_1^\|$ for the perpendicular and parallel components of $q_1$ with respect to $q_2$ to get the estimate
+$$
+ J_2\le \sup_{\xi\in\RR^2} \int_{\RR^2} \frac{\dd q_2}{(1+|\xi-q_2|^2)^{\alpha}} \int_{\RR^2}\frac{\dd q^\bot_1 \dd q^\|_1}{ (1+2| q_1^\|| |q_2|)^{2\rho}  (1+|q^\bot_1+\xi^\bot|^2)^{\alpha} }
+$$
+again the condition $\alpha > 1/2$ allows to bound this last quantity as
+$$
+\lesssim \sup_{\xi\in\RR^2} \int_{\RR^2} \frac{\dd q_2}{(1+|\xi-q_2|^2)^{\alpha}} \int_{\RR}\frac{ \dd q^\|_1}{ (1+2| q_1^\|| |q_2|)^{2\rho} }
+$$
+and $\rho > 1/2$ subsequently by
+$$
+\lesssim \sup_{\xi\in\RR^2} \int_{\RR^2} \frac{\dd q_2}{(1+|\xi-q_2|^2)^{\alpha}|q_2|}
+$$
+which is finite when $\alpha > 1/2$.
+\end{proof}
+
+\begin{theorem}
+\label{th:2d-reg}
+For all $\rho>1/2$ there exists $\gamma>1/2$ such that for all $T>0$ the operator $X$ belongs to $\cC^\gamma([0,T],H^\alpha(\RR^2))$ for all $\alpha>1/2$. 
+\end{theorem}
+\subsection{The derivative NLS equation}
+Here we will focus on the modulated Derivative non linear Schr\"odinger equation (ie:  $A=i\partial^2$ and $\mathcal N(u)=\partial^{\theta}(|u|^2-||u||_2^2)u$ for $\theta>0$. Now the Fourier transform of the operator associated to this equation is given by
+$$
+\hat X_{st}(\psi_1,\psi_2,\psi_3)=(ik)^{\theta}\sum_{\star} \psi_1(k_1)^{*}\psi_2(k_2)\psi_3(k_3)\Phi^{w}_{st}(2(k-k_2)(k-k_3))
+$$
+where the star under the sum means that we have $-k_1+k_2+k_3=k$ and $k_2\ne k$,$k_3\ne k$
+, $k_1k_2k_3\ne0$. Standard application of Cauchy-Schwartz gives
+$$
+||X_{st}||_{H^{\alpha}}^2\leq\sup_{k\ne0}|k|^{2\alpha+2\theta}\sum_{\star}|k_1k_2k_3|^{-2\alpha}|\Phi^{w}_{st}(2(k-k_2)(k-k_3))|^2
+$$
+then using the fact that $w$ is $(\gamma,\rho)$ irregular we obtain  
+\begin{equation*}
+||X_{st}||^2_{H^{\alpha}}\lesssim_{w,\eps,T}|t-s|^{\gamma}\sup_k|k|^{2+2\alpha}\sum_{\star} |k_1k_2k_3|^{-2\alpha}|k-k_2|^{-2\rho}|k-k_3|^{-2\rho} 
+\end{equation*}
+with $s,t\in[0,T]$, then is sufficient to prove that  
+$$
+I=\sup_k|k|^{2\alpha+2\theta}\sum_{*}|k_1k_2k_3|^{-2\alpha}|k-k_3|^{-2\rho}|k-k_2|^{-2\rho}<+\infty
+$$
+for that we will need the following lemma.
+\begin{lemma}\label{lemma:sum-bound}
+For $\rho>\max(1/2,\theta/2)$  and $\alpha\geq\frac{1}{2}\theta$  then the following inequality holds: 
+\begin{equation*}
+\sum_{l\ne0,k}|l|^{-2\alpha}|k-l|^{-2\rho}\lesssim|k|^{-\theta}
+\end{equation*}
+\end{lemma}
+\begin{proof}
+The proof of this lemma is very similar to the proof of the Lemma~\ref{lemma:tech-bound}. We begin by decomposing our sum in the following way :
+\begin{equation*}
+\begin{split}
+\sum_{l\ne k,0}|l|^{-2\alpha}|k-l|^{-2\rho}&=\sum_{l\ne0,k;|l-k|\leq|l|}|l|^{-2\alpha}|k-l|^{-2\rho}+\sum_{l\ne 0,k;|k-l|\geq|l|}|l|^{-2\alpha}|k-l|^{-2\rho}
+\\&\leq|k|^{-\theta}\sum_{l\ne0}\frac{1}{|l|^{2\rho}}+|k|^{-\theta}\sum_{l}\frac{1}{|l|^{2\alpha+2\rho-\theta}}
+%\\&
+\lesssim_{\theta,\alpha,\rho}\frac{1}{|k|^{\theta}} 
+\end{split}
+\end{equation*}
+\end{proof}
+\begin{lemma}
+Let $\rho>\max(\theta,1/2)$ and $\alpha\geq\frac{1}{2}\theta$  then $I<+\infty$.
+\end{lemma}
+\begin{proof}
+If we use the fact that $|k|^{2\alpha}\lesssim|k_1|^{2\alpha}+|k_2|^{2\alpha}+|k_3|^{2\alpha}$ we obtain 
+\begin{equation*}
+\begin{split}
+I&\lesssim
+\sup_k|k|^{2\theta}\left(\sum_{*}|k_2k_3|^{2\alpha}|k-k_2|^{-2\rho}|k-k_3|^{-2\rho}+\sum_{*}|k_1k_2|^{-2\alpha}|k-k_2|^{-2\rho}|k_2-k_1|^{-2\rho}\right) 
+\\&\lesssim\sup_k|k|^{2\theta}\left(\sum_{k_2\ne0,k}|k_2|^{-2\alpha}|k-k_2|^{-2\rho}\right)^{2}+\sup_k|k|^{2\theta}\sum_{*}|k_1k_2|^{-2\alpha}|k-k_2|^{-2\rho}|k_2-k_1|^{-2\rho} 
+\\&=I_1+I_2
+\end{split}
+\end{equation*}
+Now by the Lemma~\ref{lemma:sum-bound} we have
+$$
+I_1=\sup_k|k|^{2\theta}(\sum_{k_2\ne0,k}|k_2|^{-2\alpha}|k-k_2|^{-2\rho})^{2}<+\infty
+$$
+for $\rho>\max(\theta,1/2)$, $\alpha>\frac{1}{2}\theta$.
+It remains to treat the second term which requires a bit more work:
+\begin{equation*}
+\begin{split}
+I_{2}&=\sup_k|k|^{2\theta}\sum_{k_1,k_2}|k_2k_1|^{-2\alpha}|k_2-k|^{-2\rho}|k_2-k_1|^{-2\rho}
+\\&=\sup_k|k|^{2\theta}\sum_{k_2}|k_2|^{-2\alpha}|k-k_2|^{-2\rho}\sum_{k_1}|k_1|^{-2\alpha}|k_2-k_1|^{-2\rho}\lesssim\sup_k|k|^{2\theta}\sum_{k_2}|k_2|^{-2\alpha-\theta}|k-k_2|^{-2\rho}
+\\&\lesssim\sup_k|k|^{2\theta}(\sum_{k_2;|k-k_2|\leq|k_2|}|k_2|^{-2\alpha-\theta}|k-k_2|^{-2\rho}+\sum_{k_2;|k-k_2|\geq|k_2|}|k_2|^{-2\alpha-\theta}|k-k_2|^{-2\rho})
+\\&\lesssim\sup_k(|k|^{\theta-2\alpha})+\sup_k\sum_{k_2;|k-k_2|\geq|k_2|}|k_2|^{-2\alpha-\theta}|k-k_2|^{-2\rho+2\theta}
+\\&\lesssim \sup_k(|k|^{\theta-2\alpha})+\sum_{k_2\ne0}|k_2|^{-2\alpha-2\rho+\theta}<+\infty
+\end{split}
+\end{equation*}
+if  $\rho>\max(1/2,\theta) $, $\alpha\geq\frac{1}{2}\theta$.
+\end{proof}
+\begin{theorem}\label{th:rg-DNLS}
+Let $\rho>\max(1/2,\theta/2)$ then there exist $\gamma>1/2$ such that  $X\in \mathcal C^{\gamma}([0,T],H^{\alpha})$ for all $T>0$ and $\alpha\geq\frac{1}{2}\theta$.
+\end{theorem}
+
+
+\section{Global existence for the modulated KdV in Sobolev spaces with non-negative index}
+\label{sec:global-kdv}
+In this section we will concentrate on the periodic modulated KdV equation on $\TT$ and $\mathbb R$ and on the NLS equation on $\TT$. We prove the existence of a global solution for an initial data $\phi\in H^{\alpha}(\mathbb T)$ for any $\alpha\geq0$ in spite of the fact that the modulation breaks all conservation law apart from that associated to the $L^2$ norm.
+
+Let us recall how we can establish the $L^2$-norm conservation in this case.
+\begin{proposition}
+Let $u$ the local solution of the periodic modulated KdV equation with initial data $\phi\in L^2(\TT)$ and $v_t=(U^{w}_t)^{-1}u_t$ for $t\in[0,T]$ where $T=T(||\phi||_{L^2})$ is the life-time of the local solution then we have $||v_t||_2=||\phi||_2$ for all $t\in[0,T]$ and  we can extend the local solution into  a global one.
+\end{proposition}
+\begin{proof}
+Let $\psi$ a smooth function then we have by integration by part formula 
+\begin{equation*}
+\begin{split}
+\langle\psi,X_{st}(\psi,\psi)\rangle_{L^2}&=\int_{s}^{t}\dd\sigma(\int_{\mathbb T}\psi (U^{w}_{\sigma})^{-1}\partial_x(U^{w}_{\sigma}\psi)^2)
+=\int_{s}^{t}\dd\sigma\int_{\mathbb T}U^{w}_{\sigma}\psi\partial_x(U^{w}_{\sigma}\psi)^2
+\\&=-\int_{s}^{t}\dd\sigma\int_{\mathbb T}\partial_x(U^{w}_{\sigma}\psi)(U^{w}_{\sigma}\psi)^2=0
+\end{split}
+\end{equation*}
+and then 
+we have that 
+\begin{equation*}
+\begin{split}
+||v_t||^2_2&=||v_s||_2^2+\langle v_s,X_{st}(v_s,v_s)\rangle+||v_t-v_s||_2^2+R_{st}
+=||v_s||_2^2+||v_t-v_s||_2^2+R_{st}
+\end{split}
+\end{equation*}
+where $|R_{st}|\lesssim|t-s|^{2\gamma}$ with $\gamma>1/2$ and then we can see that $\left| ||v_t||_2^2-||v_s||_2^2\right|\lesssim|t-s|^{\gamma+1/2}$ which give us our result. 
+\end{proof}
+Now using this proposition and the smoothing effect for $X$ we obtain the global existence for the equation in the Sobolev space with non negative index.
+\begin{proposition}
+Let $\alpha\geq0$, $\phi\in H^{\alpha}$ and $T>0$ then there exist a unique  $v\in C^{1/2}([0,T],H^{\alpha})$ such that 
+$
+v_t=\phi+\int_{0}^{t}X_{\dd \sigma}(v_{\sigma},v_{\sigma})\dd\sigma
+$
+holds for all $t\in[0,T]$
+\begin{proof}
+Let $\phi\in L^2$ then we using the local existence result we know that there exists $\kappa=\kappa(||\phi||_{L^2})>0$ and a unique $v\in C^{1/2}([0,\kappa],H^{\alpha})$ solution of the Young equation associated to $X$ in $[0,\kappa]$. Moreover we have the  conservation law $||v_t||_{L^2}=||v_0||_{L^2}$ and this allow us to iterate our local result to obtain global a solution defined on $[0,T]$ for arbitrary $T>0$. Now to extend this local we use the lemma ~\ref{lemma:smoothing} in fact let $\alpha>0$ and $\phi\in H^{\alpha}$ then is obvious that $\phi\in L^2$ and using the Lemma~\ref{lemma:smoothing} and the fact that $v$ satisfy the Young equation we have easily that
+$$
+||v_t-v_s||_{H_{\beta}}\lesssim_{T,||X||_{C^{\gamma}([0,T],\mathcal L(L^2,H_{\beta}))}}|t-s|^{\gamma}(||v||_{C^{1/2}([0,T],L^2)}+|\phi|_{L^2})^2
+$$
+for all $0<\beta<2\rho-3/2$ and then $v\in C^{1/2}([0,T],H_{\beta})$. By  iterating this result we see that $v\in C^{1/2}(H^{\alpha},[0,T])$ and this finishes the proof.
+\end{proof}
+\end{proposition}
+\begin{remark}
+The bound of the operator $X$ allows us to construct a local solution even when the initial data is in a negative Sobolev space ($\alpha>-\rho$). The method presented in this section gives the possibility to construct a global solution only in the case when we deal with initial data in a positive regularity space. In the next section we present an adaptation of the almost conservation law method developed in~\cite{[CollianderKeelStaffilaniTakaokaTao]} which will allow to control global solutions in negative regularity spaces.
+\end{remark}
+
+\subsection{Cubic NLS equation}
+
+Here we obtain global solution of positive regularity for the modulated cubic NLS equation.
+\begin{lemma}
+\label{lemma:conservation}
+ We have that for any $\phi\in H^0$ and any $0\le s \le t$: 
+$$
+\langle \phi, X_{st}(\phi,\phi,\phi)\rangle \in \RR
+$$
+and there exists a constant $C_R$ such that for all $\phi\in H^0$ with $\|\phi\|_{H^0}\le R$ we have
+$$
+|\|\phi+X_{s,t}(\phi,\phi,\phi)\|_{H^0}-\|\phi\|_{H^0}|\le C_R |t-s|^{2\gamma}.
+$$
+\end{lemma}
+\begin{proof}
+We start observing that for smooth $\phi$:
+$$
+\langle \phi, \dot X_{s}(\phi,\phi,\phi)\rangle = \langle \phi, U^{w}_{-s}( |U_s \phi|^2 U^{w}_s \phi)\rangle 
+= \langle U^{w}_s \phi,  |U^{w}_s \phi|^2 U^{w}_s \phi \rangle\in \RR
+$$
+Integrating in $s$ and extending to arbitrary $\phi\in H^0$ we get the claim. Then if $\phi\in H^0$  we have
+$$
+\|\phi+X_{s,t}(\phi,\phi,\phi)\|^2_{H^0}=\|\phi\|^2_{H^0}+\|X_{st}(\phi,\phi,\phi)\|^2_{H^0}
+$$
+so
+$$
+|\|\phi+X_{s,t}(\phi,\phi,\phi)\|_{H^0}-\|\phi\|_{H^0}|\le \frac{\|X_{st}(\phi,\phi,\phi)\|^2_{H^0}}{\|\phi\|_{H^0}} \lesssim |t-s|^{2\gamma} \|\phi\|_{H^0}^5 .
+$$
+\end{proof}
+At this point the Lemma~\eqref{lemma:global} allow us to obtain the conservation law for our equation in $H^0$ and extend in this space the local solution in a global solution.  
+Now we prove the existence of a global solution for an initial data in $H^\alpha$ with $\alpha>0$.
+\begin{proposition}\label{prop:Global-Schr}
+Let  $\phi\in H^{\alpha}$ and $T>0$ then there exist $v\in \mathcal C_T^{1/2}H^\alpha$ such that the following equality holds 
+$$
+v_t=\phi+\int_{0}^{t}X_{\dd\sigma}(v_{\sigma},v_{\sigma},v_{\sigma})
+$$
+for all $t\in[0,T]$. \end{proposition}
+\begin{proof}
+The existence of the global solution  for an initial data in $\phi\in L^2$ is given by the conservation law $||v_t||_{L^2}=||\phi||_{L^2}$.  Now we will focus on the case when $\phi\in H^\alpha$ and we decompose our modulated Schr\"odinger operator $X$ as 
+$$
+X^2=X^{21}+X^{22}+X^{23}
+$$
+with 
+$$
+\cF X_{st}^{2j}(\psi_1,\psi_2,\psi_3)(k)=\sum_{(k_1,k_2,k_3)\in D^k_j}\hat\psi_1(k_1)^{\star}\hat\psi_2(k_2)\hat\psi_3(k_3)\Phi^w_{st}((k-k_2)(k-k_3)) 
+$$
+ for $j\in\{1,2,3\}$ and where $D^k_1=\{-k_1+k_2+k_3=k,k_2\ne k,k_3\ne k\}\cap\{|k_1|\geq|k|/3\}$, $D^k_2=\{-k_1+k_2+k_3=k,k_2\ne k,k_3\ne k\}\cap\{|k_1|<|k|/3,|k_2|\geq|k|/3\}$ and $D^k_3=\{-k_1+k_2+k_3=k,k_2\ne k,k_3\ne k\}\cap\{|k_1|<|k|/3,|k_2|<|k|/3,|k_3|\geq|k|/3\}$. Using Cauchy-Schwarz inequality we have the following bound  
+\begin{equation}
+\begin{split}
+||X^{2j}_{st}(\psi_1,\psi_2,\psi_3)||^2_{H^{\beta+\eps}}\leq&||\psi_j||_{H^{\beta+\eps}}\Pi_{i\ne j}||\psi_i||_{H^\beta}\sup_k|k|^{2\beta+2\eps}
+\\ &\sum_{D_j^k}|k_j|^{-2\beta-2\eps}\left(\Pi_{i\ne j}|k_i|^{-2\beta}\right) |\Phi^w_{st}(2(k-k_2)(k-k_3))|^2
+\end{split}
+\end{equation}
+ for $\beta,\eps\geq0$ then using the fact that $|k|\lesssim|k_j|$ on $D_j^k$ and using the $\rho$-irregularity of $w$ we obtain 
+$$
+||X^{2j}_{st}(\psi_1,\psi_2,\psi_3)||^2_{H^{\beta+\eps}}\lesssim_{\alpha,\eps}||\Phi^w||_{\mathcal W^{\rho,\gamma}_T}|t-s|^{\gamma}||\psi_j||_{H^{\beta+\eps}}\Pi_{i\ne j}||\psi_i||_{H^\alpha}\left(\sum_{l\ne0}|l|^{-2\rho}\right)^2<+\infty
+$$
+when $\rho>1/2$ and then we have that for all $T>0$ there exist $\gamma>1/2$ such that $X^{21}\in\mathcal C^{\gamma}\left([0,T],\mathcal L^3(H^{\alpha+\eps}\times H^{\alpha}\times H^\alpha,H^{\alpha+\eps})\right)$ for all $\beta,\eps\geq0$, of course the same statement holds for the other operators.  Now let us define the norm on $C^{1/2}([0,T],H^\beta)$ by $||\psi||_{\beta}=||\psi||_{\mathcal C^{1/2}([0,T],H^\beta)}+||\psi||_{\mathcal C^0([0,T],H^\beta)}$  for $\beta\in\mathbb R$ and the map $\Gamma$ by : 
+$$
+\Gamma(\psi):=\phi+\int_0^tX_{\dd\sigma}(\psi_\sigma)
+$$
+for $\psi\in \mathcal C^{1/2}([0,T],H^\alpha)$. By a simple computation we see that 
+$$
+||\Gamma(\psi)||_{0}\lesssim_{\gamma,w}||\phi||_L^2+T^{\gamma-1/2}||\psi||_{0}^3
+$$
+Now if $0<T\leq T_1$ is sufficiently small then the equation $r=||\phi||_{L^2}+T^{\gamma-1/2}r^3$ admits a positive solution $r^{\star}>0$ and  the closed ball $B_{r^{\star}}=:\{\psi\in C^{1/2}([0,T],L^2);||\psi||_0\leq r_T^\star\}$ is invariant by $\Gamma$. Moreover we have that 
+$$
+||\Gamma(\psi_1)-\Gamma(\psi_2)||_0\lesssim_{\gamma,w} T^{\gamma-1/2}||\psi_1-\psi_2||_0(1+(r^{\star})^2)
+$$
+and then if $T\leq T_2\leq T_1$ sufficiently small,  $\Gamma$ is a strict contraction on $B_{r^{\star}}$ which admits a unique fixed point $v$. Let $\Gamma_{B_{r^{\star}}}$ the restriction of $\Gamma$ on $B_{r^{\star}}$ and use the fact that
+$$
+\Gamma(\psi)_t=\phi+2\int_0^tv_\sigma||v_\sigma||_{L^2}^2\dd\sigma+\sum_{j\in\{1,2,3\}}\int_{0}^{t}X^{2j}_{\dd\sigma}(\psi_\sigma)
+$$
+and the regularity of $X^{2j}$ to deduce that
+$$
+||\Gamma_{B_{r^{\star}}}(\psi)||_{\alpha}\lesssim||\phi||_{H^\alpha}+T^{\gamma-1/2}(r^{\star})^2||\psi||_{\alpha}.
+$$
+Then $B(0,R):=\{\psi\in\mathcal C([0,T],H^\beta);||\psi||\leq R\}$ is invariant by $\Gamma_{B_{r^{\star}}}$ for $T^{\star}=T^{\star}(||\phi||_{L^2})$ small enough depending only on $r^{\star}>0$. Being the ball closed in $C^{1/2}([0,T],L^2)$  we have that $v\in\mathcal C^{1/2}([0,T^{\star}],H^{\alpha})$ and now is suffice to iterate this result to obtain a global solution in $H^\alpha$.
+\end{proof}
+
+\subsection{KdV on $\mathbb R$}
+Here we go back to the KdV equation to  prove the global existence of the modulated KdV equation in non-negative Sobolev space.
+Now as in the proposition~\ref{prop:Global-Schr} we will decompose the modulated operator $X$ of the KdV equation in the following way 
+$$
+X=X^{1}+2X^{2}+X^{3}+X^{4}
+$$
+where 
+$$
+\cF X^1_{st}(\psi_1,\psi_2)=ix\mathbb I_{|x|\geq1}\int_{|y|,|x-y|\geq1/2}\hat\psi_1(y)\hat\psi_2(x-y)\Phi^w_{st}(xy(x-y))\dd y
+$$
+$$
+\cF X^2_{st}(\psi_1,\psi_2)=ix\mathbb I_{|x|\geq1}\int_{|y|<1/2}\hat\psi_1(y)\hat\psi_2(x-y)\Phi^w_{st}(xy(x-y))\dd y
+$$
+$$
+\cF X^3_{st}(\psi_1,\psi_2)=ix\mathbb I_{|x|<1}\int_{|y|\geq2}\hat\psi_1(y)\hat\psi_2(x-y)\Phi^w_{st}(xy(x-y))\dd y
+$$
+and 
+$$
+\cF X^4_{st}(\psi_1,\psi_2)=ix\mathbb I_{|x|<1}\int_{|y|<2}\hat\psi_1(y)\hat\psi_2(x-y)\Phi^w_{st}(xy(x-y))\dd y
+$$
+As in the periodic case the operator $X^1$ have some smoothing effect more precisely 
+$$
+||X_{st}^1(\psi_1,\psi_2)||_{\alpha+\eps}\leq|t-s|^{\gamma}||\phi||_{\alpha}||\phi_2||_{\alpha}
+$$
+for $\alpha,\eps>0$ and $\eps>0$ small enough moreover we have the following bound 
+$$
+||X^1_{st}(\psi_1,\psi_2)||_{\beta}\lesssim|t-s|^{\gamma}\left(||\psi_1||_{\alpha}||\psi_2||_{\beta}+||\psi_1||_{\beta}||\psi_1||_{\alpha}\right)
+$$
+for all $\alpha,\beta\geq0$. We will focus on the operator $X^2$. By a usual argument we have that 
+$$
+||X^2_{st}(\psi_1,\psi_2)||_{\alpha+\eps}\lesssim|t-s|^{\gamma}||\psi_1||_{\alpha}||\psi_2||_{\alpha+\eps}\sup_{|x|\geq1}|x|^2\int_{|y|\leq1/2}(1+|yx^2|)^{-2\rho}<+\infty
+$$
+when $\rho>1/2$ then for all $\alpha,\eps>0$ and $T>0$ we have $X^2\in C^{\gamma}([0,T],\mathcal L^2(H^\alpha\times H^{\alpha+\eps},H^{\alpha+\eps}))$. For the third operator $X^3$ we have the bound 
+$$
+||X^3_{st}(\psi_1,\psi_2)||_{\alpha+\eps}\lesssim|t-s|^{\gamma}||\psi_1||_{\alpha}||\psi_2||_{\alpha}\sup_{|x|<1}|x|^2\int_{|y|>2}(1+y^2|x|)^{-2\rho}<+\infty
+$$ 
+for $\alpha,\eps>0$ and then $X^3\in C^{\gamma}([0,T],\mathcal L^2(H^\alpha\times H^{\alpha},H^{\alpha+\eps}))$ for all $T>0$. Of course we have the same regularity for the operator $X^4$ and the global existence for the KdV equation follow by the same argument used in the proof of Proposition~\ref{prop:Global-Schr}.
+
+
+
+\section{Global existence for the modulated KdV equation in negative Sobolev spaces }
+In this section we prove the global existence for the KdV equation with rough initial condition $\phi\in H^{\alpha}(\mathbb T)$ with negative $\alpha$.
+For the unmodulated equation with initial condition in negative Sobolev spaces~\cite{[CollianderKeelStaffilaniTakaokaTao]} proves global existence using the so called ``I-method". In this section we try to adapt this technique to our context. To do so we have to study the rescaled Cauchy problem associated to the modulated equation and then give an almost conservation law for the rescaled local solution.
+
+\subsection{Rescaled equation}
+Here we study the rescaled solution of our equation we know in the deterministic case if $u$ is a local solution of KdV equation on $[0,T]$ with initial data $\phi\in H^{\alpha}(\mathbb T)$ then the function defined by $u^{\lambda}(t,x)=\lambda^{-2}u(\lambda^{-3}t,\lambda^{-1}x)$ is once again a solution of the KdV equation on $[0,\lambda^3T]$ with initial data 
+$\phi^{\lambda}(x)=\lambda^{-2}\phi(\lambda^{-1}x)$ and vice versa. We proceed along the same lines in our setting. By a formal computation we see that  if $u$ is a local solution for the modulated KdV equation on the torus then the rescaled function satisfies formally the equation 
+$$
+\frac\dd{\dd t} u^{\lambda}_{t}=\partial^{3}_xu^{\lambda}\frac{\dd  w^{\lambda}_t}{\dd t}+\partial_x(u^{\lambda}_t)^2
+$$
+with $w^{\lambda}_t=\lambda^3w_{\lambda^{-3}t}$ and  $u^{\lambda}(0,x)=\lambda^{-2}\phi(\lambda^{-1}x)$. We must also pay attention to the fact that space has changed because the new solution is $\lambda$-periodic function and not a $1$-periodic function. Let us introduce some definition and conventions that will be used later. We begin by define the Fourier transform of function on $\TT_\lambda = [0,\lambda]$ by 
+$$
+\hat f(k)=\int_{0}^{\lambda}f(x)e^{-2i\pi kx}\dd x
+$$
+for $k\in\mathbb Z/\lambda$ then the usual properties of the Fourier transform holds:
+\begin{enumerate}
+\item 
+$
+\int_{0}^{\lambda}|f(x)|^2\dd x=\frac{1}{\lambda}\sum_{k\in\mathbb Z/\lambda}|\hat f(k)|^2
+$
+\item 
+$
+f(x)=\frac{1}{\lambda}\sum_{k\in\mathbb Z/\lambda}\hat f(k)e^{2i\pi kx}
+$
+\item 
+$
+\mathcal F(fg)(k)=\frac{1}{\lambda}\sum_{k_1,k_2\in\mathbb Z/\lambda;k_1+k_2=k}\hat f(k_1)\hat g(k_2)
+$
+\end{enumerate}
+and then we define the Sobolev space $H^{\alpha}(\TT_\lambda)$  by the set of the distribution $f\in\mathcal S'(\TT_\lambda)$ such that $\hat f(0)=0$ and 
+$$
+||f||^2_{H^{\alpha}(0,\lambda)}=\frac{1}{\lambda}\sum_{k\in\mathbb Z/\lambda}|k|^{2\alpha}|\hat f(k)|^2<+\infty.
+$$
+Now we are able to study our rescaled Cauchy problem given by 
+\begin{equation}\label{eq:R-Cauchy}
+\left\{
+\begin{split}
+&\frac{\dd}{\dd t} u_t^{\lambda}=\partial^3_xu_t\frac{\dd}{\dd t} w^{\lambda}_t+\partial_x(u_{t}^{\lambda})^2\dd t
+\\&u(0,x)^{\lambda}=\psi(x)\in H^{\alpha}(0,\lambda)
+\end{split}
+\right.
+\end{equation}
+As usual we write this last equation as 
+$$
+v_t^{\lambda}=\psi+\int_{0}^{t}X^{\lambda}_{\dd\sigma}(v_{\sigma},v_{\sigma})
+$$
+with $v_t^{\lambda}=(U^{w^\lambda}_t)^{-1}u^{\lambda}_t$. Now to solve this last equation by the fixed point method we have to estimate the H\"older norm of the modulated operator  $X^{\lambda}$ given by :
+$$
+X_{st}^{\lambda}(\psi_1,\psi_2)=\int_{s}^{t}(U^{w^\lambda}_{\sigma})^{-1}\partial_x(U^{w^\lambda}_{\sigma}\psi_1U^{w^\lambda}_{\sigma}\psi_2)\dd\sigma
+$$
+for $\psi_1,\psi_2\in H^{\alpha}(0,\lambda)$.
+\begin{proposition}
+ Let $\alpha>-\rho$ and $\rho>3/4$ then there exist $\gamma>1/2$  such that for all $T>0$ the following inequality holds.
+ $$
+ ||X^{\lambda}_{st}||_{\mathcal L^2H^{\alpha}(0,\lambda)}\leq C_{T}||\Phi^{w}||_{\mathcal W_{\rho,T}^{\gamma}}\lambda^{\alpha+3/2-3\gamma}|t-s|^{\gamma}
+ $$
+for all $(s,t)\in[0,\lambda^3T]$, with $C_{T}>0$ is a finite positive constant.
+\end{proposition}
+\begin{proof}
+Let $\psi_1,\psi_2\in H^{\alpha}(0,\lambda)$ then by a simple computation we have that 
+$$
+|X^{\lambda}_{st}(\psi_1,\psi_2)|^2_{H_{\alpha(0,\lambda)}}=\lambda^{-3}\sum_{k\in\mathbb Z/\lambda}|k|^{2\alpha+2}\left|\sum_{k_1+k_2=k}\phi_1(k_1)\phi_2(k_2)\Phi^{\lambda}_{st}(k_1k_2k)\right|^2
+$$
+with $\Phi^{\lambda}_{st}(a)=\int_{s}^{t}e^{iaw^{\lambda}_\sigma}\dd\sigma$ and then using Cauchy-Schwarz inequality we obtain 
+\begin{equation*}
+\begin{split}
+|X^{\lambda}_{st}(\psi_1,\psi_2)|^2_{H_{\alpha(0,\lambda)}}\leq \lambda^{-1}\sum_{k\in\mathbb Z/\lambda}|k|^{2\alpha+2}\sup_{k_1+k_2=k}\frac{\left|\Phi_{st}^{\lambda}(kk_1k_2)\right|^2}{|k_1|^{2\alpha}|k_2|^{2\alpha}}||\psi_1||_{H^{\alpha}(0,\lambda)}||\psi_2||_{H^{\alpha}(0,\lambda)}
+\end{split}
+\end{equation*}
+Now using the $(\rho,\gamma)$ irregularity of $w$ we can see that
+\begin{equation*}
+\begin{split}
+\left|\int_{s}^{t}e^{ikk_1k_2w^{\lambda}_{\sigma}}\dd \sigma\right|&=\lambda^3\left|\int_{\lambda^{-3}s}^{\lambda^{-3}t}e^{i\lambda^3kk_1k_2w_{\sigma}}\dd\sigma\right|
+%\\&
+\leq C_{w,T}\lambda^{3-3(\gamma+\rho)}|t-s|^{\gamma}|kk_1k_2|^{-2\rho+\eps}
+\end{split}
+\end{equation*} 
+and then we have 
+\begin{equation*}
+\begin{split}
+|X^{\lambda}_{st}|^2_{\mathcal L^2 H_{\alpha(0,\lambda)}}&\leq C^2_{w,T}\lambda^{5-6(\gamma+\rho)}|t-s|^{2\gamma}\sum_{k\in\mathbb Z/\lambda}|k|^{2-4\rho}\sup_k\left(\frac{|k|}{|k_1k_2|}\right)^{2\alpha+2\rho}
+\\&\leq C^2_{w,T}\lambda^{3-6\gamma+2\alpha}|t-s|^{2\gamma}\sum_{k\in\mathbb Z^*}|k|^{2-4\rho}<+\infty
+\end{split}
+\end{equation*}
+and  this finishes the proof.
+\end{proof}
+\begin{corollary}
+Let $\lambda>0$ then $u$ is a local solution of the modulated KdV equation on the Torus  with initial data $\phi\in H^{\alpha}(\mathbb T)$ and life time $T>0$  if and only if $u^\lambda(t,x)=\lambda^{-2}u(\lambda^{-3}t,\lambda^{-1}x)$ is a local  solution of the rescaled equation with initial data $\phi^{\lambda}(x)=\lambda^{-2}\phi(\lambda^{-1}x)$ with life time $\lambda^3T$
+\end{corollary}
+\begin{proof}
+Let $u$ a solution of the modulated KdV equation on the Torus then by definition we have that $v_t=U^{-1}_tu_t\in C^{1/2}([0,T],H^{\alpha}(\mathbb T))$ and by a simple computation we have that $v_t^{\lambda}=(U_t^{w^{\lambda}})^{-1}u_t^{\lambda}\in C^{1/2}([0,\lambda^3T],H^{\alpha}(\TT_\lambda))$. Now we have to check that the rescaled function $u^{\lambda}(t,x)=\lambda^{-2}u(\lambda^{-3},\lambda^{-1}x)$ satisfy the equation. but by a simple computation we have that $\hat v^{\lambda}_t(k)=\frac{1}{\lambda}\hat v_{\lambda^{-3}t}(\lambda k)$ and 
+\begin{equation*}
+\begin{split}
+\hat X^{\lambda}_{st}(\psi_1,\psi_2)(k)&=ik\lambda^{-1}\sum_{k_1+k_2=k;k_1,k_2\in\mathbb Z/\lambda}\hat\psi_1(k_1)\hat\psi_2(k_2)\int_{s}^{t}e^{ikk_1k_2\lambda^3w_{\lambda^{-3}\sigma}}\dd \sigma
+\\&=ik\lambda^{2}\sum_{l_1+l_2=\lambda k;l_1,l_2\in\mathbb Z}\hat\psi_1\left(\frac{l_1}{\lambda}\right)\hat\psi_2\left(\frac{l_2}{\lambda}\right)\Phi^{w}_{\lambda^{-3}s,\lambda^{-3}t}(l_1l_2\lambda k)
+\\&=\lambda^{-1} \hat X_{\frac{s}{\lambda^3}\frac{t}{\lambda^3}}(\psi_1(\lambda.),\psi_2(\lambda.))(\lambda k)
+\end{split}
+\end{equation*}
+for all $k\in\mathbb Z/\lambda$ and all $\psi_1,\psi_2\in H^{\alpha}(0,\lambda)$. Let  $\lambda^3t\in[0,\lambda^3T]$ and $\Pi=(t_i)_i$ a partition of the interval $[0,\lambda^3t]$ then of course $\Pi^{\lambda}=(\lambda^{-3}t_i)$  is a dissection of $[0,t]$ and using the relation given above we can easily see that 
+$$
+\hat X_{t_it_{i+1}}^{\lambda}(v^{\lambda}_{t_i},v^{\lambda}_{t_i})=\lambda^{-1}\hat X_{\lambda^{-3}t_{i+1},\lambda^{-3}t_i}(v_{\lambda^{-3}t_i},v_{\lambda^{-3}t_i})(\lambda k)
+$$
+and using the fact that $u$ is a solution of the 1-periodic equation we can easily see that 
+$$
+v_{t}=\psi+\lim_{|\Pi^{\lambda}|\to0}\sum_{t_i}X_{\lambda^{-3}t_{i+1},\lambda^{-3}t_i}(v_{\lambda^{-3}t_i},v_{\lambda^{-3}t_i})
+$$
+in $H^{\alpha}(\mathbb T)$ and then 
+$$
+v^{\lambda}_t=\phi^{\lambda}+\lim_{|\Pi|\to0}\sum_i X_{t_it_{i+1}}^{\lambda}(v^{\lambda}_{t_i},v^{\lambda}_{t_i})
+$$
+in $H^{\alpha}(0,\lambda)$ with $\phi^{\lambda}(x)=\lambda^{-2}\phi(\lambda^{-1}x)$ of course this give us our result by the convergence of Riemann sum to the Young integral.
+\end{proof}
+
+\subsection{Commutator estimates and almost conservation law}
+The previous  section tell us if we want to construct a global solution to the 1-periodic KdV equation is sufficient to prove that for every $T>0$ and a suitable $\lambda>1$ we are able to construct a global solution to the rescaled equation. For that
+let us introduce the spatial Fourier multiplier operator $I$ which act like the identity on the low frequencies and like a smoothing operator of order $|\alpha|$ on the high frequencies more precisely we choose a smooth function $m$ such that 
+\begin{equation*}
+m(\xi)=
+\left\{
+\begin{split}
+&1,\quad|\xi|<1
+\\&|\xi|^{\alpha},\quad|\xi|\geq10
+\end{split}
+\right.
+\end{equation*}
+and for $N>>1$ we define $I$ by $\mathcal F(I\phi)(k)=m(\frac{k}{N})\hat \phi(k)$ for every $\phi\in H^{\alpha}(\TT_\lambda)$. Now the so called $I$ method to proof the global solution is based on some estimation of the modified energy $||Iu_t||_{L^2}$. Let us begin by expand our modified energy 
+$$
+||Iv_t||_2^2-||Iv_s||^2=\langle Iv_s,IX^{\lambda}_{st}(v_s,v_s)-X^{\lambda}_{st}(Iv_s,Iv_s)\rangle+R_{st}
+$$
+with $R_{st}\lesssim|t-s|^{\gamma+1/2}$ then to control $R$ is sufficient to control the first order term of our expansion and for that we have the following commutator estimates. To simplife the notation let $m_N(k)=m(k/N)$.
+
+\begin{proposition}\label{proposition:commu}
+Let $\alpha\in(-\rho,0)$, $\rho>3/4$ there exist $\gamma>1/2$ such that for all $T>0$  the following inequality holds  a   
+$$
+||IX^{\lambda}_{st}(\psi_1,\psi_2)-X^{\lambda}_{st}(I\psi_1,I\psi_2)||_2\leq C_{T}||\Phi^{w}||_{\mathcal W_{\rho,T}^{\gamma}}|t-s|^{\gamma}N^{-\rho}\lambda^{-\rho+3/2-3\gamma}||I\psi_1||_2||I\psi_2||_2
+$$
+for all $s,t\in[0,\lambda^3T]$, $\lambda>0$ and $\psi_1,\psi_2\in H^{\alpha}(0,\lambda)$, with $C_{w,T}>0$ a finite constant. 
+\end{proposition}
+\begin{proof}
+By a simple computation we have
+\begin{equation*}
+\begin{split}
+||IX^{\lambda}_{st}(\psi_1,\psi_2)-X^{\lambda}_{st}(I\psi_1,I\psi_2)||^2_2&=\frac{1}{\lambda^3}\sum_{k\in\mathbb Z/\lambda}|k|^2\left|\sum_{k_1+k_2=k}\Phi^{\lambda}_{st}(kk_1k_2)\hat \psi_1(k_1) \hat\psi_2(k_2)(m_N(k)-m_N(k_1)m_N(k_2))\right|^2
+\end{split}
+\end{equation*}
+and then we split $\{k_1+k_2=k\}=\cup_{i=0,1,2,3}D_i$ with $D_0=\{k_1+k_2=k;|k_1|\leq N/2,|k_2|\leq N/2\}$,$D_1=\{k_1+k_2=k;|k_1|\geq N/2,|k_2|\leq N/2,|k|\leq N/4\}$,$D_2=\{k_1+k_2=k;|k_1|\geq N/2,|k_2|\leq N/2,|k|\geq N/4\}$
+and $D_3=\{k_1+k_2=k;|k_1|\geq N/2,|k_2|\geq N/2\}$. Is not difficult to see that the region $D_0$ give a zero contribution. Using the Cauchy-Schwarz inequality we can see that
+$$
+\lambda^{-3}\sum_{k\in\mathbb Z/\lambda}|k|^2\left|\sum_{D_i}\Phi^{\lambda}_{st}(kk_1k_2)\hat \psi_1(k_1) \hat\psi_2(k_2)(m_N(k)-m_N(k_1)m_N(k_2))\right|^2\leq h_N^{\lambda,i}||I\psi_1||_2^2||I\psi_2||_2^2
+$$
+with 
+$$
+h_N^{\lambda,i}=\lambda^{-1}\sum_{|k|\leq N/4}|k|^2\sup_{D_i}\frac{|\Phi^{\lambda}_{st}(kk_1k_2)|^2|m_N(k)-m_N(k_2)m_N(k_1)|^2}{|m_N(k_1)|^2|m_N(k_2)|^2}
+$$
+ for $i=1,3$ and 
+ $$
+ h_N^{\lambda,2}=\lambda^{-1}\sup_{|k|\geq N/4}|k|^2\sum_{D_2}\frac{|\Phi^{\lambda}_{st}(kk_1k_2)|^2|m_N(k)-m_N(k_2)m_N(k_1)|^2}{|m_N(k_1)|^2|m_N(k_2)|^2}.
+  $$
+We begin by bounding the term $h_N^{\lambda,2}$:
+ $$
+ h_{N}^{\lambda,2}\leq C_{w,T}|t-s|^{2\gamma}\lambda^{5-6(\gamma+\rho)}N^{2\alpha}\sup_{|k|\geq N/4}|k|^{2-2\rho}\sum_{D_2}\frac{|m_N(k)-m_N(k_1)|^2}{|k_1|^{2\alpha+2\rho}|k_2|^{2\rho}},
+ $$
+then by the mean value theorem we have  
+$
+|m_N(k)-m_N(k_1)|\lesssim|k_2|/N
+$ 
+and if we interpolate this bound with the trivial bound $|m_N(k)-m_N(k_1)|\lesssim 1$ we obtain 
+$$
+|m_N(k)-m_N(k_1)|\lesssim N^{-2\alpha(1-\theta)-2\theta}|k|^{2\alpha(1-\theta)}|k_2|^{2\theta}.
+$$
+If $\rho\in(3/4,3/2)$ we can choose $\theta=\rho-1/2-\eps\in[0,1]$ for $\eps>0$ small enough to obtain 
+\begin{equation*}
+\begin{split}
+h_N^{\lambda,2}&\lesssim C_{w,T}|t-s|^{2\gamma}\lambda^{5-6(\gamma+\rho)}N^{2\alpha\theta-2\theta}\sup_{|k|\geq N/4}|k|^{2-4\rho-2\alpha\theta}\sum_{D_2}(|k||k_1|^{-1})^{2\alpha+2\rho}|k_2|^{-1-\eps}
+\\&\lesssim  C_{w,T}|t-s|^{2\gamma}N^{3-6\rho+\eps}\lambda^{6-6(\gamma+\rho)+\eps}
+\\&\lesssim    C_{w,T}|t-s|^{2\gamma}N^{-2\rho}\lambda^{-2\rho+3-6\gamma}.
+\end{split}
+\end{equation*}
+If $\rho>3/2$ we use only the trivial bound to get
+\begin{equation*}
+\begin{split}
+h_N^{\lambda,2}&\lesssim C_{w,T}|t-s|^{2\gamma}\lambda^{5-6(\gamma+\rho)}\sup_{|k|\geq N/4}|k|^{2-4\rho}\sum_{D_2}(|k||k_1|^{-1})^{2\alpha+2\rho}|k_2|^{-2\rho}
+\\&\lesssim C_{w,T}|t-s|^{2\gamma}N^{2-4\rho}\lambda^{5-6\gamma-4\rho}
+\\&\lesssim C_{w,T}|t-s|^{\gamma}N^{-2\rho}\lambda^{3-6\gamma-2\rho}.
+\end{split}
+\end{equation*}
+Now we will focus on the term $h_N^{\lambda,1}$ in fact by a simple computation we can see that in this region we have $|k_2|\in[N/4,N/2]$ and then  
+\begin{equation*}
+\begin{split}
+h_N^{\lambda,1}&\lesssim C_{w,T}|t-s|^{\gamma}\lambda^{5-6(\gamma+\rho)}\sum_{|k|\leq N/4}|k|^{2-4\rho}\sup_{D_1}|k|^{2\alpha+2\rho}|k_1|^{-2\alpha-2\rho}|k_2|^{-2\rho}
+\\&\lesssim C_{w,T}|t-s|^{\gamma}\lambda^{3-6\gamma-2\rho}N^{-2\rho}.
+\end{split}
+\end{equation*}
+It remains to bound $h_N^{\lambda,3}$. We begin by noting that in this region we have  $|m_N(k)-m_N(k_1)m_N(k_2)|^2\lesssim|m_N(k)|^2+N^{-4\alpha}|k_1k_2|^{2\alpha}$ and then  
+\begin{equation*}
+\begin{split}
+h_N^{\lambda,3}&\lesssim C_{w,T}|t-s|^{2\gamma}\lambda^{5-6(\gamma+\rho)}(N^{4\alpha}\sum_{k}|k|^{2-4\rho-2\alpha}|m_N(k)|^2\sup_{D_3}|k|^{2\alpha+2\rho}|k_1k_2|^{-2\alpha-2\rho}
+\\&+\sum_k|k|^{2-4\rho}\sup_{D_3}|k|^{2\rho}|k_1k_2|^{-2\rho})
+\\&\lesssim  C_{w,T}|t-s|^{2\gamma}\lambda^{5-6(\gamma+\rho)}N^{-2\rho}(\lambda^{4\rho-2}+N^{2\alpha}\sum_{k}|k|^{2-4\rho-2\alpha}|m_N(k)|^2)
+\end{split}
+\end{equation*}
+ Now it is not difficult to see that $N^{2\alpha}\sum_{k}|k|^{2-4\rho-2\alpha}|m_N(k)|^2\lesssim\lambda^{4\rho-2}$ and that we have  
+ $$
+ h_N^{\lambda,3}\lesssim C_{w,T}|t-s|^{2\gamma}\lambda^{3-6\gamma-2\rho}N^{-2\rho} .
+ $$
+This ends the proof.
+\end{proof}
+Now we have a useful Corollary which be used to prove a variant of the local existence result. 
+\begin{corollary}
+Let $\alpha\in(-\rho,0)$, $\rho>3/4$ then there exist $\gamma>1/2$ such that for all $T>0$ there exists a constant  such that
+$$
+||IX^{\lambda}_{st}(\psi_1,\psi_2)||_{L^2}\lesssim_{w,T}|t-s|^{\gamma}\lambda^{3/2-3\gamma+\alpha}||I\psi_1||_2||I\psi_2||_2
+$$
+for all $s,t\in[0,\lambda^3T]$ and $\psi_1,\psi_2\in H^{\alpha}(0,\lambda)$
+\end{corollary}
+Let us define $N_I(\psi)=||I\psi||_{L^2}$ for all $\psi\in H^{\alpha}(0,\lambda)$ of course $H^\alpha(0,\lambda)$ equipped with the norm $N_I$ is a Banach space. Now we have the following local existence result.
+\begin{proposition}\label{proposition:local result}
+Let $\psi\in H^{\alpha}(0,\lambda)$ then there exist a life time $\kappa>0$ and a solution $u$ of the rescaled problem such that  $Iv^{\lambda}\in C^{1/2}([0,\kappa],L^2)$ moreover we have that 
+$$
+\kappa\sim\min(5,||I\psi||^{-\theta})
+$$
+for some $\theta>0$ and we also have 
+$$
+||Iv||_{\mathcal C^{0}(L^2)}+||Iv||_{\mathcal C^{1/2}(L^2)}\lesssim ||I\psi||_{L^2}.
+$$
+\end{proposition}
+\begin{proof}
+Let $v\in C^{1/2}([0,\kappa],H^{\alpha})$, $0<\kappa<5$ then we introduce the norm $||v||=||Iv||_{C^{1/2}L^2}+||Iv||_{C^{0}L^2}$ and we define the fixpoint map 
+$$
+\Gamma_{\kappa}(v)=\psi+\int_0^tX^{\lambda}_{\dd\sigma}(v_{\sigma},v_{\sigma}).
+$$
+Of course $\Gamma_\kappa$ is well defined and if we let $B_C:=\{v\in C^{1/2}([0,\kappa],H^{\alpha});||v||\leq c||I\psi||_{L^2}\}$ then if $v\in B_C$ we have by a simple computation that 
+ $$
+ ||I\Gamma_\kappa(v)||_{C^{1/2}L^2}\lesssim C_{W,\lambda^{-3}\kappa}\lambda^{\alpha+3/2-3\gamma}||I\psi||^2\kappa^{\gamma-1/2}
+ $$
+  and then  for $\lambda>1$, we have that 
+  $$
+   ||\Gamma_\kappa(v)||\lesssim C_{W,\kappa}c^2||I\psi||^2\kappa^{\gamma-1/2}.
+   $$
+Now is sufficient to take $\kappa^{\star}\sim \min(5,||I\psi||^{\frac{1}{1/2-\gamma}})$ small enough and then there exist $c>1$ such that $||\Gamma(v)||\leq c||I\psi||_{L^2}$. Now $\Gamma_{\kappa}$ is a contraction in $B_c$ in fact we have by a simple computation  
+\begin{equation*}
+\begin{split}
+||\Gamma_\kappa(v^1)-\Gamma_\kappa(v^2)||&\lesssim c\kappa^{\gamma-1/2}||I\psi||_{L^2}||v^1-v^2||
+\\&\lesssim c||v^1-v^2||
+\end{split}
+\end{equation*}
+and then if we take $\kappa\sim \min(5,||I\psi||^{\frac{1}{1/2-\gamma}})\leq \kappa^{\star}$ small enough, $\Gamma_{\kappa}$ in this case is a strict contractions in $B_c$ and then it have a unique fixed point in this ball, the proof of the uniqueness is standard.
+\end{proof}
+We have now all the ingredients  to prove the global existence result. 
+
+\subsection{Global existence}
+To exibith a global solution for 1-periodic Cauchy problem with initial data $\phi\in H^\alpha(\mathbb T)$ it suffices to prove that for every $T>0$ the rescaled equation admits a solution in $[0,\lambda^{3}T]$ with initial condition $\psi^{\lambda}(x)=\lambda^{-2}\phi(\lambda^{-1}x)$. We begin by noting that 
+$$
+||I\psi^{\lambda}||_{L^2}\lesssim\lambda^{-\alpha-3/2}N^{-\alpha}||\phi||_{H^{\alpha}(\mathbb T)}
+$$
+and then we choose $\lambda\sim_{||\phi||_{H^{\alpha}}}N^{-\frac{\alpha}{3/2+\alpha}}$ such that $||I\psi^{\lambda}||_{L^2}=\eps_0\ll 1$. Using the  local result we know that there exists a solution $v^{\lambda}=v$ of the rescaled problem with lifetime $\kappa>1$ now by  a simple  computation we have  
+$$
+||Iv_t||_{L^2}-||Iv_s||_{L^2}=\langle v_s;IX(v_s,v_s)-X(Iv_s,Iv_s)\rangle+R_{st}
+$$
+ where $|R_{st}|\lesssim|t-s|^{2\gamma}$ then for  $\rho<3/2$ and using this last equation,the Young estimation given in the Theorem~\ref{th:young} and commutator estimate we can see that 
+$$
+||Iv_1||\leq\eps_0^2+N^{-\rho}\lambda^{-\rho+3/2-3\gamma}
+$$
+ then if we iterate our local result given by the Proposition~\ref{proposition:local result} we can construct a solution with life time $\sim N^{\rho}\lambda^{\rho+3/2-3\gamma}$ and then we have to choose $N$ such that 
+$$
+\lambda^3T\lesssim N^{\rho}\lambda^{\rho-3/2+3\gamma}.
+$$
+This is possible if $\alpha>-\frac{\rho}{3-2\gamma}$ and $N$ large enough.
+
+\section{Strichartz estimate and the modulated NLS}
+\label{sec:strich-NLS}
+In this section we study the Schr\"odinger equation with quintic non linearity (ie : $A=i\partial^2$ and $\mathcal N(u)=|u|^\mu u$, $\mu\in(1,4]$). The problem  here is to manage the algebraic difficulty given by the non linearity for this we will use a different strategy than that used in the previous sections. We recall for the case of Brownian motion that this equation has already been studied in~\cite{Debussche2011363}  using a strong Strichartz type estimates, the goal of this section is to observe that their result generalizes easily to an arbitrary $\rho$-irregular path. In order to prove Th.~\ref{theorem:strichartz-w} we will follow their strategy and obtain a preliminary estimate which involves computations similar to those used in the study of the $X$ operator for the cubic NLS in Lemma~\ref{th:reg-1d}.
+\begin{proposition}\label{proposition: Strich}
+Let $\alpha\in[0,1]$ and $\rho>0$ such that $0\leq\alpha<1$ and $\rho>\alpha+1/2$ or $\alpha=1$ and $\rho>1$ then for all $T>0$ there exist $\gamma>1/2$ such that :
+$$
+\int_{0}^{T}\dd t\left|\left|D^{\frac{\alpha}{2}}\left|\int_{0}^{t}U_t^{w}(U_s^{w})^{-1}\psi_s\dd s\right|^2\right|\right|^2_{L^{2}(\mathbb R)}\lesssim ||\Phi^w||_{\mathcal W_{\rho,T}^{\gamma}}T^{\gamma}\left|\left|\psi\right|\right|^4_{L^1([0,T],L^2(\mathbb R))}
+$$
+for every $\psi\in L^1([0,T],L^2(\mathbb R))$. 
+\end{proposition} 
+\begin{proof}
+By going in Fourier variables we can see that :
+\begin{equation*}
+\begin{split}
+\int_{0}^{T}\dd t\left|\left|D^{\frac{\alpha}{2}}\left|\int_{0}^{t}U_t^{w}(U_s^{w})^{-1}\psi_s\dd s\right|^2\right|\right|^2_{L^{2}(\mathbb R)}= & \int_{0}^{T}\dd t\int_{[0,t]^4}\dd s_1\dd s_2\dd s_3\dd s_4\int_{\mathbb R^3}\dd x_1\dd x_2\dd x_3 \times
+\\& \times (e^{-i\phi}|x_2-x_1|^{\alpha}|\hat\psi_{s_1}(x_1)||\hat\psi^*_{s_2}(x_2)||(\hat\psi_{s_3})^*(x_3)||\hat\psi^*_{s_4}(x_4)|)
+\end{split}
+\end{equation*}
+where $x_4=-x_1+x_2+x_3$, $\phi=x_1^2(w_t-w_{s_1})-x_2^2(w_t-w_{s_2})-x_3^2(w_t-w_{s_3})+x_4^2(w_t-w_{s_4})$. Now we split the integral over $(s_1,s_2,s_3,s_4)$ in four region where $s_i=\max(s_1,s_2,s_3,s_4)$ for $i=1,...,4$. Consider for example the first region where $s_1>s_2,s_3,s_4$. Then using Fubini we can see that this integral is given by  :
+$$
+\mathcal I=\int_{0}^{T}\dd s_1\int_{[0,s_1]^{3}}\int_{\mathbb R^3}\dd x_1\dd x_2\dd x_3(\int_{s_1}^{T}e^{-i\phi}\dd t)|x_2-x_1|^{\alpha}|\hat\psi_{s_1}(x_1)||\hat\psi^*_{s_2}(x_2)||(\hat\psi_{s_3})^*(x_3)||(\hat\psi^*_{s_4})^{*}(x_4)|
+$$
+and 
+$$
+\left|\int_{s_1}^{T}e^{-i\phi}\dd t\right|=\left|\int_{s_1}^{T}e^{2i(x_{2}-x_{1})(x_{3}-x_{1})(w_{t}-w_{s_1})}\dd t\right|=\left|\Phi^{w}_{s_1T}(2(x_2-x_1)(x_3-x_1))\right|.
+$$
+Then we have to bound the following integral 
+\begin{equation*}
+\begin{split}
+I(\alpha)&=\int_{\mathbb R^3}\dd x_1\dd x_2\dd x_3|x_2-x_1|^{\alpha}|\Phi^{w}_{s_1T}(2(x_2-x_1)(x_3-x_1))||\hat\psi_{s_1}(x_1)||\hat\psi^*_{s_2}(x_2)||(\hat\psi_{s_3})^*(x_3)||(\hat\psi^*_{s_4})^*(x_4)|.
+\end{split}
+\end{equation*}
+An application of Lemma~\ref{lemma=Sch-estimates} shows that
+$$
+\mathcal I\lesssim T^{\gamma}\left(\int_{0}^{T}|\psi_{s}|_{L^{2}(\mathbb R)}\dd s\right)^4
+$$
+and concludes the proof.
+\end{proof}
+Now we  obtain a Gagliardo-Nirenberg type inequality to transform the regularity gain of the previous proposition into an integrability result of Strichartz's type.
+\begin{lemma}\label{lemma:Gagliardo-Nirenberg}
+Let $p>2$ and $\eps>0$ then there exist $C=C(\eps,p)$ such that for all $f\in L^1(\mathbb R)\cap\mathcal H_{s}$ the following inequality holds :
+$$
+||f||_{L^p(\mathbb R)}\leq c||f||_{L^1(\mathbb R)}^{1-\theta}||f||_{\mathcal H_s}^{\theta}
+$$
+where $\mathcal H_s$ is the homogenous Sobolev space on $\RR$, $s=\frac{1}{2}-\frac{1}{p}+\frac{\eps}{2}$ and $\theta=\frac{2p-2}{(2+\eps)p-2}\in(0,1)$ 
+\end{lemma}
+\begin{proof}
+We begin by decomposing $f$ in standard Littlewood-Paley blocks $f=\sum_{i>-1}\Delta_if$ and then
+\begin{equation}\label{eq:L-P-decomp}
+||f||_{L^p(\mathbb R)}\leq||\Delta_{-1}f||_{L^{p}(\mathbb R)}+\sum_{i\geq0}||\Delta_if||_{L^p(\mathbb R)}.
+\end{equation}
+Bernstein's inequality then gives
+$
+||\Delta_if||_{L^p(\mathbb R)}\lesssim2^{i(\frac{1}{2}-\frac{1}{p})}||\Delta_if||_{L^2(\mathbb R)}
+$ and
+then summing this last equation over $i\geq0$ and using Jensen inequality we can see that 
+\begin{equation*}
+\begin{split}
+\sum_{i\geq0}||\Delta_if||_{L^p(\mathbb R)}&\lesssim \sum_{i\geq0}2^{i(\frac{1}{2}-\frac{1}{p})}||\Delta_if||_{L^2(\mathbb R)}
+%\\&
+\lesssim \sum_{i\geq0}(2^{i(\frac{1}{2}-\frac{1}{p}+\frac{\eps}{2})}||\Delta_if||_{L^2(\mathbb R)})2^{-i\frac{\eps}{2}}
+\\&\lesssim_{\eps} \left(\sum_{i\geq0}2^{2i(\frac{1}{2}-\frac{1}{p}+\frac{\eps}{2})}||\Delta_if||^2_{L^2(\mathbb R)}\right)^{1/2}
+\lesssim_{\eps}||f||_{\mathcal H_s}
+\end{split}
+\end{equation*}
+and then we have 
+$
+||f||_{L^p(\mathbb R)}\lesssim ||f||_{L^1(\mathbb R)}+||f||_{\mathcal H_s}
+$.
+Now if we put $f_{\lambda}(x)=f(\lambda x)$ in this last inequality we can see that 
+$$
+||f||_{L^p(\mathbb R)}\lesssim \lambda^{-1+1/p}||f||_{L^1(\mathbb R)}+\lambda^{\eps/2}||f||_{\mathcal H_s}
+$$
+then to have our result is suffices to take $\lambda=(||f||^{-1}_{L^1(\mathbb R)}||f||_{\mathcal H_s})^{\frac{2p}{2-(2+\eps)p}}$.
+\end{proof}
+\begin{proof}[Proof of Proposition~\ref{theorem:strichartz-w}]
+Starting with Lemma~\ref{lemma:Gagliardo-Nirenberg} and taking $\alpha=1$ and $\rho>1$ in  Prop.~\ref{proposition: Strich} we obtain :
+\begin{equation*}
+\begin{split}
+& \left|\left|\int_{0}^{.}U^{w}_{.}(U_{s}^{w})^{-1}\psi_s\dd s\right|\right|^{p}_{L^{p}([0,T],L^{2p}(\mathbb R))}=\int_{0}^{T}\dd t\left|\left|\left|\int_{0}^{t}U^{w}_{t}(U_{s}^{w})^{-1}\psi_s\dd s\right|^2\right|\right|^{p/2}_{L^p(\mathbb R)}
+\\&\qquad\lesssim \int_{0}^{T}\dd t\left|\left|\left|\int_{0}^{t}U^{w}_{t}(U_{s}^{w})^{-1}\psi_s\dd s\right|^2\right|\right|^{1/2}_{L^1(\mathbb R)}\left|\left|D^{\frac{1}{2}}\left|\int_{0}^{t}U^{w}_{t}(U_{s}^{w})^{-1}\psi_s\dd s\right|^2\right|\right|^{\frac{p-1}{2}}_{L^2(\mathbb R)}
+\\&\qquad\lesssim C_{w}T^{\frac{\gamma(p-1)}{4}+\frac{5-p}{4}}\left|\left|\int_{0}^{.}U_{.}^{w}(U^{w}_{s})^{-1}\psi_s\dd s\right|\right|_{L^{\infty}([0,T],L^2(\mathbb R))}\left(\int_{0}^{T}||\psi_s||_{L^2(\mathbb R)}\dd s\right)^{p-1}.
+\end{split}
+\end{equation*}
+Now is suffice to remark that 
+\begin{equation*}
+\begin{split}
+\left|\left|\int_{0}^{.}U_{.}^{w}(U^{w}_{s})^{-1}\psi_s\dd s\right|\right|_{L^{\infty}([0,T],L^2(\mathbb R))}&\leq\sup_{0\leq t\leq T}\int_{0}^{T}\left|\left|U^{w}_{t}(U^{w}_{s})^{-1}\psi_s\right|\right|_{L^{2}(\mathbb R)}\dd s
+\leq\int_{0}^{T}||\psi_s||_{L^2(\mathbb R)}\dd s
+\end{split}
+\end{equation*}
+and then  
+$$
+\left|\left|\int_{0}^{.}U^{w}_{.}(U_{s}^{w})^{-1}\psi_s\dd s\right|\right|^p_{L^{p}([0,T],L^{2p}(\mathbb R))}\leq C_{w}T^{\frac{\gamma(p-1)}{4}+\frac{5-p}{4}}\left(\int_{0}^{T}||\psi_s||_{L^2(\mathbb R)}\dd s\right)^{p}
+$$
+when $p\in(2,5]$. Now in the case $p\in[2,4)$ we obtain the same result if we use the Lemma~\ref{lemma:Gagliardo-Nirenberg} and take $\alpha=1-\frac{2}{p}+\eps\in(0,1/2]$, $\rho>\alpha+\frac{1}{2}$ in Proposition~\ref{proposition: Strich}. 
+\end{proof}
+To have all the ingredients needed for the fixed point argument we have to estimates the action of the operator
+$U^{w}$ on the initial condition.
+\begin{proposition}\label{proposition:strich-estim-3}
+Let $T>0$, $p=\mu+1\in(4,5]$, $\rho>\min(\frac{3}{2}-\frac{2}{p})$ then then there exist constant $C_{p}$  and $\gamma^{\star}(p)>0$ such that the following inequality holds :
+$$
+\left|\left|U^{w}_{t}\psi\right|\right|_{L^{p}([0,T],L^{2p}(\mathbb R))}\leq C_{p}||\Phi||_{\mathcal W^{\rho,\gamma}_T}T^{\gamma^{\star}(p)}||\psi||_{L^2(\mathbb R)}
+$$
+for all $\psi\in L^{2}(\mathbb R)$.
+\end{proposition}
+\begin{proof}
+Let us begin by using the Lemma~\ref{lemma:Gagliardo-Nirenberg} and then 
+\begin{equation*}
+\begin{split}
+\left|\left|U^{w}_{t}\psi\right|\right|^p_{L^{p}([0,T],L^{2p}(\mathbb R))}&=\int_{0}^{T}\dd t\left|\left|\left|U^{w}_t\psi\right|^2\right|\right|_{L^p(\mathbb R)}^{p/2}\\&
+\lesssim||U^{w}\psi||^{(1-\theta)p}_{L^{\infty}([0,T],L^{2}(\mathbb R))}\int_{0}^{T}\dd t\left|\left|D^{\alpha/2}\left|U^{w}_t\psi\right|^2\right|\right|_{L^{2}(\mathbb R)}^{\theta \frac{p}{2}}
+\end{split}
+\end{equation*}
+where $\theta=\frac{2p-2}{(2+\eps)p-2}$ then is suffice to bound the quantity 
+$\left|\left|D^{\alpha/2}\left|U^{w}_t\psi\right|^2\right|\right|^2$ and to proceed as the in the Proposition~\ref{theorem:strichartz-w}. By a simple computation we have 
+\begin{equation*}
+\begin{split}
+\left|\left|D^{\alpha/2}\left|U^{w}_t\psi\right|^2\right|\right|^2=\int_{\mathbb R^3}\dd x_1\dd x_2\dd x_3|x_2-x_1|^{\alpha}|\Phi^{w}_{0T}(\eta)||\hat\psi(x_1)||\hat\psi(x_2)||\hat\psi(x_3)||\hat\psi(-x_1+x_2+x_3)|
+\end{split}
+\end{equation*}
+where $\eta=2(x_2-x_1)(x_3-x_2)$.
+Now applying again Proposition~\ref{proposition: Strich} we concludes the proof.
+\end{proof}
+We are now ready to prove Th.~\ref{th:Strich-existence} about existence of local solution to the modulated NLS with general non-linearity.
+\begin{proof}[Proof of~\ref{th:Strich-existence}]
+Let us define for $\psi\in L^{p}([0,T],L^{2p})$ the following map :
+$$
+\Gamma(\psi)_t=U^{w}_tu^{0}+i\int_{0}^{t}U^{w}_t(U^{w}_{s})^{-1}(|\psi_s|^{\mu} \psi_s)\dd s
+$$
+then we can easily see by proposition $\Gamma(\psi)\in L^{p}([0,T],L^{2p}(\mathbb R))$. Now we will prove that $\Gamma $ is a strict contraction in a adequate ball of our space. In fact let
+$$
+B_{r}=\left\{\psi\in L^{p}([0,T],L^{2p}(\mathbb R)), ||\psi||_{L^{p}([0,T],L^{2p}(\mathbb R))}\leq r\right\}
+$$
+then using the Proposition~\ref{proposition:strich-estim-3} and Proposition ~\ref{theorem:strichartz-w} we have 
+\begin{equation*}
+\begin{split}
+\left|\left|\Gamma(\psi)\right|\right|_{L^{p}([0,T],L^{2p}(\mathbb R))}&\leq||U_{.}^{w}u^{0}||_{L^{p}([0,T],L^{2p}(\mathbb R))}+\left|\left|\int_{0}^{.}U^{w}_{.}(U^{w}_{s})^{-1}(|\psi_s|^{\mu}\psi_s)\dd s\right|\right|_{L^{p}([0,T],L^{2p}(\mathbb R))} 
+\\&\leq C_{w,T}T^{\gamma^{\star}(p)}\left(||u^0||_{L^2(\mathbb R)}+\int_{0}^{T}\left|\left|\left|\psi_s\right|^{\mu}\psi_s\right|\right|_{L^{2}(\mathbb R)}\dd s\right)
+\\&\leq C_{w,T}T^{\gamma^{\star}(p)} (||u^{0}||_{L^2(\mathbb R)}+||\psi||_{L^{p}([0,T],L^{2p}(\mathbb R))}^p)
+\\&\leq C_{w,T}T^{\gamma^{\star}(p)}(||u^0||_{L^{2}(\mathbb R)}+r^{p})
+\end{split}
+\end{equation*}
+then we can choose $T_1$ small enough such for all $T\leq T_1$ that  the equation $r_T=C_{w}T^{\gamma^{\star}(p)}(||u^0||_{L^{2}(\mathbb R)}+r_T^{p})
+$ admit a positive solution $r=r_T$. Now for $T<T_1$ and  $\psi_1,\psi_2\in L^{p}([0,T],L^{2p}(\mathbb R))\cap B_r$ we see by the same argument using previously we have 
+\begin{equation*}
+\begin{split}
+\left|\left|\Gamma(\psi_1)-\Gamma(\psi_2)\right|\right|_{L^{p}([0,T],L^{2p}(\mathbb R))}&=\left|\left|\int_{0}^{.}U^{w}_{.}(U^{w}_s)^{-1}(\left|\psi_1\right|^{\mu}\psi_1-\left|\psi_2\right|^{\mu}\psi_2)\dd s\right|\right|_{L^{p}([0,T],L^{2p}(\mathbb R))}
+\\&\leq C_{w,T}T^{\gamma^{\star}(p)}r^{p-1}\left|\left|\psi_1-\psi_2\right|\right|_{L^{p}([0,T],L^{2p}(\mathbb R))}
+\end{split}
+\end{equation*}
+then if we choose $T_2<T_1$ such that for all $T<T_2$ we have $||\Phi||_{\mathcal W^{\gamma,\rho}_{T}}T^{\gamma^{\star}(p)}r^{p-1}<1$ then in this case $\Gamma$ is a strict contraction of the ball $L^{p}([0,T_2],L^{2p}(\mathbb R))\cap B_r$ and then it has a unique fixed point in this ball. The proof of  uniqueness is standard. Now the fact that $u\in C([0,T_2],L^2(\mathbb R))$ is simply given by the inequality
+$$
+||u_t-u_s||_{L^2(\mathbb R)}\leq||(U^w_t-U_s^w)u^0||+\int_{s}^{t}||u_\sigma||_{L^{2p}(\mathbb R)}^p\dd\sigma .
+$$
+Now we will focus on the proof of the conservation law in the quintic case (i.e.: $p=5$), for simplicity. For the other value of $p$ the argument is similar. Let now $M\in\mathbb N$. By the same argument used in the beginning  of the proof  we can construct a local solution $u^M\in L^5([0,T],L^{10}(\mathbb R))\cap C([0,T],L^2(\mathbb R))$ of the regularized equation. More precisely we have that 
+$$
+u^M_t=U_t^w\Pi_Mu^0+i\int_{0}^{t}U_t^w(U_s^w)^{-1}\Pi_M\left(|\Pi_Mu^M|^4\Pi_Mu^M\right)\dd s
+$$
+for all $t\in[0,T]$ and some $T=T(||u^0||_{L^2(\mathbb R)})$. Let $v^M=(U^w_t)^{-1}u_t^M$. A simple computation shows that
+$$
+||v_t^M-v_s^M||_{L^2(\mathbb R)}\leq\int_{s}^{t}||\Pi_Mu_{\sigma}^{M}||^5_{L^{10}}\dd\sigma\lesssim_M(t-s)||u^M||_{L^{\infty}([0,T],L^{2}(\mathbb R))}
+$$
+from which  we obtain that 
+$$
+||v_t^{M}||_{2}^2=||v^{M}_s||_2^2+2\int_{s}^{t}\mathcal Im\langle v_s, (U^w_\sigma)^{-1}(|U^w_\sigma v_s^M|^4U_\sigma v_s^M)\rangle\dd \sigma+O(|t-s|^2).
+$$
+It is not difficult to see that $\langle v_s, (U^w_\sigma)^{-1}(|U^w_\sigma v_s^M|^5U_\sigma v_s^M)\rangle\in\mathbb R$ and then $||v^M_t||_2^2=||v^M_s||_2^2+O(|t-s|^2)$ and then we obtain immediately that $||u^M_t||_2=||u^0||_2$. Moreover we have  
+\begin{itemize}
+\item $\Pi_Mu^M=u^M$ ;
+\item for every $T>0$, $\sup_M||u^M||_{L^5([0,T],L^{10}(\mathbb R))}<+\infty$ .
+\end{itemize}
+Using that we have easily 
+$$
+||u^M-u||_{L^5([0,T],L^{10}(\mathbb R))}\lesssim T^{\gamma}(||u^0-\Pi_Mu^0||_2+||u^M-u||_{L^5([0,T],L^{10}(\mathbb R))})
+$$
+and for $T<\min(T_2,1/2)$ small enough  $||u^M-u||_{L^5([0,T],L^{10}(\mathbb R))}\to^{M\to+\infty}0$. It is then  sufficient  to iterate this procedure to extend it to the interval $[0,T_2]$. Now by a simple computation we can see that 
+$$
+||u^M-u||_{L^\infty([0,T_2],L^2(\mathbb R))}\lesssim ||\Pi_Mu^0-u^0||_2+ ||u^M-u||_{L^5([0,T],L^{10}(\mathbb R))}
+$$
+and then $||u_t||_{L^2(\mathbb R)}=||u^0||_{L^2(\mathbb R)}$ which gives the conservation law and allow us to extend our local solution in a global solution. Now let $u^0\in H^1$ and  using the Strichartz estimates after taking the first derivative of the function $\Gamma(\psi)$ we obtain that 
+$$
+||\Gamma(\psi)||_{L^5([0,T],W^{1,10}(\mathbb R))}\lesssim_{w}T^{\gamma}(||u^0||_{H^1}+r^4||\psi||_{L^5([0,T],W^{1,10}(\mathbb R))})
+$$  
+with $\psi\in B_r$ where $B_r$ is the ball in which we have setup our point fix argument at the beginning of the proof. Then $B(0,R)$, the ball of radius $R$ in $L^5([0,T],W^{1,10}(\mathbb R))$ is invariant  by $\Gamma_{B_r}$ the restriction of $\gamma$ on $B_r$  for $T_3=T$ depending only on $r$ and not $R$. Since closed balls of $L^5([0,T],W^{1,10}(\mathbb R))$ are closed also in $L^5([0,T],L^{1,10}(\mathbb R))$  the fixed point of $\Gamma_{B_r}$ is in $L^5([0,T],W^{1,10}(\mathbb R))$  and  we obtain  that $u\in L^5([0,T_3],W^{1,10}(\mathbb R))$.  Now by a standard argument we obtain the needed regularity for $u$.  
+\end{proof}
+
+
+\begin{bibdiv}
+    \begin{biblist}
+    
+\bib{abdullaev_soliton_2000}{article}{
+	title = {Soliton perturbations and the random Kepler problem},
+	volume = {135},
+	issn = {0167-2789},
+	url = {http://www.ams.org/mathscinet-getitem?mr=1731507},
+	doi = {10.1016/S0167-2789(99)00118-9},
+	number = {3-4},
+	urldate = {2013-01-09},
+	journal = {Physica D. Nonlinear Phenomena},
+	author = {Abdullaev, F. Kh.},
+	author = {Bronski, J. C.},
+	author = {Papanicolaou, G.},
+	year = {2000},
+	pages = {369--386},
+}
+
+
+    
+\bib{babin-kdv}{article}{
+	title = {On the regularization mechanism for the periodic Korteweg-de Vries equation},
+	volume = {64},
+	issn = {0010-3640},
+	url = {http://dx.doi.org/10.1002/cpa.20356},
+	doi = {10.1002/cpa.20356},
+	number = {5},
+	journal = {Communications on Pure and Applied Mathematics},
+	author = {Babin, Anatoli V.},
+	author =  {Ilyin, Alexei A.},
+	author =  {Titi, Edriss S.},
+	year = {2011},
+	pages = {591--648}
+}
+
+
+
+\bib{bessaih_evolution_2005}{article}{
+	Author = {Bessaih, H.},
+	author = {Gubinelli, M.},
+	author = {Russo, F.},
+	%Doi = {10.1214/009117905000000323},
+	Issn = {0091-1798},
+	Journal = {Ann. Probab.},
+	Number = {5},
+	Pages = {1825--1855},
+	Title = {The evolution of a random vortex filament},
+%	Url = {http://dx.doi.org/10.1214/009117905000000323},
+	Volume = {33},
+	Year = {2005},
+}
+
+
+\bib{brzezniak_global_2010}{article}{
+	Author = {Brze{\'z}niak, Z.},
+	author =  {Gubinelli, M.},
+	author = {Neklyudov, M.},
+	Journal = {Preprint},
+%	Keywords = {{76B47}, {35Q35}, {37K05}, Mathematical Physics, Mathematics - Analysis of {PDEs}, Mathematics - Probability},
+%	Month = {aug},
+	Title = {Global evolution of random vortex filament equation},
+	Url = {http://arxiv.org/abs/1008.1086},
+%	Urldate = {2012-10-02},
+	Year = {2010},
+}
+
+\bib{CatellierGubinelli}{unpublished}{
+title = {On the regularization of ODEs via irregular perturbations},
+year = {2012},
+note = {preprint},
+author = {R. Catellier},
+author = {M. Gubinelli},
+note= {arXiv:1205.1735},
+}
+
+
+
+\bib{clarke_dispersion_2001}{article}{
+	title = {Dispersion management for solitons in a Korteweg~de Vries system},
+	volume = {12},
+	issn = {10541500},
+	url = {http://chaos.aip.org/resource/1/chaoeh/v12/i1/p8_s1?isAuthorized=no},
+	doi = {doi:10.1063/1.1429967},
+	number = {1},
+	urldate = {2012-07-03},
+	journal = {Chaos: An Interdisciplinary Journal of Nonlinear Science},
+	author = {Clarke, Simon},
+	author =  {Malomed, Boris A},
+	author =  {Grimshaw, Roger},
+	year = {2001},
+	pages = {8--15},
+}
+
+\bib{christ_asymptotics_2003}{article}{	
+ title = {Asymptotics, frequency modulation, and low regularity ill-posedness for canonical defocusing equations},
+	volume = {125},
+	issn = {0002-9327},
+	url = {http://www.ams.org/mathscinet-getitem?mr=2018661},
+	number = {6},
+	urldate = {2013-02-07},
+	journal = {American Journal of Mathematics},
+	author = {Christ, Michael},
+	author = {Colliander, James},
+	author = {Tao, Terrence},
+	year = {2003},
+	pages = {1235--1293},
+}
+
+
+\bib{[CollianderKeelStaffilaniTakaokaTao]}{article}{
+ author={Colliander,J},
+ author={Keel,G},
+ author={Staffilani,G},
+ author={Takaoka,H},
+ author={Tao.T},  
+ title={Sharp global well-posedness for the KDV and modified KDV on $\mathbb R$ and $\mathbb T$},
+   journal={Jour. Am. Math. Soc.},
+   volume={16},
+   date={2003},
+   number={3},
+   pages={705
+   --749},
+   issn={1088-6834},
+   review={\MR{1969209 (2004c:35352)}},
+   doi={10.1090/S0894-0347-03-00421-1},
+} 
+
+
+
+\bib{Davie}{article}{	
+    title = {Uniqueness of solutions of stochastic differential equations},
+	issn = {1073-7928},
+	url = {http://www.ams.org/mathscinet-getitem?mr=2377011},
+	doi = {10.1093/imrn/rnm124},
+	number = {24},
+	urldate = {2012-12-04},
+	journal = {International Mathematics Research Notices. {IMRN}},
+	author = {Davie, A. M.},
+	year = {2007},
+	pages = {Art. ID rnm124, 26},
+}
+
+\bib{de_bouard_effect_2002}{article}{
+	title = {On the effect of a noise on the solutions of the focusing supercritical nonlinear Schr\"odinger equation},
+	volume = {123},
+	issn = {0178-8051},
+	url = {http://www.ams.org/mathscinet-getitem?mr=1906438},
+	doi = {10.1007/s004400100183},
+	number = {1},
+	urldate = {2013-01-09},
+	journal = {Probability Theory and Related Fields},
+	author = {de Bouard, A.},
+	author = {Debussche, A.},
+	year = {2002},
+	pages = {76--96},
+}
+
+
+\bib{de_bouard_blow-up_2005}{article}{
+	title = {Blow-up for the stochastic nonlinear Schr\"odinger equation with multiplicative noise},
+	volume = {33},
+	issn = {0091-1798},
+	url = {http://www.ams.org/mathscinet-getitem?mr=2135313},
+	doi = {10.1214/009117904000000964},
+	number = {3},
+	urldate = {2013-01-09},
+	journal = {The Annals of Probability},
+	author = {de Bouard, A.},
+	author = {Debussche, A.},
+	year = {2005},
+	pages = {1078--1110},
+}
+
+
+\bib{deBouard20101300}{article}{
+title = {The nonlinear Schr\"odinger equation with white noise dispersion},
+journal = {Journal of Functional Analysis},
+volume = {259},
+number = {5},
+pages = {1300--1321},
+year = {2010},
+note = {},
+issn = {0022-1236},
+doi = {10.1016/j.jfa.2010.04.002},
+url = {http://www.sciencedirect.com/science/article/pii/S0022123610001412},
+author = {A. de Bouard},
+author = {A. Debussche}
+}
+
+
+
+\bib{DGT12}{article} {
+    AUTHOR = {Deya, A.},
+    AUTHOR = {Gubinelli, M.},
+    AUTHOR = {Tindel, S.},
+     TITLE = {Non-linear rough heat equations},
+   JOURNAL = {Probab. Theory Related Fields},
+    VOLUME = {153},
+      YEAR = {2012},
+    NUMBER = {1-2},
+     PAGES = {97--147},
+%      ISSN = {0178-8051},
+       %DOI = {10.1007/s00440-011-0341-z},
+      %URL = {http://dx.doi.org/10.1007/s00440-011-0341-z},
+}
+		
+
+
+
+\bib{Debussche2011363}{article}{
+title = {1D quintic nonlinear SchrÌ¦dinger equation with white noise dispersion},
+journal = {Journal de Math\'ematiques Pures et Appliqu\'ees},
+volume = {96},
+number = {4},
+pages = {363--376},
+year = {2011},
+note = {},
+issn = {0021-7824},
+doi = {10.1016/j.matpur.2011.02.002},
+url = {http://www.sciencedirect.com/science/article/pii/S0021782411000250},
+author = {A. Debussche},
+author= {Y. Tsutsumi}
+}
+
+
+
+\bib{FGP}{article}{
+   author={Flandoli, F.},
+   author={Gubinelli, M.},
+   author={Priola, E.},
+   title={Well-posedness of the transport equation by stochastic
+   perturbation},
+   journal={Invent. Math.},
+   volume={180},
+   date={2010},
+   number={1},
+   pages={1--53},
+   issn={0020-9910},
+   review={\MR{2593276}},
+   doi={10.1007/s00222-009-0224-4},
+}
+	
+
+
+\bib{[FrizVictoir]}{book}{
+   author={Friz, P. K.},
+   author={Victoir, N. B.},
+   title={Multidimensional stochastic processes as rough paths},
+   series={Cambridge Studies in Advanced Mathematics},
+   volume={120},
+   note={Theory and applications},
+   publisher={Cambridge University Press},
+   place={Cambridge},
+   date={2010},
+   pages={xiv+656},
+   isbn={978-0-521-87607-0},
+   review={\MR{2604669 (2012e:60001)}},
+}
+
+\bib{geman_occupation_1980}{article}{
+	title = {Occupation Densities},
+	volume = {8},
+	issn = {0091-1798},
+	url = {http://projecteuclid.org/euclid.aop/1176994824},
+	doi = {10.1214/aop/1176994824},
+	number = {1},
+	urldate = {2012-12-05},
+	journal = {The Annals of Probability},
+	author = {Geman, Donald},
+	author = {Horowitz, Joseph},
+	year = {1980},
+	pages = {1--67},
+}
+
+
+
+
+
+\bib{[Gubinelli-2004]}{article}{
+   author={Gubinelli, M.},
+   title={Controlling rough paths},
+   journal={J. Funct. Anal.},
+   volume={216},
+   date={2004},
+   number={1},
+   pages={86--140},
+   issn={0022-1236},
+   doi={10.1016/j.jfa.2004.01.002},
+}
+
+\bib{GubinelliKdV}{article}{
+	title = {Rough solutions for the periodic Korteweg--de Vries equation},
+	volume = {11},
+	issn = {1534-0392},
+	number = {2},
+	journal = {Communications on Pure and Applied Analysis},
+	author = {Gubinelli, M.},
+	year = {2012},
+	pages = {709--733}
+}
+
+
+\bib{gubinelli_regularization_2012}{article}{
+	title = {Regularization by noise and stochastic Burgers equations},
+	journal = {{arXiv:1208.6551}},
+	author = {Gubinelli, M.},
+	author = {Jara, M.},
+	year = {2012},
+}
+
+
+\bib{gubinelli_young_2006}{article}{
+	Author = {Gubinelli, M.},
+	author = {Lejay, A.},
+	author = {Tindel, S.},
+%	Doi = {10.1007/s11118-006-9013-5},
+%	Issn = {0926-2601},
+	Journal = {{P}otential {A}nal. },
+	Number = {4},
+	Pages = {307--326},
+	Title = {Young integrals and {SPDEs}},
+%	Url = {http://dx.doi.org/10.1007/s11118-006-9013-5},
+	Volume = {25},
+	Year = {2006},
+}
+
+
+\bib{GL09}{article} {
+    AUTHOR = {Gubinelli, M.},
+    AUTHOR = {L{\"o}rinczi, J.},
+     TITLE = {Gibbs measures on {B}rownian currents},
+   JOURNAL = {Comm. Pure Appl. Math.},
+    VOLUME = {62},
+      YEAR = {2009},
+    NUMBER = {1},
+     PAGES = {1--56},
+      ISSN = {0010-3640},
+       %DOI = {10.1002/cpa.20260},
+      %URL = {http://dx.doi.org/10.1002/cpa.20260},
+}
+
+
+
+
+\bib{gubinelli_rough_2010}{article}{
+	Author = {Gubinelli, M.},
+	author = {Tindel, S.},
+%	Doi = {10.1214/08-AOP437},
+	Issn = {0091-1798},
+	Journal = {Ann. Probab.},
+	Number = {1},
+	Pages = {1--75},
+	Title = {Rough evolution equations},
+	Url = {http://dx.doi.org/10.1214/08-AOP437},
+	Volume = {38},
+	Year = {2010},
+}
+
+\bib{hairer_rough_2011}{article}{
+	Author = {Hairer, M.},
+	Doi = {10.1002/cpa.20383},
+	Issn = {0010-3640},
+	Journal = {Communications on Pure and Applied Mathematics},
+	Number = {11},
+	Pages = {1547--1585},
+	Title = {Rough stochastic {PDEs}},
+	Url = {http://dx.doi.org/10.1002/cpa.20383},
+	Volume = {64},
+	Year = {2011},
+	}
+
+
+\bib{hairer_solving_2011}{article}{
+	Author = {Hairer, M.},
+	Journal = {Ann. of Math.},
+%	Keywords = {{35Q82}, {60H15}, {60K35}, Mathematical Physics, Mathematics - Analysis of {PDEs}, Mathematics - Probability},
+%	Month = {sep},
+	Title = {Solving the {KPZ} equation},
+	note = {arXiv:1109.6811},
+	Url = {http://arxiv.org/abs/1109.6811},
+	status = {to appear},
+	year= {2013},
+}
+
+
+\bib{hundertmark_decay_2009}{article}{	title = {Decay estimates and smoothness for solutions of the dispersion managed non-linear Schršdinger equation},
+	volume = {286},
+	issn = {0010-3616},
+	url = {http://www.ams.org/mathscinet-getitem?mr=2472020},
+	doi = {10.1007/s00220-008-0612-4},
+	number = {3},
+	urldate = {2013-02-07},
+	journal = {Communications in Mathematical Physics},
+	author = {Hundertmark, Dirk},
+	author = {Lee, Young-Ran},
+	year = {2009},
+	pages = {851--873},
+}
+
+
+\bib{hundertmark_super-exponential_2012}{article}{	title = {Super-exponential decay of diffraction managed solitons},
+	volume = {309},
+	issn = {0010-3616},
+	url = {http://www.ams.org/mathscinet-getitem?mr=2864785},
+	doi = {10.1007/s00220-011-1354-2},
+	number = {1},
+	urldate = {2013-02-07},
+	journal = {Communications in Mathematical Physics},
+	author = {Hundertmark, Dirk},
+	author = {Lee, Young-Ran},
+	year = {2012},
+	pages = {1--21},
+}
+
+\bib{KT}{incollection}{
+	Author = {Kappeler, T.},
+	Author = {Topalov, P.},
+	Booktitle = {Mathematisches Institut, Georg-August-Universit\"at G\"ottingen: Seminars 2003/2004},
+	Date-Added = {2006-09-11 22:23:03 +0200},
+	Date-Modified = {2006-09-11 22:23:03 +0200},
+	Mrclass = {37K10 (35Q53)},
+	Mrnumber = {MR2181576},
+	Pages = {151--155},
+	Publisher = {Universit\"atsdrucke G\"ottingen, G\"ottingen},
+	Title = {Well-posedness of {K}d{V} on {$H\sp {-1}(\Bbb T)$}},
+	Year = {2004}}
+
+\bib{kunze_ground_2005}{article}{
+	title = {Ground states for the higher-order dispersion managed {NLS} equation in the absence of average dispersion},
+	volume = {209},
+	issn = {0022-0396},
+	url = {http://www.sciencedirect.com/science/article/pii/S0022039604003869},
+	doi = {10.1016/j.jde.2004.09.014},
+	number = {1},
+	urldate = {2012-07-03},
+	journal = {Journal of Differential Equations},
+	author = {Kunze, Markus},
+	author = { Moeser, Jamison},
+	author =  {Zharnitsky, Vadim},
+	year = {2005},
+	keywords = {Dispersion management, Ground states, Nonlinear Schr\"odinger equation},
+	pages = {77--100},
+}
+
+
+
+	
+
+\bib{Lyons1998}{article}{
+	author = {Lyons, Terry J.},
+	journal = {Rev. Mat. Iberoam.},
+	number = {2},
+	pages = {215--310},
+	title = {{Differential equations driven by rough signals}},
+	volume = {14},
+	year = {1998},
+}
+
+
+\bib{[LionsStFlour]}{book}{
+   author={Lyons, T. J.},
+   author={Caruana, M.},
+   author={L{\'e}vy, T.},
+   title={Differential equations driven by rough paths},
+   series={Lecture Notes in Mathematics},
+   volume={1908},
+   note={Lectures from the 34th Summer School on Probability Theory held in
+   Saint-Flour, July 6--24, 2004;
+   With an introduction concerning the Summer School by Jean Picard},
+   publisher={Springer},
+   place={Berlin},
+   date={2007},
+   pages={xviii+109},
+   isbn={978-3-540-71284-8},
+   isbn={3-540-71284-4},
+   review={\MR{2314753 (2009c:60156)}},
+}
+	
+	
+
+\bib{marty2006}{article}{
+	title = {On a splitting scheme for the nonlinear Schr\"odinger equation in a random medium},
+	volume = {4},
+	issn = {1539-6746},
+	url = {http://www.ams.org/mathscinet-getitem?mr=2264815},
+	number = {4},
+	urldate = {2013-01-09},
+	journal = {Communications in Mathematical Sciences},
+	author = {Marty, R.},
+	year = {2006},
+	pages = {679--705}
+}
+
+
+\bib{gubperime}{unpublished}{
+title = {Paraproducts, rough paths and controlled distributions},
+year = {2012},
+note = {arXiv:1210.2684},
+author = {N. Perkowski},
+author = {M. Gubinelli},
+author ={P. Imkeller},
+}
+
+
+
+\bib{tao_lp_2003}{article}{	title = {Lp improving bounds for averages along curves},
+	volume = {16},
+	issn = {1088-6834, 0894-0347},
+	url = {http://www.ams.org/journals/jams/2003-16-03/S0894-0347-03-00420-X/home.html},
+	abstract = {We establish local mapping properties for averages on curves. The exponents are sharp except for endpoints.},
+	number = {03},
+	urldate = {2012-12-04},
+	journal = {Journal of the American Mathematical Society},
+	author = {Tao, Terence},
+	author = {Wright, James},
+	month = {jan},
+	year = {2003},
+	pages = {605--638},
+}
+
+\bib{[Young-1936]}{article}{
+   author={Young, L. C.},
+   title={An inequality of the H\"older type, connected with Stieltjes
+   integration},
+   journal={Acta Math.},
+   volume={67},
+   date={1936},
+   number={1},
+   pages={251--282},
+   issn={0001-5962},
+   doi={10.1007/BF02401743},
+}
+
+
+
+\bib{zharnitsky_stabilizing_2001}{article}{
+	title = {Stabilizing effects of dispersion management},
+	volume = {152--153},
+	issn = {0167-2789},
+	url = {http://www.sciencedirect.com/science/article/pii/S0167278901002135},
+	doi = {10.1016/S0167-2789(01)00213-5},
+	urldate = {2012-07-03},
+	journal = {Physica D: Nonlinear Phenomena},
+	author = {Zharnitsky, V.},
+	author = {Grenier, E.},
+	author = {Jones, C. {K.R.T.}},
+	author = {Turitsyn, S. K.},
+	year = {2001},
+	pages = {794--817},
+}
+
+
+ \end{biblist}
+ \end{bibdiv}
+ 
+\end{document}

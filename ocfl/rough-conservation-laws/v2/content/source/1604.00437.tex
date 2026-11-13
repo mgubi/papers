@@ -1,0 +1,2772 @@
+ \documentclass[10pt,reqno,oneside]{amsart}
+%\usepackage[english]{babel}
+\usepackage[left=3cm,right=3cm,top=4cm,bottom=3cm]{geometry}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,color}
+%\usepackage[T1]{fontenc}
+\usepackage{pdfsync}
+\usepackage[citecolor=blue,colorlinks=true]{hyperref}
+\usepackage{mathrsfs}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{upref}
+\usepackage{enumitem}
+
+%\usepackage{refcheck}
+
+
+
+
+\numberwithin{equation}{section}
+
+
+\newcommand{\id}{\mbox{Id}}
+\newcommand{\1}{{\bf 1}}
+
+\newcommand{\rmk}[1]{\textcolor{blue}{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\mathd}{\mathrm{d}}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\ind}{\mathbf{1}}
+
+\newcommand{\varep}{\varepsilon}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\la}{\lambda}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ka}{\kappa}
+\newcommand{\vp}{\varphi}
+\newcommand{\om}{\omega}
+
+
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+
+\newcommand{\ssk}{\smallskip}
+
+\newcommand{\bfA}{\mathbf{A}}
+
+\newcommand{\mcE}{\mathcal{E}}
+
+\newcommand{\X}{\mathbb X}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\T}{\mathbb T}
+
+\newcommand{\EE}{\mathbb{E}} 
+\newcommand{\PP}{\mathbb{P}}
+
+\newcommand{\cac}{\mathcal C}
+\newcommand{\cl}{\mathcal L}
+\newcommand{\cn}{\mathcal N}
+\newcommand{\cw}{\mathcal W}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% Samy's macros %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\txx}{\textcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% Brackets %%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lc}{\left[}
+\newcommand{\rc}{\right]}
+\newcommand{\lcl}{\left\{}
+\newcommand{\rcl}{\right\}}
+\newcommand{\lln}{\left|}
+\newcommand{\rrn}{\right|}
+\newcommand{\lla}{\left\langle}
+\newcommand{\rra}{\right\rangle}
+\newcommand{\lan}{\left\langle}
+
+\DeclareMathOperator{\diver}{div}
+\DeclareMathOperator*{\esssup}{esssup}
+\DeclareMathOperator{\tr}{Tr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% Theorems %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{acknowledgement}[theorem]{Acknowledgment}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\theoremstyle{remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+
+%%%%%%%%%%% Start TeXmacs macros
+%\catcode`\|=\active \def|{
+%\fontencoding{T1}\selectfont\symbol{124}\fontencoding{\encodingdefault}}
+\newcommand{\assign}{:=}
+\newcommand{\cdummy}{\cdot}
+%\newcommand{\comma}{{,}}
+%\newcommand{\nocomma}{}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+%\newcommand{\upl}{+}
+%%%%%%%%%%% End TeXmacs macros
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\setcounter{tocdepth}{2}
+
+
+\begin{document}
+
+\title[General a priori estimates for rough PDE\MakeLowercase{s}]{General a priori estimates for rough PDE\MakeLowercase{s} with application to rough conservation laws}
+
+
+\author{Aur\'elien Deya}
+\address[A. Deya]{Institut Elie Cartan, University of Lorraine
+B.P. 239, 54506 Vandoeuvre-l\`es-Nancy, Cedex
+France}
+\email{Aurelien.Deya@univ-lorraine.fr}
+
+\author{Massimiliano Gubinelli}
+\address[M. Gubinelli]{Hausdorff Center for Mathematics \& Institute for Applied Mathematics, University of Bonn,
+Endenicher Allee 60,
+53115 Bonn, Germany}
+\email{gubinelli@iam.uni-bonn.de}
+
+\author{Martina Hofmanov\'a}
+\address[M. Hofmanov\'a]{Institute of Mathematics,  Technical University Berlin, Stra\ss e des 17. Juni 136, 10623 Berlin, Germany}
+\email{hofmanov@math.tu-berlin.de}
+
+\author{Samy Tindel}
+\address[S. Tindel]{Department of Mathematics, Purdue University,
+150 N. University Street,  West Lafayette, IN 47907, United States}
+\email{stindel@purdue.edu}
+
+\thanks{Financial support by the DFG via Research Unit FOR 2402 is gratefully acknowledged.}
+
+
+\begin{abstract}
+We introduce a general framework to study PDEs driven by rough paths: we develop new a priori estimates based on a rough Gronwall lemma argument for weak solutions to rough PDEs. This will allow us to follow standard PDE strategies to obtain existence and uniqueness results. In particular our approach does not rely on any sort of transformation formula (flow transformation, Feynman--Kac representation formula etc.) and is therefore rather flexible.
+As an application, we study  conservation laws driven by rough paths establishing well--posedness for the corresponding kinetic formulation.
+\end{abstract}
+
+\subjclass[2010]{60H15, 35R60, 35L65}
+
+\keywords{rough paths, rough PDEs, weak solution, a priori estimates, scalar conservation laws, kinetic formulation, kinetic solution}
+
+
+\date{\today}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+
+
+Lyons~\cite{MR1654527} introduced rough paths to give a description of solutions to ordinary differential equation (ODEs) driven by external time varying signals which is robust enough to allow very irregular signals like the sample paths of a Brownian motion. His analysis singles out a rough path as the appropriate topological structure on the input signal with respect to which the solution of an ODE varies in a  continuous way. Since its invention, Rough path theory (RPT) has been developed very intensively to provide robust analysis of ODEs and a novel way to define solutions of stochastic differential equations driven by non semimartingale signals (for a comprehensive review see the book of Friz and Victoir~\cite{FV} and the lecture notes of Lyons, Caruana and L\'evy~\cite{MR2314753} or the more recents ones of Friz and Hairer~\cite{friz_course_2014}). RPT can be naturally formulated also in infinite-dimension to analyse ODEs in Banach spaces. This generalisation is, however, not appropriate for the understanding of rough PDEs (RPDEs), i.e. PDEs with irregular perturbations. This is due to two basic facts. First, the notion of rough path encodes in a fundamental way only the nonlinear effects of a time varying signals without possibility to add more dimensions to the parameter space where the signal is allowed to vary in an irregular fashion. Second, in infinite dimension the action of a signal (even finite dimensional) can be described by differential (or more generally unbounded) operators. 
+
+Due to these  basic difficulties attempts to use RPT to study rough PDEs have been limited by two factors: the first one is the need to  look at RPDEs as evolutions in Banach spaces perturbed by one parameter rough signals (in order to keep rough paths as basic objects), the second one is the need to avoid unbounded operators by looking at mild formulations or Feynman--Kac formulas or transforming the equation in order to absorb the rough dependence into better understood objects (e.g. flow of characteristic curves).
+
+These requirements pose strong limitations on the kind of results one is allowed to obtain for RPDEs and the proof strategies are very different from the classical PDE proofs. The most successful approaches to RPDEs do not even allow to characterise the solution directly but only via a transformation to a more standard PDE problem.
+The need of a mild formulation of a given problem leads usually to very strong structural requirements like for example semilinearity.
+We list here some pointers to the relevant literature:
+\begin{itemize}
+\item Flow transformations applied to viscosity formulation of fully non-linear RPDEs (including Backward rough differential equations) have been studied in a series of work by Friz and coauthors: Diehl and Friz~\cite{MR2978136},
+Friz and Oberhauser~\cite{MR3152786},
+Caruana and Friz~\cite{MR2510132},
+Diehl, Friz and Oberhauser~\cite{MR3332714},
+Caruana, Friz and Oberhauser~\cite{MR2765508} and finally Friz, Gassiat, Lions and Souganidis~\cite{160204746}.
+
+\item Rough formulations of evolution heat equation with multiplicative noise (with varying degree of success) have been considered by Gubinelli and Tindel~\cite{MR2599193}, Deya, Gubinelli and Tindel~\cite{MR2925571}, Teichmann~\cite{MR2836540}, Hu and Nualart~\cite{MR2471936} and Garrido-Atienza, Lu and Schmalfuss~\cite{MR3423246}.
+
+\item Mild formulation of rough Burgers equations with spatially irregular noise have been first introduced by Hairer and Weber~\cite{MR3010394,MR3129808} and Hairer, Maas and Weber~\cite{MR3179667} leading to the groundbreaking work of Hairer on the Kardar--Parisi--Zhang equation~\cite{MR3071506}.
+
+\item Solutions of  conservation laws with rough fluxes have been studied via flow transformation by Friz and Gess~\cite{friz_stochastic_2014} and via the transformed test function approach by Lions, Perthame and Souganidis~\cite{MR3274890, MR3327520, MR3380984}, Gess and Souganidis~\cite{MR3351442,gess_long_time_2014}, Gess, Souganidis and Perthame ~\cite{gess_semi_discretization_2015} and Hofmanov\'{a}~\cite{H16}.
+
+\end{itemize}
+
+Hairer's regularity structure theory~\cite{MR3274562} is a wide generalisation of rough path which allows irregular objects parametrized by multidimensional indices. A more conservative approach, useful in many situations but not as general, is the paracontrolled calculus developed by Gubinelli, Imkeller and Perkowski~\cite{MR3406823,gubinelli_lectures_2015}. These techniques go around the first limitation. In order to apply them however the PDEs need usually to have a mild formulation where the unbounded operators are replaced by better behaved quantities and in general by bounded operators in the basic Banach spaces where the theory is set up. Existence and uniqueness of solutions to RPDEs are then consequences of standard fixed-point theorems in the Banach setting. 
+
+Standard PDE theory developed tools and strategies to study \emph{weak solutions} to PDEs, that is distributional relations satisfied by the unknown together with its weak derivatives. From a conceptual point of view  the wish arises to devise an approach to RPDEs which borrow as much as possible from the variety of tools and techniques of PDE theory. From this point of view various authors started to develop \emph{intrinsic} formulations of RPDEs as which involves relations between certain distributions associated to the unknown and the rough paths associated to the input signal. Let us mention the work of Gubinelli, Tindel and Torrecilla~\cite{gubinelli_controlled_2014} on viscosity solutions to fully non--linear rough PDEs, that of Catellier~\cite{catellier_rough_2015} on rough transport equations (in connection with the regularisation by  noise phenomenon), Diehl, Friz and Stannat~\cite{14126557} and finally of Bailleul and Gubinelli~\cite{BG} on rough transport equations. This last work introduces for the first time apriori estimates for RPDEs, that is estimates which holds for any weak solution of the RPDE (though we should also mention the contribution~\cite{nunu-vuillermot}, in which weak formulations are investigated for Young type equations driven by fractional Brownian motions with Hurst parameter $H>1/2$).
+These estimates are crucial to derive control on various norms of the solution and obtain existence and uniqueness results bypassing the use of the rough flow of characteristics which has been the main tool of many of the previous works on this subject. 
+
+\medskip
+
+In the present paper we continue the development of general tools for RPDEs. The key problem with rough paths and rough integrals is the absence of very basic and effective tools like Gronwall lemma. Skimming over any book on PDEs shows how fundamental is this tool for any nontrivial result on weak solutions. Our main technical contribution  is a strategy to obtain apriori estimates of Gronwall type for RPDE via a \emph{Rough Gronwall lemma}. This result is not very difficult to prove but, as the standard one, it is the cornerstone of various arguments aiming at establishing properties of weak solutions to RPDEs leading to well--posedness.
+We discuss how to use this new tool using as a first example a toy model of a heat equation with linear transport noise and as a more compelling application we analyse in depth scalar conservation laws with rough fluxes establishing well-posedness in a rather natural way.
+
+Conservation laws and related equations have been paid an increasing attention lately and have become a very active area of research, counting nowadays quite a number of results for deterministic and stochastic setting, that is for conservation laws either of the form
+\begin{equation}\label{eq:det}
+\partial_t u+\diver\big(A(u)\big)=0
+\end{equation}
+(see \cite{vov1,car,vov,kruzk,lpt1,lions,perth,tadmor}) or
+\begin{equation*}%\label{eq:stoch}
+\dif u+\diver\big(A(u)\big)\dif t=g(x,u)\dif W
+\end{equation*}
+where the It\^o stochastic forcing is driven by a finite- or infinite-dimensional Wiener process (see \cite{bauzet,karlsen,debus2,debus,DV,feng,bgk,holden,kim,stoica,wittbold}). Degenerate parabolic PDEs were studied in~\cite{car,chen} and in the stochastic setting in~\cite{BVW,degen2,hof}.
+
+Recently, several attempts have already been made to extend rough path techniques to conservation laws as well. First, Lions, Perthame and Souganidis (see \cite{MR3327520,MR3274890}) developed a pathwise approach for
+$$\dif u+\diver\big(A(x,u)\big)\circ \dif W=0$$
+where $W$ is a continuous real-valued signal and $\circ$ stands for the Stratonovich product in the Brownian case, then Friz and Gess (see \cite{friz_stochastic_2014}) studied
+$$\dif u+\diver f(t,x,u)\dif t=F(t,x,u)\dif t+\Lambda_k(x,u,\nabla u)\dif z^k$$
+where $\Lambda_k$ is affine linear in $u$ and $\nabla u$ and $z=(z^1,\dots,z^K)$ is a rough driving signal. Gess and Souganidis \cite{MR3351442} considered
+\begin{equation}\label{eq1a}
+\dif u+\diver\big(A(x,u)\big)\dif z=0
+\end{equation}
+where $z=(z^1,\dots,z^M)$ is a geometric $\alpha$-H\" older rough path and in \cite{gess_long_time_2014} they studied the long-time behavior in the case when $z$ is a Brownian motion. Hofmanov\'a \cite{H16} then generalized the method to the case of mixed rough-stochastic model
+$$\dif u+\diver\big(A(x,u)\big)\dif z=g(x,u)\dif W,$$
+where $z$ is a geometric $\alpha$-H\"older rough path, $W$ is a Brownian motion and the stochastic integral on the right hand side is understood in the sense of It\^o.
+
+
+It was observed already a long time ago that, in order to find a suitable concept of solution for problems of the form \eqref{eq:det}, on the one hand classical $C^1$ solutions do not exist in general and, on the other hand, weak or distributional solutions lack uniqueness.
+The first claim is a consequence of the fact that any smooth solution has to be constant along characteristic lines, which can intersect in finite time (even in the case of smooth data) and shocks can be produced. The second claim demonstrates the inconvenience that often appears in the study of PDEs and SPDEs: the usual way of weakening the equation leads to the occurrence of nonphysical solutions and therefore additional assumptions need to be imposed in order to select the physically relevant ones and to ensure uniqueness. Hence one needs to find some balance that allows to establish existence of a unique (physically reasonable) solution.
+
+
+Towards this end,  Kru\v{z}kov \cite{kruzk} introduced the notion of entropy solution to~\eqref{eq:det}, further developed in the stochastic setting in~\cite{bauzet,car,feng,kim,wittbold}.
+Here we pursue the kinetic approach, a concept of solution that was first introduced by Lions, Perthame, Tadmor \cite{lions} for deterministic hyperbolic conservation laws and further studied in \cite{vov1}, \cite{chen}, \cite{vov}, \cite{lpt1}, \cite{lions}, \cite{tadmor}, \cite{perth}. This direction also appears in several works on stochastic conservation laws and degenerate parabolic SPDEs, see \cite{degen2}, \cite{debus2}, \cite{debus}, \cite{DV}, \cite{bgk}, \cite{hof} and in the (rough) pathwise works \cite{gess_long_time_2014}, \cite{MR3351442}, \cite{H16}, \cite{MR3327520}, \cite{MR3274890}. 
+
+Kinetic solutions are more general in the sense that they are well defined even in situations when neither the original conservation law nor the corresponding entropy inequalities can be understood in the sense of distributions. Usually this happens due to lack of integrability of the flux and entropy-flux terms, e.g. $A(u)\notin L^1_{\text{loc}}$. Therefore, further assumptions on initial data or the flux function $A$ are in place in order to overcome this issue and remain in the entropy setting. It will be seen later on that no such restrictions are necessary in the kinetic approach as the equation that is actually being solved -- the so-called kinetic formulation, see \eqref{eq:kinform} -- is in fact linear. In addition, various proofs simplify as methods for linear PDEs are available.
+
+In the present paper, we are concerned with scalar rough conservation laws of the form \eqref{eq1a}, where $z=(z^1,\dots,z^M)$ can be lifted to a geometric rough path of finite $p$-variation for $p\in [2,3)$. 
+We will show how our general tools allows to  treat~\eqref{eq1a}
+ along the lines of the standard PDEs proof strategy. Unlike the known results concerning the same problem (see e.g. \cite{MR3351442,MR3327520,MR3274890}), our method does not rely on the flow transformation method and so it overcomes the limitations inevitably connected with such a transformation. Namely, we are able to significantly weaken the assumptions on the flux coefficient $A=(A_{ij})$: we assume that $a_{ij}=\partial_\xi A_{ij}$ and $b_j=\diver_x A_{\cdot j}$ belong to $W^{3,\infty}$, whereas in \cite{MR3351442} the regularity of order $\mathrm{Lip}^{2+\gamma}$ is required for some $\gamma>\frac{1}{\alpha}$ with $\alpha\in(0,1)$ being the H\"older regularity of the driving signal. For a 2-step rough path, i.e. in the range $\alpha\in (\tfrac{1}{3},\frac{1}{2}]$, it therefore means that almost 5 derivatives might be necessary. Nevertheless, let us point out that even the regularity we require is not the optimal one. To be more precise, with a more refined method we expect that one could possibly only assume the $W^{p,\infty}$-regularity for the coefficients $a,b$. Moreover extensions of the method to any $p\geq 3$ does not pose any particular problem but only requires heavier notations and longer proofs. For the sake of a cleaner presentation and to convey as effectively as possible the key points of our strategy we will limit here to discuss the first non--trivial case (namely $p\in [2,3)$) which shows already the general pattern.
+ 
+
+\subsection*{Outline of the paper} In Section~\ref{sec:general} we fix notations, introduce the notion of unbounded rough driver and establish the main tools used thereafter: a priori estimates for distributional solutions to rough equations and a related rough Gronwall lemma. In order to allow the reader to understand more easily the general strategy we present it via a simple toy model of a rough heat equation with transport noise. Using this toy model we discuss in  Section~\ref{sec:uniq1} the details of the tensorization method needed to prove bounds on nonlinear functions of the solution. Section~\ref{sec:conservation-presentation} introduces the setting for the analysis of conservations laws with rough fluxes. Section~\ref{sec:uniq} uses the tensorization method to obtain estimates leading to reduction, $L^1$-contraction and finally uniqueness for kinetic solutions. In Section~\ref{sec:apriori} we prove some $L^p$-apriori bounds on solutions which are stable under rough path topology. These bounds are finally used in Section~\ref{sec:existence} to prove existence of kinetic solutions. 
+
+
+
+
+\section{General a priori estimates for rough PDEs}
+\label{sec:general}
+
+\subsection{Notation}
+
+
+First of all, let us recall the definition of the increment operator, denoted by $\delta$. If $g$ is a path defined on $[0,T]$ and $s,t\in[0,T]$ then $\delta g_{st}:= g_t - g_s$, if $g$ is a $2$-index map defined on $[0,T]^2$ then $\delta g_{sut}:=g_{st}-g_{su}-g_{ut}$. The norm of the element $g$ in the Banach space $E$ will be written as $\cn[g; E]$. For two quantities $a$ and $b$ the relation $a\lesssim_{x} b$ means $a\leq c_{x} b$, for a constant $c_{x}$ depending on a multidimensional parameter $x$.
+
+
+In the sequel, given an interval $I$ we call \emph{control on $I$} (and denote it by $\omega$) any superadditive map on $\Delta_I:=\{(s,t)\in I^2: \ s\leq t\}$, that is, any map $\omega: \Delta_I \to [0,\infty[$ such that, for all $s\leq u\leq t$,
+$$\omega(s,u)+\omega(u,t) \leq \omega(s,t).$$
+We will say that a control is \emph{regular} if $\lim_{|t-s|\to 0} \omega(s,t) = 0$. Also, given a control $\omega$ on an interval $I=[a,b]$, we will use the notation $\omega(I):=\omega(a,b)$. 
+Given a time interval $I$, a parameter $p>0$, a Banach space $E$ and any function $g : I \to E$ we define the norm
+$$\cn[g;\overline V^p_1(I;E)]:=\sup_{(t_i) \in \mathcal{P}(I)} \left( \sum_{i} |g_{t_i} - g_{t_{i+1}}|^p \right)^{\frac{1}{p}},$$
+where $\mathcal{P}(I)$ denotes the set of all partitions of the interval $I$.
+In this case,
+$$\omega_g(s,t) = \cn[g;\overline V^p_1([s,t];E)]^p$$ defines a control on $I$, and we denote by $ V^p_1(I;E)$ the set of elements $g\in \overline V^p_1(I;E)$ for which $\omega_g$ is regular on $I$. 
+We denote by $\overline V^p_2(I;E)$ the set of two-index maps $g : I\times I \to E$ with left and right limits in each of the variables and for which there exists a control $\omega$ such that
+$$
+|g_{st}| \leq \omega(s,t)^{\frac{1}{p}}
+$$
+for all $s,t\in I$. We also define the space $\overline V^p_{2,\text{loc}}(I;E)$ of maps $g:I\times I\to E$ such that there exists a countable covering $\{I_k\}_k$ of $I$ satisfying $g \in \overline V^p_2(I_k;E)$ for any $k$. We write $g\in  V^p_2(I;E)$ or $g\in  V^p_{2,\text{loc}}(I;E)$ if the control can be chosen regular.
+
+\begin{lemma}[Sewing lemma]\label{lemma-lambda}
+Fix an interval $I$, a Banach space $E$ and a parameter $\zeta >1$. Consider a map $h:I^3 \to E$ such that $h\in \mathrm{Im} \,\delta$ and for every $s<u<t \in I$,
+\begin{eqnarray} 
+|h_{sut}|\leq \omega(s,t)^{\zeta} ,
+\end{eqnarray}
+for some regular control $\omega$ on $I$. Then there exists a unique element $\Lambda h\in V_2^{\frac{1}{\zeta}}(I;E)$ such that $\delta(\Lambda h)=h$ and for every $s<t\in I$,
+\begin{eqnarray} \label{contraction}
+|(\Lambda h)_{st}|\leq C_\zeta\, \omega(s,t)^{\zeta}  ,
+\end{eqnarray}
+for some universal constant $C_\zeta$.
+\end{lemma}
+
+%\begin{remark}\label{rmk:explicit-Lambda}
+%Given the existence of $\Lambda h$ it is clear that it is possible to have an explicit representation for it as
+%$$
+%(\Lambda h)_{st} = \sum_{n\ge 0} \sum_{i=0}^{2^n-1} h_{t^{n+1}_{2i} t^{n+1}_{2i+1} t^{n+1}_{2i+2}}
+%$$
+%where $t^n_i = s + (t-s) 2^{-n} i$ is a dyadic partition of $[s,t]$.
+%\end{remark}
+
+\begin{proof}
+The proof follows that given in \cite[Lemmma 4.2]{friz_course_2014} for H\"older norms, we only specify the modification needed to handle variation norms.
+Regarding existence, we recall that since $\delta h=0$, there exists a $2$-index map $B$ such that $\delta B=h$.
+Let $s,\,t\in[0,T]$, such that $s<t$, and consider a sequence $\{\pi_n;\,n\geq0\}$ of partitions $\{s=r_0^n<\cdots< r_{k_n+1}^n=t\}$ of $[s,t]$. Assume that $\pi_n\subset\pi_{n+1}$ and $\lim_{n\rightarrow\infty} k_n=\infty.$ Set 
+$$M^{\pi_n}_{st}=B_{st}-\sum_{i=0}^{k_n}B_{r^n_{i},r^n_{i+1}}.$$
+Due to superadditivity of $\omega$ it can be seen that there exists $l\in\{1,\dots,k_n\}$ such that
+$$\omega(r^n_{l-1},r^n_{l+1})\leq \frac{2\omega(s,t)}{k_n}
+$$
+Now we choose such an index $l$ and transform $\pi_n$ into $\hat \pi$, where
+$\hat\pi=\{r_0^n<r_1^n<\cdots<r_{l-1}^n<r^n_{l+1}<\cdots<r_{k_n+1}^n\}$.
+Then
+$$M^{\hat\pi}_{st}=M^{\pi_n}_{st}-(\delta B)_{r^n_{l-1},r^n_{l},r^n_{l+1}}
+=M^{\pi_n}_{st}-h_{r^n_{l-1},r^n_{l},r^n_{l+1}}$$
+and hence
+$$|M^{\hat\pi}_{st}-M^{\pi_n}_{st}|\leq \omega(r^n_{l-1},r^n_{l+1})^{\zeta}\leq \bigg[\frac{2\omega(s,t)}{k_n}\bigg]^\zeta.$$
+Repeating this operation until we end up with the trivial partition $\hat\pi_0=\{s,t\}$, for which $M^{\hat\pi_0}_{st}=0$ this implies that $M^{\pi_n}_{st}$ converges to some $M_{st}$ satisfying
+\begin{align*}
+|M_{st}| = \lim_n |M^{\pi_n}_{st}|\leq  2^\zeta\omega(s,t)^\zeta\sum_{i=1}^{\infty}i^{-\zeta}\leq C_{\zeta}\,\omega(s,t)^\zeta.
+\end{align*}
+\end{proof}
+
+
+
+\subsection{Unbounded rough drivers}\label{sec:urd} Let $\N_0=\N \cup \{ 0 \}$.
+In what follows, we call a \emph{scale} any sequence $\big(E_n,\lVert\cdot\rVert_n\big)_{n\in\N_0}$ of Banach spaces such that $E_{n+1}$ is continuously embedded into $E_n$. Besides, for $n\in\N_0$ we denote by $E_{-n}$ the topological dual of $E_n$.
+
+
+\begin{definition}
+\label{def:urd}
+Let $p\in [2,3)$ be given. A continuous unbounded $p$-rough driver with respect to the scale $\big(E_n,\lVert\cdot\rVert_n\big)_{n\in\N_0}$, is a pair $\mathbf{A} = \big(A^1,A^2\big)$ of $2$-index maps such that
+$$A^1_{st}\in  \cl(E_{-n},E_{-(n+1)}) \ \ \text{for} \ \ n\in \{0,2\}, 
+\qquad  A^2_{st} \in \cl(E_{-n},E_{-(n+2)}) \ \  \text{for} \ \ n\in \{0,1\},$$
+and there exists a continuous control $\omega_A$ on $[0,T]$ such that for every $s,t\in [0,T]$,
+\begin{align}
+\lVert A^1_{st}\rVert_{\cl(E_{-n},E_{-(n+1)})}^p &\leq\omega_A(s,t) \qquad \text{for}\ \ n\in \{0,2\}, 
+\label{eq:bnd-A1}\\
+\lVert A^2_{st}\rVert_{\cl(E_{-n},E_{-(n+2)})}^{p/2} &\leq\omega_A(s,t) \qquad \text{for}\ \ n\in \{0,1\},
+\label{eq:bnd-A2}
+\end{align}
+and, in addition, the Chen's relation holds true, that is,
+\begin{equation}\label{eq:chen-relation}
+\delta A^1_{sut}=0,\qquad\delta A^2_{sut}=A^1_{ut}A^1_{su},\qquad\text{for all}\quad 0\leq s<u<t\leq T.
+\end{equation}
+\end{definition}
+
+
+
+
+\subsection{Motivation}
+
+In order to present the main ideas of our approach towards rough PDEs, let us consider a toy model of a linear rough heat equation of the form
+\begin{align}\label{eq:heat}
+\begin{aligned}
+\dd u &=\Delta u\, \dd t + V\cdot \nabla u \,\dd z,\qquad x\in\R^N,\,t\in(0,T),\\
+u(0)&=u_0,
+\end{aligned}
+\end{align}
+where $V=(V^1,\dots,V^K)$ is a family of sufficiently smooth and bounded vector fields on $\R^N$ and $z=(z^1,\dots,z^K)$ can be lifted to a geometric $p$-rough path for $p\in [2,3)$. We denote by $\mathbf{Z}=(Z^1,Z^2)$ its rough path lift.  Let us insist on the fact that the linearity of the leading order operator does not play any role and the discussion below can be easily adapted to quasilinear elliptic or monotone operators.
+%
+Setting (using the Einstein summation convention)
+\begin{equation}\label{driver}
+A^1_{st}u:=Z^{1,k}_{st} \,V^k \cdot\nabla u,\qquad A^2_{s t}u:= Z^{2,jk}_{st}\, V^k\cdot\nabla (V^j\cdot\nabla u)
+\end{equation} 
+we observe that $\bfA=(A^1,A^2)$ defines an unbounded $p$-rough driver in the scale $E_n=W^{n,2}(\R^N)$. Therefore, motivated by \cite{BG} we are lead to the following formulation of \eqref{eq:heat} which should be satisfied for every $0 \leqslant s \leqslant t \leqslant T$ and every test
+  function $\varphi \in E_{3}$:
+\begin{equation}\label{eq:he1}
+\delta  u(\varphi )_{s t} =\int_{s}^{t} 
+      u_r (\Delta \varphi)  \dd r+ u_{s} (A^{1,
+     \ast}_{s t} \varphi ) +  u_{s} (A^{2, \ast}_{s t} \varphi
+     ) + u^{\natural}_{s t}( \varphi ) 
+\end{equation}
+where $u^\natural$ is an $E_{-3}$-valued $2$-index map such that for every $\varphi\in E_3$ the map $u^{\natural}_{s t}( \varphi ) $ possesses sufficient time regularity, namely, it has finite local $\frac{q}{3}$-variation for some $q < 3$ and some regular control. In expression~\eqref{eq:he1}, let us also label the operators $A^{1,\ast}$ and $A^{1,\ast}$ for further use:
+\begin{equation}\label{eq:def-A-star}
+A_{st}^{1,\ast}\vp
+=- Z_{st}^{1,k} \, \text{div}\lp V^{k}\vp \rp,
+\quad\text{and}\quad
+A_{st}^{2,\ast}\vp
+= Z_{st}^{2,jk} \, \text{div}\lp V^{j} \text{div}\lp V^{k}\vp \rp \rp .
+\end{equation}
+
+
+
+\begin{remark}
+This formulation has an intuitive appeal, however note that it should more precisely  be understood  as saying that $u$ is a solution of the equation if the distribution 
+\begin{equation*}
+u^{\natural}_{s t}( \varphi ) : = \delta  u(\varphi )_{s t} -\int_{s}^{t} 
+      u_r (\Delta \varphi)  \dd r- u_{s} (A^{1,
+     \ast}_{s t} \varphi ) -  u_{s} (A^{2, \ast}_{s t} \varphi
+     )  
+\end{equation*}
+belongs to $V^{\frac{q}{3}}_{2,\text{loc}}([0,T],E_{-3})$. 
+In this paper we will set up the convention that every $2$-index map with a $\natural$ superscript denotes an element of $V^{1/\zeta}_{2,\text{loc}}([0,T],E_{-3})$ for some $\zeta > 1$.
+\end{remark}
+
+
+
+
+
+
+Before we continue with the presentation of the rough path framework, let us briefly recall how the basic energy estimates are derived in the classical case when $z$ is a smooth path. In that situation, one formally tests \eqref{eq:heat} by $\varphi=u$ and integration by parts leads to
+\begin{align*}
+ \|u_t\|_{L^2}^2+2\int_0^t\|\nabla u_r\|_{L^2}^2\,\dd r &=\|u_0\|_{L^2}^2+\int_0^t u^2_r(\diver V) \,\dd z_r\\%\label{eq:he2}\\
+ &\leq \|u_0\|_{L^2}^2+\|V\|_{W^{1,\infty}}\int_0^t \|u_r\|_{L^2}^2\,\dd |z_r|, 
+\end{align*}
+where $L^{2}$ stands for $L^{2}(\R^{N})$.
+Hence the Gronwall lemma applies and we obtain
+$$ \|u_t\|_{L^2}^2+2\int_0^t\|\nabla u_r\|_{L^2}^2\,\dd r \leq \mathrm{e}^{\|V\|_{W^{1,\infty}}\|z\|_{1\text{-var}}}\|u_0\|_{L^2}^2$$
+which consequently implies that, in the case of a smooth driver $z$, weak solutions of \eqref{eq:heat} belong to $C ( [ 0,T ] ;L^{2} ( \mathbb{R}^{N} ) ) \cap L^{2} ( 0,T;W^{1,2}  ( \mathbb{R}^{N} ) )$.
+
+
+Therefore, in order to derive the energy estimate in the rough path framework, one needs to perform two steps. First, one has to justify the ``test by $u$'' or in other words one has to apply some It\^o formula to the function $u\mapsto \|u\|_{L^2}^2.$ Second, one needs a suitable replacement for the Gronwall lemma argument. In the proof of existence, the first step can be  easily justified. Namely, one works with a suitable approximate smooth path $\mathbf{Z}^n$ such that the corresponding equation possesses a smooth solution and consequently the equation for $u^2$ can be derived using classical (deterministic) arguments. Note that such a simplification is no longer possible in the proof of uniqueness where the only formulation and regularity at hand is the one given by the a priori estimate, namely, $C ( [ 0,T ] ;L^{2} ( \mathbb{R}^{N} ) ) \cap L^{2} ( 0,T;W^{1,2}  ( \mathbb{R}^{N} ) )$. However, we postpone the discussion of this issue to Section~\ref{sec:uniq1}.
+
+An important observation is that as we only expect a weak solution to \eqref{eq:heat} to belong to $C ( [ 0,T ] ;L^{2} ( \mathbb{R}^{N} ) ) \cap L^{2} ( 0,T;W^{1,2}  ( \mathbb{R}^{N} ) )$, as in the smooth setting, the term
+$$
+\int_0^\cdot \|\nabla u_r\|^2_{L^2}\,\dd r,
+$$
+which appears once we test by $u$, is only expected to be continuous and of finite variation but not H\"older continuous. This is the reason why it is necessary to work in the $p$-variation framework, even if the driver $\bfA$ is taken to be unbounded $\tfrac{1}{p}$-H\"older rough driver according to \cite[Definition 5]{BG}.
+
+
+
+In order to understand (somehow heuristically) the rough path mechanism, let us assume that we are able to derive rigorously the equation for $u^2$. This should yield the following dynamics:
+\begin{align}\label{u2}
+\begin{aligned}
+\delta  u^2(\varphi )_{s t} &=-2\int_{s}^{t} 
+      |\nabla u_r|^2 ( \varphi)  \,\dd r-2\int_s^t(u\nabla u_r)(\nabla \vp)\,\dd r\\
+      &\qquad+ u^2_{s} (A^{1,\ast}_{s t} \varphi ) +  u^2_{s} (A^{2, \ast}_{s t} \varphi
+     ) + u^{2,\natural}_{s t}( \varphi ) 
+\end{aligned}
+\end{align}
+for some new remainder $u^{2,\natural}.$ Remark that since $u^2$ is expected to belong to $L^1(\R^N)$, the corresponding scale of test function spaces here is $E_n=W^{n,\infty}(\R^N)$, unlike in \eqref{eq:he1} where we considered $E_n=W^{n,2}(\R^N)$. Choosing $\vp=1$ and $s=0$ leads to
+\begin{align}\label{u2-norm}
+\|u_t\|_{L^2}^2+2\int_0^t\|\nabla u_r\|_{L^2}^2\,\dd r&=\|u_0\|_{L^2}^2+ u^2_0(A^{1,*}_{0t}1)+u^2_0(A^{2,*}_{0t}1)+u^{2,\natural}_{0 t}( 1 ) \notag\\
+&\lesssim \|u_0\|_{L^2}^2\Big(1+|Z^1_{0t}|\|V\|_{W^{1,\infty}}+|Z^2_{0t}|\|V\|^2_{W^{2,\infty}}\Big)+|u^{2,\natural}_{0 t}( 1 )|.
+\end{align}
+In order to achieve a rough Gronwall lemma type argument, it is now easily seen that we need to estimate the remainder $u^{2,\natural}$ in terms of the left hand side in \eqref{u2-norm}. Otherwise stated, our problem is reduced to show that:
+\begin{equation*}%\label{rem}
+|u^{2,\natural}_{0 t}( 1 )|\lesssim_t \sup_{0\leq r\leq t}\|u_r\|_{L^2}^2+2\int_0^t\|\nabla u_r\|_{L^2}^2\,\dd r
+\end{equation*}
+in such  a way that the proportional constant can be made sufficiently small provided $t$ is small. Such an estimate is an important element of our general approach towards RPDEs and is presented in full detail and generality in the next subsection.
+
+
+
+
+\subsection{A priori estimates and rough Gronwall lemma}
+\label{subsec:apr}
+
+The aim of this subsection is to introduce mathematical tools that allow to derive a priori estimates for a wide class of rough PDEs.
+%That is, we will establish a new estimate that depends only on the regularity of the rough path lift $\mathbf{Z}=(Z^1,Z^2)$.
+To this end and in view of the discussion above, we are concerned with general rough PDEs of the form
+\begin{equation}\label{eq:gen}
+\dd g_{t} = \mu(\dd t)+ {\bf A}(\dd t) g_{t}  .
+\end{equation}
+where $\bfA=(A^1,A^2)$ is an unbounded $p$-rough driver on the scale $(E_n)$ and the drift $\mu$, which possibly also depends on the solution, is continuous of finite variation. To make the connection to the toy model \eqref{eq:heat}, eq.~\eqref{eq:gen} is understood in the sense of distributions and corresponds to \eqref{u2} in our particular example, i.e. $g$ corresponds to $u^2$ and the drift $\delta\mu$ is an increment of the integral
+$$\int_0^\cdot u_r\Delta u_r\,\dd r.$$
+
+
+We now give a rigorous meaning to such an equation.
+
+\begin{definition}\label{def:gen}
+Let $p\in [2,3)$ and fix an interval $I\subseteq [0,T]$. Let ${\bf A} = \big(A^1,A^2\big)$ be a continuous unbounded $p$-rough driver on $I$ with respect to the scale $(E_n)$ and let $\mu\in \overline V_1^1(I;E_{-3})$. A path $g:I \to E_{-0}$ is called a solution (on $I$) of the equation \eqref{eq:gen} provided there exists $q<3$ and  $g^\natural \in V^{\frac{q}{3}}_{2,\text{loc}}([0,T],E_{-3})$ such that, for every $s,t\in I$, $s<t$,
+\begin{equation}\label{eq:gen2}
+(\delta g)_{st}(\varphi)=(\delta \mu)_{st}(\varphi)+g_s(\{A^{1,*}_{st}+A^{2,*}_{st}\}\varphi)+g^\natural_{st}(\varphi).
+\end{equation}
+
+\end{definition}
+%\noindent
+%\textcolor{blue}{[Aurelien-Minor point] Following our previous discussion, I've tried to stay as general as possible for the regularity assumption on $g^\natural$ (at least I think this is the minimal assumption in order to prove the subsequent a priori estimate). But to be honest, I think I would be in favor of the assumption
+%\begin{equation}\label{more-restr-cond}
+%g^\natural \in \overline V_2^{p/3}(I;E_3^\ast)
+%\end{equation}
+%in this definition. For instance, in the conservation law case, if we assume that $f$ is a solution in the sense that (\ref{more-restr-cond}) holds, then we can show (see Lemma \ref{lem:exi-extens}) that
+%$$f \in V_1^p(I;E_1^\ast) \quad \text{and} \quad f^\sharp:=\delta f-f(A^1)\in V_2^{p/2}(I;E_2^\ast) \ ,$$
+%and from this we derive that patching \emph{local} solutions on $[0,T_1]$, $[T_1,T_2]$,...gives a \emph{global} solution on $[0,T]$ (see the end of Section \ref{subsec:proo-prop-exi}). If we don't assume (\ref{more-restr-cond}), then I don't know how to do it.}
+
+
+
+
+
+
+
+
+
+Let us now present our first main result on an a priori estimate for the remainder $g^\natural$ which  will be employed to derive the energy estimate for \eqref{eq:gen}. We make use of a family of smoothing operators $(J^\eta)_{\eta\in (0,1)}$ acting on the scale $(E_n)_{n\in\N}$ and satisfying, for $k\in \{0,1,2\}$,
+\begin{equation}\label{eq:reg-J-eta}
+\lVert  J^\eta-\id\rVert_{\cl(E_{n+k},E_n)} 
+\lesssim 
+\eta^k , \qquad \lVert J^\eta\rVert_{\cl(E_n,E_{n+k})} \lesssim \eta^{-k}.
+\end{equation}
+An important role is played by the $E_{-1}$-valued $2$-index map $g^\sharp$ defined as follows
+\begin{equation}\label{eq:def-g-sharp}
+g^\sharp_{st}(\varphi):=\delta g(\vp)_{st}-g_s(A^{1,*}_{st}\vp),
+\end{equation}
+observe that due to \eqref{eq:gen2} it is also given by
+$$g^\sharp_{st}(\varphi)=(\delta\mu)_{st}(\varphi)+g_s(A^{2,*}_{st}\varphi)+g^\natural_{st}(\varphi).$$
+In the following result we will make use of both these expressions depending on the necessary regularity: the former one contains terms that are less regular in time but more regular in space (i.e. they require less regular test functions) whereas the terms in the latter one are more regular in time but less regular in space.
+
+
+
+\begin{theorem}\label{prop:apriori}
+Let $p\in[2,3)$ and fix an interval $I\subseteq [0,T]$. Let ${\bf A}=(A^1,A^2)$ be a continuous unbounded $p$-rough driver on the scale $(E_n)$ endowed with the family of smoothing operators $(J^\eta)$. Consider a path $\mu \in \overline V_1^1(I;E_{-3})$ such that for every $\varphi \in E_3$, there exists a  control $\omega_\mu$ and a constant $\lambda\in[p,3]$ such that
+\begin{equation}\label{cond-mu-n}
+\sup_{\eta\in(0,1)} \eta^{\lambda-k} |(\delta \mu)_{st}(J^\eta\varphi)|\leq \omega_\mu(s,t)\, \|\varphi\|_{E_k} \qquad \text{for} \  k=1,2 .
+\end{equation}
+Let  $g$ be a solution on $I$  of the equation \eqref{eq:gen}, with the following additional hypothesis: $g$ is controlled over the whole interval $I$, that is we have $g^\natural \in V^{\frac{q}{3}}_2(I;E_{-3})$, and assume
+\begin{equation}\label{q}
+q\in\left[\frac{3p\lambda}{2p+\lambda},3\right).
+\end{equation}
+Moreover let $G=\cn[g;L^\infty(s,t;E_{-0})]$,  fix
+ $\kappa\in[0,\tfrac{1}{p})$ such that
+\begin{equation}\label{kappa}
+\frac{1}{2}\left(\frac{3}{p}-\frac{3}{q}\right)\geq \kappa\geq\frac{1}{\lambda-2}\left(\frac{3}{q}-1-\frac{3-\lambda}{p}\right)
+\end{equation}
+and let
+\begin{align}\label{eq:def-omega-I}
+\omega_I(s,t) 
+:=  G^\frac{q}{3}\,\omega_A(s,t)^{\frac{q}{3}(\frac{3}{p}-2\kappa)}+\omega_\mu(s,t)^\frac{q}{3}\omega_A(s,t)^{\frac{q}{3}(\frac{3-\lambda}{p}+\kappa (\lambda-2))}.
+\end{align}
+Then there exists a constant $L>0$ (independent of $I$) such that if $\omega_A(I)\leq L$ then for all $s,t\in I$, $s<t$,
+\begin{equation}\label{apriori-bound} 
+\begin{split}
+ \|g^{\natural}_{st}\|_{E_{-3}}
+ \lesssim_{q,\bfA,I} \omega_I(s,t)^{\frac{3}{q}}.
+ %% \, \cn[g;L^\infty(s,t;E_{-0})]\,\omega_A(s,t)^{\frac{3}{p}-2\kappa}
+%%+\omega_\mu(s,t) \omega_A(s,t)^{\frac{3-\lambda}{p}+\kappa(\lambda-2) }, 
+\end{split}
+\end{equation}
+%where%where $\omega_I$ is the continuous control given by
+%\begin{multline}\label{eq:def-omega-I}
+%\omega_I(s,t) 
+%:=  
+%[G\,(\omega_A(I)^{-\frac2p} + \omega_A(I)^{\frac1p}+1+\omega_A(I)^{\frac{1}{p}})]^{\frac p3} \omega_A(s,t)  \\
+%+(\omega_A(I)^{1-\frac{1}{p}}+\omega_A(I)^{1-\frac{2}{p}})^{\frac p3} \omega_\mu(s,t)^{\frac p3} \omega_A(s,t)^{1-{\frac p3} },
+%\end{multline}
+%where we have set $G = \cn[g;L^\infty(I;E_{-0})]$.
+\end{theorem}
+
+
+\begin{proof}
+Let $\omega_\natural(s,t)$ be a regular control such that $\|g^{\natural}_{st}\|_{E_{-3}} \le \omega_\natural(s,t)^{\frac{3}{q}}$ for any $s,t \in I$.
+Let $\varphi \in E_3$ be such that $\lVert \varphi \rVert_{E_3} \leq 1$. We first show that
+\begin{equation}\label{delta-reste}
+(\delta g^{\natural}(\varphi))_{sut}= (\delta g)_{su}(A^{2,*}_{ut} \varphi)+g^{\sharp}_{su}(A^{1,*}_{ut} \varphi) ,
+\end{equation}
+where $g^{\sharp}$ was defined in \eqref{eq:def-g-sharp}.
+Indeed, owing to \eqref{eq:gen2}, we have 
+\begin{equation*}
+g^{\natural}_{st}(\vp) = \delta g(\vp) _{st}- g_s \lp [A_{st}^{1,*} + A_{st}^{2,*}](\vp)\rp - \delta \mu(\vp)_{st},
+\end{equation*}
+where we omit the time indices for notational sake. Applying $\delta$ on both sides of this identity and recalling Chen's relations \eqref{eq:chen-relation} as well as the fact that $\delta \delta=0$ we thus get
+\begin{equation*}
+\delta g^{\natural}_{sut}(\vp) = (\delta g)_{su} \lp [A^{1,*}_{ut} + A_{ut}^{2,*}](\vp)\rp - g_s \lp  A^{1,*}_{su}A^{1,*}_{ut}(\vp)\rp  .
+\end{equation*}
+Plugging relation \eqref{eq:def-g-sharp} again into this identity, we end up with our claim \eqref{delta-reste}.
+
+The aim now is to bound the terms on the right hand side of \eqref{delta-reste} separately by the allowed quantities $G,\,\omega_\mu,\,\omega_\natural$ and to reach a sufficient time regularity as required by the sewing lemma \ref{lemma-lambda}.
+To this end, we make use of the smoothing operators $(J^\eta)$ and repeatedly apply the equation \eqref{eq:gen2} as well as the two equivalent definitions of $g^\sharp$ from \eqref{eq:def-g-sharp}. We obtain
+\begin{align}\label{eq:dcp-g-nat}
+\delta g^\natural(\vp)_{sut}&=(\delta g)_{su}(J^{\eta} A^{2,*}_{ut} \varphi)+(\delta g)_{su}((\mathrm{Id}-J^{\eta}) A^{2,*}_{ut} \varphi) \notag\\
+&\quad+g^{\sharp}_{su}(J^{\eta} A^{1,*}_{ut} \varphi)+g^{\sharp}_{su}((\mathrm{Id}-J^{\eta})A^{1,*}_{ut} \varphi) \notag\\
+&=g_{s}(A^{1,*}_{su}J^{\eta} A^{2,*}_{ut} \varphi)+g_{s}(A^{2,*}_{su}J^{\eta} A^{2,*}_{ut} \varphi)+(\delta\mu)_{su}(J^{\eta} A^{2,*}_{ut} \varphi)+g^\natural_{su}(J^{\eta} A^{2,*}_{ut} \varphi) \notag\\
+&\quad+(\delta g)_{su}((\mathrm{Id}-J^{\eta}) A^{2,*}_{ut} \varphi) \notag\\
+&\quad+g_{s}(A^{2,*}_{su}J^{\eta} A^{1,*}_{ut} \varphi)+(\delta\mu)_{su}(J^{\eta} A^{1,*}_{ut} \varphi)+g^\natural_{su}(J^{\eta} A^{1,*}_{ut} \varphi) \notag\\
+&\quad+(\delta g)_{su}((\mathrm{Id}-J^{\eta})A^{1,*}_{ut}\vp)-g_{s}(A^{1,*}_{su}(\mathrm{Id}-J^{\eta}) A^{1,*}_{ut} \varphi) \notag\\
+&=I_1+\cdots+I_{10}
+\end{align}
+The use of the smoothing operators reflects the competition between space and time regularity in the various terms in the equation. To be more precise, the only available norm of $g$ is $L^\infty(0,T;E_{-0})$. So on the one hand $g$ does not possess any time regularity (at least at this point of the proof) but on the other hand it does not require any space regularity of the corresponding test functions. In general, the presence of $(\mathrm{Id}-J^\eta)$ allows to apply the first estimate from \eqref{eq:reg-J-eta} to make use of the additional space regularity in order to compensate for the lack of time regularity. Correspondingly, the second estimate from \eqref{eq:reg-J-eta} allows to use the additional time regularity in order to compensate for the lack of space regularity.
+
+Now bound the above as follows.
+\begin{align*}
+|I_1|+|I_2|+|I_6|&\lesssim G\,\omega_A(s,t)^\frac3p+\eta^{-1}\,G\,\omega_A(s,t)^\frac4p+G\,\omega_A(s,t)^\frac3p,\\
+|I_3|+|I_7|&\lesssim \eta^{1-\lambda}\,\omega_\mu(s,t)\omega_A(s,t)^{\frac2p}+\eta^{2-\lambda}\,\omega_\mu(s,t)\omega_A(s,t)^{\frac1p},\\
+|I_4|+|I_8|&\lesssim \eta^{-2} \,\omega_\natural(s,t)^\frac{3}{q}\omega_A(s,t)^{\frac2p}+\eta^{-1}\,\omega_\natural(s,t)^\frac{3}{q}\omega_A(s,t)^{\frac1p},\\
+|I_5|+|I_9|+|I_{10}|&\lesssim {\eta}\, G\,\omega_A(s,t)^\frac2p+\eta^2\,G\,\omega_A(s,t)^\frac1p+{\eta}\,G\,\omega_A(s,t)^\frac2p
+\end{align*}
+Finally, we choose $\eta\in(0,1)$ to equilibrate the various terms, that is, we set
+$$\eta=\omega_A(I)^{-\frac{1}{p}+\kappa} \omega_A(s,t)^{\frac{1}{p}-\kappa}$$ for some $\kappa\in[ 0,\tfrac{1}{p})$ to be chosen below. Assuming that $\omega_A(I)\leq 1$ we deduce
+\begin{align*}
+|\delta g^\natural(\vp)_{sut}|&\lesssim G\,\omega_A(s,t)^\frac3p\\
+&\quad+\omega_\mu(s,t)\omega_A(s,t)^{\frac{3-\lambda}{p}+\kappa(\lambda-2)}\\
+&\quad+2\omega_A(I)^{\frac{1}{p}+\kappa}\omega_\natural(s,t)^\frac{3}{q}\omega_A(s,t)^{\kappa}\\
+&\quad+G\,\omega_A(I)^{-2(\frac{1}{p}+\kappa)}\omega_A(s,t)^{\frac{3}{p}-2\kappa}.
+\end{align*}
+Note that there are only two terms where we kept track of $\omega_A(I)$, namely, the one that needs to be absorbed to the left hand side eventually, i.e. the one containing $\omega_\natural$, and the one with a negative power. The latter one can be further estimated from above by a constant depending on $\bfA$ and $I$ if we assume that $I\neq\emptyset$ and the former one will then determine the value of the constant $L$ from the statement of the Theorem.
+Consequently, recalling the definition \eqref{eq:def-omega-I} of $\omega_{I}$, we obtain
+\begin{equation*}
+|(\delta g^{\natural})_{sut}( \varphi ) | \lesssim \omega_{I}(s,t)^\frac{3}{q}+2\omega_A(I)^{\frac{1}{p}+\kappa}\omega_\natural(s,t)^\frac{3}{q}\omega_A(s,t)^{\kappa},
+\end{equation*}
+By definition, for a suitable choice of the parameter $\kappa$, the mapping $\omega_{I}$ is a regular control. Indeed, the regularity of $\omega_{I}$ easily stems from the continuity of $\omega_A$ whereas superadditivity is obtained from \cite[Exercise 1.9]{FV} by recalling that both $\omega_{A}$ and $\omega_{\mu}$ are controls, and choosing $\kappa\in [0,\tfrac{1}{p})$ such that 
+$$\frac{q}{3}\left(\frac{3}{p}-2\kappa\right)\geq 1,\qquad \frac{q}{3}+\frac{q}{3}\left(\frac{3-\lambda}{p}+\kappa (\lambda-2)\right)\geq1.$$
+This leads to the condition \eqref{kappa}
+and due to \eqref{q} such a $\kappa\in[0,\tfrac{1}{p})$ exists.
+
+
+Since $\omega_\natural$ is also a regular control, $\delta g^{\natural}(\varphi)$ satisfies the assumptions of Lemma~\ref{lemma-lambda} and we can thus conclude that, for all $s<t\in I$,
+$$|g^{\natural}_{st}( \varphi ) | \lesssim_p  \omega_I(s,t)^{\frac{3}{q}}+2\omega_A(I)^{\frac{1}{p}+\kappa}\omega_\natural(s,t)^\frac{3}{q}\omega_A(s,t)^{\kappa}$$
+and consequently
+$$\|g^{\natural}_{st}\|_{E_{-3}}^\frac{q}{3} \lesssim_p  \omega_I(s,t)+\omega_A(I)^{\frac{q}{3}(\frac{1}{p}+\kappa)}\omega_\natural(s,t)\omega_A(s,t)^{\frac{\kappa q}{3}}$$
+so if $\omega_A(I)$ is sufficiently small, the estimate \eqref{apriori-bound} immediately follows.
+\end{proof}
+
+
+
+
+
+
+
+
+%\begin{remark}
+%\label{remark:explicit-sewing-interpolation}
+%As a consequence of Remark \ref{rmk:explicit-Lambda}, we get a (relatively) explicit representation of $g^{\natural}$ in terms of interpolated increments. Namely, consider a dyadic partition $t^n_i = s + (t-s) 2^{-n} i$ of $[s,t]$ and
+%$$
+%g^\natural_{st}(\varphi) = \sum_{n\ge 0} \sum_{i=0}^{2^n-1} (\delta g^\natural (\varphi))_{t^{n+1}_{2i} t^{n+1}_{2i+1} t^{n+1}_{2i+2}}
+%$$
+%where $\delta g^\natural$ is given by \eqref{delta-reste}:
+%$$
+%(\delta g^\natural (\varphi))_{s u t}
+%= (\delta g)_{s u }(A^{2,*}_{u t} \varphi)+g^{\sharp}_{s u}(A^{1,*}_{u t} \varphi) ,
+%$$
+%and where we decompose $\delta g^\natural$ as in \eqref{eq:dcp-g-nat}:
+%$$
+% (\delta g^\natural (\varphi))_{sut} =  (\delta g)_{s u }((\id -J^\eta) (A^{1,*}_{u t}+A^{2,*}_{u t} )\varphi)
+%  + g_{s } ((A^{1,*}_{s u} + A^{2}_{s u})J^\eta A^{2,\ast}_{u t} \varphi)
+%$$
+%$$
+%-g_{s}(A^{1,*}_{s u} (\id -J^\eta)A^{1,*}_{u t} \varphi) 
+%+ g_{s}(A^{2,*}_{s u}J^\eta A^{1,*}_{u t} \varphi) 
+%$$
+% $$
+%  +  (\delta \mu)_{s u}( J^\eta (A^{1,*}_{u t}+A^{2,*}_{u t}) \varphi)
+%  + g^{\natural}_{s u}( J^\eta (A^{1,*}_{u t}+A^{2,*}_{u t}) \varphi).
+%$$
+%We choose $\eta = (\omega_A(s,t) /L)^{1/p}$ where $L$ is a fixed constant, sufficiently large to have $\eta\le 1$. If $L$ is small enough this equation has a the unique fixed-point $g^\natural$ as shown before. An important observation for what follows is that in this representation the $2$-increment $ \mu$ appears only in the combination
+%$$
+%M_{sut}(\varphi) = (\delta \mu)_{su}\Big( J^{(\omega_A(s,t)/L)^{1/p}} (A^{1,*}_{ut}+A^{2,*}_{ut}) \varphi\Big),
+%$$
+%for a fixed constant $L$.
+%
+%\end{remark}
+
+
+\begin{remark}\label{rem:heat1}
+We point out that the time regularity of the remainder $g^\natural$ is determined not only by the corresponding regularity of the driver $\bfA$ but is also influenced by the regularity of the drift $\mu$. The parameters $\lambda, \kappa, p$ represent the competition of the various terms from \eqref{eq:gen2} leading to the regularity of $g^\natural$.
+To illustrate this phenomenon, let us go back to the heat equation \eqref{eq:heat} and show how Theorem \ref{prop:apriori} applies and yields the desired estimate for the remainder.
+
+
+Recall that the drift in \eqref{u2} satisfies
+\begin{align*}
+(\delta\mu)_{st}(\vp)=-2\int_s^t \int_{\R^N} |\nabla u_r|^2 \vp\,\dd r-2\int_s^t\int_{\R^N} \nabla u_r \cdot\nabla\vp \,u_r\,\dd r.
+\end{align*}
+It can be estimated as follows
+\begin{align}\label{eq:estim-mu-heat}
+|(\delta\mu)_{st}(\vp)|\lesssim \int_s^t \|\nabla u_r\|_{L^2}^2 \,\dd r\,\|\vp\|_{L^\infty}+\bigg(\int_s^t\|\nabla u_r\|_{L^2}^2\,\dd r \bigg)^\frac{1}{2}\bigg(\int_s^t\| u_r\|_{L^2}^2\,\dd r \bigg)^\frac{1}{2}\|\vp\|_{W^{1,\infty}},
+\end{align}
+and hence the assumption \eqref{cond-mu-n} holds true in the scale $E_n=W^{n,\infty}(\R^N)$. Notice that, according to \eqref{eq:estim-mu-heat}, the coefficient $\lambda$ in \eqref{cond-mu-n} could be chosen as $\lambda=0$. However, due to other terms in our expansion, we take $\lambda=p$ in the sequel. With this value in hand, we get
+$$
+\omega_\mu(s,t)=\int_s^t \|\nabla u_r\|_{L^2}^2 \,\dd r+\bigg(\int_s^t\|\nabla u_r\|_{L^2}^2\,\dd r \bigg)^\frac{1}{2}\bigg(\int_s^t\| u_r\|_{L^2}^2\,\dd r \bigg)^\frac{1}{2}.
+$$
+Accordingly, we may choose $q=p$ and $\kappa=0$ and deduce that
+\begin{equation*}%\label{apriori-bound} 
+\begin{split}
+ &\| u^{2,\natural}_{st}\|_{E_{-3}} \lesssim_{p,\bfA,I} \, \cn[u^2;L^\infty(s,t;E_{-0})]\,\omega_A(s,t)^{\frac{3}{p}}
++\omega_\mu(s,t) \omega_A(s,t)^{\frac{3-p}{p}}.
+\end{split}
+\end{equation*}
+In other words, the drift in \eqref{u2} has enough space regularity and consequently we obtain better time regularity for the remainder, namely, is has finite $\tfrac{p}{3}$-variation as expected for equations without drift (cf. \cite{BG}).
+\end{remark}
+
+
+
+
+
+
+With Theorem \ref{prop:apriori} in hand, the following Gronwall type lemma is a key step in order to get an a priori bound for a solution to equation \eqref{eq:gen2}.
+
+\begin{lemma}[Rough Gronwall Lemma]\label{lemma:basic-rough-gronwall}
+Fix a time horizon $T>0$ and let $G:[0,T] \to [0,\infty)$ be a path such that for some constants $C,L>0$, $\kappa\geq 1$ and some controls $\omega_1,\omega_2$ on $[0,T]$, one has
+\begin{equation}\label{eq:a-priori-g}
+\delta G_{st} \leq C \Big(\sup_{0\leq r\leq t} G_r \Big) \, \omega_1(s,t)^{\frac{1}{\kappa}} + \omega_2(s,t),
+\end{equation}
+for every $s<t\in [0,T]$ satisfying $\omega_1(s,t) \leq L$. Then it holds
+$$\sup_{0\leq t\leq T} G_t \leq 2 \exp\Big( \frac{\omega_1(0,T)}{\al L}\Big) \cdot \Big\{ G_0+\sup_{0\leq t\leq T}\Big(\omega_2(0,t) \, \exp\Big(-\frac{\omega_1(0,t)}{\al L}\Big)\Big) \Big\} ,$$
+where $\al$ is defined as 
+\begin{equation}\label{eq:def-alpha}
+\al=\min\left(1, \, \frac{1}{L (2Ce^2)^{\kappa} }\right).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let us successively set, for every $t\in [0,T]$,
+\begin{equation}\label{eq:def-sup-g-h}
+G_{\leq t}:=\sup_{0\leq s\leq t} G_s  , \quad H_t:=G_{\leq t} \exp\Big(-\frac{\omega_1(0,t)}{\al L}\Big) \quad \text{and} \quad H_{\leq t}:=\sup_{0\leq s\leq t} H_s .
+\end{equation}
+Also, let us denote by $K$ the integer such that $\al L (K-1)\leq \omega_1(0,T) \leq \al L K$, and define a set of times $t_0<t_1 <\cdots <t_K$ as follows: $t_0:=0$, $t_K:=T$ and for $k\in \{1,\ldots,K-1\}$, $t_k$ is such that $\omega_1(0,t_k)=\al Lk$. In particular, $\omega_1(t_k,t_{k+1})\leq \al L\leq L$ (recall that we have chosen $\al\leq 1$ in~\eqref{eq:def-alpha}).
+
+\smallskip
+
+Fix $t\in [t_{k-1},t_k]$, for some $k\in \{1,\ldots,K\}$.
+% Also consider a generic $s\in[0,t]$, such that $t_{\ell-1} \leq s\leq t_\ell$ for a given $\ell\leq k$.
+ We start from the trivial decomposition
+\begin{equation*}
+(\delta G)_{0t} = \sum_{i=0}^{k-2} (\delta G)_{t_it_{i+1}}+(\delta G)_{t_{k-1}t}.
+\end{equation*}
+Then on each interval $[t_i,t_{i+1}]$ one can apply the a priori bound \eqref{eq:a-priori-g}. Taking into account the facts that $\omega_1(t_k,t_{k+1})\leq \al L$ and that $\om_{2}$ is a super-additive function, we get
+\begin{eqnarray}\label{proof-gron-1}
+(\delta G)_{0t} 
+&\leq& 
+C (\al L)^{\frac{1}{\kappa}} \sum_{i=0}^{k-2} G_{\leq t_{i+1}}+\omega_2(0,t_{k-1})+C (\al L)^{\frac{1}{\kappa}} G_{\leq t}+\omega_2(t_{k-1},t) \notag \\ 
+&\leq&  C (\al L)^{\frac{1}{\kappa}} \sum_{i=0}^{k-1} G_{\leq t_{i+1}}+\omega_2(0,t) .
+\end{eqnarray}
+Let us bound the term $\sum_{i=0}^{k-1} G_{\leq t_{i+1}}$ above. According to our definitions \eqref{eq:def-sup-g-h}, we have 
+\begin{equation}\label{proof-gron-2}
+\sum_{i=0}^{k-1} G_{\leq t_{i+1}}=\sum_{i=0}^{k-1} H_{t_{i+1}} \exp\Big( \frac{\omega_1(0,t_{i+1})}{\al L}\Big) \leq H_{\leq T} \sum_{i=0}^{k-1} \exp(i+1) \leq  \exp(k+1)\, H_{\leq T}  ,
+\end{equation}
+where we have used the  fact that $\om(0,t_{i+1})\leq \al L (i+1)$ for the first inequality.
+Combining (\ref{proof-gron-1}) and (\ref{proof-gron-2}), we thus get that
+$$G_{\leq t} \leq G_0+\omega_2(0,t)+ C (\al L)^{\frac{1}{\kappa}} \exp(k+1)\, H_{\leq T}  .$$
+Now,
+\begin{eqnarray*}
+H_t &=& G_{\leq t} \exp\Big(-\frac{\omega_1(0,t)}{\al L} \Big)\\
+&\leq& \{G_0+\omega_2(0,t)\} \exp\Big(-\frac{\omega_1(0,t)}{\al L} \Big)+ C (\al L)^{\frac{1}{\kappa}} \exp(k+1)\, H_{\leq T}\exp\Big(-\frac{\omega_1(0,t_{k-1})}{\al L} \Big) ,
+\end{eqnarray*}
+and since $\om(0,t_{k-1})= \al L (k-1)$, we end up with:
+\begin{equation*}
+H_t  \leq
+G_0+\sup_{0\leq s\leq T}\Big(\omega_2(0,s) \, \exp\Big(-\frac{\omega_1(0,s)}{\al L}\Big)\Big)+ Ce^2 (\al L)^{\frac{1}{\kappa}} H_{\leq T} .
+\end{equation*}
+By taking the supremum over $t\in [0,T]$, we deduce that
+$$H_{\leq T} \leq Ce^2 (\al L)^{\frac{1}{\kappa}} H_{\leq T}+G_0+\sup_{0\leq s\leq T}\Big(\omega_2(0,s) \, \exp\Big(-\frac{\omega_1(0,s)}{\al L}\Big)\Big)$$
+and recalling the definition \eqref{eq:def-alpha} of $\al$, it entails that 
+$$H_{\leq T} \leq 2G_0+2\sup_{0\leq s\leq T}\Big(\omega_2(0,s) \, \exp\Big(-\frac{\omega_1(0,s)}{\al L}\Big)\Big)  .$$
+The conclusion is now immediate, since
+$$G_{\leq T}=\exp\Big( \frac{\omega_1(0,T)}{\al L}\Big) H_T \leq \exp\Big( \frac{\omega_1(0,T)}{\al L}\Big) H_{\leq T}  .$$
+\end{proof}
+
+\begin{remark}
+Finally, we have all in hand to derive the energy estimate for our example \eqref{eq:heat}. 
+Indeed, let us start from \eqref{u2-norm}, which can be recast as:
+\begin{equation*}
+(\delta\|u\|_{L^2}^2)_{st}+2\int_s^t\|\nabla u_r\|_{L^2}^2\,\dd r\lesssim\|u_s\|_{L^2}^2 \,\omega_A(s,t)^\frac1p+|u^{2,\natural}_{st}(1)|.
+\end{equation*}
+Now invoke Remark \ref{rem:heat1} in order to get
+\begin{align*}
+&(\delta\|u\|_{L^2}^2)_{st}+2\int_s^t\|\nabla u_r\|_{L^2}^2\,\dd r
+\lesssim \sup_{s\leq r\leq t}\|u_r\|_{L^2}^2\,\omega_A(s,t)^{\frac{1}{p}}
++\omega_\mu(s,t) \omega_A(s,t)^{\frac{3-p}{p}}\\
+&\qquad\lesssim \sup_{s\leq r\leq t}\|u_r\|_{L^2}^2\bigg[\omega_A(s,t)^{\frac{1}{p}}+|t-s|\,\omega_A(s,t)^{\frac{3-p}{p}}\bigg]+\int_s^t \|\nabla u_r\|_{L^2}^2 \,\dd r\,\omega_A(s,t)^{\frac{3-p}{p}}.
+%\\
+%&\qquad\lesssim \left(\sup_{s\leq r\leq t}\|u_r\|_{L^2}^2+2\int_s^t \|\nabla u_r\|_{L^2}^2 \,\dd r\right)\bigg[\omega_A(s,t)^{\frac{1}{p}}+|t-s|\,\omega_A(s,t)^{\frac{3-p}{p}}\bigg].
+\end{align*}
+Hence we can apply the rough Gronwall lemma with
+$$G_t:=\|u_t\|_{L^2}^2+2\int_0^t \|\nabla u_r\|_{L^2}^2\,\dd r,\quad\omega_1(s,t):=\omega_A(s,t)^{\frac{\kappa}{p}}+|t-s|^{\kappa}\omega_A(s,t)^{\frac{(3-p)\kappa}{p}}+\omega_A(s,t)^{\frac{(3-p)\kappa}{p}},$$
+$\omega_2(s,t)=0$, and $\kappa = \min(p,p/(3-p)) \geq 1$, obtaining
+\begin{align*}
+\sup_{0\leq t\leq T}\|u_t\|_{L^2}^2+\int_0^T\|\nabla u_t\|_{L^2}^2\,\dd t\lesssim \exp\Big( \frac{\omega_1(0,T)}{\al L}\Big) \, \|u_0\|_{L^2}^2.
+\end{align*}
+With these a priori estimates one can immediately proceed to the proof of existence of a weak solution to \eqref{eq:heat} which would rely on compactness of suitable approximate solutions.
+\end{remark}
+
+
+
+
+\section{Tensorization and uniqueness}
+\label{sec:uniq1}
+
+\subsection{Preliminary discussion}
+\label{subsec:prelim}
+
+The a priori estimates established in the previous section are the essential tools towards the proof of existence of weak solutions to RPDEs. Nevertheless, when it comes to uniqueness, further difficulties arise and new ideas are required. Let us explain these issues on our toy model \eqref{eq:heat}. Since the equation is linear, proving uniqueness is equivalent to showing that if a weak solution vanishes at the initial time, it vanishes for all times $t\geq0$. Therefore, one would like to derive the estimate
+$$\|u_t\|_{L^2}^2\lesssim \|u_0\|_{L^2}^2$$
+for every weak solution to \eqref{eq:heat}, that is, for every $u\in C([0,T];L^2(\R^N))\cap L^2(0,T;W^{1,2}(\R^N))$ satisfying \eqref{eq:he1}.
+It was already mentioned above that the major obstacle consists in the rigorous derivation of the equation for $u^2$, i.e. \eqref{u2}. In the deterministic or stochastic setting, one typically employs a mollifying sequence $(\psi_\varepsilon)$ of test functions for \eqref{eq:he1}, derives the equation for $(u*\psi_\varepsilon)^2$ and passes to the limit as $\varepsilon\to0$. In the context of transport equation one is thus lead to the DiPerna-Lions commutator lemma \cite{MR1022305}, which allows to pass to the limit in the transport terms. As we consider a transport-type noise in \eqref{eq:heat}, similar arguments are also required here.
+
+As in \cite{BG}, our method relies on a tensorization argument together with a refined analysis of the approximation error.
+To be more specific, starting from \eqref{eq:he1} we write down the tensorized equation for $U(x,y):=u^{\otimes2}(x,y)=u(x)u(y)$. Namely, write
+\begin{equation*}
+\delta U_{st} = \delta u_{st} \otimes u_{s} +  u_{s} \otimes \delta u_{st} 
++ \delta u_{st} \otimes \delta u_{st},
+\end{equation*}
+then expand the terms $\delta u_{st}$ above thanks to \eqref{eq:he1}. This yields:
+\begin{align}\label{eq:tensor}
+\begin{aligned}
+\delta U_{st}&=\int_s^t u_r\otimes (\Delta u_r)\,\dd r+\int_s^t (\Delta u_r)\otimes u_r\,\dd r\\
+&\quad+\big(A^1_{st}\otimes\mathbb{I}+\mathbb{I}\otimes A^1_{st}\big)U_s +\big(A^2_{st}\otimes\mathbb{I}+\mathbb{I}\otimes A^2_{st}+A^1_{st}\otimes A^1_{st}\big)U_s+U^{\natural}_{st},
+\end{aligned}
+\end{align}
+where $\mathbb{I}$ denotes the identity map on $\R^{N}$. 
+Note that in view of \eqref{eq:he1}, this equation is rigorously derived and understood in the sense of distributions, that is, it holds true for every test function $\Phi\in W^{2,2}(\R^N)\otimes W^{2,2}(\R^N)$ (the algebraic tensor product). The remainder $u^{\otimes2,\natural}$ has finite $\tfrac{p}{3}$-variation as a distribution with values in $W^{-3,2}(\R^N)\otimes W^{-3,2}(\R^N).$
+The important observation is that Chen's relation \eqref{eq:chen-relation} is satisfied for $\mathbf{\Gamma}=(\Gamma^1,\Gamma^2)$ where
+\begin{equation}\label{driver:tens}
+ \Gamma^1_{st}:=A^1_{st}\otimes\mathbb{I}+\mathbb{I}\otimes A^1_{st},\qquad\Gamma^2_{st}:=A^2_{st}\otimes\mathbb{I}+\mathbb{I}\otimes A^2_{st}+A^1_{st}\otimes A^1_{st}.
+\end{equation}
+Hence \eqref{eq:tensor} can be written as
+\begin{equation}\label{tensor2}
+\delta U_{st}=\delta \Pi_{st} + \Gamma^1_{st}U_{s}+\Gamma^2_{st}U_{s}+U^{\natural}_{st},
+\end{equation}
+with
+$$
+\Pi_t = \int_0^t u_r\otimes (\Delta u_r)\,\dd r+\int_0^t (\Delta u_r)\otimes u_r\,\dd r.
+$$
+The main advantage of the tensorization method is thus the following: equation \eqref{tensor2} is still linear, and thus can possibly be treated by our a priori estimate methods, as in the case of \eqref{eq:gen2}.
+Our ultimate goal now is then to test by
+\begin{equation}\label{testf}
+\Phi_\varepsilon(x,y)=\vp\left(\frac{x+y}{2}\right)\psi_\varepsilon(x-y)
+\end{equation}
+and to derive estimates uniform in $\varepsilon$ to be able to pass to the limit as $\varepsilon\to0$. In other words, this will allow us to pass to the diagonal and obtain the equation for $u^2$.
+To this end, we
+introduce a blow-up transformation $T_\varepsilon$ on test functions as follows:
+$$
+T_\varepsilon \Phi(x,y) :=\varepsilon^{-N} \Phi\big(x_+ + \frac{x_-}{\varep}, x_+ - \frac{x_-}{\varep}\big) ,
+$$
+where $x_{\pm}=\frac{x\pm y}{2}$ are the coordinates parallel and transverse to the diagonal.
+Note that
+% $T_\varepsilon$ is a bounded invertible operator on
+%$$L_-^1 L^\infty_+=\left\{\Phi:(x,y)\to\R;\,\int_{x_-}dx_-\sup_{x_+}|\Phi(x,y)|<\infty\right\}$$ uniformly in $\varepsilon$ and that
+its adjoint for the $L^2$-inner product reads
+$$T^*_\varepsilon \Phi (x, y) = \Phi (x_+ +\varepsilon x_- , x_+ -\varepsilon x_-)$$
+and its inverse is given by
+$$T^{-1}_\varepsilon\Phi(x,y)=\varepsilon^N\Phi(x_++\varepsilon x_-,x_+-\varepsilon x_-).$$
+If we let  
+$
+\mathbf{\Gamma}^{\ast}_{\varepsilon} := T_\varepsilon^{-1}\mathbf{\Gamma}^{\ast}T_\varepsilon
+$,  $U^\varepsilon := T^{\ast}_\varepsilon U$, $U^{\natural,\varepsilon}:=T_\varepsilon^* U^\natural $ and  $\Pi^\varepsilon := T^{\ast}_\varepsilon \Pi$ then \eqref{tensor2} tested against test functions of the form \eqref{testf}, that is, testing against $T_\varepsilon\Phi$, leads to the equation
+\begin{equation*}%\label{eq:eps2}
+\delta U^\varepsilon_{st}( \Phi) =\delta \Pi_{st}^\varepsilon ( \Phi) +U_s^\varepsilon (( \Gamma_{\varepsilon,st}^{1,\ast} + \Gamma_{\varepsilon,st}^{2,\ast}) \Phi)  +  U^{ \natural,\varepsilon}_{st}(\Phi).
+\end{equation*}
+
+
+
+\subsection{Renormalizable drivers}
+
+Let us now continue with the general theory for \eqref{eq:gen}. In view of the discussion in the previous subsection, we are concerned with equations of the form
+\begin{equation}\label{eq:eps}
+\delta G^\varepsilon_{st}( \Phi) =\delta M_{st}^\varepsilon ( \Phi) +G_s^\varepsilon (( \Gamma_{\varepsilon,st}^{1,\ast} + \Gamma_{\varepsilon,st}^{2,\ast}) \Phi)  +  G^{ \natural,\varepsilon}_{st}(\Phi).
+\end{equation}
+Remark that depending on the particular problem at hand, $G$ is not always defined as $g\otimes g$ as it was the case for the linear equation \eqref{eq:heat}. We refer the reader to Subsection \ref{subsec:tens} for the application to kinetic solutions of conservation laws.
+
+It is worth noticing that the structure of equation \eqref{eq:eps} is similar to relation \eqref{eq:gen2}. In order to apply our general results, we are thus reduced to derive  uniform bounds for the set of drivers $\{\mathbf{\Gamma}_\varepsilon\}_{\varepsilon\in(0,1)}$ associated with the unbounded rough driver $\mathbf{A}$. This leads us to the following definition.
+
+
+\begin{definition}[Renormalizable driver]
+Let $\bfA$ be a continuous unbounded $p$-rough driver on the scale $(E_n)$. We say that $\bfA$ is renormalizable in the scale of spaces $(\mathcal E_n)$ if $\{\mathbf{\Gamma}_\varepsilon\}_{\varepsilon\in(0,1)}$ is a bounded family of continuous unbounded $p$-rough drivers on the scale $(\mathcal{E}_n)$.
+\end{definition}
+
+
+%\rmk{[Aurelien] Shouldn't we say a few words about this general scale $(\mathcal{E}_n)$? I mean, at this point, $\mathbf{\Gamma}_\varepsilon$ are only defined as operators on the algebraic tensor products $E_n \otimes E_n$, so shouldn't we say that each $\mathcal{E}_n$ must be a subspace of some completion of $E_n\otimes E_n$, and then that $\mathbf{\Gamma}_\varepsilon$ can be extended into a bounded family of operators on $\mathcal{E}_n$? }
+
+In the context of transport-type rough drivers as in \eqref{driver}, this renormalization corresponds to the fact that a commutator lemma argument in the sense of DiPerna-Lions \cite{MR1022305} can be performed.
+
+
+\begin{proposition}\label{prop:renorm}
+Let a continuous unbounded $p$-rough driver $\mathbf{A}$ be defined as in \eqref{driver}, where $V=(V^1,\dots,V^K)$ is a family of vector fields on $\R^N$ such that $V\in W^{3,\infty}(\R^N)$ and $\mathbf{Z}=(Z^1,Z^2)$ is a geometric $p$-rough path for $p\in [2,3)$. Then it is a renormalizable driver in the scale $(\mathcal E_{n})$ where
+$$\mathcal{E}_{n}:=\left\{ \Phi\in W^{n,\infty}(\R^N\times\R^N);\,\Phi(x,y)=0\;\text{if}\;|x-y|\geq 2\right\}$$
+equipped with the subspace topology of $W^{n,\infty}(\R^N\times\R^N)$.
+\end{proposition}
+
+\begin{remark}
+The support condition in the definition of spaces $\mathcal E_{n}$ actually means that the test functions are compactly supported in the $x_-$ direction, which is the key point of the proof below. Note that the test functions we are interested in are of the form \eqref{testf}, i.e. the dependence on $x_-$ is only in the mollifier $\psi$ which can be taken compactly supported.
+\end{remark}
+
+\begin{proof}[Proof of Proposition \ref{prop:renorm}]
+Recall that the driver $\mathbf{\Gamma}$ was defined in \eqref{driver:tens}, and that $A_{st}^{1,\ast}, A_{st}^{2,\ast}$ are defined by \eqref{eq:def-A-star}. Therefore, the driver $\mathbf{\Gamma}_{\varepsilon}$ which was defined by $\mathbf{\Gamma}_{\varepsilon}^*=T_\ep^{-1}\mathbf{\Gamma}^*T_\ep$ can be written as
+$$\Gamma^{1,*}_{\varepsilon,st}=Z_{st}^{1,i}\Gamma^{1,i,*}_{V,\ep},\qquad\Gamma^2_{\varepsilon,st}=Z_{st}^{2,ij}\Gamma^{1,j,*}_{V,\ep}\Gamma^{1,i,*}_{V,\ep},$$
+where
+\[ \Gamma_{V, \varepsilon }^{1,*} := -
+   V^{+}_{\varepsilon} \cdot\nabla^{+} - \varepsilon^{-1} V^{-}_{\varepsilon}
+   \cdot\nabla^{-} -D^{+}_{\varepsilon}. 
+\]
+In order to read the last two formulae, let us introduce the following notation:
+$$\nabla^\pm:=\frac{1}{2}(\nabla_{{x}}\pm\nabla_{{y}}),\qquad D({x})=\diver_{{x}} V({x}),$$
+and for a real-valued function $\Psi$ on $\R^{N}$ let us denote by
+$$\Psi^\pm({x},{y}):=\Psi({x})\pm\Psi({y})$$
+its symmetric and antisymmetric lift to $\R^{N}\times\R^{N}$. In addition, the term $D^{+}_{\varepsilon}$ above is understood by writing
+$$\Psi^{\pm}_{\varepsilon} ({x}, {y}) := \Psi
+({x}_+ + \varepsilon {x}_-) \pm \Psi
+({x}_+ - \varepsilon {x}_-)$$
+for the blow up of $\Psi^{\pm}$ according to the transformation $\Psi^\pm_\varepsilon=T^{-1}_\ep \Psi^\pm T_\ep$. We also used the fact that
+$$\nabla^+T_\varepsilon=T_\varepsilon\nabla^+,\qquad \nabla^-T_\varepsilon=\varepsilon^{-1}T_\varepsilon\nabla^-.$$
+
+
+
+Next, by the Taylor formula we obtain
+\begin{align*}
+ \varepsilon^{- 1} V^-_{\varepsilon} &= 2\, x_-\int_0^1 \mathrm D V\big((x_+-\varepsilon x_-)+2\varepsilon r x_-\big)\,\dd r
+\end{align*}
+%\begin{align*}
+%\|  \varepsilon^{- 1} V^-_{\varepsilon} \|_{W^{n,
+%   \infty}} & \\
+%   &\lesssim_{\supp (\theta_{x,-}\theta_{\xi,-})}\| \pmb{\theta} \|_{W^{n, \infty}}  \| \nabla V \|_{W^{n,
+%   \infty}} 
+%\end{align*}
+%and more generally we have
+hence, since functions in $\mathcal{E}_n$ are compactly supported in the $x_-$ direction, we obtain for $n=0,1,2$
+\[ \| \Gamma^{1,*}_{V, \varepsilon} \Phi \|_{\mathcal{E}_n} \lesssim(\| V
+   \|_{W^{n, \infty}} + \| \mathrm{D} V \|_{W^{n, \infty}}) \| \Phi \|_{\mathcal{E}_{n+1}} \lesssim \| V
+   \|_{W^{n+1, \infty}} \| \Phi \|_{\mathcal{E}_{n+1}},\]
+and for $n=0,1$
+$$ \| \Gamma^{2,*}_{V, \varepsilon} \Phi \|_{\mathcal{E}_n}= \| \Gamma^{1,*}_{V, \varepsilon} \Gamma^{1,*}_{V, \varepsilon} \Phi \|_{\mathcal{E}_n}\lesssim \| V
+   \|_{W^{n+1, \infty}} \|\Gamma^{1,*}_{V, \varepsilon} \Phi \|_{\mathcal{E}_{n+1}} \lesssim  \| V
+   \|_{W^{n+1, \infty}} \| V
+   \|_{W^{n+2, \infty}}\| \Phi \|_{\mathcal{E}_{n+2}}, $$
+which holds true uniformly in $\varepsilon$. Consequently, uniformly in $\varepsilon$,
+$$\lVert \Gamma^{1}_{\ep,st}\rVert_{\cl(\mathcal E_n,\mathcal E_{n-1})}^p \lesssim_{\|V\|_{W^{3,\infty}}} \omega_Z(s,t),\qquad n\in \{-0,-2\},$$
+$$ \lVert \Gamma^{2}_{\ep,st}\rVert_{\cl(\mathcal E_n,\mathcal E_{n-2})}^{p/2} \lesssim_{\|V\|_{W^{3,\infty}}} \omega_Z(s,t),\qquad n\in \{-0,-1\} ,$$
+where $\omega_Z$ is a control corresponding to the rough path $\mathbf{Z}$, namely,
+$$|Z_{st}^1|\leq \omega_Z(s,t)^\frac1p,\qquad |Z^2_{st}| \leq \omega_Z(s,t)^\frac2p.$$
+\end{proof}
+
+
+Having Proposition \ref{prop:renorm} at hand and assuming that a suitable uniform estimate also holds true for $G^\varepsilon$ as well as for
+the drift term $M^\varepsilon$ in \eqref{eq:eps}, one would like to apply Theorem \ref{prop:apriori} to derive a uniform estimate for the remainder $U^{\natural,\ep}$. However, this is generally not possible as one cannot construct smoothing operators $(J^\eta)$ on the scale $(\mathcal E_n)$ in such a way that the corresponding version of \eqref{eq:reg-J-eta} holds true. In particular, applying a smoothing operator necessarily increases the support of the function and this difficulty has to be overcome using an additional localization.
+
+\subsection{Full localization}\label{subsec:fullloc}
+We need to introduce spaces of test functions which are suitably localized. Localization in the ${x}_-$ variable is needed to deal with the renormalization of the rough driver. This localization will disappear after taking the limit $\varepsilon\to 0$. An additional localization in the ${x}_+$ direction is needed to derive preliminary uniform bounds for $G^\varepsilon$ and $M^\varepsilon$. This localization (parametrized by $R \ge 1$) will be removed afterwards via a rough Gronwall lemma argument which gives us estimates uniform in $R$. Let $\mathcal E_{R,n}\subset \mathcal E_n$ defined by
+$$\mathcal E_{R,n}:=\left\{ \Phi\in W^{n,\infty}(\R^{N}\times\R^{N});\,\Phi({x},{y})=0\;\text{if}\;\rho_R({x},{y})\ge 1 \right\}\subset \mathcal E_n,$$
+where 
+$
+\rho_R( x, y)^2 = |{x}_+|^2/R^2 +  |{x}_-|^2
+$.
+
+
+As a consequence of the proof of Proposition \ref{prop:renorm}, we immediately obtain uniform bounds for the family of drivers $\{\mathbf{\Gamma}_\varepsilon\}$.
+
+\begin{corollary}\label{cor:1}
+The continuous unbounded $p$-rough driver $\mathbf{A}$ defined in \eqref{d:urd} is renormalizable in the scale $(\mathcal E_{R,n})$ and
+$$\lVert \Gamma^{1}_{\ep,st}\rVert_{\cl(\mathcal E_{R,n},\mathcal E_{R,n-1})}^p \lesssim_{\|V\|_{W^{3,\infty}}} \omega_Z(s,t),\qquad n\in \{-0,-2\},$$
+$$ \lVert \Gamma^{2}_{\ep,st}\rVert_{\cl(\mathcal E_{R,n},\mathcal E_{R,n-2})}^{p/2} \lesssim_{\|V\|_{W^{3,\infty}}} \omega_Z(s,t),\qquad n\in \{-0,-1\} ,$$
+holds true uniformly in $\varepsilon$ and $R$.
+\end{corollary}
+
+
+
+As the next step, let us introduce a suitable cut-off function as follows: let $\eta\in (0,\tfrac{1}{3})$ and let $\theta_{\eta}\in C_c^\infty(\R)$ be such that
+$$0\leq \theta_{\eta}\leq 1,\qquad\supp\, \theta_{\eta}\subset B_{1-2\eta}\subset \R,\qquad \theta_{\eta}\equiv 1\text{ on }B_{1-3\eta}\subset \R,$$
+and
+$$|\nabla^k \theta_{\eta}|\lesssim \eta^{-k},\qquad\text{for}\;k=1,2.$$
+Finally, we define
+\[ \Theta_\eta ( x, y):=\Theta_{R,\eta} ( x, y) =\theta_{\eta}(\rho_R( x, y)) \]
+Then we have the following auxiliary result.
+
+
+\begin{lemma}\label{lem:1}
+Let $\Phi\in\mathcal{E}_{R,k}$, $k=1,2.$ Then it holds true that
+\begin{align}
+ \| \Theta_{\eta} \Phi \|_{\mathcal{E}_{R,k}} &\lesssim \| \Phi \|_{\mathcal{E}_{R,k}} ,\label{1}\\
+ \| ( 1- \Theta_{\eta} ) \Phi \|_{\mathcal{E}_{R,0}} &\lesssim \eta^k \| \Phi \|_{\mathcal{E}_{R,k}},\label{2}
+\end{align}
+and there exists $\Psi_R\in\mathcal{E}_{R,3}$ with  $\sup_{R\in\R}\|\Psi_R\|_{\mathcal{E}_{R,3}}<\infty$ such that
+\begin{align}
+\eta^{3-k}|J^\eta\Theta_\eta\Phi( x, y)|&\lesssim \Psi_R( x, y)\|\Phi\|_{\mathcal{E}_{R,k}},\label{3}
+\end{align}
+where the proportional constants are independent of $\eta$ and $R$.
+\end{lemma}
+
+
+
+\begin{proof}
+In order to prove \eqref{1}, we write
+$$\nabla(\Theta_\eta\Phi)=(\nabla \Theta_\eta)\Phi+\Theta_\eta(\nabla\Phi),$$
+where the second term does not pose any problem. On the other hand, the term $\nabla\Theta_\eta$ diverges as $\eta^{-1}$ due to the assumptions on $\theta_{\eta}$, namely, it holds
+\begin{align*}
+\nabla_{{x}}\Theta_\eta&=(\nabla \theta_{\eta})(\rho_R( x, y))\nabla_{{x}} \rho_R( x, y).
+\end{align*}
+But due to the support of $\Phi$ we have that for every $({x},{y})$ in the region where $\nabla_{x}\Theta_{\eta}\neq0$ there exists $(\tilde{{x}},\tilde{{y}})$ outside of support of $\Phi$ such that $|( x, y)-(\tilde{ x},\tilde{ y})|\lesssim \eta$ hence
+$$|\Phi({x},y)|=|\Phi({x},y)-\Phi(\tilde{x},\tilde{ y})|\lesssim \eta\|\Phi\|_{\mathcal{E}_{R,1}}$$
+and consequently \eqref{1} follows for $k=1$. If $k=2$, we have
+\[ \nabla^{2} ( \Theta_{\eta} \Phi ) = ( \nabla^{2} \Theta_{\eta} ) \Phi +2
+   \nabla \Theta_{\eta} \cdummy \nabla \Phi + \Theta_{\eta} \nabla^{2} \Phi,
+\]
+where the third term does not pose any problem and the second one can be estimated using the reasoning above.
+For the first one, we observe that $\nabla_x^2\Theta_\eta$
+diverges like $\eta^{-2}$ but for every $(x, y)$ such that $\nabla^2\Theta\neq 0$ there exists $(\tilde{{x}},\tilde{{y}})$ that lies outside of support of $\Phi$, satisfies $|(x,y)-(\tilde{x},\tilde{y})|\lesssim \eta$ such that second order Taylor expansion gives
+\begin{align*}
+ |\Phi (x,y) | 
+    &=  | \Phi (x,y) - \Phi ( \tilde{x},\tilde{y} ) - \mathrm{D}\Phi ( \tilde{x},\tilde{y}) ( (x, y)-(\tilde{x},\tilde{ y})) | \\
+    &\lesssim 
+   | \mathrm{D}^2\Phi ( z_x,{z}_y )| |(x,y)-(\tilde{x},\tilde{y}) |^{2}  \lesssim\eta^2 \| \Phi \|_{\mathcal{E}_{R,2}} 
+\end{align*}
+and \eqref{1} follows.
+
+
+
+
+The same approach leads to \eqref{2}. To be more precise, for $(x,y)$ from the support of $(1-\Theta_\eta)\Phi$ we have using the first and second order Taylor expansion, respectively,
+\begin{align*}
+ | ( 1- \Theta_{\eta} ) \Phi (x, y ) | 
+\lesssim \eta^{k} \| ( 1- \Theta_{\eta} ) \Phi \|_{\mathcal{E}_{R,k}} \lesssim
+   \eta^{k} \| \Phi \|_{\mathcal{E}_{R,k}} ,
+\end{align*}
+where we used \eqref{1} for the second inequality.
+
+
+Let us now prove \eqref{3}. First of all, we observe the trivial estimate, for $k=1,2,$ and $(x, y)\in \supp(J_\eta\Theta_\eta\Phi)$, 
+\begin{equation}\label{4}
+\eta^{3-k}|J^\eta\Theta_\eta\Phi(x, y)|\leq \|J^\eta\Theta_\eta\Phi\|_{L^\infty}\lesssim \|\Phi\|_{\mathcal{E}_{0}}\lesssim \|\Phi\|_{\mathcal{E}_{k}}.
+\end{equation}
+Next, we note that
+$$\supp(J^\eta\Theta_\eta\Phi)\subset\left\{(x,y)\in\R^{N}\times\R^{N};\, \rho_R(x,y) \leq 1-\eta \right\}$$
+since $R\ge 1$, and denote
+$$D_R:=\left\{(x, y)\in\R^{N}\times\R^{N};\, \rho_R(x, y) \leq 1 \right\}.$$
+Let $d(\cdot,\partial D_R)$ denote the distance to its boundary $\partial D_R$. It satisfies
+$$d((x, y),\partial D_R)\geq \eta\qquad\text{for all}\quad ( x, y)\in \supp(J_\eta\Theta_\eta\Phi).$$
+Thus, due to the Taylor expansion we obtain for $k=1,2,$ and $(x, y)\in \supp(J_\eta\Theta_\eta\Phi)$, 
+\begin{align}\label{5}
+\begin{aligned}
+\eta^{3-k}|J^\eta\Theta_\eta\Phi( x,y)|&\lesssim \eta^{3-k} |d((x, y),\partial D_R)|^k\|J^\eta\Theta_\eta\Phi\|_{W^{k,\infty}}\\
+&\lesssim|d((x,y),\partial D_R)|^3\|\Phi\|_{\mathcal{E}_{R,k}}
+\end{aligned}
+\end{align}
+where we also used \eqref{1}. Besides
+we may put \eqref{4} and \eqref{5} together to conclude that there exists $\Psi_R\in\mathcal{E}_{R,3}$ satisfying the conditions stated in this Lemma and, in addition,
+$$\min\left\{1,|d((x,y),\partial D_R)|^3\right\}\lesssim \Psi_R(x,y)$$
+which completes the proof. For example we can take 
+$$
+\Psi_R(x, y) = \begin{cases}
+d(( x, y),\partial D_R)^3, &\ \text{ if  $(x,y)\in D_R$ and $d((x,y),\partial D_R) \le 1/2$} ,\\
+						 1,&\ 
+\text{ if $(x,y)\in D_R$ and  $d((x,y),\partial D_R) \ge 3/4$},
+\end{cases}
+$$
+and complete it with a smooth interpolation in between.
+\end{proof}
+
+
+\subsection{Conclusion}
+It remains to establish the uniform bound for the remainder $G^{\natural,\ep}$ in \eqref{eq:eps}, pass to the diagonal and then estimate the obtained equation. These steps typically require a careful analysis of the particular structure of $G^\ep$ as well as $M^\ep$ in \eqref{eq:eps}, and therefore we will not give the full details at this level of generality. Let us only discuss the main ideas of the method here and see Section \ref{sec:uniq} for a detailed application to rough conservation laws.
+
+
+We intend to proceed similarly as in Theorem \ref{prop:apriori}: letting
+\begin{align*}
+G^{\sharp,\varepsilon}_{st}(\Phi):=T^*_\varepsilon G^\sharp_{st}(\Phi)&=\delta G^\varepsilon_{st}(\Phi)-G^\varepsilon_s(\Gamma^{1,*}_{st}\Phi)\\
+&=\delta M^\varepsilon_{st}(\Phi)+G^\varepsilon_s(\Gamma^{2,*}_{st}\Phi)+G^{\natural,\varepsilon}_{st}(\Phi),
+\end{align*}
+it follows from \eqref{eq:eps} that
+\[ \delta G^{\natural,\varepsilon} _{sut}( \Phi ) = ( \delta G^\varepsilon )_{su} ( \Gamma_{\varepsilon,ut}^{2, \ast} \Phi )
+   +G^{\sharp,\varepsilon}_{su} ( \Gamma_{\varepsilon,ut}^{1, \ast} \Phi ) .\]
+Now, apart from the smoothing operators $(J^\eta)$ we also include the localization $(\Theta_\eta)$ defined in Subsection \ref{subsec:fullloc}. We have
+\begin{align*}
+ \delta G^{\natural,\varepsilon} ( \Phi ) &= ( \delta G^\varepsilon ) ( J_{\eta} ( \Theta_{\eta}
+   \Gamma_{\varepsilon}^{2, \ast} \Phi ) ) + ( \delta G^\varepsilon ) ( ( 1-J_{\eta} ) ( \Theta_{\eta}
+   \Gamma_{\varepsilon}^{2, \ast} \Phi ) ) + ( \delta G^\varepsilon ) ( ( 1- \Theta_{\eta} ) \Gamma_{\varepsilon}^{2, \ast}
+   \Phi ) \\
+& \quad+G^{\sharp,\varepsilon} ( J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) +G^{\sharp,\varepsilon}
+   ( ( 1-J_{\eta} ) ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) +G^{\sharp,\varepsilon} ( ( 1-
+   \Theta_{\eta} ) \Gamma_{\varepsilon}^{1, \ast} \Phi ) \\
+& =G^\varepsilon ( \Gamma_{\varepsilon}^{1, \ast} J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{2, \ast} \Phi ) ) +G^\varepsilon (
+   \Gamma_{\varepsilon}^{2, \ast} J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{2, \ast} \Phi ) ) + \delta M^\varepsilon (
+   J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{2, \ast} \Phi ) )\\
+&\quad +G^{\natural,\varepsilon} ( J_{\eta} (
+   \Theta_{\eta} \Gamma_{\varepsilon}^{2, \ast} \Phi ) )  + ( \delta G^\varepsilon ) ( ( 1-J_{\eta} ) ( \Theta_{\eta} \Gamma_{\varepsilon}^{2, \ast} \Phi ) ) + (
+   \delta G^\varepsilon ) ( ( 1- \Theta_{\eta} ) \Gamma_{\varepsilon}^{2, \ast} \Phi ) \\
+&\quad +G^\varepsilon ( \Gamma_{\varepsilon}^{2, \ast} J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) + \delta
+   M^\varepsilon ( J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) +G^{\natural,\varepsilon} (
+   J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) \\
+& \quad+ ( \delta G^\varepsilon ) ( ( 1-J_{\eta} ) ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) +G^\varepsilon
+   ( \Gamma_{\varepsilon}^{1, \ast} ( 1-J_{\eta} ) ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) \\
+&\quad + ( \delta G^\varepsilon ) ( ( 1- \Theta_{\eta} ) \Gamma_{\varepsilon}^{1, \ast} \Phi ) +G^\varepsilon ( \Gamma_{\varepsilon}^{1,
+   \ast} ( 1- \Theta_{\eta} ) \Gamma_{\varepsilon}^{1, \ast} \Phi ) . 
+\end{align*}
+In this expression, it is immediately seen what terms have to be estimated. To be more precise, we need suitable preliminary estimates for
+$G^\varepsilon,\, M^\ep,\,G^{\natural,\ep}$ in the scale of spaces $\mathcal{E}_{R,n}$. Note that the preliminary estimate for $G^{\natural,\varepsilon}_{st}$ in $\mathcal{E}_{R,3}^*$
+is a consequence of the derivation of the tensorized equation \eqref{eq:eps}. It depends on $\ep$ and the aim is to derive a new estimate which is uniform in $\ep$. The preliminary estimates of $G^\ep$ and $M^\ep$ do not necessarily need to be uniform in $\varepsilon$ and $R$ as one can then use the rough Gronwall lemma to get better estimates as well.
+
+With estimates uniform in $\ep$ and $R$ at hand, one can finally pass to the diagonal. In the case of the toy model \eqref{eq:heat} this yields the equation for $u^2$. Then one applies the general a priori estimates from Subsection \ref{subsec:apr} again and concludes that
+$$\sup_{0\leq t\leq T}\|u_t\|_{L^2}^2\lesssim \|u_0\|_{L^2}^2$$
+is satisfied for every weak solution in $C([0,T];L^2(\R^N))\cap L^2(0,T;W^{1,2}(\R^N))$. The uniqueness then follows.
+
+
+
+\section{Rough conservation laws I: Presentation}
+\label{sec:conservation-presentation}
+Throughout the reminder of the paper, we are interested in a rough path driven scalar conservation law of the form
+\begin{align}\label{eq1}
+\begin{aligned}
+\dif u+\diver\big(A(x,u)\big)\dif z&=0,\qquad t\in(0,T),\,x\in\R^N,\\
+u(0)&=u_0,
+\end{aligned}
+\end{align}
+where $z=(z^{1},\dots,z^{K})$ and $z$ can be lifted to a geometric $p$-rough path, $A:\R^N_x\times\R_\xi\rightarrow\R^{N\times K}$. Using the Einstein summation convention, \eqref{eq1} rewrites
+\begin{equation*}
+\begin{split}
+\dif u+\partial_{x_i}\big(A_{ij}(x,u)\big)\,\dif z^j&=0,\qquad t\in(0,T),\,x\in\R^N,\\
+u(0)&=u_0.
+\end{split}
+\end{equation*}
+
+As the next step, let us introduce the kinetic formulation of \eqref{eq1} as well as the basic definitions concerning the notion of kinetic solution. We refer the reader to \cite{perth} for a detailed exposition. The motivation behind this approach is given by the nonexistence of a strong solution and, on the other hand, the nonuniqueness of weak solutions, even in simple cases. The idea is to establish an additional criterion -- the kinetic formulation --
+which is automatically satisfied by any strong solution to \eqref{eq1} (in case it exists) and which permits to ensure the well-posedness. The linear character of the kinetic formulation simplifies also the analysis of the remainder terms and the proof of the apriori estimates.
+It is well-known that in the case of a smooth driving signal $z$, the kinetic formulation of \eqref{eq1}, which describes the time evolution of $f(t,x,\xi)=\1_{u(t,x)>\xi}$, reads as
+\begin{align}\label{eq:kinform}
+\begin{split}
+\dif f+\nabla_x f\cdot a\,\dif z-\partial_\xi f\, b\,\dif z&=\partial_\xi m,\\
+f(0)&=f_0,
+\end{split}
+\end{align}
+where the coefficients $a,b$ are given by
+$$a=(a_{ij})=(\partial_\xi A_{ij}):\R^N\times\R\to\R^{N\times K},\qquad b=(b_j)=(\diver_x A_{\cdot j}):\R^N\times\R\to \R^K$$
+and $m$ is a nonnegative finite measure on $[0,T]\times\R_x^{N}\times\R_\xi$ which becomes part of the solution. The measure $m$ is called kinetic defect measure as it takes account of possible singularities of $u$. Indeed, if there was a smooth solution to \eqref{eq1} then one can derive \eqref{eq:kinform} rigorously with $m\equiv 0.$ We say then that $u$ is a kinetic solution to \eqref{eq1} provided, roughly speaking, there exists a kinetic measure $m$ such that the pair $(f=\1_{u>\xi},m)$ solves \eqref{eq:kinform} in the sense of distributions on $[0,T)\times\R^N_x\times\R_\xi$.
+
+In the case of a rough driver $z$, we will give an intrinsic notion of kinetic solution to \eqref{eq1}. In particular, the kinetic formulation \eqref{eq:kinform} will be understood in the framework of unbounded rough drivers presented in the previous sections.
+The reader can immediately observe that \eqref{eq:kinform} fits very naturally into this concept: the left hand side of \eqref{eq:kinform} is of the form of a rough transport equation whereas the kinetic measure on the right hand side plays the role of a drift. Nevertheless, one has to be careful since the kinetic measure is not given in advance, it is a part of the solution and has to be constructed within the proof of existence. Besides, in the proof of uniqueness, one has to compare two solutions with possibly different kinetic measures.
+
+
+The kinetic formulation \eqref{eq:kinform} can be rewritten as
+\begin{align*}
+\dif f= \left(\begin{array}{cc}
+											b\\
+											-a
+											\end{array}\right)\cdot\left(\begin{array}{c}
+			\partial_\xi f\\
+			\nabla_x f
+			\end{array}\right)\dif z+\partial_\xi m
+\end{align*}
+or
+\begin{align*}
+\dif f=V\cdot\nabla_{\xi,x}f\,\dif z+\partial_\xi m,
+\end{align*}
+where the family of vector fields $V$ is given by
+$$V=(V^1,\dots,V^{K})=\left(\begin{array}{cc}
+											b\\
+											-a
+											\end{array}\right)=\left(\begin{array}{cccccc}
+											b_1 &\cdots & b_K \\
+											-a_{11}&\cdots& -a_{1K}\\
+											\vdots&\cdots&\vdots\\
+											-a_{N1}&\cdots& -a_{NK}\\
+											\end{array}\right).$$
+Note that these vector fields satisfy for $i\in\{1,\dots, K\}$
+\begin{equation}\label{divfree}
+\diver_{\xi,x} V_i=\partial_\xi b_i-\diver_x a_{\cdot i}=\partial_\xi \diver_x A_{\cdot i}-\diver_x \partial_\xi A_{\cdot i}=0.
+\end{equation}
+In addition, we assume that
+\begin{equation}\label{H}
+V\in W^{3,\infty}(\R^{N+1})\qquad\text{and}\qquad V(x,0)=0\qquad\forall x\in\R^N.
+\end{equation}
+Let $\mathbf{Z}=(Z^1,Z^2)$ be a lift of $z$ to a geometric $p$-rough path and let $\omega_Z$ be the associated continuous control, i.e.
+$$|Z_{st}^1|\leq \omega_Z(s,t)^\frac1p,\qquad |Z^2_{st}| \leq \omega_Z(s,t)^\frac2p.$$
+The scale of spaces $(E_n)$ where \eqref{eq:kinform} will be considered is $E_n=W^{n,1}\cap W^{n,\infty}(\R^N)$.
+Then it can be shown that
+\begin{align}\label{d:urd}
+\begin{aligned}
+A^1_{st}\varphi:&=Z^{1,i}_{st} \, V^i\cdot\nabla_{\xi,x}\varphi,\\
+A^2_{st}\varphi:&=Z^{2,ij}_{st}\, V^j\cdot\nabla_{\xi,x}( V^i\cdot\nabla_{\xi,x}\varphi).
+\end{aligned}
+\end{align}
+defines a continuous unbounded $p$-rough driver on $(E_n)$ with 
+\begin{align}\label{eq:urdest}
+\begin{aligned}
+\lVert A^{1}_{st}\rVert_{\cl( E_n, E_{n-1})}^p &\lesssim \omega_Z(s,t),\qquad n\in \{-0,-2\},\\
+ \lVert A^{2}_{st}\rVert_{\cl( E_n, E_{n-2})}^{p/2} &\lesssim \omega_Z(s,t),\qquad n\in \{-0,-1\} .
+\end{aligned}
+\end{align}
+The last point to be specified in order to include \eqref{eq:kinform} in the framework of unbounded rough drivers, is how to understand the drift term given by the kinetic measure $m$. To be more precise, in view of Subsection \ref{subsec:apr}, one would like to rewrite \eqref{eq:kinform} as
+\begin{equation}\label{eq:LR}
+\delta f_{st} = \delta \mu _{st} + (A^1_{st}+A^2_{st})f_s +f^{\natural}_{st}
+\end{equation}
+where $\delta\mu$ stands for the increment of the corresponding kinetic measure term and $f^\natural$ is a suitable remainder. However, already in the smooth setting such a formulation can only be true for a.e. $s,t\in[0,T]$. Indeed, the kinetic measure contains shocks of the kinetic solution and thus it is not absolutely continuous with respect to the Lebesgue measure. The atoms of the kinetic measure correspond precisely to singularities of the solution. Therefore, it makes a difference if we set
+\begin{equation}\label{eq:left-right}
+\mu_t(\varphi):= -m(\1_{[0,t]}\partial_\xi\varphi)\qquad \text{ or }\qquad\mu_t:=-m(\1_{[0,t)}\partial_\xi\varphi).
+\end{equation}
+According to the properties of functions with bounded variation, the first one is right-continuous whereas the second one is left-continuous. Furthermore, they coincide everywhere except on a set of times which is at most countable.
+Note also that the rough integral $f^\flat$ defined by
+$$
+\delta f^\flat_{st} = (A^1_{st}+A^2_{st})f_s +f^{\natural}_{st}
+$$
+ is expected to be continuous in time. Thus, depending on the chosen definition of $\mu$ in \eqref{eq:left-right} we obtain either right- or left-continuous representative of the class of equivalence $f$ on the left hand side of \eqref{eq:LR}. These representatives will be denoted by $f^+$ and $f^-$ respectively.
+
+For the sake of completeness, recall that in the deterministic (as well as stochastic) setting, the kinetic formulation \eqref{eq:kinform} is understood in the sense of distributions on $[0,T)\times\R^{N+1}$. That is, the test functions depend also on time. Nevertheless, for our purposes it seems to be more convenient to consider directly the equation for the increments $\delta f^\pm_{st}$. Correspondingly, we include two versions of \eqref{eq:kinform} in the definition of kinetic solution, even though this presentation may look slightly redundant at first. Both of these equations will actually be needed in the proof of uniqueness.
+
+
+
+
+%to the adjoints are given by
+%\begin{align*}
+%A^{1,*}&=					-A^{1},\qquad A^{2,*}=A^2.
+%\end{align*}
+%
+%In order to define a suitable scale of spaces, fix a smooth function $\theta:\R_\xi\to\R$ such that $0<\theta\leq 1$, $\theta\equiv 1$ on $(-\infty,-1)$ and $\theta$ has exponential decay as $\xi\to-\infty$.
+%Let $(E_n)$ be the scale of Banach spaces defined as
+%$$E_n:=\left\{\vp\in W^{n,\infty}(\R^{N+1});\,\|\vp\|_{E_n}=\sum_{0\leq k\leq n}\big(\|\nabla^k\vp\|_{L^{\infty}}+\|\theta\nabla^k\vp\|_{L^{1}}\big)<\infty\right\}$$
+%Note that the definition of $E_n$ is independent of the particular choice of $\theta$ which is only used to reflect the fact that the test functions are integrable for $\xi\to\-\infty$ but not necessarily integrable for $\xi\to\infty$. \rmk{actually, we don't need to have $\theta\vp$ integrable in $x$, but this way it is easier to write. the smoothing should be hopefully fine. but maybe it's even easier to directly work with $\chi_u$ instead of $f$ which is integrable...} 
+
+
+Before doing so, we proceed with a reminder of Young measures and the related definition of kinetic function that will eventually lead to the notion of generalized kinetic solution, see Definition \ref{genkinsol}. For further reading we refer the reader e.g. to \cite{debus, H16, malek}.
+
+In what follows, we denote by $\mathcal{P}_1(\R)$ the set of probability measures on $\R$.
+
+
+\begin{definition}[Young measure]
+Let $(X,\lambda)$ be a $\sigma$-finite measure space. A mapping $\nu:X\rightarrow\mathcal{P}_1(\R)$ is called a Young measure provided it is weakly measurable, that is, for all $\phi\in C_b(\R)$ the mapping $z\mapsto \nu_z(\phi)$ from $X$ to $\R$ is measurable.
+%
+%A mapping $\nu\in L^\infty_w(Q;M(\R))$ is called a Young measure provided $\nu_z$ is a probability measure on $\R$ for a.e. $z\in Q$.
+%A Young measure $\nu$ is said to be compactly supported if there exists $L>0$ such that
+%$$\supp \nu_z\subset [-L,L]\qquad \text{for a.e. }z\in Q.$$
+A Young measure $\nu$ is said to vanish at infinity if
+\begin{equation*}
+\int_X\int_\R|\xi|\,\dif\nu_z(\xi)\,\dif\lambda(z)<\infty.
+\end{equation*}
+\end{definition}
+
+
+
+\begin{definition}[Kinetic function]
+Let $(X,\lambda)$ be a $\sigma$-finite measure space.
+A measurable function $f:X\times\R\rightarrow[0,1]$ is called a kinetic function on $X$ if there exists a Young measure $\nu$ on $X$ that vanishes at infinity and such that for a.e. $z\in X$ and for all $\xi\in\R$
+$$f(z,\xi)=\nu_z(\xi,\infty).$$
+\end{definition}
+
+
+\begin{lemma}[Compactness of Young measures]\label{kinetcomp}
+Let $(X,\lambda)$ be a $\sigma$-finite measure space such that $L^1(X)$ is separable. Let $(\nu^n)$ be a sequence of Young measures on $X$ such that for some $p\in[1,\infty)$
+\begin{equation}\label{eq:estyoungm}
+\sup_{n\in\N}\int_X\int_\R|\xi|^p\,\dif\nu^n_z(\xi)\,\dif \lambda(z)<\infty.
+\end{equation}
+Then there exists a Young measure $\nu$ on $X$ satisfying \eqref{eq:estyoungm} and a subsequence, still denoted by $(\nu^n)$, such that for all $h\in L^1(X)$ and all $\phi\in C_b(\R)$
+$$\lim_{n\rightarrow \infty}\int_X h(z)\int_\R \phi(\xi)\,\dif\nu^n_z(\xi)\,\dif\lambda(z)=\int_X h(z)\int_\R \phi(\xi)\,\dif\nu_z(\xi)\,\dif\lambda(z)$$
+Moreover, if $f_n,\,n\in\N,$ are the kinetic functions corresponding to $\nu^n,\,n\in\N,$ such that \eqref{eq:estyoungm} holds true, then there exists a kinetic function $f$ (which correponds to the Young measure $\nu$ whose existence was ensured by the first part of the statement) and a subsequence still denoted by $(f^n)$ such that
+$$f_n\overset{w^*}{\longrightarrow} f\quad \text{ in }\quad L^\infty(X\times\R).$$
+\end{lemma}
+
+
+Generalized kinetic solution are needed as a intermediate step in the construction of full solutions to \eqref{eq:kinform}.
+
+\begin{definition}[Generalized kinetic solution]\label{genkinsol}
+Let $f_0:\R^{N+1}\rightarrow[0,1]$ be a kinetic function. A measurable function $f:[0,T]\times\R^{N+1}\to [0,1]$ is called a generalized kinetic solution to \eqref{eq1} with initial datum $f_0$ provided
+\begin{enumerate}
+\item there exist $f^\pm$, such that $f^+_t=f^-_t=f_t$ for a.e. $t\in[0,T]$, $f^\pm_t$ are kinetic functions on $\R^N$ for all $t\in[0,T]$, and the associated Young measures $\nu^\pm$  satisfy
+\begin{equation}\label{integrov}
+\sup_{0\leq t\leq T}\int_{\R^N}\int_{\R}|\xi|\,\dif\nu^\pm_{t,x}(\xi)\,\dd x<\infty , 
+\end{equation}
+\item $f^+_0=f^-_0=f_0$,
+\item there exists a finite Borel measure $m$ on $[0,T]\times\R^{N+1}$,
+\item there exist $f^{\pm,\natural}\in V^{\frac{q}{3}}_{2,\text{loc}}([0,T];E_{-3})$
+for some $q<3$,
+\end{enumerate}
+such that
+\begin{equation*}
+\begin{split}
+\delta f^+_{st}(\varphi)&=f^+_s(A^{1,*}_{st} \varphi +A^{2,*}_{st} \varphi)-m(\1_{(s,t]}  \partial_\xi \varphi)+f^{+,\natural}_{st}(\varphi) ,\\
+\delta f^-_{st}(\varphi)&=f^-_s(A^{1,*}_{st} \varphi +A^{2,*}_{st} \varphi)-m(\1_{[s,t)}  \partial_\xi \varphi)+f^{-,\natural}_{st}(\varphi) ,
+\end{split}
+\end{equation*}
+holds true for all $s<t\in[0,T]$ and all $\varphi\in E_3$. 
+\end{definition}
+
+
+Finally we state the precise notion of solution we will consider for eq.~\eqref{eq:kinform}:
+
+\begin{definition}[Kinetic solution]
+Let $u_0\in L^1(\R^N).$
+Then $u\in  L^\infty(0,T;L^1(\R^N))$
+is called a kinetic solution to \eqref{eq1} with initial datum $u_0$ if the function $f(t,x,\xi) = \1_{u(t,x)>\xi}$ is a generalized kinetic solution according to Definition \ref{genkinsol} with initial condition $f_0(x,\xi) = \1_{u_0(x)>\xi}$. 
+\end{definition}
+
+
+
+
+\subsection{The main result}
+\label{subsec:main}
+
+Our well-posedness result for the conservation law \eqref{eq1} reads as follows.
+
+\begin{theorem}\label{thm:main}
+Let $u_0\in L^1(\R^N)\cap L^2(\R^N) $. Under the above assumptions, the following statements hold true:
+\begin{enumerate}
+\item[\emph{(i)}] There exists a unique kinetic solution to \eqref{eq1} and it belongs to $L^\infty(0,T;L^2(\R^N))$.
+\item[\emph{(ii)}] Any generalized kinetic solution is actually a kinetic solution, that is, if $f$ is a generalized kinetic solution to \eqref{eq1} with initial datum $\ind_{u_0>\xi}$ then there exists a kinetic solution $u$ to \eqref{eq1} with initial datum $u_0$ such that $f=\ind_{u>\xi}$ for a.e. $(t,x,\xi)$.
+\item[\emph{(iii)}] If $u_1,\,u_2$ are kinetic solutions to \eqref{eq1} with initial data $u_{1,0}$ and $u_{2,0}$, respectively, then for a.e. $t\in[0,T]$
+\begin{equation*}%\label{goo}
+\|(u_1(t)-u_2(t))^+\|_{L^1}\leq \|(u_{1,0}-u_{2,0})^+\|_{L^1}.
+\end{equation*}
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}\label{u+}
+Note that in the definition of a kinetic solution, $u$ is a class of equivalence in $L^\infty(0,T;L^1(\R^N))$. Consequently, the $L^1$-contraction property holds true only for a.e. $t\in[0,T]$. However, it can be proved that in the class of equivalence $u$ there exists a representative $u^+$, defined through $\ind_{u^+(t,x)>\xi}=f^+(t,x,\xi)$, which has better continuity properties and in particular it is defined for every $t\in[0,T]$. If $u^+_1$ and $u^+_2$ are these representatives associated to $u_1$ and $u_2$ respectively, then
+$$\|(u^+_1(t)-u^+_2(t))^+\|_{L^1}\leq \|(u_{1,0}-u_{2,0})^+\|_{L^1}$$
+is satisfied for every $t\in[0,T]$.
+\end{remark}
+
+
+
+
+
+\section{Rough conservation laws II: Uniqueness and reduction}
+\label{sec:uniq}
+
+Let $f^1,f^2$ be two generalized kinetic solutions to \eqref{eq1}. In what follows, we will use the following notation: $\bar f:=1-f$ as well as $\mathbf{x}:=(x,\xi)\in\R^{N+1}$, $\mathbf{y}:=(y,\zeta)\in\R^{N+1}$.
+
+
+\subsection{Tensorization}
+\label{subsec:tens}
+
+
+
+
+
+
+Consider $F = f^{1,+} \otimes \bar{f}^{2,+}$ defined on $[0,T] \times \R ^{N+1}\times\R ^{N+1}$ by
+$$
+F_t(\mathbf{x},\mathbf{y}): = f^{1,+}_t(\mathbf{x})\bar f^{2,+}_t(\mathbf{y}) .
+$$
+Let us now derive the equation for $F$. To this end, we tensorize the equation for $f^{1,+}$ with the equation for $\bar f^{2,+}$ and obtain, in the sense of distributions over $\R^{N+1}\times\R^{N+1}$ ,
+\[ \delta F_{s t} = f^{1, +}_t \otimes \bar{f}^{2, +}_t - f^{1, +}_s \otimes \bar{f}^{2, +}_s
+   = f^{1, +}_t \otimes (\delta \bar{f}^{2, +}_{s t}) + (\delta f^{1, +}_{s t}) \otimes
+   \bar{f}^{2, +}_s \]
+\[ = f^{1, +}_s  \otimes(\delta \bar{f}^{2, +}_{s t}) + (A^1_{s t} + A^2_{s t}) f^{1,
+   +}_s \otimes (\delta \bar{f}^{2, +}_{s t}) +\partial_\xi m^1 (\1_{(s, t]})  \otimes (\delta \bar{f}^{2,
+   +}_{s t}) + f^{1, +, \natural}_{s t} \otimes (\delta \bar{f}^{2, +}_{s t}) +
+   (\delta f^{1, +}_{s t}) \otimes \bar{f}^{2, +}_s \]
+\[ = f^{1, +}_s \otimes (A^1_{s t} + A^2_{s t}) \bar{f}^{2, +}_s - f^{1, +}_s \otimes \partial_\xi m^2
+   (1_{(s, t]}) - f^{1, +}_s \otimes f^{2, +, \natural}_{s t} \]
+\[ + (A^1_{s t} + A^2_{s t}) f^{1, +}_s \otimes (A^1_{s t} + A^2_{s t}) \bar{f}^{2,
+   +}_s - (A^1_{s t} + A^2_{s t}) \bar{f}^{2, +}_s \otimes \partial_\xi m^2 (\1_{(s, t]}) - (A^1_{s
+   t} + A^2_{s t}) f^{1, +}_s \otimes f^{2, +, \natural}_{s t} \]
+\[ +\partial_\xi m^1 (\1_{(s, t]}) \otimes (A^1_{s t} + A^2_{s t}) \bar{f}^{2, +}_s -\partial_\xi  m^1 (\1_{(s,
+   t]}) \otimes \partial_\xi m^2 (\1_{(s, t]}) -\partial_\xi m^1 (\1_{(s, t]}) \otimes f^{2, +, \natural}_{s t} \]
+\[ + f^{1, +, \natural}_{s t} \otimes (A^1_{s t} + A^2_{s t}) \bar{f}^{2, +}_s - f^{1,
+   +, \natural}_{s t} \otimes \partial_\xi m^2 (\1_{(s, t]}) - f^{1, +, \natural}_{s t} \otimes f^{2, +,
+   \natural}_{s t} \]
+\[ + (A^1_{s t} + A^2_{s t}) f^{1, +}_s \otimes \bar{f}_s^{2, +} +\partial_\xi m^1 (\1_{(s, t]})
+  \otimes  \bar{f}_s^{2, +} + f^{1, +, \natural}_{s t} \otimes \overline{f_{}}_s^{2, +} .\]
+Let $R_{s t}$ stand for a (sufficiently regular) remainder with a continuous control. Then
+\[ \delta F_{s t} = \Gamma^1_{s t} F_s + \Gamma^2_{s t} F_s + R_{s t} \]
+\[ - f^{1, +}_s \otimes \partial_\xi m^2 (\1_{(s, t]}) - \partial_\xi m^1 (1_{(s, t]}) \otimes \partial_\xi m^2 (\1_{(s, t]}) +\partial_\xi m^1
+   (\1_{(s, t]})  \otimes \bar{f}_s^{2, +} \]
+and all the other terms containing the kinetic measures can be included in the
+remainder. The integration by parts formula for BV functions reads as
+\[ A_t B_t = A_s B_s + \int_{(s, t]} A_r \mathd B_r + \int_{(s, t]} B_{r -}
+   \mathd A_r \]
+which implies
+\[ - \partial_\xi m^1 (\1_{(s, t]})\otimes  \partial_\xi m^2 (\1_{(s, t]}) = - \int_{(s, t]} \partial_\xi m^1 (\1_{(s, r]})
+   \otimes \mathd \partial_\xi m_r^2 - \int_{(s, t]} \partial_\xi m^2 (\1_{(s, r)})\otimes  \mathd \partial_\xi m^1_r = : I_1 + I_2. \]
+For the first term we apply again the equation for $f^{1, +}$ to get
+\[ I_1 = -\int_{(s, t]} (\delta f^{1, +}_{s r} - (A^1_{s r} + A^2_{s r}) f^{1,
+   +}_s - f^{1, +, \natural}_{s r}) \otimes \mathd \partial_\xi m^2_r = -\int_{(s, t]} \delta f^{1,
+   +}_{s r} \otimes \mathd\partial_\xi  m^2 + R_{s t} \]
+   $$
+   =-\int_{(s, t]} f^{1,
+   +}_{r} \otimes \mathd\partial_\xi  m^2 + f^{1,+}_s  \otimes\partial_\xi m^2(\1_{(s,t]}) + R_{s t}
+   $$
+so the second term on the right hand side cancels out. For $I_2$ we need to use the equation for $\bar{f}^{2, -}$. This leads to
+\[ I_2 = - \int_{(s, t]} (\partial_\xi m^2 (\1_{[s, r)}) - \partial_\xi m^2 (\1_{\{ s \}})) \otimes \mathd \partial_\xi m^1_r 
+\]
+\[= 
+   \int_{(s, t]} (\delta \bar{f}^{2, -}_{s r} - (A^1_{s r} + A^2_{s r}) f^{2,
+   -}_s - f^{2, -, \natural}_{s r} +\partial_\xi m^2 (\1_{\{ s \}})) \otimes \mathd \partial_\xi m^1_r \]
+\[ =  \int_{(s, t]} \delta \bar{f}^{2, -}_{s, r} \otimes \mathd \partial_\xi m_r^1 + \partial_\xi m^2 (\1_{\{ s \}})
+   \otimes \partial_\xi m^1 (\1_{(s, t]}) +R_{st}
+   \]
+   \[
+   =  \int_{(s, t]} \bar{f}^{2, -}_r \otimes \mathd \partial_\xi m^1_r -
+   \overline{f^{}}^{2, -}_s \otimes \partial_\xi m^1 (\1_{(s, t]}) +\partial_\xi m^2 (\1_{\{ s \}}) \otimes \partial_\xi m^1 (\1_{(s, t]})
+   + R_{s t} \]
+and since $f^{2, +}_s - f^{2, -}_s = \partial_\xi m^2 (\1_{\{ s \}})$ hence $\bar{f}^{2,
+-}_s- \partial_\xi m (\1_{\{ s \}}) = \bar{f}^{2, +}_s$ we obtain
+\[ I_2 = \int_{(s, t]} \bar{f}^{2, -}_r \otimes \mathd \partial_\xi m^1_r -\overline{f^{}}^{2,
+   +}_s  \otimes \partial_\xi m^1 (\1_{(s, t]}) + R_{s t} \]
+and so the second term again cancels out. We point out that all the equalities above are to be understood in the sense of distributions tested against test functions from the algebraic tensor product $C^\infty_c(\R^{N+1})\otimes C^\infty_c(\R^{N+1})$. With a density argument this can be extended to all test functions from $C^\infty_c(\R^{N+1}\times\R^{N+1})$. Therefore, we have rigorously obtained that the increments of $F$ can be expanded as follows: for $\Phi\in C^\infty_c(\R^{N+1}\times\R^{N+1})$
+\begin{equation*}%\label{expansion-tensor}
+\delta F_{st}(\Phi) = \delta Q_{st}(\Phi) + F_s((\Gamma_{st}^{1,*}  + \Gamma_{st}^{2,*})\Phi) +  F^{ \natural}_{st}(\Phi),
+\end{equation*}
+with
+\begin{equation*}
+\Gamma_{st}^1 := A^1_{st}  \otimes \mathbb{I}+\mathbb{I} \otimes A^1_{st}  , \qquad
+\Gamma_{st}^2 := A^2_{st} \otimes \mathbb{I}+\mathbb{I} \otimes A^2_{st} + A^1_{st} \otimes A^1_{st} ,
+\end{equation*}
+$$
+Q_{t}: = Q^{1}_{t} - Q^{2}_{t} =\int_{[0,t]} \partial_\xi m^1_{dr} \otimes \bar f^{2,-}_r -  \int_{[0,t]} f^{1,+}_r \otimes \partial_\xi m^2_{dr} ,
+$$
+where the two integrals are understood as Young integrals.
+
+
+
+
+
+Introducing the blow up transformation $T_\varepsilon$ as in Subsection \ref{subsec:prelim}, i.e.
+$$T_\varepsilon\Phi(\mathbf{x},\mathbf{y}):=\varepsilon^{-N-1}\Phi\left(\mathbf x_++\frac{\mathbf x_-}{\varepsilon},\mathbf x_+-\frac{\mathbf x_-}{\varepsilon}\right),$$
+and setting  
+$
+\mathbf{\Gamma}^{\ast}_{\varepsilon}  := T_\varepsilon^{-1}\mathbf{\Gamma}^{\ast}T_\varepsilon
+$,  $F^\varepsilon := T^{\ast}_\varepsilon F$, $F^{\natural,\varepsilon}:=T_\varepsilon^* F^\natural $ and  $Q^\varepsilon := T^{\ast}_\varepsilon Q$
+leads us to the problem
+\begin{equation}\label{eq:eps1}
+\delta F^\varepsilon_{st}(\Phi)= \delta Q^\varepsilon_{st}(\Phi)+ F_s^\varepsilon((\Gamma^{1,*}_{\varepsilon,st}+\Gamma^{2,*}_{\varepsilon,st})\Phi)+F_{st}^{\natural,\varepsilon} (\Phi).
+\end{equation}
+According to Proposition \ref{prop:renorm}, the set $\{\mathbf{\Gamma}_\varepsilon\}_{\varepsilon\in(0,1)}$ is a bounded family of continuous unbounded $p$-rough drivers on the corresponding scale $(\mathcal E_n)$
+where
+$$\mathcal{E}_{n}:=\left\{ \Phi\in W^{n,\infty}(\R^{N+1}\times\R^{N+1});\,\Phi(\mathbf{x},\mathbf{y})=0\;\text{if}\;|\mathbf{x}_-|\geq 1\right\}.$$
+Moreover, according to Corollary \ref{cor:1}, uniformly in $R$, it is a bounded family of continuous unbounded $p$-rough drivers on the scale $(\mathcal E_{R,n})$
+where
+$$\mathcal E_{R,n}:=\left\{ \Phi\in W^{n,\infty}(\R^{N+1}\times\R^{N+1});\,\Phi(\mathbf{x},\mathbf{y})=0\;\text{if}\;\rho_R(\mathbf{x},\mathbf{y})\ge 1 \right\}\subset \mathcal E_n,$$
+and 
+$
+\rho_R( \mathbf x,\mathbf y)^2 = |\mathbf{x}_+|^2/R^2 +  |\mathbf{x}_-|^2
+$.
+
+
+
+
+\subsection{Preliminary estimates}
+%We need to introduce spaces of test functions which are suitably localized. Localization in the $\mathbf{x}_-$ variable is needed to deal with the renomalization of the rough driver. This localization will disappear after taking the limit $\varepsilon\to 0$. An additional localization in the $\mathbf{x}_+$ direction is needed to derive preliminary uniform bounds for $F^\varepsilon$ and $Q^\varepsilon$. This localization (parametrized by $R \ge 1$) will be removed afterwards  via a rough Gronwall lemma argument which gives us estimates uniform in $R$. Let $\mathcal E_{R,n}\subset \mathcal E_n$ be such that
+%$$\mathcal E_{R,n}:=\left\{ \Phi\in W^{n,\infty}(\R^{N+1}\times\R^{N+1});\,\Phi(\mathbf{x},\mathbf{y})=0\;\text{if}\;\rho_R(\mathbf{x},\mathbf{y})\ge 1 \right\}\subset \mathcal E_n,$$
+%where 
+%$
+%\rho_R(\mathbf x,\mathbf y)^2 = |\mathbf{x}_+|^2/R^2 +  |\mathbf{x}_-|^2
+%$.
+%
+%
+%As a consequence of Proposition \ref{prop:renorm}, we immediately obtain uniform bounds for the family of drivers $\{\mathbf{\Gamma}_\varepsilon\}$.
+%
+%\begin{corollary}\label{cor:1}
+%The continuous unbounded $p$-rough driver $\mathbf{A}$ defined in \eqref{d:urd} is renormalizable in the scale $(\mathcal E_{R,n})$ and
+%$$\lVert \Gamma^{1}_{\ep,st}\rVert_{\cl(\mathcal E_{R,n},\mathcal E_{R,n-1})}^p \lesssim_{\|V\|_{W^{3,\infty}}} \omega_Z(s,t),\qquad n\in \{-0,-2\},$$
+%$$ \lVert \Gamma^{2}_{\ep,st}\rVert_{\cl(\mathcal E_{R,n},\mathcal E_{R,n-2})}^{p/2} \lesssim_{\|V\|_{W^{3,\infty}}} \omega_Z(s,t),\qquad n\in \{-0,-1\} ,$$
+%holds true uniformly in $\varepsilon$ and $R$.
+%\end{corollary}
+%
+%
+%
+%As the next step, let us introduce a suitable cut-off function as follows: let $\eta\in (0,\tfrac{1}{3})$ and let $\theta_{\eta}\in C_c^\infty(\R)$ be such that
+%$$0\leq \theta_{\eta}\leq 1,\qquad\supp\, \theta_{\eta}\subset B_{1-2\eta}\subset \R,\qquad \theta_{\eta}\equiv 1\text{ on }B_{1-3\eta}\subset \R,$$
+%and
+%$$|\nabla^k \theta_{\eta}|\lesssim \eta^{-k},\qquad\text{for}\;k=1,2.$$
+%Finally, we define
+%\[ \Theta_\eta (\mathbf x,\mathbf y):=\Theta_{R,\eta} (\mathbf x,\mathbf y) =\theta_{\eta}(\rho_R(\mathbf x,\mathbf y)) \]
+%Then we have the following auxiliary result.
+%
+%
+%\begin{lemma}\label{lem:1}
+%Let $\Phi\in\mathcal{E}_{R,k}$, $k=1,2.$ Then it holds true that
+%\begin{align}
+% \| \Theta_{\eta} \Phi \|_{\mathcal{E}_{R,k}} &\lesssim \| \Phi \|_{\mathcal{E}_{R,k}} ,\label{1}\\
+% \| ( 1- \Theta_{\eta} ) \Phi \|_{\mathcal{E}_{R,0}} &\lesssim \eta^k \| \Phi \|_{\mathcal{E}_{R,k}},\label{2}
+%\end{align}
+%and there exists $\Psi_R\in\mathcal{E}_{R,3}$ with  $\sup_{R\in\R}\|\Psi_R\|_{\mathcal{E}_{R,3}}<\infty$ such that
+%\begin{align}
+%\eta^{3-k}|J^\eta\Theta_\eta\Phi(\mathbf x,\mathbf y)|&\lesssim \Psi_R(\mathbf x,\mathbf y)\|\Phi\|_{\mathcal{E}_{R,k}},\label{3}
+%\end{align}
+%where the proportional constants are independent of $\eta$ and $R$.
+%\end{lemma}
+%
+%
+%
+%\begin{proof}
+%In order to prove \eqref{1}, we write
+%$$\nabla(\Theta_\eta\Phi)=(\nabla \Theta_\eta)\Phi+\Theta_\eta(\nabla\Phi),$$
+%where the second term does not pose any problems. On the other hand, the term $\nabla\Theta_\eta$ diverges as $\eta^{-1}$ due to the assumptions on $\theta_{\eta}$, namely, it holds
+%\begin{align*}
+%\nabla_{\mathbf{x}}\Theta_\eta&=(\nabla \theta_{\eta})(\rho_R(\mathbf x,\mathbf y))\nabla_{\mathbf{x}} \rho_R(\mathbf x,\mathbf y).
+%\end{align*}
+%But due to the support of $\Phi$ we have for every $(\mathbf{x},\mathbf{y})$ in the region where $\nabla_\mathbf{x}\Theta_{\eta}\neq0$ there exists $(\tilde{\mathbf{x}},\tilde{\mathbf{y}})$ outside of support of $\Phi$ such that $|(\mathbf x,\mathbf y)-(\tilde{\mathbf x},\tilde{\mathbf y})|\lesssim \eta$ hence
+%$$|\Phi(\mathbf{x},\mathbf y)|=|\Phi(\mathbf{x},\mathbf y)-\Phi(\tilde{\mathbf x},\tilde{\mathbf y})|\lesssim \eta\|\Phi\|_{\mathcal{E}_{R,1}}$$
+%and consequently \eqref{1} follows for $k=1$. If $k=2$, we have
+%\[ \nabla^{2} ( \Theta_{\eta} \Phi ) = ( \nabla^{2} \Theta_{\eta} ) \Phi +2
+%   \nabla \Theta_{\eta} \cdummy \nabla \Phi + \Theta_{\eta} \nabla^{2} \Phi,
+%\]
+%where the third term does not pose any problems and the second one can be estimate using the reasoning above.
+%For the first one, we observe that $\nabla_x^2\Theta_\eta$
+%diverges like $\eta^{-2}$ but for every $(\mathbf x,\mathbf y)$ such that $\nabla^2\Theta\neq 0$ there exists $(\tilde{\mathbf{x}},\tilde{\mathbf{y}})$ that lies outside of support of $\Phi$ and satisfies $|(\mathbf x,\mathbf y)-(\tilde{\mathbf x},\tilde{\mathbf y})|\lesssim \eta$ and using the second order Taylor expansion gives
+%\begin{align*}
+% |\Phi (\mathbf x,\mathbf y) | 
+%    &=  | \Phi (\mathbf x,\mathbf y) - \Phi ( \tilde{\mathbf x},\tilde{\mathbf y} ) - \mathrm{D}\Phi ( \tilde{\mathbf x},\tilde{\mathbf y}) ( (\mathbf x,\mathbf y)-(\tilde{\mathbf x},\tilde{\mathbf y})) | \\
+%    &\lesssim 
+%   | \mathrm{D}^2\Phi (\mathbf z_x,\mathbf{z}_y )| |(\mathbf x,\mathbf y)-(\tilde{\mathbf x},\tilde{\mathbf y}) |^{2}  \lesssim\eta^2 \| \Phi \|_{\mathcal{E}_{R,2}} 
+%\end{align*}
+%and \eqref{1} follows.
+%
+%
+%
+%
+%The same approach leads to \eqref{2}. To be more precise, for $(\mathbf x,\mathbf y)$ from the support of $(1-\Theta_\eta)\Phi$ we have using the first and second order Taylor expansion, respectively,
+%\begin{align*}
+% | ( 1- \Theta_{\eta} ) \Phi (\mathbf x,\mathbf y ) | 
+%\lesssim \eta^{k} \| ( 1- \Theta_{\eta} ) \Phi \|_{\mathcal{E}_{R,k}} \lesssim
+%   \eta^{k} \| \Phi \|_{\mathcal{E}_{R,k}} ,
+%\end{align*}
+%where we used \eqref{1} for the second inequality.
+%
+%
+%Let us now prove \eqref{3}. First of all, we observe the trivial estimate, for $k=1,2,$ and $(\mathbf x,\mathbf y)\in \supp(J_\eta\Theta_\eta\Phi)$, 
+%\begin{equation}\label{4}
+%\eta^{3-k}|J^\eta\Theta_\eta\Phi(\mathbf x, \mathbf y)|\leq \|J^\eta\Theta_\eta\Phi\|_{L^\infty}\lesssim \|\Phi\|_{\mathcal{E}_{0}}\lesssim \|\Phi\|_{\mathcal{E}_{k}}.
+%\end{equation}
+%Next, we note that
+%$$\supp(J^\eta\Theta_\eta\Phi)\subset\left\{(\mathbf x,\mathbf y)\in\R^{N+1}\times\R^{N+1};\, \rho_R(\mathbf x,\mathbf y) \leq 1-\eta \right\}$$
+%since $R\ge 1$, and denote
+%$$D_R:=\left\{(\mathbf x,\mathbf y)\in\R^{N+1}\times\R^{N+1};\, \rho_R(\mathbf x,\mathbf y) \leq 1 \right\}.$$
+%Let $d(\cdot,\partial D_R)$ denote the distance to its boundary $\partial D_R$. It satisfies
+%$$d((\mathbf x,\mathbf y),\partial D_R)\geq \eta\qquad\text{for all}\quad (\mathbf x,\mathbf y)\in \supp(J_\eta\Theta_\eta\Phi).$$
+%Thus, due to the Taylor expansion we obtain for $k=1,2,$ and $(\mathbf x,\mathbf y)\in \supp(J_\eta\Theta_\eta\Phi)$, 
+%\begin{align}\label{5}
+%\begin{aligned}
+%\eta^{3-k}|J^\eta\Theta_\eta\Phi(\mathbf x,\mathbf y)|&\lesssim \eta^{3-k} |d((\mathbf x,\mathbf y),\partial D_R)|^k\|J^\eta\Theta_\eta\Phi\|_{W^{k,\infty}}\\
+%&\lesssim|d((\mathbf x,\mathbf y),\partial D_R)|^3\|\Phi\|_{\mathcal{E}_{R,k}}
+%\end{aligned}
+%\end{align}
+%where we also used \eqref{1}. Besides
+%we may put \eqref{4} and \eqref{5} together to conclude that there exists $\Psi_R\in\mathcal{E}_{R,3}$ satisfying the conditions stated in this Lemma and, in addition,
+%$$\min\left\{1,|d((\mathbf x,\mathbf y),\partial D_R)|^3\right\}\lesssim \Psi_R(\mathbf x,\mathbf y)$$
+%which completes the proof. For example we can take 
+%$$
+%\Psi_R(\mathbf x,\mathbf y) = \begin{cases}
+%d((\mathbf x,\mathbf y),\partial D_R), &\ \text{ if } d((\mathbf x,\mathbf y),\partial D_R) \le 1/2,\\
+%						 1,&\ 
+%\text{ if } d((\mathbf x,\mathbf y),\partial D_R) \ge 3/4,
+%\end{cases}
+%$$
+%and complete it with a smooth interpolation in between. \rmk{Check this last part of proof. Would be better to have an explicit construction of this function}
+%\end{proof}
+%
+
+
+
+As the next step, we derive a preliminary uniform bound on $F^\ep.$ Even though this estimate is not uniform in $R$ this does not bring any difficulties, since later on we will send $\varepsilon\to0$ first and only then $R\to\infty$.
+
+
+\begin{lemma}\label{lem:2}
+For all $0\leq s\leq t\leq T$ it holds true that
+\begin{equation}\label{bou-m-ep}
+\mathcal{N}[F^\varepsilon;L^\infty(s,t;\mathcal{E}_{R,0}^*)]\lesssim \ep R^N+\sup_{s\leq r\leq t}\int_{\R^N} \int_\R | \xi |\, \nu^{1,+}_{r,x} (\dd \xi)\dd x+\sup_{s\leq r\leq t} \int_{\R^N}\int_\R | \zeta |\, \nu^{2,+}_{r,y} (\dd \zeta)\dd y
+\end{equation}
+where the proportional constant does not depend on $\ep$ and $R$.
+\end{lemma}
+
+\begin{proof}
+Consider the function $\Upsilon^\ep:\R^2 \to [0,\infty[$ defined as
+\[ \Upsilon^\ep (\xi, \zeta): =  \int_{\zeta}^{\infty}  \int_{-
+   \infty}^{\xi} \ep^{-1} \mathbf{1}_{|\xi'-\zeta'|\leq 2\ep}\,\dd\xi'\dd\zeta' . \]
+One has
+$$\partial_{\xi} \Upsilon^\ep (\xi, \zeta) =  \int_{\zeta}^{\infty} \varepsilon^{- 1} \mathbf{1}_{|\xi-\zeta'|\leq 2\ep} \,\dd\zeta' ,$$
+hence $\partial_{\xi} \Upsilon^\ep (\xi, +\infty) = 0 $, and
+\begin{eqnarray*}
+ \Upsilon^\ep (\xi, \zeta)
+	&=&  \int_{{\zeta - \xi}}^{\infty}  \int_{-
+   \infty}^0  \varepsilon^{- 1} \mathbf{1}_{|\xi'-\zeta'|\leq 2\ep}\,\dd\xi'\dd\zeta' = \ \Upsilon^\ep ({0,\zeta - \xi})  .
+\end{eqnarray*}
+%We have also
+%$$
+%0 \le \partial_{\xi}  \Upsilon_- (\xi, 0) = \int_{-\infty}^\xi \varepsilon^{- 1}\theta_{\xi,-}(\xi'  /
+%   \varepsilon)d\xi' \le \int \theta_{\xi,-}(\xi') d\xi'
+%$$
+%and since $\Upsilon_- (-\infty, 0)=0$ we deduce
+Moreover, writing
+ $$
+ \Upsilon^\ep ( 0,\zeta) =  \varepsilon \int_{-\infty}^{{\zeta/\varepsilon}} \int_{-\infty}^{\zeta'} \mathbf{1}_{|\xi'|\leq 2}\,\dd\xi'\dd\zeta'  $$
+it follows that
+% there exists a constant $C_{\xi,-}$ for which $|\Upsilon^\ep_- (0, 0)| \le C_{\xi,-}\varepsilon$. Indeed, if $\supp\,\theta_{\xi,-}\subset [-K,K]$ then
+$$|\Upsilon^\ep ( 0,0)|=\varepsilon\int_{-\infty}^0 \int_{-\infty}^{\zeta'}\mathbf{1}_{|\xi'|\leq 2}\,\dd\xi'\dd\zeta'  \lesssim \varepsilon. $$
+Finally, using the elementary bound
+$$| \partial_\zeta \Upsilon^\ep(\xi,\zeta)| \leq 2,$$
+we obtain that
+\begin{align*}
+|\Upsilon^\ep (\xi, \zeta)|&= | \Upsilon^\ep ( 0, \zeta-\xi) | \lesssim \varepsilon + |\zeta-\xi|\lesssim \varepsilon + | \xi |+|\zeta|.
+   \end{align*}
+With the above properties of $\Upsilon^\ep$ in mind, we have, for all $t\in [0,T]$ and $x,y\in \R^N$,
+\begin{align*}
+\int_{\R^2}  f^{1,+}_r (x,\xi) \bar{f}^{2,+}_r (y,\zeta) \varepsilon^{-
+   1}\mathrm{1}_{|\xi - \zeta|\leq 2\ep}\,\dd \xi \dd \zeta 
+   & = -  \int_{\R^2} 
+   f^{1,+}_r (x,\xi) \bar{f}^{2,+}_r (y,\zeta) (\partial_{\zeta} \partial_{\xi} \Upsilon^\ep)(\xi, \zeta)\,\dd \xi \dd \zeta\\
+&=  
+   \int_{\R} \int_{\R} f^{1,+}_r (x;\xi)  (\partial_{\xi}\Upsilon^\ep) (\xi, \zeta) \,\dd \xi\, \nu^{2,+}_{r,y} (\dd  \zeta) \\
+& = \int_\R \int_\R  \Upsilon^\ep(\xi, \zeta)\,\nu^{1,+}_{r,x} (\dd  \xi)\,\nu^{2,+}_{r,y} (\dd \zeta)   \\
+&\lesssim \ep + \int_\R | \xi |\, \nu^{1,+}_{r,x} (\dd \xi)+ \int_\R | \zeta |\, \nu^{2,+}_{r,y} (\dd \zeta) . 
+\end{align*}
+Therefore, we obtain
+\begin{align*}%\label{Feps}
+\begin{aligned}
+\|F^\ep_r\|_{\mathcal{E}^*_{R,0}}&\leq\int_{\R^{N+1}\times\R^{N+1}} F_r^\ep(\mathbf x,\mathbf y) \,\mathbf{1}_{|\mathbf x_-|\leq 1} \,\mathbf{1}_{| x_+|\leq R} \,\dd\mathbf x\dd\mathbf y\\
+&\leq\int_{\R^{N+1}\times\R^{N+1}} F_r(\mathbf x,\mathbf y) \ep^{-N-1}\,\mathbf{1}_{|\mathbf x_-|\leq \ep} \,\mathbf{1}_{| x_+|\leq R} \,\dd\mathbf x\dd\mathbf y\\
+&\leq\int_{\R^N\times\R^N}\ep^{-N}\,\mathbf{1}_{| x_-|\leq \ep}\,\mathbf{1}_{|x_+|\leq R}\int_{\R^2} F_t(\mathbf x,\mathbf y) \ep^{-1}\,\mathbf{1}_{|\xi_-|\leq \ep}\,\dd\xi\dd\zeta\dd x\dd y\\
+&\lesssim \int_{\R^N\times\R^N}\ep^{-N}\,\mathbf{1}_{| x_-|\leq \ep}\,\mathbf{1}_{|x_+|\leq R}\bigg(\ep + \int_\R | \xi |\, \nu^{1,+}_{r,x} (\dd \xi)+ \int_\R | \zeta |\, \nu^{2,+}_{r,y} (\dd \zeta)\bigg)\dd x\dd y\\
+&\lesssim \ep R^N+\int_{\R^N\times\R^N}\ep^{-N}\,\mathbf{1}_{| x_-|\leq \ep}\bigg( \int_\R | \xi |\, \nu^{1,+}_{r,x} (\dd \xi)+ \int_\R | \zeta |\, \nu^{2,+}_{r,y} (\dd \zeta)\bigg)\dd x\dd y\\
+&\lesssim \ep R^N+\int_{\R^N} \int_\R | \xi |\, \nu^{1,+}_{r,x} (\dd \xi)\dd x+ \int_{\R^N}\int_\R | \zeta |\, \nu^{2,+}_{r,y} (\dd \zeta)\dd y
+\end{aligned}
+\end{align*}
+and the estimate (\ref{bou-m-ep}) follows.
+\end{proof}
+
+
+Let us now proceed with the drift term $Q^\ep$. We set
+ $$
+ q^{1}_{t} := \int_{[0,t]}  m^{1}_{\dd r}  \otimes \bar{f}^{2,-}_r 
+, \qquad
+ \sigma^{1}_{t} := \int_{[0,t]}  m^{1}_{\dd r} \otimes {\nu}^{2,-}_r 
+ $$
+and in parallel
+ $$
+ q^{2}_{t} := \int_{[0,t]}  f^{1,+}_{r}  \otimes m^2_{\dd r}
+ , \qquad
+ \sigma^{2}_{t} := \int_{[0,t]}  \nu^{1,+}_{r} \otimes m^{2}_{\dd r} \ .
+ $$
+With these notations, it holds true that
+\begin{equation}\label{decompo-incr-q-1}
+Q^1 =(\partial_\xi\otimes\mathbb{I}) q^1 =   2 \partial_\xi^+ q^1 - \sigma^1 \qquad \text{where} \qquad \partial_\xi^+:=\frac{1}{2}(\partial_\xi\otimes\mathbb{I} + \mathbb{I}\otimes \partial_\xi)  ,
+\end{equation}
+and in the same way $Q^2 =2 \partial_\xi^+ q^2 + \sigma^2$.
+
+
+\begin{lemma}\label{lem:3a}
+For all $0\leq s\leq t\leq T$ and $\Phi \in \mathcal{E}_{R,k}$, $k=1,2,$ it holds that
+\begin{equation*}
+\sum_{\ell=1,2}| \delta q_{s t}^{\ell} (\partial_\xi^+T_\varepsilon  \Phi) | \lesssim  \omega_m(s, t)\|\partial_\xi^+\Phi\|_{\mathcal E_{R,0}}  ,
+\end{equation*}
+where $\ell=1,2,$ and the proportional constant does not depend on $\ep, R$  and the control $\omega_{m}$ is defined as follows
+$$\omega_m (s, t) := \| \bar{f}^2 \|_{L^{\infty}} m^1 ((s, t] \times \mathbb{R}^{N + 1}) + \| f^1\|_{L^{\infty}} m^2 ((s, t] \times \mathbb{R}^{N + 1}).$$
+\end{lemma}
+
+\begin{proof}
+Let us first point out that
+\begin{eqnarray*}
+|\delta q^1_{st}(\Psi)| & \leq & \int_{\mathbf{x},\mathbf{y}}    \delta q^1_{st}(d\mathbf{x},\mathbf{y}) |\Psi(\mathbf{x},\mathbf{y})|d\mathbf{y}
+\\
+& = & 2^{N+1}\int_{\mathbf{x},\mathbf{x}_-}    \delta q^1_{st}(d\mathbf{x},\mathbf{x}-2 \mathbf{x}_-) |\Psi(\mathbf{x},\mathbf{x}-2 \mathbf{x}_-)|d\mathbf{x}_-\\
+&\leq &  2^{N+1}   \int_{\mathbf{x}_-} \int_{\mathbf{x}} \delta q^1_{st}(d\mathbf{x},\mathbf{x}-2 \mathbf{x}_-) \sup_{\mathbf{x}}|\Psi(\mathbf{x},\mathbf{x}-2 \mathbf{x}_-)|d\mathbf{x}_-\\
+&\leq &  2^{N+1}   \left[ \sup_{\mathbf{x}_-} \int_{\mathbf{x}} \delta q^1_{st}(d\mathbf{x},\mathbf{x}-2 \mathbf{x}_-) \right] \left[ \int_{\mathbf{x}_-} \sup_{\mathbf{x}}|\Psi(\mathbf{x},\mathbf{x}-2 \mathbf{x}_-)|d\mathbf{x}_-\right]\\
+&=&  2^{N+1}   \left[ \sup_{\mathbf{x}_-} \int_{\mathbf{x}}\delta q^1_{st}(d\mathbf{x},\mathbf{x}-2 \mathbf{x}_-) \right] \left[ \int_{\mathbf{x}_-} \sup_{\mathbf{x}_+}|\Psi(\mathbf{x}_+ + \mathbf{x}_-,\mathbf{x}_+- \mathbf{x}_-)|d\mathbf{x}_-\right] ,
+\end{eqnarray*}
+and then
+\begin{eqnarray*}
+\sup_{\mathbf{x}_-} \int_{\mathbf{x}}\delta q^1_{st}(d\mathbf{x},\mathbf{x}-2 \mathbf{x}_-)& \leq & \int_{]s,t]} \sup_{\mathbf{x}_-} \int_{\mathbf{x}} m^1(dr,d\mathbf{x}) |\bar  f^2_r(\mathbf{x}-2 \mathbf{x}_-)|\\
+& \leq & \|\bar f^2\|_{L^\infty} \int_{]s,t]\times \R^{N+1}}  m^1(dr,d\mathbf{x})\\
+& \leq & \|\bar f^2\|_{L^\infty} m^1((s,t]\times \R^{N+1})  ,
+\end{eqnarray*}
+so 
+\begin{equation*}\label{estim-q-1}
+|\delta q^1_{st}(\Psi)| \lesssim \|\bar f^2\|_{L^\infty} m^1((s,t]\times \R^{N+1}) \|\Psi\|_{L^1_- L^\infty_+}
+\end{equation*}
+where we have introduced the intermediate norm
+\[ \| \Psi \|_{L^1_- L^{\infty}_+} := \int_{\R^{N+1}} d \mathbf{x}_-
+   \sup_{\mathbf{x}_+} | \Psi (\mathbf{x}_+ +\mathbf{x}_-,
+   \mathbf{x}_+ -\mathbf{x}_-) | . \]
+At this point, observe that by a basic change of variables, one has
+\begin{eqnarray*}
+\|T_{\varepsilon} \Psi \|_{L^1_- L^{\infty}_+}& = &\varepsilon^{- N - 1}
+   \int_{\R^{N+1}} d \mathbf{x}_- \sup_z | \Psi (z + \varepsilon^{- 1}
+   \mathbf{x}_-, z - \varepsilon^{- 1} \mathbf{x}_-) | \\
+& =& \int_{\R^{N+1}} d \mathbf{x}_- \sup_z | \Psi (z +\mathbf{x}_-, z
+   -\mathbf{x}_-) | \ = \ \| \Psi \|_{L^1_- L^{\infty}_+} \ ,
+\end{eqnarray*}
+and also, if $\Psi\in\mathcal{E}_{R,0}$, we can use the localization in the $\mathbf{x}_-$ variable (independent of $R$) of the test function to estimate
+\begin{equation*}\label{norm-inter}
+\| \Psi \|_{L^1_- L^{\infty}_+}\leq \|\Psi\|_{\mathcal{E}_{R,0}}.
+\end{equation*}
+Then, from
+\begin{equation}\label{commut}
+\partial_\xi^+T_\ep=T_\ep \partial_\xi^+,
+\end{equation}
+and \eqref{1}
+it follows that
+\begin{align*}
+|\delta q^1_{st}(\partial^+_\xi T_\varepsilon \Phi)|&=|\delta q^1_{st}( T_\varepsilon\partial^+_\xi \Phi)|\\
+&\lesssim \|\bar f^2\|_{L^\infty} m^1((s,t]\times \R^{N+1}) \|T_\varepsilon\partial^+_\xi \Phi\|_{L^1_- L^\infty_+}\\
+&\leq \|\bar f^2\|_{L^\infty} m^1((s,t]\times \R^{N+1}) \|\partial^+_\xi \Phi\|_{L^1_- L^\infty_+}\\
+&\lesssim \|\bar f^2\|_{L^\infty} m^1((s,t]\times \R^{N+1})\|\partial^+_\xi\Phi\|_{\mathcal{E}_{R,0}}.
+\end{align*}
+\end{proof}
+
+
+\begin{lemma}\label{lem:3}
+For all $0\leq s\leq t\leq T$ and $\Phi \in \mathcal{E}_{R,k}$, $k=1,2,$ it holds that
+\begin{equation*}
+| \delta Q_{s t}^{\varepsilon} (J^\eta\Theta_\eta \Phi) | \lesssim  \omega_m(s, t)\|\Phi\|_{\mathcal E_{R,1}} + \eta^{k-3}\,\omega_{\sigma, \varepsilon,R} (s, t) \| \Phi \|_{\mathcal{E}_{R,k}}  ,
+\end{equation*}
+where the proportional constant does not depend on $\ep$ and $R$ and the control $\omega_{\sigma, \varepsilon,R}$ is defined as follows
+$$\omega_{\sigma, \varepsilon,R}(s,t):=\delta\sigma^1_{st}(T^\ep \Psi_R)+\delta\sigma^2_{st}(T^\ep \Psi_R),$$
+where $\Psi_R$ is the function introduced in Lemma \ref{lem:1}.
+\end{lemma}
+
+
+\begin{proof}
+By Lemma~\ref{lem:3a} we have that
+\begin{align*}
+|\delta q^1_{st}(\partial^+_\xi T_\varepsilon J^\eta\Theta_\eta\Phi)|
+&\lesssim \|\bar f^2\|_{L^\infty} m^1((s,t]\times \R^{N+1})\|\partial^+_\xi  J^\eta\Theta_\eta\Phi\|_{\mathcal{E}_{R,0}}\\
+&\lesssim \|\bar f^2\|_{L^\infty} m^1((s,t]\times \R^{N+1})\|\Phi\|_{\mathcal{E}_{R,1}}.
+\end{align*}
+As far as $\sigma^1$ is concerned, we make use of \eqref{3} to deduce
+\begin{equation*}
+ \eta^{3-k}| \delta \sigma^1_{s t} (T_{\varepsilon} J^\eta\Theta_\eta\Phi) | \leqslant 
+  \eta^{3-k}\delta \sigma^1_{s t} (T_{\varepsilon}  |J^\eta\Theta_\eta \Phi |) \leqslant \| \Phi
+   \|_{\mathcal{E}_{R,k}}\, \omega_{\sigma, \varepsilon,R}(s,t)  . 
+	\end{equation*}
+Hence
+$$
+ | \delta Q_{s t}^1 (T_{\varepsilon}J^\eta\Theta_\eta\Phi) | \lesssim  
+	 \omega_m(s, t)\|\Phi\|_{\mathcal E_{R,1}} + \eta^{k-3}\,\omega_{\sigma, \varepsilon,R} (s, t) \| \Phi \|_{\mathcal{E}_{R,k}}  .
+$$
+and along the same lines, we can prove that
+$$| \delta Q_{s t}^2 (T_{\varepsilon} J^\eta\Theta_\eta\Phi) | \lesssim \omega_m(s, t)\|\Phi\|_{\mathcal E_{R,1}} + \eta^{k-3}\,\omega_{\sigma, \varepsilon,R} (s, t) \| \Phi \|_{\mathcal{E}_{R,k}}  ,$$
+which achieves the proof of our assertion.
+\end{proof}
+
+
+To conclude this subsection, note that we have, due to (\ref{decompo-incr-q-1}) and \eqref{commut},
+\begin{equation}\label{appli-1-q-ep-theta}
+\begin{split}
+ \delta Q_{s t}^{\varepsilon} (\Psi_R) & = \delta Q_{s t} (T_{\varepsilon}
+   \Psi_R) = -  \delta\sigma^1_{s t} (T_{\varepsilon} \Psi_R) - 
+  \delta \sigma^2_{s t} (T_{\varepsilon}\Psi_R)+  \delta q^1_{s t} (T_{\varepsilon} \partial_\xi^+ \Psi_R) +  \delta q^2_{s t} (T_{\varepsilon} \partial_\xi^+ \Psi_R) \\
+  & \leq - \omega_{\sigma, \varepsilon,R} (s, t) +\omega_m(s,t)\| \partial_\xi^+ \Psi_R\|_{\mathcal{E}_{R,0}} . 
+\end{split}	\end{equation}
+	
+	
+
+
+
+\subsection{Passage to the diagonal}\label{subsec:diago}
+
+Finally, we have all in hand to derive the uniform estimate for $F^{\natural,\ep}$.
+
+
+
+
+
+
+
+	
+\begin{proposition}\label{thm:loc1}
+Let
+\begin{equation*}\label{q1}
+q\in\left[\frac{9p}{2p+3},3\right),\qquad\kappa\in \left[\frac{3-p}{3p},\frac{3-p}{p}\right].
+\end{equation*}
+Then there exists a constant $L>0$ such that if $\omega_Z(I)\leq L$ then for all $s< t\in I$,
+\begin{equation}\label{apriori-bound1} 
+\begin{split}
+ \|F^{\natural,\ep}_{st}\|_{\mathcal{E}^*_{R,3}}&\lesssim \omega_I(s,t)^{\frac{3}{q}}\\
+ &= \cn[F^\ep;L^\infty(s,t;\mathcal{E}^*_{R,0})]\,\omega_Z(s,t)^{\frac{3}{p}-2\kappa}
++\omega_m(s,t)\omega_Z(s,t)^\frac{1}{p}+\omega_{\sigma,\ep,R}(s,t) \omega_Z(s,t)^{\kappa },
+\end{split}
+\end{equation}
+where the proportional constant is independent of $\ep$ and $R$.
+\end{proposition}
+
+\begin{proof}
+We proceed similarly as in Theorem \ref{prop:apriori}: letting
+\begin{align*}
+F^{\sharp,\varepsilon}_{st}(\Phi):=T^*_\varepsilon F^\sharp_{st}(\Phi)&=\delta F^\varepsilon_{st}(\Phi)-F^\varepsilon_s(\Gamma^{1,*}_{st}\Phi)\\
+&=\delta Q^\varepsilon_{st}(\Phi)+F^\varepsilon_s(\Gamma^{2,*}_{st}\Phi)+F^{\natural,\varepsilon}_{st}(\Phi),
+\end{align*}
+it follows from \eqref{eq:eps1} that
+\[ \delta F^{\natural,\varepsilon} _{sut}( \Phi ) = ( \delta F^\varepsilon )_{su} ( \Gamma_{\varepsilon,ut}^{2, \ast} \Phi )
+   +F^{\sharp,\varepsilon}_{su} ( \Gamma_{\varepsilon,ut}^{1, \ast} \Phi ) .\]
+Now, apart from the smoothing operators $(J^\eta)$ we also include the localization $(\Theta_\eta)$ defined at the beginning of this subsection. We have
+\begin{align*}
+ \delta F^{\natural,\varepsilon} ( \Phi ) &= ( \delta F^\varepsilon ) ( J_{\eta} ( \Theta_{\eta}
+   \Gamma_{\varepsilon}^{2, \ast} \Phi ) ) + ( \delta F^\varepsilon ) ( ( 1-J_{\eta} ) ( \Theta_{\eta}
+   \Gamma_{\varepsilon}^{2, \ast} \Phi ) ) + ( \delta F^\varepsilon ) ( ( 1- \Theta_{\eta} ) \Gamma_{\varepsilon}^{2, \ast}
+   \Phi ) \\
+& \quad+F^{\sharp,\varepsilon} ( J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) +F^{\sharp,\varepsilon}
+   ( ( 1-J_{\eta} ) ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) +F^{\sharp,\varepsilon} ( ( 1-
+   \Theta_{\eta} ) \Gamma_{\varepsilon}^{1, \ast} \Phi ) \\
+& =F^\varepsilon ( \Gamma_{\varepsilon}^{1, \ast} J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{2, \ast} \Phi ) ) +F^\varepsilon (
+   \Gamma_{\varepsilon}^{2, \ast} J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{2, \ast} \Phi ) ) + \delta Q^\varepsilon (
+   J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{2, \ast} \Phi ) )\\
+&\quad +F^{\natural,\varepsilon} ( J_{\eta} (
+   \Theta_{\eta} \Gamma_{\varepsilon}^{2, \ast} \Phi ) )  + ( \delta F^\varepsilon ) ( ( 1-J_{\eta} ) ( \Theta_{\eta} \Gamma_{\varepsilon}^{2, \ast} \Phi ) ) + (
+   \delta F^\varepsilon ) ( ( 1- \Theta_{\eta} ) \Gamma_{\varepsilon}^{2, \ast} \Phi ) \\
+&\quad +F^\varepsilon ( \Gamma_{\varepsilon}^{2, \ast} J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) + \delta
+   Q^\varepsilon ( J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) +F^{\natural,\varepsilon} (
+   J_{\eta} ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) \\
+& \quad+ ( \delta F^\varepsilon ) ( ( 1-J_{\eta} ) ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) +F^\varepsilon
+   ( \Gamma_{\varepsilon}^{1, \ast} ( 1-J_{\eta} ) ( \Theta_{\eta} \Gamma_{\varepsilon}^{1, \ast} \Phi ) ) \\
+&\quad + ( \delta F^\varepsilon ) ( ( 1- \Theta_{\eta} ) \Gamma_{\varepsilon}^{1, \ast} \Phi ) +F^\varepsilon ( \Gamma_{\varepsilon}^{1,
+   \ast} ( 1- \Theta_{\eta} ) \Gamma_{\varepsilon}^{1, \ast} \Phi ) . 
+\end{align*}
+In this expression, it is immediately seen what terms have to be estimated. Let $\Phi\in\mathcal{E}_{R,3}$ be such that $\|\Phi\|_{\mathcal{E}_{R,3}}\leq 1$, denote
+$M^\ep=\cn[F^\ep;L^\infty(s,t;\mathcal{E}_{R,0}^*)]$ and let $\omega_{\natural,\ep,R}$ be a control such that
+$\|F^{\natural,\ep}\|_{\mathcal{E}_{R,3}^*} \leq \omega_{\natural,\ep,R}(s,t)^{\frac{3}{q}}
+$.
+Note that the first quantity is finite due to Lemma \ref{lem:2} whereas the second one due to the full localization as discussed at the beginning of Subsection \ref{subsec:tens}.
+ Then using Corollary \ref{cor:1} and Lemmas \ref{lem:1}, \ref{lem:2}, \ref{lem:3}, we deduce that
+\begin{align*}
+ |\delta F^{\natural,\varepsilon} ( \Phi )| & \lesssim M^\varepsilon\omega_Z(s,t)^\frac{3}{p}+\eta^{-1}M^\varepsilon\omega_Z(s,t)^\frac{4}{p}+ \big(\omega_m(s, t)+ \eta^{1-3}\,\omega_{\sigma, \varepsilon,R} (s, t)\big)\omega_Z(s,t)^\frac{2}{p}\\
+ &\quad+\eta^{-2}\omega_{\natural,\ep,R}(s,t)^\frac{3}{q}\omega_Z(s,t)^\frac{2}{p}+\eta M^\ep\omega_Z(s,t)^\frac{2}{p}+\eta M^\ep\omega_Z(s,t)^\frac{2}{p}\\
+ &\quad+M^\varepsilon\omega_Z(s,t)^\frac{3}{p}+\big(\omega_m(s, t)+ \eta^{2-3}\,\omega_{\sigma, \varepsilon,R} (s, t)\big)\omega_Z(s,t)^\frac{1}{p}+\eta^{-1}\omega_{\natural,\ep,R}(s,t)^\frac{3}{q}\omega_Z(s,t)^\frac{1}{p}\\
+ &\quad+\eta^2 M^\ep\omega_Z(s,t)^\frac{1}{p}+\eta M^\ep\omega_Z(s,t)^\frac{2}{p}\\
+ &\quad+\eta^2 M^\ep\omega_Z(s,t)^\frac{1}{p}+\eta M^\ep\omega_Z(s,t)^\frac{2}{p}.
+\end{align*}
+Hence setting
+$$\eta=\omega_Z(I)^{-\frac{1}{p}+\kappa}\omega_Z(s,t)^{\frac{1}{p}-\kappa}$$
+and assuming that $\omega_A(I)\leq 1$ we deduce
+\begin{align*}
+|\delta F^{\natural,\ep}(\vp)_{sut}|&\lesssim M^\ep\,\omega_A(s,t)^{\frac{3}{p}-2\kappa}+\omega_m(s,t)\omega_Z(s,t)^\frac{1}{p}\\
+&\quad+\omega_{\sigma,\ep,R}(s,t)\omega_A(s,t)^{\kappa}+\omega_{\natural,\ep,R}(s,t)^\frac{3}{q}\omega_Z(s,t)^{\kappa},
+\end{align*}
+thus we may conclude as in Theorem \ref{prop:apriori}.
+\end{proof}
+
+
+
+
+
+As a first consequence of Proposition \ref{thm:loc1}, we can derive the following bound on the limit of $\omega_{\sigma,\ep,R}(s,t)$ as $\ep \to 0$ and $R\to\infty$.
+
+
+
+\begin{lemma}\label{lem:conv-mu-theta-ep}
+There exists a finite measure $\mu$ on $[0,T]$ such that, for all $0\leq s\leq t\leq T$,
+\begin{equation}\label{limsup-omega-ep}
+\limsup_{R\to\infty}\limsup_{\ep \to 0}\, \omega_{\sigma,\ep,R}(s,t) \leq \mu([s,t]) .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Consider the sequence of measures $(\mu_{R}^\ep)_{\ep>0}$ on $[0,T]$ defined for every Borel set $B \subset [0,T]$ as
+$$\mu^\ep_{R}(B):=\bigg( \int_B m^1_{dr} \otimes \nu^{2,-}_r \bigg)\big(T_\ep \Psi_R\big)+\bigg( \int_B \nu^{1,+}_r \otimes m^2_{dr} \bigg)\big( T_\ep \Psi_R\big) $$
+so that $\omega_{\sigma,\ep,R}(s,t)=\mu^\ep_R((s,t])$.
+By applying the equation \eqref{eq:eps1} to the test function $\Psi_R$ and using (\ref{appli-1-q-ep-theta}), we get that for every $s<t\in [0,T]$,
+\begin{equation*}
+\delta F^{\varepsilon}_{s t} (\Psi_R) \leq F^{\varepsilon}_s\big((\Gamma_{\varepsilon,st}^{1,*} + \Gamma_{\varepsilon,st}^{2,*})(\Psi_R)\big) -  \omega_{\sigma, \varepsilon,R} (s, t) +F^{\natural, \varepsilon}_{s t} (\Psi_R) +\omega_m(s,t)\| \partial_\xi^+ \Psi_R\|.
+\end{equation*}
+and so
+\begin{equation*}
+\omega_{\sigma, \varepsilon,R} (s, t) \leq \big|F^{\varepsilon}_s\big((1+\Gamma_{\varepsilon,st}^{1,*} + \Gamma_{\varepsilon,st}^{2,*})(\Psi_R)\big)\big| +|F^{\natural, \varepsilon}_{s t} (\Psi_R) | +\omega_m(s,t)\| \partial_\xi^+ \Psi_R\|.
+\end{equation*}
+Therefore, due to Lemma \ref{lem:2} and Proposition \ref{thm:loc1}, we can conclude that for every interval $I\subset[0,T]$ satisfying $\omega_Z(I)\leq L$, one has
+\begin{align*}
+\omega_{\sigma, \varepsilon,R} (I) \lesssim \ep R+1 +\omega_m(I)(1+\omega_Z(I)^\frac{1}{p})+\omega_{\sigma,\ep,R}(I) \omega_Z(I)^{\kappa }
+\end{align*}
+for some proportional constant independent of $\ep, \,R$. As a consequence, there exists $0<L'\leq L$ such that for every interval $I\subset [0,T]$ satisfying $\omega_Z(I)\leq L'$, it holds
+$$
+\omega_{\sigma, \varepsilon,R} (I) \lesssim \ep R+1 +\omega_m(I).
+$$
+By uniformity of both $L'$ and the proportional constant, the latter bound immediately yields
+\begin{equation}\label{lim}
+\omega_{\sigma, \varepsilon,R} (0,T) \lesssim \ep R+1 +\omega_m(0,T).
+\end{equation}
+Thus, the sequence $(\mu^\ep_{R})_{\ep>0}$ is bounded in total variation on $[0,T]$ and accordingly, by Banach-Alaoglu theorem, there exists a subsequence, still denoted by $(\mu^\ep_{R})_{\ep>0}$, as well as a finite measure $\mu_{R}$ on $[0,T]$ such that for every $\vp \in C([0,T])$, one has
+$$\mu_{R}^\ep(\vp) \to \mu_{R}(\vp)\qquad  \text{as $\ep\to0$.}$$
+Moreover, as a straightforward consequence of \eqref{lim}, we get
+$$\mu_{R}([0,T]) \lesssim 1+\omega_m(0,T). $$
+Therefore $(\mu_R)_{R\in\N}$ is bounded in total variation and there exists a finite measure $\mu$ on $[0,T]$ satisfying
+$$\mu([0,T]) \lesssim 1+\omega_m(0,T), $$
+such that, along a subsequence,
+$$\mu_R(\vp)\to\mu(\vp)\qquad\forall\,\vp\in C([0,T])\qquad R\to\infty$$
+
+
+Finally, due to the properties of $BV$-functions, for every $R\in\N$, there exists an at most countable set $\mathcal{D}_R$ such that the function $t\mapsto \mu_{R}(]0,t])$ is continuous on $[0,T]\setminus\mathcal{D}_R$. Furthermore, by Portmanteau theorem,  one has
+$$\mu^\ep_{R}(]0,t]) \to \mu_{R}(]0,t])\qquad\forall\,t\in [0,T]\setminus\mathcal D_R\qquad\ep\to 0.$$
+Similarly, there exists a countable set $\mathcal D$ such that
+$$\mu_R(]0,t])\to\mu(]0,t])\qquad\forall\,t\in [0,T]\setminus\mathcal D\qquad R\to 0.$$
+Fix $s<t\in [0,T]$. Since a countable union of countable sets is countable, we may consider a sequence $(s_k)$, resp. $(t_k)$, of points outside of $\cup_R \mathcal{D}_R\cup \mathcal{D}$ that increase, resp. decrease, to $s$, resp. $t$, as $k$ tends to infinity. Then
+\begin{align*}
+\limsup_{\ep \to 0}\, \omega_{\sigma,\ep,R}(s,t)=\limsup_{\ep \to 0}\, \mu_{R}^\ep(]s,t])\leq \limsup_{\ep \to 0}\, \mu_{R}^\ep(]s_k,t_k])=\mu_{R}(]s_k,t_k])  
+\end{align*}
+and
+\begin{align*}
+\limsup_{R\to\infty}\limsup_{\ep \to 0}\, \omega_{\sigma,\ep,R}(s,t)\leq\limsup_{R\to\infty}\mu_{R}(]s_k,t_k]) =\mu(]s_k,t_k]) .
+\end{align*}
+By letting $k$ tend to infinity, we get (\ref{limsup-omega-ep}), which achieves the proof of the lemma.
+\end{proof}
+
+
+
+Now, we have all the tools in hand to prove our main intermediate result towards uniqueness.
+We consider $\psi\in C^\infty_c(\R^{N+1})$ such that
+$$\psi\geq0,\qquad\supp\,\psi\subset B_{2/\sqrt{2}},\qquad\int_{\R^{N+1}}\psi(\mathbf x)\,\dd\mathbf x =1,$$
+and $ \{\vp_R\} \subset C^\infty_c(\R^{N+1})$ a family of smooth functions indexed by $R$ such that
+$$\vp_R \geq0,\qquad\supp\,\vp_R \subset B_{R/\sqrt{2}}, \qquad \sup_R \|\vp_R \|_{W^{3,\infty}}\lesssim 1.  $$
+Plugging $\Phi_R (\mathbf{x},\mathbf{y}) = \varphi_R (\mathbf{x}_+) \psi
+(2\mathbf{x}_-)$ into \eqref{eq:eps1}, we get the following convergence result.
+
+\begin{proposition}\label{prop:convergence}
+For every $0\leq s\leq t\leq T$, it holds true that
+\begin{equation}\label{con}
+ F^{\varepsilon}_{t} (\Phi_R) 
+   \rightarrow  h_{t} (\varphi_R),
+   \end{equation}
+\begin{equation*}%\label{com}
+(\Gamma^1_{ \varepsilon,st} + \Gamma^2_{
+   \varepsilon,st})_{} F_{s}^{\varepsilon} (\Phi_R)  \rightarrow (A^1_{st} + A^2_{st})_{} h_s
+   (\varphi_R), 
+   \end{equation*}
+where $h_t =  f^{1,+}_t \bar f^{2,+}_t$.
+\end{proposition}
+
+
+
+\begin{proof}
+We observe that the test function $\Phi_R$ is compactly supported in the set $B_{R+1}\times B_{R+1} \subset \R^{N+1}\times\R^{N+1} $. Next, it holds true that if $\Psi$ be supported in $D_{R}$ then for all functions $v^1, v^2$:
+\begin{align*}
+|v^1 \otimes v^{2}(\Psi)|&=\bigg|\int_{D_{R}} v^{1}(\mathbf x_++\mathbf x_-) v^{2}(\mathbf x_+-\mathbf x_-)\Psi(\mathbf x_++\mathbf x_-,\mathbf x_+-\mathbf x_-)\dd\mathbf x_-\dd\mathbf x_+\bigg|\\
+&\leq \int_{D_{R}} v^{1}(\mathbf x_++\mathbf x_-) v^{2}(\mathbf x_+-\mathbf x_-)\dd\mathbf x_+\sup_{\mathbf x_+}|\Psi(\mathbf x_++\mathbf x_-,\mathbf x_+-\mathbf x_-)|\dd\mathbf x_-
+\end{align*}
+which, on the one hand, can be further estimated by
+\begin{align*}
+|v^1 \otimes v^{2}(\Psi)|&\leq\|v^{1}\|_{L^1(B_{R+1})} \|v^{2}\|_{L^\infty(B_{R+1})} \|\Psi\|_{L^1_-L^\infty_+}
+\end{align*}
+and, on the other hand, by
+\begin{align*}
+|v^1 \otimes v^{2}(\Psi)|&\leq\|v^{2}\|_{L^1(B_{R+1})} \|v^{1}\|_{L^\infty(B_{R+1})}\|\Psi\|_{L^1_-L^\infty_+}.
+\end{align*}
+Since $|f^{1,+}_t|\leq 1$, $| \bar f^{2,+}_t|\leq 1$ it follows that $f^{1,+}_t, \bar  f^{2,+}_t\in L^1(B_{R+1})$ and therefore one may find $g^1,g^2\in C^\infty_c(\R^{N+1})$ such that $|g^1|\leq 1$, $|g^2|\leq 1$ and
+$$\|f^{1,+}_t-g^1\|_{L^1(B_{R+1})}+\|\bar f^{2,+}_t-g^2\|_{L^1(B_{R+1})}\leq \delta.$$
+Consequently,
+\begin{align*}
+|F^\ep_t(\Phi_R)&-(g^1\otimes g^2)^\ep(\Phi_R)| \leq 
+|(g^1\otimes (\bar f^{2,+}_t -g^2))(T_\ep \Phi_R)| +|((f^{1,+}_t -g^1)\otimes \bar f^{2,+}_t)(T_\ep \Phi_R)|\\
+& \leq \|g^1\|_{L^\infty(B_{R+1})}  \|\bar f^{2,+}_t -g^2\|_{L^1(B_{R+1})} +  \|\bar f^{2,+}_t\|_{L^\infty(B_{R+1})}  \|f^{1,+}_t -g^1\|_{L^1(B_{R+1})} \leq \delta
+\end{align*}
+On the other hand, using the continuity of $g^1,g^2$ we have
+$$
+(g^1\otimes g^2)(T_\ep \Phi_R) \to (g^1g^2) (\vp_R).
+$$
+Moreover, as above,
+\begin{align*}
+|(g^1g^2) (\vp_R) & - h_t (\vp_R)| \\ & \leq \|g^1\|_{L^\infty(B_{R+1})}  \|\bar f^{2,+}_t -g^2\|_{L^1(B_{R+1})} +  \|\bar f^{2,+}_t\|_{L^\infty(B_{R+1})}  \|f^{1,+}_t -g^1\|_{L^1(B_{R+1})}
+\\ & \leq \delta. 
+\end{align*}
+Since $\delta$ is arbitrary we have established~\eqref{con}. 
+
+Now observe that by Corollary~\ref{cor:1} we have that $T_\ep \Gamma^{1,*}_\ep \Phi_R$ and $T_\ep \Gamma^{2,*}_\ep \Phi_R$ are bounded uniformly in $\ep$ in $L^1_- L^\infty_+$, indeed
+\begin{align*}
+\|T_\ep \Gamma^{1,*}_\ep \Phi_R\|_{L^1_- L^\infty_+} & \leq \| \Gamma^{1,*}_\ep \Phi_R\|_{L^1_- L^\infty_+} = \| \Gamma^{1,*}_\ep \Phi_R\|_{L^1_-(B_1; L^\infty_+(B_R))}
+\\ & \leq \| \Gamma^{1,*}_\ep \Phi_R\|_{\mathcal{E}_{R,0}}
+\lesssim_V \|  \Phi_R\|_{\mathcal{E}_{R,0}}
+\end{align*}
+where we used in order the boundedness of $T_\ep$ in $L^1_- L^\infty_+$, the compact support of $\Phi_R$ to go from $L^1$ to $L^\infty$ and finally the renormalizability of $\bf{A}$ in the spaces $(\mathcal{E}_{R,n})_n$. The same reasoning applies to $T_\ep \Gamma^{2,*}_\ep \Phi_R$.
+In order to establish the limit of $F^\ep_s(\Gamma^{1,*}_\ep \Phi_R)$ it is enough to  consider $(g^1 \otimes g^2)(T_\ep \Gamma^{1,*}_\ep \Phi_R)$ and $(g^1 \otimes g^2)(T_\ep \Gamma^{2,*}_\ep \Phi_R)$. 
+Now
+\begin{align*}
+& (g^1 \otimes g^2)(T_\ep \Gamma^{1,*}_\ep \Phi_R) = (g^1 \otimes g^2)( \Gamma^{1,*} T_\ep \Phi_R) 
+=(\Gamma^{1}(g^1 \otimes g^2))(  T_\ep \Phi_R) 
+\\ & \quad =(A^1 g^1 \otimes g^2 + g^1 \otimes A^1 g^2 )(  T_\ep \Phi_R)
+\\ & \quad \to ((A^1 g^1)  g^2 + g^1 (A^1 g^2) )( \vp_R) = ( g^1 g^2)(A^{1,*} \vp_R). 
+\end{align*}
+Similarly we have
+\begin{align*}
+& (g^1 \otimes g^2)(T_\ep \Gamma^{2,*}_\ep \Phi_R) = (g^1 \otimes g^2)( \Gamma^{2,*} T_\ep \Phi_R) 
+=(\Gamma^{2}(g^1 \otimes g^2))(  T_\ep \Phi_R) 
+\\ & \quad =(A^2 g^1 \otimes g^2 + g^1 \otimes A^2 g^2 + A^1 g^1 \otimes A^1 g^2)(  T_\ep \Phi_R)
+\\ & \quad \to ((A^2 g^1)  g^2 + g^1 (A^2 g^2) + (A^1 g^1) (A^1 g^2) )( \vp_R) = ( g^1 g^2)(A^{2,*} \vp_R). 
+\end{align*}
+(refer to~\cite{BG} for details on this computation).
+\end{proof}   
+
+
+\begin{proposition}\label{prop:compare}
+Let $f^1$ and $f^2$ be two generalized kinetic solutions of~\eqref{eq1} with initial conditions $f^1_0$ and $f^2_0$. Assume that $f^{1}_0 \bar f^{2}_0 \in L^1(\R^{N+1})$ then 
+$$
+\sup_{t\in[0,T]} \|f^{1,+}_t\bar f^{2,+}_t\|_{L^1(\R^{N+1})} \le  \|f^{1}_0 \bar f^{2}_0\|_{L^1(\R^{N+1})}. 
+$$ 
+\end{proposition}
+
+\begin{proof}  
+Similarly to \eqref{appli-1-q-ep-theta}, we have that
+\[ \delta Q^{\varepsilon} (\Phi_R)  \leq - \delta \sigma^1 (T_{\varepsilon} \Phi_R) - \delta \sigma^2 (T_{\varepsilon} \Phi_R) + \omega_m(s,t) \|\partial_\xi^+ \Phi_R \|_{\mathcal{E}_{R,0}} \leq \omega_m(s,t) \|\partial_\xi^+ \Phi_R \|_{\mathcal{E}_{R,0}}. \]
+Therefore using Proposition~\ref{prop:convergence} we have 
+\[\delta h_{st} (\vp_R) \leq (A^1_{s t} + A^2_{s t})_{} h_s
+   (\vp_R) +\limsup_{\ep\to0} \, \omega_{\natural,\ep,R}(s,t) ^{\frac{3}{q}} +  \|\partial_\xi^+ \Phi_R \|_{\mathcal{E}_{R,0}} \omega_m(s,t). 
+\]
+In order to take the $R\to \infty$ limit we need to know that $h_t$ is in $L^1$ uniformly in $t$. The difficulty here is the estimation of the term $(A^1_{s t} + A^2_{s t})_{} h_s
+   (\vp_R)$. To go around this problem we want to choose another test function which is easier to estimate but with unbounded support. For this reason we choose $\vp_R(\mathbf{x}_+)=\vp(\mathbf{x}_+/R) \psi_L(\mathbf{x}_+)$ where $\psi_L(\mathbf{x}_+) =\psi(\mathbf{x}_+/L)$ and $\psi(\mathbf{x}_+) = (1+|\mathbf{x}_+|^2)^{-M}$ for $M$ large enough and $\vp$ is a suitable compactly supported function with $\vp |_{B_{1/4}}=1$.  Now
+$$\partial_\xi^+ \Phi_R (\mathbf{x},\mathbf{y}) =R^{-1} (\partial_\xi \varphi) (\mathbf{x}_+/R) \psi(\mathbf{x}_+/L) \psi
+(2\mathbf{x}_-) + L^{-1} \varphi (\mathbf{x}_+/R) (\partial_\xi\psi)(\mathbf{x}_+/L) \psi
+(2\mathbf{x}_-)$$ so $\|\partial_\xi^+ \Phi_R \|_{\mathcal{E}_{R,0}} \lesssim( R^{-1}+L^{-1})$.
+ Hence, we can pass to the limit as $R\to\infty$ and apply Proposition \ref{thm:loc1} and Lemma \ref{lem:conv-mu-theta-ep} to deduce (for $s, t$ close enough to each other)
+\begin{align*}
+\delta h_{st} (\psi_L)& \lesssim  (A^1_{s t} + A^2_{s t})_{} h_s
+   (\psi_L) +\limsup_{R\to\infty}\limsup_{\ep\to0} \, \omega_{\natural,\ep,R}(s,t) ^{\frac{3}{q}} + C L^{-1}\omega_m(s,t)\\
+   &\lesssim (A^1_{s t} + A^2_{s t})_{} h_s
+   (\psi_L) +\omega_Z(s,t)^{\frac{3}{p}-2\kappa}
+   \\ & \qquad +\omega_m(s,t)\omega_z(s,t)^{\frac{1}{p}}+\mu([s,t]) \omega_Z(s,t)^\kappa + C L^{-1}\omega_m(s,t).
+\end{align*}
+Moreover the reason to choose $\psi_L$ is that it is easy to show that for this particular test function we have (see~\cite{BG}) 
+\[ |(A^1_{s t} + A^2_{s t})_{} h_s (\psi_L)| \lesssim_V h_s(\psi_L) \omega_Z(s,t)^{1/p} \]
+for some constant depending only on the vector fields $V$ but uniform in $L$. 
+Note, that even though $\mu([s,t])$ is not superadditive due to the possible presence of jumps, one has the following property which can be used as a replacement for superadditivity
+$$\mu([s,u])+\mu([u,t])\leq 2\mu([s,t]).$$
+A simple modification of  the Rough Gronwall lemma (to take into account this small deviation from superadditivity) gives readily
+$$
+\sup_{t\in[0,T]}h_t(\psi_L) \lesssim 1,
+$$
+where the constant is uniform in $L$ and depends only on $\omega_m,\omega_Z,V,\mu$ and $h_0(\psi_L)$. This implies that if $h_0 \in L^1$ we can send $L\to \infty$ and get that
+$$
+\sup_{t\in[0,T]}h_t(1) \lesssim 1
+$$
+by monotone convergence. This implies that $h_t$ is in $L^1$ uniformly in $t\in[0,T]$. Then we can go back to the equation for $h_t(\psi_L)$, send $L\to \infty$ using this $L^1$ bound and using that
+\[ \lim_{L\to \infty}(A^1_{s t} + A^2_{s t})_{} h_s (\psi_L) = 0 \]
+due to the fact that $\diver V=0$ (as noted in \eqref{divfree}) we get
+\begin{equation}\label{eq:h1}
+\delta h_{st}(1) \lesssim \omega_Z(s,t)^{\frac{3}{p}-2\kappa}+\omega_m(s,t)\omega_Z(s,t)^{\frac{1}{p}}+\mu([s,t]) \omega_z(s,t)^\kappa
+\end{equation}
+for all $s,t\in [0,T]$ at a sufficiently small distance from each other.  
+Thus, one may telescope \eqref{eq:h1} on a partition $\{0=t_0<t_1<\cdots<t_n=t\}$ of mesh size going to zero to obtain
+\begin{align*}
+ h_t (1)- h_0 (1)& =\sum_{i=0}^{n-1} \big(h_{t_{i+1}} (1)- h_{t_i} (1)\big)\\
+% &\lesssim \sum_{i=0}^{n-1}\big(\omega_Z(t_i,t_{i+1})^{\frac{3}{p}-2\kappa}+\omega_m(s,t)\omega_z(t_i,t_{i+1})^{\frac{1}{p}}+\mu([t_i,t_{i+1}]) \omega_Z(t_i,t_{i+1})^\kappa\big)\\
+ &\lesssim \Big[\sup_{i=0,\dots,n-1}\omega_Z(t_i,t_{i+1})\Big]^{(\frac{3}{p}-2\kappa-1)\wedge\frac{1}{p}\wedge \kappa}\big(\omega_Z(0,t)+ \omega_m(0,t)+2\mu([0,t])\big).
+\end{align*}
+Sending $n\to\infty$ yields
+\begin{align*}
+\|f^{1,+}_t\bar f^{2,+}_t\|_{L^1_{x,\xi}}=h_t(1)\leq h_0(1)=\|f^1_0\bar f^2_0\|_{L^1_{x,\xi}}.
+\end{align*}
+\end{proof}
+
+By standard arguments on kinetic equations this readily implies the reduction of  a generalized kinetic solution to a kinetic solution, Theorem \ref{thm:main}(ii), the $L^1$-contraction property, Theorem \ref{thm:main}(iii), as well as uniqueness. 
+Indeed, let $f$ be a generalized kinetic solution to \eqref{eq1} with an initial condition at equilibrium: $f_0=\ind_{u_0>\xi}$ . Applying Proposition \ref{prop:compare} to $f^1=f^2=f$ leads to
+\begin{align*}
+\sup_{0\leq t\leq T}\|f^{+}_t\bar f^{+}_t\|_{L^1_{x,\xi}}\leq \|f_0\bar f_0\|_{L^1_{x,\xi}}=\|\ind_{u_0>\xi}\ind_{u_0\leq \xi}\|_{L^1_{x,\xi}}=0.
+\end{align*}
+Hence $f^+_t(1-f^+_t)=0$ for a.e. $(x,\xi)$. Now, the fact that $f^+_t$ is a kinetic function for all $t\in[0,T)$ gives the
+conclusion: indeed, by Fubini Theorem, for any $t \in [0, T )$, there is a set $B_t$ of
+full measure in $\R^N$ such that, for all $x\in B_t$, $f^+_t(x,\xi)\in\{0,1\} $ for
+a.e. $\xi\in\R$. Recall that $-\partial_\xi f^+_t(x, \cdot)$ is a probability measure on $\R$ hence,
+necessarily, there exists $u^+: [0,T)\times\R^N\rightarrow\R$ measurable such that $f^+_t(x,\xi)=\ind_{u^+(t,x)>\xi}$ for a.e. $(x,\xi)$ and all $t\in[0,T)$. Moreover, according to \eqref{integrov}, it holds
+$$\sup_{0\leq t\leq T}\int_{\R^N}|u^+(t,x)|\,\dif x=\sup_{0\leq t\leq T}\int_{\R^N}\int_\R|\xi|\,\dif\nu^+_{t,x}(\xi)\,\dif x<\infty$$
+%and
+%$$\int_0^T\int_{\R^N}|u(t,x)|^2\,\dif x\dif t=\int_0^T\int_{\R^N}\int_\R|\xi|^2\,\dif\nu^+_{t,x}(\xi)\,\dif x\dif t\leq C$$
+hence $u$ is a kinetic solution and Theorem \ref{thm:main}(ii) follows.
+
+The $L^1$-contraction property is then an immediate consequence of the fact that
+$$(u_1-u_2)^+=\int_\R\ind_{u_1>\xi}\overline{\ind_{u_2>\xi}}\,\dif \xi.$$
+Let ${u}^+_1$ and ${u}^+_2$ denote the representatives constructed in the previous step. Then we apply Proposition \ref{prop:compare} and obtain
+\begin{align*}
+\big\|\big(u^+_1(t) -u^+_2(t)\big)^+\big\|_{L^1_x}&=\| f^{1,+}_t\overline{f}^{2,+}_t\|_{L^1_{x,\xi}}\leq\| f^{1,+}_{0}\overline{f}^{2,+}_{0}\|_{L^1_{x,\xi}}=\|(u^+_{1,0}-u^+_{2,0})^+\|_{L^1_x}
+\end{align*}
+which completes the proof of Theorem \ref{thm:main}(iii).
+
+
+
+\section{Rough conservation laws III: A priori estimates}\label{sec:apriori}
+
+In this section we will establish a priori $L^{2q}$-estimates for kinetic solutions to \eqref{eq1}. Let $u$ be a kinetic solution to \eqref{eq1} and let $f(t,x,\xi)=\ind_{u(t,x)>\xi}$ be the corresponding kinetic function. We will also use the notation $\chi(t,x,\xi) = f (t,x,\xi)- \ind_{0>\xi}$. In particular, for $q\in\N$ we have 
+$$
+\chi_t(\xi^{2q-1}) =\frac{1}{2q} \int_{\R^N} |u(t,x)|^{2q}\, \dd x  
+$$
+and
+$$
+|\chi_t|(1) =\chi_t(\mathrm{sgn}(\xi)) = \int_{\R^N} |u(t,x)|\,\dd x.
+$$
+
+
+\begin{theorem}
+\label{th:apriori-est-existence}
+Assume that  \eqref{H} holds true. Then 
+\begin{equation}\label{eq:L1}
+\sup_{t\in[0,T]}\|u(t,\cdot)\|_{L^{1}} \le \|u(0,\cdot)\|_{L^{1}}
+\end{equation}
+%Furthermore, if $u\in L^\infty(0,T;L^2(\R^N))$ then
+%$$
+%\sup_{t\in[0,T]}\|u(t,\cdot)\|_{L^{2}} + \delta m_{0T}(1) \lesssim \|u(0,\cdot)\|_{L^{2}} + \|u(0,\cdot)\|_{L^{1}}, 
+%$$
+and, for all $q\in\N$,
+\begin{equation}\label{eq:L2q}
+\sup_{t\in[0,T]}\|u(t,\cdot)\|^{2q}_{L^{2q}} + \delta m_{0T}(\xi^{2q-2}) \lesssim_{\bfA,q} \|u(0,\cdot)\|^{2q}_{L^{2q}}+ \|u(0,\cdot)\|^2_{L^{2}} + \|u(0,\cdot)\|_{L^{1}} . 
+\end{equation}
+\end{theorem}
+
+\begin{remark}\label{rem:rig}
+The above result gives a priori estimates for kinetic solutions that depend only on the rough regularity of the driver $\bfA$ and are therefore well-suited for the proof of existence in the next section. Note that in order to make all the arguments below entirely rigorous, it is necessary to either work at the level of a (smooth) approximation or to introduce an additional cut-off of the employed test functions. Since we will only apply Theorem \ref{th:apriori-est-existence} to smooth approximations, we omit the technical details here.
+\end{remark}
+
+\begin{proof}[Proof of Theorem \ref{th:apriori-est-existence}]
+We have that $\delta \chi (\varphi)=\delta f (\varphi)$ and due to \eqref{H} also that
+$$
+\chi (A^{1, \ast} \varphi + A^{2, \ast}
+   \varphi) = f (A^{1, \ast} \varphi + A^{2, \ast}
+   \varphi).
+$$
+Then the function $\chi$ solves the rough equation
+\begin{equation}
+\label{eq:rough-chi}
+ \delta \chi (\varphi) =\delta \partial_{\xi}  m (\varphi)+ \chi (A^{1, \ast} \varphi) + \chi (A^{2, \ast}
+   \varphi)  + \chi^{\natural} (\varphi)
+\end{equation}
+where $\chi^{\natural} = f^\natural$. Our aim is to apply this equation to a test function of the 
+from $\xi^{2q-1}$ for some $q\in\N$. The growth of the test function does not pose particular problems since we can use a scale of spaces  of test function with a polynomial weight $w_{2q-1}(\xi)=1+|\xi|^{2q-1}$. However in order to obtain useful estimates we cannot apply directly the Rough Gronwall strategy since estimates for  $ \chi^{\natural} (\xi^{2q-1})$ will in general depend on $m(w_{2q-1})$ and on $|\chi| (w_{2q-1})$ and we cannot easily control $m(w_{2q-1})$. 
+
+To avoid this problem we have to inspect more carefully the equation satisfied by $\chi^{\natural}(\xi^{2q-1})$. 
+Applying $\delta$ to \eqref{eq:rough-chi} with $\varphi(\xi)=\xi^{2q-1}$
+we obtain
+\begin{equation}\label{eq:delta}
+\delta\chi^\natural_{s u t}(\xi^{2q-1})=(\delta\chi)_{su}(A^{2,*}_{ut}\xi^{2q-1})+\chi^\sharp_{ut}(A^{1,*}_{ut}\xi^{2q-1})
+\end{equation}
+with the usual notation
+$$\chi^\sharp_{ut}=(\delta\chi)_{ut}-A^1_{ut}\chi_u.$$
+Note that this point can be made rigorous as explained in Remark \ref{rem:rig}.
+Using the fact that  the vector fields are conservative, that is,
+$$A^{1, \ast} \varphi= -
+Z^1 V \cdot\nabla\varphi,\qquad A^{2, \ast} \varphi= Z^2 V \cdot\nabla (V \cdot\nabla\varphi),$$
+we have that the
+test functions on the right hand side of \eqref{eq:delta}, i.e. $A^{1,*}_{ut}\xi^{2q-1}$ and $A^{2,*}_{ut}\xi^{2q-1}$, as well as their derivatives are bounded by the weight $w_{2q-2}$ and not just $w_{2q-1}$ as we would naively expect. 
+So we can use the scale of spaces with weight $w_{2q-2}$ in order to estimate the remainder.
+
+To this end, consider the scale $(E_n^{q})_{n\in\N_0}$ of weighted spaces given by 
+$$E_n^q:=\left\{\varphi:\R^{N+1}\to\R;\,\|\varphi\|_{E_n^q}:=\sum_{0\leq k\leq n}\left\|\frac{\nabla^k\varphi}{w_{2q-2}}\right\|_{L^\infty_{x,\xi}}<\infty\right\}$$
+It can be checked that one can define a family of smoothing operators $(J^\eta)_{\eta\in(0,1)}$ on $(E_n^q)_{n\in \N_0}$ such that \eqref{eq:reg-J-eta} holds true. Indeed, convolution with standard mollifiers does the job.
+As the next step, we intend to apply Theorem \ref{prop:apriori}. If $\varphi\in E_1^q$ then it holds true that
+\begin{equation*}%\label{eq:m}
+|\delta m_{st}(\partial_\xi\varphi)|\leq \delta m_{st}(w_{2q-2})\|\varphi\|_{E_1^q}=\left(\delta m_{st}(1)+\delta m_{st}(\xi^{2q-2})\right)\|\varphi\|_{E_1^q}.
+\end{equation*}
+Besides, if $\varphi\in E_{n+1}^q$, $n=0,1,2$, then
+\begin{align*}
+\|A^{k,*}_{st}\varphi\|_{E^q_n}&\lesssim_{\|V\|_{W^{n,\infty}}}\omega_Z(s,t)^\frac{k}{p}\|\varphi \|_{E_{n+k}^q}, \qquad k=1,2,
+\end{align*}
+which implies that indeed $\bfA=(A^1,A^2)$ is a continuous unbounded $p$-rough driver on the scale $(E_n^q)_{n\in\N_0}.$ Moreover, the preliminary estimate for the remainder $\chi^\natural$ can be again justified as explained in Remark \ref{rem:rig}. Therefore Theorem \ref{prop:apriori} applies with $\lambda=p$, $\kappa=0$, $q=p$ and yields
+\begin{equation}\label{apriori-bound1-lp} 
+\begin{split}
+\|\chi^\natural_{st}\|_{E^q_{-3}}&\lesssim \omega_\natural(s,t)^\frac{3}{p}\\
+:\!&= \, \sup_{r\in[s,t]}|\chi_r |(1)\,\omega_A(s,t)^{\frac{3}{p}}
++\left(\delta m_{st}(1)+\delta m_{st}(\xi^{2q-2})\right) \omega_A(s,t)^{\frac{3-p}{p} }.
+\end{split}
+\end{equation}
+Inserting now the smoothing operators into \eqref{eq:delta}, we obtain 
+\[ \delta \chi^{\natural} (\xi^{2q-1}) = \delta \chi ((1 - J^{\eta}) A^{1, \ast} \xi^{2q-1})
+   + \delta \chi ((1 - J^{\eta}) A^{2, \ast} \xi^{2q-1}) - \chi (A^{1, \ast} (1 -
+   J^{\eta}) A^{1, \ast} \xi^{2q-1}) \]
+\[ + \chi (A^{2, \ast} J^{\eta} A^{1, \ast} \xi) + \chi (A^{1, \ast} J^{\eta}
+   A^{2, \ast} \xi^{2q-1}) + \chi (A^{2, \ast} J^{\eta} A^{2, \ast} \xi^{2q-1}) \]
+\[ + \chi^{\natural} (J^{\eta} A^{1, \ast} \xi^{2q-1}) + \chi^{\natural} (J^{\eta}
+   A^{2, \ast} \xi^{2q-1}) \]
+\[ -\delta m ( \partial_{\xi} J^{\eta} A^{1, \ast} \xi^{2q-1}) -\delta m ( \partial_{\xi}J^{\eta}
+   A^{2, \ast} \xi^{2q-1}) \]  
+As already explained above, the test functions on the right hand side always contain derivatives of $\xi^{2q-1}$ so the scale $(E^q_n)$ is sufficient to control the right hand side. Indeed, we may use \eqref{apriori-bound1-lp} for the remainder as well as
+$$|\chi(\varphi)|\leq \left(|\chi|(1)+\chi(\xi^{2q-1})\right)\|\varphi\|_{E^q_0}$$
+to deduce, similarly to the proof of Theorem \ref{prop:apriori}, that
+\begin{align*}
+|\delta\chi_{sut}^\natural(\xi^{2q-1})|&\lesssim  \left(\sup_{r\in[s,t]}|\chi_r|(1)+\sup_{r\in[s,t]}\chi_r(\xi^{2q-1})\right)\omega_Z(s,t)^{\frac{3}{p}}\\
+&\quad+\omega_Z(I)^{\frac{1}{p}}\omega_\natural(s,t)^\frac{3}{p}\\
+&\quad+\left(\delta m_{st}(1)+\delta m_{st}(\xi^{2q-2})\right)\omega_A(s,t)^{\frac{3-p}{p}}
+\end{align*}
+provided $\omega_Z(I)$ was sufficiently small and $s,u,t \in I$. Hence the sewing lemma gives
+\begin{align*}
+|\chi_{st}^\natural(\xi^{2q-1})|&
+%\lesssim  \left(\sup_{r\in[s,t]}|\chi_r|(1)+\sup_{r\in[s,t]}\chi_r(\xi^{2q-1})\right)\omega_Z(s,t)^{\frac{3}{p}}\\
+%&\quad+\omega_Z(I)^{\frac{1}{p}}\omega_\natural(s,t)^\frac{3}{p}\\
+%&\quad+\left(\delta m_{st}(1)+\delta m_{st}(\xi^{2q-2})\right)\omega_A(s,t)^{\frac{3-p}{p}}\\
+\lesssim  \left(\sup_{r\in[s,t]}|\chi_r|(1)+\sup_{r\in[s,t]}\chi_r(\xi^{2q-1})\right)\omega_Z(s,t)^{\frac{3}{p}}\\
+&\quad+\left(\delta m_{st}(1)+\delta m_{st}(\xi^{2q-2})\right)\omega_A(s,t)^{\frac{3-p}{p}}.\end{align*}
+Finally, \eqref{eq:rough-chi} applied to $\xi^{2q-1}$ reads as
+$$
+ \delta \chi (\xi^{2q-1}) = \chi (A^{1, \ast} \xi^{2q-1}) + \chi (A^{2, \ast}
+   \xi^{2q-1}) - (2q-1) \delta m (\xi^{2p-2}) + \chi^{\natural} (\xi^{2q-1})
+$$
+so an application of the Rough Gronwall lemma yields
+$$
+ \sup_{t\in[0,T]} \chi_t (\xi^{2q-1}) + \delta m_{0 T} (\xi^{2q-2}) \lesssim  \chi_0 (\xi^{2q-1})  + \delta m_{0 T}(1) + \sup_{t\in[0,T]}|\chi_t|(1),
+$$
+and for $q=1$ we obtain an estimate for $\delta m_{0 T}(1)$ in terms of  $\sup_{t\in[0,T]}|\chi_t|(1)$ and the initial condition only
+$$
+ \sup_{t\in[0,T]} \chi_t (\xi) + \delta m_{0 T} (1) \lesssim \chi_0 (\xi)+ \sup_{t\in[0,T]}|\chi_t|(1). 
+$$
+This way, we have reduced the problem of obtaining a priori estimates in $L^{2q}$ to that of the estimates in $L^1$. 
+
+Now it does not seem easy to follow the path above in order also to estimate $|\chi|(1)$ since in this case we need to test the equation with the singular test function $\mathrm{sgn}(\xi)$. Maybe it can be possible to approximate this test function and then pass to the limit. In order to do so one would have to prove that the rough driver behaves well under this limit and that we have uniform estimates. Without embarking in this strategy we notice that the $L^1$-contraction property established in Section \ref{sec:uniq} immediately implies the $L^1$-estimate we need.
+% \rmk{[Aurelien] The latter property has been established for ?rough? solution, which (perhaps?) points out the need to identify ?classical? kinetic solutions (the one we?re working with here) and ?rough? kinetic solutions, in case of a smooth z}
+Indeed we note that under hypothesis \eqref{H}, \eqref{eq1} with the zero initial condition possesses a kinetic solution which is constantly zero. Hence the $L^1$-contraction property applied to $u_1=u$ and $u_2\equiv 0$ yields \eqref{eq:L1} which is the required bound for $|\chi_t|(1)$ needed to close the $L^{2q}$-estimate and \eqref{eq:L2q} follows.
+\end{proof}
+
+
+\section{Rough conservation laws IV: Existence}\label{sec:existence}
+
+In order to establish the existence part of Theorem \ref{thm:main}, let us consider $(\mathbf{Z}^n)_{n\in\N},$ a family of rough paths lifts of smooth paths $(z^n)$ which converge to $\mathbf Z$ in the rough path sense over the time interval $[0,T]$. We define the approximate drivers $\bfA^n=(A^{n,1},A^{n,2})$ as follows
+\begin{align*}%\label{d:urd}
+\begin{aligned}
+A^{n,1}_{st}\varphi:&\!=Z^{n,1,i}_{st} \, V^i\cdot\nabla_{\xi,x}\varphi,\\
+A^{n,2}_{st}\varphi:&\!=Z^{n,2,ij}_{st}\, V^j\cdot\nabla_{\xi,x}( V^i\cdot\nabla_{\xi,x}\varphi).
+\end{aligned}
+\end{align*}
+If $\bfA$ is a continuous unbounded $p$-rough driver on a scale $(E_n)$  according to Definition \ref{def:urd}, then the approximations $\bfA^n$ are also continuous unbounded $p$-rough drivers on $(E_n)$ and, in addition, they can be chosen in such a way that the estimate \eqref{eq:urdest} holds true uniformly in $n$.
+Using the standard  theory, one obtains existence of a unique kinetic solution $u^n$ to the approximate problem
+\begin{align*}
+\dd u+\diver(A(x,u))\,\dd z^n&=0,\\
+u(0)&=u_0.
+\end{align*}
+In other words, there exists a kinetic measure $m^n$ such that $f^n=\ind_{u^n>\xi}$ satisfies the corresponding kinetic formulation
+\begin{align*}
+\partial_t f^n &=\partial_\xi m^n +V\cdot\nabla_{\xi,x} f^n\, \dot{z}^n, \\
+f^n(0)&=f_0=\ind_{u_0>\xi},
+\end{align*}
+in the sense of distributions over $[0,T)\times\R^{N+1}$, that is, for every $\varphi\in C^\infty_c([0,T)\times\R^{N+1})$ it holds true
+\begin{align}\label{eq:weak}
+\int_0^T f^n_t(\partial_t\varphi_t)\,\dd t+f_0(\varphi_0)=\int_0^T f^n_t(V\cdot\nabla\varphi_t)\,\dd z^n_t+m^n(\partial_\xi\varphi).
+\end{align}
+As a consequence of the a priori estimates from the previous section we get the necessary convergence of these approximations.
+
+\begin{proposition}\label{prelim-conv}
+Let $u_0\in L^1\cap L^2(\R^N)$. Then the following convergences hold true:
+\begin{enumerate}
+\item[$(i)$] there exists a kinetic function $f$ on $[0,T]\times\R^N$ such that, along a subsequence,
+$$f^n\overset{*}{\rightharpoonup} f \qquad\text{in}\qquad L^\infty([0,T]\times\R^{N+1})$$
+and the associated Young measure $\nu$ satisfies
+$$
+\esssup_{t\in[0,T]}\int_{\R^N}\int_\R \big(|\xi|+|\xi|^2\big)\,\nu_{t,x}(\dd\xi)\lesssim \|u_0\|_{L^1}+\|u_0\|^2_{L^2}
+$$
+%\rmk{[Aurelien] What about the estimates for the kinetic function??}
+\item[$(ii)$] there exists a nonnegative bounded Borel measure $m$ on $[0,T]\times\R^{N+1}$ such that, along a subsequence,
+$$m^n\overset{*}{\rightharpoonup} m\qquad\text{in}\qquad \mathcal{M}_b([0,T]\times\R^{N+1}),$$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Under this assumption on the initial condition, it follows from Theorem \ref{th:apriori-est-existence} that the approximate solutions are bounded uniformly in $L^\infty(0,T;L^1\cap L^2(\R^N))$ and the corresponding kinetic measures $m^n$ are uniformly bounded in total variation. Thus $(ii)$ follows from the Banach-Alaoglu theorem. Besides, the Young measures $\nu^n=\delta_{u^n=\xi}$ satisfy
+\begin{equation}\label{est:23}
+\sup_{t\in[0,T]}\int_{\R^N}\int_\R |\xi|\,\nu^n_{t,x}(\dd\xi)+\sup_{t\in[0,T]}\int_{\R^N}\int_\R |\xi|^2\,\nu^n_{t,x}(\dd\xi)\lesssim \|u_0\|_{L^1}+\|u_0\|^2_{L^2}
+\end{equation}
+so the assumptions of Lemma \ref{kinetcomp} are fulfilled and $(i)$ follows.
+\end{proof}
+
+\begin{corollary}\label{left-right}
+There exist $f^+,\,f^-$, representatives of the class of equivalence $f$, such that, for every $t\in(0,T)$, $f^+_t,\, f^-_t$ are kinetic functions on $\R^N$ and, along subsequences,
+$$\frac{1}{\varepsilon}\int_t^{t+\varepsilon}f_s\,\dd s\overset{*}{\rightharpoonup}f^+_t,\qquad \frac{1}{\varepsilon}\int^t_{t-\varepsilon}f_s\,\dd s\overset{*}{\rightharpoonup}f^-_t\qquad\text{in}\qquad L^\infty(\R^{N+1}).$$
+Moreover, 
+the corresponding Young measures $\nu^\pm_t$ satisfy
+\begin{equation}\label{est:23e}
+\sup_{t\in(0,T)}\int_{\R^N}\int_\R \big(|\xi|+|\xi|^2\big)\,\nu^\pm_{t,x}(\dd\xi)\lesssim \|u_0\|_{L^1}+\|u_0\|^2_{L^2}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+For fixed $t\in (0,T)$ define
+$${f}^{+,\varepsilon}_t:=\frac{1}{\varepsilon} \int_t^{t+\varepsilon}{f}_s\,\dd s,\qquad {f}^{-,\varepsilon}_t:=\frac{1}{\varepsilon} \int^t_{t-\varepsilon}{f}_s\,\dd s .$$
+They are kinetic functions on $\R^N$ with the associated Young measures given by
+$${\nu}^{+,\varepsilon}_{t}:= \frac{1}{\varepsilon} \int_t^{t+\varepsilon} {\nu}_{s} \,\dd s,\qquad {\nu}^{-,\varepsilon}_{t}:= \frac{1}{\varepsilon} \int^t_{t-\varepsilon} {\nu}_{s} \,\dd s$$
+%\rmk{[Aurelien] I?m not sure $\nu$ has been clearly defined above (as the Young measure associated with f)} 
+and satisfy, due to Proposition \ref{prelim-conv},
+\begin{equation*}%\label{stable-bound-2}
+\begin{split}
+\int_{\R^N} \int_\R \big(|\xi| +|\xi|^2\big)\, {\nu}^{\pm,\varepsilon}_{t,x}(\dd \xi)\,\dd x &\leq \esssup_{t\in [0,T]} \, \int_{\R^N} \int_\R \big(|\xi| +|\xi|^2\big) \, {\nu}_{t,x}(\dd \xi)\,\dd x\\
+%&\leq \liminf_{n\to\infty} \sup_{t\in [0,T]} \, \int_{\R^N} \int_\R\big(|\xi| +|\xi|^2\big)\, {\nu}^n_{t,x}(\dd \xi)\,\dd x\\
+%& \rmk {[Aurelien] where the last inequality comes from?}\\
+&\lesssim\|u_0\|_{L^1}+\|u_0\|^2_{L^2},
+\end{split}
+\end{equation*}
+Thus, we can apply Lemma \ref{kinetcomp} to deduce the existence of $f^+_t, f^-_t$, which are kinetic functions on $\R^N$ such that, along a subsequence that possibly depends on $t$,
+$$f^{+,\varepsilon}_t\overset{*}{\rightharpoonup} f^+_t,\qquad f^{-,\varepsilon}_t\overset{*}{\rightharpoonup}f^-_t\qquad\text{in}\qquad L^\infty(\R^{N+1}).$$
+Moreover, the associated Young measures $\nu^\pm_t$ satisfy \eqref{est:23e} and as a consequence of the Lebesgue differentiation theorem, $f^+_t=f^-_t=f_t$ for a.e. $t\in(0,T).$
+\end{proof}
+
+%Next, the Lebesgue differentiation theorem then implies that for every $\varphi\in C^\infty_c(\R^{N+1})$ and a.e. $s,t\in(0,T)$
+%\begin{align*}
+%f^n_t(\varphi)-f^n_s(\varphi)=\int_s^t f^n_r(V\cdot\nabla\varphi)\,\dd z^n_r-m^n(\ind_{(s,t]}\partial_\xi\varphi)
+%\end{align*}
+%and by a density argument the null set does not depend on the particular choice of test function $\psi$. 
+By the same approach, one can prove the existence of $f^{n,+},f^{n,-}$, the corresponding representatives of $f^n$. In addition, for all $\varphi\in C^\infty_c(\R^{N+1})$,
+\begin{align*}
+\delta f^{n,+}_{st}(\varphi)&=\int_s^t f^{n}_r(V\cdot\nabla\varphi)\,\dd z^n_r-m^n(\ind_{(s,t]}\partial_\xi\varphi)\\
+\delta f^{n,-}_{st}(\varphi)&=\int_s^t f^{n}_r(V\cdot\nabla\varphi)\,\dd z^n_r-m^n(\ind_{[s,t)}\partial_\xi\varphi)
+\end{align*}
+holds true for every $s,t\in(0,T).$ This can be obtained by testing \eqref{eq:weak} by $\psi^{+,\varepsilon}\varphi$ and $\psi^{-,\varepsilon}\varphi$ where $\psi^{-,\varepsilon}$ and $ \psi^{-,\varepsilon}$ are a suitable approximations of $\ind_{[0,t]}$ and $\1_{[0,t)}$, respectively, such as
+\begin{align}\label{eq:23a}
+\psi^{+,\varepsilon}_r:=\begin{cases}
+1, & \text{if}\  r\in [0,t],\\
+1-\frac{r-t}{\varepsilon}, & \text{if}\ r\in [t,t+\varepsilon], \\
+0, & \text{if} \ r\in [t+\varepsilon,T],
+\end{cases}
+\qquad
+\psi^{-,\varepsilon}_r:=\begin{cases}
+1, & \text{if}\  r\in [0,t-\varepsilon],\\
+-\frac{s-t}{\varepsilon}, & \text{if}\ r\in [t-\varepsilon,t], \\
+0, & \text{if} \ r\in [t,T],
+\end{cases}
+\end{align}
+and passing to the limit in $\varepsilon$.
+ Since $f^{n,+}_t=f^{n,-}_t=f^n_t$ for a.e. $t\in(0,T)$, we can interchange them in the above Riemann-Stieltjes integral and in particular the integral can be approximated by both
+\begin{align*}
+f^{n,+}_s(V\cdot\nabla\varphi)\delta z^n_{st}\qquad\text{and}\qquad f^{n,-}_s(V\cdot\nabla\varphi)\delta z^n_{st}.
+\end{align*}
+Therefore, we arrive at the equivalent formulation
+\begin{align}\label{eq:234}
+\begin{aligned}
+\delta f^{n,+}_{st}(\varphi)&=f^{n,+}_s(A^{n,1,*}_{st}\varphi)+f^{n,+}_s(A^{n,2,*}_{st}\varphi)+f^{n,+,\natural}_{st}(\varphi)-m^n(\ind_{(s,t]}\partial_\xi\varphi),\\
+\delta f^{n,-}_{st}(\varphi)&=f^{n,-}_s(A^{n,1,*}_{st}\varphi)+f^{n,-}_s(A^{n,2,*}_{st}\varphi)+f^{n,-,\natural}_{st}(\varphi)-m^n(\ind_{[s,t)}\partial_\xi\varphi),
+\end{aligned}
+\end{align}
+which holds true in the scale $(E_n)$ with $E_n=W^{n,1}(\R^{N+1})\cap W^{n,\infty}(\R^{N+1})$ for some remainders $f^{n,\pm,\natural}$. Moreover, it can be proved, cf. \cite[Remark 12]{DV} or \cite[Lemma 4.3]{H16}, that the kinetic measures $m^n$ do not have atoms at $t=0$ and consequently $f^{n,+}_0=f_0$ for all $n\in\N$.
+
+Besides, due to Theorem \ref{prop:apriori} with $\lambda=p$, $q=p$ and $\kappa=0$ we obtain, since $|f^{n,\pm}|\leq 1$,
+\begin{align}\label{est:rem1}
+\begin{aligned}
+&\|f^{n,\pm,\natural}_{st}\|_{E_{-3}}\lesssim \omega_Z(s,t)^{\frac{3}{p}}
++m^n(\ind_{(s,t]}) \,\omega_Z(s,t)^{\frac{3-p}{p} }
+%&\cn[f^{n,-,\natural}; V_2^{\frac{p}{3}}([s,t];E_{-3})]\\
+%&\qquad\lesssim \, \cn[f^{n,-};L^\infty(s,t;E_{-0})]\,\omega_A(s,t)^{\frac{3}{p}}
+%+m^n(\ind_{[s,t)}) \,\omega_A(s,t)^{\frac{3-p}{p} }.
+\end{aligned}
+\end{align}
+%\rmk{[Aurelien] I think that given the uniform assumption on the driver, the $\omega_Z$ ?s should
+%all be replaced with $\omega_A$?s in this section, don?t you think?.} \textcolor{red}{maybe we should better refer to the est. on p20 to hold uniformly in $n$ and write $\omega_Z$ everywhere in this section}
+provided $\omega_Z(s,t)\leq L$. This restriction on the distance of $s,t$ determines the finite covering $\{I_k\}$ of the interval $[0,T]$ needed to justify that $f^{n,\pm,\natural}$ are of locally finite $\frac{p}{3}$-variation as distributions with values in $E_{-3}$. To be more precise, let $\{I_k\}$ be a covering of $[0,T]$ such that
+$$ \sup_{s,t\in I_k}\omega_Z(s,t)\leq L\qquad \forall k.$$
+%and set $I_k=[t_{k-1},t_k]$.Note that such a partition exists since for every $n$ the set of atoms of $m^n$ is at most countable and $f^+=f^-$ on a set of full measure.
+
+As the next step, we intend to pass to the limit in the above two equations.
+% This will be done on each of the subintervals $\{I_k\}$ separately so let us fix $k\in\{1,\dots,\ell\}$.
+The main difficulty originates in the fact that the only available convergence of $f^{n,+}$ as well as $f^{n,-}$ and $f^n$ is weak* in time. Consequently, we cannot pass to the limit pointwise for a fixed time $t$.
+In order to overcome this issue, we observe that the first three terms on the right hand sides in \eqref{eq:234}, i.e. the approximation of the Riemann-Stieltjes integral, are continuous in $t$. The kinetic measure poses problems as it contains jumps, which are directly related to the noncontinuity of $f^{n}$. Therefore, let us define an auxiliary distribution $f^{n,\flat}$ by
+$$
+f^{n,\flat}_t(\varphi):=f^{n,+}_t(\varphi)+m^n(\ind_{[0,t]}\partial_\xi\varphi),
+$$
+and observe that due to \eqref{eq:234} it can also be written as
+$$
+ f^{n,\flat}_t(\varphi)=f^{n,-}_t(\varphi)+m^n(\ind_{[0,t)}\partial_\xi\varphi).
+$$
+Then we have
+\begin{align}\label{eq:23b}
+\delta f^{n,\flat}_{st}(\varphi)&=f^{n,\pm}_s(A^{n,1,*}_{st}\varphi)+f^{n,\pm}_s(A^{n,2,*}_{st}\varphi)+f^{n,\pm,\natural}_{st}(\varphi)
+\end{align}
+and due to \eqref{est:rem1}
+\begin{align}\label{equic}
+|\delta f^{n,\flat}_{st}(\varphi)|\lesssim \left(\omega_Z(s,t)^{\frac{1}{p}}
++m(\1_{[0,T]}) \,\omega_Z(s,t)^{\frac{3-p}{p} }\right)\|\varphi\|_{E_3}\lesssim \omega_Z(s,t)^\frac{3-p}{p}\|\varphi\|_{E_3}
+\end{align}
+%\rmk{[Aurelien] In the first inequality of (7.8), don't we implicitly use the subsequent estimate (7.13) in order to bound $m^n$ uniformly in (7.6)?} \textcolor{red}{no, we already know that on the whole $[0,T]$ the measures are uniformly bounded}
+for all $s,t\in I_k$. Nevertheless, since $f^{n,\flat}$ is a path, we may use a telescopic sum argument to deduce \eqref{equic} for every $s,t\in[0,T]$. In other words, $(f^{n,\flat}(\varphi))_{n\in\N}$ is equicontinuous and bounded in $ V^q_1([0,T];\R)$ for $q=\frac{p}{3-p}$. So as a corollary of the Arzel\`a-Ascoli theorem (cf. \cite[Proposition 5.28]{FV}), there exists a subsequence, possibly depending on $\varphi$, and an element $f^{\flat}(\varphi)\in  {V}^q_1([0,T];\R)$ such that
+\begin{equation}\label{conv:flat}
+f^{n,\flat}(\varphi)\to f^{\flat}(\varphi)\qquad\text{in}\qquad V^{q'}_1([0,T];\R)\qquad\forall q'>q.
+\end{equation}
+As the next step, we prove that the limit $f^{\flat}$ can be identified as
+\begin{equation}\label{eq:flat}
+f^{\flat}_t(\varphi)=f^{+}_t(\varphi)+m(\ind_{[0,t]}\partial_\xi\varphi)=f^{-}_t(\varphi)+m(\ind_{[0,t)}\partial_\xi\varphi).
+\end{equation}
+To this end, let us recall that given $r_1,r_2\geq1$ such that $\frac{1}{r_1}+\frac{1}{r_2}>1$, we can define the Young integral as a bilinear continuous mapping
+$$ V^{r_1}_1([0,T];\R)\times  V^{r_2}_1([0,T];\R)\to  V^{r_2}_1([0,T];\R),\qquad (g,h)\mapsto\int_{0}^\cdot g \,\dd h,$$
+see \cite[Theorem 6.8]{FV}.
+Let $\psi\in C^\infty_c([0,T))$. Then it follows from the definition of $f^{n,\flat}$, the integration by parts formula for Young integrals and $f^{n,\flat}_{0}=f^{n,+}_{0}=f_0$ that
+\begin{align*}
+\int_0^T f^{n}_t(\varphi) \psi'_t\,\dd t- m^n(\psi \partial_\xi\varphi)+f_0(\varphi)\psi_0=-\int_0^T\psi_t\,\dd f^{n,\flat}_t(\psi).
+\end{align*}
+Proposition \ref{prelim-conv} now allows to pass to the limit on the left hand side, whereas by \eqref{conv:flat} we obtain the convergence of the Young integrals on the right hand side.
+% Moreover, the convergence of the left hand side implies that the subsequence in \eqref{conv:flat} does not depend on $\varphi$.
+We obtain
+\begin{align*}
+\int_0^T f_t(\varphi) \psi'_t\,\dd t- m(\psi \partial_\xi\varphi)+f_0(\varphi)\psi_0=-\int_0^T\psi_t\,\dd f^{\flat}_t(\psi).
+\end{align*}
+Now, in order to derive \eqref{eq:flat} we consider again the two sequences of test functions \eqref{eq:23a}
+%$$\psi^{-,\varepsilon}_s:=\begin{cases}
+%1, & \text{if}\  s\in [0,t],\\
+%1-\frac{s-t}{\varepsilon}, & \text{if}\ s\in [t,t+\varepsilon], \\
+%0, & \text{if} \ s\in [t+\varepsilon,T],
+%\end{cases}\qquad
+%\psi^{-,\varepsilon}_s:=\begin{cases}
+%1, & \text{if}\  s\in [0,t],\\
+%-\frac{s-t}{\varepsilon}, & \text{if}\ s\in [t-\varepsilon,t], \\
+%0, & \text{if} \ s\in [t+\varepsilon,T],
+%\end{cases}
+%$$
+and pass to the limit as $\varepsilon\to0$. Indeed, due to Corollary \ref{left-right} we get the convergence of the first term on the left hand side, the kinetic measure term converges due to dominated convergence theorem and for the right hand side we use the continuity of the Young integral. We deduce
+\begin{align*}
+-f^{+}_t(\varphi)-m(\ind_{[0,t]}\partial_\xi\varphi)+f_0(\varphi)&=-f^{\flat}_t(\varphi)+f^{\flat}_0(\varphi),\\
+-f^{-}_t(\varphi)-m(\ind_{[0,t)}\partial_\xi\varphi)+f_0(\varphi)&=-f^{\flat}_t(\varphi)+f^{\flat}_0(\varphi),
+\end{align*}
+and \eqref{eq:flat} follows since for $t=0$ we have
+$$f^{\flat}_0(\varphi)=\lim_{n\to\infty} f^{n,\flat}_0(\varphi)=\lim_{n\to\infty}  f^{n,\pm}_0(\varphi)=f_0(\varphi).$$
+Now, it only remains to prove that $f^+_0=f_0$. The above formula at time $t=0$ rewrites as
+$$
+f^{+}_0(\varphi)-f_0(\varphi)=-m(\ind_{\{0\}}\partial_\xi\varphi).
+$$
+Hence the claim can be proved following the lines of \cite[Lemma 4.3]{H16} and we omit the details. For the sake of completeness, let us set $f^-_0:=f_0$ and $f^+_T:=f^-_T$.
+
+Finally we have all in hand to complete the proof of convergence in \eqref{eq:234}. Fix $\varphi \in E_3$ and
+% recall that
+%$$(\delta f^{n,+,\flat})_{st}(\varphi)=f^{n,+}_s(A^{n,1,*}_{st} \varphi +A^{n,2*,}_{st} \varphi)+f^{n,+,\natural}_{st}(\varphi)  ,$$
+integrate \eqref{eq:23b} over $s$ as follows
+\begin{equation*}%\label{integrated-rel}
+\begin{split}
+\frac{1}{\varepsilon} \int_s^{s+\varepsilon}  (\delta f^{n,\flat})_{rt}(\varphi)\,\dd r-\frac{1}{\varepsilon} \int_s^{s+\varepsilon}  f^{n,+}_r(A^{n,1,*}_{rt} \varphi +A^{n,2,*}_{rt} \varphi)\,\dd r&=\frac{1}{\varepsilon} \int_s^{s+\varepsilon}  f^{n,+,\natural}_{rt}(\varphi) \,\dd r ,\\
+\frac{1}{\varepsilon} \int^s_{s-\varepsilon}  (\delta f^{n,\flat})_{rt}(\varphi)\,\dd r-\frac{1}{\varepsilon} \int^s_{s-\varepsilon}  f^{n,-}_r(A^{n,1,*}_{rt} \varphi +A^{n,2,*}_{rt} \varphi)\,\dd r&=\frac{1}{\varepsilon} \int^s_{s-\varepsilon}  f^{n,-,\natural}_{rt}(\varphi) \,\dd r .
+\end{split}
+\end{equation*}
+On the left hand side we can successively take the limit as $n \to \infty$ and $\varepsilon \to 0$ (or rather for a suitable subsequence of $n$ and $\varepsilon$ depending possibly on $\varphi$ and $s$, to be more precise). This leads to the following assertion: for every $s<t \in [0,T]$, the quantities
+\begin{equation}\label{defi-f-flat}
+\begin{split}
+f^{+,\natural}_{s t}(\varphi):&\!=\lim_{\varepsilon \to 0}\, \lim_{n \to \infty} \frac{1}{\varepsilon} \int_s^{s+\varepsilon}  f^{n,+,\natural}_{rt}(\varphi)\,\dd r\\
+f^{-,\natural}_{s t}(\varphi):&\!=\lim_{\varepsilon \to 0}\, \lim_{n \to \infty} \frac{1}{\varepsilon} \int^s_{s-\varepsilon}  f^{n,-,\natural}_{rt}(\varphi)\,\dd r
+\end{split}
+\end{equation}
+are well-defined, finite and satisfy
+\begin{equation}\label{second-part}
+(\delta f^{\flat})_{st}(\varphi)=f^\pm_s(A^{1,*}_{st} \varphi +A^{2,*}_{st} \varphi)+f^{\pm,\natural}_{st}(\varphi) . 
+\end{equation}
+Injecting (\ref{eq:flat}) into (\ref{second-part}) yields that for every $s<t\in [0,T]$,
+\begin{equation*}%\label{decomp-f-proof-ex}
+\begin{split}
+\delta f^+_{st}(\varphi)&=f^+_s(A^{1,*}_{st} \varphi +A^{2,*}_{st} \varphi)-m(\1_{(s,t]}  \partial_\xi \varphi)+f^{+,\natural}_{st}(\varphi) ,\\
+\delta f^-_{st}(\varphi)&=f^-_s(A^{1,*}_{st} \varphi +A^{2,*}_{st} \varphi)-m(\1_{[s,t)}  \partial_\xi \varphi)+f^{-,\natural}_{st}(\varphi) ,
+\end{split}
+\end{equation*}
+and so it only remains to prove that the remainders $f^{\pm,\natural}$ defined by (\ref{defi-f-flat}) are sufficiently regular.
+To this end, we first observe that
+\begin{align}\label{control-mu-n}
+\limsup_{n\to\infty}m^n(\1_{(s,t]})\leq m(\ind_{[s,t]}),\qquad \limsup_{n\to\infty}m^n(\1_{[s,t)})\leq m(\ind_{[s,t]})
+\end{align}
+holds true for every $s<t\in[0,T]$.
+Indeed, the weak* convergence of $m^n$ to $m$, as described by Proposition \ref{prelim-conv}, allows us to assert that for every $t$ in the (dense) subset $\mathfrak{C}_m$ of continuity points of the function $t\mapsto m(\1_{(0,t]})$, one has $m^n(\1_{(0,t]}) \to m(\1_{(0,t]})$ as $n\to \infty$. Consider now two sequences $s_k,t_k$ in $\mathfrak{C}_m$ such that $s_k$ strictly increases to $s$ and $t_k$ decreases to $t$, as $k\to \infty$.
+Hence
+it holds that
+$$ \limsup_{n\to \infty} \, m^n(\ind_{(s,t]}) \leq \limsup_{n\to \infty} \, m^n(\1_{(s_k,t_k]})=m(\1_{(s_k,t_k]}) .$$
+Taking the limsup over $k$ yields the first part of (\ref{control-mu-n}), the second part being similar. 
+Next, we make use of (\ref{est:rem1}) and (\ref{control-mu-n}) to deduce for every $\varphi \in E_3$ and every $s<t \in I_k$,
+$$|f^{\pm,\natural}_{st}(\varphi)| \lesssim  \lVert \varphi \rVert_{E_3} \left(\omega_Z(s,t)+m([s,t])^{\frac{p}{3}} \omega_Z(s,t)^{1-\frac{p}{3}} \right)^{\frac{3}{p}} .$$
+We can conclude that $f^{\pm,\natural} \in \overline{V}^{\frac{p}{3}}_{2,\text{loc}}([0,T];E_3^\ast)$, and finally the pair $(f,m)$ is indeed a generalized kinetic solution on the interval $[0,T]$.
+
+
+The reduction Theorem \ref{thm:main}(ii) now applies and yields the existence of $u^+:[0,T)\times\R^N\to\R$ such that $\1_{u^+(t,x)>\xi}=f^+(t,x,\xi)$ for a.e. $(x,\xi)$ and every $t$. Besides, we deduce from \eqref{est:23e} that $u^+\in L^\infty(0,T;L^1\cap L^2(\R^N))$. Hence, the function $u^+$ is a representative of a class of equivalence $u$ which is a kinetic solution to \eqref{eq1}. In view of Remark \ref{u+}, this is the representative which then satisfies the $L^1$-contraction property for every $t\in[0,T]$ and not only almost everywhere. The proof of Theorem \ref{thm:main}(i) is complete.
+
+
+
+
+
+
+
+
+%\bibliographystyle{plain}
+%\bibliography{rough-kinetic}
+
+
+
+%% biblio generated by bibtex, DO NOT EDIT, uncomment above and delete what follows if you want to modify !!!!
+
+
+\def\ocirc#1{\ifmmode\setbox0=\hbox{$#1$}\dimen0=\ht0 \advance\dimen0
+  by1pt\rlap{\hbox to\wd0{\hss\raise\dimen0
+  \hbox{\hskip.2em$\scriptscriptstyle\circ$}\hss}}#1\else {\accent"17 #1}\fi}
+
+\begin{thebibliography}{10}
+
+\bibitem{BG}
+I.~Bailleul and M.~Gubinelli.
+\newblock Unbounded rough drivers.
+\newblock {\em arXiv:1501.02074 [math]}, January 2015.
+\newblock arXiv: 1501.02074.
+
+\bibitem{bauzet}
+Caroline Bauzet, Guy Vallet, and Petra Wittbold.
+\newblock The {C}auchy problem for conservation laws with a multiplicative
+  stochastic perturbation.
+\newblock {\em J. Hyperbolic Differ. Equ.}, 9(4):661--709, 2012.
+
+\bibitem{BVW}
+Caroline Bauzet, Guy Vallet, and Petra Wittbold.
+\newblock A degenerate parabolic-hyperbolic {C}auchy problem with a stochastic
+  force.
+\newblock {\em J. Hyperbolic Differ. Equ.}, 12(3):501--533, 2015.
+
+\bibitem{vov1}
+F.~Berthelin and J.~Vovelle.
+\newblock A {B}hatnagar-{G}ross-{K}rook approximation to scalar conservation
+  laws with discontinuous flux.
+\newblock {\em Proc. Roy. Soc. Edinburgh Sect. A}, 140(5):953--972, 2010.
+
+\bibitem{car}
+Jos{\'e} Carrillo.
+\newblock Entropy solutions for nonlinear degenerate problems.
+\newblock {\em Arch. Ration. Mech. Anal.}, 147(4):269--361, 1999.
+
+\bibitem{MR2510132}
+Michael Caruana and Peter Friz.
+\newblock Partial differential equations driven by rough paths.
+\newblock {\em J. Differential Equations}, 247(1):140--173, 2009.
+
+\bibitem{MR2765508}
+Michael Caruana, Peter~K. Friz, and Harald Oberhauser.
+\newblock A (rough) pathwise approach to a class of non-linear stochastic
+  partial differential equations.
+\newblock {\em Ann. Inst. H. Poincar\'e Anal. Non Lin\'eaire}, 28(1):27--46,
+  2011.
+
+\bibitem{catellier_rough_2015}
+R{\'e}mi Catellier.
+\newblock Rough linear transport equation with an irregular drift.
+\newblock {\em arXiv:1501.03000 [math]}, January 2015.
+\newblock arXiv: 1501.03000.
+
+\bibitem{karlsen}
+Gui-Qiang Chen, Qian Ding, and Kenneth~H. Karlsen.
+\newblock On nonlinear stochastic balance laws.
+\newblock {\em Arch. Ration. Mech. Anal.}, 204(3):707--743, 2012.
+
+\bibitem{chen}
+Gui-Qiang Chen and Beno{\^{\i}}t Perthame.
+\newblock Well-posedness for non-isotropic degenerate parabolic-hyperbolic
+  equations.
+\newblock {\em Ann. Inst. H. Poincar\'e Anal. Non Lin\'eaire}, 20(4):645--668,
+  2003.
+
+\bibitem{degen2}
+A.~{Debussche}, M.~{Hofmanov{\'a}}, and J.~{Vovelle}.
+\newblock {Degenerate Parabolic Stochastic Partial Differential Equations:
+  Quasilinear case}.
+\newblock {\em Ann. Prob.}, 2016.
+\newblock to appear.
+
+\bibitem{debus}
+A.~Debussche and J.~Vovelle.
+\newblock Scalar conservation laws with stochastic forcing.
+\newblock {\em Journal of Functional Analysis}, 259(4):1014--1042, 2010.
+
+\bibitem{DV}
+A.~Debussche and J.~Vovelle.
+\newblock Scalar conservation laws with stochastic forcing, revised version.
+\newblock unpublished,
+  \url{http://math.univ-lyon1.fr/~vovelle/DebusscheVovelleRevised.pdf}, 2014.
+
+\bibitem{debus2}
+A.~Debussche and J.~Vovelle.
+\newblock Invariant measure of scalar first-order conservation laws with
+  stochastic forcing.
+\newblock {\em Probab. Theory Related Fields}, 163(3-4):575--611, 2015.
+
+\bibitem{MR2925571}
+A.~Deya, M.~Gubinelli, and S.~Tindel.
+\newblock Non-linear rough heat equations.
+\newblock {\em Probab. Theory Related Fields}, 153(1-2):97--147, 2012.
+
+\bibitem{14126557}
+J.~{Diehl}, P.~K. {Friz}, and W.~{Stannat}.
+\newblock {Stochastic partial differential equations: a rough path view}.
+\newblock {\em ArXiv e-prints}, December 2014.
+
+\bibitem{MR2978136}
+Joscha Diehl and Peter Friz.
+\newblock Backward stochastic differential equations with rough drivers.
+\newblock {\em Ann. Probab.}, 40(4):1715--1758, 2012.
+
+\bibitem{MR3332714}
+Joscha Diehl, Peter~K. Friz, and Harald Oberhauser.
+\newblock Regularity theory for rough partial differential equations and
+  parabolic comparison revisited.
+\newblock In {\em Stochastic analysis and applications 2014}, volume 100 of
+  {\em Springer Proc. Math. Stat.}, pages 203--238. Springer, Cham, 2014.
+
+\bibitem{MR1022305}
+R.~J. DiPerna and P.-L. Lions.
+\newblock Ordinary differential equations, transport theory and {S}obolev
+  spaces.
+\newblock {\em Invent. Math.}, 98(3):511--547, 1989.
+
+\bibitem{feng}
+Jin Feng and David Nualart.
+\newblock Stochastic scalar conservation laws.
+\newblock {\em J. Funct. Anal.}, 255(2):313--373, 2008.
+
+\bibitem{160204746}
+P.~K. {Friz}, P.~{Gassiat}, P.-L. {Lions}, and P.~E. {Souganidis}.
+\newblock {Eikonal equations and pathwise solutions to fully non-linear SPDEs}.
+\newblock {\em ArXiv e-prints}, February 2016.
+
+\bibitem{MR3152786}
+Peter Friz and Harald Oberhauser.
+\newblock Rough path stability of (semi-)linear {SPDE}s.
+\newblock {\em Probab. Theory Related Fields}, 158(1-2):401--434, 2014.
+
+\bibitem{friz_stochastic_2014}
+Peter~K. Friz and Benjamin Gess.
+\newblock Stochastic scalar conservation laws driven by rough paths.
+\newblock {\em arXiv:1403.6785 [math]}, March 2014.
+\newblock arXiv: 1403.6785.
+
+\bibitem{friz_course_2014}
+Peter~K. Friz and Martin Hairer.
+\newblock {\em A {Course} on {Rough} {Paths}: {With} an {Introduction} to
+  {Regularity} {Structures}}.
+\newblock Springer, August 2014.
+
+\bibitem{FV}
+Peter~K. Friz and Nicolas~B. Victoir.
+\newblock {\em Multidimensional {Stochastic} {Processes} {As} {Rough} {Paths}:
+  {Theory} and {Applications}}.
+\newblock Cambridge University Press, February 2010.
+
+\bibitem{MR3423246}
+Mar{\'{\i}}a~J. Garrido-Atienza, Kening Lu, and Bj{\"o}rn Schmalfuss.
+\newblock Local pathwise solutions to stochastic evolution equations driven by
+  fractional {B}rownian motions with {H}urst parameters {$H\in(1/3,1/2]$}.
+\newblock {\em Discrete Contin. Dyn. Syst. Ser. B}, 20(8):2553--2581, 2015.
+
+\bibitem{gess_semi_discretization_2015}
+Benjamin Gess, Beno{\^\i}t Perthame, and Panagiotis~E. Souganidis.
+\newblock Semi-discretization for stochastic scalar conservation laws with
+  multiple rough fluxes.
+\newblock {\em arXiv:1512.06056 [math]}, December 2015.
+\newblock arXiv: 1512.06056.
+
+\bibitem{gess_long_time_2014}
+Benjamin Gess and Panagiotis~E. Souganidis.
+\newblock Long-time behavior, invariant measures and regularizing effects for
+  stochastic scalar conservation laws.
+\newblock {\em arXiv:1411.3939 [math]}, November 2014.
+\newblock arXiv: 1411.3939.
+
+\bibitem{MR3351442}
+Benjamin Gess and Panagiotis~E. Souganidis.
+\newblock Scalar conservation laws with multiple rough fluxes.
+\newblock {\em Commun. Math. Sci.}, 13(6):1569--1597, 2015.
+
+\bibitem{gubinelli_lectures_2015}
+M.~Gubinelli and N.~Perkowski.
+\newblock Lectures on singular stochastic {PDEs}.
+\newblock {\em Ensaios Mathematicos}, 29:1--89, January 2015.
+\newblock arXiv: 1502.00157.
+
+\bibitem{gubinelli_controlled_2014}
+M.~Gubinelli, S.~Tindel, and I.~Torrecilla.
+\newblock Controlled viscosity solutions of fully nonlinear rough {PDEs}.
+\newblock arXiv: 1403.2832, 2014.
+
+\bibitem{MR3406823}
+Massimiliano Gubinelli, Peter Imkeller, and Nicolas Perkowski.
+\newblock Paracontrolled distributions and singular {PDE}s.
+\newblock {\em Forum Math. Pi}, 3:e6, 75, 2015.
+
+\bibitem{MR2599193}
+Massimiliano Gubinelli and Samy Tindel.
+\newblock Rough evolution equations.
+\newblock {\em Ann. Probab.}, 38(1):1--75, 2010.
+
+\bibitem{MR3274562}
+M.~Hairer.
+\newblock A theory of regularity structures.
+\newblock {\em Invent. Math.}, 198(2):269--504, 2014.
+
+\bibitem{MR3071506}
+Martin Hairer.
+\newblock Solving the {KPZ} equation.
+\newblock {\em Ann. of Math. (2)}, 178(2):559--664, 2013.
+
+\bibitem{MR3179667}
+Martin Hairer, Jan Maas, and Hendrik Weber.
+\newblock Approximating rough stochastic {PDE}s.
+\newblock {\em Comm. Pure Appl. Math.}, 67(5):776--870, 2014.
+
+\bibitem{MR3129808}
+Martin Hairer and Hendrik Weber.
+\newblock Erratum to: {R}ough {B}urgers-like equations with multiplicative
+  noise [mr3010394].
+\newblock {\em Probab. Theory Related Fields}, 157(3-4):1011--1013, 2013.
+
+\bibitem{MR3010394}
+Martin Hairer and Hendrik Weber.
+\newblock Rough {B}urgers-like equations with multiplicative noise.
+\newblock {\em Probab. Theory Related Fields}, 155(1-2):71--126, 2013.
+
+\bibitem{hof}
+Martina Hofmanov{\'a}.
+\newblock Degenerate parabolic stochastic partial differential equations.
+\newblock {\em Stochastic Process. Appl.}, 123(12):4294--4336, 2013.
+
+\bibitem{bgk}
+Martina Hofmanov{\'a}.
+\newblock A {B}hatnagar-{G}ross-{K}rook approximation to stochastic scalar
+  conservation laws.
+\newblock {\em Ann. Inst. Henri Poincar\'e Probab. Stat.}, 51(4):1500--1528,
+  2015.
+
+\bibitem{H16}
+Martina Hofmanova.
+\newblock Scalar conservation laws with rough flux and stochastic forcing.
+\newblock {\em Stoch. PDE: Anal. Comp.}, 2016.
+\newblock to appear.
+
+\bibitem{holden}
+H.~Holden and N.~H. Risebro.
+\newblock Conservation laws with a random source.
+\newblock {\em Appl. Math. Optim.}, 36(2):229--241, 1997.
+
+\bibitem{MR2471936}
+Yaozhong Hu and David Nualart.
+\newblock Rough path analysis via fractional calculus.
+\newblock {\em Trans. Amer. Math. Soc.}, 361(5):2689--2718, 2009.
+
+\bibitem{vov}
+C.~Imbert and J.~Vovelle.
+\newblock A kinetic formulation for multidimensional scalar conservation laws
+  with boundary conditions and applications.
+\newblock {\em SIAM J. Math. Anal.}, 36(1):214--232 (electronic), 2004.
+
+\bibitem{kim}
+Jong~Uhn Kim.
+\newblock On a stochastic scalar conservation law.
+\newblock {\em Indiana Univ. Math. J.}, 52(1):227--256, 2003.
+
+\bibitem{kruzk}
+S.~N. Kru{\v{z}}kov.
+\newblock First order quasilinear equations with several independent variables.
+\newblock {\em Mat. Sb. (N.S.)}, 81 (123):228--255, 1970.
+
+\bibitem{lions}
+P.-L. Lions, B.~Perthame, and E.~Tadmor.
+\newblock A kinetic formulation of multidimensional scalar conservation laws
+  and related equations.
+\newblock {\em J. Amer. Math. Soc.}, 7(1):169--191, 1994.
+
+\bibitem{MR3327520}
+Pierre-Louis Lions, Beno{\^{\i}}t Perthame, and Panagiotis~E. Souganidis.
+\newblock Scalar conservation laws with rough (stochastic) fluxes.
+\newblock {\em Stoch. Partial Differ. Equ. Anal. Comput.}, 1(4):664--686, 2013.
+
+\bibitem{MR3380984}
+Pierre-Louis Lions, Beno{\^{\i}}t Perthame, and Panagiotis~E. Souganidis.
+\newblock Stochastic averaging lemmas for kinetic equations.
+\newblock In {\em S\'eminaire {L}aurent {S}chwartz---\'{E}quations aux
+  d\'eriv\'ees partielles et applications. {A}nn\'ee 2011--2012}, S\'emin.
+  \'Equ. D\'eriv. Partielles, pages Exp. No. XXVI, 17. \'Ecole Polytech.,
+  Palaiseau, 2013.
+
+\bibitem{MR3274890}
+Pierre-Louis Lions, Beno{\^{\i}}t Perthame, and Panagiotis~E. Souganidis.
+\newblock Scalar conservation laws with rough (stochastic) fluxes: the
+  spatially dependent case.
+\newblock {\em Stoch. Partial Differ. Equ. Anal. Comput.}, 2(4):517--538, 2014.
+
+\bibitem{lpt1}
+Pierre-Louis Lions, Beno{\^{\i}}t Perthame, and Eitan Tadmor.
+\newblock Formulation cin\'etique des lois de conservation scalaires
+  multidimensionnelles.
+\newblock {\em C. R. Acad. Sci. Paris S\'er. I Math.}, 312(1):97--102, 1991.
+
+\bibitem{MR1654527}
+Terry~J. Lyons.
+\newblock Differential equations driven by rough signals.
+\newblock {\em Rev. Mat. Iberoamericana}, 14(2):215--310, 1998.
+
+\bibitem{MR2314753}
+Terry~J. Lyons, Michael Caruana, and Thierry L{\'e}vy.
+\newblock {\em Differential equations driven by rough paths}, volume 1908 of
+  {\em Lecture Notes in Mathematics}.
+\newblock Springer, Berlin, 2007.
+\newblock Lectures from the 34th Summer School on Probability Theory held in
+  Saint-Flour, July 6--24, 2004, With an introduction concerning the Summer
+  School by Jean Picard.
+
+\bibitem{malek}
+J.~M{\'a}lek, J.~Ne{\v{c}}as, M.~Rokyta, and M.~R{\ocirc{u}}{\v{z}}i{\v{c}}ka.
+\newblock {\em Weak and measure-valued solutions to evolutionary {PDE}s},
+  volume~13 of {\em Applied Mathematics and Mathematical Computation}.
+\newblock Chapman \& Hall, London, 1996.
+
+\bibitem{nunu-vuillermot}
+David Nualart and Pierre-A. Vuillermot.
+\newblock Variational solutions for partial differential equations driven by a
+  fractional noise.
+\newblock {\em Journal of Functional Analysis}, 232(2):390--454, March 2006.
+
+\bibitem{perth}
+Beno{\^{\i}}t Perthame.
+\newblock {\em Kinetic formulation of conservation laws}, volume~21 of {\em
+  Oxford Lecture Series in Mathematics and its Applications}.
+\newblock Oxford University Press, Oxford, 2002.
+
+\bibitem{tadmor}
+Beno{\^{\i}}t Perthame and Eitan Tadmor.
+\newblock A kinetic equation with kinetic entropy functions for scalar
+  conservation laws.
+\newblock {\em Comm. Math. Phys.}, 136(3):501--517, 1991.
+
+\bibitem{stoica}
+Bruno Saussereau and Ion~Lucretiu Stoica.
+\newblock Scalar conservation laws with fractional stochastic forcing:
+  existence, uniqueness and invariant measure.
+\newblock {\em Stochastic Process. Appl.}, 122(4):1456--1486, 2012.
+
+\bibitem{MR2836540}
+Josef Teichmann.
+\newblock Another approach to some rough and stochastic partial differential
+  equations.
+\newblock {\em Stoch. Dyn.}, 11(2-3):535--550, 2011.
+
+\bibitem{wittbold}
+Guy Vallet and Petra Wittbold.
+\newblock On a stochastic first-order hyperbolic equation in a bounded domain.
+\newblock {\em Infin. Dimens. Anal. Quantum Probab. Relat. Top.},
+  12(4):613--651, 2009.
+
+\end{thebibliography}
+
+
+\end{document}

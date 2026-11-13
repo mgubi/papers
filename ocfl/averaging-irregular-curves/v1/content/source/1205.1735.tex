@@ -1,0 +1,1654 @@
+\documentclass[11pt,a4paper,draft,reqno]{amsart}
+%\usepackage{pdfsync}
+\usepackage[twoside=false]{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+%\geometry{a4paper} % or letter or a5paper or ... etc
+%\geometry{margins=1cm} % for example, change the margins to 2 inches all round
+%\geometry{landscape} % set up the page for landscape
+% read geometry.pdf for detailed page layout information
+\usepackage{amsmath,amsthm,amssymb,amsrefs}
+%\usepackage{showkeys}
+%\usepackage[firstpage]{draftwatermark}
+\usepackage[final]{hyperref} % override draft
+
+%\SetWatermarkScale{5}
+
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+
+\newcommand{\TT}{\mathbb{T}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\expect}{\mathbb{E}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\kpz}{\mathrm{kpz}}
+\newcommand{\she}{\mathrm{she}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Lz}{{L^2_0(\TT)}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\cyl}{\mathcal{C}yl}
+\newcommand{\la}{\left\langle}
+\newcommand{\ra}{\right\rangle}
+
+\newcommand{\Lou}{L^{\textrm{ou}}}
+\newcommand{\tr}{\mathrm{Tr}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{mathenv}
+
+\newcommand{\NN}{\mathbb{N}}
+\renewcommand{\S}{\mathfrak{S}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\note}[1]{{\underline {\bf #1}}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cB}{\mathcal{B}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%% some redefinitions for amsrefs
+
+
+\renewcommand{\PrintDOI}[1]{%
+    DOI \href{http://dx.doi.org/#1}{\texttt{#1}}%
+    \IfEmptyBibField{volume}{, (to appear in print)}{}%
+}
+
+
+%%% BEGIN DOCUMENT
+\begin{document}
+
+\title[Regularization]{On the regularization of ODEs\\ via irregular pertubations}
+\author{R.~Catellier}
+\address[R.~Catellier]{CEREMADE  UMR 7534 -- Universit\'e Paris--Dauphine}
+\email[R.~Catellier]{remi.catellier@ceremade.dauphine.fr}
+\author{M.~Gubinelli}
+\address[M.~Gubinelli]{CEREMADE  UMR 7534 -- Universit\'e Paris--Dauphine}
+\email[M.~Gubinelli]{massimiliano.gubinelli@ceremade.dauphine.fr}
+\date{v21 20120507}
+\dateposted{XXX}
+
+\begin{abstract}
+We consider the ODE $\dd x_t = b(t,x_t)\dd t + \dd w_t$ where $w$ is a continuous driving function and $b$ is a time-dependent vector field which possibly is only a distribution in the space variable. We quantify the regularizing properties of an arbitrary continous path $w$ on the existence and uniqueness of solutions to this equation. In the particular case of a function $w$ sampled according to the law of the fractional Brownian motion of Hurst index $H\in (0,1)$, we prove that almost surely the ODE admits a solution for all $b$ for which the space-time Fourier transform  $\hat b$  satisfy
+$$
+(1+\log^{1/2}(1+|\omega|)) (1+ |\xi|)^{\alpha} |\hat b(\omega,\xi)|\in L^1_{\omega,\xi}(\RR \times \RR^d) .
+$$
+with $\alpha > -1/2H$. If $\alpha > 1-1/2H$ then the solution is unique among a natural set of continuous solutions. Moreover if $H>1/3$ and $\alpha > 3/2-1/2H$ or if $\alpha > 2-1/2H$ then the equation admits a unique Lipshitz flow.
+Note that when $\alpha < 0$ the vectorfield $b$ is only a distribution, nonetheless there exists a natural notion of solution for which the above results apply.
+\end{abstract}
+\keywords{Stochastic differential equation, fractional Brownian motion, path-by-path solutions}
+%\subjclass[2000]{00X00}
+
+\maketitle
+
+\section{Introduction}
+
+In~\cite{MR2377011} A. M. Davie showed that the integral equation
+\begin{equation}
+\label{eq:ODE-0}
+x_t = x_0 + \int_0^t b(s,x_s) \dd s + w_t, \qquad t\in[0,1]
+\end{equation}
+with $x,w\in C([0,1];\RR^d)$ and $b:\RR\times\RR^d \to \RR^d$ bounded and measurable has a unique continuous solution for almost
+every path $w$ sampled from the law of the $d$-dimensional Brownian motion. This can be interpreted as a phenomenon of
+regularization by noise, in the sense that it is well known that the same equation without $w$ can show non-uniqueness. Here
+it is the irregular character of the noise which act as to smooth out the irregular vector field $b$ and guarantees uniqueness.
+
+Regularization by noise in the case of SDE driven by Brownian motion is by nowadays a well undestood subject: see for example
+Veretennikov, Krylov and Roeckner, Flandoli, Gubinelli and Priola, Zhang, etc\dots All these work are essentially based of the
+use of It\^o calculus to highlight the regularizing properties of Brownian paths. Davie's contribution is more subtle in the
+sense that it is a result for an ODE and not for the related SDE, i.e. the solution is studied as a continuous path and not as a
+continuous adapted process on some probability space. This has been clearly pointed out by Flandoli which called these more
+general solutions \emph{path-by-path}.
+
+\bigskip
+
+Regularization by (fast) oscillation is an interesting phenomenon which happens also in some PDE situations, for example for Korteweg-de-Vries equation~\cites{kdv,BIT} and for fast-rotating Euler and Navier-Stokes equations~\cite{BMN}.  We would like to point out that the techinque of Young integration we employ is essentially the same used in the paper~\cite{kdv} and take inspiration in the theory of rough paths~\cites{Lyons, Controlling, FV}. We believe that this approach can be fruitful also in other situations.
+
+\bigskip
+
+The aim of the present paper is to \emph{analytically} caracterize this regularization effect for general continuous perturbation $w$ (random or not) to the evolution dictated by an irregular vectorfield. 
+It turns out that a  convenient space of vectorfields for which our approach works  well is the following
+\begin{definition}
+Let $\alpha \in \RR$ and
+\begin{equation*}
+N_{\alpha}(f) = \int_{\RR\times\RR^d} |\hat{f}(\omega,\xi)|\left(1+|\xi|\right)^{\alpha}(1+\log^{\frac12}(1+|\omega|))\dd \omega\dd \xi  
+\end{equation*}
+and
+$\cF L^{\alpha}(\RR\times\RR^d) = \left\{ f \in\cS'(\RR\times\RR^d) : N_\alpha(f) <\infty \right\}$.
+Then $N_\alpha$ is  a norm on $\cF L^\alpha(\RR\times\RR^d)$.
+\end{definition}
+In some cases it will be useful to work in the autonomous case. That is for $f\in\cF L^{\alpha}(\RR^d)$ where
+\begin{definition}
+Let $\alpha \in \RR$. Let 
+$N_{\alpha}(f) = \int_{\RR\times\RR^d} |\hat{f}(\xi)|(1+|\xi|)^{\alpha}\dd \xi$
+and define
+$\cF L^{\alpha}(\RR^d) = \{ f \in\cS'(\RR^d) :N_\alpha(f) <\infty\}$
+\end{definition}
+If $\alpha\ge0$ and $f\in\cF L^{\alpha}$ implies that $\hat f$ is in $L_1$ and $f$ is bounded continuous function. Furthermore if $\alpha\ge1$, $f\in\cF L^\alpha$ is globally Lipschitz continuous in the second variable. Furthermore for $\alpha\in(0,1)$, $f\in\cF L^\alpha$ is globally H\"older continuous in the second variable. 
+Note that if $\alpha < 0$ then the vectorfields are only distributions. 
+
+\bigskip
+
+As an application of our results we obtain existence and uniqueness of solutions of the ODE for distributional vectorfields $b$ in the case when $w$ is sampled according to the law of the fractional Brownian motion (fBm) of arbitrary Hurst parameter $H\in (0,1)$. 
+
+The fBm has the advantage of being a quite simple process for which many other results
+about existence and uniqueness of associated SDE are available~\cite{MR1934157}. More interestigly, the It\^o calculus approach used in most of the papers on the regularization effect for Brownian motion, is not easily extendable to the fBm case. The freedom in the choice of the Hurst parameter give us the possibility to explore the effect of the irregularity of the perturbation on the regularization phenomenon.
+
+All these results will hold outside an exceptional set of zero measure with respect to the fBm law. For sufficiently regular $b$ we are able to show that this exceptional set \emph{does not} depend on the data of the problem, i.e. on the initial point $x_0$ and on the vectorfield $b$. This will allow to solve the corresponding SDE for quite general random $b$. Note that even in the case of the Brownian motion this was an open problem~\cite{FGP} since the usual approach cannot be applied in this case. Allowing random $b$ opens the way to the study of a general class of stochastic transport equations where the drift itself depends on the solution. 
+
+\bigskip
+Now let $d\ge 1$ and consider  a $d$-dimensional fractional Brownian motion $(W_t)_{t\in[0,1]}$  with Hurst parameter $H\in(0,1)$ on a given stochastic basis $(\Omega,\cF,P)$. Consider $b\in\cF L^\alpha$ for some $\alpha > -1/2H$. Then in this setting we will be able to prove the following theorem.
+
+\begin{theorem}\label{eq:fbm-theorem-1}
+Assume $H\ge1/2$ and $\alpha >-1/2H$. For all $b\in\cF L^{\alpha+1}$ and $x_0\in\RR^d$ there exists a set $\mathcal N_{b,x_0} \in \cF$ (which depends on $b$ and $x_0$) with $P(\mathcal {N}_{b,x_0})=0$ and such that  for all $w\not\in \mathcal N_{b,x_0}$ the equation~\eqref{eq:ODE-0} admits a unique solution in $C^0(\RR_+,\RR^d)$.
+\end{theorem}
+
+These solutions are path-by-path solutions of the corresponding ODE, according to the definition of Flandoli. 
+
+\bigskip
+When $\alpha < 0$ the drift is only a distribution. However in some cases we are still able to give a meaning to the ODE and to show uniqueness in a suitable class of solutions. It turns out that the right space where to look for solutions is a space of paths which do not look very different from the additive perturbation:
+\begin{definition}
+The space $\cQ^{\gamma}_w$ of $(w,\gamma)$-controlled paths is the space
+$$\cQ^{\gamma}_w= \left\{x\ \textrm{continuous path on $[0,1]$ : } (x-w)\in\cC^{0,\gamma}\right\}$$
+where $\cC^{0,\gamma}$ is the space of $\gamma$-H\"older functions.
+\end{definition}
+ Then the following holds
+\begin{theorem}\label{eq:fbm-theorem-2}
+Assume now $H>0$, $\alpha >-1/2H$ and take $\gamma = 5/8+(H\alpha)/4 > 1/2$. Then 
+\begin{itemize}
+\item[i)]
+almost surely for all $b$ in $\cF L^\alpha$  and all  smooth approximations $(b_n)_{n\ge 1}$ converging to $b$ in $\cF L^\alpha$, the following limit exists
+\begin{equation}
+\label{eq:limiting-procedure}
+  \lim_n  \int_{0}^t b_n(s,x_s)\dd s ,
+\end{equation}
+for any continuous path $x\in\cQ^\gamma_W$ and is independent of the specific sequence $(b_n)_{n\ge 1}$. 
+\item[ii)]almost surely for all $b$ in $\cF L^{\alpha+1}$ there exists a solution $x\in\cQ^\gamma_W$ of the equation
+$$
+x_t= x_0 + \int_{0}^t b(s,x_s)\dd s + w_t,\ t\in[0,1]
+$$
+where the integral of $b$ is understood according the limiting procedure given in eq.~\eqref{eq:limiting-procedure} above.
+\item[iii)] if $b \in \cF L^{\alpha+1}$ then there exists an null set $\mathcal N_{b,x_0}$ depending on $b$ and $x_0$ such that this solution is unique in $\cQ^\gamma_w$ for all $w\not\in N_{b,x_0}$. 
+\end{itemize}
+\end{theorem}
+
+Under some more restricting conditions on the vectorfield $b$ we can prove that the exceptional set does not depend on the data of the problem and in this situation we obtain also more informations on the dependence of the solution on the data. 
+\begin{theorem}
+For all $\alpha > -1/2H$ and suitable $\gamma>1/2$ there exists a full measure set of fBm paths for which the following holds: for all $b\in \cF L^{\alpha+\gamma+1}$ with $\alpha+\gamma+1>0$ or $b\in \cF L^{\alpha+2}$ the flow map $x_0 \to X_t$ is Lipshitz uniformly in time.
+\end{theorem}
+Note that in this case, since the exceptional set  is \emph{independent} of the vectorfield $b$, we are allowed to take a random vectorfield $w \mapsto b^w$ (without any further regularity condition on the dependence on $w$ beside measurability) and still obtain existence and uniqueness of a Lipshitz flow. 
+
+
+\bigskip
+The plan of the paper is the following. In Sect.~\ref{sec:reg} we lay out a path-wise approach to the estimation of the regularization properties of an arbitrary continuous path, this will need tools from the theory of Young integration. In Sect.~\ref{sec:young-ode} we will develop such tools and use them in Sect.~\ref{sec:existence-uniqueness-young} to prove existence and uniqueness of solutions to Young-type equations. Then in Sect.~\ref{sec:est-averaging} we introduce suitable norms to control the regularization properties of paths and use them in Sect.~\ref{sec:prob-fbm} to obtain information about the fractional Brownian motion which jointly with the general theory for the Young equation will in particular allow to prove the above theorems. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Regularization by oscillations}
+\label{sec:reg}
+
+As already said, we intend to study the equation
+\begin{equation*}
+x_t=x_0 + \int_0^t b(s,x_s)\dd s + w_t
+\end{equation*}
+where $w:\RR_+\to\RR^d$ is a continuous function (with $w_0=0$) and $b:\RR\times\RR^d\to\RR^d$ is a (time-dependent, distributional) vectorfield. We think $w$ as a very rough function whose oscillations dominate in small time scales the effects of the integrated vectorfield $b$. In this situation the function $x$ behave in small scales very much like $w$ and the effects of $b$ are seen only via a average over these fast oscillations. All this will cooks up some regularization effect which will allow to prove existence and uniqueness even when the vectorfield $b$ does not enjoys  nice space regularity. 
+
+To highlight the effect of the translations induced by $w$ on the flow of $b$ let us introduce the change of variables $\theta_t = x_t - w_t$ so that the above equation now reads:
+\begin{equation*}
+\theta_t=\theta_0 + \int_0^t b(s,w_s+\theta_s)\dd s 
+\end{equation*}
+If we believe that $w$ oscillate faster than $\theta$ then seems reasonable to approximate the integral in the r.h.s. by a sum over a partition $t_0=0,\dots,t_n=t$ of $[0,t]$ where we have freezed the $\theta$ parameter at the initial time of each  segment:
+\begin{equation}
+\label{eq:approx}
+ \int_0^t b(s,w_s+\theta_s)\dd s \simeq \sum_{i=0}^{n-1} \int_{t_{i}}^{t_{i+1}} b(s,w_s+\theta_{t_i})\dd s = \sum_{i=0}^{n-1} (\sigma^w_{[t_i,t_{i+1}]} b )(\theta_{t_i})
+\end{equation}
+and where we introduced the operator $\sigma^w_{[s,t]}$ to denote this time averaging along the flow of $w$ for the interval $[s,t]$:
+\begin{equation*}
+(\sigma^w_{[s,t]} b) (x)= \int_{s}^{t} b(u,w_u+x)\dd u .
+\end{equation*}
+Under appropriate conditions the expression on the r.h.s. of eq.~\eqref{eq:approx} will have a well defined limit as the size of the partition goes to zero and will define a kind of integral which we naturally denote by
+\begin{equation*}
+\int_0^t (\sigma^w_{\dd s}b)(\theta_s) = \lim \sum_{i=0}^{n-1} (\sigma^w_{[t_i,t_{i+1}]} b )(\theta_{t_i}).
+\end{equation*}
+and we will have an alternative formulation of the above, classical, ODE, as an integral equation involving the time-dependent vectorfield $\sigma^w_{[s,t]}b$ which is an averaged version of $b$. The integral appearing in this equation is a kind of non-linear Young integral~\cite{Young}.
+Existence and uniqueness of solutions for equations involving Young integrals are by now standard~\cites{Lyons,Controlling,FV} and easily extended to this context as shown below. In particular the equation
+\begin{equation*}
+\theta_t = \theta_0 + \int_0^t (\sigma^w_{\dd s}b)(\theta_s)
+\end{equation*}
+will have a solution $\theta\in C^\gamma([0,T],\RR^d)$ (the space of $\gamma$-H\"older continuous functions on $\RR^d$) provided $(x,t)\mapsto (\sigma^w_{[0,t]}b)(x)$ is a $\gamma$-H\"older function of time, Lipshitz in space with $\gamma>1/2$, that is
+$$
+|(\sigma^w_{[s,t]}b)(x)-(\sigma^w_{[s,t]}b)(y)| \lesssim_{w,b} |x-y| |t-s|^\gamma
+$$ 
+for all $x,y\in\RR^d$ and $0\le s \le t \le T$. 
+Note that some space regularity is already needed to have existence (compare with the classical setup where bounded vectorfields are sufficient to existence). Uniqueness in this context will require still more space regularity, in particular it will hold as soon as the following four-point estimate applies
+$$
+|[(\sigma^w_{[s,t]}b)(x)-(\sigma^w_{[s,t]}b)(y)]-[(\sigma^w_{[s,t]}b)(z)-(\sigma^w_{[s,t]}b)(h)]| \lesssim_{w,b} |(x-y)-(z-h)| |t-s|^\gamma .
+$$ 
+
+Another strategy to prove uniqueness is to consider the difference between two solutions $x$ and $x'$. Let $\Delta_t = x_t -x'_t=\theta_t-\theta'_t$ which solves the equation
+\begin{equation*}
+\Delta_t = \int_0^t (\sigma^w_{\dd s}b)(\theta_s)-\int_0^t (\sigma^w_{\dd s}b)(\theta_s+\Delta_s) =
+\int_0^t (\sigma^x_{\dd s}b)(0)-\int_0^t (\sigma^x_{\dd s}b)(\Delta_s)
+\end{equation*}
+where we used the definition of the averaging operator $\sigma$. In that case a sufficient condition to prove that $\Delta_t =0$ for all $t\ge 0$ is that the  estimate
+$$
+|(\sigma^x_{[s,t]}b)(x)-(\sigma^x_{[s,t]}b)(y)| \lesssim_{x,b} |x-y| |t-s|^\gamma
+$$ 
+remains valid also for $\sigma^x$ for all $x,y\in\RR^d$ and $0\le s \le t \le T$. 
+ 
+ 
+In order for these estimations to be useful we need a way to link the regularity of the original vectorfield $b$ with its averaged version $\sigma^w_{[s,t]}b$ along an arbitrary continuous path $w$.
+
+\begin{definition} [the averaging constant of $w$]
+Given two Banach spaces of vectorfields $V,W$ we define the averaging constant $K^w_\gamma(V,W)$ of $w$ between $V$ and $W$ by
+$$
+K^w_\gamma(V,W) = \sup_{f\in V} \sup_{0\le s < t < T} \frac{\|\sigma^w_{[s,t]}f\|_W}{\|f\|_V|t-s|^\gamma}
+$$
+and in the following we denote $K^w_{\alpha,\gamma}=K^w_\gamma(\cF L^\alpha,C^0(\RR^d;\RR^d))$.
+\end{definition}
+
+ For $f\in\cF L^{0}$ we use the representation
+\begin{equation}
+\label{eq:fourier-representation}
+(\sigma^w_{s,t} f)(x) =\int_s^t f(u,w_u+x)\dd u = \int_{\RR\times\RR^d} \hat f(\omega,\xi) Y_{s,t}^w(\omega,\xi) e^{i\xi\cdot x}\dd \omega \dd \xi 
+\end{equation}
+where
+$$
+Y_{s,t}^w(\omega,\xi) = \int_s^t e^{i\xi \cdot w_u+i\omega u} \dd u
+$$
+which means that 
+\begin{equation}
+\label{eq:sigma-bound-1}
+|(\sigma^w_{[s,t]} f)(x)| \le K^w_{\alpha,\gamma} N_{\alpha}(f) |t-s|^\gamma 
+\end{equation}
+with
+$$
+K^w_{\alpha,\gamma}= \sup_{0\le s < t \le 1} \sup_{\xi\in\RR^d,\omega\in \RR} \frac{|Y_{s,t}^w(\omega,\xi)|}{(1+|\xi|)^{\alpha}\left(1+\log^{\frac12}(1+|\omega|)\right)|t-s|^\gamma}
+$$
+From this estimate it is easy to deduce the following theorem
+\begin{theorem}
+If $K^w_{\alpha,\gamma} < \infty$ the linear map $f \mapsto \sigma^w_{s,t}f$ can be extended in a continous way to the whole $\cF L^{\alpha}$ such that $\sigma^w_{[s,u]}f(x) + \sigma^w_{[u,t]}f(x) = \sigma^w_{[s,t]}f (x)$ and that the bound given by eq.~\eqref{eq:sigma-bound-1}  holds. 
+\end{theorem}
+
+In particular whenever $K^w_{\alpha,\gamma} < \infty$, property which in some sense characterize the regularizing effect of the path $w$, we have good estimates for the averaged field $\sigma^w f$ and we are in position to prove the following theorem.
+
+\begin{theorem}
+Assume that $K^w_{\alpha,\gamma} < \infty$ for some $\alpha \in \RR$ and $\gamma > 1/2$. Then there exists a solution $\theta(x_0)\in C^\gamma([0,1],\RR^d)$ to the Young-type equation 
+$$
+\theta_t(x_0) = x_0 + \int_0^t (\sigma^w_{\dd s} b)(\theta_s(x_0))
+$$
+for any $b\in \cF L^{\alpha+1}$. If $b\in \cF L^{\alpha+2}$ (or $\alpha+\gamma>0$ and $b\in\cF L^{\alpha+\gamma+1}$) this is the unique $\gamma$-H\"older solution to this equation, and for all $t\in[0,1]$, the flow map $x_0\to\theta_t(x_0)$ is well defined and Lipschitz continuous, uniformely in time. 
+\end{theorem}
+
+When $\alpha \ge -1$ the vectorfield $b$ is continuous and this solutions are simply solutions to the classical ODE
+$$
+\theta_t = \theta_0 + \int_0^t b(u,w_u+\theta_u) \dd u
+$$
+In the case that $\alpha < -1$ the vectorfield $b$ is a distribution and the previous ODE does not make sense. In that situation the ``classical" meaning of these solution is the following. For any sequence of smooth vectorfields $b_n$ converging to $b$ in $\cF L^{\alpha+1}$ we have
+$$
+\int_0^t b_n(u,w_u+\theta_u) \dd u = \int_0^t (\sigma^w_{\dd s} b_n)(\theta_s) \to \int_0^t (\sigma^w_{\dd s} b)(\theta_s)
+$$
+by continuity of the Young integral and of the averaging with respect to the norm of $\cF L^{\alpha+1}$ so that $\theta$ solves the equation
+$$
+\theta_t = \theta_0 + \lim_n \int_0^t b_n(u,w_u+\theta_u) \dd u 
+$$
+where the r.h.s. is well defined for any $\theta\in C^\gamma([0,1],\RR^d)$ and any sequence of regular vectorfields $(b_n)_{n\ge 1}$ such that $N_{\alpha+1}(b_n -b)\to 0$. Moreover the limit does not depend on the particular sequence but only on $b$ so that we can identify
+$$
+\int_0^t b(u,w_u+\theta_u) \dd u =  \lim_n \int_0^t b_n(u,w_u+\theta_u) \dd u 
+$$
+and give meaning to the ODE with a distributional drift $b$. 
+  
+  \bigskip
+One of the  aims of this paper is to show that the above program can be carried on sucessfully in the case of $w$ given by a path of a fractional Brownian motion $W$ of Hurst parameter $H\in (0,1)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{The ODE as an equation driven by a rough path}
+\label{sec:young-ode}
+
+In this section we will define a Young integral~\cites{Young,Lyons} for non linear operators. Let us first remind some definitions. If $V$ and $W$ are two Banach spaces, we define 
+$$C^{0,\nu}(V,W):=\left\{h:V\to W\ : \ \|h\|_{C^\nu(V, W)} : = \sup_{\substack{u,v\in V \\ u\neq v}}\frac{\|h(u)-h(v)\|_W}{\|u-v\|^\nu_V} < \infty \right\}$$
+and $\|.\|_{\nu}=\|.\|_{C^\nu(V,W)}$ is a semi-norm on $\mathrm{Lip}(V,W)$. When $\vartheta=1$ we will denote $\mathrm{Lip}(V,W) = C^{0,1}(V,W)$. If $I\subset \RR$ is an interval we let $\|f\|_{\nu,I} = \|f\|_{\nu}$ the corresponding H\"older semi-norm.  
+
+\begin{theorem}\label{young integral}
+Let $\nu,\rho,\vartheta >0$  with $\nu+\vartheta\rho>1$, and $V$ and $W$ two Banach spaces and $I$ an interval on $\RR$. Let $G\in C^{0,\nu}\left(I, C^{0,\vartheta}(V,W)\right)$ and $f\in C^{0,\rho}(I,V)$. Let $ s,t \in I$ with $s\le t$. Then the following limit exists and is independent of the partition
+$$\int_s^t G_{\dd u}(f_u) := \lim_{\substack{\Pi \mathrm{\ partition\ of}\ [s,t]\\ |\Pi|\to 0}} \sum_{i}(G_{t_{i+1}}-G_{t_i})(f_{t_i}) $$
+Furthermore
+\begin{enumerate}
+\item
+$$\int_s^tG_{\dd r}(f_r)=\int_s^u G_{\dd r}(f_r)+\int_u^t G_{\dd r}(f_r)$$
+\item
+$$\left\|\int_s^t G_{\dd r}(f_r) - (G_t-G_s)(f_s)\right\|_W 
+\le 
+C_{\nu,\rho} \|G\|_{\nu,I} \|f\|_{\rho,I}^\vartheta |t-s|^{\nu+\vartheta\rho} $$
+\item For all $s\le t \in I$, the map $(f,G) \mapsto  \int_s^t G_{\dd r}(f_r)$ is continuous as a function of $\left(\cC^{0,\rho}(I,V),\|.\|_{\infty,[s,t]}\right)\times\left(\cC^{0,\gamma}\left(I,C^{0,\vartheta}(V,W)\right),\|.\|_{\gamma,[s,t]} \right)$ onto $W$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Let $s,t\in I$ with $s\le t$ be fixed until the end of the proof. Suppose first that $G$ is differentiable (in time) and  $G' \in C^{0,\nu}\left(I, C^{0,\vartheta}(V,W)\right)$, and of course $G\in C^{0,\nu}(I,C^{0,\vartheta}(V,W))$. Then we define for $s \le t$
+$$\int_s^tG_{\dd u}(f_u)  :=\int_s^tG'_u(f_u) \dd u:= I_{s,t} (f,G)$$
+and also define 
+$$J_{s,t}(f,G) : = I_{s,t}(f,G)-G_{s,t}(f_s)$$
+where $G_{s,t}=G_t-G-s$.
+For $u\in [s,t]$ we have
+$$J_{s,t}(f,G) = J_{s,u}(f,G) + J_{u,t}(f,G) + G_{u,t}(f_u) - G_{u,t}(f_s)  $$
+hence, for $n\ge 1$, $i \in \{0,\dots,2^n\}$ and $t_i^n = s + (t-s)i2^{-n}$, 
+$$
+J_{s,t}(f,G) = \sum_{i=0}^{2^n-1}J_{t_i^n,t_{i+1}^n}(f,G) + \sum_{k=1}^{n}\sum_{i=1}^{2^k-1}\left( G_{t_{2i-1}^k,t_{2i}^k}(f_{t_{2i-1}^k}) - G_{t_{2i-1}^k,t_{2i}^k}(f_{t_{2(i-1)}^k}) \right)
+$$
+But, as $G$ is smooth, the following computation holds
+\begin{eqnarray*}
+\left\|J_{t_{i}^n,t_{i+1}^n}(f,G)\right\|_W
+&\le&
+\int_{t_{i}^n}^{t_{i+1}^n}\left\|G_u'(f_u)-G_u'(f_{t_{i}^n})\right\|_W \dd u\\
+&\le&
+\int_{t_{i}^n}^{t_{i+1}^n}\left\|G_u'\right\|_{\vartheta}\left\|f_u-f_{t_{i}^n}\right\|^\vartheta_V \dd u\\
+&\le&
+\int_{t_{i}^n}^{t_{i+1}^n}\left(\left\|G'\right\|_{\nu,I}|u|^\nu + \|G_0'\|_{\vartheta}\right) \left\|f\right\|^\vartheta_\rho |u-t_{i}^n|^{\vartheta\rho} \dd u\\
+&\le&
+C_{f,G,s,t} 2^{-(1+\vartheta\rho)n}
+\end{eqnarray*}
+hence
+$$\left\|\sum_{i=0}^{2^n-1}J_{t_i^n,t_{i+1}^n}(f,G)\right\|_W \le C_{f,G,s,t}' 2^{-n\vartheta\rho}\underset{n\to\infty}{\to}0$$
+and then
+$$\left\|J_{s,t}(f,G)\right\|_W \le \sum_{k=1}^{\infty}\sum_{i=1}^{2^k-1}\left\| G_{t_{2i-1}^k,t_{2i}^k}(f_{t_{2i-1}^k}) - G_{t_{2i-1}^k,t_{2i}^k}(f_{t_{2(i-1)}^k}) \right\|_W$$
+For $k\ge 1$ and $i \in\{1,\dots,2^k-1\}$, we have
+\begin{eqnarray*}
+\left\| G_{t_{2i-1}^k,t_{2i}^k}(f_{t_{2i-1}^k}) - G_{t_{2i-1}^k,t_{2i}^k}(f_{t_{2(i-1)}^k}) \right\|_W
+&\le&
+\left\| G_{t_{2i-1}^k,t_{2i}^k}\right\|_{\vartheta}\left\|f_{t_{2i-1}^k}  -f_{t_{2i-2}^k}  \right\|^\vartheta_V\\
+&\le&
+\|G\|_{\nu,[s,t]} \|f\|^\vartheta_{\rho,[s,t]} |t-s|^{\nu+\vartheta\rho} 2^{-(\nu+\vartheta\rho) k} \\
+\end{eqnarray*}
+Hence, the following bound holds
+\begin{equation*}
+\begin{split}
+ \sum_{k=1}^{\infty}\sum_{i=1}^{2^k-1} & \left\| G_{t_{2i-1}^k,t_{2i}^k}(f_{t_{2i-1}^k}) - G_{t_{2i-1}^k,t_{2i}^k}(f_{t_{2(i-1)}^k}) \right\|_W
+ \\ & \le
+ \|G\|_{\nu,[s,t]} \|f\|^\vartheta_{\rho,[s,t]} |t-s|^{\vartheta\rho+\nu}\sum_{k=1}^{\infty}\sum_{i=1}^{2^k-1}2^{-(\nu+\vartheta\rho)k}
+ \\ &\le
+ \frac{2^{-(\vartheta\rho+\nu-1)}}{1-2^{-(\vartheta\rho+\nu-1)}}\|G\|_{\nu,[s,t]} \|f\|^\vartheta_{\rho,[s,t]} |t-s|^{\vartheta\rho+\nu}
+\end{split}
+\end{equation*}
+Which proves the result for $G$ smooth.
+Let now $G\in C^{0,\nu}\left(I, C^{0,\vartheta}(V,W)\right)$ and $f$ as wanted. Let $G^n$ smooth as above such that 
+$(G_t^n-G^n_s)(f_s)\to(G_t-G_s)(f_s)$ as $n\to\infty$;
+ for all $\nu'<\nu$
+ $\lim_{n\to \infty}\|G-G^n\|_{\nu ', [s,t]} = 0$
+ and for all $n\ge 0$,  
+$\|G^n\|_{\nu,I} \le \|G\|_{\nu,I}$. As $I_{s,t}$ is linear in the second variable, we have, for $\nu'<\nu$
+\begin{eqnarray*}
+\|J_{s,t}(f,G^n)- J_{s,t}(f,G^{n+m})\|_W
+&=&
+\|J_{s,t}(f,G^n-G^{n+m})\|_W\\
+&\le&
+C_{s,t,f,\nu',\rho} \|G^{n}-G^{n+m}\|_{\nu',[s,t]}\\
+&\underset{n\to\infty}{\to}&
+0
+\end{eqnarray*}
+Then the sequence $\left(J_{s,t}(f,G^n)\right)_n$ is Cauchy in $W$ which is a Banach space. Let say it converges to $J_{s,t}(f,G)$. Furthermore, the sequence $\left(G_t^n-G_s^n\right)(f_s)$ converges obviously to $\left(G_t-G_s\right)(f_s)$. Then as
+$I_{s,t}(f,G^n)=J_{s,t}(f,G^n)+G_{s,t}^n(f_s)$
+the sequence $\left(I_{s,t}(f,G^n)\right)_n$ converges to a limit called $I_{s,t}(f,G)$. Furthermore,
+\begin{eqnarray*}
+\|J_{s,t}(f,G^n)\|_W 
+&\le&
+ C_{\nu,\rho} \|G_n\|_{\nu,[s,t]} \|f\|_{\rho,[s,t]}|t-s|^{\nu+\vartheta\rho}\\
+ &\le&
+ C_{\nu,\rho} \|G\|_{\nu,I} \|f\|_{\rho,I}|t-s|^{\nu+\vartheta\rho}
+\end{eqnarray*}
+and so does $\|I_{s,t}(f,G)-(G_t-G_s)(f_s)\|_W$. The Chasles property and the triangular inequality are obvious with the definition of $I$. Moreover since $I(f,G)$ is linear in $G$ it is easy to see that the definition does not depend on the particular sequence $G^n$.
+
+Let now show that $I_{s,t}(f,G)$ is the limit of Riemann sum. Let $\Pi=\{s=t_0<t_1<\dots<t_n=t\}$ a partition of $[s,t]$. Let
+$$S_\Pi= \sum_{k=0}^{n-1} G_{t_i,t_{i+1}}(f_{t_{i+1}})$$
+the Riemann sum corresponding to this partition.
+As 
+$G_{t_i,t_{i+1}}(f_{t_{i+1}})=I_{t_i,t_{i+1}}(f,G)-J_{t_i,t_{i+1}}(f,G)$
+the following equality holds
+$$S_\Pi - I_{s,t}(f,G) = - \sum_{i=0}^{n-1}J_{t_i,t_{i+1}}(f,G)$$
+Hence
+\begin{eqnarray*}
+\|S_\Pi - I_{s,t}(f,G)\|_W
+&\le&
+\sum_{i=0}^{n-1}\|J_{t_i,t_{i+1}}(f,G)\|_W
+\le
+C_{f,G,s,t}\sum_{i=0}^{n-1}|t_{i+1}-t_i|^{\nu+\vartheta\rho}\\
+&\le&
+C|\Pi|^{\nu+\vartheta\rho-1}
+\to_{|\Pi|\to0}
+0
+\end{eqnarray*}
+It remains to show the continuity of the map $(f,G)\mapsto I(f,G)$. Take $f,f',G,G'$ and assume for simplicity that $G(0)=G'(0)=0$ then
+\begin{eqnarray*}
+I_{s,t}(f,G) - I_{s,t}(f',G') 
+&=&
+[I_{s,t}(f,G) - I_{s,t}(f',G)] + I_{s,t}(f',G-G') 
+\end{eqnarray*}
+and
+\begin{eqnarray*}
+\left\|I_{s,t}(f',G-G')\right\|_W
+&\le&
+\left\|\left((G-G')_t-(G-G')_s\right)(f_s)\right\|_W + \left\|J_{s,t}(f,G-G')\right\|_W\\
+&\lesssim&
+\|G-G'\|_{\nu,[s,t]}|t-s|^\nu\left(\|f\|^\vartheta_{\infty,[s,t]}+|t-s|^{\vartheta\rho}\|f\|^\vartheta_{\rho,[s,t]}\right)
+\end{eqnarray*}
+furthermore
+$$
+I_{s,t}(f,G) - I_{s,t}(f',G) = G_{s,t}(f_s) - G_{s,t}(f'_s) + J_{s,t}(f,G) - J_{s,t}(f',G)
+$$
+Now
+$$
+\|I_{s,t}(f,G) - I_{s,t}(f',G) \|_W \lesssim \|G\|_{\nu,I} \|f-f'\|^\vartheta_{\infty,[s,t]} |t-s|^{\nu} + (\|f\|^\vartheta_{\rho,I}+\|f'\|^\vartheta_{\rho,I})\|G\|_{\nu,I} |t-s|^{\vartheta\rho+\nu}
+$$
+By partitioning the interval $[0,t]$ in subintervals $[t_i,t_{i+1}]$ of size $2^{-n}$ and summing up the contributions according to these bounds we obtain an improved estimate
+\begin{eqnarray*}
+\|I_{s,t}(f,G) - I_{s,t}(f',G) \|_W 
+&\lesssim& 
+\|G\|_{\nu,I} \|f-f'\|^\vartheta_{\infty,[s,t]} 2^{(1-\nu)n} |t-s|^{\nu} \\
+&&
++ (\|f\|^\vartheta_{\rho,I}+\|f'\|^\vartheta_{\rho,I})\|G\|_{\nu,I}  |t-s|^{\vartheta\rho+\nu} 2^{(1-\nu-\vartheta\rho)n}
+\end{eqnarray*}
+Taking $n$ large enough so that
+$$
+(\|f\|^\vartheta_{\rho,I}+\|f'\|^\vartheta_{\rho,I})  |t-s|^{\vartheta\rho} 2^{-\vartheta\rho n} \le  \|f-f'\|^\vartheta_{\infty,[s,t]} \le (\|f\|^\vartheta_{\rho,I}+\|f'\|^\vartheta_{\rho,I})  |t-s|^{\vartheta\rho} 2^{\vartheta\rho} 2^{-\vartheta\rho n}
+$$
+we get
+$$
+\|I_{s,t}(f,G) - I_{s,t}(f',G) \|_W \lesssim \|G\|_{\nu,I} \|f-f'\|^\vartheta_{\infty,[s,t]} 2^{(1-\nu)n} |t-s|^\nu
+$$
+which means that it is possible to choose $n$ such that
+$$
+\|I_{s,t}(f,G) - I_{s,t}(f',G) \|_W
+\lesssim
+\|G\|_{\nu,I} \|f-f'\|^\vartheta_{\infty} |t-s|^\nu\left(\frac{(\|f\|^\vartheta_{\rho,I}+\|f'\|^\vartheta_{\rho,I})  |t-s|^{\vartheta\rho} 2^{\vartheta\rho}}{\|f-f'\|^\vartheta_{\infty,[s,t]}}\right)^{\frac{1-\nu}\rho}
+$$
+$$
+\lesssim
+\|G\|_{\nu,I} \|f-f'\|_{\infty,[s,t]}^{(\nu+\vartheta\rho-1)/\rho}  |t-s| \left(\|f\|_{\rho,I}^\vartheta+\|f'\|^\vartheta_{\rho,I}\right)^{(1-\nu)/(\vartheta\rho)}
+$$
+and this allow to conclude the continuity.
+\end{proof}
+\begin{remark}
+It is easy to construct a suitable sequence $(G^n)_{n\ge 1}$. Let $h:\RR\to\RR$ be a compactly supported, smooth positive function with integral $1$. Define $h_n(t)=nh(nt)$ and define for all $v\in V$ and all $t\in\RR$
+$$G_t^n(v) = \int_\RR h_n(t-s)G_s(v)\dd s = G_t^n(v) = \int_\RR h_n(s)G_{t-s}(v)\dd s$$
+Then $G^n$ is as wanted. Indeed,
+\begin{equation*}
+\begin{split}
+& \left\|\left(G_t^n-G_s^n\right)(v)-\left(G_t^n-G_s^n\right)(w)\right\|_W
+\\ &\qquad 
+\le
+\int_\RR h_n( r) \big\|\left(G_{t-r}-G_{s-r}\right)(v)
+%\\ & \qquad\qquad\qquad
+-\left(G_{t-r}-G_{s-r}\right)(v)\big\|_W\dd r
+\\ &\qquad\le
+\int_\RR h_n( r) \left\|\left(G_{t-r}-G_{s-r}\right)\right\|_{\vartheta}\dd r \|v-w\|^\vartheta_V
+\\&\qquad\le
+\|G\|_{\nu,I}|t-s|^\nu\|v-w\|^\vartheta_V
+\end{split}
+\end{equation*}
+which proves that $G^n\in C^{0,\nu}(\RR, C^{0,\vartheta}(V,W))$ and that $\|G^n\|_{\nu,\RR}\le\|G\|_{\nu,\RR}$. Furthermore $G^n$ is differentiable and
+$(G^n)' \in C^{0,\nu}(\RR, C^{0,\vartheta}(V,W))$. As $h_n$ is a good kernel, all the properties required on $G^n$ are satisfied.
+\end{remark}
+\begin{definition}
+The limit functional $I$ defined in the last theorem is obviously an integral and then we will refer to it as
+$\int_{s}^t G_{du}(f_u) $.
+\end{definition}
+%
+\begin{remark}
+Let $g\in C^{0,\nu}(I,V')$ and $f\in C^{0,\rho}(I,V)$ with $\nu+\rho>1$, where $V$ and $V'$ are Banach spaces. Let $W=V\otimes V'$ and for all $x\in V$,
+$
+G_t(x)=x \otimes g_t 
+$.
+Then $G\in C^{0,\nu}(I, \mathrm{Lip}(V,W))$ and the above integral is the classical Young integral.
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Existence and uniqueness of Young solutions}
+\label{sec:existence-uniqueness-young}
+\subsection{Existence and uniqueness}
+%
+In this section we will always assume that  $K^w_{\alpha,\gamma}<\infty$ for some $\gamma> 1/2$ and $\alpha \in \RR$. In this case the averaged vectorfield $$\sigma^w f \in \cC^{0,\gamma}([0,1], C^{0,\vartheta}(\RR^d,\RR^d))$$ for all $f\in \cF L^{\alpha+\vartheta}$ and $\vartheta\in[0,1]$. Indeed we have the estimate
+\begin{equation}
+\label{eq:sigma-bound-2}
+|(\sigma^w_{[s,t]} f)(x)-(\sigma^w_{[s,t]} f)(y)| \le K^w_{\alpha,\gamma} N_{\alpha+\vartheta}(f) |t-s|^\gamma |x-y|^\vartheta
+\end{equation}
+which is easily deduced from the fact that
+$$
+(\sigma^w_{[s,t]} f)(x)-(\sigma^w_{[s,t]} f)(y) = \sigma^w_{[s,t]}(\tau_x f - \tau_y f)(0)
+$$
+where $\tau_x f(z) = f(x+z)$ and the inequality
+$$
+N_\alpha(\tau_x f - \tau_y f) \le N_{\alpha+\vartheta}(f)|x-y|^\vartheta.
+$$ 
+obtained easily by interpolation between the cases $\vartheta=0$ and $\vartheta=1$. 
+Hence, thanks to the Theorem~\ref{young integral}, for all process $\theta\in\cC^{0,\gamma}([0,1],\RR^d)$, we can define the following integral
+$$\int_0^t\left(\sigma^w_{\dd u}f\right)(\theta_u)$$ for all $f\in \cF L^{\alpha+\vartheta}$ with $(1+\vartheta)\gamma > 1$.
+When $f\in\cF L^{\alpha+1}$ is also a continuous function, as $\theta\in\cC^{0,\gamma}([0,1],\RR^d)$ is also continuous, the following computation holds
+\begin{eqnarray*}
+\int_0^t f(s,\theta_s + w_s)\dd s
+& = & 
+\lim_{\substack{\Pi \mathrm{\ partition\ of}\ [s,t]\\ |\Pi|\to 0}} \sum_{t_i\in\Pi}\int_{t_i}^{t_{i+1}}f(s,\theta_{t_i}+w_s)\dd s\\
+& = & 
+\lim_{\substack{\Pi \mathrm{\ partition\ of}\ [s,t]\\ |\Pi|\to 0}} \sum_{t_i\in\Pi}\left(\sigma^w_{t_{i+1}}f-\sigma^w_{t_{i}}f\right)(\theta_{t_i})\\
+& = &
+\int_0^t\left(\sigma^w_{\dd u}f\right)(\theta_u)
+\end{eqnarray*}
+
+As a first application of this observation  we obtain a result about the behaviour of the averaging constant w.r.t. H\"older continuous perturbations of the path:
+
+\begin{lemma}
+\label{lemma:averaging-perturbation-basic}
+Assume that $K^w_{\alpha,\gamma}<+\infty$. Then if $\theta \in C^{0,1}(\RR_+,\RR^d)$ then $$K^{w+\theta}_{\alpha+\gamma,\gamma} \lesssim K^w_{\alpha,\gamma}(1+\|\theta\|_1^\gamma) ;$$ and if $\theta \in C^{0,\gamma}(\RR_+,\RR^d)$ then 
+$$K^{w+\theta}_{\alpha+1,\gamma} \lesssim K^w_{\alpha,\gamma}(1+\|\theta\|_\gamma) .$$
+\end{lemma}
+\begin{proof}
+We start by observing that 
+$$
+ \sigma^{w+\theta}_{[s,t]} b (x) = \int_s^t (\sigma^{w}_{\dd u} b) (x+\theta_u)
+$$
+which is easily verified for smooth $b$ and which relates the action of $\sigma^{x+\theta}$ to the action of $\sigma^w$ via a Young integral since $\gamma > 1/2$. Furthermore  the bound~\eqref{eq:sigma-bound-2} with $\vartheta=\gamma$ is enough to get the  Young estimate
+\begin{equation*}
+\left|\int_s^t \sigma^{w}_{\dd u}(b)(\theta_u)-\sigma^w_{[s,t]}(b)(\theta_s)\right| \lesssim K^w_{\alpha,\gamma} N_{\alpha+\gamma}(b) |s-t|^\gamma\left(1+ \|\theta\|_1^\gamma\right)
+\end{equation*}
+useful when $\theta$ is Lipshitz continuous. This estimate implies the claim for $K^{w+\theta}_{\alpha+\gamma,\gamma}$. In the other case we proceed similarly using the standard Young estimate for the integral.
+\end{proof}
+
+
+
+\bigskip
+We pass now to the study of the ODE via the Young integral.
+If we  consider the definition of controlled paths
+we have that any $x\in \cQ^{\gamma}_w$  is solution of the ODE
+$$
+x_t = x_0 + \int_0^t f(u,x_u)\dd u + w_t
+$$
+if and only if $\theta = x - w$ solves the Young equation ($\theta_0 = x_0$) 
+\begin{equation}
+\label{eq:young-sigma}
+\theta_t = \theta_0 + \int_0^t\left(\sigma^w_{\dd u}f\right)(\theta_u) .
+\end{equation}
+
+
+\begin{theorem}
+For all $b\in\cF L^{\alpha+1}$ there exists a solution $\theta\in \cC^{0,\gamma}([0,1],\RR^d)$ to eq~\eqref{eq:young-sigma}. 
+\end{theorem}
+\begin{proof}
+ Let $K>0$ such that $K^w_{\alpha,\gamma}N_{\alpha+1}(b)<K$, $t_0\in[0,1]$, $x\in\RR^d$ and $T>0$ such that 
+$$\frac{K^w_{\alpha,\gamma}N_{\alpha+1}(b)}{1-K^w_{\alpha,\gamma}N_{\alpha+1}(b)T^\gamma} \le K$$
+Let us define 
+$$\cC_{t_0,x} = \left\{\theta\in\cC^{0,\gamma}\left(\left[t_0,\min(t_0+T,1)\right]\right)\ : \ \theta_{t_0}=x,\ \|\theta\|_{\gamma,[t_0\min(t_0+T,1)]}\le K\right\}$$
+and 
+$$\Phi_{t_0,x} : \left\{
+\begin{array}{rcl}
+\cC^{0,\gamma} & \to & \cC^{0,\gamma}\\
+\theta & \to & \left(t\to x + \int_{t_0}^t \left(\sigma^w_{\dd u}b\right)(\theta_u)\right)
+\end{array}
+\right.$$
+
+By theorem \ref{young integral} $\Phi$ is well defined and $\Phi_{t_0,x}\left(\cC_{t_0,x}\right)\subset \cC_{t_0,x}$. Indeed for $\theta\in\cC^{0,\gamma}$,
+\begin{eqnarray*}
+\lefteqn{\frac{\left|\Phi_{t_0,x}(\theta)_t-\Phi_{t_0,x}(\theta)_s\right|}{\left|t-s\right|^{\gamma}}}\\
+&\le&
+\frac{1}{(t-s)^\gamma}\left(\left|\int_{t_0}^t\left(\sigma^w_{\dd u}\right)\left(\theta_u\right) - \left(\sigma^w_t-\sigma^w_s\right)(b)(\theta_s)\right| + \left|\left(\sigma^w_t-\sigma^w_s\right)(b)(\theta_s)\right|\right)\\
+&\le&
+K^w_{\alpha,\gamma}N_{\alpha+1}(b)(\|\theta\|_{\gamma,[t_0,\min(t_0+T,1)]}(t-s)^\gamma+1)\\
+\end{eqnarray*}
+and $\Phi(\theta)\in\cC^{0,\gamma}$. Furthermore, if $\theta\in\cC_{t_0,x}$, thanks to the choice of $T$, 
+$\|\Phi(\theta)\|_{\gamma,[t_0,t_0+T]}\le K$. Moreover by the properties of the Young integral $\Phi$ is continuous on $\cC_{t_0,x}$ for the norm $\|.\|_{\infty,[t_0,t_0+T]}$. 
+By its definition $\cC_{t_0,x}$ is immediately a closed convex set of $\cC^0$. Let us show that $\Phi(\cC_{t_0,x})$ is relatively compact in $\cC^0$. It is obviously equicontinuous as
+$\|\Phi(\theta)\|_{\gamma}\le K$ and relatively bounded as $|\Phi(\theta)_t|\le |x| + K(t-t_0)^\gamma$. Hence by Ascoli theorem $\Phi(\cC_{t_0,x})$ is relatively compact. Thanks to Leray-Schauder-Tychonoff fixed point theorem, there exists $\theta^{t_0,x}$ such that 
+$\theta^{t_0,x}_t=\Phi(\theta^{t_0,x})_t= x + \int_0^t\left(\sigma_{\dd u}^w b\right)(\theta^{t_0,x}_u)$.
+We then construct by induction a solution on the whole interval. For $n$ such that $nT\le1$ let $\theta^0 = \theta^{0,x_0}$ and $\theta^n = \theta^{nT,\theta^{n-1}_{nT}}$. Let us define $\theta_t=\theta^n_t$ if $t\in[nT,(n+1)T]$. By an immediate induction, $\theta$ is solution of the equation
+$\theta_t=x_0+\int_0^t\left(\sigma^w_{\dd u}b\right)(\theta_u)$
+and then is obviously in $\cC^{0,\gamma}$. 
+\end{proof}
+%
+\begin{remark}
+The previous theorem holds also for $b \in \cF L^{\alpha+\vartheta}$ with $(1+\vartheta)\gamma > 1$.
+\end{remark}
+%
+\begin{theorem}
+For all $b\in\cF L^{\alpha+2}$ the solution $\theta\in \cC^{0,\gamma}([0,1],\RR^d)$ to eq.~\eqref{eq:young-sigma} is unique. 
+\end{theorem}
+%
+\begin{proof}
+Let start with a lemma 
+\begin{lemma}\label{lemma quadriangulation}
+For all $a,b,c,d\in\RR$,
+$$\left|e^{ia}-e^{ib}-e^{ic}+e^{id}\right|\le|(a-b)-(c-d)|(1+|b-d|+|c-d|)+|b-d||c-d|$$
+\end{lemma}
+\begin{proof}
+Let $f(u,v)=d+u(c-d)+v(b-d)+uv((a-b)-(c-d))$
+then an immediate calculus shows that
+\begin{equation*}
+\begin{split}
+& e^{ia}-e^{ib}-e^{ic}+e^{id}  =
+\int_{0}^1\dd u \int_{0}^1\dd v \partial_2\partial_1 e^{if(u,v)}
+\\  & =
+i\int_{0}^1\dd u \int_{0}^1\dd v (\partial_2\partial_1 f)(u,v)e^{if(u,v)} - (\partial_2f)(u,v)(\partial_1 f)(u,v)e^{if(u,v)}
+\\ & =
+\int_{0}^1\dd u \int_{0}^1\dd v \left(\left(i - v(c-d)+u(b-d)\right)((a-b)-(c-d))+ (b-d)(c-d)\right) e^{if(u,v)}
+\end{split}
+\end{equation*}
+and the result follow easily.
+\end{proof}
+Thanks to that lemma, it is easy to show that for all $f\in\cF L^{\alpha+2}$ when $\tau_x f = f(x+.)$ and for all $x_1,x_2,y_1,y_2\in\RR^d$,
+\begin{multline*}
+N_{\alpha}\left(\tau_{x_1}f-\tau_{y_1}f-\tau_{x_2}f+\tau_{y_2}f\right)
+\lesssim
+N_{\alpha+2}(f)\Big(|y_1-y_2||x_2-y_2|\\
++|(x_1-y_1)-(x_2-y_2)|\left(1+|y_1-y_2|+|x_2-y_2|\right)
+\Big)
+\end{multline*}
+We use the same notations as in the previous theorem. To prove the uniqueness of the solution, it is sufficient to prove that there exists $T$ small enough such that $\Phi_{t_0,x}$ is a contraction on $\cC_{t_0,x}$ for all $(t_0,x)\in [0,1]\times\RR^d$. If that condition holds, the fixed point of $\Phi_{t_0,x}$ on $\cC_{t_0,x}$ is unique, and the solution constructed in the previous theorem is unique. To obtain this result it is necessary to bound
+$$\left|\int_{s}^t\left(\sigma_{\dd r}^w b\right)(\theta_r)-\int_{s}^t\left(\sigma_{\dd r}^w b\right)(\psi_r)\right|$$
+with a function of the norm $\|\theta-\psi\|_\gamma$.
+We have, for $x_1,x_2,y_1,y_2\in\RR^d$, 
+\begin{eqnarray*}
+\lefteqn{\left|\left(\sigma_{s,t}^wb\right)(x_1+z)-\left(\sigma_{s,t}^wb\right)(y_1+z)-\left(\sigma_(s,t)^wb\right)(x_2+z)+\left(\sigma_{s,t}^wb\right)(y_2+z)\right|}\\
+&=&
+\left|\sigma^w_{s,t}\left(\tau_{x_1}b-\tau_{y_1}b-\tau_{x_2}b+\tau_{y_2}b\right)(z)\right|\\
+&\le& 
+K^w_{\alpha,\gamma}N_{\alpha}\left(\tau_{x_1}b-\tau_{y_1}b-\tau_{x_2}b+\tau_{y_2}b\right)
+|t-s|^\gamma|\\
+&\lesssim&
+K^w_{\alpha,\gamma}N_{\alpha+2}(b)\Big((x_1-x_2)-(y_1-y_2)|(1+|y_1-y_2|+|x_2-y_2|)\\
+&&\quad\quad\quad\quad\quad\quad+|y_1-y_2||x_2-y_2|\Big)
+\end{eqnarray*}
+By a similar method to the proof of Theorem~\ref{young integral} it is easy to prove that 
+\begin{multline*}
+\left|\int_s^t\left(\sigma^w_{\dd r}b\right)(\theta_u)-\int_s^t\left(\sigma^w_{\dd r}b\right)(\psi_u)-\left(\left(\sigma^w_{s,t}b\right)(\theta_s)-\left(\sigma^w_{s,t}b\right)(\psi_s)\right)\right|\\
+\le K^w_{\alpha,\gamma}N_{\alpha+2}|t-s|^{2\gamma}
+ \Bigg(\|\psi\|_{\gamma[t_0,t_0+T]}\|\theta-\psi|_{\infty,[t_0,t_0+T]}\\
+ 	+\|\theta-\psi\|_{\gamma,[t_0,t_0+T]}\left(1+\|\theta-\psi\|_{\infty,[t_0,t_0+T]}+\|\psi\|_{\gamma,[t_0,t_0+T]} \right)
+ \Bigg)
+\end{multline*}
+As $\theta,\psi\in\cC_{t_0,x}$, the following estimation holds
+\begin{eqnarray*}
+\left\|\Phi(\theta)-\Phi(\psi)\right\|_{\gamma,[t_0,t_0+T]}
+&\lesssim&
+T^\gamma K^w_{\alpha,\gamma} N_{\alpha+2}(b)\|\theta-\psi\|_{\gamma,[t_0,t_0+T]}
+\end{eqnarray*}
+which conclude the proof with $T$ small enough. 
+\end{proof}
+Another approach to uniqueness which does not require better regularity of $b$ ($b\in \cF L^{\alpha+1}$ instead of $b\in \cF L^{\alpha+2}$) goes through showing some stability by approximations and the preservation of the regularization property of $w$ on the approximating solutions. Let us explain this better. For $b\in\cF L^{\alpha+1}$ let $(b_n)_{n\ge 1}$ a sequence of smooth vectorfields converging to $b$ in  $\cF L^{\alpha+1}$. Let $(x^n)_{n\ge 1}$ the corresponding solutions to the equation
+\begin{equation}
+\label{eq:approx-ODE}
+x^n_t = x_0 +\int_0^t b_n(u,x^n_u) \dd u + w_t
+\end{equation}
+and write $\theta^n_t = x^n_t - w_t$. Let $\theta$ be a solution to the limiting Young equation and consider the difference $\Delta^n = \theta-\theta^n$ which solves 
+$$
+\Delta^n_t = \int_0^t (\sigma^w_{\dd u} b)(\theta_u) - \int_0^t b_n(u,x^n_u) \dd u 
+$$
+$$
+= \int_0^t (\sigma^w_{\dd u} (b-b_n))(\theta_u) + \int_0^t b_n(u,w_u + \theta_u) \dd u - \int_0^t b_n(u,x^n_u) \dd u
+$$
+$$
+= \int_0^t (\sigma^w_{\dd u} (b-b_n))(\theta_u) + \int_0^t b_n(u,x^n_u + \Delta^n_u) \dd u - \int_0^t b_n(u,x^n_u) \dd u
+$$
+$$
+= \int_0^t (\sigma^w_{\dd u} (b-b_n))(\theta_u) + \int_0^t (\sigma^{x_n}_{\dd u}b_n)(\Delta^n_u) - \int_0^t (\sigma^{x_n}_{\dd u}b_n)(0)
+$$
+For all $0\le s \le u < v \le t \le 1$, by standard Young integral estimates and (\ref{eq:sigma-bound-1}) (see above) we have
+\begin{eqnarray*}
+\left|\int_u^v (\sigma^w_{\dd r} (b-b_n))(\theta_r)\right| 
+&\lesssim&
+\left|\int_u^v (\sigma^w_{\dd r} (b-b_n))(\theta_r)-\sigma_{[u,v]}^w(b-b_n)(\theta_u\right| +\left|\sigma_{[u,v]}^w(b-b_n)(\theta_u)\right|\\
+&\lesssim&
+K^w_{\alpha,\gamma} N_{\alpha+1}(b-b_n)  |v-u|^\gamma(1+|v-u|^\gamma\|\theta\|_{\gamma,[s,t]})
+\end{eqnarray*}
+and
+\begin{eqnarray*}
+\left|\int_u^v (\sigma^{x_n}_{\dd r}b_n)(\Delta^n_r) - \int_u^v (\sigma^{x_n}_{\dd r}b_n)(0)\right| 
+&\lesssim& 
+\left|\int_u^v (\sigma^{x_n}_{\dd r}b_n)(\Delta^n_r) - \left(\sigma^{x_n}_{[u,v]}b_n\right)(\Delta^n_u)\right|\\
+&&
++\left|\left(\sigma^{x_n}_{[u,v]}b_n\right)(\Delta^n_u)-\left(\sigma^{x_n}_{[u,v]}b_n\right)(0)\right|\\ 
+&\lesssim&
+K^{x_n}_{\alpha,\gamma} N_{\alpha+1}(b_n) |v-u|^\gamma \left(|v-u|^\gamma\|\Delta^n\|_{\gamma,[s,t]} + |\Delta^n_u| \right)
+\end{eqnarray*}
+Hence
+\begin{eqnarray*}
+\left|\Delta^n_v-\Delta^n_u\right|
+&\le&
+\left|\int_u^v (\sigma^w_{\dd r} (b-b_n))(\theta_r)\right| + \left|\int_u^v (\sigma^{x_n}_{\dd r}b_n)(\Delta^n_r) - \int_u^v (\sigma^{x_n}_{\dd r}b_n)(0)\right|\\
+&\le&
+ K^{w}_{\alpha,\gamma} N_{\alpha+1}(b-b_n)(v-u)^\gamma\left((v-u)^\gamma\|\theta\|_{\gamma, [s,t]}+1\right)\\
+&&
+ +  K^{x_n}_{\alpha,\gamma} N_{\alpha+1}(b)(v-u)^\gamma\left((v-u)^\gamma\|\Delta\|_{\gamma,[s,t]}+|\Delta^n_s|\right)
+\end{eqnarray*}
+Hence, if $(t-s)^\gamma ( K^{w}_{\alpha,\gamma}+ K^{x_n}_{\alpha,\gamma})N_{\alpha+1}(b)\le \frac12$
+\begin{eqnarray*}
+\|\Delta^n\|_{\gamma,[s,t]}
+&\le&
+K^w_{\alpha,\gamma} N_{\alpha+1}(b-b_n)\left((t-s)^\gamma\|\theta\|_{\gamma, [s,t]}+1\right)\\
+&&
+ + K^{x_n}_{\alpha,\gamma}N_{\alpha+1}(b)\left((t-s)^\gamma\|\Delta\|_{\gamma,[s,t]}+\|\Delta^n\|_{\infty,[s,t]}\right)\\
+ &\le&
+ \frac12\left(\|\theta\|_{\gamma,[s,t]}+(t-s)^{-\gamma}\right)\frac{N_{\alpha+1}(b-b_n)}{N_{\alpha+1}(b)} +  \frac12\left(\|\theta\|_{\gamma,[s,t]}+(t-s)^{-\gamma}\|\Delta^n\|_{\infty, [s,t]}\right)
+\end{eqnarray*}
+Furthermore, 
+\begin{eqnarray*}
+\frac{\left|\theta_v-\theta_u\right|}{(v-u)^\gamma}
+&\le&
+\left|\int_u^v\left(\sigma^w_{\dd r}b\right)(\theta_r)- \left(\sigma^w_v-\sigma^w_u\right)(b)(\theta_u)\right|+\left|\left(\sigma^w_v-\sigma^w_u\right)(b)(\theta_u)\right|\\
+&\le&
+K^w_{\alpha,\gamma} N_{\alpha+1}(b)(v-u)^\gamma\left(\|\theta\|_{\gamma,[s,t]}+(t-s)^{-\gamma}\right)
+\end{eqnarray*}
+and then
+$$\|\theta\|_{\gamma,[s,t]}\le(t-s)^{-\gamma}$$
+which gives
+\begin{equation}\label{eq:gronwall like 1}
+\|\Delta^n\|_{\gamma,[s,t]}\le2(t-s)^{-\gamma}\frac{N_{\alpha+1}(b-b_n)}{N_{\alpha+1}(b)} + (t-s)^{-\gamma}\|\Delta\|_{\infty,[s,t]}
+\end{equation}
+Furthermore, we also have
+\begin{eqnarray*}
+\|\Delta^n\|_{\infty,[s,t]}
+& \le &
+|\Delta_s|
++K^w_{\alpha,\gamma}N_{\alpha}(b-b_n)(t-s)^{\gamma}\left((t-s)^{\gamma}\|\theta\|_{\gamma,[s,t]}+1\right)\\
+&&
++ K^{x_n}_{\alpha,\gamma}N_{\alpha}(b)(t-s)^{\gamma}\left((t-s)^{\gamma}\|\Delta^n\|_{\gamma,[s,t]} + |\Delta^n_s|\right)\\
+&\le&
+|\Delta_s|+\frac{N_{\alpha+1}(b-b_n)}{N_{\alpha}(b)}+\frac12\left((t-s)^\gamma\|\Delta\|_{\gamma,[s,t]}+|\Delta_s|\right)\\
+&\le&
+|\Delta_s|+\frac{N_{\alpha+1}(b-b_n)}{N_{\alpha}(b)} + \frac12\left(2\frac{N_{\alpha}(b-b_n)}{N_{\alpha+1}(b)}+\|\Delta\|_{\infty,[s,t]}+|\Delta_s|\right)\\
+\end{eqnarray*}
+Hence
+\begin{equation}\label{eq:gronwall like 2}
+\|\Delta\|_{\infty,[s,t]}\le4\frac{N_{\alpha+1}(b-b_n)}{N_{\alpha}(b)} + 3 |\Delta_s|
+\end{equation}
+We want now to extend this estimate for all $S<T$ in $[0,1]$.
+Let 
+$$h=\left(2 N_{\alpha+1}(b)\left(K^w_{\alpha,\gamma}+K^{x_n}_{\alpha,\gamma}\right)\right)^{-\frac1\gamma}$$
+Let $N = \lfloor (T-S)/h\rfloor$ and for $i\in\{0,\dots,N\}$, $t_i=ih+S$ and $t_{N+1}=T$.
+We have by induction
+
+\begin{eqnarray*}
+\|\Delta^n\|_{\infty,[t_i,t_{i+1}]}
+&\le&
+C_13^i\left(\frac{N_{\alpha+1}(b-b_n)}{N_{\alpha+1}(b)}+\left|\Delta_S\right|\right)\\
+&\le&
+C_1\exp\left(C_2(T-S)\left(\log(3)N_{\alpha+1}(b)(K^w_{\alpha,\gamma}+K^{x_n}_{\alpha,\gamma})\right)^{\frac1\gamma}\right)\\
+&&{}{}{}\left(\frac{N_{\alpha+1}(b-b_n)}{N_{\alpha+1}(b)}+\left|\Delta_S\right|\right)\\
+\end{eqnarray*}
+Where $C_1$ and $C_2$ are some constants which might depend on $H,b,d,\alpha,\gamma$. The same estimate holds for all $i$, and as $\sup_i \left\{\|\Delta^n\|_{\infty,[t_i,t_{i+1}]}\right\}=\|\Delta^n\|_{\infty,[0,1]}$ it also holds for $\|\Delta^n\|_{\infty,[0,1]}$.
+This estimate shows that uniqueness will hold as soon as $K^{x_n}_{\alpha,\gamma} \to \infty$ not too fast with respect to the speed at which $N_{\alpha+1}(b-b_n)$ goes to zero. In particular we have the following theorem
+\begin{theorem}
+\label{th:uniqueness-approx}
+Let $b\in \cF L^{\alpha+1}$, then a sufficient condition for uniqueness of solutions to
+ eq.~\eqref{eq:young-sigma} is that there exist a sequence of smooth $(b_n)_{n\ge 1}$ such that $b_n \to b$ in $\cF L^{\alpha+1}$ and there exists $\rho > 0$ such that
+$$
+e^{\rho (K^{x_n}_{\alpha,\gamma})^{1/\gamma}} N_{\alpha+1}(b-b_n)\to 0
+$$ 
+as $n\to\infty$ where $x^n$ is a solution to the ODE~\eqref{eq:approx-ODE}.
+\end{theorem}
+\begin{proof}
+By the above estimate we have
+$$
+\|\Delta^n\|_{\infty,[0,T]} \lesssim e^{c T (K^{x_n}_{\alpha,\gamma})^{1/\gamma}} N_{\alpha+1}(b-b_n)
+$$
+where the constants can depend on $b$ but are uniform in $n$. Then choosing $T$ small enough we obtain $\|\Delta^n\|_{\infty,[0,T]} \to 0$ as $n\to \infty$. By proceeding in such a way on the interval $[T, 2T]$ and so on we obtain that $\Delta_t = 0$ for all $t\in [0,1]$. This means that $x_n \to x$ and so since the solutions $x_n$ are unique, there can be only one limit point $x$.
+\end{proof}
+\bigskip
+An easy consequence of the above result is obtained by considering the estimate of the averaging constant of $x_n$ given in Lemma~\ref{lemma:averaging-perturbation-basic}:
+\begin{lemma}
+\label{lemma:averaging-perturbation}
+Assume that $\alpha+\gamma+1\ge 0$. Then if $b\in \cF L^{\alpha+\gamma+1}$ we have $\sup_n K^{x_n}_{\alpha+\gamma,\gamma}<+\infty$.
+\end{lemma}
+\begin{proof}
+Applying Lemma~\ref{lemma:averaging-perturbation-basic} to $\theta^n=x^n-\theta$ we get
+$
+K^{x_n}_{\alpha+\gamma,\gamma} \lesssim K^w_{\alpha,\gamma} (1+\|\theta^n\|_1^\gamma)
+$
+but since $b\in\cF L^{\alpha+\gamma+1}\subset \cF L^0$ we have $\|\theta^n\|_1 \le \|b\|_\infty \le N_{\alpha+\gamma+1}(b)$ so the claim follows.
+\end{proof}
+\bigskip
+In the end, let us give some easy results of approximation in the space $\left(\cF L^\alpha,N_\alpha\right)$.
+\begin{lemma}\label{approximation dans alpha}
+Let $\alpha<1$ and $b\in \cF L^{\alpha}$, then there exists a sequence $(b_n)_n$ of element of $\cF L^{\alpha}$ such that 
+$$N_\alpha(b_n)\le N_\alpha(b)$$
+$$N_\alpha(b-b_n)\underset{n\to\infty}{\to}0$$
+and for all $n\in\NN-\{0\}$, $b_n$ is a Lipschitz continuous function in the second variable and $\forall t\in\RR$, $\|b_n(t,.)\|_{\mathrm{Lip}}\le C N_\alpha(b) n^{1-\alpha}$.
+\end{lemma}
+
+\begin{proof}
+Let $\alpha<1$ and $f\in\cF L^\alpha$. Let us define for all $n\in \NN$ and for all $(w,\xi) \in \RR\times\RR^d$,
+$$b_n(w,\xi) = \left(\frac{n}{n+|\xi|}\right)^{1-\alpha}\hat b (w,\xi)$$
+Hence, 
+\begin{eqnarray*}
+N_\alpha(b-b_n)
+&=&
+\int_\RR \dd w \int_{\RR^d} \dd \xi \left(1-\left(\frac{|\xi|}{n+|\xi|}\right)^{1-\alpha}\right)\left|\hat b (w,\xi)\right|(1+|\xi|)^\alpha\left(\log_+^{\frac12}|\xi|+1\right)\\
+&\overset{n\to\infty}{\to}&
+0
+\end{eqnarray*}
+As $1-\left(\frac{n}{n+|\xi|}\right)^{1-\alpha}$ converges to zero and is bounded by $1$.
+Furthermore, as $\left(\frac{n}{n+|\xi|}\right)^n$ is bounded by $1$, $|\hat b_n|$ is integrable and then $b_n$ is a continuous function and
+\begin{eqnarray*}
+\left|b_n(t,x)-b_n(t,y)\right|
+&\le&
+\int_\RR \dd w \int_{\RR^d} \dd \xi \left(\frac{n}{n+|\xi|}\right)^{1-\alpha}\left|\hat b (w,\xi)\right|\left|\exp(i\la y,\xi\ra - \exp(i\la y,\xi\ra)\right|\\
+&\le&
+n^{1-\alpha}\int_\RR \dd w \int_{\RR^d} \dd \xi |\xi|^{\alpha}\left(\frac{|\xi|}{n+|\xi|}\right)^{1-\alpha}\left|\hat b (w,\xi)\right|\left|x-y\right|\\
+&\le&
+n^{1-\alpha}N_{\alpha}(b)|x-y|
+\end{eqnarray*}
+\end{proof}
+
+\subsection{Flow} 
+
+Provided that $K^w_{\alpha,\gamma}<\infty$ for some $\alpha\in\RR$ and the associated $\gamma>1/2$, we can resume the previous results as the following theorem
+\begin{theorem}
+For all $b\in\cF L^{\alpha+2}$ (respectively $\alpha+\gamma+1\ge 0$ and $b\in\cF L^{\alpha+\gamma+1}$) and all $x\in\RR^d$, there exists a unique solution $\theta\in C(\RR^d;C^{0,\gamma}(\RR_+;\RR^d))$ of the following equation
+$$\theta_t(x) = x + \int_0^t\left(\sigma^w_{\dd u}b\right)(\theta_u(x))$$
+furthermore, $\theta$ is Lipschitz continuous in space uniformly in time.
+\end{theorem}
+
+\begin{proof}
+We only have to prove the Lipschitz continuity of the flow. Furthermore, thanks to the previous results, we have shown that for smooth $b_n\in\cF L^{\alpha+2}$ (respectively $\cF L^{\alpha+\gamma+1}$) such that $b_n\overset{N_{\alpha+2} (\mathrm{resp.} N_{\alpha+\gamma+1}) }{\longrightarrow} b$ with $N_{\alpha+2}(b_n)\le N_{\alpha+2}(b)$ (resp $N_{\alpha+\gamma+1}(b_n)\le N_{\alpha+\gamma+1}(b)$), for all $x\in\RR^d$, $\theta^n_.(x)$ converges to $\theta_.(x)$ uniformly. It is then enough to prove that for all $t\in[0,1]$, the flow $\theta^n$ is differentiable, and that the Jacobian map is uniformly bounded in time, space and $n$. First, if $b_n$ is smooth enough, the Jacobian map exists and verifies the following equation : 
+$$D\theta^n_t(x) = I + \int_{0}^t Db_n(u,\theta^n_u(x)+w_u)\circ D\theta^n_u(x)\dd u $$ 
+Furthermore
+\begin{eqnarray*}
+\left(\sigma^w_tDb_n\right)(x) 
+&=&
+\int_\RR \dd \omega\int_{\RR^d}\dd \xi \hat{Db_n}(\omega,\xi)\exp(i\la\xi,x\ra+i\omega t)Y_{[0,t]}(\omega,\xi)\\
+&=&
+\int_\RR \dd \omega\int_{\RR^d}\dd \xi i\hat{b_n}(\omega,\xi)\la\xi\right|\exp(i\la\xi,x\ra+i\omega t)Y_{[0,t]}(\omega,\xi)\\
+\end{eqnarray*}
+Hence, if $b\in\cF L^{\alpha+2}$, 
+\begin{eqnarray*}
+|\sigma^w_{[s,t]}Db_n(x)\circ\varphi-\sigma^w_{[s,t]}Db_n(y)\circ\psi|
+&\le&
+K_{\alpha,\gamma}^w N_{\alpha+2}(b_n)(t-s)^{\gamma}\left(|\varphi-\psi|+|\psi||x-y|\right)
+\end{eqnarray*}
+which gives
+\begin{multline}\label{eq:bound-flow-lipschitz}
+|D\theta^n_t(x)-D\theta^n_s(x)|
+\lesssim
+K_{\alpha,\gamma}^wN_{\alpha+2}(b_n)(t-s)^\gamma\left(|D\theta^n_s(x)|\right.
++(t-s)^\gamma\|D\theta^n_.(x)\|_{\gamma,[s,t]}\\
+\left.+(t-s)^\gamma\|D\theta^n_.(x)\|_{\infty,[s,t]}\|\theta^n_.(x)\|_{\gamma,[s,t]}\right)
+\end{multline}
+
+If $b\in\cF L^{\alpha+\gamma+1}$,
+\begin{eqnarray*}
+|\sigma^w_{[s,t]}Db_n(x)\circ\varphi-\sigma^w_{[s,t]}Db_n(y)\circ\psi|
+&\le&
+K_{\alpha,\gamma}^w N_{\alpha+\gamma+1}(b_n)(t-s)^{\gamma}\left(|\varphi-\psi|+|\psi||x-y|^\gamma\right)
+\end{eqnarray*}
+which gives
+\begin{multline}\label{eq:bound-flow-holder}
+|D\theta^n_t(x)-D\theta^n_s(x)|
+\lesssim
+K_{\alpha,\gamma}^wN_{\alpha+2}(b_n)(t-s)^\gamma\left(|D\theta^n_s(x)|\right.
++(t-s)^\gamma\|D\theta^n_.(x)\|_{\gamma,[s,t]}\\
+\left.+(t-s)^\gamma\|D\theta^n_.(x)\|_{\infty,[s,t]}\|\theta^n_.(x)\|_{1}^\gamma \right)
+\end{multline}
+Equations (\ref{eq:bound-flow-lipschitz}) and (\ref{eq:bound-flow-holder}) allow us to conclude with a Gronwall like method similar to what we use in (\ref{eq:gronwall like 1}) and (\ref{eq:gronwall like 2}).
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Estimations of the averaging constant}
+
+\label{sec:est-averaging}
+
+In this section we provide bounds of the averaging constant $K^w_{\alpha,\gamma}$ of $w$ in terms of quantities which are  amenable to straighforward estimations in concrete cases, in particular when $w$ is a sample path of a stochastic process. 
+
+\begin{lemma}\label{lemma majoration 1/2}
+Let $(\omega,\xi)\in (\RR\times\RR^d)$, then the following inequality holds for all $H>0$ and for all $0<\lambda\le 1$, where $C_{H,d}$ is a constant depending on $H$ and $d$:
+
+\begin{equation*}
+\begin{split}\left|Y_{[s,t]}(\omega,\xi)\right| \le 
+C_{H,d} \sqrt{t-s}(1+|\xi|)^{-\frac 1 {2H}}\left(1+ Q^w_\lambda+\sqrt{|\log (t-s)|} \right.\\ \left.+ \sqrt{\log (1+ |\omega|)} + \sqrt{\log (1+ |\xi|)} \right)
+\end{split}
+ \end{equation*}
+where $Q^w_\lambda=\sqrt{\log S^w_\lambda}+\sqrt{\log R^w_\lambda}$ ;
+$$
+ R^w_\lambda = \left|\int_0^1 \exp\left(\lambda|w_u|^2\right)\dd u\right|^{\frac1\lambda}
+$$
+and
+\begin{multline*}
+S^w_\lambda =
+\left(\sum_{n,m \ge 0}
+	\sum_{k=0}^{2^n-1}
+		\sum_{(w,\xi) \in (\ZZ/2^m)^{d+1}} \frac{2^{-2n-m}
+		e^{\lambda 2^{n} (1+|\xi|)^{\frac 1 H} |Y_{[ k {2^{-n}}, {(k+1)} {2^{-n}}]}\left(\omega,\xi\right)|^2}}{(|\omega|+1)^{2}(|\xi|+1)^{d+1}}	%\right.\\\left.
+					\vphantom{\sum_{n,m \ge 0}}
+\right)^{\frac 1 \lambda}
+\end{multline*}
+\end{lemma}
+
+\begin{proof}
+The following bound holds for all $\big((\omega,\xi),(\omega',\xi')\big)\in \left(\RR\times\RR^d\right)^2$ : 
+
+\begin{eqnarray}\label{majoration lipschitz}
+\left|Y^w_{[s,t]}(\omega,\xi)-Y^w_{[s,t]}(\omega',\xi')\right|
+&\le&
+\int_{s}^t\left|\exp\left(i\la\xi,w_u\ra+i \omega u \right) - \exp\left(i\la\xi',w_u\ra+i \omega' u \right)\right|\dd u\nonumber\\
+&\le&
+\int_{s}^t\left|\la\xi-\xi',w_u\ra + (\omega-\omega')u\right|\dd u\nonumber\\
+&\le&
+Z^w_{[s,t]}|\xi-\xi'|+(t-s)|\omega-\omega'|.
+\end{eqnarray}
+where
+$Z^w_{[s,t]}=\int_s^t|w_u|\dd u$.
+Now
+\begin{eqnarray*}
+Z^w_{[s,t]}
+&\lesssim&
+(t-s)\left(\sqrt{{\frac1\lambda}\log\left(\int_s^t \exp(\lambda|w_u|^2) \frac{\dd u}{t-s}\right)}\right)\\
+&\lesssim&
+ (t-s)\left(\sqrt{\log R^w_\lambda}+\sqrt{{\frac1\lambda}|\log t-s}|\right)\\
+&\le&
+C\left(\sqrt{\log R^w_\lambda}+1\right)(t-s)^{1-\eps}
+\end{eqnarray*}
+Then for all $\eps>0$ there exists a constant $C>0$ such that for all $(\omega,\xi)\in\RR\times\RR^d$ and all $s,t\in[0,1]$,
+\begin{equation}\label{majoration Y quasi lipschitz}
+|Y^w_{[s,t]}(\omega,\xi)-Y^w_{[s,t]}(\omega',\xi')|\le C(\sqrt{\log R^w_\lambda}+1)(t-s)^{1-\eps}(|\omega-\omega'|+|\xi-\xi'|)
+\end{equation}
+For $m\ge0$, if $\omega\in 2^{-m}\ZZ$ and $\xi \in (2^{-m}\ZZ)^d$ we have
+\begin{equation*}
+|Y_{[\frac k {2^{n}},\frac {k+1} {2^{n}}]}(\omega,\xi)| 
+\le 
+2^{-n/2} (1+|\xi|)^{-1/2H} \log^{1/2}\left[(1+|\xi|)^{d+1} (1+|\omega|)^2 2^{2n+m} S^w_\lambda\right]
+\end{equation*}
+Now for any $\omega'\in\RR$ and $\xi'\in\RR^d$ consider the nearest $\omega\in 2^{-m}\ZZ$ and $\xi \in 2^{-m}\ZZ^d$ for given $m$, then
+$|\omega-\omega'|+|\xi-\xi'|\lesssim 2^{-m}$
+and
+\begin{eqnarray*}
+|Y_{[\frac k {2^{n}},\frac {k+1} {2^{n}}]}(\omega',\xi')| 
+&\le&
+|Y_{[\frac k {2^{n}},\frac {k+1} {2^{n}}]}(\omega',\xi')-Y_{[\frac k {2^{n}},\frac {k+1} {2^{n}}]}(\omega,\xi)|+|Y_{[\frac k {2^{n}},\frac {k+1} {2^{n}}]}(\omega,\xi)|\\
+&\lesssim&   
+2^{-(1-\eps)n} \max(\log^{1/2}R^w_\lambda,1) 2^{-m}\\
+&& 
++ 
+2^{-n/2} (1+|\xi|)^{-1/2H} \log^{1/2}\left[(1+|\xi|)^{d+1} (1+|\omega|)^2 2^{2n+m} S^w_\lambda\right]\\
+\end{eqnarray*}
+so you can take $\eps=1/2$, $m$ large enough such that 
+$2^{-m}\le|\xi'|^{-1/2H}$ 
+and such that
+$2^{-m}\lesssim|\xi'|$ 
+thanks to those conditions there exists $C>0$ such that
+$C/2\le|\xi'|\le|\xi|\le C|\xi'|$
+and we get the better estimate
+\begin{multline*}
+|Y_{[\frac k {2^{n}},\frac {k+1} {2^{n}}]}(\omega',\xi')|
+\lesssim 
+2^{-n/2}(1+|\xi|)^{-\frac1{2H}} \\\left(  1+\log^{1/2}R^w_\lambda + \log^{1/2} S^w + \log^{1/2}(1+|\omega'|) + \log^{1/2}(1+ |\xi'|) + n^{1/2}\right)
+\end{multline*}
+We extend this bound for all $s<t$ in $[0,1]$ by using the following argument. Let $0\le s < t \le 1$. Let $0 \le s < t \le 1$, and $n\in\NN$ the bigger $n'$ such that $2^{-(n'+1)} \le t-s \le 2^{-n'}$. By definition of $n$ there
+exists $l$ such that $ l/ {2^n}\le s < t \le  {(l+1)}/ {2^n}$. We can find some sequences $(s_k)_{k\ge1}$ and
+$(t_k)_{k\ge1}$ such that $(s_k)$ decreases, $(t_k)$ increases, $s_1=t_1= {(2k+1)}/{2^{n+1}}$, $\lim_{k\to\infty}s_k = s$,
+$\lim_{k\to\infty}t_k = t$, $s_{k+1}-s_k\le 2^{n+k+1}$, $t_{k+1}-t_k \le 2^{n+k+1}$ and $2^{n+k}t_k\in \ZZ$ and $2^{n+k}s_k\in
+\ZZ$. Hence
+$[s,t)=\cup_{k \ge 1} [s_{k+1},s_k) \cup \cup_{k \ge 1} [t_{k},t_{k+1})$
+and thanks to the definition of the sequences, the following inequalities hold
+\begin{equation}
+\label{method Y}
+\begin{split}
+\left|Y^w_{\left[s,t\right]}\right|
+&\le
+\sum_{k \ge 1}\left(\left|Y^w_{[s_{k+1},s_k[}\right|+\left|Y^w_{[t_k,t_{k+1}[}\right|\right)\nonumber%\\ &\le&
+\le
+C_1 \sum_{k\ge1}2^{-(n+k)/2}\left(\sqrt{(n+k)}+C_2\right)
+\\ &\lesssim
+C_1 2^{-(n+1)/2}\left(C_2+\sqrt{n}\right)
+\lesssim
+C_1 (t-s)^{1/2} \left(C_2+\sqrt{\left|\log(t-s)\right|}\right)
+\end{split}
+\end{equation}
+where $C_1=(1+ |\xi|)^{-1/2H}$ and $C_2 =  1+\log^{1/2}R^w_\lambda +\log^{1/2} S^w_\lambda+\log^{1/2}(1+ |\omega|) + \log^{1/2}(1+ |\xi|)$.
+Then following bound holds for all $s,t$ and for all $\omega,\xi$:
+\begin{multline*}
+\left|Y_{[s,t]}(\omega,\xi)\right| \lesssim \sqrt{t-s}(1+|\xi|)^{-\frac 1 {2H}}\\
+\left(1+Q^w_\lambda+\sqrt{|\log (t-s)|} + \sqrt{\log (1+ |\omega|)} + \sqrt{\log (1+ |\xi|)} \right)
+\end{multline*}
+where $C$ is a constant depending on $d$, $\cD$ and $H$ and 
+$Q^w_\lambda = \sqrt{\log R^w_\lambda}+  \sqrt{\log S^w_\lambda}$.
+\end{proof}
+
+\begin{theorem}\label{theorem majoration K}
+For any $H> 0$, any $0<\lambda\le1$ and for all $\alpha>-1/2H$ there exists $\gamma > 1/2$ such that 
+$$
+K^w_{\alpha,\gamma} \lesssim 1+ Q^w_\lambda
+$$
+\end{theorem}
+\begin{proof}
+Interpolating between the inequality above  and the trivial one
+$
+|Y_{[s,t]}(\omega,\xi)| \le |t-s|
+$
+we get for all $0\le  \eps \le 1$:
+\begin{multline*}
+\left|Y_{[s,t]}(\omega,\xi)\right| \lesssim (t-s)^{1/2+\eps/2} (1+|\xi|)^{-\frac {1-\eps} {2H}}\\
+\left(1+Q^w_\lambda+\sqrt{|\log t-s|} + \sqrt{\log (1+|\omega|)} + \sqrt{\log(1+ |\xi|)} \right)
+\end{multline*}
+and by loosing a bit of the powers we can get rid of two logaritmic corrections in $t-s$ and $\xi$:
+$$\left|Y_{[s,t]}(\omega,\xi)\right| \lesssim (t-s)^{1/2+\eps/4} (1+|\xi|)^{-\frac {1} {2H}+\frac {2\eps} {2H}}\left(1+Q^w_\lambda\right)\left(1+ \sqrt{\log (1+ |\omega|)} \right)$$
+which implies directly the statement by taking $\alpha=-\frac1{2H}+\frac{2\eps}{2H}$ and $\gamma=\frac12+\frac\eps4=\frac58+\frac{H\alpha}4$.
+\end{proof}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Averaging properties of the fBm}
+\label{sec:prob-fbm}
+
+The aim of this section is to prove the following theorem :
+
+\begin{theorem}\label{probabilistic estimate}
+Let $W$ a fBm with Hurst parameter $H$ then for all $\alpha < 1/2H$ there exists $\gamma > 1/2$ such that  the random variable $K^W_{\alpha,\gamma}<\infty$ almost surely. 
+\end{theorem}
+We will use Theorem~\ref{theorem majoration K} to reduce the estimation of $K^W_{\alpha,\gamma}$.
+ to that of $Q^W_\lambda$ and $R^W_\lambda$. For this second r.v. we easily have:
+\begin{lemma}
+For all $\lambda<1/2$  the r.v. $R^W_\lambda$ is finite a.s.
+\end{lemma}
+\begin{proof}
+By Jensen's inequality
+\begin{eqnarray*}
+\expect\left[R^W_\lambda\right]
+&=&
+\expect\left[\left(\int_0^1\exp\left(\lambda |W_ u|^2\right)\dd u\right)^{\frac1\lambda}\right]
+\le
+\left(\int_0^1 \expect\left[\exp \left(\lambda \right|W_u\left|^2\right)\right]\dd u \right)^{\frac1\lambda}\\
+&=&
+\left(\int_0^1 \frac 1 {(1-2u^{2H}\lambda)^{\frac d2}}\dd u\right)^\frac1\lambda
+\le
+(1-2\lambda)^{-\frac d{\lambda2}}
+\end{eqnarray*}
+\end{proof}
+
+
+
+
+ To deal with $Q^W_\lambda$ we use some Gaussian calculus, and  a combinatoric argument borrowed from~\cite{NRT}.
+Let $0\le s< t \le 1$ be fixed from now. For integer $p>0$ let $\sigma\in\S_{2p}$ and define 
+$\Delta_{\sigma}:=\Delta_{2p,\sigma,[s,t]}=\{(t_1,\dots,t_{2p})\in[s,t]^{2p}\ : \ s\le t_{\sigma(1)} \le \dots \le
+t_{\sigma(2p)} \le t \}$.
+Moreover let $(t_1,\dots,t_{2p})\in\Delta_{\sigma}$ and define $(a_k^\sigma)_{1 \le k\le 2p-1}$ by 
+$$\sum_{k=1}^p(W_{t_k}-W_{t_{k+p}})=\sum_{k=1}^{2p-1}a_{k}^\sigma (W_{t_{\sigma(k+1)}}-W_{t_{\sigma(k)}}).$$ and $\eps(k)$ by
+$\sum_{k=1}^p W_{t_{k}}-W_{t_{k+p}} = \sum_{k=1}^{2p}\eps(k)W_{t_k}$.
+The relation between $\eps(\sigma(k))$ and $a^\sigma_k$ is given by the following Lemma.
+\begin{lemma}
+For $\sigma\in\S_{2p}$ and $k\in\{1,\dots,2p-1\}$, 
+$a_k^\sigma=-\sum_{l=1}^{k}\eps(\sigma(l))$.
+\end{lemma}
+\begin{proof}
+Let $\sigma\in\S_{2p}$. By the definition of $\Delta_\sigma$ and $\eps$, we have, for $(t_1,\dots,t_{2p})\in \Delta_{\sigma}$,
+$\sum_{k=1}^{2p}\eps(k)W_{t_{k}}=\sum_{k=1}^{2p}\eps(\sigma(k))W_{t_{\sigma(k)}}$.
+ Hence, by definition of the $a_k^\sigma$, it holds that
+\begin{eqnarray*}
+\sum_{k=1}^{2p-1}a_k^\sigma\left(W_{t_{k+1}}-W_{t_{k}}\right)
+& \underbrace{=}_{a_0^\sigma=a_{2p}^\sigma=0} &
+\sum_{k=1}^{2p}\left(a_{k-1}^\sigma-a_k^\sigma\right)W_{t_{\sigma(k)}}
+= 
+\sum_{k=1}^{2p}\eps(\sigma(k))W_{t_{\sigma(k)}}
+\end{eqnarray*}
+% The following system holds for the $\left(a_k^\sigma\right)_k$ 
+%\left(
+%\begin{array}{ccccc}
+%-1 & 0 &  & & \\
+%1 & -1 & \ddots & & \\
+% & \ddots & \ddots & \ddots & \\
+% & & \ddots & -1 & 0\\
+% & & & 1 & -1  
+%\end{array}
+%\right)
+%.
+%\left(
+%\begin{array}{c}
+%a_1^\sigma\\
+%a_2^\sigma\\
+%\vdots\\
+%a_{2p-1}^\sigma\\
+%a_{2p}^\sigma
+%\end{array}
+%\right)
+%=
+%\left(
+%\begin{array}{c}
+%\eps(\sigma(1))\\
+%\eps(\sigma(2))\\
+%\vdots\\
+%\eps(\sigma(2p-1))\\
+%\eps(\sigma(2p))
+%\end{array}
+%\right)
+%$$
+giving
+$a_k^\sigma=-\sum_{l=1}^{k}\eps(\sigma(l))$ (compapatible with the condition $a_{2p}^\sigma = 0$).
+\end{proof}
+
+\noindent The fractional Brownian motion possesses the property of local nondeterminism. It is a well known fact since an article from Berman in 1973 \cite{MR0317397}.  This property implies the following lemma which will be useful in the computation below.
+\begin{lemma}\label{lemma NRT}
+There exist a constant $K_H$ such that for all $0\le t_1\le \dots \le t_n$ and for any vector $(u_1,\dots, u_d)\in\RR^d$, we
+have
+$$Var\left(\sum_{i=2}^d u_i \left(W_{t_{i}}-W_{t_{i-1}}\right)\right)\ge K_H \sum_{i=2}^d u_i^2|t_i-t_{i-1}|^{2H}$$
+\end{lemma}
+Thanks to the two last lemma, we are able to easily obtain an estimation for $Y_{[s,t]}^W$.
+\begin{lemma}\label{lemma estimation L1}
+ For $\lambda$ small enough ($\lambda<1/4$) we have
+ $$ \expect
+ \exp\left(\lambda\frac{|\xi|^{\frac 1 H}} {(t-s)} |Y_{[s,t]}^W(\omega,\xi)|^2\right)
+\le C_\lambda <+\infty $$
+ where the constant $C_\lambda$ does not depend on $\omega,x,t,s$.
+\end{lemma}
+\begin{proof}
+We have
+\begin{equation*}
+\expect\left[\exp{\mu |Y_{[s,t]}^W(\omega,\xi)|^2}\right]=\sum_{p \ge 0} \frac {\mu^p} {p!}
+\expect\left[|Y_{[s,t]}^W(\omega,\xi)|^{2p}\right]
+\end{equation*}
+Hence, we must estimate
+$\expect[|\int_{s}^t \exp( i \la \xi , W_t \ra ) \dd t |^{2p}]$.
+With the above notation, the following computation holds :
+\begin{eqnarray*}
+\lefteqn{\expect\left[\left|\int_{s}^t \exp\left( i \la \xi , W_t \ra + i \omega t\right) \dd t \right|^{2p}\right]}\\
+&= &
+\left|
+	\expect\left[
+\int_{ [s,t]^{2p }}\prod_{k=1}^p \exp \left( i \la \xi , W_{t_k}-W_{t_{k+p}} \ra +i \omega (t_k-t_{k+p})\right) \dd t_{1}\dots \dd
+t_{2p}
+	\right]
+\right|\\
+& = & 
+\left|
+	\sum_{\sigma\in\S_{2p}}
+		\int_{\Delta_\sigma}
+			\expect\left[
+\exp\left( i \sum_{k=1}^{2p-1}a_k^{\sigma}\Big( \la \xi, W_{t_{\sigma(k+1)}}-W_{t_{\sigma(k)}}\ra + \omega\left(t_{\sigma(k+1)} -
+t_{\sigma(k)}\right)\Big)\right)\right]
+		\right.\\ 
+		&& 
+		\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad
+		 \dd t_{\sigma(1)}\dots \dd t_{\sigma(2p)}
+\Bigg|\\
+\end{eqnarray*}
+\begin{eqnarray*}
+& \le &
+\sum_{\sigma\in\S_{2p}}
+	\int_{\Delta_\sigma}
+		\left|\expect\left[
+\prod_{l=1}^{d}\exp\left( i \xi_l \sum_{k=1}^{2p-1}a_k^{\sigma}\left(W_{t_{\sigma(k+1)}}^l-W_{t_{\sigma(k)}}^l\right) \right)		
+		\right]\right|
+	\dd t_{\sigma(1)}\dots \dd t_{\sigma(2p)}
+\\
+& \underbrace {=}_{\coprod\ \mathrm {of\ } (W_t^l)_{l} } & 
+\sum_{\sigma\in\S_{2p}}
+	\int_{\Delta_\sigma}
+		\prod_{l=1}^{d}
+			\left|\expect\left[
+				\exp\left( 
+					i \xi_l \sum_{k=1}^{2p-1}a_k^{\sigma} \left(W_{t_{\sigma(k+1)}}^l-W_{t_{\sigma(k)}}^l\right) 
+				\right)
+			\right]\right|
+	\dd t_{\sigma(1)}\dots \dd t_{\sigma(2p)}
+\\
+& \underbrace {=}_{\mathrm{mBf}} &
+\sum_{\sigma\in\S_{2p}}
+	\int_{\Delta_\sigma}
+		\prod_{l=1}^{d}
+			\exp\left(
+				-\frac {\xi_l^2} 2 Var\left(\sum_{k=1}^{2p-1}a_k^{\sigma}\left(W_{t_{\sigma(k+1)}}^l-W_{t_{\sigma(k)}}^l\right)\right)
+			\right)
+	\dd t_{\sigma(1)}\dots \dd t_{\sigma(2p)}
+\\
+& \underbrace {\le}_{\mathrm{Lemma} \ \ref{lemma NRT}} &
+\sum_{\sigma\in\S_{2p}}
+	\int_{\Delta_\sigma}
+		\prod_{l=1}^{d}
+			\exp\left(
+				-\frac {K_H \xi_l^2} 2 \sum_{k=1}^{2p-1}\left(a_k^{\sigma}\right)^2\left|t_{\sigma(k+1)}-t_{\sigma(k)}\right|^{2H}
+			\right)
+	\dd t_{\sigma(1)}\dots \dd t_{\sigma(2p)}
+\\
+& \le & 
+\sum_{\sigma\in\S_{2p}}
+	\int_{\Delta_\sigma}
+		\exp\left(
+				-\frac {K_H |\xi|^2} 2 \sum_{k=1}^{2p-1}\left(a_k^{\sigma}\right)^2\left|t_{\sigma(k+1)}-t_{\sigma(k)}\right|^{2H}
+		\right)
+	\dd t_{\sigma(1)}\dots \dd t_{\sigma(2p)}\\
+\end{eqnarray*}
+
+\noindent As we have seen above, the $a_{2k}^\sigma$ are possibly null. The idea to deal we this fact is to neglect those term
+in the previous computation. In the worst case: $a_{2k}^\sigma=0$ and $\left|a_{2k+1}^\sigma\right|=1$. Hence, for any
+$\sigma\in\S_{2p}$,
+
+\begin{equation}
+\begin{split}
+\int_{\Delta_\sigma} &
+		\exp\left(
+			-\frac{K_H|\xi|^2} 2 
+			\sum_{k=1}^{2p-1}
+				\left(a_k^{\sigma}\right)^2 \left|t_{\sigma(k+1)}-t_{\sigma(k)}\right|^{2H}
+		\right)
+	\dd t_{\sigma(1)}\dots \dd t_{\sigma(2p)}
+ \\
+& \le 
+\int_{\Delta_\sigma}
+	\exp\left(
+		-\frac{K_H|\xi|^2} 2 \sum_{k=1}^{p} \left|t_{\sigma(2k)}-t_{\sigma(2k-1)}\right|^{2H}
+	\right)
+\dd t_{\sigma(1)}\dots \dd t_{\sigma(2p)}\\
+&= 
+\int_{s}^t\dd t_{\sigma(2p)}
+\int_{s}^{t_{\sigma(2p)}}\dd y_{\sigma(2p-1)}\exp\left(-\frac{K_H|\xi|^2} 2 y_{\sigma(2p-1)}^{2H}\right)\dots
+\int_{s}^{t_{\sigma(2)}}\dd y_{\sigma(1)}
+\\
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+\qquad & \le 
+\int_{\Delta_{p,id,[s,t]}}\dd t_{1}\dots \dd t_{p}
+\left(\int_{0}^\infty \dd y\exp\left(-\frac{K_H|\xi|^2} 2 y^{2H}\right)\right)^p\\
+& \le 
+\frac{(s-t)^p}{p!}\left(C\left(\frac {2} {K_H |\xi|^2} \right)^{\frac 1 {2H}} \right)^{p}\\
+& = 
+C_H\frac 1 {p!} \left(\frac {s-t} {|\xi|^{\frac 1 H}}\right)^p
+\end{split}
+\end{equation}
+where we used the fact that $y_{\sigma(2k-1)}=t_{\sigma(2k)}-t_{\sigma(2k-1)}$. Putting all together, it gives that
+$$E\left[|Y^W_{[s,t]}(\omega,\xi)|^{2p}\right]\le \frac {(2p)!} {p!} C_H\left (\frac {t-s} {|\xi|^{\frac 1 H}}\right)^p$$
+and then
+$$\expect\left[\exp\left(\mu|Y^W_{[s,t]}(\omega,\xi)|^2\right)\right]\le \sum_{p\ge 0}\frac {\mu^p} {p!} \frac {(2p)!} {p!}
+C_H\left (\frac {t-s} {|\xi|^{\frac 1 H}}\right)^p$$
+ Hence taking $\mu=\lambda |\xi|^{\frac 1 H}/(t-s)$
+\begin{eqnarray*}
+\expect 
+	\left[
+		\exp
+			\left(
+				\lambda
+				\frac
+					{\xi^{\frac 1 H}}
+					{(t-s)}
+				\left|Y^W_{[s,t]}(\omega,\xi)\right|^2
+			\right)
+	\right]
+&\le&
+\sum_{p\ge 0}\frac {\lambda^p} {p!} \frac {(2p)!} {p!}C_H
+\end{eqnarray*}
+which converges for $\lambda <\frac 14$.\qedhere
+\end{proof}
+
+\section{Averaging properties of absolutely continuous perturbations of the fBm}
+
+Let $(b_n)_{n\ge 1}$ be a sequence of smooth vector fields such that $N_{\alpha+1}(b_n) \le C$ uniformly in $n\ge 1$. By a standard fixed point argument, it is well known that the following equation
+\begin{equation}
+X^n_t = x_0 + \int_{0}^t b_n(s,X^n_s)ds + W_t
+\end{equation}
+has an adapted solution $X^n$  (to the standard filtration of the fractional Brownian motion). 
+Here we analyze the averaging constant of $X_n$ and we prove that it satisfy the requirements of Theorem~\ref{th:uniqueness-approx} implying uniqueness of the limit ODE for $b\in \cL F^{\alpha+1}$ and convergence of $X^n$ to this unique solution.
+
+\bigskip
+The main difficulty is given by the fact that the only available analytic estimate of the behaviour of the averaging constant of $X^n$ is given by Lemma~\ref{lemma:averaging-perturbation} and this estimate imply a loss of regularity of size $\gamma$ with respect to the vectorfield $b$. Below we will take advantage of the absolute continuity of the law of $X^n$ w.r.t. the law of the fBm $W$ to transfer the averaging properties of the fBM to the stochastic process $X^n$. This approach is an extension of an observation of Davie~\cite{MR2377011} to the fBm context. 
+
+A drawback of this approach is that the exceptional set will necessarily depend on the initial point $x_0$ and on the vectorfield $b$. This prevents to easily apply the uniqueness result to the case of random $b$ and to the analysis of the flow of the ODE.
+
+\bigskip
+The computation of the Radon-Nikodym derivative between the law of $X^n$ and the law of $W$ will result in a Girsanov transform. For technical reasons we will do this transformation only on a sub interval $[0,T_{Gir}]\subset[0,1]$. As $b_n$ and $X^n$ are regular enough, according to Nualart and Ouknine~\cite{MR1934157}, there exist a Brownian motion $B$ related to the filtration associated with $W$ and a probability $P_n$ such that the process $(X^n_t)_{t\in[0,T_{Gir}]}$ is a fractional Brownian motion of Hurst parameter $H$, where
+$$\frac{\dd P_n}{\dd P} = \exp\left(-\int_0^{T_{Gir}}H_t^n.\dd B_t-\frac12\int_0^{T_{Gir}}\left|H^n_t\right|^2\dd t\right)$$
+and where for $H\ge\frac12$
+$$H_t^n=\frac{t^{H-\frac12}}{\Gamma(\frac32-H)}\left(t^{1-2H}b_n(t,X^n_t) + \left(H-\frac12\right)\int_0^t\frac{t^{\frac12-H}b_n(t,X^n_t)-s^{\frac12-H}b_n(s,X^n_s)}{(t-s)^{H+\frac12}}\dd s\right)$$
+and for $H<\frac12$
+$$H_t^n = \frac{t^{H-\frac12}}{\Gamma(\frac12-H)}\int_0^t\left(s(t-s)\right)^{\frac12-H}b_n(s,X^n_s)\dd s$$
+Thank to that Girsanov transform, the almost sure bound for $Q^W_\lambda$ can be used to estimate $Q^{X_n}_\lambda$ since $P_n$ and $P$ are equivalent. 
+
+\begin{lemma}\label{majoration Qn}
+There exists a constant $\rho >0$ and a constant $C_\rho$ independent of $n$ such that
+$$\expect\left[\exp\left(\rho(Q^{X_n}_\lambda)^2\right)\right]\le C_\rho$$
+\end{lemma}
+\begin{proof}
+Let $K>0$. 
+By using the notation above
+\begin{equation*}
+\begin{split} 
+&
+\expect\left[\exp\left(\rho(Q^{X_n}_\lambda)^2\right)\right] ^2 =\expect_{P_n}\left[\exp\left(\rho(Q^{X_n}_\lambda)^2\right)\frac{\dd P}{\dd P_n}\right] ^2
+\\ & \le 
+\expect_{P_n}\left[\exp\left(2\rho(Q^{X_n}_\lambda)^2\right)\right] 
+\expect_{P_n}\left[\left(\frac{\dd P}{\dd P_n}\right)^2\right] 
+\\ & =
+\expect\left[\exp\left(2\rho(Q^{W}_\lambda)^2\right)\right] 
+	\expect_{P_n}\left[\exp\left(2\int_0^TH^n_t\dd B_t + \int_0^TH^n_t\dd t \right)\right]
+\end{split}
+\end{equation*}
+Where we have used that under $P_n$, $X^n$ is a fractional Brownian motion of same Hurst parameter $H$. If $\rho$ is small enough the first term is finite by the above results. 
+ To prove the lemma, it is sufficient to prove that 
+$$\expect_{P_n}\left[\exp\left(2\int_0^TH^n_t\dd B_t + \int_0^T\left|H^n_t\right|^2\dd t \right)\right]$$
+is bounded by a constant independent of $n$. As $B$ is a Brownian motion, it is enough to bound 
+$$\expect_{P_n}\left[\exp\left(\int_0^{T}\left|H_t^n\right|^{2}\dd t\right)\right]$$
+The arguments are quite different depending whether $H>1/2$ or $H<1/2$.
+First suppose that $H<\frac12$.
+\begin{eqnarray*}
+|H_t^n|^2
+&=&
+\left|K_H^{-1}\left(\int_0^. b_n(s,X^n_s)\dd s\right)(t)\right|^2\\
+&=&
+\left|\frac{t^{H-\frac12}}{\Gamma(\frac12 - H)}\int_0^t (s(t-s))^{\frac12-H}b_n(s,X^n_s)\dd s\right|^2\\
+&=&
+\left|\frac{-\left(\frac12-H\right)t^{H-\frac12}}{\Gamma(\frac12 - H)}\int_0^t (s(t-s))^{-(\frac12+H)}(t-2s)\underbrace{\int_0^sb_n(u,X^n_u)\dd u}_{\left(\sigma_s^{X^n}b_n\right)(0)}\dd s\right|^2\\
+&\le&
+\frac{\left(\frac12-H\right)^2t^{2H-1}}{\Gamma(\frac12 - H)^2}t\int_0^t(s(t-s))^{-(1+2H)}\left|t-2s\right|\left|\left(\sigma_s^{X^n}b_n\right)(0)\right|^2\dd s\\
+&\le&
+\left(CN_{\alpha+1}(b_n)Q_\lambda^{X^n}\lambda^{-\frac12}\right)^2\frac{\left(\frac12-H\right)^2t^{2H}}{\Gamma(\frac12 - H)^2}\int_0^t(s(t-s))^{-(1+2H)}\left|t-2s\right|s^{2\gamma}\dd s\\
+&\le&
+C\left(Q_\lambda^{X^n}\right)^2\lambda^{-1}\frac{N_\alpha(b)^2\left(\frac12-H\right)^2t^{2(\gamma-H)}}{\Gamma(\frac12 - H)^2}\int_0^1(u(1-u))^{-(1+2H)}\left|1-2u\right|u^{2\gamma}\dd s\\
+&\le&
+C(b,H,\gamma)\lambda^{-1}\left(Q_\lambda^{X_n}\right)^2
+\end{eqnarray*}
+Hence, 
+\begin{eqnarray*}
+\expect_{P_n}\left[\exp\left(\int_0^T\left|H_t^n\right|^2\dd t\right)\right]
+&\le&
+\expect\left[\exp\left(CT\left(Q_\lambda^{W}\right)^2\lambda^{-1}\right)\right]\\
+\end{eqnarray*}
+For $T$ small enough, this quantity is bounded, and the lemma is proved in this case. 
+For $H>\frac12$, We have to work in the autonomous case. In this case, $b$ is $\alpha$ H\"older continuous and $\|b\|_\alpha\le C N_{\alpha+1}(b)$ and $\|b\|_\infty\le N_{\alpha+1}(b)$
+\begin{eqnarray*}
+|H_t^n|
+&=&
+\left|\frac{t^{H-\frac12}}{\Gamma(\frac32-H)}\left(t^{1-2H}b_n(t,X^n_t) + \left(H-\frac12\right)\int_0^t\frac{t^{\frac12-H}b_n(t,X^n_t)-s^{\frac12-H}b_n(s,X^n_s)}{(t-s)^{H+\frac12}}\dd s\right)\right|\\
+&\le&
+\frac{t^{\frac12 -H}\left|b_n(X^n_t)\right|}{\Gamma(\frac32 - H)}\\
+&&
++\frac{(H-\frac12)t^{H-\frac12}}{2\gamma(3/2-H)}\int_{0}^t(t-s)^{-(H+\frac12)}\left|\left(t^{\frac12-H}-s^{\frac12-H}\left(b_n(t,X_t^n)+b_n(s,X_s^n)\right)\right)\right|\dd s\\
+&&
++\frac{(H-\frac12)t^{H-\frac12}}{2\gamma(3/2-H)}\int_{0}^t\left|(t-s)^{-(H+\frac12)}\left(t^{\frac12-H}+s^{\frac12-H}\left(b_n(t,X_t^n)-b_n(s,X_s^n)\right)\right)\right|\dd s\\
+&\le&
+\frac{t^{\frac12 -H}N_{\alpha+1}(b)}{\Gamma(\frac32 - H)}+\frac{(H-\frac12)t^{H-\frac12}N_{\alpha+1}(b)}{\Gamma(3/2-H)}\int_{0}^t(t-s)^{-(H+\frac12)}\left|\left(t^{\frac12-H}-s^{\frac12-H}\right)\right|\dd s\\
+\end{eqnarray*}
+\begin{eqnarray*}
+&&
++\frac{(H-\frac12)t^{H-\frac12}}{\Gamma(3/2-H)}\int_{0}^t(t-s)^{-(H+\frac12)}s^{\frac12-H}CN_{\alpha+1}(b)\left|X^n_t-X^n_s\right|^\alpha\dd s\\
+&\le&
+C_H N_{\alpha+1}(b)t^{\frac12-H}\left(1 + \int_0^1(1-u)^{-(H+\frac12)}u^{12-H}\left|X^n_t-X^n_{tu}\right|^\alpha\dd u\right)\\
+&=&
+C_H N_{\alpha+1}(b)t^{\frac12-H}\left(1 + \left|X^n_1\right|^\alpha t^{\alpha H}\int_0^1(1-u)^{-(H+\frac12)+\alpha H}u^{12-H}\dd u\right)\\
+&\le&
+C_H N_{\alpha+1}(b)t^{\frac12-H}\left(1 + \left|X^n_1\right|^\alpha\right)
+\end{eqnarray*}
+where the equality are in law and where we have used that under $P_n$ $X^n$ is a fractional Brownian motion and have the property of stationarity and stationary increment. Furthermore this computation is correct as $-\frac1{2H}<\alpha<\frac1{2H}$ and hence $-\frac12<\alpha H<\frac12$. Hence
+\begin{eqnarray*}
+\expect_{P_n}\left[\exp\left(\int_{0}^1\left|H_t^n\right|^2\right)\right]
+&\le&
+\expect_{P_n}\left[\exp\left(C(H,b,\alpha)(1+\left|X^n_1\right|^\alpha)^2\int_{0}^1t^{\frac12-H}\right)\right]\\
+&\le&
+\expect\left[C\exp\left(C'W_1^{2\alpha}\right)\right]\\
+&<&
+\infty
+\end{eqnarray*}
+\qedhere
+\end{proof}
+\begin{remark}
+In the non-autonomous case the theorem is still true for $b\in\cF L^{\alpha+1}$ such that $b$ is globally $\nu$-H\"older continuous in the first variable for $\nu>H-\frac12$.
+\end{remark}
+\begin{theorem}
+Assume that $b\in\cF L^{\alpha+1}$ then there exists $\rho>0$ and sequence of smooth vectorfields $(b_n)_n$ such that $b_n \to b$ in $\cF L^{\alpha+1}$ and almost surely
+$$
+\exp\left(\rho(Q^{X_n}_\lambda)^2\right) N_{\alpha+1}(b-b_n) \to 0
+$$
+which implies uniqueness of the Young equation for $b$.
+\end{theorem}
+\begin{proof}
+By the previous result we have that the $L^1$ norm of $\exp(\rho(Q^{X_n}_\lambda)^2)$ is uniformly bounded in $n$. Moreover consider $b_n$ such that 
+$
+\hat b_n(\omega,\xi) = e^{-|\xi|/n} \hat b(\omega,\xi)
+$. Then $b_n$ is smooth, $b_n \to b$ in $\cF L^{\alpha+1}$ by the dominated convergence theorem and there exists a subsequence which will still denote with $b_n$ such that $N_{\alpha+1}(b-b_n)\lesssim n^{-2}$. On this subsequence (which depends on $b$) consider the random variable
+$$
+D = \sum_{n\ge 1} \exp\left(\rho(Q^{X_n}_\lambda)^2\right) N_{\alpha+1}(b-b_n)
+$$
+then 
+$$
+\expect D = \sum_{n\ge 1} \expect \exp\left(\rho(Q^{X_n}_\lambda)^2\right) N_{\alpha+1}(b-b_n) \lesssim \sum_{n\ge 1} n^{-2} \lesssim 1
+$$
+so that almost surely $D<\infty$ which implies that $\exp\left(\rho(Q^{X_n}_\lambda)^2\right) N_{\alpha+1}(b-b_n) \to 0$. 
+\end{proof}
+
+Note that this argument give  an exceptional set of zero measure which a priori depends on $b$ (and on the sequence $(b_n)_n$). As remarked previously, this fact prevents straighforward extension of the uniqueness results in $\cF L^{\alpha+1}$ to random $b$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{bibdiv} 
+\begin{biblist}
+\bib{BIT}{article}{
+ title={On the regularization mechanism for the periodic Korteweg-de Vries equation},
+ volume={64},
+ DOI={10.1002/cpa.20356},
+ number={5},
+ journal={Communications on Pure and Applied Mathematics},
+ author={Babin, Anatoli V.},
+ author={Ilyin, Alexei A.},
+ author={Titi, Edriss S.},
+ year={2011},
+ pages={591?648}}
+
+\bib{BMN}{article}{
+ title={Regularity and integrability of $3$D Euler and Navier-Stokes equations for rotating fluids},
+ volume={15},
+ number={2},
+ journal={Asymptotic Analysis},
+ author={Babin, A.},
+ author={Mahalov, A.},
+ author={Nicolaenko, B.},
+ year={1997},
+ pages={103?150}}
+
+\bib{DF}{article}{
+   author={Da Prato, G.},
+   author={Flandoli, F.},
+   title={Pathwise uniqueness for a class of SDE in Hilbert spaces and
+   applications},
+   journal={J. Funct. Anal.},
+   volume={259},
+   date={2010},
+   number={1},
+   pages={243--267},
+   issn={0022-1236},
+   review={\MR{2610386}},
+   doi={10.1016/j.jfa.2009.11.019},
+}
+
+\bib{MR2377011}{article}{
+   author={Davie, A. M.},
+   title={Uniqueness of solutions of stochastic differential equations},
+   journal={Int. Math. Res. Not. IMRN},
+   date={2007},
+   number={24},
+   pages={Art. ID rnm124, 26},
+   issn={1073-7928},
+   review={\MR{2377011 (2008m:60099)}},
+   doi={10.1093/imrn/rnm124},
+}
+
+\bib{MR2566909}{article}{
+   author={Duncan, T.},
+   author={Nualart, D.},
+   title={Existence of strong solutions and uniqueness in law for stochastic
+   differential equations driven by fractional Brownian motion},
+   journal={Stoch. Dyn.},
+   volume={9},
+   date={2009},
+   number={3},
+   pages={423--435},
+   issn={0219-4937},
+   review={\MR{2566909 (2011c:60182)}},
+   doi={10.1142/S0219493709002725},
+}
+	
+\bib{FGP}{article}{
+   author={Flandoli, F.},
+   author={Gubinelli, M.},
+   author={Priola, E.},
+   title={Well-posedness of the transport equation by stochastic
+   perturbation},
+   journal={Invent. Math.},
+   volume={180},
+   date={2010},
+   number={1},
+   pages={1--53},
+   issn={0020-9910},
+   review={\MR{2593276}},
+   doi={10.1007/s00222-009-0224-4},
+}
+
+\bib{FV}{book}{
+ title={Multidimensional Stochastic Processes As Rough Paths: Theory and Applications},
+ ISBN={9780521876070},
+ publisher={Cambridge University Press},
+ author={Friz, Peter K.},
+ author={Victoir, Nicolas B.},
+ year={2010}}
+
+\bib{Lyons}{book}{
+ title={System Control and Rough Paths},
+ ISBN={9780198506485},
+ publisher={Oxford University Press},
+ author={Lyons, Terry},
+ author={Qian, Zhongmin},
+ year={2002}}
+
+
+\bib{MR2117951}{article}{
+   author={Krylov, N. V.},
+   author={R{\"o}ckner, M.},
+   title={Strong solutions of stochastic equations with singular time
+   dependent drift},
+   journal={Probab. Theory Related Fields},
+   volume={131},
+   date={2005},
+   number={2},
+   pages={154--196},
+   issn={0178-8051},
+   review={\MR{2117951 (2005k:60209)}},
+   doi={10.1007/s00440-004-0361-z},
+}
+
+\bib{MR2606880}{article}{
+   author={Meyer-Brandis, T.},
+   author={Proske, F.},
+   title={Construction of strong solutions of SDE's via Malliavin calculus},
+   journal={J. Funct. Anal.},
+   volume={258},
+   date={2010},
+   number={11},
+   pages={3922--3953},
+   issn={0022-1236},
+   review={\MR{2606880 (2011c:60189)}},
+   doi={10.1016/j.jfa.2009.11.010},
+}
+\bib{MR1934157}{article}{
+   author={Nualart, D.},
+   author={Ouknine, Y.},
+   title={Regularization of differential equations by fractional noise},
+   journal={Stochastic Process. Appl.},
+   volume={102},
+   date={2002},
+   number={1},
+   pages={103--116},
+   issn={0304-4149},
+   review={\MR{1934157 (2004b:60151)}},
+   doi={10.1016/S0304-4149(02)00155-2},
+}
+
+\bib{NRT}{article}{
+   author={Nualart, D.},
+   author={Rovira, C.},
+   author={Tindel, S.},
+   title={Probabilistic models for vortex filaments based on fractional
+   Brownian motion},
+   journal={Ann. Probab.},
+   volume={31},
+   date={2003},
+   number={4},
+   pages={1862--1899},
+   issn={0091-1798},
+   review={\MR{2016603 (2005e:76068)}},
+   doi={10.1214/aop/1068646369},
+}
+		
+\bib{MR0317397}{article}{
+   author={Berman, Simeon M.},
+   title={Local nondeterminism and local times of Gaussian processes},
+   journal={Indiana Univ. Math. J.},
+   volume={23},
+   date={1973/74},
+   pages={69--94},
+   issn={0022-2518},
+   review={\MR{0317397 (47 \#5944)}},
+}
+
+\bib{Controlling}{article}{
+   author={Gubinelli, M.},
+   title={Controlling rough paths},
+   journal={J. Funct. Anal.},
+   volume={216},
+   date={2004},
+   number={1},
+   pages={86--140},
+   issn={0022-1236},
+   review={\MR{2091358 (2005k:60169)}},
+   doi={10.1016/j.jfa.2004.01.002},
+}
+
+\bib{kdv}{article}{
+ title={Rough solutions for the periodic Korteweg?de Vries equation},
+ volume={11},
+ number={2},
+ journal={Communications on Pure and Applied Analysis},
+ author={Gubinelli, M.},
+ year={2012},
+ pages={709?733}}
+
+\bib{Young}{article}{
+   author={Young, L. C.},
+   title={An inequality of the H\"older type, connected with Stieltjes
+   integration},
+   journal={Acta Math.},
+   volume={67},
+   date={1936},
+   number={1},
+   pages={251--282},
+   issn={0001-5962},
+   review={\MR{1555421}},
+   doi={10.1007/BF02401743},
+}
+
+
+\end{biblist}
+\end{bibdiv} 
+	
+\end{document}

@@ -1,0 +1,2000 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsmath,mathrsfs,bm,amssymb,color}%,bbm}
+\usepackage[width=15cm,height=8.5in]{geometry}
+
+%%%%%%%%%% FUMIO CUSTOMS
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{assumption}[theorem]{Assumption}
+
+\providecommand{\bc}[1]{\begin{corollary}\label{#1}}
+\providecommand{\ec}{\end{corollary}}
+\providecommand{\bp}[1]{\begin{proposition}\label{#1}}
+\providecommand{\ep}{\end{proposition}}
+
+
+\newenvironment{proof}[1][Proof]{{\sc #1.} }{\hfill $\Box$}
+
+
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\newcommand{\bt}[1]{\begin{theorem}\label{#1}}
+\newcommand{\et}{\end{theorem}}
+\newcommand{\bl}[1]{\begin{lemma}\label{#1}}
+\newcommand{\el}{\end{lemma}}
+
+\newcommand{\br}[1]{\begin{remark}\label{#1}}
+\newcommand{\er}{\end{remark}}
+
+
+
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+
+%\newtheorem{assumption}{Assumption}%[chapter]
+
+
+
+\newcommand\bbone
+{\ensuremath{\mathbbm{1}}}
+\def\bbbone{{\mathchoice {\rm 1\mskip-4mu l} {\rm 1\mskip-4mu l}
+{\rm 1\mskip-4.5mu l} {\rm 1\mskip-5mu l}}}
+\def\one{\bbbone}
+
+
+\newcommand{\kp}{\one_\Lambda^\perp(k)}
+\providecommand{\statd}{{\rm m}}%trans}{p}
+
+
+\providecommand{\ix}{\int_{\BR} \! dx \Ebb^x}
+\providecommand{\idx}{\int_{\BR} \!\!\! dx}
+
+
+\providecommand{\pro}[1]{(#1_t)_{t\geq 0}}
+\newcommand{\Ebb}{{\mathbb E}}
+\newcommand{\om}{\omega}
+
+\providecommand{\eq}[1]{\begin{equation}\label{#1}}
+\providecommand{\en}{\end{equation}}
+
+
+\renewcommand{\d}{\displaystyle}
+
+\providecommand{\Pro}[1]{(#1_t)_{t\geq 0}}
+\providecommand{\qed}{\hfill {$\Box$}\par\medskip}
+\providecommand{\BR}{{\mathbb{R}^3 }}
+\providecommand{\BRN}{{\mathbb{R}^{3N} }}
+\providecommand{\iijj}{\sum_{i,j=1}^N}
+\renewcommand{\ij}{\sum_{i\not=j}^N}
+
+\providecommand{\od}{{\rm OD}}
+\providecommand{\dd}{{\rm D}}
+
+
+\providecommand{\bi}
+{\begin{itemize}}
+\providecommand{\ei}{\end{itemize} }
+\providecommand{\CC}{{\mathbb{C}}}
+\providecommand{\RR}{\mathbb{R}}
+\providecommand{\limn}{\lim_{n\rightarrow\infty}}
+\providecommand{\limm}{\lim_{m\rightarrow\infty}}
+\providecommand{\limt}{\lim_{t\rightarrow 0}}
+
+\providecommand{\W}{\mathscr{K}}
+\providecommand{\kak}[1]{(\ref{#1})}
+\providecommand{\LR}{{L^2(\BR)}}
+
+
+\providecommand{\LRN}{{L^2(\BRN)}}
+
+
+\providecommand{\LRL}{{L^2(\Lambda)}}
+\providecommand{\hni}{\hn_\ren }
+\providecommand{\D}{{\ms D}}
+
+\providecommand{\hn}{H}%_{ \rm  N}}
+\providecommand{\hnr}
+{\hhni}
+
+\providecommand{\ms}[1]{\mathscr{#1}}
+\providecommand{\hhn}{\tilde H_\eps}
+\providecommand{\hhni}{\tilde H_\ren }
+
+
+\providecommand{\ggg}{\mathfrak{G}}% {\cal F}}
+\providecommand{\fff}{\mathscr{F}}
+\providecommand{\HHH}{\mathcal{H}}
+
+\providecommand{\is}{\inf \s}
+\providecommand{\seqq}[1]{\{ {#1}_n \}_{n\in{\mathbb N}}}
+\providecommand{\spp}{{\rm Spec}}
+
+
+\providecommand{\f}{^{-1}}
+\providecommand{\lk}{\left(}
+\providecommand{\rk}{\right)}
+\providecommand{\lkk}{\left\{}
+\providecommand{\rkk}{\right\}}
+\providecommand{\lan}{\langle}
+\providecommand{\ran}{\rangle}
+\providecommand{\pp}{\pi^{-1}_\La(E)}
+\providecommand{\add}{a^\ast}
+\providecommand{\ab}[1]{\left\langle #1\right\rangle}
+
+\providecommand{\abb}[1]
+{\left\langle #1\right\rangle_{\rm vac}}
+
+
+\providecommand{\heat}[2]{\Pi_{#1}(#2)}
+\providecommand{\ttt}{\tau}
+\providecommand{\ass}{a^\sharp}
+\providecommand{\bss}{a^{ \sharp r}}
+\providecommand{\ov}[1]{\overline{#1}}
+\providecommand{\hf}{H_{\rm f}}
+
+
+\providecommand{\gr}{\Psi_{\rm g}}
+
+\providecommand{\gp}{\Psi_{\rm p}}
+\providecommand{\grp}{\Psi_{\rm p}}
+\providecommand{\half}{\frac{1}{2}}
+\providecommand{\han}{{1/2}}
+
+\providecommand{\wick}[1]
+{\!\!:\!\!{#1}\!\!:\!\!}
+\providecommand{\hi}{H_{\rm I}}
+\providecommand{\hp}{H_{\rm p}}
+\providecommand{\hpp}{H_{\rm p}}
+
+\providecommand{\MMM}[4]
+{\left(\!\!\!\begin{array}{cc}#1&#2\\ #3&#4\end{array}\!\!\!\right)}
+
+\providecommand{\MMMM}[9]
+{\left(\!\!\!\begin{array}{ccc}#1&#2&#3\\ #4&#5&#6\\#7&#8&#9\end{array}\!\!\!\right)}
+%\providecommand{\La}{\Lambda}
+\providecommand{\la}{{\Lambda}}
+\providecommand{\La}{{\Lambda}}
+
+\providecommand{\s}{\sigma}
+\providecommand{\hhh}{\ms H} %{\cal H}}
+\providecommand{\hhhn}{\mathcal{H}_{\rm N}} %{\cal H}}
+\newcommand{\TTT}[1]{{\rm (#1)}}
+
+\newcommand{\z}{{\mathbb{Z}_\han}}
+\providecommand{\muu}{\sum_{\mu=1}^3}
+\providecommand{\lkkk}[1]{\lkk
+\begin{array}{rl}#1
+\end{array}
+\right.}
+
+\providecommand{\lkkkk}[1]{\lkk
+\begin{array}{ll}#1
+\end{array}
+\right.}
+
+\providecommand{\slim}{{\rm s}\!-\!\lim}
+\providecommand{\slimn}{{\rm s}\!-\!\lim_{n\rightarrow \infty}}
+\providecommand{\slimt}{{\rm s}\!-\!\lim_{t\rightarrow 0}}
+\providecommand{\slimm}{{\rm s}\!-\!\lim_{m\rightarrow \infty}}
+\providecommand{\skima}{\frac{}{}\!\!}
+
+
+\providecommand{\vp}{{\widehat \varphi}}
+\providecommand{\vpp}{\tilde \varphi}
+\providecommand{\non}{\nonumber}
+%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\providecommand {\NN}  {\hn_\eps}
+
+\newcommand{\mustcite}[1]{{\bf [#1]}}
+
+%\providecommand{\remark}{%
+%\begin{remark}
+%    \normalfont}\def
+  %  \endremark{%
+%\end{remark}
+%}
+
+\providecommand{\IR}{\mathbb{R}}
+\providecommand{\IP}{\mathbb{P}}
+\providecommand{\IC}{\mathbb{C}}
+\providecommand{\dist}{\mathop{\mathrm{dist}}\nolimits}
+\providecommand{\extr}{\mathop{\mathrm{extr}}\nolimits}
+\providecommand{\Prob}{\mathop{\mathrm{Prob}}\nolimits}
+\providecommand{\diam}{\mathop{\mathrm{diam}}\nolimits}
+\providecommand{\cov}{\mathop{\mathrm{cov}}\nolimits}
+\providecommand{\var}{\mathop{\mathrm{var}}\nolimits}
+\providecommand{\supp}{\mathop{\mathrm{supp}}\nolimits}
+\providecommand{\id}{\mathop{\mathrm{id}}\nolimits}
+%\providecommand{\W}{\mathop{\mathrm{{\cal W}}}\nolimits}
+\providecommand{\WW}{\mathop{\mathrm{\widehat{\cal W}}}\nolimits}
+\providecommand{\wW}{\widehat W}
+\providecommand{\vp}{\mathop{\mathrm{{\varphi}}}\nolimits}
+\providecommand{\Y}{\mathop{\mathrm{{\cal Y}}}\nolimits}
+\renewcommand{\r}{\mathop{\mathrm{{\cal R}}}\nolimits}
+\providecommand{\LL}{\mathop{\mathrm{{\cal L}}}\nolimits}
+\providecommand{\M}{\mathop{\mathrm{{\cal M}}}\nolimits}
+\providecommand{\A}{\mathop{\mathrm{{\cal A}}}\nolimits}
+\providecommand{\C}{\mathop{\mathrm{{\cal C}}}\nolimits}
+\providecommand{\I}{\mathop{\mathrm{{\cal I}}}\nolimits}
+\providecommand{\J}{\mathop{\mathrm{{\cal J}}}\nolimits}
+\providecommand{\X}{\mathop{\mathrm{{\cal X}}}\nolimits}
+\providecommand{\e}{{\rm e}}
+%mathop{\mathrm{{\varepsilon}}}\nolimits}
+\providecommand{\p}{\mathop{\mathrm{{\cal P}}}\nolimits}
+%\providecommand{\P}{\mathop{\mathrm{{\cal P}}}\nolimits}
+\providecommand{\proj}{\mathop{\mathrm{proj}}\nolimits}
+\providecommand{\Dom}{\mathop{\mathrm{Dom}}\nolimits}
+\providecommand{\expect}{\mathbb{E}}
+\providecommand{\Spec}{\mathop{\mathrm{Spec}}\nolimits}
+\providecommand{\1}{\mathbb{1}}
+\providecommand{\arctanh}{\mathop{\mathrm{arctanh}}\nolimits}
+% \provideenvironment{proof}{\par \textit{Proof}: \ignorespaces}{\hfill\ensuremath
+% {\Box}\par}
+\newenvironment{pft}{\par \textit{Proof of the theorem,} \ignorespaces}
+{\hfill\ensuremath{\Box}\par}
+\newenvironment{pfl}{\par \textit{Proof of the lemma}: \ignorespaces}
+{\hfill\ensuremath{\Box}\par}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+\providecommand {\betrag} [1] {\ensuremath{ \left\vert  #1  \right\vert } }
+\providecommand {\jnorm} [2] [] {\ensuremath{ \left\Vert  #2  \right\Vert_{#1} } }
+\providecommand {\R} {\ensuremath{\mathbb{R}}}
+%\providecommand {\N} {\ensuremath{\mathbb{N}}}
+\providecommand {\B} {\ensuremath{\mathcal{B}}}
+\providecommand {\F}  {\ms F}
+\providecommand {\Ecal}  {\ensuremath {\mathcal{E}}}
+\providecommand {\Nsf}  {\ensuremath {\mathsf{N}}}
+\providecommand {\V}  {\ensuremath {\mathcal{V}}}
+\providecommand {\K}  {\ensuremath {\mathcal{K}}}
+\providecommand {\h}  {\ensuremath {\mathcal{H}}}
+\providecommand {\Z}  {\ensuremath {\mathcal{Z}}}
+\providecommand {\T}  {\ensuremath {\mathcal{T}}}
+\providecommand {\D}  {\ensuremath {\mathcal{D}}}
+\providecommand {\s}  {\ensuremath {\mathcal{S}}}
+\providecommand {\U}  {\ensuremath {\mathcal{U}}}
+\providecommand {\N}  {\ensuremath {\mathcal{N}}}
+\providecommand {\G}  {\ensuremath {\mathcal{G}}}
+\providecommand {\g}  {\ensuremath {\mathsf{G}}}
+\providecommand {\sss}  {\ensuremath {\mathsf{S}}}
+\providecommand {\pp}  {\ensuremath {\mathsf{P}}}
+\providecommand {\Om} {\ensuremath{\Omega}}
+\providecommand {\Ga} {\ensuremath{\Gamma}}
+\providecommand {\ga} {\ensuremath{\gamma}}
+\providecommand {\rh} {\ensuremath{\varrho}}
+\providecommand {\tupel}  [2] {\ensuremath{#1_1, \ldots,#1_#2}}
+\providecommand {\skalprod} [3] [] {\ensuremath{ \left\langle #2,#3 \right\rangle_{#1}}}
+
+\providecommand{\dd}{\mathop{\mathrm{d}}\nolimits}
+
+% MG commands
+\providecommand{\eps}{\varepsilon}
+\providecommand{\muT}{\mu_T}
+\providecommand{\tnu}{\tilde{\nu}}
+\providecommand{\note}[1]{{{\par\small\sl\marginpar{\tt\footnotesize #1}\par}}
+}
+% end MG commands
+
+
+\providecommand{\nux}{\nu^{\bold{x}}}
+\providecommand{\nuxT}{\nu_T^{\bold{x}}}
+\providecommand{\Wx}{\mathcal{W}^{\bold{x}}}
+\providecommand{\WxT}{\mathcal{W}_T^{\bold{x}}}
+\providecommand{\Wxn}{\mathcal{W}^{\bold{x},n}}
+\providecommand{\ren}{{\rm ren}}
+\providecommand{\ce}{{\rm c}_\eps}
+
+
+\newcounter {constant}
+\newenvironment{constant}{\refstepcounter{constant} }{}
+\renewcommand{\theconstant}{\arabic{constant}}
+\providecommand{\const}[1]{C_{\ref{const:#1}}}
+\providecommand{\defconst}[1]{%
+\begin{constant}\label{const:#1}\const{#1}\end{constant}}
+
+
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+
+\date{}
+\begin{document}
+
+\title
+{{ Ultraviolet Renormalization of the Nelson Hamiltonian through
+Functional Integration}}
+%\vspace{1.5cm}
+\author{
+\small Massimiliano Gubinelli\\[0.1cm]
+ {\small\it    CEREMADE -- UMR 7534, Universit\'e Paris-Dauphine }    \\[-0.7ex]
+  {\small\it  Place du Mar\'echal De Lattre De Tassigny,
+75775 Paris cedex 16, France}      \\[-0.7ex]
+ {\small  {\tt massimiliano.gubinelli@ceremade.dauphine.fr}   }\\[0.5cm]
+%{\small and} \\
+\small Fumio Hiroshima\\
+{\small\it Faculty of Mathematics, Kyushu University}    \\[-0.7ex]
+{\small\it 744 Motooka, Fukuoka, 819-0395, Japan}      \\[-0.7ex]
+{\small  {\tt hiroshima@math.kyushu-u.ac.jp}}\\[0.5cm]
+\small J\'ozsef L\H{o}rinczi\\[0.1cm]
+{\it \small School of Mathematics, Loughborough University} \\[-0.7ex]
+{\it \small Loughborough LE11 3TU, United Kingdom} \\[-0.7ex]
+{\small {\tt  J.Lorinczi@lboro.ac.uk}} \\[-0.7ex]}
+\maketitle
+
+
+\bigskip
+\begin{abstract}
+\noindent
+Starting from the $N$-particle Nelson Hamiltonian defined by imposing an ultraviolet cutoff,
+we perform ultraviolet %(energy)
+renormalization by showing that in the zero cutoff limit a
+self-adjoint operator exists after a logarithmically divergent term is subtracted from
+the original Hamiltonian. We obtain this term as the diagonal part of a pair interaction
+appearing in the density of a Gibbs measure derived from the Feynman-Kac representation
+of the Hamiltonian. Also, we show existence of a weak coupling limit of the renormalized
+Hamiltonian and derive an effective Yukawa interaction potential between the particles.
+
+\bigskip
+\noindent
+\emph{Keywords}: $N$-particle Nelson model, ultraviolet cutoff, energy renormalization,
+Yukawa potential, Feynman-Kac representation, stochastic integrals, Gibbs measure
+\end{abstract}
+
+
+\newpage
+\section{Introduction}
+In this paper we consider the $N$-particle Nelson model, which describes the interaction
+of $N$ electrically charged spinless particles with a scalar boson field.
+%We assume no interaction among the particles.
+In Fock space representation the model can be given by the Hamiltonian
+\begin{equation} \label{Ham}
+\hn = \hp\otimes \one +\one \otimes \hf  + \hi
+\end{equation}
+acting on
+$$
+\hhh=\LRN \otimes\F,
+$$
+where $L^{2}(\R^{3N})$ is the particle space and $\F$ denotes the symmetric Fock space over $\LR$
+describing the bosons. Recall that $\F = \bigoplus_{n=0}^{\infty} \F^{(n)}$, where $\F^{(n)} =
+{{\otimes}^n_{\rm sym}}\LR$ is the $n$-boson subspace and $\F^{(0)} = \mathbb{C}$ (where the
+subscript indicates symmetrized tensor product), for which the infinite direct sum norm
+$\|F\|_{\fff}^2 = \sum_{n=0}^{\infty}\|f_n\|_{\F^{(n)}}^2$ is finite. We denote the Fock vacuum
+by $\one_\fff=1\oplus 0\oplus 0\oplus\ldots \in\fff$, and write simply $\one$ when no confusion
+arises.
+
+The components of the $N$-particle Nelson Hamiltonian are as follows. The $N$-particle Schr\"odinger
+operator
+$$
+\hp = -\frac{1}{2} \sum_{j=1}^N  \Delta_j + V
+$$
+is the Hamiltonian of the free particles with  an external potential $V: \RR^{3N}  \to \R$, which
+acts as a multiplication operator, and where $\Delta_j=\Delta_{x_j}$ denotes the 3-dimensional
+Laplacian.
+
+Let $\add (f)$ and $a(f)$, $f\in\LR$, be the boson creation and annihilation operators, respectively,
+satisfying the  canonical commutation relations $[a(f),\add(g)]=(\bar f, g)$ and $[a(f),a(g)]=0=
+[\add(f), \add(g)]$. We formally denote $\ass(f)=\int _\BR \ass(k) \widehat f(k) dk$, where $\ass$
+stands for $a$ or $\add$. Denote by $\omega(k)$ the dispersion relation, which we will choose in
+the main part of the paper to be $\omega(k) = |k|$, describing massless bosons. The free field
+Hamiltonian $\hf$ of $\fff$ is then defined by the second quantization of $\omega$,
+i.e.,
+$$
+\hf \prod_{j=1}^n \add(f_j)\one= \sum_{j=1}^n \add(f_1)\cdots\add(\omega f_j)\cdots\add(f_n)\one
+\quad \mbox{and} \quad \hf \one=\one,
+$$
+formally expressed as
+$$
+\hf = \int_\BR \omega(k) \add(k)a(k)  dk.
+$$
+
+%Next we define the scalar field operators $\phi(f)$ by
+%\eq{scalarfield}
+%\phi(f)=\frac{1}{\sqrt 2}(a(\hat f/\omega^\han)+a(\widetilde{\hat f}/\omega^\han))
+%\en
+%for $\widehat f/\omega^\han \in\LR$, where $\widetilde{\hat f}(k)=\hat f(-k)$.
+The interaction Hamiltonian is formally  defined by
+\begin{equation}
+\label{hint}
+\hi(x)  = g\sum_{j=1}^N \int_\BR \frac{1}{\sqrt{2\omega(k)}}
+\left( \vp (k)\e^{ik\cdot x_j}  a(k) + \vp (-k)\e^{-ik\cdot x_j} \add(k)\right)  dk
+\end{equation}
+for every $x\in\RR^{3N}$. We make the identification $\hhh\cong L^2(\RR^{3N};\fff)$, i.e., $F\in \hhh$
+will be regarded as a function  $\RR^{3N}\ni x\mapsto F(x)\in \fff$ such that $\int_{\RR^{3N}}\|F(x)\|^2_
+\fff dx<\infty$. Under this identification the interaction Hamiltonian becomes $(\hi F)(x)=\hi(x) F(x)$ on
+$\hhh$. The function $\varphi$ (featured in its Fourier transform $\vp$) is a function describing a charge
+distribution so that the total charge is $\int_\BR \varphi(x) dx = 1$. In the Hamiltonian it has a
+regularising role, making the operator well defined, and physically it has the meaning of an ultraviolet
+(UV) cutoff. The prefactor $g$ is a coupling constant between the particles and the field.
+
+Under the assumptions
+\begin{equation}
+{\vp }/{\omega^{1/2}}, {\vp }/{\omega}  \in   \LR ,\quad \ov{\vp(k)}=\vp(-k)
+\label{sa}
+\end{equation}
+the interaction $\hi$ is well defined, symmetric and infinitesimally $\one\otimes \hf $-bounded. Thus
+by the Kato-Rellich theorem $\hn$ is a self-adjoint operator on the domain $D(\hp\otimes \one) \cap
+D(\one \otimes \hf )$. If, moreover, an infrared (IR) cutoff is imposed by the condition
+\begin{equation}
+{\vp }/{\omega^{3/2}}  \in  \LR,
+\label{ir}
+\end{equation}
+then $\hn$ has a unique ground state \cite{spo98,bfs98,ger00,ara01,sas05}, i.e., an eigenfunction $\Psi
+\in \hhh$ at the bottom of its spectrum. As it was shown in \cite{lms02,dg04,hir06}, condition (\ref{ir})
+is also necessary for a ground state to exist in this space.
+
+In this paper we are interested in an appropriate definition of $\hn$ in the point charge limit, i.e., when
+$\varphi(x) \to (2\pi)^{3/2}\delta(x)$ or, equivalently, $\vp (k) \to 1 $. This is a physically interesting
+but mathematically singular case, when condition (\ref{sa}) fails to hold. In order to analyse this limit,
+we regularise the Hamiltonian by choosing the UV cutoff function $\vp_\eps(k)=\e^{-\eps|k|^2/2}$. With this
+choice in (\ref{hint}) we define the Hamiltonian $\hn_\eps$, and by regarding $\eps>0$ as a UV cutoff parameter
+we will analyse the limit of $\hn_\eps-E_\eps$ as $\eps\downarrow 0$, where $E_\eps$ is an energy renormalization
+term, which will be determined below.
+
+The main results of this paper are as follows.
+\bi
+\item[(1)]
+By using functional integration we derive the energy renormalization term $E_\eps$ from the diagonal part of
+a pair interaction, and show the existence of the renormalized Hamiltonian $\d \hn_\ren =\lim_{\eps\downarrow 0}
+(\hn_\eps-E_\eps)$ in the sense of strong convergence of the related semigroups.
+\item[(2)]
+We derive the pair interaction potential in the Boltzmann-Gibbs density of the path measure associated with
+$\hni$.
+\item[(3)]
+We show existence of the weak coupling limit  of $\e^{-t\hni}$ and compare it with that of the Nelson model
+with UV cutoff.
+\ei
+Here are some comments to these points.
+
+\medskip
+\noindent
+(1) The first part of this problem was already investigated in \cite{nel64} by using Gross transform. This
+is a unitary transform implemented by $e^{i\pi_\eps(x)}$ with the generator
+\eq{gross}
+\pi_\eps(x)=i\sum_{j=1}^N \int_{|k|>\Lambda} \frac{1}{\sqrt{2\omega(k)}}\frac{1}{\omega(k)+|k|^2/2}
+(-a(k)\widehat \varphi_\eps(k)e^{ikx_j}+\add(k)\widehat\varphi_\eps(-k)e^{-ikx_j})dk.
+\en
+Here $\La>0$ is introduced  for $\pi_\eps$ to be well defined. Nelson has shown that the Gross transformed
+operator $\e^{i\pi_\eps(x)} (H_\eps-E_\eps) \e^{-i\pi_\eps(x)}$ converges to a self-adjoint operator in norm
+resolvent sense as $\eps\downarrow 0$, and $\e^{i\pi_\eps(x)}\to \e^{i\pi_0(x)}$ in strong sense.
+
+In contrast to this approach, in the following we present a UV renormalization by using path measure methods.
+Nelson did consider a path integral approach \cite{nel64b}, however, this remained incomplete since the approach
+based on Gross transform may have appeared simpler and satisfactory for the purposes of his investigation.
+Taking the Gross transformation of $\hn_\eps-E_\eps$, a cancellation of diverging terms occurs and the limit
+$\eps\downarrow 0$ can be analysed to define a UV renormalised Hamiltonian. However, in this paper we do not
+take Gross transform and derive $E_\eps$ from the diagonal part of the pair potential associated with a Gibbs
+measure instead.
+
+Following our previous work on the one-particle Nelson model \cite{lms02,bhlms02} we find it worthwhile to
+analyse this problem by using functional integration not just for the extra insights it gives (applicable
+also to other cases, e.g., UV renormalization of the Nelson model with variable coefficients \cite{ghps12}),
+but also because this approach allows to prove existence of a ground state of the UV renormalized Hamiltonian.
+As far as we are aware, the existence of a ground state of $H_\ren$ was shown for sufficiently weak couplings
+only \cite{hhs05}. This problem is another illustration of the fact that direct analytic and path integral
+methods complement each other, and both have specific advantages.
+
+
+A key point in this paper is to show that
+\eq{DD}
+\lim_{\eps\downarrow0}
+(f\otimes\one, \e^{-T(H_\eps-E_\eps)}g\otimes \one)
+\en
+can be expressed in terms of a path measure representation
+(Lemma \ref{maindenai} below), and
+\eq{CC}
+H_\eps-E_\eps>C
+\en
+holds with a constant $C$, uniformly in $\eps>0$ (Corollary \ref{nelson}). Although these were established by
+operator analysis methods in \cite{nel64} by using the Gross transform, we derive them directly by using
+Feynman-Kac type formulae for $H_\eps-E_\eps$, so our strategy is completely different from Nelson's.
+
+\medskip
+\noindent
+(2)
+By constructing a functional integral representation of the Nelson Hamiltonian with UV cutoff and integrating out
+the field part, an expression is obtained in terms of an expectation with respect to Wiener measure on Brownian
+paths under $V$ and a pair interaction potential $W$ (see Chapter 6 in \cite{lhb11}). Using this as a density,
+the path measure can be seen as a Gibbs measure on paths. The pair interaction has the form
+\eq{p1}
+\int_{-T}^ T ds \int_{-T}^ T dt W(B_t-B_s,t-s),
+\en
+where $W$ depends on the UV cutoff \cite{bhlms02}. On the other hand, a similar construction for the Pauli-Fierz
+model in non-relativistic quantum electrodynamics yields a Gibbs measure with pair interaction formally given by
+\cite{spo87,bh09}
+\eq{p2}
+\int_{-T}^ T dB_s^\mu  \int_{-T}^ T dB_t^\nu  W_{\mu\nu}(B_t-B_s,t-s).
+\en
+It is remarkable that the double Riemann integral in \kak{p1} is replaced by a double stochastic integral.
+In this paper we will consider the finite volume Gibbs measure associated with the Nelson model without UV
+cutoff and obtain that the exponent in the Boltzmann-Gibbs density has the form
+(Corollary \ref{pair potential})
+\eq{p3}
+\int_{-T}^ T ds \int_{s}^ T dB_t  W(B_t-B_s,t-s) +\int _{-T}^T ds W(B_T-B_s,T-s).
+\en
+It is interesting to see that the Gibbs measure without a UV cutoff has the intermediate form of \kak{p1} and
+\kak{p2}.
+
+
+\medskip
+\noindent
+(3)
+Finally we consider the weak coupling limit, which  is a scaling limit such that the creation operators $\add$
+and the annihilation operators $a$ are scaled to $\kappa a$ and $\kappa \add$, respectively, with a scaling
+parameter $\kappa>0$. When $\eps>0$, the scaled Nelson Hamiltonian $\hn_\eps(\kappa)$ converges in the limit
+$\kappa \to \infty$ to a Schr\"odinger operator with an effective potential, and furthermore it converges to
+a Schr\"odinger operator with Yukawa potential when in a subsequent limit $\eps\downarrow 0$. We are interested
+in obtaining the weak coupling limit of $\hni(\kappa)$ and comparing it with that of the UV-regularized
+Hamiltonian (Corollary \ref{main5}).
+
+
+\bigskip
+We note that in this paper the space dimension is fixed to the physical $d=3$, however, our arguments can
+be carried out for any other dimension in a similar way. We will see that the energy renormalization term
+behaves like $E_\eps\sim -\int_1^\infty e^{-\eps r^2} r^{d-4} dr$. When $d=1$ or $d=2$, there is no need
+for an energy renormalization, and when $d\geq 3$, energy renormalization becomes important to deal with
+the UV divergences in the $\eps\downarrow 0$ limit. Also, it will be seen that our arguments do not need 
+the assumption of a pinning external potential, in fact, we do not need any. However, we keep a $V$ in our 
+formulae with the understanding that the results are valid also for $V \equiv 0$. 
+
+
+\bigskip
+\noindent
+The plan of this paper is as follows. In the main Section 2 we perform renormalization on the level of the
+density of the Gibbs measure, determine the pair interaction potential, and prove existence of a UV
+renormalized Hamilton operator. In Section 3 we study a weak coupling limit of the renormalized Hamiltonian
+and derive an effective interaction potential between the particles.
+
+
+\section{Energy renormalization by path measures}
+\subsection{Functional integral representation of the regularized Hamiltonian}
+First we define the version of the Nelson model which will be the main object studied in this paper. We choose
+$\omega(k)=|k|$. Let
+$$
+\one_\la(k) =
+\lkk
+\begin{array}{ll}
+1,& \omega(k) < \la \\
+0,& \omega(k)\geq\la
+\end{array}
+\right.
+$$
+and $\kp=\one-\one_\la(k)$. We assume that  $\Lambda> 0$, which is needed in \kak{IRbound},  Lemma
+\ref{finite} and Corollary \ref{nelson} below. For simplicity we will use the following standing assumption
+throughout below.
+\begin{assumption}
+The external potential $V$ is a bounded continuous function. In particular, it is of Kato-class, i.e.,
+it satisfies
+\eq{kato11}
+\lim_{t\downarrow 0}\sup_{x\in\RR^3} \Ebb^x\!\left [\int_0^t |V(B_s)|ds\right ]=0.
+\en
+\end{assumption}
+Note that in what follows $V\equiv 0$ is a possible choice without changing the statements. We summarize 
+some properties of Kato-class potentials in Appendix \ref{appa} for the reader's convenience; they will be 
+used below on some objects which take the role of a potential. 
+
+Consider the cutoff function
+\eq{sasa3}
+\vp_\eps(k)=\e^{-\eps|k|^2/2}\kp,\quad \eps\geq0
+\en
+and define the regularized Hamiltonian
+\begin{equation}
+\hn_\eps = \hp\otimes \one +\one \otimes \hf  + \hi^\eps,\quad \eps>0,
+\end{equation}
+by
+\begin{equation}
+\hi^\eps(x)  = g\sum_{j=1}^N \int_\BR
+\frac{1}{\sqrt{2\omega(k)}} \left( \vp_\eps (k)\e^{ik\cdot x_j}
+ a(k) + \vp_\eps (-k)\e^{-ik\cdot x_j}  \add(k)\right)  dk.
+\end{equation}
+Here $\eps>0$ is regarded as the UV cutoff parameter. The main purpose of this paper is to
+consider the limit $\eps\downarrow 0$ of $\hn_\eps$. We show that this limit can be sensibly defined
+by an energy renormalization. Define
+\eq{sasa6}
+E_\eps=-\frac{g^2}{2} N \int_{\BR} \frac{\e^{-\eps|k|^2}}{\omega(k)}\beta(k)\kp dk,
+\en
+where
+\eq{beta}
+\beta(k)=\frac{1}{\omega(k)+|k|^2/2}.
+\en
+Notice  that $E_\eps\to-\infty$ as $\eps\downarrow 0$.
+%Only the place we need IR cutoff condition, $\la>0$, is the lemma below:
+%\bl{uni}
+%Suppose that $\la>0$.
+%Then there
+% exists a constant $C$ independent of the UV cutoff parameter $\eps>0$ such that
+%$\is(\hn_\eps)>C$.
+ %In particular
+ %$\|\e^{-t\hn_\eps}\|\leq \e^{-tC}$ holds for all  $\eps>0$.
+%\el
+%\proof
+%We refer to  \cite[Lemma 5]{nel64}.
+%\qed
+
+Our main theorem states that $\hn_\eps-E_\eps$  converges in the $\eps\downarrow 0$ limit to a
+non-trivial self-adjoint operator $\hni$ in a specific sense, which we call the UV renormalized
+Nelson Hamiltonian.
+\bt{main}
+There exists a self-adjoint operator $\hni$ such that
+\eq{main1}
+\slim_{\eps\downarrow0}
+\e^{-t(\hn_\eps-E_\eps)}=\e^{-t\hni},\quad t\geq0.
+\en
+\et
+We carry out the proof by functional integration and will obtain $E_\eps$ as the diagonal term of a
+pair interaction potential on the paths of a Brownian motion.
+
+Let $(B_t)_{t\in\RR}=(B_t^1,...,B_t^N)_{t\in\RR}$, where $(B_t^j)_{t\in\RR}$, $j=1,...,N$, are $N$
+independent, two-sided, $\BR$-valued standard Brownian motions on the space of continuous paths indexed
+by the whole real line, endowed with Wiener measure. We denote by $\Ebb^x[\cdots]$ expectation with
+respect to the Wiener measure starting from  $x$ at $t=0$. It is known that a Feynman-Kac formula holds
+for $(F,\e^{-2T\hn_\eps}G)$, see \cite[Theorem  6.3]{lhb11}, given in terms of a two-sided Brownian motion.
+In particular, for $F=f\otimes \one$ and $G=h\otimes \one$ we have the following representation.
+\begin{proposition}
+Let $f,h\in\LR$. Then it follows that
+\begin{align*}
+(f\otimes \one, \e^{-2T\hn_\eps} h\otimes  \one) = \idx \Ebb^x\!\left[\ov{f(B_{-T})} h(B_T)
+\e^{-\int_{-T}^T V(B_s) ds} \e^{\frac{g^2}{2} S_\eps} \right],
+\end{align*}where
+\eq{regint}
+S_\eps= \iijj \int _{-T}^T ds\int_{-T}^T dt
+W_\eps (B_t^i-B_s^j,t-s)
+\en
+is the pair interaction given by the pair interaction potential
+\begin{equation}
+\label{eq:nelsonWreg}
+W_\eps (x,t) =  \int_{\BR} \frac{1}{2\omega(k)} \e^{-\eps |k|^2} \e^{-ik\cdot x} \e^{-\omega(k)|t|}\kp dk.
+\end{equation}
+\end{proposition}
+
+
+\subsection{Renormalized action}
+In this section we perform UV renormalization on the level of the density of the path measure. Consider the
+function
+\begin{equation}
+\label{eq:phiW}
+\varphi_\eps(x,t) =  \int_{\BR} \frac{\e^{-\eps |k|^2} \e^{-ik\cdot x-\omega(k)|t|}}{2 \omega(k)}
+\beta(k)\kp dk,\quad \eps\geq 0,
+\end{equation}
+where $\beta(k)$ is given by \kak{beta}.
+
+\begin{proposition}
+There exists a functional $S_0^\ren $ such that
+\eq{mmm1}
+\lim_{\eps\downarrow 0}\Ebb^x \left[\e^{-\int_{-T}^TV(B_s)ds} \e^{\frac{g^2}{2}( S_\eps-4NT\varphi_\eps(0,0))}\right] =
+\Ebb^x\!\left[\e^{-\int_{-T}^TV(B_s)ds} \e^{\frac{g^2}{2}S_0^\ren }\right].
+\en
+\end{proposition}
+\noindent
+Notice that $W_\eps (x,t)$ is smooth, and
+$W_\eps (x,t)\to  W_0(x,t)$ as $\eps\downarrow0$ for every
+$(x,t)\neq (0,0)$, where
+\eq{tooi}
+W_0(x,t)=\int_{\BR}\frac{1}{2\omega(k)}\e^{-ik\cdot x} \e^{-\omega(k)|t|} \kp dk.
+\en
+It is seen, however, that $W_\eps (0,0)\to \infty$ as $\eps\downarrow 0$, i.e., $W_0(x,t)$ has a power-like
+singularity at $(0,0)$, thus \kak{mmm1} is non-trivial to obtain. We will prove the above proposition
+through a sequence of lemmas below.
+
+From now on we fix $T>0$. As $\eps\downarrow 0$ only the diagonal part of the interaction has a singular term.
+Also, fix $0<\tau\leq T$ and denote $[t]_T = -T\vee t \wedge T$. We decompose the regularized interaction
+into diagonal and off-diagonal parts as
+\eq{hiror6}
+S_\eps = S_\eps^{\dd } + S_\eps^{\od },
+\en
+where
+\eq{eniwa1}
+S_\eps^{\dd } = 2\iijj \int_{-T}^T ds \int_{s}^{[s+\tau]_T} dt\, W_\eps (B_t^i-B_s^j,t-s)
+\en
+and
+\eq{eniwa2}
+S_\eps^{\od }  = 2\iijj \int_{-T}^T ds \int_{[s+\tau]_T}^{T}dt W_\eps (B_t^i-B_s^j,t-s).
+\en
+$S_\eps^{\dd }$ denotes the integral of $S_\eps$ in the neighborhood of the diagonal
+$\{(t,t)\in\RR^2| |t|\leq T\}$, and $S_\eps^{\od } $ on its complement. Notice that for $\tau=T$ we have
+$S_\eps^{\od }=0$. The next lemma is easy to prove and we omit the details.
+\bl{h1}
+It follows pathwise that $\lim_{\eps\downarrow 0}S_\eps^{\od }  = S_0^{\od }$, where $S_0^{\od }$ is
+$S_\eps^{\od }$ with $\eps=0$.
+\el
+
+A representation in terms of a stochastic integral will help us deal with the more difficult term
+$S_\eps^{\dd }$. In the following lemma first we derive some bounds on $\varphi_\eps(x,t)$ and its
+gradient.
+\begin{lemma}
+\label{lpb}
+There exists a constant $c>0$ such that the bounds
+\begin{align*}
+&
+|\nabla \varphi_\eps(x,t)|\le c  |t|^{-1},\quad t\not=0  \\
+&
+|\nabla \varphi_\eps(x,t)| \le c |x|^{-1},\quad |x|\not=0
+\end{align*}
+hold uniformly in $\eps$. Furthermore, similar bounds hold for the function $\varphi_0-\varphi_\eps$
+with a constant $\ce   > 0$ such that $\lim_{\eps\downarrow 0}\ce  =0$, i.e.,
+\begin{align*}
+&
+|\nabla \varphi_\eps(x,t)-\nabla \varphi_0(x,t) |\le \ce    |t|^{-1},\quad t\not=0,  \\
+&
+|\nabla \varphi_\eps(x,t)-\nabla \varphi_0(x,t) | \le \ce   |x|^{-1},\quad |x|\not=0.
+\end{align*}\end{lemma}
+\proof
+%Hence
+%\begin{equation*}
+%|\varphi_\eps(x,t)| \le 2\pi C\int_{0}^{1} \frac{1}{2|t|+r}dr + 2\pi C \int_{1}^\infty \frac{\e^{-r }}{r}dr
+%\end{equation*}
+%which gives the bound
+%$|\varphi_\eps(x,t)| \le  C (1+\log (|t|\wedge 1))$.
+The first bound on the gradient follows directly by
+\begin{equation*}
+\begin{split}
+|\nabla \varphi_\eps(x,t)| & \le
+\int_{\BR} \frac{1}{2 (\omega(k)+|k|^2/2)} \e^{-\eps |k|^2} \e^{-\omega(k)|t|}\kp dk
+\le c \int_\La^\infty  \e^{ -r t} dr.
+\end{split}
+\end{equation*}
+Next consider the second. After integration over the angular variables we obtain
+\eq{eq:varphi-ang-int}
+\varphi_\eps(x,t) = 2\pi \int_{\Lambda}^\infty \frac{\e^{-\eps r^2 - r |t|}}{r(2+r)} \frac{\sin(r|x|)}{|x|} dr.
+\en
+Differentiation in (\ref{eq:varphi-ang-int}) gives
+\begin{equation}
+\label{b}
+\nabla \varphi_\eps(x,t)
+= \frac{2\pi x}{|x|^2} \int_{\Lambda}^\infty  \frac{\e^{-\eps r^2/|x|^{2}-|t| r/|x|}}{r(2|x|+r)}
+\lk r\cos r -\sin r \rk dr,
+\end{equation}
+and estimating the right-hand  side we have
+\begin{align*}
+|\nabla \varphi_\eps(x,t)|
+ \leq \int_{0}^{1}  \frac{C r^3}{r^2} dr
++ \left|\int_{1}^\infty   \frac{\e^{-\eps r^2/|x|^{2}-|t|r/|x|}}{(2|x|+r)} \cos r dr\right|
++ \int_{1}^\infty  \frac{1}{r^2}dr
+\end{align*}using that $|r\cos r  - \sin r | \le C r^3$, for a constant $C > 0$ and all $r\in [0,1]$. Since the
+integral in the middle term above is bounded, the lemma follows.
+\qed
+\begin{lemma}
+\label{lem:WI-decomp}
+If $\eps>0$, then the expression
+\begin{align}
+S_\eps^{\dd } & = 2\iijj \int_{-T}^T \varphi_\eps(B_s^i-B_s^j,0)ds   - 2\iijj
+ \int_{-T}^T \varphi_\eps(B_{[s+\tau]_T}^i-B_s^j,[s+\tau]_T-s) ds \non \\
+ & \qquad +  2\iijj  \int_{-T}^T ds \int_{s}^{[s+\tau]_T} \nabla \varphi_\eps(B_t^i -B_s^j,t-s)  \cdot dB_t^i
+\label{eq:WI-decomp}
+\end{align}
+holds.
+\end{lemma}
+\proof
+Notice that $\varphi_\eps(x,t)$ solves the equation
+\begin{equation}
+\label{eq:phi-pde}
+\lk \partial_t  + \frac12 \Delta\rk  \varphi_\eps(x,t) = - W_\eps (x,t), \qquad x \in \BR, \quad t \ge 0.
+\end{equation}
+Fix $i$ and $j$. Then the  It\^o formula yields that
+\begin{multline}
+\label{eq:phi-eps-dec}
+\varphi_\eps(B_{[s+\tau]_T}^i-B_s^j,[s+\tau]_T-s)-\varphi_\eps(B_s^i-B_s^j,0) \\
+= \int_{s}^{[s+\tau]_T} \nabla \varphi_\eps(B_t^i-B_s^j,t-s)  \cdot dB_t^i
++ \int_{s}^{[s+\tau]_T}
+\lk \partial_t + \frac{1}{2}\Delta\rk  \varphi_\eps(B_t^i-B_s^j,t-s) dt.
+\end{multline}
+Hence by (\ref{eq:phi-pde})
+\begin{multline}
+\label{eq:Wdec}
+\int_{s}^{[s+\tau]_T} W_\eps (B_t^i-B_s^j,t-s) dt \\
+= \varphi_\eps(B_s^i-B_s^j,0) -\varphi_\eps(B_{[s+\tau]_T}^i-B_s^j,[s+\tau]_T-s) +
+\int_{s}^{[s+\tau]_T} \nabla\varphi_\eps(B_t^i-B_s^j,t-s)\cdot dB_t^i
+\end{multline}
+follows. Inserting this expression into $S_\eps^{\dd}$ proves the claim.
+\qed
+Lemma~\ref{lem:WI-decomp} suggests the definition
+\eq{jozsef def}
+S_\eps^\ren  = S_\eps - 4 NT\varphi_\eps(0,0),\quad \eps>0
+\en
+as a renormalized action. This can be expressed as
+\begin{align}
+\label{eq:WI-renorm}
+S_\eps^\ren
+=
+S_\eps^{\od }  +X_\eps+Y_\eps+Z_\eps
+\end{align}
+where
+\begin{align}
+\label{eq:WI-renorm-1}
+X_\eps&
+=
+2\ij  \int_{-T}^T \varphi_\eps(B_s^i-B_s^j,0) ds, \\
+Y_\eps &
+= 2 \iijj \int_{-T}^T ds \int_{s}^{[s+\tau]_T} \nabla \varphi_\eps(B_t^i-B_s^j,t-s)  \cdot dB_t^i,\\
+\label{eq:WI-renorm-2}
+Z_\eps &
+= - 2 \iijj \int_{-T}^T \varphi_\eps(B_{[s+\tau]_T}^i-B_s^j,[s+\tau]_T-s)ds.
+\end{align}
+\bl{finitez}
+There exist constants $c_z$ and $c_s$ such that $|Z_\eps|\leq c_z T$ and $|S_\eps^{\od}|\leq c_s T^2$,
+uniformly in the paths and $\eps\geq0$.
+\el
+\proof
+We see that
+\begin{align*}
+|Z_\eps|
+\leq
+4\pi N^2 \lk
+\int_{-T}^{T-\tau} ds  \int_{\Lambda}^\infty \frac{\e^{-r\tau }}{1+r/2}dr +
+\int_{T-\tau}^{T} ds  \int_{\Lambda}^\infty \frac{\e^{-r(T-s)}}{1+r/2}dr\rk
+\leq c_z T
+\end{align*}
+with some $c_z > 0$. The bound $|S_\eps^{\od}|\leq c_s T^2$ is derived similarly.
+\qed
+\bl{finite}
+It follows that $\d \sup_{x\in\BR} \Ebb^x[|X_\eps|]<\infty$, for all $\eps\geq 0$.
+\el
+\proof
+We notice that
+\eq{225}
+X_\eps =\ij\int_{-T}^ T ds \frac{2\pi}{|B_s^i-B_s^j|}
+\int_\Lambda^\infty \frac{\sin\sqrt{r|B_s^i-B_s^j|}}{r+r^2/2}\e^{-\eps r^2} dr,\quad \eps\geq0.
+\en
+Hence
+\eq{xkato}
+\Ebb^x\!\left[|X_\eps|\right]
+\leq
+\ij\int_{-T}^ {T} ds \Ebb^x \left[\frac{2\pi}{|B_s^i-B_s^j|}\right]
+\int_\Lambda^\infty \frac{1}{r+r^2/2}dr.
+\en
+The assumption
+$\Lambda>0$ implies
+\eq{IRbound}
+\int_\Lambda^\infty \frac{1}{r+r^2/2} dr<\infty.
+\en
+Since $\ij |x^i-x^j|^{-1}$  is a Kato-class potential on $L^2(\RR^{3N})$ (see Appendix \ref{appa}),
+we have
+\begin{align*}
+\sup_{x\in\BR} \Ebb^x\!\left [\ij  \int_{-T}^ T \frac{ds}{|B_s^i-B_s^j|} \right] <\infty.
+\end{align*}
+Thus \kak{xkato} is finite and the lemma follows.
+\qed
+\begin{lemma}
+\label{prop:convergence}
+It follows that $\d \sup_{x\in\BR}\Ebb^x [|Y_\eps|]<\infty$ for all $\eps\geq 0$, and
+$\d \lim_{\eps\downarrow0}\sup_{x\in\BR}  \Ebb^x [|Y_\eps -Y_0 |]=0$.
+\end{lemma}
+\proof
+By the Fubini theorem the stochastic and Lebesgue integrals can be interchanged, thus $Y_\eps$ has
+the representation
+\begin{equation}
+\label{eq:WI-renorm-1-bis}
+Y_\eps = 2 \iijj \int_{-T}^T \lk  \int_{[t-\tau]_T}^t  \nabla \varphi_\eps(B_t^i-B_s^j,t-s) ds \rk
+\cdot dB_t^i.
+\end{equation}
+This is a well-defined random variable for every $\eps \geq 0$. The It\^o isometry gives
+\begin{equation}
+\label{228}
+\begin{split}
+&\Ebb^x\!\left[|Y_\eps-Y_0|^2 \right]\non \\
+& =
+4 \sum_{i=1}^N \int_{-T}^T
+\Ebb^0\!\left[\left| \sum_{j=1}^N \int_{[t-\tau]_T}^t(\nabla \varphi_\eps-\nabla \varphi_0)
+(B_t^i-B_s^j+x^i-x^j,t-s)ds \right|^2 \right] dt
+\non \\ &
+\le
+4\ce   \sqrt N\iijj \int_{-T}^T
+\Ebb^0\!\left[\lk\int_{[t-\tau]_T}^t |B_t^i-B_s^j+x^i-x^j|^{-\theta} |t-s|^{-(1-\theta)} ds\rk^2 \right] dt,
+\non
+\end{split}
+\end{equation}
+where we used  Lemma \ref{lpb} and an interpolation to obtain the bound
+\eq{interp}
+|\nabla \varphi_\eps(x,t)-\nabla \varphi_0(x,t)| \le \ce    |x|^{-\theta} |t|^{-(1-\theta)},
+\quad \theta \in [0,1].
+\en
+Here $\ce  \to 0$ as $\eps\downarrow 0$. With some $\frac{1}{2}<\theta <1$, the Schwarz inequality applied
+to the latter integral gives
+\begin{align}
+&\Ebb^x[|Y_\eps-Y_0|^2] \non \\
+&
+\leq
+4\ce  \sqrt N \iijj \int_{-T}^T\!\!\!
+ \Ebb^0\!\left[\int_{[t-\tau]_T}^t |B_t^i-B_s^j+x^i-x^j||^{-2\theta} ds \right]
+\lk \int_{[t-\tau]_T}^t \!\!\! |t-s|^{-2(1-\theta)} ds \rk  dt \non \\
+&
+\label{230}
+\leq
+4 \ce   \tau^{2\theta-1}\sqrt N \iijj \int_{-T}^T \lk
+\int_{[t-\tau]_T}^t \!\!\! \Ebb^0 [|B_t^i-B_s^j+x^i-x^j|^{-2\theta}] ds\rk  dt.
+\end{align}
+Write $x^i-x^j=X$. Then we can compute as
+\begin{align*}
+\int_{-T}^ T dt \int_{\BR\times\BR} \!\!\! |u-v+X|^{-2\theta}p_t(u)p_s(v) du dv
+&\leq
+\int_{-\infty}^ \infty dt \int_{\BR} |u|^{-2\theta}p_{t+s}(u-X) du \\
+&=
+\int_{\BR} \frac{1}{|u-X|} \frac{1}{|u|^{2\theta}}du.
+\end{align*}
+Since  $|x|^{-2\theta}\in L^p(\BR)+L^\infty(\BR)$ for $p > 3/2$, the potential $|x|^{-2\theta}$
+is Kato-class. Thus
+$$
+\sup_{X\in\BR} \int_{\BR} \frac{1}{|u-X|} \frac{1}{|u|^{2\theta}}du <\infty,
+$$
+see also Appendix \ref{appa}. Hence $\sup_{x\in\BR} \int_{-T}^T dt \int_{[t-\tau]_T}^t ds
+\Ebb^x[|B_t^i-B_s^j|^{-2\theta}] <\infty$ follows. Therefore we obtain that
+\eq{231}
+\sup_{x\in\BR}\Ebb^x [|Y_\eps-Y_0|^2] \to 0
+\en
+as $\eps\downarrow 0$ by \kak{230} and the fact that $\ce  \to 0$ as $\eps\downarrow 0$.
+Moreover, $\sup_{x\in\BR} \Ebb^x [|Y_\eps|]<\infty$ follows from the inequality
+\begin{align*}
+\Ebb^x[|Y_\eps|^2]
+\le
+4c \tau^{2\theta-1}   \sqrt N\iijj \int_{-T}^T dt
+\int_{[t-\tau]_T}^t \Ebb^x [|B_t^i-B_s^j+x^i-x^j|^{-2\theta}] ds.
+\end{align*}
+\qed
+For $x=(x^1,...,x^N)\in \RR^{3N}$ define
+\begin{align*}
+&S_\eps^{\od, T}(x)=2\sum_{i,j=1}^N \int_0^{2T} ds\int_{[s+\tau]_T}^T W_\eps(B_t^i-B_s^j,t-s) dt,\\
+&X_\eps^T(x)=2\iijj \int_0^{2T}\varphi_\eps(B_s^i-B_s^j+x^i-x^j,0) ds,\\
+&Y_\eps^T(x)=2\sum_{i,j=1}^N  \int_0^{2T} ds \int_s^{[s+\tau]_T}\nabla\varphi_\eps(B_t^i-B_s^j+x^i-x^j, t-s) \cdot dB_t^i,\\
+&Z_\eps^T(x)=-2\sum_{i,j=1}^N \int_0^{2T}\varphi_\eps(B_{[s+\tau]_T}^i-B_s^j+x^i-x^j, [s+\tau]_T-s)ds.
+\end{align*}
+
+\bl{supexp}
+Let $\alpha\in\RR$. Then there exists a constant $c_U(\alpha)>0$, independent of $\eps\geq0$, such that
+\eq{koukou}
+\sup_{x\in\BR}\Ebb^0[\e^{\alpha U_\eps^T(x)}]<c_U(\alpha),\quad \eps\geq0,\qquad U=S^{\od}, X,Y,Z.
+\en
+\el
+\proof
+Let $U=X$. By the inequality $|X_\eps^T(x)|\leq C\ij \int_0^{2T}{|B_s^i-B_s^j|}^{-1} ds$ and the fact that
+$\ij  {|x^i-x^j|}^{-1}$ is a Kato-class potential, we see that
+\eq{XX}
+\sup_{x\in\BR}\left|\Ebb^0[\e^{\alpha X_\eps^T(x)}]\right|
+\leq \sup_{x\in\BR}\Ebb^x\!\left[\e^{|\alpha| \iijj \int_0^{2T}|B_s^i-B_s^j|^{-1} ds}\right]<\infty.
+\en
+Take $U=Y$, and let $\Phi_t=\Phi_t(x)=(\Phi_t^1,\ldots,\Phi_t^N)$ and
+$$
+\d \Phi_t^i =\Phi_t^i(x)=2 \sum_{j=1}^N \int^t_{[t-\tau]_T}\nabla \varphi_\eps (B_t^i-B_s^j+x^i-x^j,t-s)ds.
+$$
+Thus $Y_\eps^T(x)$ has the representation
+\begin{equation}
+\label{eq:WI-renorm-1-bism}
+Y_\eps^T(x) = \int_{0}^{2T} \Phi_t\cdot dB_t.
+\end{equation}
+Using the Girsanov theorem,  we obtain $\Ebb^0\!\left[\e^{2\alpha \int_0^ {2T} \Phi_t \cdot
+dB_t-\half(2\alpha )^2\int_0^ {2T} |\Phi_t|^2 dt}\right] =1$ and the bound
+\begin{align*}
+\lk \Ebb^0\!\left[\e^{\alpha Y_\eps^T(x)}\right] \rk ^2
+&\leq
+\Ebb^0\!\left[\e^{2\alpha \int_0^ {2T} \Phi_t \cdot dB_t-\half(2\alpha )^2\int_0^ {2T} |\Phi_t|^2 dt}\right]
+\Ebb^0\!\left[\e^{2\alpha ^2 \int_2^ {2T} |\Phi_t|^2 dt}\right] \\
+&=
+\Ebb^0\!\left[\e^{2\alpha ^2\int_0^{2 T} |\Phi_t|^2 dt}\right].
+\end{align*}
+In a similar way to \kak{228} we have
+$$
+\int_0^ {2T} |\Phi_t|^2 dt\leq 4 c\tau^{2\theta-1}\sqrt N  Q(x),
+$$
+where $c$ is the constant in Lemma \ref{lpb}, which is independent of $\eps$,
+$$
+Q(x)= \iijj \int_0^{2T} ds \int_s^{[s+\tau]_T} |B_t^i-B_s^j+x^i-x^j |^{-2\theta} dt
+$$
+and we recall that we have chosen $\half <\theta <1$. Thus we have
+\eq{na2-occ1}
+\lk \Ebb^0\!\left[\e^{\alpha    Y_\eps^T(x)}\right] \rk^2
+\leq
+\Ebb^0\!\left[\e^{\gamma  Q(x)}\right],
+\en
+where  $\gamma=8 c\sqrt N \alpha^2\tau^{2\theta-1}$. The Jensen inequality gives
+\eq{domo}
+\Ebb^0\!\left[\e^{\gamma Q(x)} \right]  \le \int_0^{2T} \frac{ds}{2T}
+\Ebb^0\!\left[\e^{2 T\gamma \iijj \int_s^{[s+\tau]_T} |B_t^i -B_s^j +x^i-x^j|^{-2\theta} dt} \right].
+\en
+We split up the right-hand  side of \kak{domo} by $\int_0^{2T}= \int_{0}^{2T-\tau}+\int_{2T-\tau}^{2T}$.
+Consider the first term. Since $[s+\tau]_T=s+\tau$, we have
+\begin{eqnarray}
+\lefteqn{
+\int_0^{2T-\tau}\frac{ds}{2T}
+\Ebb^0 \left[\e^{2 T\gamma \iijj \int_s^{[s+\tau]_T} |B_t^i-B_s^j +x^i-x^j|^{-2\theta} dt }\right] }
+\non \\
+&\label{proof}
+=
+\int_0^{2T-\tau}\frac{ds}{2T}
+\Ebb^0 \left[\e^{2 T\gamma \iijj \int_0^{\tau} |B_{s+t}^i-B_s^j+x^i-x^j|^{-2\theta} dt }\right].
+\end{eqnarray}
+Let $\fff_s=\s(B_r^j;0\leq r\leq s, \, j=1,...,N)$ be the natural filtration of the $3N$-dimensional Brownian
+motion $(B_t)_{t\geq0}$. Taking conditional expectation and using the Markov property, we see that
+\begin{align*}
+\Ebb^0 \left[\e^{2 T\gamma \iijj \int_0^{\tau} |B_{s+t}^i-B_s^j+x^i-x^j|^{-2\theta} dt }\right]
+&=
+\Ebb^0\!\left[
+\Ebb^0 \left[\e^{2 T\gamma \iijj \int_0^{\tau} |B_{s+t}^i-B_s^j+x^i-x^j|^{-2\theta} dt }|\fff_s\right]\right]\\
+&=
+\Ebb^0\!\left[\Ebb^{B_s} \left[\e^{2 T\gamma \iijj \int_0^{\tau}
+|B_{t}^i-B_0^j+x^i-x^j|^{-2\theta} dt }\right]\right].
+\end{align*}
+We can further compute this as
+\begin{align*}
+&=
+(2\pi s)^{-3N/2}\int_{\RR^{3N}} \e^{-|y|^2/2s}
+\Ebb^{y} \left[\e^{2 T\gamma \iijj \int_0^{\tau} |B_{t}^i-B_0^j+x^i-x^j|^{-2\theta} dt }\right] dy \\
+&=
+(2\pi s)^{-3N/2}\int_{\RR^{3N}} \e^{-|y|^2/2s} \prod_{i=1}^N \Ebb^{0} \left[\e^{2 T\gamma
+\sum_{j=1}^N \int_0^{\tau} |B_{t}^i+(x+y)^i-(x+y)^j|^{-2\theta} dt }\right] dy.
+\end{align*}
+Since $|x|^{-2\theta}$ is a Kato-class potential, we see that
+$$
+\d \sup_{x\in\BR}\Ebb^0[\e^{\beta \int_0^\tau |B^i_s+x|^{-2\theta}ds}]=
+\sup_{x\in\BR}\Ebb^x[\e^{\beta \int_0^\tau |B^i_s|^{-2\theta}ds}]<\infty,
+$$
+for all $\beta\in\RR$ (see Appendix \ref{appa}). From this it follows that
+\eq{suppp}
+\sup_{x,y\in\BR} \Ebb^0 \left[\e^{2 T\gamma \sum_{j=1}^N \int_0^{\tau}
+|B_{t}^i+(x+y)^i-(x+y)^j|^{-2\theta} dt }\right]<\infty.
+\en
+In particular,
+\begin{align}
+&
+\int_{0}^{2T-\tau} \frac{1}{2T}\Ebb^x \left[\e^{2 T\gamma \iijj \int_s^{[s+\tau]_T}
+|B_t^i-B_s^j+x^i-x^j|^{-2\theta} dt }\right]ds \non\\
+&\label{inf1}
+\leq
+\frac{2T-\tau}{2T}\sup_{x,y\in\BR}\prod_{i=1}^N \Ebb^{0}\left[\e^{2 T\gamma \sum_{j=1}^N \int_0^{\tau}
+|B_{t}^i+(x+y)^i-(x+y)^j|^{-2\theta} dt }\right]<\infty.
+\end{align}
+Next consider the second term and note that $[s+\tau]_T=2T$. In the same way as above, we have
+\begin{align}
+&
+\int_{2T-\tau}^{2T} \frac{1}{2T}\Ebb^x \left[\e^{2 T\gamma \iijj \int_s^{[s+\tau]_T}
+|B_t^i-B_s^j+x^i-x^j|^{-2\theta} dt }\right]ds \non\\
+&\label{inf2}
+\leq
+\frac{\tau}{2T}\sup_{x,y\in\BR}  \prod_{i=1}^N \Ebb^{0} \left[\e^{2 T\gamma \sum_{j=1}^N \int_0^{\tau}
+|B_{t}^i+(x+y)^i-(x+y)^j|^{-2\theta} dt }\right]<\infty.
+\end{align}
+Hence by \kak{inf1} and \kak{inf2} we obtain
+\eq{sup3}
+\sup_{x\in\BR}\Ebb^0[\e^{2\alpha Y_\eps^T(x)}] \leq
+\lk \sup_{x,y\in\BR}  \prod_{i=1}^N \Ebb^{0} \left[\e^{2 T\gamma \sum_{j=1}^N \int_0^{\tau}
+|B_{t}^i+(x+y)^i-(x+y)^j|^{-2\theta} dt }\right]\rk^\han <\infty.
+\en
+Finally, consider the cases $U=Z$ and $U=S^{\od}$. From  $|Z_\eps^T(x)|\leq c_z T$ and
+$|S_\eps^{\od, T}(x)| \leq c T^2$ we obtain $\sup_{x\in\BR}\Ebb[\e^{\alpha Z_\eps^T(x)}]<\infty$
+and $\sup_{x\in\BR}\Ebb[\e^{\alpha S_\eps^{\od T}(x)}] <\infty$.
+\qed
+
+\begin{lemma}
+\label{prop:exp-int}
+Let $\alpha\in\RR$ and  $f,h\in\LR$. Then
+$$
+\d \idx \Ebb^x[f(B_{-T}) h(B_{T}) \e^{-\int_{-T}^TV(B_s) ds}
+\e^{\alpha S_\eps^\ren }]<\infty
+$$
+for all $\eps\geq0$.
+\end{lemma}
+\proof
+Recall the decomposition $S_\eps^\ren  = S_\eps^{\od}+X_\eps+Y_\eps + Z_\eps$. By the Schwarz
+inequality we have
+\begin{align}
+&
+\idx \Ebb^x[|f(B_{-T}) h(B_T)| \e^{\alpha S_\eps^\ren }]\non\\
+&\leq
+\idx  \Ebb^0\!\left[|f(x) h(B_{2T}+x)|\e^{-\int_0^{2T}V(B_s+x) ds}
+\e^{\alpha(
+S_\eps^{\od, T}(x)+X_\eps^T(x)+Y_\eps^T(x)+Z_\eps^T(x))
+} \right]\non\\
+&\label{tosan}
+\leq \|f\| \|h \| \sup_{x\in\BR} 
+\lk
+\Ebb^0
+\left[\e^{-2\int_0^{2T}V(B_s+x) ds} \e^{2\alpha(
+S_\eps^{\od, T}(x)+X_\eps^T(x)+Y_\eps^T(x)+Z_\eps^T(x))}
+\right]\rk^\han.
+\end{align}
+By Lemma \ref{supexp} and the fact that $V$ is Kato-class, we see that
+$$
+\sup_{x\in\BR} \Ebb^0\left[\e^{-2\int_0^{2T}V(B_s+x) ds} \e^{
+2\alpha(
+S_\eps^{\od, T}(x)+
+X_\eps^T(x)+Y_\eps^T(x)+Z_\eps^T(x))}\right]<\infty,
+$$
+and the lemma follows.
+\qed
+
+
+\subsection{Renormalized Hamiltonian}
+In this section we show that $H_\eps+g^2 N \varphi_\eps(0,0)$ converges to  a self-adjoint operator
+$H_{\ren}$ as $\eps\downarrow 0$.
+
+\subsubsection{Convergence of the renormalized action}
+\label{222}
+\bl{convexp}
+If $\alpha\in\RR$, then
+\eq{warau}
+\lim_{\eps\downarrow 0}\Ebb^0 \left[|\e^{\alpha X_\eps^T(x)}-\e^{\alpha X_0^T(x)}|\right]=0,\quad
+x\in\RR^{3N}.
+\en
+\el
+\proof
+We obtain that
+$|X_\eps^T(x)|\leq \int_{0}^{2T} V_C(B_s^1+x^1,....,B_s^N+x^N)ds$ and
+$$
+\Ebb^0\!\left[|\e^{\alpha X_\eps^T(x)}-\e^{\alpha X_0^T(x)}|\right]
+\leq
+2 \Ebb^0\!\left[|\e^{\alpha \int_{-T}^T V_C(B_s^1+x^1,....,B_s^N+x^N)ds}\right]<\infty.
+$$
+Since $X_\eps^T(x)\to X_0^T(x)$ a.s. for every $x$,  the Lebesgue dominated convergence theorem implies
+\kak{warau}.
+\qed
+
+\bl{convexp2}
+If $\alpha\in\RR$, then
+\eq{warai2}
+\lim_{\eps\downarrow 0}\sup_{x\in\BR} \Ebb^0[|\e^{\alpha U_\eps^T(x)}-\e^{\alpha U_0^T(x)}|]=0,\quad
+U=S^{\od}, Y,Z.
+\en
+\el
+\proof
+Let $U=Y$. It suffices to show that $\sup_{x\in\BR}\Ebb^0\!\left[|\e^{\alpha (Y_\eps^T(x)-Y_0^T(x))}-1|\right]
+\to 0$. We have
+\eq{ilo}
+\Ebb^0\!\left[\lk \e^{\alpha (Y_\eps^T(x)-Y_0^T(x))}-1\rk^2 \right]=
+\Ebb^0\!\left[\e^{2\alpha (Y_\eps^T(x)-Y_0^T(x))}\right]+
+1-2\Ebb^0\!\left[\e^{\alpha (Y_\eps^T(x)-Y_0^T(x))}\right].
+\en
+We will show below that $\lim_{\eps\downarrow 0} \Ebb^0[\e^{\alpha (Y_\eps^T(x)-Y_0^T(x))}]=1$.
+Define the random process $\delta \Phi_t=\delta \Phi_t(x)=(\delta\Phi_t^1,\ldots,\delta \Phi_t^N)$ and
+$$
+\d \delta \Phi_t^i = \delta \Phi_t^i(x)= 2 \sum_{j=1}^N \int^t_{[t-\tau]_T}(\nabla \varphi_\eps-\nabla\varphi_0)
+(B_t^i-B_s^j+x^i-x^j,t-s)ds
+$$
+so that
+$$
+Y_\eps^T(x)-Y_0^T(x)=\int_{0}^{2T} \delta\Phi_t(x) dt.
+$$
+By the Girsanov theorem
+\eq{gir}
+1=\Ebb^0[\e^{\alpha \int_{0}^ {2T} \delta\Phi_t \cdot dB_t -\frac{\alpha^2}{2} \int_{0}^ {2T} |\delta\Phi_t|^2 dt}]
+\en
+for every $\alpha\in\RR$, hence it follows that
+\eq{result}
+\sup_{x\in\BR} \lk \Ebb^0\!\left[\e^{\alpha (Y_\eps^T(x)-Y_0^T(x))} \right]-1\rk^2
+\leq
+\sup_{x\in\BR} \Ebb^0\!\left[\e^{2\alpha\int_{0}^{2T} \delta\Phi_t \cdot dB_t}\right]
+\Ebb^0\!\left[\lk1-\e^{-\frac{\alpha^2}{2}\int_{0}^{2T} |\delta\Phi_t|^2 dt}\rk^2\right].
+\en
+We see that by \kak{gir} again
+\eq{bound}
+\sup_{x\in\BR}\Ebb^0\!\left[\e^{2\alpha\int_{0}^{2T} \delta\Phi_t \cdot dB_t}\right]
+\leq
+\sup_{x\in\BR}\lk \Ebb^0\!\left[\e^{4\alpha^2\int_{0}^{2T} |\delta\Phi_t|^2 dt}\right]\rk ^\han
+\en
+and furthermore
+\eq{233}
+\sup_{x\in\BR}\Ebb^0\!\left[\lk1-\e^{-\frac{\alpha^2}{2}\int_{0}^{2T} |\delta\Phi_t|^2 dt}\rk^2\right]
+\leq
+\sup_{x\in\BR}\Ebb^0\!\left[\left|\frac{\alpha^2}{2}\int_{0}^{2T} |\delta\Phi_t|^2dt\right|^2\right]\to 0
+\en
+as $\eps\downarrow 0$. Here \kak{233}  can be shown by Lemma \ref{prop:convergence}. The right-hand
+side of \kak{bound} is uniformly bounded in $\eps$, which can be proven  in the same way as in the
+proof of Lemma \ref{prop:exp-int}. Hence \kak{result} converges to zero as $\eps\downarrow 0$ and
+\kak{warai2} for $U=Y$ follows.
+
+Let $U=Z$. It suffices to show that $\sup_{x\in\BR}\Ebb^x\!\left[|\e^{\alpha (Z_\eps-Z_0)}-1|\right]\to 0$.
+We have
+\begin{align*}
+&Z_\eps(x)-Z_0(x)\\
+&=
+2\iijj \int_{-T}^T
+\!\!\!
+ds\int_\BR\!\!\!
+\frac{\e^{-ik\cdot(B_{[s+\tau]_T-s}^i+x^i-B_{[s+\tau]_T-s}^j-x^j)}\e^{-([s+\tau]_T-s)\omega(k)} }{\omega(k)}
+\beta(k)\kp (1-\e^{-\eps|k|^2})dk.
+\end{align*}
+Let $\eta_\eps(x)=\alpha (Z_\eps(x)-Z_0(x))$. 
+It can be directly seen that
+$$
+|\eta_\eps(x)|^n\leq c^n \alpha^n T^n \eps^n
+$$
+for a constant $c$ independent of $x$. Then we have $\d \Ebb^0[\e^{\eta_\eps(x)}]=
+1+\sum_{n\geq 1}\frac{1}{n!} \Ebb^0[\eta_\eps(x)^n]$ and
+$$
+\d \sum_{n\geq 1}\frac{1}{n!}  \Ebb^0[|\eta_\eps(x)|^n] \leq \sum_{n\geq 1}\frac{1}{n!}c^n T^n \eps^n\to 0
+$$
+as $\eps\downarrow 0$, uniformly in $x$. Thus \kak{warai2} for $U=Z$ follows. For $U=S^{\od}$ we obtain
+\kak{warai2} in a similar way.
+\qed
+
+\begin{lemma}
+\label{54321}
+Let $\alpha\in\RR$ and  $f,h\in\LR$. Then
+\begin{eqnarray}
+\lefteqn{
+\lim_{\eps\downarrow 0}\idx  \Ebb^x [f(B_{-T}) h(B_T)  \e^{-\int_{-T}^TV(B_s)ds}
+\e^{\alpha S_\eps^\ren }]\non} \\
+&&\label{hanatarasi}
+= \idx  \Ebb^x [f(B_{-T} )h(B_T)\e^{-\int_{-T}^TV(B_s)ds}\e^{\alpha S_0^\ren }].
+\end{eqnarray}
+\end{lemma}
+\proof
+Write ${A_\eps}=A_\eps(x)=\alpha(S^{\od,T}_\eps(x)+Y_\eps^T(x)+Z_\eps^T(x))$. Then by shift
+invariance of Brownian motion with respect to the measure $dx dP^x$ and 
+by telescoping we have
+that
+\begin{eqnarray*}
+\lefteqn{
+\left|\idx  \Ebb^x \left[f(B_{-T}) h(B_T) \e^{-\int_{-T}^TV(B_s)ds}
+\lk \e^{\alpha S_\eps^\ren } - \e^{\alpha S_0^\ren }\rk \right]\right| } \\
+&\leq&
+\e^{2T\|V\|_\infty}\idx |f(x)|\Ebb^0 \left[ |h(B_{2T}+x)|
+\lk \e^{A_\eps(x)+\alpha X_\eps^T(x)} - \e^{A_0(x)+\alpha X_0^T(x)}\rk \right]\\
+&\leq&
+\e^{2T\|V\|_\infty} \|f\| \|h\| \, \sup_{x\in\BR}\lk \Ebb^0[|\e^{A_\eps(x)}-\e^{A_0(x)}|^4]
+\Ebb^0[\e^{4\alpha X_\eps^T(x)}]\rk^{1/4}\\
+&&\qquad +
+\e^{2T\|V\|_\infty} 
+\idx   |f(x)| E_\eps(x)   
+\sup_{x\in\BR} \lk \Ebb ^0[|\e^{4  A_0}]\rk^{1/4},
+\end{eqnarray*}
+where $E_\eps(x)= \lk \Ebb^0[|h(B_{2T}+x)|^2] \rk ^\han \lk \Ebb^0[ (\e^{\alpha X_\eps^T(x)}-
+\e^{\alpha X_0^T(x)})^4]\rk ^{1/4}$. 
+We show that each term at the right-hand side converges to
+zero. 
+Note that both $\sup_{x\in\BR} \Ebb^0[\e^{4\alpha X_\eps^T(x)}]$ and $\sup_{x\in\BR}
+\Ebb^0[\e^{4 A_0}]$ are uniformly bounded with respect to $\eps$ by Lemma \ref{supexp}.
+In Lemma \ref{convexp2}  it is shown that
+$$
+\lim_{\eps\downarrow 0} \sup_{x\in\BR}  \Ebb^0[|\e^{A_\eps(x)}-\e^{A_0(x)}|^4]= 0.
+$$
+Hence the first term converges to zero. Furthermore,
+\begin{align*}
+E_\eps(x) \leq  \lk \Ebb^0[|h(B_{2T}+x)|^2] \rk^\han \sup_{x\in\BR}\lk 
+\Ebb^0\left[ (\e^{\alpha X_\eps^T(x)}-\e^{\alpha X_0^T(x)})^4\right] \rk ^{1/4} \in L^1(\RR^{3N}).
+\end{align*}
+By Lemma \ref{convexp} we have that $\Ebb^0[(\e^{\alpha X_\eps^T(x)}-\e^{\alpha X_0^T(x)})^4]\to 0$
+as $\eps\downarrow 0$, for all $x\in\RR^{3N}$. Hence the Lebesgue dominated convergence theorem
+implies that the second term converges to zero, and the lemma follows.
+\qed
+
+
+
+\bl{maindenai}
+It follows that
+\eq{sasa21}
+\lim_{\eps\downarrow 0} (f\otimes \one,\e^{-2T(\hn_\eps+g^2N\varphi_\eps(0,0))} h\otimes  \one)
+= \int_{\BR} \Ebb^x\!\left[\ov{f(B_{-T})} h(B_T)\e^{-\int_{-T}^T V(B_s) ds} \e^{\frac{g^2}{2} S_0^\ren }
+\right]dx,
+\en
+where
+\begin{align}\label{hiroo}
+S_0^\ren
+&=
+2\ij\int_{-T}^T \varphi_0(B_s^i-B_s^j,0)ds
+ +2\iijj \int_{-T}^T ds\int_s^T\nabla\varphi_0(B_t^i-B_s^j,t-s) \cdot dB_t  \non \\
+&
+\qquad -2\iijj \int_{-T}^T \varphi_0(B_T^i-B_s^j,T-s)ds,
+\end{align}
+and 
+integrands are given by 
+$
+\varphi_0(X,t)=\int_\BR\frac{e^{-ikX}e^{-|t|\omega(k)}}{2\omega(k)}\beta(k) \kp dk$ 
+and 
+$
+\nabla \varphi_0(X,t)=\int_\BR\frac{-ik e^{-ikX}e^{-|t|\omega(k)}}{2\omega(k)}\beta(k) \kp dk$.
+\el
+\proof
+We have
+\eq{554321}
+(f\otimes \one, \e^{-2T(\hn_\eps+g^2N\varphi_\eps(0,0))}h\otimes  \one) =
+\int_{\BR} \Ebb^x\!\left[\ov{f(B_{-T})} h(B_T)\e^{-\int_{-T}^T V(B_s) ds}
+\e^{\frac{g^2}{2} S_\eps^\ren } \right]dx .
+\en
+The right-hand  side above converges to $\int_{\BR} \Ebb^x [\ov{f(B_{-T})} h(B_T)
+\e^{-\int_{-T}^T V(B_s) ds}\e^{\frac{g^2}{2} S_0^\ren} ]dx$ as $\eps\downarrow 0$.
+Thus \kak{sasa21} follows. We also see that
+\begin{align}
+S_0^\ren
+&=
+2 \ij \int_{-T}^T \varphi_0(B_s^i-B_s^j,0) ds
++ 2\iijj \int_{-T}^T ds\int_s^{[s+\tau]_T}\nabla\varphi_0 (B_t^i-B_s^j,t-s) \cdot dB_t\non\\
+&
+\qquad - 2\iijj \int_{-T}^T \varphi_0(B^i_{[s+\tau]_T}-B^j_s,[s+\tau]_T-s) ds
+.
+\end{align}
+Taking $\tau=T$, we obtain \kak{hiroo}.
+\qed
+
+
+
+\subsubsection{Extension beyond the vacuum vector}
+Now we extend the result in Section \ref{222} from vectors of the form $f\otimes \one$ to more general
+vectors of the form $f\otimes F(\phi(f_1),\ldots,\phi(f_n))\one $, with $F\in \ms  S(\BR)$, where
+$\phi(f)$ stands for a scalar field given by
+$\frac{1}{\sqrt 2} (\add(\hat f)+a(\widetilde{\hat f}))$,  where $\widetilde{\hat f}(k)=\hat f(-k)$.
+To do this we
+need a Feynman-Kac-type formula giving a representation of $\e^{-2T H_\eps}$.
+
+Denote
+$$
+H_{-k}(\RR^n)=\{f\in \ms S_\RR'(\RR^n)\,|\,\widehat f\in L_{\rm loc}^1(\RR^n), |\cdot|^{-k/2}\widehat f\in
+L^2(\RR^n)\}
+$$
+endowed with the norm $\d \|f\|_{H_{-k}(\RR^n)}^2=\int_{\RR^n} |\widehat f(x)|^2|x|^{-k} dx$. Recall that a
+Euclidean field is a family of Gaussian random variables $\{\phi_{\rm E}(F), \, F\in H_{-1}(\RR^4)\}$ on a
+probability space $(Q_{\rm E}, \Sigma_{\rm E}, \mu_{\rm E})$, such that the map $F \mapsto \phi_{\rm E}(F)$
+is linear, and their mean and covariance are given by
+$$
+\Ebb_{\mu_{\rm E}}[\phi_{\rm E}(F)]=0 \quad \mbox{and} \quad \Ebb_{\mu_{\rm E}}[\phi_{\rm E}(F)
+\phi_{\rm E}(G)]=\half (F,G)_{H_{-1}(\RR^4)}.
+$$
+For the reader's convenience we summarize in  Appendix \ref{appb} some basic facts on Euclidean fields and
+their representation in $L^2$ space (including the operators $J_t:\fff\to L^2(Q_{\rm E};\mu_{\rm E})$),
+which will be used here. In what follows, we identify $\hhh$ with the set of $\fff$-valued $L^2$ functions
+$L^2(\RR^{3N};\fff)$, i.e., $F\in \hhh$ can  be regarded as a function  $\RR^{3N}\ni x\mapsto F(x)\in \fff$
+such that $\int_{\RR^{3N}}\|F(x)\|^2_\fff dx<\infty$.
+\bp{FKF}
+Let $F, G\in\hhh$. Then
+\begin{align}
+&(F, \e^{-2TH_\eps}G)\non\\
+&\label{fkf}
+=\idx  \Ebb^x \left[\e^{-\int_{-T}^T V(B_s) ds} \Ebb_{\mu_{\rm E}} \left[J_{-T} F(B_{-T})\cdot
+\e^{-\phi_{\rm E}(\int_{-T}^T\sum_{j=1}^N \delta_s\otimes \tilde\varphi(\cdot-B_s^j) ds)} J_TG(B_T)\right]\right],
+\end{align}
+where $\tilde \varphi_\eps(x)=\lk \e^{-\eps|\cdot|^2/2}\one_\La^\perp /\sqrt{\omega}\rk^\vee{}(x)$, and $\delta_s(x) =
+\delta(x-s)$ is Dirac delta distribution with mass on $s$.
+\ep
+\proof
+See \cite[Theorem 6.3]{lhb11}.
+\qed
+
+
+\bl{h123}
+Let $ \rho_j\in H_{-\han}(\BR)$ for $j=1,2$, $f,h\in\LRN$ and $\alpha,\beta\in\CC$. Then
+\begin{eqnarray}
+\lefteqn{
+\lim_{\eps\downarrow0} (f\otimes \e^{\alpha\phi(\rho_1)}\one,
+\e^{-2T(\hn_\eps+g^2N\varphi_\eps(0,0))} h\otimes  \e^{\beta\phi(\rho_2)}\one) } \non\\
+&&\label{main22}
+= \int_{\BR} \Ebb^x\!\left[\ov{f(B_{-T})} h(B_T)\e^{-\int_{-T}^T V(B_s) ds} \e^{\frac{g^2}{2}
+S_0^\ren +\frac{1}{4}\xi} \right]dx,
+\end{eqnarray}
+where
+\begin{align*}
+\xi=\xi(g)
+&=
+\bar \alpha^2\|\rho_1/\sqrt\omega \|^2+\beta^2\|\rho_2/\sqrt\omega\|^2+2\bar
+\alpha \beta (\rho_1/\sqrt\omega, \e^{-2T\omega} \rho_2/\sqrt\omega) \\
+&
+\qquad + 2\bar \alpha g \sum_{j=1}^N
+\int_{-T}^Tds \int_\BR dk \frac{\widehat \rho_1(k)}{\sqrt{\omega(k)}}\kp
+\e^{-|s-T|\omega(k)}\e^{-ikB_s^j} \\
+&
+\qquad
++ 2\beta  g
+\sum_{j=1}^N
+\int_{-T}^Tds \int_\BR dk \frac{\widehat \rho_2(k)}{\sqrt{\omega(k)}}\kp
+\e^{-|s+T|\omega(k)}\e^{-ikB_s^j}.
+\end{align*}
+\el
+\proof
+By the functional integral representation \kak{fkf} we have
+\begin{align*}
+&
+(f\otimes \e^{\alpha\phi(\rho_1)}\one,
+\e^{-2T(\hn_\eps+g^2N \varphi_\eps(0,0))} h\otimes
+\e^{\beta\phi(\rho_2)}\one)
+=
+\idx \Ebb^x\!\left[\bar f(B_{-T} )h(B_T) \e^{-\int_{-T}^TV(B_s) ds}\right.\\
+&\times
+\left.
+\Ebb_{\mu_E}[\e^{\bar \alpha\phi_E(\delta_{-T}\otimes \rho_1)}
+\e^{\beta \phi_E(\delta_{T}\otimes \rho_2)} \e^{g \phi_E(-\sum_{j=1}^N
+\int_{-T}^ T \delta_s\otimes  \tilde \varphi_\eps (\cdot-B_s^j)ds)} ]\right]
+\e^{-2Tg^2 N\varphi_\eps(0,0)}.
+\end{align*}
+It can be
+directly seen that
+$$
+\Ebb_{\mu_E}\left[\e^{\bar \alpha\phi_E(\delta_{-T}\otimes \rho_1)}
+\e^{\beta \phi_E(\delta_{T}\otimes \rho_2)}\e^{g \phi_E(-\sum_{j=1}^N
+\int_{-T}^ T \delta_s\otimes  \tilde \varphi_\eps (\cdot-B_s^j)ds)} \right]
+\e^{-2Tg^2 N\varphi_\eps(0,0)} =\e^{\frac{g^2}{2}S_\eps^\ren +\frac{1}{4}\xi_\eps},
+$$
+where $\xi_\eps$ is defined by $\xi$ with $\kp$ replaced by $\kp \e^{-\eps|k|^2/2}$. Thus
+\begin{align*}
+& (f\otimes \e^{\alpha\phi(\rho_1)}\one, \e^{-2T(\hn_\eps+g^2N\varphi_\eps(0,0))}
+h\otimes  \e^{\beta\phi(\rho_2)}\one) \\
+&
+= \int_{\BR} \!\!\! dx \Ebb^x\!\left[\ov{f(B_{-T})} h(B_T)\e^{-\int_{-T}^T V(B_s) ds} \e^{\frac{g^2}{2}
+S_\eps^\ren +\frac{1}{4}\xi_\eps} \right].
+\end{align*}
+Notice that with a constant $C$ we have $\xi_\eps\leq C$ uniformly in the paths and $\eps\geq0$. Hence
+we can complete the proof of the lemma in a similar way to Lemma \ref{maindenai}.
+\qed
+Consider the dense subspace  $\D$ of  $\hhh$ given by
+\begin{eqnarray*}
+\lefteqn{
+\D={\rm L.H.}\, \{f\otimes \one \,|\, f\in\LRN\} \, \cup } \\
+&&
+\lkk f\otimes F(\phi(f_1),\ldots,\phi(f_n)) \one\,|\, F\in \ms S(\RR^n),
+f_j\in C_0^\infty(\BR), 1\leq j\leq n, n\in \Bbb N, f\in\LRN \rkk.
+\end{eqnarray*}
+By Lemma \ref{h123} the next result is immediate.
+\bl{h2}
+Let $\Phi=f\otimes F(\phi(u_1),\ldots,\phi(u_n))\one$, $\Psi=h\otimes G(\phi(v_1),\ldots,\phi(v_m))\one \in \D$.
+Then
+\begin{align}
+\lim_{\eps\downarrow0}
+(\Phi, \e^{-2T (\hn_\eps+g^2 N\varphi_\eps(0,0))} \Psi)
+&=
+(2\pi)^{-(n+m)/2} \int_{\RR^{n+m}}dK_1 dK_2 \ov{\widehat F(K_1)} \widehat G(K_2) \non \\
+& \times
+\idx  \Ebb^x\!\left[\ov{f(B_{-T})} h(B_T) \e^{-\int_{-T}^T V(B_s) ds} \e^{\frac{g^2}{2}
+S_0^\ren + \frac{1}{4} \xi(K_1,K_2)} \right],
+\label{310}
+\end{align}
+where
+\begin{align*}
+\xi(K_1,K_2)
+&=
+-\|K_1\cdot u/\sqrt\omega\|^2 -\|K_2\cdot v /\sqrt\omega\|^2 -
+2 (K_1 \cdot u/\sqrt\omega, \e^{-2T\omega} K_2 \cdot v/\sqrt\omega)\\
+& \qquad
+- 2i g \sum_{j=1}^N \int_{-T}^Tds \int_\BR dk
+\frac{K_1\cdot \widehat u(k)}{\sqrt{\omega(k)}}\kp \e^{-|s-T|\omega(k)}\e^{-ikB_s^j} \\
+&
+\qquad + 2i g \sum_{j=1}^N \int_{-T}^Tds \int_\BR dk
+\frac{K_2\cdot \widehat v(k)}{\sqrt{\omega(k)}}\kp \e^{-|s+T|\omega(k)}\e^{-ikB_s^j}
+\end{align*}
+and $u=(u_1,...,u_n)$, $v=(v_1,...,v_m)$.
+\el
+\proof
+Notice that $F(\phi(f_1),\ldots,\phi(f_n)) \one
+=(2\pi)^{-n/2} \int_{\RR^n} \widehat F(K)
+\e^{i\phi (K\cdot f)} \one dK$. Hence
+\begin{align*}
+& (\Phi, \e^{-2T(\hn_\eps+g^2 N \varphi_\eps(0,0))} \Psi)\\
+&= \frac{1}{(2\pi)^{(n+m)/2}}
+\int_{\RR^{m+n}}
+\!\!\!
+\!\!\!
+\!\!\!
+\!\!\!
+dK_1dK_2\ov{\widehat F(K_1)} \widehat G(K_2)
+(f\otimes \e^{-i\phi(K_1\cdot f)}\one,
+\e^{-2T(\hn_\eps+g^2 N \varphi_\eps(0,0))}
+h\otimes \e^{-i\phi(K_2\cdot h)}\one).
+\end{align*}
+Thus the statement follows from Lemma \ref{h123}.
+\qed
+
+
+\subsubsection{Uniform lower bound}
+\label{223}
+In this section we show a crucial lower bound on $H_\eps+g^2 N \varphi_\eps(0,0)$ uniform in
+$\eps>0$, and give the proof of Theorem \ref{main}.
+
+\bc{map}
+There exists a constant $C$ independent of $\eps$ such that
+\eq{bound1}
+\idx \Ebb^x[f(B_{-T})h(B_T) \e^{-\int_{-T}^TV(B_s) ds} \e^{S_\eps^\ren }]\leq C\|f\| \|h\|
+\en
+for every $f,h\in\LR$ and  $\eps\geq0$, and
+\eq{tosan2}
+C\leq \sup_{x\in\BR} 
+\lk
+\Ebb^0[\e^{-2\int_0^{2T}V(B_s+x) ds}
+\e^{2(S_\eps^{\od, T}(x)+X_\eps^T(x)+Y_\eps^T(x)+Z_\eps^T(x))}]\rk^\han.
+\en
+\ec
+\proof
+This is directly derived from \kak{tosan}.
+\qed
+
+
+\bc{nelson}
+There exists $C \in \RR$ such that $\hn_\eps+g^2 N\varphi_\eps(0,0)>C$, uniformly in $\eps>0$.
+\ec
+\proof
+In this proof the positive constants $a_j$, $b_j$ will be understood to be independent of both
+$\eps\geq0$ and $T$. It is straightforward to  see that
+$$
+\Ebb^0[\e^{ S_\eps^{\od,T}(x)}]\leq a_1\e^{b_1T} \quad \mbox{and} \quad
+\Ebb^0[\e^{ Z_\eps^T(x)}]\leq a_2\e^{b_2T}.
+$$
+By \kak{XX} and
+ \kak{sup3} we also have
+$$\sup_{x\in\BR} \Ebb^0[\e^{ X_\eps^T(x)}] \leq a_3\e^{b_3 T}\quad \mbox{and}
+\quad
+\sup_{x\in\BR}\Ebb^0[\e^{ Y_\eps^T(x)}]\leq a_4\e^{b_4 \tau T}.$$
+Here we  used Proposition
+\ref{expexp} in Appendix \ref{appa}. Since
+\begin{align*}
+&\Ebb^0\!\left [ \e^{2(
+S_\eps^{\od, T}(x)+X_\eps^T(x)+Y_\eps^T(x)+Z_\eps^T(x))}\right]\\
+&\leq
+\lk \Ebb^0\!\left[\e^{4 S_\eps^{\od,T}(x)}\right]\rk^\han \!\!\! \lk 
+\Ebb^0\!\left[\e^{8 X_\eps^T(x)}\right]\rk
+^{1/4} \!\!\! \lk 
+\Ebb^0\!\left[\e^{16 Y_\eps^T(x)}\right]\rk^{1/8} \!\!\!
+\lk \Ebb^0\!\left[\e^{32 Z_\eps^T(x)}\right]\rk^{1/16},
+\end{align*}
+there exist constants $a_5$ and $b_5$ such that
+\eq{best}
+\lk
+\Ebb^0\!\left [ \e^{2(S_\eps^{\od, T}(x)+X_\eps^T(x)+Y_\eps^T(x)+Z_\eps^T(x))}\right]\rk^\han
+\leq a_5 \e^{b_5T}
+\en
+for all $T>0$. Consider the function
+$$
+W(x^1,...,x^N)=\sum_{j=1}^N |x^j|^2.
+$$
+We denote $H_\eps$ with $V$ replaced by $\delta W$ by $H_\eps(\delta)$, for $\delta\geq0$.
+Then $-\half \sum_{j=1}^N \Delta_j +\delta W$, $\delta>0$, has a compact resolvent, which implies
+that $H_\eps(\delta)$ for $\delta>0$  has the unique ground state $\gr(\delta)$ by \cite{spo98,ger00},
+see Remark \ref{existence} below. By the Feynman-Kac formula \kak{fkf} we see that $\e^{-TH_\eps(\delta)}$
+is positivity improving for $\eps>0$, i.e., $(F, \e^{-TH_\eps(\delta)}G)>0$ for $F,G\in \hhh$ such that
+$F, G\geq 0$. Hence it follows that $\gr(\delta)>0$. In particular, $(f\otimes \one, \gr(\delta))\neq 0$,
+for every $0\leq  f\in\LRN$, where $f\not\equiv 0$. Thus
+\eq{inf}
+\is \left(H_\eps(\delta)+g^2 N\varphi_\eps(0,0)\right)
+=
+-\lim_{T\to \infty}\frac{1}{T}\log (f\otimes \one, \e^{-T(H_\eps(\delta)+g^2 N\varphi_\eps(0,0))}f\otimes\one),
+\en
+for every $0\leq f\in \LRN$. By \kak{bound1} and \kak{best},
+\begin{align*}
+&(f\otimes \one, \e^{-2T(H_\eps(\delta)+g^2 N\varphi_\eps(0,0))}f\otimes \one)
+=
+\idx \Ebb^x[f(B_{-T}) f(B_{T})\e^{-\int_{-T}^{T}\delta W(B_s) ds}\e^{S_\eps^\ren}]\\
+&\leq
+\|f\|^2 \sup_{x\in\BR} \Ebb^0 \lk
+\left[\e^{2(S_\eps^{\od, T}(x)+X_\eps^T(x)+Y_\eps^T(x)+Z_\eps^T(x))} \right]\rk^\han
+\leq
+\|f\|^2 a_5\e^{b_5 T},
+\end{align*}
+which implies, together with \kak{inf},  that
+\eq{delta3}
+\is \left(H_\eps(\delta)+g^2 N\varphi_\eps(0,0)\right)+\frac{b_5}{2} \geq0,\quad \delta>0.
+\en
+Note that $b_5$ is independent of $\delta$. Thus
+\eq{delta1}
+|(F, \e^{-2T(H_\eps(\delta)+g^2 N\varphi_\eps(0,0))}G)|\leq \|F\| \|G\| \e^{b_5 T}
+\en
+follows for every $\delta>0$. Let $F,G\in\hhh$. By the Feynman-Kac formula \kak{fkf} we have
+\begin{align*}
+&
+(F, \e^{-2TH_\eps(\delta)}G)\\
+&
+=\idx \Ebb^x\!\left[\e^{-\int_{-T}^T \delta W(B_s) ds} \Ebb_{\mu_{\rm E}}\!
+\left[J_{-T} F(B_{-T})\cdot  \e^{-\phi_{\rm E}(\int_{-T}^T\sum_{j=1}^N \delta_s\otimes
+\tilde\varphi(\cdot-B_s^j) ds)} J_TG(B_T)\right]\right].
+\end{align*}
+The Lebesgue dominated convergence theorem furthermore implies
+$$
+\lim_{\delta\downarrow 0}(F, \e^{-2T(H_\eps(\delta)+g^2 N\varphi_\eps(0,0))}G)
+= (F, \e^{-2T(H_\eps(0)+g^2 N\varphi_\eps(0,0))}G).
+$$
+Taking the limit $\delta\downarrow 0$ on both sides of \kak{delta1}, we have
+\eq{delta2}
+|(F, \e^{-2T(H_\eps(0)+g^2 N\varphi_\eps(0,0))}G)|\leq \|F\| \|G\| \e^{b_5T}.
+\en
+This implies that  \kak{delta3} also holds for $\delta=0$. Since $H_\eps=H_\eps(0)+V$ and $V$
+is bounded, we obtain
+$$
+\is(H_\eps+g^2 N\varphi_\eps(0,0))+\frac{b_5}{2}+\|V\|_\infty \geq0.
+$$
+Setting $C=-\frac{b_5}{2}-\|V\|_\infty$ yields the corollary.
+\qed
+\br{existence}
+\rm{
+Let $\Sigma$ be the infimum of the essential spectrum of the self-ajoint operator $-\half \sum_{j=1}^N
+\Delta_j +V$ in $L^2(\RR^{3N})$ and $E=\is(-\half\sum_{j=1}^N  \Delta_j +V)$. 
+Then it can be shown in 
+\cite{spo98} by using functional integrations  
+ that $H_\eps$ has a unique ground state if
+$$
+\Sigma-E>\frac{N^2}{4} \int_\BR \e^{-\eps|k|^2}\beta(k) \kp dk
+$$
+(see also \cite[Theorem 6.6]{lhb11}). In particular, in the case of $V(x^1,...,x^N)=\delta \sum_{j=1}^N
+|x^j|^2$, the operator $H_\eps$ has a unique ground state for every $\eps>0$ and $\delta>0$, since
+$\Sigma-E=\infty$.
+}
+\er
+
+Now we can complete the proof of the main theorem.
+
+\medskip
+\noindent
+\emph{Proof of Theorem \ref{main}.}
+Let $F, G\in \hhh$ and $C_\eps(F,G)=(F, \e^{-t(H_\eps+g^2N\varphi_\eps(0,0))}G)$. By Lemma \ref{h123} we
+obtain that $C_\eps(F,G)$ is convergent as $\eps\downarrow0$, for every $F,G\in\D$. By the uniform bound
+$$
+\|\e^{-t(H_\eps+g^2N\varphi_\eps(0,0))}\|<\e^{-tC}
+$$
+obtained from Corollary  \ref{nelson} and since $\D$ is dense in $\hhh$, it follows that
+$\{C_\eps(F,G)\}_\eps$ is a Cauchy sequence for $F,G\in\hhh$. Let $C_0(F,G)=\lim_{\eps\downarrow 0}C_\eps(F,G)$.
+Hence we get $|C_0(F,G)|\leq \e^{-tC}\|F\|\|G\|$. The Riesz theorem implies that there exists a bounded operator
+$T_t$ such that
+$$
+C_0(F,G)=(F, T_t G),\quad F,G\in \hhh.
+$$
+Thus $\slim_{\eps\downarrow 0}\e^{-t(\hn_\eps+g^2N\varphi_\eps(0,0))}=T_t$ follows. Furthermore, we also have
+that
+$$
+\slim_{\eps\downarrow 0} \e^{-t(\hn_\eps+g^2N\varphi_\eps(0,0))}
+\e^{-s(\hn_\eps+g^2N\varphi_\eps(0,0))}=\slim_{\eps\downarrow 0}
+\e^{-(t+s)(\hn_\eps+g^2N\varphi_\eps(0,0))}=T_{t+s}.
+$$
+Since the left-hand side above is $T_t T_s$, the semigroup property of $T_t$ follows. Since
+$\e^{-t(\hn_\eps+g^2N\varphi_\eps(0,0))}$ is a symmetric semigroup, $T_t$ is also symmetric. By
+the functional integral representation \kak{310} the functional $(F, T_t G)$ is continuous at $t=0$
+for every $F, G \in \D$. Given that $\D$ is in $\hhh$ and $\|T_t\|$ is uniformly bounded in a
+neighborhood of  $t=0$, it also follows that  $T_t$ is strongly continuous at $t=0$. Then the
+semigroup version of Stone's theorem \cite[Proposition 3.26]{lhb11} implies that there exists a
+self-adjoint operator $\hni$, bounded from below, such that
+$T_t=\e^{-t\hni}$, $t\geq0$.  The proof is
+completed by setting $E_\eps=-g^2N\varphi_\eps(0,0)$.
+\qed
+We established the existence of the renormalized Hamiltonian $H_\ren$. We can obtain explicitly
+the pair potential associated with $H_\ren$.
+\bc{pair potential}
+The pair potential associated with $\hni$ is given by $\frac{g^2}{2}S_0^\ren $.
+\ec
+\proof
+By Lemma \ref{maindenai} we see that
+\eq{sasa212}
+(f\otimes \one, \e^{-2T\hni} h\otimes \one)
+=\idx  \Ebb^x \left[\ov{f(B_{-T})} h(B_T)\e^{-\int_{-T}^T V(B_s) ds} \e^{\frac{g^2}{2} S_0^\ren}
+\right].
+\en
+\qed
+
+
+\section{Effective potential in the weak coupling limit}
+In this section we take the cutoff function to be
+$$
+\varphi_\eps(k)= (2\pi)^{-3/2}\e^{-\eps|k|^2/2}.
+$$
+We consider the following weak coupling limit of the Hamiltonian. In order to have a physically reasonable
+effective potential, we take the dispersion relation
+$$
+\omega_\nu(k)=\sqrt{|k|^2+\nu^2}
+$$
+with positive mass $\nu>0$ instead of $\omega(k)=|k|$, and set the IR cutoff to zero. Then the Hamiltonian
+is defined on $L^2(\RR^{3N})\otimes\fff$ and given by
+$$
+\hn_\eps=\hp\otimes\one+\one\otimes\hf+\hi,
+$$
+where $\hp=\sum_{j=1}^N (-\half \Delta_j) +V(x_1,...,x_N)$ denotes the $N$-body Schr\"odinger operator, and
+$$
+\hf=\int_\BR \omega_\nu(k)\add(k) a(k)dk
+$$
+is the free massive boson field. We scale the Hamiltonian by replacing the annihilation operator $a$ and the
+creation operator $\add$ by $\kappa a$ and $\kappa \add$, respectively, where $\kappa>0$ is the scaling
+parameter. Then $\hn_\eps$ changes to
+\eq{weak}
+\hn_\eps(\kappa)=\hp\otimes \one +\kappa^2 \one\otimes\hf+\kappa \hi.
+\en
+This scaling also implies the transformations $\omega\mapsto \kappa^2 \omega$ and $\vp\mapsto \kappa^2\vp$,
+while the energy renormalization term scales as
+\eq{energy}
+E_\eps(\kappa)=-g^2 N  \int_\BR \frac{\e^{-\eps |k|^2}}{2(2\pi)^3 \omega_\nu(k)}
+\frac{\kappa^2}{\kappa^2\omega_\nu(k)+|k|^2/2} dk.
+\en
+By Theorem \ref{main} there exists a self-adjoint operator $H_{\ren}(\kappa)$ such that
+\eq{main2}
+\lim_{\eps\downarrow 0} (f\otimes\one, \e^{-t(H_\eps(\kappa)-E_\eps(\kappa))}
+h\otimes  \one)=(f\otimes\one, \e^{-tH_{\ren}(\kappa)}h\otimes \one).
+\en
+The next proposition is established in \cite{dav79,hir99}.
+\bp{wcl}
+We have
+$$
+\slim_{\eps\downarrow 0} \lim_{\kappa\to\infty} \e^{-t(\hn_\eps(\kappa)-E_\eps(\kappa))}=
+\e^{-th_{\rm eff}}\otimes P_\Omega,
+$$
+where $P_\Omega$ denotes the projection to $\{z\one\,|\,z\in\CC\}\subset\fff$ and
+$$
+h_{\rm eff}=-\half \sum_{j=1}^N \Delta_j + V(x^1,...,x^N)-\frac{g^2}{4\pi }\sum_{i<j}
+\frac{\e^{-\nu|x_i-x_j|}}{|x_i-x_j|}.
+$$
+\ep
+
+We are now interested in the scaling limit of $H_{\ren}(\kappa)$ when $\kappa\to\infty$. By Theorem
+\ref{main} we see that
+\bl{main4}
+If $f,h\in\LR$, then
+\eq{weakcouplinglimit}
+\lim_{\kappa\to\infty}(f\otimes \one, \e^{-t H_\ren (\kappa)}h\otimes \one) =(f,\e^{-t h_{\rm eff}} h).
+\en
+\el
+\proof
+By Lemma \ref{h123} we have
+\eq{sasa2121}
+(f\otimes \one, \e^{-2T H_\ren (\kappa)}h\otimes \one) = \idx
+\Ebb^x \! \left[\ov{f(B_{-T})} h(B_T)\e^{-\int_{-T}^T V(B_s) ds} \e^{\frac{g^2}{2} S_0^\ren (\kappa)}\right],
+\en
+where
+\begin{align}\label{hiro}
+S_0^\ren (\kappa)
+&
+= 2\ij\int_{-T}^T \varphi_0(B_s^i-B_s^j,0,\kappa)ds
++2\iijj \int_{-T}^T ds\int_s^T\nabla\varphi_0(B_t-B_s,t-s,\kappa) \cdot dB_t\non\\
+&
+\qquad -2\iijj \int_{-T}^T \varphi_0(B_T-B_s,T-s,\kappa)ds,
+\end{align}
+and
+\eq{sasa33}
+\varphi_0(x,t,\kappa)=\frac{1}{(2\pi)^3}\int_{\BR} \frac{\e^{-ik\cdot x} \e^{-\kappa^2\omega(k)|t|}}{2\omega(k)}
+\frac{\kappa^2}{\kappa^2 \omega(k)+|k|^2/2}  \kp dk.
+\en
+In particular, for $t=0$ we have
+$$
+g^2\ij \varphi_0(x^i-x^j,0,\kappa)ds \;\to\; \frac{g^2}{4\pi} \sum_{i<j}\frac{\e^{-\nu|x^i-x^j|}} {|x^i-x^j|},
+$$
+and for $t\not=0$,
+$$
+|\nabla\varphi_0(X, t, \kappa)|\to 0, \quad |\varphi_0(X, t, \kappa)|\to 0
+$$
+pointwise as $\kappa\to\infty$. It can be shown in the same way as in Lemma \ref{maindenai} that
+\begin{align*}
+&
+\lim_{\kappa\to\infty} \idx
+\Ebb^x \! \left[\ov{f(B_{-T})} h(B_T)\e^{-\int_{-T}^T V(B_s) ds} \e^{\frac{g^2}{2} S_0^\ren (\kappa)}\right]\\
+&=
+\idx \Ebb^x\!\left[\ov{f(B_{-T})} h(B_T)\e^{-\int_{-T}^T V(B_s) ds} \e^{\frac{g^2}{4\pi}
+\sum_{i<j} \int_{-T}^T \frac{\e^{-\nu|B^i_s-B^j_s|}} {|B^i_s-B^j_s|}ds} \right].
+\end{align*}
+This completes the proof of the corollary.
+\qed
+\bc{main5}
+If $F, G\in\ms D$, then
+\eq{weakcouplinglimit2}
+\lim_{\kappa\to\infty}(F,  \e^{-t H_\ren (\kappa)} G) = (F,\e^{-t h_{\rm eff}}\otimes P_\Omega  G).
+\en
+\ec
+\proof
+This follows from Lemmas \ref{h123} and  \ref{main4}.
+\qed
+
+
+\appendix
+\section{Kato-class potentials}
+\label{appa}
+We say that $V\in \ms K_d$ whenever
+\eq{kato2}
+\lim_{t\downarrow 0}\sup_{x\in\RR^d} \Ebb^x\!\left [\int_0^t |V(B_s)|ds\right ]=0.
+\en
+The space $\ms K_d$ is Kato-class (relative to the Laplacian) of potentials $V: \RR^d \to \RR$. For details
+on Kato-class potentials we refer to \cite[Chapter 3.3]{lhb11} and \cite{as82, cfks08}.
+
+\bp{multi}
+If $V\in \ms K_d$, then $W(x)=\sum_{i\not =j}^N V(x^i-x^j) \in \ms K_{dN}$, with the notation $x=(x^1,...,x^N)
+\in \RR^{dN}$.
+\ep
+For a proof we refer e.g. to \cite[p.7]{cfks08}. An equivalent characterization of Kato-class potentials is
+as follows. $V\in \ms K_d$ if and only if
+\eq{eq}
+\lim_{r\downarrow 0}\sup_{x\in\RR^d}\int_{|x-y|<r}|g(x-y) V(y)|dy=0 \quad \mbox{with} \quad
+g(x)=\lkk \begin{array}{ll}
+|x|& d=1\\
+-\log|x|&d=2\\
+|x|^{2-d}&d\geq 3.
+\end{array}
+\right.
+\en
+From this characterization we have the following result.
+\bp
+{sup}
+If $V\in \ms K_d$, then $\sup_{x\in\RR^d} \int_{\RR^d} |g(x-y) V(y)| dy <\infty$.
+\ep
+Examples of Kato-class potentials include
+(1)  $|x|^{-(2-\eps)}$ with  $d=3$ for any $\eps>0$,
+(2) $V\in L^p(\RR^d)+L^\infty(\RR^d)$ with $p=1$ for $d=1$, and $p>d/2$ for $d\geq 2$.
+It is also known that the function $\e^{\int_0^t V(B_s) ds}$ of Brownian motion is integrable
+with respect to Wiener measure for a Kato-class potential $V$.
+\bp{expexp}
+Let $0\leq V\in \ms K_d$. Then there exist $\beta, \gamma>0$ such that
+\eq{alpha}
+\sup_{x\in\RR^d}\Ebb^x[\e^{\int_0^t V(B_s) ds}]<\gamma \e^{t\beta}.
+\en
+In particular, if $V\in L^p(\RR^d)$ with $p=1$ for $d=1$, and $p>d/2$ for $d\geq 2$, then there
+exists $C$ such that $\beta \leq C\|V\|_p$.
+\ep
+\proof
+See \cite[Lemma 3.38]{lhb11}.
+\qed
+
+\section{Schr\"odinger representation and Euclidean field}
+\label{appb}
+It is well known that the boson Fock space $\fff$ is unitary equivalent to $L^2(Q,\mu)$, where this
+space consists of square integrable functions on a probability space $(Q,\Sigma,\mu)$. Consider the
+family of Gaussian random variables $\{\phi_0(f), \, f\in H_{-1/2}(\BR)\}$ on $(Q,\Sigma,\mu)$ such
+that $\phi_0(f)$ is linear in $f\in H_{-\han}(\RR^3)$, and their mean and covariance are given by
+$$
+\Ebb_{\mu}[\phi_0(f)]=0 \quad \mbox{and} \quad \Ebb_{\mu}[\phi_0(f)\phi_0(g)]
+=\half (f, g)_{H_{-\han}(\RR^3)}.
+$$
+Given this space, the Fock vacuum $\one_\fff$ is unitary equivalent to $\one_{L^2(Q)}\in L^2(Q)$, and
+the scalar field $\phi(f)$ is unitary equivalent to $\phi_0(f)$ as operators, i.e., $\phi_0(f)$ is
+regarded as multiplication by $\phi_0(f)$. Then the linear hull of the vectors given by the Wick products
+$:\prod_{j=1}^n \phi_0(f_j):$ is dense in $L^2(Q)$, where recall that Wick product is recursively defined
+by
+\begin{eqnarray*}
+&&
+{:\phi_0(f):} \; =\phi_0(f)  \\
+&&
+{:\phi_0(f)\prod_{j=1}^n \phi_0(f_j):} \: =
+\phi_0(f):\prod_{j=1}^n \phi_0(f_j):-\half\sum_{i=1}^n (f,f_i)_{H_{-\han}(\RR^3)} :\prod_{j\not=i}^n \phi_0(f_j):
+\end{eqnarray*}
+This allows to identify $\fff$ and $L^2(Q)$, which we have done in \kak{fkf}, i.e., $F\in \hhh$ can be regarded
+as a function $\RR^{3N}\ni x\mapsto F(x)\in L^2(Q)$ such that $\int_{\RR^{3N}}\|F(x)\|^2_{L^2(Q)} dx<\infty$.
+
+To construct a Feynman-Kac-type representation we use a Euclidean field. Consider the family of Gaussian random
+variables $\{\phi_{\rm E}(F), \, F\in H_{-1}(\RR^4)\}$ with mean and covariance
+$$
+\Ebb_{\mu_E}[\phi_E(F)]=0 \quad \mbox{and} \quad \Ebb_{\mu_E}[\phi_E(F)\phi_E(G)]=\half (F, G)_{H_{-1}(\RR^4)}
+$$
+on a chosen probability space $(Q_E, \Sigma_E, \mu_E)$. Note that for $f\in H_{-1/2}(\BR)$ the relations
+$$
+\delta_t\otimes f\in H_{-1}(\RR^4) \quad  \mbox{and} \quad \|\delta_t\otimes f\|_{H_{-1}(\RR^4)} =
+\|f\|_{H_{-1/2}(\BR)}
+$$
+hold, where $\delta_t(x) = \delta(x-t)$ is Dirac delta distribution with mass on $t$. The family of identities
+used in \kak{fkf}
+is  then given by $J_t: L^2(Q)\to L^2(Q_{\rm E})$, $t\in\RR$, defined by the relations
+$$
+J_t \one_{L^2(Q)}=\one_{L^2(Q_{\rm E})} \quad \mbox{and} \quad
+J_t {:\prod_{j=1}^m \phi(f_j):} \;=\; {:\prod_{j=1}^m \phi_{\rm E}(\delta_t\otimes f_j):}
+$$
+Under the identification $\fff\cong L^2(Q)$ it follows that $(J_t F, J_s G)_{L^2(Q_{\rm E})}=
+(F, \e^{-|t-s|\hf }G)_\fff$ for $F, G\in\fff$. For an extensive discussion of the details we refer to
+\cite[Chapter 5]{lhb11}.
+
+
+\bigskip
+\noindent
+{\bf Acknowledgments:}
+FH acknowledges support of Grant-in-Aid for Science Research (B) 20340032 from JSPS,
+and thanks the hospitality of Universit\'e d'Aix-Marseille-Luminy and  Universit\'e de
+Rennes 1, where part of this work has been  done.
+JL thanks IHES, Bures-sur-Yvette, for a visiting fellowship, where part of
+this work has been done, and gratefully thanks Fumio Hiroshima for an invitation to the workshop
+\emph{Quantum Field Theory and Related Topics}, held at RIMS Kyoto in November 2012.
+
+{%\footnotesize
+\begin{thebibliography}{99}
+\bibitem[AS82]{as82}
+M. Aizenman and B. Simon,
+Brownian motion and Harnack's inequality for Schr\"odinger Hamiltonians,
+{\it Commun. Pure. Appl. Math. }{\bf 35} (1982), 209--273.
+
+\bibitem[Ara01]{ara01}
+A. Arai,
+Ground state of the massless Nelson model without infrared cutoff in a non-Fock representation,
+{\it Rev. Math. Phys.} {\bf 13}(2001), 1075--1094.
+
+\bibitem[BFS98]{bfs98}
+V.  Bach,   J.  Fr\"ohlich and    I.M.  Sigal,
+Quantum electrodynamics of confined non-relativistic particles, {\it  Adv. Math. } {\bf 137}
+(1998),   299--395.
+
+\bibitem[BH09]{bh09}
+V. Betz and F. Hiroshima,
+Gibbs measures with double stochastic integrals on path space,
+{\it Infinite Dimensional Analysis,  Quantum Probability and Related Topics}
+{\bf 12} (2009),  135--152.
+
+
+ \bibitem[BHLMS02]{bhlms02}
+V.  Betz, F.  Hiroshima,  J.  L\H orinczi, R.A.  Minlos and H.  Spohn,
+Ground state properties of the Nelson Hamiltonian --- A Gibbs measure-based approach,
+{\it Rev. Math. Phys.} {\bf 14}  (2002), 173--198.
+
+
+\bibitem[CFKS08]{cfks08}
+H.L. Cycon, R.G. Frose, W. Kirsch and B. Simon,
+{\it Schr\"odinger Operators}, 2nd ed., Springer 2008.
+
+\bibitem[Dav79]{dav79}
+E.B.  Davies,   Particle-boson interactions and weak coupling limit,
+{\it  J. Math. Phys.} {\bf 20}  (1979),  345--351.
+
+\bibitem[DG04]{dg04}
+J. Derezi\'nski and C. G\'erard,
+Scattering theory of infrared divergent Pauli-Fierz Hamiltonians,
+{\it   Ann. Henri Poincar\'e},  {\bf 5} (2004), 523-578.
+
+
+\bibitem[Ger00]{ger00}
+C.  G\'erard,
+On the existence of ground states for massless Pauli-Fierz Hamiltonians,
+{\it Ann.  Henri  Poincar\'e} {\bf 1}  (2000),  443--459.
+
+
+\bibitem[GHPS12]{ghps12}
+C. G\'erard, F. Hiroshima, A. Panati and A. Suzuki,
+Removal of UV cutoff for the Nelson model with variable coefficients,
+{\it Lett. Math. Phys.} {\bf 101} (2012), 305--322.
+
+\bibitem[Hir06]{hir06}
+M. Hirokawa,
+Infrared catastrophe for Nelson's model --- non-existence of ground state and soft-boson
+divergence, {\it Publ. RIMS, Kyoto Univ.}  \textbf{42},  (2006), 897--922.
+
+
+\bibitem[HHS05]{hhs05}
+M. Hirokawa, F. Hiroshima and H. Spohn,
+Ground state for point particles interacting through a massless scalar bose field,
+{\it Adv. Math.} {\bf 191} (2005), 339--392.
+
+\bibitem[Hir99]{hir99}
+F. Hiroshima,
+Weak coupling limit removing an ultraviolet cut-off for a Hamiltonian of
+particles interacting with a quantized scalar field, {\it  J. Math. Phys.} {\bf  40}
+(1999), 1215--1236.
+
+\bibitem[LHB11]{lhb11}
+J. L\H orinczi,  F. Hiroshima and V. Betz,
+{\it Feynman-Kac-Type Theorems and Gibbs Measures on Path Space}, de Gruyter Studies
+in Mathematics {\bf 34},  2011.
+
+\bibitem[LMS02]{lms02}
+J. L\H{o}rinczi, R.A. Minlos and H. Spohn,
+The infrared behavior in Nelson's model of a quantum particle coupled to a massless scalar
+field, {\it Ann. Henri Poincar\'e}  {\bf 3} (2002), 1--28.
+
+\bibitem[Nel64a]{nel64}
+E. Nelson,
+Interaction of nonrelativistic particles with a quantized scalar field,
+{\it J.   Math.   Phys. } {\bf  5}  (1964),   1190--1197.
+
+
+\bibitem[Nel64b]{nel64b}
+E. Nelson,
+Schr\"odinger particles interacting with a quantized scalar field, in: {\it Proc. Conference
+on Analysis in Function Space}, W. T.  Martin and I. Segal (eds.), p. 87, MIT Press, 1964.
+
+\bibitem[Sas05]{sas05}
+I. Sasaki,
+Ground state of the massless Nelson model in a non-Fock representation,
+{\it J. Math. Phys.} {\bf 46} (2005), 102107.
+
+\bibitem[Spo87]{spo87}
+H. Spohn,
+Effective mass of the polaron: a functional integral approach, {\it Ann. Phys.} {\bf 175}
+(1987), 278--318.
+
+\bibitem[Spo98]{spo98}
+H.  Spohn,
+Ground state of quantum particle coupled to a scalar boson field,
+{\it  Lett.   Math.   Phys.  } {\bf 44}   (1998),   9--16.
+
+\end{thebibliography}
+}
+
+\end{document}
+
+

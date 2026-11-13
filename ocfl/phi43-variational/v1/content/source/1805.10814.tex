@@ -1,0 +1,2318 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage[width=16.5cm, top=3cm, bottom=3cm]{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+
+%SetFonts
+
+%SetFonts
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,stmaryrd,enumerate,mathrsfs,bbm,xcolor,latexsym,theorem}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\Iota}{\mathrm{I}}
+\newcommand{\assign}{:=}
+\newcommand{\mathD}{\mathrm{D}}
+\newcommand{\mathd}{\mathrm{d}}
+\newcommand{\nocomma}{}
+\newcommand{\tmaffiliation}[1]{\\ #1}
+\newcommand{\tmcolor}[2]{{\color{#1}{#2}}}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\tmtextbf}[1]{{\bfseries{#1}}}
+\newcommand{\tmtextit}[1]{{\itshape{#1}}}
+\newenvironment{enumeratealpha}{\begin{enumerate}[a{\textup{)}}] }{\end{enumerate}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}{Notation}
+\newtheorem{proposition}{Proposition}
+{\theorembodyfont{\rmfamily}\newtheorem{remark}{Remark}}
+\newtheorem{theorem}{Theorem}
+\newcommand{\tmkeywords}{\textbf{Keywords:} }
+%%%%%%%%%% End TeXmacs macros
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
+\newcommand{\bint}{\dashint}
+\newcommand{\dint}{\not{d}}
+\newcommand{\C}{\mathscr{C}}
+\newcommand{\CC}{\mathscr{C}}
+\newcommand{\CCC}{\mathscr{C}}
+\newcommand{\VV}{\mathscr{C}}
+\newcommand{\CD}{\mathscr{D}}
+\newcommand{\CF}{\mathscr{F}}
+\newcommand{\CB}{\mathscr{B}}
+\newcommand{\CA}{\mathscr{A}}
+\newcommand{\CL}{\mathscr{L}}
+\newcommand{\CQ}{\mathscr{Q}}
+\newcommand{\CS}{\mathscr{S}}
+\newcommand{\CP}{\mathscr{P}}
+\newcommand{\CX}{\mathscr{X}}
+\newcommand{\CZ}{\mathscr{Z}}
+\newcommand{\addref}{\tmcolor{red}{[add reference]}}
+%
+
+
+\begin{document}
+
+\title{Variational approach to Euclidean QFT}
+
+\author{
+  N. Barashkov
+  \tmaffiliation{IAM University of Bonn, Germany}
+  \and
+  M. Gubinelli
+  \tmaffiliation{IAM \& HCM University of Bonn, Germany}
+}
+
+\maketitle
+
+\begin{abstract}
+  We propose a new approach to the construction of the $\Phi^4_{3}$
+  Euclidean field theory on a periodic domain. The key ingredient is a
+  variational formula for the partition function involving a stochastic
+  control problem along the flow of a scale regularization parameter.
+  Techniques originating from the analysis of singular SPDEs give uniform
+  bounds allowing to prove the boundedness of the variational functional as
+  the cutoff is removed. The control problem reveals itself as a rigorous and
+  efficient version of Wilson's continous renormalization group.
+\end{abstract}
+
+\tmkeywords{Euclidean quantum field theory, Bou{\'e}--Dupuis formula,
+renormalization group, paracontrolled calculus.}
+
+\section{Introduction }
+
+The $\Phi^4_d$ Euclidean quantum field theory on the $d$ dimensional torus
+$\Lambda =\mathbbm{T}^d = (\mathbbm{R}/ (2 \pi \mathbbm{Z}))^d$ is the
+probability measure $\nu$ obtained as the weak limit for $T \rightarrow
+\infty$ of the family of measures $(\nu_T)_T$ given by
+\begin{equation}
+  \nu_T (\mathd \phi) = \CZ^{- 1}_T \exp \left[ - \lambda \int_{\Lambda}
+  [\phi_T (\xi)^4 - a_T \phi_T (\xi)^2] \mathd \xi \right] \mu (\mathd \phi)
+  \label{eq:gibbs} .
+\end{equation}
+Here $\Delta$ is the Laplacian on $\Lambda$, $\mu$ is the centered Gaussian
+measure with covariance $(1 - \Delta)^{- 1}$, $\CZ_T$ is a normalization
+factor, $a_T$ a given constant and $\phi_T = \rho_T \ast \phi$ with $\rho_T$
+some appropriate smooth and compactly supported cutoff function such that
+$\rho_T \rightarrow \delta$ as $T \rightarrow \infty$. The measures $\mu,
+\nu_T$ are realized as probability measures on $\CS' (\Lambda)$, the space of
+distributions on $\Lambda$. It is well known that they are supported on the
+Sobolev space $W^{(2 - d) / 2 - \varepsilon, p} (\Lambda)$ for all small
+$\varepsilon > 0$ and $p \geqslant 2$. The existence of the limit $\nu$ is
+conditioned on the choice of an appropriate sequence of
+\tmtextit{renormalization constants} $(a_T)_T$.
+
+\
+
+The aim of this paper is to present a proof of convergence using stochastic
+calculus along the direction given by the continuous scale cutoff $T$ together
+with a variational formula for the partition function $\CZ_T$ and for the
+generating function of the measure $\nu_T$. Our work can be seen as an attempt
+to pursue Wilson's~{\cite{wilson_renormalization_1983}} and
+Polchinski's~{\cite{polchinski_renormalization_1984}} continuous
+renormalization group (RG) method. This method has been made rigorous by
+Brydges, Slade et
+al.~{\cite{brydges_functional_1993,brydges_short_1995,brydges_lectures_2009}}
+and as such witnesses a lot of progress and
+successes~{\cite{brydges_renormalisation_2014_3,brydges_renormalisation_2014_2,bauerschmidt_renormalisation_2014,brydges_renormalisation_2014_1,brydges_renormalisation_2014,brydges_short_1995}}.
+The key idea is the nonperturbative study of a certain infinite dimensional
+Hamilton--Jacobi--Bellman equation~{\cite{brydges_mayer_1987}} describing the
+effective, scale dependent, action of the theory. Here we take the stand of
+trying to avoid the heavy analysis involved by the direct study of the PDE by
+going to the equivalent stochastic control formulation, well established and
+understood in finite dimensions~{\cite{fleming_controlled_2005}}. The time
+parameter of the evolution corresponds to an increasing amount of small scale
+fluctuations of the Euclidean field and our main tool is a variational
+representation formula, introduced by Bou{\'e} and
+Dupuis~{\cite{boue_variational_1998}}, for the logarithm of the partition
+function interpreted as the value function of the control problem. See also
+the related papers of {\"U}st{\"u}nel~{\cite{ustunel_variational_2014}} and
+Zhang~{\cite{zhang_variational_2009}} where extensions and further results on
+the variational formula are obtained. This variational formula has been used
+by Lehec~{\cite{lehec_representation_2013}} to reprove some Gaussian
+functional inequalities. In this representation we can avoid the analysis of
+an infinite dimensional second order operator and concentrate more on pathwise
+properties of the Euclidean interacting fields. We are able to leverage
+techniques developed for singular SPDEs, in particular the paracontrolled
+calculus developed in~{\cite{gubinelli_paracontrolled_2015}}, to perform the
+renormalization of various non-linear quantities and show uniform bounds in
+the $T \rightarrow \infty$ limit.
+
+\
+
+The main result of the paper is the following bound.
+
+\begin{theorem}
+  \label{th:main-3d}Let $d = 3$. There exist renormalization constants
+  $\alpha_T, \delta_T$, which depend polynomially on $\lambda$, and functions
+  $E_+ (\lambda), E_- (\lambda)$ not depending on $\Lambda$, such that
+  \[ \lim_{\lambda \rightarrow 0} \frac{E_{+, -} (\lambda)}{\lambda^3} = 0,
+  \]
+  and for any $\lambda > 0$
+  \[ E_- (\lambda) \leqslant - \frac{1}{| \Lambda |} \log \int \exp \left[ -
+     \lambda \int_{\Lambda} [\phi_T (\xi)^4 - \alpha_T \phi_T (\xi)^2 -
+     \delta_T] \mathd \xi \right] \mu (\mathd \phi) \leqslant E_+ (\lambda) .
+  \]
+\end{theorem}
+
+A similar statement for $d = 2$ will be proven below in order to introduce
+some of the ideas on which the $d = 3$ proof is based. The method of proof
+give also boundedness of the moment generating function of $\phi_T$ uniformly
+in $T$ allowing to prove convergence in law, at least along subsequences
+$(T_n)_n$, and some additional informations on the pathwise behaviour of the
+interacting fields. We do not pursue further these developments since it is
+also clear from the methods we introduce that the full convergence of the
+sequence of measures $(\nu_T)_T$ and of the corresponding variational problems
+can be obtained using arguments of $\Gamma$--convergence which we leave to a
+further publication.
+
+\
+
+The construction of the $\Phi^4_{2, 3}$ measure in finite volume is basic
+problem of constructive quantum field theory to which much literature has been
+devoted. Is not our aim to provide here a comprehensive review of this
+literature.The $d = 2$ case is much simpler than $d = 3$ and a large amount of
+work has been devoted to this situation. As far as the $d = 3$ case is
+concerned, let us just mention some of the results that, to different extent,
+prove the existence of the limit as the ultraviolet (small scale)
+regularization is removed. After the early fundational work on Glimm and
+Jaffe~{\cite{glimm_boson_1968,glimm_positivity_1973}} which was partly
+performed in the Hamiltonian formalism, all the subsequent research has been
+formulated in the Euclidean setting: i.e. as the problem of construction and
+study of the probability measures $\nu$ on a space of distributions.
+Feldman~{\cite{feldman_lambda_1974}}, Park~{\cite{park_lambda_1975}}, Benfatto
+et al.~{\cite{benfatto_ultraviolet_1980}}, Magn{\'e}n and
+Seneor~{\cite{magnen_infinite_1976}} and finally Brydges et
+al.~{\cite{brydges_new_1983}} obtained the main results we are aware of.
+Recent advances in the analysis of singular SPDEs put forward by the invention
+of regularity structures by M.~Hairer~{\cite{hairer_theory_2014}} and related
+approaches~{\cite{gubinelli_paracontrolled_2015,catellier_paracontrolled_2013,otto_quasilinear_2016}}
+or even RG--inspired ones~{\cite{kupiainen_renormalization_2016}}, have
+allowed to pursue the stochastic quantisation program to a point where now can
+be used to prove directly existence of the finite volume $\Phi^4_3$ measure in
+two different ways~{\cite{mourrat_dynamic_2016,albeverio_invariant_2017}}.
+Some results on the existince of the infinite volume dynamics have been
+obtained recently~{\cite{gubinelli_global_2018}}. For a recent overview of the
+status of the constructive program wrt. the analysis of the $\Phi^4_{2, 3}$
+models the reader can consult the introduction
+to~{\cite{albeverio_invariant_2017}}.
+
+\
+
+The paper is organized as follows. In Section~\ref{sec:rg-flow} we set up our
+main tool, the Bou{\'e}--Dupuis variational formula of
+Theorem~\ref{th:variational}. Then, as a warmup exercise, we use the formula
+to show existence of the $\Phi^4_2$ measure in Section~\ref{sec:two-d}. We
+pass then to the more involved situation in three dimensions in
+Section~\ref{sec:three-d} and give the proof of Theorem~\ref{th:main-3d}. In
+Section~\ref{sec:stochastic} we collect the proof of renormalizability of the
+stochastic terms and related probabilistic estimates. Finally the appendix
+contains background material on functional spaces and paraproducts and also
+some auxiliary results. The reader is invited to skim over the appendix in
+order to be introduced to the notations used in the paper.
+
+\medskip
+{\noindent}\tmtextbf{Acknowledgments . }The authors are partially supported
+by the German DFG via CRC 1060.{\hspace*{\fill}}{\medskip}
+
+\section{The RG flow as a stochastic control problem}\label{sec:rg-flow}
+
+We begin by constructing a probability space $\mathbbm{P}$ endowed with a
+process $$Y \in C (\mathbbm{R}_+, W^{(2 - d) / 2 - \varepsilon, p}
+(\Lambda)),$$ such that $\tmop{Law}_{\mathbbm{P}} (Y_{\infty}) = \nu$ and
+$\tmop{Law}_{\mu} (\phi_T) = \tmop{Law}_{\mathbbm{P}} (Y_T)$.
+
+\
+
+Let us fix some notations and objects. Let $\langle a \rangle = (1 + a^2)^{1
+/ 2}$. Denote with $\CS (\Lambda)$ the space of Schwartz functions on
+$\Lambda$ and with $\CS' (\Lambda)$ the dual space of distributions. The
+notation $\hat{f}$ or $\CF f$ stands for the space Fourier transform of $f$. \
+In order to easily keep track of the volume dependence of various objects we
+normalize Lebesgue measure on $\Lambda$ to have unit mass. We denote the
+normalized integral and measure by
+\[ \bint f \assign \frac{1}{| \Lambda |} \int_{\Lambda} f, \quad \dint x =
+   \frac{1}{| \Lambda |} \mathd x. \]
+Norms in all the related functional spaces (Lebesgue, Sobolev and Besov
+spaces) are understood similarly normalized unless \ stated otherwise. The
+various contants appearing in the estimates will be understood independent of
+$\Lambda$
+
+
+
+Fix $\alpha < - d / 2$ and let $\Omega \assign C (\mathbbm{R}_+ ; H^{-
+\alpha})$, $(X_t)_t$ the canonical process on $\Omega$ and $\CB$ the Borel
+$\sigma$--algebra of $\Omega$. On $\left( \Omega, \CB \right)$ consider the
+probability measure $\mathbbm{P}$ which makes the canonical process $X$ a
+cylindrical Brownian motion in $L^2 (\Lambda)$. In the following $\mathbbm{E}$
+without any qualifiers will denote expectations wrt. $\mathbbm{P}$ and
+$\mathbbm{E}_{\mathbbm{Q}}$ will denote expectations wrt. some other measure
+$\mathbbm{Q}$ on $\left( \Omega, \CB \right)$. On the measure space $\left(
+\Omega, \CB, \mathbbm{P} \right)$ there exists a collection $(B_t^n)_{n \in
+\mathbbm{Z}^d}$ of complex (2-dimensional) Brownian motions, such that
+$\overline{B^n_t} = B^{- n}_t$, \ $B^n_t, B^m_t$ independent for $m \neq \pm
+n$ and $X_t = \sum_{n \in \mathbbm{Z}^d} e^{2 \pi i \langle n, \cdot \rangle}
+B^n_t$. Note that $X$ has a.s. trajectories in $C (\mathbbm{R}_+, W^{- d / 2 -
+\varepsilon, p} (\Lambda))$ for any $\varepsilon > 0$ and $p \geqslant 2$ by
+standard arguments.
+
+Fix some $\rho \in C_c^{\infty} (\mathbbm{R}_+, \mathbbm{R}_+)$ such that
+$\rho (0) = 1$. Let $\rho_t (x) = \rho (x / t)$ and
+\[ \sigma_t (x) \assign (\dot{\rho}_t (x))^{1 / 2} = (- \rho' (x / t) (x /
+   t^2))^{1 / 2} = (- (x / t) \rho' (x / t))^{1 / 2} / t^{1 / 2}, \]
+where $\dot{\rho}_t$ is the partial derivative of $\rho_t$ with respect to
+$t$. Consider the process $Y_t$ defined by
+\begin{equation}
+  Y_t \assign \sum_{n \in \mathbbm{Z}^d} \int_0^t \frac{\sigma_s (n)}{\langle
+  n \rangle} e^{2 \pi i \langle n, \cdot \rangle} \tmop{dB}^n_s .
+  \label{eq:rep-Y}
+\end{equation}
+It is a centered Gaussian process with covariance
+\begin{eqnarray*}
+  \mathbbm{E} [\langle Y_t, \varphi \rangle \langle Y_s, \psi \rangle] & = &
+  \sum_{n \in \mathbbm{Z}^d} \sum_{m \in \mathbbm{Z}^d} \mathbbm{E} \left[
+  \int_0^t \frac{\sigma_u (n)}{\langle n \rangle} \tmop{dB}^n_u  \hat{\varphi}
+  (n) \overline{\int_0^s \frac{\sigma_u (m)}{\langle m \rangle} \tmop{dB}^m_s 
+  \hat{\psi} (m)} \right]\\
+  & = & \sum_{n \in \mathbbm{Z}^d} \frac{\rho_{\min (s, t)} (n)}{\langle n
+  \rangle^2} \hat{\varphi} (n) \overline{\hat{\psi} (n)},
+\end{eqnarray*}
+for any $\varphi, \psi \in \CS (\Lambda)$, by Fubini's theorem and Ito
+isometry. Then for any $\varphi \nocomma, \psi \in L^2 (\Lambda)$ we have
+$\lim_{t \rightarrow \infty} \mathbbm{E} [\langle Y_t, \varphi \rangle \langle
+Y_t, \psi \rangle] = \sum_{n \in \mathbbm{Z}^d} \langle n \rangle^{- 2}
+\hat{\varphi} (n) \overline{\hat{\psi} (n)}$, by dominated convergence.
+
+Note that up to any finite time $T$ the r.v. $\mathcal{\CF} Y_T$ has finite
+support and the stopped process $Y^T_t = Y_{t \wedge T}$ for any fixed $T >
+0$, is in $C (\mathbbm{R}_+, W^{k, 2} (\Lambda))$ for any $k \in \mathbbm{N}$.
+Furthermore $(Y^T_t)_t$ only depends on a finite subset of the Browninan
+motions $(B^n)_n$.
+
+We will usually write $g (\mathD)$ for the Fourier multiplier operator with
+symbol $g$. With this convention we can compactly denote
+\begin{equation}
+  Y_t = \int_0^t J_s \mathd X_s \label{eq:def-Y}
+\end{equation}
+where $J_s \assign \langle D \rangle^{- 1} \sigma_s (D)$. We observe that
+$Y_t$ has a distribution given by the pushforward $(\rho_t (\mathD))_{\ast}
+\mu$ of $\mu$ through $\rho_t (D)$. We write the measure $\nu_T$
+in~(\ref{eq:gibbs}) in terms of expectations over $\mathbbm{P}$ as
+\begin{equation}
+  \int f (\phi) \nu_T (\mathd \phi) = \frac{\mathbbm{E} [f (Y_T) e^{- V_T
+  (Y_T)}]}{\CZ_T}, \label{eq:equiv}
+\end{equation}
+for any bounded measurable $f : \CS' (\Lambda) \rightarrow \mathbbm{R}$ where
+\[ V_T (Y_T) \assign \int_{\Lambda} (\lambda | Y_T (\xi) |^4 - a_T  | Y_T
+   (\xi) |^2 - b_T) \mathd \xi, \qquad \CZ_T \assign \mathbbm{E} [e^{- V_T
+   (Y_T)}] . \]
+The sequence $(b_T)_T$ will be chosen appropriately below in order to decouple
+the behaviour of the numerator from that of the denominator.
+
+The first problem we address is that of giving upper and lower bounds to the
+quantity $\CZ_T$ appearing in~(\ref{eq:equiv}). Note that, for fixed $T$, the
+polynomial appearing in the expression for $V_T (Y_T)$ is bounded below if
+$\lambda > 0$, in this case $\CZ_T$ is well defined and also bounded away from
+zero (this follows easily from Jensen's inequality). However as $T \rightarrow
+\infty$ we tend to loose both these properties since we will be obliged to
+take $a_T \rightarrow + \infty$. In order to obtain uniform upper and lower
+bounds we proceed as follows.
+
+Denote by $\mathbbm{H}_a$ the space of progressively measurable processes
+which are $\mathbbm{P}$--almost surely in $L^2 (\mathbbm{R}_+ \times
+\Lambda)$. We say that an element $v$ of $\mathbbm{H}_a$ is a
+\tmtextit{drift}. Consider the measure $\mathbbm{Q}_T$ on $\left( \Omega, \CB
+\right)$ whose Radon--Nykodim derivative wrt. $\mathbbm{P}$ is given by
+\[ \frac{\mathd \mathbbm{Q}_T}{\mathd \mathbbm{P}} = \frac{e^{- V_T
+   (Y_T)}}{\CZ_T} . \]
+Since $Y_T$ depends on finitely many Brownian motions $(B^n)_n$ then it is
+well known~{\cite{revuz_continuous_2004,follmer_entropy_1985}} that any
+$\mathbbm{P}$--absolutely continuous probability can be expressed via Girsanov
+transform. In particular, by the Brownian martingale representation theorem
+there exists a drift $u^T \in \mathbbm{H}_a$ such that
+\[ \frac{\mathd \mathbbm{Q}_T}{\mathd \mathbbm{P}} = \exp \left(
+   \int_0^{\infty} u_s^T \mathd X_s - \frac{| \Lambda |}{2} \int_0^{\infty} \|
+   u_s^T \|^2 \mathd s \right), \]
+and the entropy of $\mathbbm{Q}_T$ wrt. $\mathbbm{P}$ is given by
+\[ H (\mathbbm{Q}_T |\mathbbm{P}) =\mathbbm{E}_{\mathbbm{Q}_T} \left[ \log
+   \frac{\mathd \mathbbm{Q}_T}{\mathd \mathbbm{P}} \right] = \frac{| \Lambda
+   |}{2} \mathbbm{E}_{\mathbbm{Q}_T} \left[ \int_0^{\infty} \| u_s^T \|^2
+   \mathd s \right] . \]
+Here equality holds also if one of the two quantities is $+ \infty$. By
+Girsanov theorem, the canonical process $X$ is a semimartingale under
+$\mathbbm{Q}_T$ with decomposition
+\[ X_t = \tilde{X}_t + \int_0^t u^T_s \mathd s, \]
+where $(\tilde{X}_t)_t$ is a cylindrical $\mathbbm{Q}_T$--Brownian motion in
+$L^2 (\Lambda)$. This implies that, under $\mathbbm{Q}_T$ the process
+$(Y_t)_t$ has the semimartingale decomposition $Y_t = W_t + U_t$ with
+\[ W_t \assign \int_0^t J_s \mathd X_s, \quad \text{and} \quad U_t = I_t
+   (u^T), \]
+where for any drift $v \in \mathbbm{H}_a$ we define $I_t (v) \assign \int_0^t
+J_s v_s \mathd s$. The integral in the density can be restricted to $[0, T]$
+since $u_t^T = 0$ if $t > T$. Now
+\begin{equation}
+  - \log \CZ_T = - \log \left[ e^{- V_T (Y_T)} \left( \frac{\mathd
+  \mathbbm{Q}_T}{\mathd \mathbbm{P}} \right)^{- 1} \right] = V_T (Y_T) +
+  \int_0^{\infty} u_s^T \mathd X_s - \frac{| \Lambda |}{2} \int_0^{\infty} \|
+  u_s^T \|^2 \mathd s, \label{eq:equilib}
+\end{equation}
+and taking expectation of~(\ref{eq:equilib}) wrt $\mathbbm{Q}_T$ we get
+\begin{equation}
+  - \log \CZ_T =\mathbbm{E}_{\mathbbm{Q}_T} \left[ V_T (W_T + I_T (u^T)) +
+  \frac{| \Lambda |}{2} \int_0^{\infty} \| u_s^T \|^2 \mathd s \right] .
+  \label{eq:pressure}
+\end{equation}
+This will be our key formula to get an upper bound on $Z_T$. For any $v \in
+\mathbbm{H}_a$ define the measure $\mathbbm{Q}^v$ by
+\[ \frac{\mathd \mathbbm{Q}^v}{\mathd \mathbbm{P}} = \exp \left(
+   \int_0^{\infty} v_s \mathd X_s - \frac{| \Lambda |}{2} \int_0^{\infty} \|
+   v_s \|^2 \mathd s \right) . \]
+Denote with $\mathbbm{H}_c \subseteq \mathbbm{H}_a$ the set of drifts for
+which $\mathbbm{Q}^v (\Omega) = 1$. In particular $u^T \in \mathbbm{H}_c$. By
+Jensen's inequality and Girsanov transformation we have
+\[ - \log \CZ_T = - \log \mathbbm{E}_{\mathbbm{P}} [e^{- V_T (Y_T)}] = - \log
+   \mathbbm{E}^v \left[ e^{- V_T (Y_T) - \int_0^{\infty} v_s \mathd X_s +
+   \frac{| \Lambda |}{2} \int_0^{\infty} \| v_s \|^2 \mathd s} \right] \]
+\[ \leqslant \mathbbm{E}^v \left[ V_T (Y_T) + \int_0^{\infty} v_s \mathd X_s -
+   \frac{| \Lambda |}{2} \int_0^{\infty} \| v_s \|^2 \mathd s \right] . \]
+for all $v \in \mathbbm{H}_c$, where $\mathbbm{E}^v \assign
+\mathbbm{E}_{\mathbbm{Q}^v}$. We conclude that
+\begin{equation}
+  - \log \CZ_T \leqslant \mathbbm{E}^v \left[ V_T (W^v_T + I_T (v)) + \frac{|
+  \Lambda |}{2} \int_0^{\infty} \| v_s \|^2 \mathd s \right]
+  \label{eq:pressure-bound}
+\end{equation}
+where $Y = W^v_T + I_T (v)$ and $\tmop{Law}_{\mathbbm{Q}^v} (W^v) =
+\tmop{Law}_{\mathbbm{P}} (Y)$. This bound is saturated when $v = u^T$. We
+record this result in the following lemma which is a precursor of our main
+tool to obtain bounds on the partition function and related objects.
+
+\begin{lemma}
+  \label{lemma:variational-easy}The following variational formula for the
+  pressure $- \log \CZ_T$ holds:
+  \[ - \frac{1}{| \Lambda |} \log \CZ_T = - \frac{1}{| \Lambda |} \log
+     \mathbbm{E} [e^{- V_T (Y_T)}] = \min_{v \in \mathbbm{H}_c} \mathbbm{E}^v
+     \left[ \frac{1}{| \Lambda |} V_T (W^v_T + I_T (v)) + \frac{1}{2}
+     \int_0^{\infty} \| v_s \|^2_{L^2} \mathd s \right] . \]
+\end{lemma}
+
+This formula is nice and easy to prove but somewhat incovenient for certain
+manipulations since the space $\mathbbm{H}_c$ is indirectly defined and the
+reference measure $\mathbbm{E}^v$ depends on the drift $v$. A more
+straighforward formula has been found by
+Bou{\'e}--Dupuis~{\cite{boue_variational_1998}} which involves a the fixed
+canonical measure $\mathbbm{P}$ and a general adapted drift $u \in
+\mathbbm{H}_a$. This formula will be our main tool in the following.
+
+\begin{theorem}
+  \label{th:variational}The Bou{\'e}--Dupuis variational formula for the
+  pressure $- \log \CZ_T$ holds:
+  \[ - \frac{1}{| \Lambda |} \log \CZ_T = - \frac{1}{| \Lambda |} \log
+     \mathbbm{E} [e^{- V_T (Y_T)}] = \inf_{v \in \mathbbm{H}_a} \mathbbm{E}
+     \left[ \frac{1}{| \Lambda |} V_T (Y_T + I_T (v)) + \frac{| \Lambda |}{2}
+     \int_0^{\infty} \| v_s \|^2_{L^2} \mathd s \right] . \]
+  where the expectation is taken wrt to the measure $\mathbbm{P}$ on $\Omega$.
+\end{theorem}
+
+\begin{proof}
+  The original proof can be found in
+  Bou{\'e}--Dupuis~{\cite{boue_variational_1998}} for functionals bounded
+  above. In our setting the formula can be proved using the result of
+  {\"U}st{\"u}nel~{\cite{ustunel_variational_2014}} by observing that $V_T
+  (Y_T)$ is a \tmtextit{tame} functional, according to his definitions.
+  Namely, for some $p, q \geqslant 1$ such that $1 / p + 1 / q = 1$ we have
+  \[ \mathbbm{E} [| V_T (Y_T) |^p] +\mathbbm{E} [e^{- q V_T (Y_T)}] < + \infty
+     . \]
+  
+\end{proof}
+
+\begin{remark}
+  Some observations on this variational formulas.
+  \begin{enumeratealpha}
+    \item They originates directly from the variational formula for the free
+    energy of a statistical mechanics systems: $V_T$ playing the role of the
+    internal energy and the quadratic term playing the role of the entropy.
+    
+    \item Note that the infimum could not be attained in
+    Theorem~\ref{th:variational} while it is attained in
+    Lemma~\ref{lemma:variational-easy}.
+    
+    \item The drift generated by absolutely continuous perturbations of the
+    Wiener measure has been introduced and studied by
+    F{\"o}llmer~{\cite{follmer_entropy_1985}}.
+    
+    \item The Bou{\'e}--Dupuis formula in Theorem~\ref{th:variational} is
+    easier to use than the formula in Lemma~\ref{lemma:variational-easy} since
+    the probability do not depend on the drift $v$. However going from one
+    formulation to the other requires proving that certain SDEs with
+    functional drift admits strong solutions and that one is able to
+    approximate unbounded functionals $V_T$ by bounded ones. This requires the
+    notion of \tmtextit{tame} functional, introduce by
+    {\"U}st{\"u}nel~{\cite{ustunel_variational_2014}}.
+    
+    \item The Bou{\'e}--Dupuis formula is a non--Markovian and infinite
+    dimensional extension of the well known stochastic control problem
+    representation of the Hamilton--Jacobi--Bellman equation in finite
+    dimensions~{\cite{fleming_controlled_2005}}.
+    
+    \item See {\"U}st{\"u}nel~{\cite{ustunel_variational_2014}} and
+    Lehec~{\cite{lehec_representation_2013}} for a streamlined proof of the
+    Bou{\'e}--Dupuis formula and for applications of the formula to functional
+    inequalities on Gaussian measures. For example, from this formula is not
+    difficult to prove integrability of functionals which are Lipshitz in the
+    Cameron--Martin directions.
+  \end{enumeratealpha}
+\end{remark}
+
+The next lemma provides a deterministic regularity result for $I (v)$ which
+will be useful below. It says that the drift $v$ generates shifts of the
+Gaussian free field in directions which belong to $H^1$ uniformly in the scale
+parameter. The space $H^1$ is the Cameron--Martin space of the free
+field~{\cite{janson_gaussian_1997}}.
+
+\begin{lemma}
+  \label{lemma:reg-drift}For any $v \in L^2 (\mathbbm{R}_+ \times \Lambda)$ we
+  have
+  \[ \sup_{0 \leqslant t \leqslant T} \| I_t (v) \|_{H^1}^2 \lesssim \int_0^T
+     \| v_s \|^2_{L^2} \mathd s. \]
+\end{lemma}
+
+\begin{proof}
+  Using the fact that $\sigma_s (\mathD)$ is diagonal in Fourier space, and
+  denoting with $(e_k)_{k \in \mathbbm{Z}^d}$ the basis of trigonometric
+  polynomials, we have
+  \[ \langle \int_0^t \sigma_s (\mathD) v_s \mathd s, \int_0^t \sigma_s
+     (\mathD) v_s \mathd s \rangle = \sum_k \left| \int_0^t \langle \sigma_s
+     (\mathD) e_k, v_s \rangle \mathd s \right|^2 \]
+  \[ \leqslant \sum_k \left( \int_0^t | \langle \sigma_s (\mathD) e_k, e_k
+     \rangle |^2 \mathd s \right) \left( \int_0^t | \langle e_k, v_s \rangle
+     |^2 \mathd s \right) \leqslant | \Lambda | \int_0^t \| v_s \|^2_{L^2}
+     \mathd s \sup_k \int_0^t \langle e_k, \sigma_s (\mathD)^2 e_k \rangle
+     \mathd s \]
+  \[ \leqslant | \Lambda | \int_0^t \| v_s \|^2_{L^2} \mathd s \sup_k \langle
+     e_k, \rho_t^2 (\mathD) e_k \rangle \leqslant | \Lambda | \int_0^t \| v_s
+     \|^2_{L^2} \mathd s. \]
+  Therefore
+  \[ \| I_t (v) \|_{H^1}^2 \lesssim \| \langle \mathD \rangle I_t (v)
+     \|_{L^2}^2 = \frac{1}{| \Lambda |} \langle \int_0^t \sigma_s (\mathD) v_s
+     \mathd s, \int_0^t \sigma_s (\mathD) v_s \mathd s \rangle \leqslant
+     \int_0^t \| v_s \|^2_{L^2} \mathd s. \]
+\end{proof}
+
+\begin{notation}
+  In the estimates below the symbol $E (\lambda)$ will denote a generic
+  positive deterministic quantity, not depending on $| \Lambda |$ and such
+  that $E (\lambda) / \lambda^3 \rightarrow 0$ as $\lambda \rightarrow 0$.
+  Moreover the symbol $Q_T$ will denote a generic random variable measurable
+  wrt. $\sigma ((W_t)_{t \in [0, T]})$ and belonging to $L^1 (\mathbbm{P})$
+  uniformly in $T$. 
+\end{notation}
+
+\section{Two dimensions}\label{sec:two-d}
+
+As a warm up we consider here the case $d = 2$. From
+Theorem~\ref{th:variational} we see that the relevant quantity to bound is of
+the form
+\begin{equation}
+  \Theta_T (u) \assign \mathbbm{E} \left[ \frac{1}{| \Lambda |} V_T (W_T + I_T
+  (u)) + \frac{1}{2} \int_0^{\infty} \| u_s \|_{L^2 (\Lambda, \mathd x)}^2
+  \mathd s \right], \label{eq:var-energy}
+\end{equation}
+for $u \in \mathbbm{H}_a$. Let $Z_t = I_t (u)$ and let $W_t = Y_t$ as a
+mnemonic of the fact that under $\mathbbm{P}$ the process $W$ is a martingale.
+From now on we leave implicit the integration variable over the spatial domain
+$\Lambda$. Choosing
+\begin{equation}
+  a_T = 6\mathbbm{E} [W_T (\xi)^2], \qquad b_T = 3\mathbbm{E} [W_T (\xi)^2]^2,
+  \label{eq:renorm-const-2d}
+\end{equation}
+we have
+\[ V_T (W_T + Z_T) = \int_{\Lambda} \lambda \llbracket W_T^4 \rrbracket +
+   \int_{\Lambda} 4 \lambda \llbracket W_T^3 \rrbracket Z_T + \int_{\Lambda} 6
+   \lambda \llbracket W_T^2 \rrbracket Z_T^2 + \int_{\Lambda} 6 \lambda W_T
+   Z_T^3 + \int_{\Lambda} \lambda Z_T^4, \]
+where
+\[ \llbracket W_T^4 \rrbracket (\xi) \assign W_T (\xi)^4 - 6\mathbbm{E} [W_T
+   (\xi)^2] W_T (\xi)^2 + 3\mathbbm{E} [W_T (\xi)^2]^2, \]
+\[ \llbracket W_T^3 \rrbracket (\xi) \assign W_T (\xi)^3 - 3\mathbbm{E} [W_T
+   (\xi)^2] W_T (\xi), \]
+\[ \llbracket W_T^2 \rrbracket (\xi) \assign W_T (\xi)^2 -\mathbbm{E} [W_T
+   (\xi)^2], \]
+denote the Wick powers of the Gaussian r.v. $W_T
+(\xi)$~{\cite{janson_gaussian_1997}}. The reader can check the well known
+property of these polynomials when seen as stochastic processes in $T$, namely
+that they are $\mathbbm{P}$--martingales wrt. the filtration of $(W_t)_t$. In
+particular they have an expression as iterated stochastic integrals wrt. the
+Brownian motions $(B^n_t)_{t, n}$ introduced in eq.~(\ref{eq:rep-Y}). Using
+Theorem~\ref{th:variational} with $u = 0$ we readily have an upper bound for
+the pressure:
+\[ - \frac{1}{| \Lambda |} \log \CZ_T \leqslant \lambda \mathbbm{E} \left[
+   \bint \llbracket W_T^4 \rrbracket \right] = 0. \]
+As for an effective lower bound we need to estimate from below the average
+under $\mathbbm{P}$ of the variational expression
+\[ \lambda \bint \llbracket W_T^4 \rrbracket + 4 \lambda \bint \llbracket
+   W_T^3 \rrbracket Z_T + 6 \lambda \bint \llbracket W_T^2 \rrbracket Z_T^2 +
+   4 \lambda \bint W_T Z_T^3 + \lambda \bint  Z_T^4 + \frac{1}{2} \int_0^T
+   \| u_s \|^2_{L^2} \mathd s. \]
+The strategy we adopt is to bound \tmtextit{pathwise}, and for a generic drift
+$u$, the contributions
+\[ \Psi_T (u) \assign \underbrace{4 \lambda \bint \llbracket W_T^3 \rrbracket
+   Z_T}_{\Iota} + \underbrace{6 \lambda \bint \llbracket W_T^2 \rrbracket
+   Z_T^2}_{\Iota \Iota} + \underbrace{4 \lambda \bint W_T Z_T^3}_{\Iota \Iota
+   \Iota}, \]
+in term of quantities involving only the Wick powers of $W$ which we can
+control in expectation and the last two \tmtextit{positive terms}
+\[ \Phi_T (u) \assign \frac{1}{2} \int_0^T \| u_s \|^2_{L^2} \mathd t +
+   \lambda \bint Z_T^4 . \]
+Any residual positive contribution depending on $u$ can be dropped in the
+lower bound making the dependence on the drift disappear. To control term
+$\Iota$ we see that by duality and Young's inequality, for any $\delta > 0$,
+\begin{equation}
+  \left| 4 \lambda \bint \llbracket W_T^3 \rrbracket Z_T \right| \leqslant 4
+  \lambda \| \llbracket W_T^3 \rrbracket \|_{H^{- 1}} \| Z_T \|_{H^1}
+  \leqslant C (\delta, d) \lambda^2 \| \llbracket W_T^3 \rrbracket \|_{H^{-
+  1}}^2 + \delta \int_0^T \| u_s \|^2_{L^2} \mathd s. \label{eq:term-i}
+\end{equation}
+For the term $\Iota \Iota$ the following fractional Leibniz rule is of help:
+
+\begin{proposition}
+  \label{FractionalLeibniz}Let $1 < p < \infty$ and $p_1, p_2 > 1$ such that
+  $\frac{1}{p_1} + \frac{1}{p_2} = \frac{1}{p}$. Then for every such $p_, p_1,
+  p_2$ and every $s, \alpha \geq 0$ there exists a constant C such that
+  \[ \| \langle \mathD \rangle^s (f g) \|_{L^p} \leq \| \langle \mathD
+     \rangle^{s + \alpha} f \|_{L^{p_2}}  \| \langle \mathD \rangle^{- \alpha}
+     g \|_{L^{p_1}} + \| \langle \mathD \rangle^{s + \alpha} g \|_{L^{p_1}} 
+     \| \langle \mathD \rangle^{- \alpha} f \|_{L^{p_2}} . \]
+\end{proposition}
+
+\begin{proof}
+  See~{\cite{gulisashvili_exact_1996}}.
+\end{proof}
+
+Using Proposition~\ref{FractionalLeibniz} we get, for any $\delta > 0$,
+\begin{equation}
+  \begin{array}{lll}
+    \left| 6 \lambda \bint \llbracket W_T^2 \rrbracket Z_T^2  \right| &
+    \lesssim & \lambda \| \llbracket W_T^2 \rrbracket \|_{W^{- \varepsilon,
+    5}} \| Z_T^2 \|_{W^{\varepsilon, \frac{5}{4}}}\\
+    & \lesssim & \lambda \| \llbracket W_T^2 \rrbracket \|_{W^{- \varepsilon,
+    5}} \| Z_T \|_{W^{\varepsilon, 2}} \| Z_T \|_{L^{\frac{10}{3}}}\\
+    & \lesssim & \lambda \| \llbracket W_T^2 \rrbracket \|_{W^{- \varepsilon,
+    5}} \| Z_T \|_{W^{1, 2}} \| Z_T \|_{L^4}\\
+    & \leqslant & \frac{C^2 \lambda^3}{2 \delta} \| \llbracket W_T^2
+    \rrbracket \|^4_{W^{- \varepsilon, 5}} + \frac{\delta}{4} \| Z_T
+    \|^2_{W^{1, 2}} + \frac{\delta \lambda}{4} \| Z_T \|_{L^4}^4 .
+  \end{array} \label{eq:term-ii}
+\end{equation}
+
+
+In order to bound the term $\Iota \Iota \Iota$ we observe the following:
+
+\begin{lemma}
+  \label{lemma:bound-cubic}Let $f \in W^{- 1 / 2 - \varepsilon, p}$ for every
+  $1 \leqslant p < \infty$ and $\varepsilon > 0$. We claim that for any
+  $\delta > 0$ there exists a constant $C = C (\delta, d)$, and an exponent $K
+  < \infty$ such that for any $g \in W^{1, 2}$
+  \[ \lambda \left| \bint f g^3 \right| \leqslant E (\lambda) \| f \|^K_{W^{-
+     1 / 2 - \varepsilon, p} } + \delta (\| g \|^2_{W^{1 - \varepsilon, 2}} +
+     \lambda \| g \|^4_{L^4 }) . \]
+\end{lemma}
+
+\begin{proof}
+  By duality $\left| \bint f g^3 \right| \leqslant \| f \|_{W^{- 1 / 2 -
+  \varepsilon, p}} \| g^3 \|_{W^{1 / 2 + \varepsilon, p'}}$ . Applying again
+  Proposition \ref{FractionalLeibniz}, we get
+  \begin{eqnarray*}
+    \| g^3 \|_{W^{1 / 2 + \varepsilon, p'}} & \lesssim & \| \langle \mathD
+    \rangle^{1 / 2 + \delta} g^3 \|_{L^{p'}} \lesssim \| \langle \mathD
+    \rangle^{1 / 2 + \delta} g\|_{L^{p_1}} \| g \|_{L^4}^2\\
+    & \lesssim & \| \langle \mathD \rangle^{1 / 2 + 2 \delta} g\|_{L^2
+    } \| g \|_{L^4}^2 \lesssim \|g\|^{\frac{1 / 2 + 2 \delta}{1 -
+    \delta}}_{H^{1 - \delta}} \| g \|_{L^2}^{\frac{1 / 2 - 3 \delta}{1 -
+    \delta}} \| g \|_{L^4}^2\\
+    & \lesssim & \|g\|^{\frac{1 / 2 + 2 \delta}{1 - \delta}}_{H^{1 -
+    \delta}} \| g \|_{L^4}^{\frac{5 / 2 - 5 \delta}{1 - \delta}} .
+  \end{eqnarray*}
+  So
+  \begin{eqnarray*}
+    \lambda \left| \bint f g^3 \right| & \lesssim & \lambda^{\frac{3 / 2 +
+    \delta}{4 (1 - \delta)}} \| f \|_{W^{- 1 / 2 - \varepsilon, p}}
+    \|g\|^{\frac{1 / 2 + 2 \delta}{1 - \delta}}_{H^{1 - \delta}}
+    \lambda^{\frac{5 / 2 - 5 \delta}{4 (1 - \delta)}} \| g
+    \|_{L^4}^{\frac{5 / 2 - \delta}{1 - \delta}}\\
+    & \lesssim & \lambda^{\frac{3 / 2 + \delta}{(1 - \delta) (1 / 2 -
+    \delta)}} \| f \|^{\frac{4}{1 / 2 - \delta}}_{W^{- 1 / 2 - \varepsilon,
+    p}} + \delta (\|g\|^2_{H^{1 - \delta}} + \lambda \| g \|_{L^4}^4) .
+  \end{eqnarray*}
+  If $\delta$ is chosen small enough, $p$ is sufficiently large and $p_1$ is
+  chosen suffiently close to $2$.
+\end{proof}
+
+\begin{remark}
+  For the $d = 2$ case it would have been enough to estimate $\| g^3
+  \|_{W^{\varepsilon, p}}$. The stronger estimate will be useful for $d = 3$
+  since there we will only have $W_T \in W^{- 1 / 2 - \varepsilon, p}$.
+\end{remark}
+
+Then
+\begin{equation}
+  \left| 4 \lambda \bint W_T Z_T^3 \right| \leqslant C E (\lambda) \| W_T
+  \|^K_{W^{- 1 / 2 - \varepsilon, p} } + \delta (\| Z_T \|^2_{W^{1 -
+  \varepsilon, 2}} + \lambda \| Z_T \|^4_{L^4 }), \label{eq:term-iii}
+\end{equation}
+and using eqs.~(\ref{eq:term-i}),~(\ref{eq:term-ii}) and~(\ref{eq:term-iii})
+together we obtain for $\delta$ small enough
+\begin{equation}
+  | \Psi_T (u) | \leqslant O (\lambda^2) [1 + \| \llbracket W_T^3 \rrbracket
+  \|_{H^{- 1}}^2 + \| \llbracket W_T^2 \rrbracket \|^4_{W^{- \varepsilon, 5}}
+  + \| W_T \|^K_{W^{- 1 / 2 - \varepsilon, p} }] + \delta \Phi_T (u) .
+  \label{eq:bound-Psi}
+\end{equation}
+and therefore
+\[ \Theta_T (u) \geqslant - C\mathbbm{E} [1 + \| \llbracket W_T^3 \rrbracket
+   \|_{H^{- 1}}^2 + \| \llbracket W_T^2 \rrbracket \|^4_{W^{- \varepsilon, 5}}
+   + \| W_T \|^K_{W^{- 1 / 2 - \varepsilon, p} }] . \]
+Using eq.~(\ref{eq:term-i}), eq.~(\ref{eq:term-ii}) and
+Lemma~\ref{lemma:bound-cubic} in eq.~(\ref{eq:var-energy}) we get
+\begin{eqnarray*}
+  \Theta_T (u) & \geqslant & - C\mathbbm{E} [1 + \| \llbracket W_T^3
+  \rrbracket \|_{H^{- 1}}^2 + \| \llbracket W_T^2 \rrbracket \|^4_{W^{-
+  \varepsilon, 5}} + \| W_T \|^K_{W^{- 1 / 2 - \varepsilon, p} }] +
+  \frac{1}{2} \mathbbm{E} [\Phi_T (u)]\\
+  & \geqslant & - C\mathbbm{E} [1 + \| \llbracket W_T^3 \rrbracket \|_{H^{-
+  1}}^2 + \| \llbracket W_T^2 \rrbracket \|^4_{W^{- \varepsilon, 5}} + \| W_T
+  \|^K_{W^{- 1 / 2 - \varepsilon, p} }] .
+\end{eqnarray*}
+This last average do not depends anymore on the drift and we are only left to
+show that
+\[ \sup_T \mathbbm{E} [\| \llbracket W_T^3 \rrbracket \|^2_{H^{- 1}} + \|
+   \llbracket W_T^2 \rrbracket \|^4_{W^{- \varepsilon, 5}} + \| W_T \|^K_{W^{-
+   1 / 2 - \varepsilon, p}}] < \infty . \]
+However it is well known that the Wick powers of the two dimensional Gaussian
+free field are distributions belonging to $L^a (\Omega, W^{- \varepsilon, b})$
+for any $a \geqslant 1$ and $b \geqslant 1$ and hypercontractivity plus an
+easy argument gives the uniform boundedness of the above averages. Therefore
+we have established that
+
+\begin{theorem}
+  \label{th:twod-bound}For any $\lambda > 0$ we have
+  \[ \sup_T \frac{1}{| \Lambda |} \left| \log \CZ_T \right| \lesssim O
+     (\lambda^2), \]
+  where the constant in the r.h.s. is independent of $\Lambda$. 
+\end{theorem}
+
+\begin{remark}
+  Note this also implies that $e^{- V_T (Y_T)}$ is in all the $L^p$ spaces
+  wrt. the measure $\mathbbm{P}$ uniformly in $T$ and for any $p \geqslant 1$
+  since the above argument remains valid upon replacing $\lambda$ with
+  $\lambda p$.
+\end{remark}
+
+\begin{remark}
+  With slightly different ways to estimate the various terms it would be
+  possible to show that the bound in Theorem~\ref{th:twod-bound} is actually
+  $o (\lambda^3)$ as in the $d = 3$ case. 
+\end{remark}
+
+\section{Three dimensions}\label{sec:three-d}
+
+We would like now to pursue a similar strategy when $d = 3$ where the
+regularity of the Wick products is less pleasant. In particular we only have
+$\llbracket W_T^3 \rrbracket \in \VV^{- 3 / 2 - \kappa}$, $\llbracket W_T^2
+\rrbracket \in \VV^{- 1 - \kappa}$ uniformly in $T$ for any small $\kappa >
+0$. This implies that there is no straighforward way to control the terms
+\begin{equation}
+  \bint \llbracket W_T^3 \rrbracket Z_T, \qquad \text{and} \qquad \bint
+  \llbracket W_T^2 \rrbracket Z_T^2, \label{eq:mixed-terms}
+\end{equation}
+like we did in Section~\ref{sec:two-d}. Indeed the only apriori estimate on
+the regularity of $Z_T = I_T (u)$ is in $H^1$, coming from
+Lemma~\ref{lemma:reg-drift} and the quadratic term in the variational
+functional $\Theta_T (u)$. It is also well known that in three dimensions
+there are further divergences beyond the Wick ordering which have to be
+subtracted in order for the limiting measure to be non-trivial. For these
+reasons we introduce further scale dependent renormalization constants
+$\gamma_T, \delta_T$ into the energy $V_T$ beyond Wick ordering and let
+\[ \frac{1}{| \Lambda |} V_T (Y_T) = \bint (\lambda \llbracket Y_T^4
+   \rrbracket - \gamma_T \llbracket Y_T^2 \rrbracket - \delta_T) . \]
+Repeating the computation from Section~\ref{sec:two-d} we arrive at
+\begin{eqnarray*}
+  \frac{\Theta_T (u)}{| \Lambda |} & = & \mathbbm{E} \left[ \lambda \bint
+  \mathbbm{W}_T^3 Z_T + \frac{\lambda}{2} \bint \mathbbm{W}^2_T Z_T^2 + 4
+  \lambda \bint W_T Z_T^3 \right]\\
+  &  & -\mathbbm{E} \left[ 2 \gamma_T \bint W_T Z_T + \gamma_T \bint
+  Z_T^2 \right] +\mathbbm{E}^u \left[ \lambda \bint Z_T^4 + \frac{1}{2}
+  \int_0^T \| u_s \|^2_{L^2} \mathd s \right],
+\end{eqnarray*}
+where we introduced the convenient notations
+\[ \mathbbm{W}_t^3 \assign 4 \llbracket W_t^3 \rrbracket, \qquad
+   \mathbbm{W}^2_t \assign 12 \llbracket W_t^2 \rrbracket . \]
+The rest of this section will be concerned with lower and upper bounds of this
+quantity leading to the proof of Theorem~\ref{th:main-3d}.
+
+\subsection{Lower bound}
+
+\subsubsection{Bound for the linear term}
+
+We are going to use the quadratic term $\int_0^T \| u_s \|^2_{L^2} \mathd s$
+to absorb the mixed terms~(\ref{eq:mixed-terms}). In order to do so we need to
+represent them as quantities flowing along the scale parameter $t$. This will
+allow to identify suitable counterterms. By Ito's formula
+\[ \lambda \bint \mathbbm{W}_T^3 Z_T = \lambda \int_0^T \bint
+   \mathbbm{W}_t^3 \dot{Z}_t \mathd t + \text{martingale}, \]
+where we used that $(\mathbbm{W}_t^3)_t$ is a martingale and that $(Z_t)_t$ is
+of bounded variation. We now introduce a new drift $w$ via the formula
+\begin{equation}
+  u_t = - \lambda J_t \mathbbm{W}_t^3 + w_t, \label{eq:ansatz-1}
+\end{equation}
+we have
+\begin{equation}
+  \label{changeeq} Z_s = - \lambda \int_0^s J^2_t \mathbbm{W}_t^3 \mathd t
+  + \int_0^s J_t w_t \mathd t = - \lambda \mathbbm{W}_s^{[3]} + K_s,
+\end{equation}
+where
+\[ K_t \assign I_t (w), \qquad \text{and} \qquad \mathbbm{W}_t^{[3]} \assign
+   \int_0^t J^2_s \mathbbm{W}_s^3 \mathd s. \]
+Note that $\dot{Z_t} = - \lambda J^2_t \mathbbm{W}_t^3 + J_t w_t$. It holds
+\[ \lambda \bint \mathbbm{W}_T^3 Z_T + \frac{1}{2} \int_0^T \| u_s \|^2_{L^2}
+   \mathd s = - \frac{1}{2} \lambda^2 \int_0^T \bint (J_t \mathbbm{W}_t^3)^2
+   \mathd t + \frac{1}{2} \int_0^T \| w_s \|^2_{L^2} \mathd s +
+   \tmop{martingale} . \]
+Here we have eliminated the mixed divergent term $\bint \mathbbm{W}_T^3 Z_T$
+and replaced it with a divergent but purely stochastic term $\int_0^T \bint
+(J_t \mathbbm{W}_t^3)^2 \mathd t$ which does not affect anymore the
+variational problem and can be explicitly removed by adding its average to
+$\delta_T$. This implies in turn that we are not able to control $(Z_t)_t$ in
+$H^1$ anymore and we should rely on the relation~(\ref{changeeq}) and on a
+control over the $H^1$ norm of $(K_t)_t$ coming from the residual quadratic
+term $\int_0^T \| w_s \|^2_{L^2} \mathd s$.
+
+\begin{remark}
+  This lack of uniform regularity of the full drift $u$ is a sign of the fact
+  that the limiting measure $\nu$ is expected not to be absolutely continuous
+  wrt. to the Gaussian free field. We do not make this connection rigorous in
+  this paper and leave the discussion to a further publication.
+\end{remark}
+
+\subsubsection{Bound for the quadratic term}
+
+Taking into account the relation~(\ref{changeeq}) we write
+\[ \frac{\lambda}{2} \bint \mathbbm{W}^2_T Z_T^2 = \frac{\lambda^3}{2} \bint
+   \mathbbm{W}^2_T (\mathbbm{W}_T^{[3]})^2 - \lambda^2 \bint \mathbbm{W}^2_T
+   \mathbbm{W}_T^{[3]} K_T + \frac{\lambda}{2} \bint \mathbbm{W}^2_T K_T^2 .
+\]
+The first term is already purely stochastic and will give a contribution
+independent of $u$ which can again be absorbed in $\delta_T$. \ In order to
+proceed we will isolate the divergent parts of the product via paracontrolled
+calculus (see Appendix~\ref{sec:appendix-para} for details). This is the
+content of the following
+
+\begin{lemma}
+  For any small $\varepsilon > 0$ there exists $\delta > 0$ such that
+  \begin{eqnarray*}
+    &  & \left| - \lambda^2 \bint \mathbbm{W}^2_T \mathbbm{W}_T^{[3]} K_T +
+    \frac{\lambda}{2} \bint \mathbbm{W}^2_T K_T^2 - \lambda \bint
+    (\mathbbm{W}^2_T \succ Z_T) K_T + \lambda^2 \bint (\mathbbm{W}^2_T \circ
+    \mathbbm{W}_T^{[3]}) K_T \right|\\
+    &  & \leqslant C (\varepsilon, \delta) E (\lambda) Q_T + \varepsilon \|
+    K_T \|^2_{H^{1 - \delta}} + \varepsilon \lambda \| Z_T \|^4_{L^4} .
+  \end{eqnarray*}
+\end{lemma}
+
+\begin{proof}
+  We compute
+  \begin{eqnarray*}
+    - \lambda^2 \bint \mathbbm{W}^2_T \mathbbm{W}_T^{[3]} K_T +
+    \frac{\lambda}{2} \bint \mathbbm{W}^2_T K_T^2 & = & \lambda \bint
+    (\mathbbm{W}^2_T \succ Z_T) K_T - \lambda^2 \bint (\mathbbm{W}^2_T \circ
+    \mathbbm{W}_T^{[3]}) K_T\\
+    &  & - \lambda^2 \bint (\mathbbm{W}^2_T \prec \mathbbm{W}_T^{[3]}) K_T +
+    \frac{\lambda}{2} \bint (\mathbbm{W}^2_T \prec K_T) K_T\\
+    &  & + \frac{\lambda}{2} \left( \bint (\mathbbm{W}^2_T \circ K_T) K_T -
+    \bint (\mathbbm{W}^2_T \succ K_T) K_T \right) .
+  \end{eqnarray*}
+  By Proposition~\ref{adjointparaproduct},
+  \begin{eqnarray*}
+    \lambda \left| \bint (\mathbbm{W}^2_T \succ K_T) K_T  -  \bint
+    (\mathbbm{W}^2_T \circ K_T) K_T \right| &  \lesssim &  \lambda \|
+    \mathbbm{W}^2_T \|_{\VV^{- 1 - \delta}}  \| K_T \|^2_{H^{1 / 2 +
+    \delta}}\\
+    & \lesssim & \lambda^{\frac{3 / 2 - \delta}{2 (1 - \delta)}} \|
+    \mathbbm{W}^2_T \|_{\VV^{- 1 - \delta}} \times \\ & & \times \| K_T \|^{2 \left( \frac{1 / 2 +
+    \delta}{1 - \delta} \right)}_{H^{1 - \delta}} \lambda^{\frac{1 / 2 -
+    \delta}{2 (1 - \delta)}} \| K_T \|^{2 \left( \frac{1 / 2 - \delta}{1 -
+    \delta} \right)}_{L^2}\\
+    & \leqslant & C \lambda^{^{\frac{3 / 2 - \delta}{1 / 2 - 3 \delta}}} \|
+    \mathbbm{W}^2_T \|^{\left( 1 - \left( \frac{3 / 2 + \delta}{2 (1 -
+    \delta)} \right) \right)^{- 1}}_{\VV^{- 1 - \delta}} + \varepsilon \| K_T
+    \|^2_{H^{1 - \delta}}\\
+    &  & + \varepsilon \lambda \| K_T \|^4_{L^2} .
+  \end{eqnarray*}
+  Furthermore by Proposition~\ref{paraproductestimate},
+  \begin{eqnarray*}
+    \left| \lambda \bint (\mathbbm{W}^2_T \prec K_T) K_T \right| & \lesssim &
+    \lambda \| \mathbbm{W}^2_T \|_{\VV^{- 1 - \delta}}  \| K_T \|^2_{H^{1 /
+    2 + \delta}}\\
+    & \leqslant & C \lambda^{\frac{3 / 2 - \delta}{1 / 2 + \delta}} \|
+    \mathbbm{W}^2_T \|^{\left( 1 - \left( \frac{3 / 2 + \delta}{2 (1 -
+    \delta)} \right) \right)^{- 1}}_{\VV^{- 1 - \delta}} + \varepsilon \| K_T
+    \|^2_{H^{1 - \delta}} + \varepsilon \lambda \| K_T \|^4_{L^2},
+  \end{eqnarray*}
+  and
+  \begin{eqnarray*}
+    \left| \lambda^2 \bint (\mathbbm{W}^2_T \prec \mathbbm{W}_T^{[3]}) K_T
+    \right| & \lesssim & \lambda^2 \| \mathbbm{W}^2_T \|_{\VV^{- 1 - \delta /
+    2}}  \| \mathbbm{W}_T^{[3]} \|_{\VV^{^{1 / 2 - \delta / 2}}} \| K_T
+    \|_{H^{1 / 2 + \delta}}\\
+    & \leqslant & C (\delta) \lambda^4 \left( \| \mathbbm{W}^2_T \|_{\VV^{- 1
+    - \delta / 2}}  \| \mathbbm{W}_T^{[3]} \|_{\VV^{^{1 / 2 - \delta / 2}}}
+    \right)^2 + \delta \| K_T \|^2_{H^{1 / 2 + \delta}} .
+  \end{eqnarray*}
+\end{proof}
+
+The resonant term $\mathbbm{W}^2_T \circ \mathbbm{W}_T^{[3]}$ will behave well
+enough after suitable renormalization, as we will see later. As far as the
+term $\lambda \bint (\mathbbm{W}^2_T \succ Z_T) K_T$ in concerned, we want to
+absorb this into $\int \| w_s \|^2 \mathd s$ like we did with the linear term.
+Before we can do this we must make sure that after applying Ito's formula it
+still possible to use $\bint Z^4_T$ to control some of the growth of this term
+since we already have quadratic (critical) dependence on $(K_t)_t$ which
+cannot be fully taken care of by $\int \| w_s \|^2 \mathd s$. Choose $\theta :
+\mathbbm{R}_+ \rightarrow \mathbbm{R}_+$ to be a smooth function such $\theta
+(x) = 1$ if $x \leqslant 1 / 4$ and $\theta (x) = 0$ if $x \geqslant 1 / 2$.
+Set $\theta_t = \theta (\langle \mathD \rangle / t)$. Then \
+\begin{eqnarray*}
+  \theta_t \sigma_s (\mathD) & = & \text{$0$ for $s \geqslant t$,}\\
+  \theta_t (\xi) & = & \text{$1$ for $\xi \leqslant c t$ \text{for some} $c >
+  0$.}
+\end{eqnarray*}
+By the Mihlin-H{\"o}rmander theorem we deduce that the operator $\theta_t$ is
+bounded on $L^p$ for any $1 < p < \infty$. Let $Z_t^{\flat} \assign \theta_t
+Z_t$ and $K^{\flat}_t \assign \theta_t K_t$, then \
+\[ Z_t^{\flat} = \theta_t Z_t = \int_0^t \theta_t \langle \mathD \rangle^{-
+   1} \sigma_s (\mathD) u_s \mathd s = \int_0^T \theta_t \langle \mathD
+   \rangle^{- 1} \sigma_s (\mathD) u_s \mathd s = \theta_t Z_T, \]
+so in particular we have $\| Z_t^{\flat} \|_{L^p} \lesssim \| Z_T \|_{L^p}$
+for all $t \leqslant T$. On the other hand the functions $Z_T - Z_T^{\flat}$
+and $K_T - K_T^{\flat}$ are spectrally supported outside of a ball or radius
+$c T$ and
+\[ \lambda \bint (\mathbbm{W}^2_T \succ Z_T) K_T = \lambda \bint
+   (\mathbbm{W}^2_T \succ Z^{\flat}_T) K_T + \lambda \bint (\mathbbm{W}^2_T
+   \succ (Z_T - Z^{\flat}_T)) K_T . \]
+We estimate the second part with the following:
+
+\begin{lemma}
+  For any small $\varepsilon > 0$ there exists $\delta > 0$ such that
+  \begin{eqnarray*}
+    \left| \lambda \bint (\mathbbm{W}^2_T \succ (Z_T - Z^{\flat}_T)) K_T
+    \right| & \leqslant & C (\varepsilon, \delta) E (\lambda) Q_T +
+    \varepsilon \| K \|_{H^{1 - \delta}} + \varepsilon \lambda \| Z_T \|_{L^4}
+    .
+  \end{eqnarray*}
+\end{lemma}
+
+\begin{proof}
+  Using the spectral support properties of the various terms we observe that
+  \[ \| \mathbbm{W}^2_T \|_{\VV^{- 1 + \delta}} \lesssim \| \mathbbm{W}^2_T
+     \|_{\VV^{- 1 - \delta}} T^{2 \delta}, \]
+  and
+  \[ T^{2 \delta} \| Z_T - Z^{\flat}_T \|_{L^2} \lesssim \| Z_T - Z^{\flat}_T
+     \|_{H^{2 \delta}} \lesssim \| Z_T - Z^{\flat}_T \|^{\frac{2 \delta}{1 / 2
+     - \delta}}_{H^{1 / 2 - \delta}} \| Z_T - Z^{\flat}_T \|^{\frac{1 / 2 - 3
+     \delta}{1 / 2 - \delta}}_{L^2} \]
+  \[ \lesssim \| Z_T \|^{\frac{2 \delta}{1 / 2 - \delta}}_{H^{1 / 2 - \delta}}
+     \| Z_T \|^{\frac{1 / 2 - 3 \delta}{1 / 2 - \delta}}_{L^2}, \]
+  where we used also interpolation and the $L^2$ bound $\| Z^{\flat}_T
+  \|_{L^2} \lesssim \| Z_T \|_{L^2}$. We observe also that
+  \begin{equation}
+    \| Z_T \|_{H^{1 / 2 - \delta}} \leqslant \| K_T \|_{H^{1 / 2 - \delta}}
+    + \lambda \| \mathbbm{W}_T^{[3]} \|_{H^{1 / 2 - \delta}}
+    \label{eq:bound-Z-K}
+  \end{equation}
+  Therefore we estimate as follows
+  \[ \begin{array}{lll}
+       &  & \left| \lambda \bint (\mathbbm{W}^2_T \succ (Z_T - Z^{\flat}_T) )
+       K_T \right|\\
+       & \lesssim & \lambda \| \mathbbm{W}^2_T \|_{\VV^{- 1 + \delta}} \| Z_T
+       - Z^{\flat}_T \|_{L^2} \| K_T \|_{H^{1 - \delta}}\\
+       & \lesssim & \lambda \| \mathbbm{W}^2_T \|_{\VV^{- 1 - \delta}} \| K_T
+       \|^{1 + \frac{2 \delta}{1 / 2 - \delta}}_{H^{1 - \delta}} \| Z_T
+       \|^{\frac{1 / 2 - 3 \delta}{1 / 2 - \delta}}_{L^2}\\
+       &  & + \lambda^{1 + \frac{2 \delta}{1 / 2 - \delta}} \|
+       \mathbbm{W}^2_T \|_{\VV^{- 1 - \delta}} \| \mathbbm{W}_T^{[3]}
+       \|^{\frac{2 \delta}{1 / 2 - \delta}}_{H^{1 / 2 - \delta}} \| K_T
+       \|_{H^{1 - \delta}} \| Z_T \|^{\frac{1 / 2 - 3 \delta}{1 / 2 -
+       \delta}}_{L^2}\\
+       & \lesssim & \lambda^{\frac{3 / 2 - \delta}{4 (1 / 2 - \delta)}} \|
+       \mathbbm{W}^2_T \|_{\VV^{- 1 - \delta}} \| K_T \|^{\frac{1 / 2 +
+       \delta}{1 / 2 - \delta}}_{H^{1 - \delta}} \lambda^{\frac{1 / 2 - 3
+       \delta}{4 (1 / 2 - \delta)}} \| Z_T \|^{\frac{1 / 2 - 3 \delta}{1 / 2 -
+       \delta}}_{L^2}\\
+       &  & + \lambda^{\frac{3 / 2 + 7 \delta}{4 (1 / 2 - \delta)}} \|
+       \mathbbm{W}^2_T \|_{\VV^{- 1 - \delta}} \| \mathbbm{W}_T^{[3]}
+       \|^{\frac{2 \delta}{1 / 2 - \delta}}_{H^{1 / 2 - \delta}} \| K_T
+       \|_{H^{1 - \delta}} \lambda^{\frac{1 / 2 - 3 \delta}{4 (1 / 2 -
+       \delta)}} \| Z_T \|^{\frac{1 / 2 - 3 \delta}{1 / 2 - \delta}}_{L^2}\\
+       & \lesssim & C (\varepsilon, \delta) \lambda^{\frac{3 / 2 - \delta}{1
+       / 2 - 3 \delta}} \| \mathbbm{W}^2_T \|^{\frac{4 (1 / 2 - \delta)}{1 / 2
+       - 3 \delta}}_{\VV^{- 1 - \delta}} + \varepsilon \| K_T \|^2_{H^{1 -
+       \delta}} + \varepsilon \lambda \| Z_T \|^4_{L^2}\\
+       &  & + C (\varepsilon, \delta) \lambda^{\frac{3 / 2 + 7 \delta}{1 / 2
+       + \delta}} \| \mathbbm{W}^2_T \|^{\frac{4 (1 / 2 - \delta)}{1 / 2 +
+       \delta}}_{\VV^{- 1 - \delta}} \| \mathbbm{W}_T^{[3]} \|^{\frac{8
+       \delta}{1 / 2 + \delta}}_{H^{1 / 2 - \delta}} + \varepsilon \| K_T
+       \|^2_{H^{1 - \delta}} + \varepsilon \lambda \| Z_T \|^4_{L^2}
+     \end{array} \]
+  
+\end{proof}
+
+It remains to absorb the remaining term. Applying Ito's formula we obtain
+\[ \lambda \bint (\mathbbm{W}^2_T \succ Z^{\flat}_T) K_T = \lambda \int_0^T
+   \bint (\mathbbm{W}^2_t \succ Z^{\flat}_t) \dot{K_t} \mathd t + \lambda
+   \int_0^T \bint (\mathbbm{W}^2_t \succ \dot{Z}^{\flat}_t) K_t \mathd t +
+   \text{martingale} . \]
+The second term in the r.h.s. is harmless thanks to the following Lemma
+
+\begin{lemma}
+  For any small $\varepsilon > 0$ there exists $\delta > 0$ such that
+  \begin{eqnarray*}
+    \left| \lambda \int_0^T \bint (\mathbbm{W}^2_t \succ \dot{Z}^{\flat}_t)
+    K_t \mathd t \right| & \leqslant & C (\varepsilon, \delta) E (\lambda) Q_T
+    + \varepsilon \| K \|^2_{H^{1 - \delta}} + \varepsilon \lambda \| Z_T
+    \|^4_{L^4} .
+  \end{eqnarray*}
+\end{lemma}
+
+\begin{proof}
+  First note that $\dot{\theta}_t (n) = (\langle n \rangle / t^2) \dot{\theta}
+  (\langle n \rangle / t)$. In particular $Z^{\flat}_t$ is spectrally
+  supported in an annulus with inner radius $t / 4$ and outer radius $t / 2$.
+  \[ \| \dot{Z}^{\flat}_t \|^2_{L^2} = \sum_{n \in \mathbbm{Z}^3} \left|
+     \dot{\theta} \left( \frac{\langle n \rangle}{t} \right) \frac{\langle n
+     \rangle}{t^2} \hat{Z}_T (n) \right|^2 \lesssim \sum_{n \in \mathbbm{Z}^3}
+     \left| \dot{\theta} \left( \frac{\langle n \rangle}{t} \right)
+     \frac{\langle n \rangle}{t} \frac{\langle n \rangle^{3
+     \varepsilon}}{t^{1 + 3 \varepsilon}} \hat{Z}_T (n) \right|^2 \lesssim
+     \frac{\| Z_T \|^2_{H^{3 \varepsilon}}}{t^{2 + 6 \varepsilon}} . \]
+  By Proposition~\ref{paraproductestimate},
+  \[ \begin{array}{lll}
+       \left| \lambda \int_0^T \bint (\mathbbm{W}^2_t \succ \dot{Z}^{\flat}_t)
+       K_t \mathd t \right| & \lesssim & \lambda \int_0^T \| \mathbbm{W}^2_t
+       \|_{\VV^{- 1 + \delta}} \| \dot{Z}^{\flat}_t \|_{L^2} \| K_t \|_{H^{1 -
+       \delta}} \mathd t\\
+       & \lesssim & \lambda \int_0^T \| \mathbbm{W}^2_t \|_{\VV^{- 1 +
+       \delta}} \| Z_T \|_{H^{3 \delta}} \| K_t \|_{H^{1 - \delta}}
+       \frac{\mathd t}{t^{1 + 3 \delta}}\\
+       & \lesssim & \lambda \| Z_T \|_{H^{3 \delta}} \sup_{0 \leqslant t
+       \leqslant T} \| K_t \|_{H^{1 - \delta}} \int_0^T \| \mathbbm{W}^2_t
+       \|_{\VV^{- 1 - \delta}} \frac{\mathd t}{t^{1 + \delta}}\\
+       & \lesssim & \lambda \| Z_T \|^{8 \delta}_{H^{1 / 2 - \delta}} \| Z_T
+       \|^{1 - 8 \delta}_{L^2} \sup_{0 \leqslant t \leqslant T} \| K_t
+       \|_{H^{1 - \delta}} \int_0^T \| \mathbbm{W}^2_t \|_{\VV^{- 1 - \delta}}
+       \frac{\mathd t}{t^{1 + \delta}}\\
+       & \lesssim & \lambda \| Z_T \|^{1 - 8 \delta}_{L^2} (\sup_{0 \leqslant
+       t \leqslant T} \| K_t \|_{H^{1 - \delta}})^{1 + 8 \delta} \left(
+       \int_0^T \| \mathbbm{W}^2_t \|_{\VV^{- 1 - \delta}} \frac{\mathd
+       t}{t^{1 + \delta}} \right)\\
+       &  & + \lambda^{1 + 8 \delta} \| Z_T \|^{1 - 8 \delta}_{L^2} (\sup_{0
+       \leqslant t \leqslant T} \| K_t \|_{H^{1 - \delta}}) \times\\
+       &  & \qquad \times \left( \| \mathbbm{W}_T^{[3]} \|^{8 \delta}_{H^{1 /
+       2 - \delta}} \int_0^T \| \mathbbm{W}^2_t \|_{\VV^{- 1 - \delta}}
+       \frac{\mathd t}{t^{1 + \delta}} \right)\\
+       & \lesssim & \varepsilon \lambda \| Z_T \|^4_{L^2} + \varepsilon
+       (\sup_{0 \leqslant t \leqslant T} \| K_t \|_{H^{1 - \delta}})^2\\
+       &  & + C (\varepsilon, \delta) \lambda^{\frac{3 + 8 \delta}{1 - 8
+       \delta}} \left( \int_0^T \| \mathbbm{W}^2_t \|_{\VV^{- 1 - \delta}}
+       \frac{\mathd t}{t^{1 + \delta}} \right)^{12}\\
+       &  & + \lambda^{\frac{3 + 40 \delta}{1 + 8 \delta}} \left( \|
+       \mathbbm{W}_T^{[3]} \|^{8 \delta}_{H^{1 / 2 - \delta}} \int_0^T \|
+       \mathbbm{W}^2_t \|_{\VV^{- 1 - \delta}} \frac{\mathd t}{t^{1 + \delta}}
+       \right)\\
+       &  & + \varepsilon \lambda \| Z_T \|^4_{L^2} + \varepsilon (\sup_{0
+       \leqslant t \leqslant T} \| K_t \|_{H^{1 - \delta}})
+     \end{array} \]
+\end{proof}
+
+So we are left with the singular term $\int_0^T \bint (\mathbbm{W}^2_t \succ
+Z^{\flat}_t) \dot{K_t} \mathd t$. In order to handle it we need to introduce a
+further decomposition of the drift via a second paracontrolled Ansatz
+\begin{equation}
+  w_t = - \lambda J_t (\mathbbm{W}^2_t \succ Z^{\flat}_t) + l_t \quad
+  \text{and} \quad \dot{K}_t = - \lambda J^2_t (\mathbbm{W}^2_t \succ
+  Z^{\flat}_t) + \dot{L}_t, \label{eq:ansatz-2}
+\end{equation}
+where $L_t \assign I_t (l)$. Now
+\begin{equation}
+  \begin{array}{lll}
+    \| K_t \|^2_{H^{1 - \delta}} & \lesssim & \lambda^2 \int^t_0 \frac{1}{t^{1
+    + \delta}} \| \mathbbm{W}^2_s \|^2_{\VV^{- 1 - \delta}} \mathd s \| Z_T
+    \|^2_{L^2} + \int^t_0 \| l_s \|_{L^2}^2 \mathd s\\
+    & \lesssim & \lambda^3 \left( \int^t_0 \frac{1}{t^{1 + \delta}} \|
+    \mathbbm{W}^2_s \|^2_{\VV^{- 1 - \delta}} \mathd s \right)^2 + \lambda \|
+    Z_T \|^4_{L^2} + \int^t_0 \| l_s \|_{L^2}^2 \mathd s,
+  \end{array} \label{eq:control-K}
+\end{equation}
+which implies that quadractic functions of the norm $\| K_t \|_{H^{1 -
+\delta}}$ with a small coeffient can always be controlled, uniformly in $[0,
+T]$, by the positive term
+\[ \lambda \bint Z^4_T + \frac{1}{2} \int^T_0 \| l_s \|_{L^2}^2 \mathd s. \]
+Using eq.~(\ref{eq:ansatz-2}) we compute
+
+
+\[ \lambda \int_0^T \bint (\mathbbm{W}^2_t \succ Z^{\flat}_t) \dot{K_t}
+   \mathd t + \frac{1}{2} \int_0^T \| w_t \|^2_{L^2} \mathd t = -
+   \frac{\lambda^2}{2} \int_0^T \bint (J_t (\mathbbm{W}^2_t \succ
+   Z^{\flat}_t))^2 \mathd t + \frac{1}{2} \int_0^T \| l_t \|^2_{L^2} \mathd t.
+\]
+We now see how we can renormalize the remaining term with the following Lemma.
+
+\begin{lemma}
+  For any small $\varepsilon > 0$ there exists a $\delta > 0$ such that
+  \begin{eqnarray*}
+    \frac{\lambda^2}{2} \left| \int^T_0 \bint ((J_t \mathbbm{W}^2_t \succ
+    Z^{\flat}_t))^2 - (J_t \mathbbm{W}^2_t \circ J_t \mathbbm{W}^2_t)
+    (Z^{\flat}_t)^2 \right| & \leqslant & C (\varepsilon, \delta) E (\lambda)
+    Q_T + \varepsilon \| K_T \|^2_{H^{1 - \delta}} + \varepsilon \lambda \|
+    Z_T \|^4_{L^4} .
+  \end{eqnarray*}
+\end{lemma}
+
+\begin{proof}
+  To prove this first note that $t^{1 / 2} J_t$ satisfies the assumptions of
+  Proposition~\ref{paraproductleibniz} with $m = - 1$. So
+  \[ \| J_t (\mathbbm{W}^2_t \succ Z^{\flat}_t) - (J_t \mathbbm{W}^2_t) \succ
+     Z^{\flat}_t \|_{H^{1 / 2 - 2 \delta}} \lesssim \langle t \rangle^{- 1 /
+     2} \| \mathbbm{W}^2_t \|_{\VV^{- 1 - \delta}} \| Z^{\flat}_t  \|_{H^{1 /
+     2 - \delta}}, \]
+  and by Proposition~\ref{multiplierestimate},
+  \[ \| J_t (\mathbbm{W}^2_t \succ Z^{\flat}_t) \|_{H^{- 2 \delta}} \lesssim
+     \langle t \rangle^{- 1 / 2 - \delta} \| \mathbbm{W}^2_t \|_{\VV^{- 1 -
+     \delta}} \| Z^{\flat}_t  \|_{L^2} . \]
+  Summarizing these considerations we have
+  \[ \left| \frac{\lambda^2}{2} \int_0^T \bint [(J_t (\mathbbm{W}^2_t \succ
+     Z^{\flat}_t))^2 - (J_t (\mathbbm{W}^2_t \succ Z^{\flat}_t)) ((J_t
+     \mathbbm{W}^2_t) \succ Z^{\flat}_t)] \mathd t \right| \]
+  \[ \lesssim \lambda^2 \sup_{t \leqslant T}  [\| Z^{\flat}_t  \|_{L^2} \|
+     Z^{\flat}_t  \|_{H^{1 / 2 - \delta}}] \int_0^T \| \mathbbm{W}^2_t
+     \|^2_{\VV^{- 1 - \delta}} \frac{\mathd t}{\langle t \rangle^{1 + \delta}}
+     . \]
+  Again applying Proposition~\ref{multiplierestimate} and
+  Proposition~\ref{paraproductleibniz},
+  \[ \left| \frac{\lambda^2}{2} \int_0^T \bint (J_t (\mathbbm{W}^2_t \succ
+     Z^{\flat}_t))^2 \mathd t - \frac{\lambda^2}{2} \int_0^T \bint ((J_t
+     \mathbbm{W}^2_t) \succ Z^{\flat}_t )^2 \mathd t \right| \]
+  \[ \lesssim \lambda^2 \sup_{t \leqslant T}  [\| Z^{\flat}_t  \|_{L^2} \|
+     Z^{\flat}_t  \|_{H^{1 / 2 - \delta}}] \int_0^T \| \mathbbm{W}^2_t
+     \|^2_{\VV^{- 1 - \varepsilon}} \frac{\mathd t}{\langle t \rangle^{1 +
+     \delta}} . \]
+  From Proposition~\ref{adjointparaproduct} we have
+  \[ \left| \frac{\lambda^2}{2} \bint ((J_t \mathbbm{W}^2_t \succ
+     Z^{\flat}_t))^2 - \frac{\lambda^2}{2} \bint (J_t \mathbbm{W}^2_t \succ
+     Z^{\flat}_t) \circ J_t \mathbbm{W}^2_t Z^{\flat}_t \right| \lesssim
+     \lambda^2 \| J_t \mathbbm{W}^2_t \|_{\VV^{- 2 \delta}}^2  \| Z^{\flat}_t
+     \|_{H^{4 \delta}}  \| Z^{\flat}_t \|_{L^2} . \]
+  The integrability of this term in time follows from the inequality
+  \[ \| J_t \mathbbm{W}^2_t \|_{\VV^{- 2 \varepsilon}}^2 \lesssim \langle t
+     \rangle^{- 1 - 2 \delta} \| \mathbbm{W}^2_t \|_{\VV^{- 1 - \delta}}^2 .
+  \]
+  To prove this last bound, recall that $t^{1 / 2} J_t$ is a Fourier
+  multiplier with symbol
+  \[ \langle k \rangle^{- 1} (- \hat{\rho}' (\langle k \rangle / t) \langle k
+     \rangle / t)^{1 / 2} = \langle k \rangle^{- 1} \eta (\langle k \rangle /
+     t), \]
+  where $\eta$ is a smooth function supported in an annulus of radius $1$.
+  Using this observation and applying Proposition~\ref{multiplierestimate}
+  gives the estimate. Finally, applying Proposition~\ref{commutatorestimate}
+  we get
+  \[ \lambda^2 \| (J_t \mathbbm{W}^2_t \succ Z^{\flat}_t) \circ J_t
+     \mathbbm{W}^2_t - (J_t \mathbbm{W}^2_t \circ J_t \mathbbm{W}^2_t)
+     (Z^{\flat}_t) \|_{L^2} \lesssim \lambda^2 \| J_t \mathbbm{W}^2_t
+     \|_{\VV^{- 2 \delta}}^2  \| Z^\flat_t \|_{H^{\delta \varepsilon}} . \]
+  Summarizing we have
+  \[ \frac{\lambda^2}{2} \left| \int^T_0 \bint ((J_t \mathbbm{W}^2_t \succ
+     Z^{\flat}_t))^2 - (J_t \mathbbm{W}^2_t \circ J_t \mathbbm{W}^2_t)
+     (Z^{\flat}_t)^2 \right| \]
+  \[ \lesssim \lambda^2 \sup_{t \leqslant T}  [\| Z^{\flat}_t  \|_{L^2} \|
+     Z^{\flat}_t  \|_{H^{1 / 2 - \delta}}] \int_0^T \| \mathbbm{W}^2_t
+     \|^2_{\VV^{- 1 - \varepsilon}} \frac{\mathd t}{\langle t \rangle^{1 +
+     \delta}} \]
+  \[ \lesssim \varepsilon \left( \frac{1}{2} \sup_{t \leqslant T} \|
+     Z^{\flat}_t  \|_{H^{1 / 2 - \delta}}^2 + \lambda \| Z_T \|_{L^2}^4
+     \right) + C (\varepsilon, \delta) \lambda^7 \left( \int_0^T \|
+     \mathbbm{W}^2_t \|^2_{\VV^{- 1 - \varepsilon}} \frac{\mathd t}{\langle t
+     \rangle^{1 + \delta}} \right)^4 \]
+  \[ \lesssim \varepsilon \left( \frac{1}{2} \| Z_T \|_{H^{1 / 2 - \delta}}^2
+     + \lambda \| Z_T \|_{L^2}^4 \right) + C (\varepsilon, \delta) \lambda^7
+     \int_0^T \| \mathbbm{W}^2_t \|^8_{\VV^{- 1 - \varepsilon}} \frac{\mathd
+     t}{\langle t \rangle^{1 + \delta}} . \]
+  and using eq.~(\ref{eq:bound-Z-K}) to control $\| Z_T \|_{H^{1 / 2 -
+  \delta}}$ in terms of $K_T$ we obtain the claim.
+\end{proof}
+
+\subsubsection{Bound for the cubic term}
+
+We are now left to estimate the cubic term which we rewrite as
+\[ \lambda \bint W_T Z^3_T = \lambda^4 \bint W_T (\mathbbm{W}_T^{[3]})^3 + 3
+   \lambda^3 \bint W_T (\mathbbm{W}_T^{[3]})^2 K_T + 3 \lambda^2 \bint W_T
+   (\mathbbm{W}_T^{[3]}) K^2_T + \lambda \bint W_T K^3_T . \]
+Using Lemma~\ref{lemma:bound-cubic} we establish that
+\[ \lambda \left| \bint W_T K^3_T \right| \leqslant E (\lambda) \| W_T
+   \|^K_{W^{- 1 / 2 - \varepsilon, p}} + \delta (\| K_T \|^2_{H^{1 -
+   \varepsilon}} + \lambda \| K_T \|^4_{L^4}) . \]
+\begin{lemma}
+  For any small $\varepsilon > 0$ there exists $\delta > 0$ such that
+  \[ \left| 3 \lambda^3 \bint W_T (\mathbbm{W}_T^{[3]})^2 K_T \right| + \left|
+     3 \lambda^2 \bint W_T \mathbbm{W}_T^{[3]} K^2_T \right| \leqslant C
+     (\varepsilon, \delta) E (\lambda) Q_T + \varepsilon \| K_T \|^2_{H^{1 -
+     \delta}} + \varepsilon \lambda \| Z_T \|^4_{L^4} . \]
+\end{lemma}
+
+\begin{proof}
+  We can write, by Proposition~\ref{paralinearization},
+  \[ 3 \lambda^3 \left| \bint W_T (\mathbbm{W}_T^{[3]})^2 K_T \right|
+     \leqslant 6 \lambda^3 \left| \bint W_T (\mathbbm{W}_T^{[3]} \succ
+     \mathbbm{W}_T^{[3]}) K_T \right| + C \lambda^3 \| W_T \|_{\VV^{- 1 / 2
+     - \varepsilon}} \| \mathbbm{W}_T^{[3]} \|^2_{\VV^{1 / 2 - \varepsilon}}
+     \| K_T \|_{H^{1 - \varepsilon}} . \]
+  Decompose
+  \[ W_T (\mathbbm{W}_T^{[3]} \succ \mathbbm{W}_T^{[3]}) = W_T \succ
+     (\mathbbm{W}_T^{[3]} \succ \mathbbm{W}_T^{[3]}) + W_T \prec
+     (\mathbbm{W}_T^{[3]} \succ \mathbbm{W}_T^{[3]}) + W_T \circ
+     (\mathbbm{W}_T^{[3]} \succ \mathbbm{W}_T^{[3]}) . \]
+  We can estimate the first two terms by
+  \[ 6 \lambda^3 \left| \bint W_T \succ (\mathbbm{W}_T^{[3]} \succ
+     \mathbbm{W}_T^{[3]}) K_T \right| \lesssim \lambda^3 \| W_T \|_{\VV^{-
+     1 / 2 - \varepsilon}} \| \mathbbm{W}_T^{[3]} \|^2_{L^{\infty}} \| K_T
+     \|_{H^{1 - \varepsilon}}, \]
+  and
+  \[ 6 \lambda^3 \left| \bint W_T \prec (\mathbbm{W}_T^{[3]} \succ
+     \mathbbm{W}_T^{[3]}) K_T \right| \lesssim \lambda^3 \| W_T \|_{\VV^{-
+     1 / 2 - \varepsilon}} \| \mathbbm{W}_T^{[3]} \|_{L^{\infty}} \|
+     \mathbbm{W}_T^{[3]} \|_{\VV^{1 / 2 - \varepsilon}} \| K_T \|_{H^{1 -
+     \varepsilon}} . \]
+  Young's inequality gives then the appropriate result. For the final term we
+  use Proposition~\ref{commutatorestimate} to get
+  \[ \begin{array}{lll}
+       &  & 6 \lambda^3 \left| \bint W_T \circ (\mathbbm{W}_T^{[3]} \succ
+       \mathbbm{W}_T^{[3]}) K_T \right|\\
+       & \leqslant & 6 \lambda^3 \left| \bint \mathbbm{W}_T^{[3]} (W_T \circ
+       \mathbbm{W}_T^{[3]}) K_T \right| + C \lambda^3 \| W_T \|_{\VV^{- 1 /
+       2 - \varepsilon}} \| \mathbbm{W}_T^{[3]} \|^2_{\VV^{1 / 2 -
+       \varepsilon}} \| K_T \|_{H^{1 - \varepsilon}}\\
+       & \lesssim & \lambda^3 \| \mathbbm{W}_T^{[3]} \|_{\VV^{1 / 2 -
+       \varepsilon}} \| W_T \circ \mathbbm{W}_T^{[3]} \|_{\VV^{- \varepsilon}}
+       \| K_T \|_{H^{1 - \varepsilon}} + \lambda^3 \| W_T \|_{\VV^{- 1 / 2 -
+       \varepsilon}} \| \mathbbm{W}_T^{[3]} \|^2_{\VV^{1 / 2 - \varepsilon}}
+       \| K_T \|_{H^{1 - \varepsilon}} .\\
+       & \lesssim & \lambda^6 C (\varepsilon) \left( \| \mathbbm{W}_T^{[3]}
+       \|_{\VV^{1 / 2 - \varepsilon}} \| W_T \circ \mathbbm{W}_T^{[3]}
+       \|_{\VV^{- \varepsilon}} + \| W_T \|_{\VV^{- 1 / 2 - \varepsilon}} \|
+       \mathbbm{W}_T^{[3]} \|^2_{\VV^{1 / 2 - \varepsilon}} \right)^2 +
+       \varepsilon \| K_T \|^2_{H^{1 - \varepsilon}}
+     \end{array} \]
+  For the last term we estimate
+  \begin{eqnarray*}
+    \left| \lambda^2 \bint (W_T \mathbbm{W}_T^{[3]}) K^2_T \right| & \lesssim
+    & \lambda^2 \| W_T \mathbbm{W}_T^{[3]} \|_{\VV^{- 1 / 2 - \delta}} \| K_T
+    \|^2_{H^{1 / 2 + \delta}},\\
+    & \lesssim & \lambda^{^{\frac{7 / 2 - 2 \delta}{2 - 2 \delta}}} \| W_T
+    \mathbbm{W}_T^{[3]} \|_{\VV^{- 1 / 2 - \delta}} \lambda^{^{\frac{1 / 2 - 2
+    \delta}{2 - 2 \delta}}} \| K_T \|^{2 \left( \frac{1 / 2 - 2 \delta}{1 -
+    \delta} \right)}_{L^2} \| K_T \|^{2 \left( \frac{1 / 2 + \delta}{1 -
+    \delta} \right)}_{H^{1 - \delta}}\\
+    & \leqslant & \lambda^{^{\frac{7 / 2 - 2 \delta}{1 / 2 - 6 \delta}}} \|
+    W_T \mathbbm{W}_T^{[3]} \|^{\frac{2 - 2 \delta}{1 / 2 - 6 \delta}}_{\VV^{-
+    1 / 2 - \delta}} + \lambda \| K_T \|^4_{L^2} + \| K_T \|^2_{H^{1 -
+    \delta}}
+  \end{eqnarray*}
+  and we observe that
+  \[ \| W_T \mathbbm{W}_T^{[3]} \|_{\VV^{- 1 / 2 - \delta}} \leqslant \| W_T
+     \succ \mathbbm{W}_T^{[3]} \|_{\VV^{- 1 / 2 - \delta}} + \| W_T \circ
+     \mathbbm{W}_T^{[3]} \|_{\VV^{- 1 / 2 - \delta}} + \| W_T \prec
+     \mathbbm{W}_T^{[3]} \|_{\VV^{- 1 / 2 - \delta}} \]
+  \[ \lesssim \| W_T \|_{\VV^{- 1 / 2 - \delta}} \| \mathbbm{W}_T^{[3]}
+     \|_{\VV^{1 / 2 - \delta}} + \| W_T \circ \mathbbm{W}_T^{[3]} \|_{\VV^{-
+     \varepsilon}} \]
+  which allows to conclude using Lemma~\ref{lemma:renormalized-terms} to bound
+  $W_T \circ \mathbbm{W}_T^{[3]}$.
+\end{proof}
+
+\subsubsection{Renormalization}
+
+Let us summarize the argument so far. Starting from the expression
+\[ \Upsilon_T \assign 4 \lambda \bint \llbracket W_T^3 \rrbracket Z_T + 6
+   \lambda \bint \llbracket W_T^2 \rrbracket Z_T^2 + 4 \lambda \bint W_T Z_T^3
+   - \bint (2 \gamma_T W_T Z_T + \gamma_T Z_T^2) + \lambda \bint  Z_T^4 +
+   \int_0^T \| u_s \|^2_{L^2} \mathd s, \]
+we performed a first change of variables~(\ref{eq:ansatz-1}) to cancel the
+term linear in $Z_T$ and get
+\[ \Upsilon_T = \frac{\lambda}{2} \bint \mathbbm{W}^2 Z_T^2 + 4 \lambda \bint
+   W_T Z_T^3 - \bint (2 \gamma_T W_T Z_T + \gamma_T Z_T^2) + \lambda \bint 
+   Z_T^4 + \frac{1}{2} \int_0^T \| w_s \|^2_{L^2} \mathd s + \cdots \]
+where the dots stands for terms which are under control via the positive terms
+appearing in the expression. Next, we expanded the term quadratic in $Z_T$ to
+get
+\[ \Upsilon_T = \lambda^2 \bint \mathbbm{W}^2_T \mathbbm{W}_T^{[3]} K_T +
+   \frac{\lambda}{2} \bint \mathbbm{W}^2_T K_T^2 + 4 \lambda \bint W_T Z_T^3 -
+   \bint (2 \gamma_T W_T Z_T + \gamma_T Z_T^2) + \lambda \bint  Z_T^4 +
+   \frac{1}{2} \int_0^T \| w_s \|^2_{L^2} \mathd s + \cdots \]
+Then rewrote it using commutators
+\[ \Upsilon_T = \lambda^2 \bint (\mathbbm{W}^2_T \circ \mathbbm{W}_T^{[3]})
+   K_T + \lambda \bint (\mathbbm{W}^2_T \succ Z_T) K_T + 4 \lambda \bint W_T
+   Z_T^3 \]
+\[ - \bint (2 \gamma_T W_T Z_T + \gamma_T Z_T^2) + \lambda \bint  Z_T^4 +
+   \frac{1}{2} \int_0^T \| w_s \|^2_{L^2} \mathd s + \cdots \]
+Applied an Ito formula to the second term (after a preliminary modification)
+to get
+\[ \Upsilon_T = \lambda^2 \bint (\mathbbm{W}^2_T \circ \mathbbm{W}_T^{[3]})
+   K_T + \lambda \int_0^T \bint (\mathbbm{W}^2_t \succ Z^{\flat}_t) \dot{K_t}
+   \mathd t + 4 \lambda \bint W_T Z_T^3 \]
+\[ - \bint (2 \gamma_T W_T Z_T + \gamma_T Z_T^2) + \lambda \bint  Z_T^4 +
+   \frac{1}{2} \int_0^T \| w_s \|^2_{L^2} \mathd s + \cdots \]
+Introduced a second paracontrolled Ansatz~(\ref{eq:ansatz-2}) to cancel the
+resulting contributions and obtained
+\[ \Upsilon_T = \lambda^2 \bint (\mathbbm{W}^2_T \circ \mathbbm{W}_T^{[3]})
+   K_T - \frac{\lambda^2}{2} \int_0^T \bint (J_t (\mathbbm{W}^2_t \succ
+   Z^{\flat}_t))^2 \mathd t + 4 \lambda \bint W_T Z_T^3 \]
+\[ - \bint (2 \gamma_T W_T Z_T + \gamma_T Z_T^2) + \lambda \bint  Z_T^4 +
+   \frac{1}{2} \int_0^T \| l_t \|^2_{L^2} \mathd t + \cdots \]
+Next we applied a commutator lemma to the second term to clarify its
+renormalizability and expanded the counterterms to get
+\[ \Upsilon_T = \lambda^2 \bint (\mathbbm{W}^2_T \circ \mathbbm{W}_T^{[3]})
+   K_T - \frac{\lambda^2}{2} \int_0^T \bint (J_t \mathbbm{W}^2_t \circ J_t
+   \mathbbm{W}^2_t) (Z^{\flat}_t)^2 \mathd t + 4 \lambda \bint W_T Z_T^3 \]
+\[ - \bint (2 \gamma_T W_T K_T + \gamma_T (Z_T^{\flat})^2) + \lambda \bint 
+   Z_T^4 + \frac{1}{2} \int_0^T \| l_t \|^2_{L^2} \mathd t + \cdots \]
+It now remains to handle the terms
+\begin{equation}
+  \lambda^2 \bint (\mathbbm{W}^2_T \circ \mathbbm{W}_T^{[3]}) K_T -
+  \frac{\lambda^2}{2} \int_0^T \bint (J_t \mathbbm{W}^2_t \circ J_t
+  \mathbbm{W}^2_t ) (Z^{\flat}_t)^2 \mathd t, \label{eq:renormalizand-terms}
+\end{equation}
+which so far are divergent and need to be renormalized. Recall also that we
+still have the counterterms we introduced in the beginning, namely
+\[ - 2 \gamma_T \bint W_T Z_T - \gamma_T \bint Z^2_T . \]
+To handle the first term in eq.~(\ref{eq:renormalizand-terms}) we consider
+\[ \lambda^2 \bint (\mathbbm{W}^2_T \circ \mathbbm{W}_T^{[3]}) K_T - 2
+   \gamma_T \bint W_T Z_T = \lambda^2 \bint (\mathbbm{W}^2_T \circ
+   \mathbbm{W}_T^{[3]} - 2 \gamma_T \lambda^{- 2} W_T) K_T + 2 \lambda
+   \gamma_T \bint W_T \mathbbm{W}_T^{[3]} \]
+and observe that the average of the second term in the r.h.s. can be absorbed
+in $\delta_T$ while for the first we have
+\[ \lambda^2 \left| \bint (\mathbbm{W}^2_T \circ \mathbbm{W}_T^{[3]} - 2
+   \gamma_T \lambda^{- 2} W_T) K_T \right| \lesssim \lambda^2 \|
+   \mathbbm{W}^2_T \circ \mathbbm{W}_T^{[3]} - 2 \lambda^{- 2} \gamma_T W_T
+   \|_{\VV^{- 1 / 2 - \varepsilon}} \| K_T \|_{W^{1, 1 / 2 + \varepsilon}} .
+\]
+Using Lemma~\ref{lemma:renormalized-terms} and eq.~(\ref{eq:control-K}) we
+have this term under control. On the other hand, to renormalize the second
+term in eq.~(\ref{eq:renormalizand-terms}), we observe that
+\begin{equation}
+  \gamma_T \bint Z^2_T = \gamma_T \bint (Z^{\flat}_T)^2 + \gamma_T \bint
+  Z^{\flat}_T (Z_T - Z^{\flat}_T) + \gamma_T \bint (Z_T - Z^{\flat}_T)^2 .
+  \label{eq:decomp-square}
+\end{equation}
+For the second and third term in eq.~(\ref{eq:decomp-square}) in this last
+expression we have the estimates
+\[ \left| \gamma_T \bint Z^{\flat}_T (Z_T - Z^{\flat}_T) \right| \leqslant |
+   \gamma_T | \| Z^{\flat}_T \|_{L^2} \| Z_T - Z^{\flat}_T \|_{L^2} \lesssim
+   \frac{| \gamma_T |}{\langle T \rangle^{1 / 4}} \| Z^{\flat}_T \|_{L^2} \|
+   Z_T - Z^{\flat}_T \|_{H^{1 / 4}}, \]
+and
+\[ \left| \gamma_T \bint (Z_T - Z^{\flat}_T)^2 \right| \leqslant | \gamma_T |
+   \| Z_T - Z^{\flat}_T \|^2_{L^2} \lesssim \frac{| \gamma_T |}{\langle T
+   \rangle^{1 / 4}} \| Z^{\flat}_T - Z_T \|_{L^2} \| Z_T - Z^{\flat}_T
+   \|_{H^{1 / 4}} . \]
+These bounds imply that both of them remain bounded provided $\gamma_T$ does
+not grow too fast in $T$ which is indeed insured by
+Lemma~\ref{lemma:renormalized-terms}. Deriving in $T$ the first term in the
+r.h.s. of eq.~(\ref{eq:decomp-square}) we get
+\[ \gamma_T \bint (Z^{\flat}_T)^2 = \int_{0}^T \bint \dot{\gamma}_t
+   (Z^{\flat}_t)^2 \mathd t + 2 \int^T_{0} \bint \gamma_t Z^{\flat}_t
+   \dot{Z}_t^{\flat} \mathd t. \]
+For the second term in this expression we can apply the estimate
+\[ \left| \int^T_{0} \bint \gamma_t Z^{\flat}_t \dot{Z}_t^{\flat} \mathd t
+   \right| \leqslant \int^T_{0} | \gamma_t | \| Z^{\flat}_t \|_{L^2}  \|
+   \dot{Z}_t^{\flat} \|_{L^2} \mathd t \lesssim \| Z_T \|_{L^2}  \| Z_T
+   \|_{H^{1 / 4}} \int^T_{0} \frac{| \gamma_t | \mathd t}{\langle t
+   \rangle^{5 / 4}} . \]
+Again, after we have fixed $\gamma_t$ below, we will see this to be bounded.
+We conclude that
+\begin{eqnarray*}
+  \frac{\lambda^2}{2} \int_0^T \bint (J_t \mathbbm{W}^2_t \circ J_t
+  \mathbbm{W}^2_t ) (Z^{\flat}_t)^2 \mathd t - \gamma_T \int Z^2_T & = &
+  \frac{\lambda^2}{2} \int_0^T \bint (J_t \mathbbm{W}^2_t \circ J_t
+  \mathbbm{W}^2_t - 2 \lambda^{- 2} \dot{\gamma}_t) (Z^{\flat}_t)^2 \mathd t +
+  R (Z),
+\end{eqnarray*}
+with
+\[ | R (Z) | \lesssim \left[ \frac{| \gamma_T |}{\langle T \rangle^{1 / 4}} +
+   \int^T_{0} \frac{| \gamma_t | \mathd t}{\langle t \rangle^{5 / 4}}
+   \right] (\| Z_T \|^2_{L^2} + \| Z_T \|^2_{H^{1 / 2 - \delta}}) \lesssim O
+   (\lambda^2) (\| Z_T \|^2_{L^2} + \| Z_T \|^2_{H^{1 / 2 - \delta}}) \]
+which is therefore under control. Note that we have used that $(\gamma_t)_t$
+is of order $\lambda^2$. Finally we have
+\[ \left| \lambda^2 \int_0^T \bint (J_t \mathbbm{W}^2_t \circ J_t
+   \mathbbm{W}^2_t - 2 \lambda^{- 2} \dot{\gamma}_t) (Z^{\flat}_t)^2 \mathd t
+   \right| \]
+\[ \lesssim \lambda^2 \left[ \int_0^T \| J_t \mathbbm{W}^2_t \circ J_t
+   \mathbbm{W}^2_t - 2 \lambda^{- 2} \dot{\gamma}_t \|_{\VV^{- \varepsilon}}
+   \mathd t \right] \sup_{t \in [0, T]} \| (Z^{\flat}_t)^2 \|_{W^{1,
+   \varepsilon}} \]
+\[ \lesssim \lambda^2 \left[ \int_0^T \| \lambda^2 J_t \mathbbm{W}^2_t \circ
+   J_t \mathbbm{W}^2_t - 2 \lambda^{- 2} \dot{\gamma}_t \|_{\VV^{-
+   \varepsilon}} \mathd t \right] \| Z_T \|_{H^{\varepsilon}}^2 \]
+which can be controlled again using Lemma~\ref{lemma:renormalized-terms}. At
+this point we are in the situation where all the terms which are not positive
+but depending on the drift can be bounded by
+\[ E (\lambda) Q_T + \varepsilon \left( \lambda \bint  Z_T^4 + \frac{1}{2}
+   \int_0^T \| l_t \|^2_{L^2} \mathd t \right) \]
+with a small constant $\varepsilon$. Therefore
+\[ \Upsilon_T \geqslant - E (\lambda) Q_T + (1 - \varepsilon) \left( \lambda
+   \bint  Z_T^4 + \frac{1}{2} \int_0^T \| l_t \|^2_{L^2} \mathd t \right)
+\]
+and taking the expectation we obtain the claimed lower bound in
+Theorem~\ref{th:main-3d}.
+
+\subsection{Upper bound}
+
+For the upper bound we note that the bounds we established give
+\[ \Upsilon_T \leqslant E (\lambda) Q_T + (1 + \varepsilon) \left( \lambda
+   \bint  Z_T^4 + \frac{1}{2} \int_0^T \| l_t \|^2_{L^2} \mathd t \right)
+\]
+for all admissible drift $u \in \mathbbm{H}_a$. Therefore it is enough to
+choose a convenient drift $u$ for which
+\begin{equation}
+  \sup_T \mathbbm{E} \left( \lambda \bint  Z_T^4 + \frac{1}{2} \int_0^T \|
+  l_t \|^2_{L^2} \mathd t \right) < \infty . \label{eq:upper-bound-constraint}
+\end{equation}
+Choosing $u$ equal to zero, like in the two dimensional case, will not work
+since then we would not get a useful lower bound due to the presence of the
+diverging constant $\delta_T .$ Instead we need to use a drift corresponding
+to the choice $l = 0$ in eq.~(\ref{eq:ansatz-2}), more precisely it would have
+to satify the equation
+\begin{equation}
+  Z_t = - \lambda \mathbbm{W}_t^{[3]} - \int^t_{T_1} J^2_s (\mathbbm{W}^2_s
+  \succ Z^{\flat}_s) \mathd s, \label{eq:z-upper-bound}
+\end{equation}
+for fixed $T_1$ large enough and $t \geqslant T_1$. It will then be sufficient
+to find $v$ such that
+\begin{equation}
+  v_s = - \lambda J_s \mathbbm{W}_s^3 - \lambda \mathbbm{I}_{s \geqslant T_1}
+  J_s (\mathbbm{W}^2_s \succ \theta_s I_s (v))  \label{changeofvariables}
+\end{equation}
+for all $s \geqslant 0$. The reason for introducing $T_1$ is that we can only
+solve and control the moments of the solution of eq.~(\ref{changeofvariables})
+for large values of $T_1$. We proceed via a fixpoint argument. For any $v \in
+\mathbbm{H}_a$ consider the affine map
+\[ v \mapsto F (v)_s = - \lambda J_s \mathbbm{W}_s^3 - \lambda \mathbbm{I}_{s
+   \geqslant T_1} J_s (\mathbbm{W}^2_s \succ \theta_s I_s (v)) . \]
+Now fix some $\alpha < - 1 / 2$, and $\mu > 0$ and introduce the norm
+\[ \interleave v \interleave \assign \int_0^{\infty} e^{- \mu s} \| v_s
+   \|_{H^{\alpha}}^2 \mathd s. \]
+Then observe that
+\[ \| F (v)_s \|_{H^{\alpha}} \leqslant \lambda \| J_s \mathbbm{W}_s^3
+   \|_{H^{\alpha}} + \lambda \| J_s (\mathbbm{W}^2_s \succ \theta_s I_s (v))
+   \|_{H^{\alpha}} \]
+\[ \leqslant \lambda \langle s \rangle^{- (1 + \varepsilon) / 2} \|
+   \mathbbm{W}_s^3 \|_{H^{\alpha - 1 - \varepsilon}} + \lambda \langle s
+   \rangle^{- (1 + \varepsilon) / 2} \| \mathbbm{W}^2_s \|_{\VV^{\alpha - 1 -
+   \varepsilon}} \| I_s (v) \|_{L^2} \]
+\[ \leqslant C \lambda \langle s \rangle^{- (1 + \varepsilon) / 2} \|
+   \mathbbm{W}_s^3 \|_{H^{\alpha - 1 - \varepsilon}} + C \lambda
+   \mathbbm{I}_{s \geqslant T_1} \langle s \rangle^{- (1 + \varepsilon) / 2}
+   \| \mathbbm{W}^2_s \|_{\VV^{\alpha - 1 - \varepsilon}} \| v \|_{L^2 ([0,
+   s], L^2)}, \]
+where we used the same computation as in Lemma \ref{lemma:reg-drift}, the fact
+that $\theta$ is a bounded operator on $H^{\alpha}$ and the bound on the
+operator norm of $\sigma_s (\mathD)$ to get the $\langle s \rangle^{- (1 +
+\varepsilon) / 2}$ factor. Therefore we can estimate
+\[ \interleave F (v) \interleave = \int_0^{\infty} e^{- \mu s} \| F (v)_s
+   \|_{H^{\alpha}}^2 \mathd s \]
+\[ \leqslant C \lambda \int_0^{\infty} \| \mathbbm{W}_s^3 \|_{H^{\alpha - 1 -
+   \varepsilon}}^2 \frac{e^{- \mu s} \mathd s}{\langle s \rangle^{1 +
+   \varepsilon}} + C \lambda \int_0^{\infty} \| v_r \|_{L^2}^2 \mathd r
+   \int_r^{\infty} \mathbbm{I}_{s \geqslant T_1} \| \mathbbm{W}^2_s
+   \|_{\VV^{\alpha - 1 - \varepsilon}}^2 \frac{e^{- \mu s} \mathd s}{\langle s
+   \rangle^{1 + \varepsilon}} \]
+\[ \leqslant C \lambda \int_0^{\infty} \| \mathbbm{W}_s^3 \|_{H^{\alpha - 1 -
+   \varepsilon}}^2 \frac{e^{- \mu s} \mathd s}{\langle s \rangle^{1 +
+   \varepsilon}} \]
+\[ \  \]
+\[ + C \lambda \int_0^{\infty} \left( \int_r^{\infty} \mathbbm{I}_{s \geqslant
+   T_1} \| \mathbbm{W}^2_s \|_{\VV^{\alpha - 1 - \varepsilon}}^4 \frac{\mathd
+   s}{\langle s \rangle^{1 + \varepsilon}} \right)^{1 / 2} \left(
+   \int_r^{\infty} e^{- 2 \mu s} \mathd s \right)^{1 / 2} \| v_r \|_{L^2}^2
+   \mathd r \]
+\[ \leqslant C \lambda \int_0^{\infty} \| \mathbbm{W}_s^3 \|_{H^{\alpha - 1 -
+   \varepsilon}}^2 \frac{e^{- \mu s} \mathd s}{\langle s \rangle^{1 +
+   \varepsilon}} + \frac{C \lambda}{(2 \mu)^{1 / 2}} \left(
+   \int_{T_1}^{\infty} \| \mathbbm{W}^2_s \|_{\VV^{\alpha - 1 -
+   \varepsilon}}^4 \frac{\mathd s}{\langle s \rangle^{1 + \varepsilon}}
+   \right)^{1 / 2} \int_0^{\infty} e^{- \mu r} \| v_r \|_{L^2}^2 \mathd r . \]
+\[ \  \]
+Choosing $\mu$ large enough so that
+\[ \frac{C \lambda}{(2 \mu)^{1 / 2}} \left( \int_{T_1}^{\infty} \|
+   \mathbbm{W}^2_s \|_{\VV^{\alpha - 1 - \varepsilon}}^4 \frac{\mathd
+   s}{\langle s \rangle^{1 + \varepsilon}} \right)^{1 / 2} \leqslant
+   \frac{1}{2}, \]
+we have
+\[ \interleave F (v) \interleave \leqslant C \lambda \int_0^{\infty} \|
+   \mathbbm{W}_s^3 \|_{H^{\alpha - 1 - \varepsilon}}^2 \frac{e^{- \mu s}
+   \mathd s}{\langle s \rangle^{1 + \varepsilon}} + \frac{1}{2} \interleave v
+   \interleave . \]
+Similarly
+\[ \interleave F (v) - F (v') \interleave \leqslant \frac{1}{2} \interleave v
+   - v' \interleave . \]
+These bounds allows to apply a Picard iteration and obtain a drify $v \in
+\mathbbm{H}_a$ such that $v = F (v)$ and satisfying the bound
+\[ \interleave v \interleave \leqslant 2 C \lambda \int_0^{\infty} \|
+   \mathbbm{W}_s^3 \|_{H^{\alpha - 1 - \varepsilon}}^2 \frac{e^{- \mu s}
+   \mathd s}{\langle s \rangle^{1 + \varepsilon}} . \]
+In order to use this drift in the variational argument we need to control in
+expectation the positive term in eq.~(\ref{eq:upper-bound-constraint}). Now
+\[ l_s = v_s + \lambda J_s \mathbbm{W}_s^3 + \lambda J_s (\mathbbm{W}^2_s
+   \succ \theta_s I_s (v)) = \lambda \mathbbm{I}_{s < T_1} J_s
+   (\mathbbm{W}^2_s \succ \theta_s I_s (v)), \qquad s \geqslant 0. \]
+Using that $\theta_s I_s (v) = \theta_s I_{T_1} (v)$ for all $0 \leqslant s
+\leqslant T_1$ we have
+\[ \int_0^T \| l_s \|^2_{L^2} \mathd s \leqslant \lambda \int_0^{T_1} \| J_s
+   (\mathbbm{W}^2_s \succ \theta_s I_{T_1} (v)) \|^2_{L^2} \mathd s
+   \leqslant \lambda \| I_{T_1} (v) \|_{L^2}^2 \int_0^{T_1} \langle s
+   \rangle^{\varepsilon} \| \mathbbm{W}^2_s \|^2_{\VV^{- 1 - \varepsilon}}
+   \mathd s \]
+\[ \leqslant \lambda \| \lambda \mathbbm{W}_{T_1}^{[3]} \|_{L^2}^4 + \lambda
+   \left( \int_0^{T_1} \langle s \rangle^{\varepsilon} \| \mathbbm{W}^2_s
+   \|^2_{\VV^{- 1 - \varepsilon}} \mathd s \right)^2, \]
+since $I_{T_1} (v) = - \lambda \mathbbm{W}_{T_1}^{[3]}$. The expectation of
+this quantity is clearly finite. In order to control $(Z_t)_t$ uniformly in
+$t$ we observe that for $t \geqslant T_1$,
+\begin{eqnarray*}
+  \| Z_t \|_{\VV^{1 / 2 - \varepsilon}} & \leqslant & \lambda \int_0^t \|
+  J_s^2 \mathbbm{W}_s^3 \|_{H^{1 / 2 - \varepsilon}} \mathd s + \lambda
+  \int^t_{T_1} \| J^2_s (\mathbbm{W}^2_s \succ Z^{\flat}_s ) \|_{H^{1 / 2 -
+  \varepsilon}} \mathd s\\
+  & \lesssim & \lambda \int_0^t \frac{1}{\langle s \rangle^{1 + \varepsilon}}
+  \| \langle \mathD \rangle^{- 2} \mathbbm{W}_s^3 \|_{\VV^{1 / 2 - 2
+  \varepsilon}} \mathd s + \lambda \int^t_{T_1} \frac{1}{\langle s \rangle^{1
+  + \varepsilon}} \| \langle \mathD \rangle^{- 2} \mathbbm{W}^2_s \|_{\VV^{1 /
+  2 - 2 \varepsilon}}  \| Z_s \|_{H^{\alpha}} \mathd s.
+\end{eqnarray*}
+Using Gronwall's lemma, taking expectation of the $p$-th moment and apply
+Cauchy-Schwarz inequality we obtain
+\begin{eqnarray*}
+  &  & \mathbbm{E} \left[ \| Z_t \|^p_{\VV^{1 / 2 - \varepsilon}} \right]\\
+  & \leqslant & \mathbbm{E} \left[ \left( \lambda \int_0^{\infty} \| \langle
+  \mathD \rangle^{- 2} \mathbbm{W}_s^3 \|_{\VV^{1 / 2 - 2 \varepsilon}}
+  \frac{\mathd s}{\langle s \rangle^{1 + \varepsilon}} \right)^{2 p} \right]
+  \mathbbm{E} \left[ \exp \left( 2 p \lambda \int^{\infty}_{T_1} \| \langle
+  \mathD \rangle^{- 2} \mathbbm{W}^2_s \|_{\VV^{1 / 2 - 2 \varepsilon}}
+  \frac{\mathd s}{\langle s \rangle^{1 + \varepsilon}} \right) \right]\\
+  & \lesssim & \lambda^{2 p} \mathbbm{E} \left[ \int_0^{\infty} \| \langle
+  \mathD \rangle^{- 2} \mathbbm{W}_s^3 \|^{2 p}_{\VV^{1 / 2 - 2 \varepsilon}}
+  \frac{\mathd s}{\langle s \rangle^{1 + \varepsilon}} \right] \mathbbm{E}
+  \left[ \int^{\infty}_{T_1} \frac{\mathd s}{s^{1 + \varepsilon / 2}} \exp
+  \left( \frac{2 p \lambda}{\langle T_1 \rangle^{\varepsilon / 2}} \| \langle
+  \mathD \rangle^{- 2} \mathbbm{W}^2_s \|_{\VV^{1 / 2 - 2 \varepsilon}}
+  \right) \right]\\
+  & \lesssim & \lambda^{2 p} \mathbbm{E} \left[ \int_0^{\infty} \|
+  \mathbbm{W}_s^3 \|^{2 p}_{\VV^{- 3 / 2 - 2 \varepsilon}} \frac{\mathd
+  s}{\langle s \rangle^{1 + \varepsilon}} \right] \sup_{s \geqslant T_1}
+  \mathbbm{E} \left[ \exp \left( \frac{2 p \lambda}{\langle T_1
+  \rangle^{\varepsilon / 2}} \| \langle \mathD \rangle^{- 2} \mathbbm{W}^2_s
+  \|_{\VV^{1 / 2 - 2 \varepsilon}} \right) \right],
+\end{eqnarray*}
+where the second line was obtained by applying Jensen's inequality on the
+finite measure space $([T_1, \infty), \langle s \rangle^{- 1 - \varepsilon /
+2} \mathd s)$. The first factor is known to be finite and for the second we
+have the following lemma which allows to conclude that the average is finite
+uniformly in $t$ and prove the lower bound for Theorem~\ref{th:main-3d}.
+
+\begin{lemma}
+  If $T_1$ is large enough only depending on $p \lambda$ we have
+  \[ \sup_{s \geqslant T_1} \mathbbm{E} \left[ \exp \left( \frac{2 p
+     \lambda}{\langle T_1 \rangle^{\varepsilon / 2}} \| \mathbbm{W}^2_s
+     \|_{\VV^{- 1 - \varepsilon}} \right) \right] < \infty . \]
+\end{lemma}
+
+\begin{proof}
+  It is well known that random variables in the second Gaussian chaos are
+  exponentially integrable for small coefficients. However in order to give a
+  complete proof and show some other uses of the variational formula we give a
+  self contained proof in our particular case. Fix $N > 0$. If we apply
+  Theorem~\ref{th:variational} with the bounded random variable $V (Y) = 2 p
+  \langle T_1 \rangle^{- \varepsilon / 2} \| \mathbbm{Y}^2_s \|_{\VV^{- 1 -
+  \varepsilon}} \wedge N$ we deduce that
+  \[ \log \mathbbm{E} \left[ \exp \left( \frac{2 p \lambda}{\langle T_1
+     \rangle^{\varepsilon / 2}}  \| \mathbbm{Y}^2_s \|_{\VV^{- 1 -
+     \varepsilon}} \wedge N \right) \right] \]
+  \[ = \sup_{u \in \mathbbm{H}_a} \mathbbm{E} \left[ \frac{2 p
+     \lambda}{\langle T_1 \rangle^{\varepsilon / 2}} \| \mathbbm{W}^2_s + 24
+     W_s U_s + U^2_s \|_{\VV^{- 1 - \varepsilon}} \wedge N - \frac{| \Lambda
+     |}{2} \int^s_0 \| u_t \|^2_{L^2} \mathd t \right] . \]
+  \[ \leqslant \sup_{u \in \mathbbm{H}_a} \mathbbm{E} \left[ \frac{2 p
+     \lambda}{\langle T_1 \rangle^{\varepsilon / 2}} \| \mathbbm{W}^2_s + 24
+     W_s U_s + U^2_s \|_{\VV^{- 1 - \varepsilon}} - \frac{| \Lambda |}{2}
+     \int^s_0 \| u_t \|^2_{L^2} \mathd t \right] . \]
+  where $U_s = I_s (u)$. By Morrey's inequality and Sobolev embedding, for
+  large enough $p$,
+  \[ \| U^2_s \|_{\VV^{- 1 - \varepsilon}} \lesssim \| \langle \mathD
+     \rangle^{- 1} U^2_s \|_{L^p} \lesssim \| U^2_s \|_{L^3} \lesssim \| U_s
+     \|^2_{L^6} \lesssim \| U_s \|^2_{H^1} \lesssim \int^s_0 \| u_t \|^2_{L^2}
+     \mathd t. \]
+  In order to handle the mixed term we decompose $W_s U_s = W_s \preccurlyeq
+  U_s + W_s \succ U_s$ and estimate each term by Besov's embedding and
+  paraproduct bounds as
+  \[ \| W_s \preccurlyeq U_s \|_{\VV^{- 1 - \varepsilon}} \lesssim \| W_s
+     \preccurlyeq U_s \|_{H^{1 / 2 - \varepsilon}} \lesssim \| W_s \|_{\VV^{-
+     1 / 2 - \varepsilon}} \| U_s \|_{H^1}, \]
+  and
+  \[ \| W_s \succ U_s \|_{\VV^{- 1 - \varepsilon}} \lesssim \| W_s \|_{\VV^{-
+     1 / 2 - \varepsilon}} \| U_s \|_{\VV^{- 1 / 2}} \lesssim \| W_s
+     \|_{\VV^{- 1 / 2 - \varepsilon}} \| U_s \|_{H^1} . \]
+  By Young's inequality
+  \[ \| W_s U_s \|_{\VV^{- 1 - \varepsilon}} \leqslant \frac{1}{2} \| W_s
+     \|_{\VV^{- 1 / 2 - \varepsilon}}^2 + \frac{C}{2} \int^s_0 \| u_t
+     \|^2_{L^2} \mathd t. \]
+  Therefore, for large enough $T_1 > 0$ (depending only on $p \lambda$)
+  \begin{eqnarray*}
+    &  & \mathbbm{E} \left[ \frac{2 p \lambda}{\langle T_1
+    \rangle^{\varepsilon / 2}} \| (\mathbbm{W}^2_s + 24 W_s U_s + U^2_s)
+    \|_{\VV^{- 1 - \varepsilon}} - \frac{| \Lambda |}{2} \int^s_0 \| u_t
+    \|^2_{L^2} \mathd t \right]\\
+    & \leqslant & \mathbbm{E} \left[ \frac{p \lambda}{\langle T_1
+    \rangle^{\varepsilon / 2}} \| \mathbbm{W}^2_s \|_{\VV^{- 1 - \varepsilon}}
+    + \frac{(24)^2 p \lambda}{2 \langle T_1 \rangle^{\varepsilon / 2}} \| W_s
+    \|_{\VV^{- 1 / 2 - \varepsilon}}^2 + \left[ \frac{Cp \lambda}{\langle T_1
+    \rangle^{\varepsilon / 2}} - \frac{| \Lambda |}{2} \right] \int^s_0 \| u_t
+    \|^2_{L^2} \mathd t \right]\\
+    & \leqslant & \mathbbm{E} \left[ \frac{p \lambda}{\langle T_1
+    \rangle^{\varepsilon / 2}} \| \langle \mathD \rangle^{- 2} \mathbbm{W}^2_s
+    \|_{\VV^{1 - \varepsilon}} + \frac{(24)^2 p \lambda}{2 \langle T_1
+    \rangle^{\varepsilon / 2}} \| W_s \|_{\VV^{- 1 / 2 - \varepsilon}}^2
+    \right]
+  \end{eqnarray*}
+  which is bounded uniformly in $s \geqslant T_1$. This allows us to conclude.
+\end{proof}
+
+\section{Estimates of the stochastic terms}
+
+\label{sec:stochastic}In this section we close our argument proving the
+following lemmas which give uniform estimates as $T \rightarrow \infty$ of the
+stochastic terms appearing in our analytic estimates.
+
+\begin{lemma}
+  \label{lemma:renormalized-terms}For any $\varepsilon > 0$ and any $p > 1$
+  \begin{equation}
+    \sup_T \mathbbm{E} \left[ \| W_T \circ W_T^{[3]} \|_{\VV^{-
+    \varepsilon}}^p \right] < \infty . \label{eq:stoch-est-w-w3}
+  \end{equation}
+  Moreover there exists a function $\gamma_t \in C^1 (\mathbbm{R}_+,
+  \mathbbm{R})$ such that for any $\varepsilon > 0$ and any $p > 1$
+  \begin{equation}
+    \sup_T \mathbbm{E} \left[ \| (\mathbbm{W}^2_T \circ \mathbbm{W}_T^{[3]} -
+    2 \gamma_T \lambda^{- 2} W_T) \|_{\VV^{- 1 / 2 - \varepsilon}}^p \right] <
+    \infty, \label{eq:renorm-1}
+  \end{equation}
+  \begin{equation}
+    \mathbbm{E} \left[ \left( \int^{\infty}_0 \| J_t \mathbbm{W}^2_t \circ J_t
+    \mathbbm{W}^2_t - 2 \lambda^{- 2} \dot{\gamma}_t \|_{\VV^{- \varepsilon}}
+    \mathd t \right)^p \right] < \infty . \label{eq:renorm-2}
+  \end{equation}
+  and
+  \begin{equation}
+    | \gamma_t | + \langle t \rangle | \dot{\gamma}_t | \lesssim \lambda^2
+    \log \langle t \rangle, \qquad t \geqslant 0. \label{eq:bounds-gamma}
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  We will concentrate in proving the bounds on the renomalized terms in
+  eq.~(\ref{eq:renorm-1}) and (\ref{eq:renorm-2}) and leave to the readed to
+  fill the details for the easier term in eq.~(\ref{eq:stoch-est-w-w3}).
+  Recall the representation of $W_t = Y_t$ in terms of the family of Brownian
+  motions $(B_t^n)_{t, n}$ in eq.~(\ref{eq:rep-Y}). Wick's products of the
+  Gaussian field $W_T$ can be represented as iterated stochastic integrals
+  wrt. $(B_t^n)_{t, n}$. In particular, if we let $\mathd w_s (k) = \langle k
+  \rangle^{- 1} \sigma_s (k) \mathd B_s^k$, we have
+  \[ \mathbbm{W}^2_T (x) = 12 \llbracket W_T^2 \rrbracket (x) = 24 \sum_{k_1,
+     k_2} e^{i (k_1 + k_2) \cdot x} \int_0^T \int_0^{s_2} \mathd w_{s_1} (k_1)
+     \mathd w_{s_2} (k_2), \]
+  \[ \mathbbm{W}^{[3]}_T (x) = 24 \sum_{k_1, k_2, k_3} e^{i k_{(123)} \cdot x}
+     \int_0^T \int_0^{s_3} \int_0^{s_2} \left( \int_{s_3}^T \frac{\sigma_u^2
+     (k_{(123)})}{\langle k_{(123)} \rangle^2} \mathd u \right) \mathd w_{s_1}
+     (k_1) \mathd w_{s_2} (k_2) \mathd w_{s_3} (k_3), \]
+  where $k_{(123)} \assign k_1 + k_2 + k_3$. Now products of iterated
+  integrals can be decomposed in sums of iterated integrals and we get
+  \[ \Delta_q (\mathbbm{W}^2_T \circ \mathbbm{W}^{[3]}_T - 2 \gamma_T
+     \lambda^{- 2} W_T) (x) = \sum_{k_1, \ldots, k_5} \int_{A_T^5} G^{2 \circ
+     [3]}_{0, q} ((s, k)_{1 \cdots 5}) \mathd w_{s_1} (k_1) \cdots \mathd
+     w_{s_5} (k_5) \]
+  \[ + \sum_{k_1, \ldots, k_3} \int_{A_T^3} G^{2 \circ [3]}_{1, q} ((s, k)_{1
+     \cdots 3}) \mathd w_{s_1} (k_1) \cdots \mathd w_{s_3} (k_3) + \sum_{k_1}
+     \int_{A_T^1} \tilde{G}^{2 \circ [3]}_{2, q} ((s, k)_1) \mathd w_{s_1}
+     (k_1), \]
+  where $A^n_T \assign \{ 0 \leqslant s_1 < \cdots < s_n \leqslant T \}
+  \subseteq [0, T]^n$ and where the deterministic kernels are given by
+  \begin{eqnarray*}
+    G^{2 \circ [3]}_{0, q} ((s, k)_{1 \cdots 5}) & = & (24^2) K_q (k_{(1
+    \cdots 5)}) e^{i (k_{(1 \cdots 5)}) \cdot x} \sum_{\sigma \in \tmop{Sh}
+    (2, 3)} \sum_{i \sim j} \times\\
+    &  & \times K_i (k_{(\sigma_1 \sigma_2)}) K_j (k_{(\sigma_3 \sigma_4
+    \sigma_5)}) \left( \int_{s_{\sigma_5}}^T \frac{\sigma_u (k_{(\sigma_3
+    \sigma_4 \sigma_5)})^2}{\langle k_{(\sigma_3 \sigma_4 \sigma_5)}
+    \rangle^2} \mathd u \right),\\
+    G^{2 \circ [3]}_{1, q} ((s, k)_{1 \cdots 3}) & = & (24^2) K_q (k_{(1
+    \cdots 3)}) e^{i (k_{(1 \cdots 3)}) \cdot x} \sum_{\sigma \in \tmop{Sh}
+    (1, 2)} \sum_{i \sim j} \sum_p \int_0^T \mathd r \frac{\sigma_r
+    (p)^2}{\langle p \rangle^2} \times\\
+    &  & \times K_i (k_{\sigma_1} + q) K_j (k_{(\sigma_2 \sigma_3)} - q)
+    \left( \int_{s_{\sigma_3} \vee r}^T \frac{\sigma_u (k_{(\sigma_2
+    \sigma_3)} - p)^2}{\langle k_{(\sigma_2 \sigma_3)} - p \rangle^2} \mathd u
+    \right),\\
+    G^{2 \circ [3]}_{2, q} ((s, k)_1) & = & (24^2) K_q (k_1) e^{i k_1 \cdot x}
+    \sum_{i \sim j} \sum_{p_1, p_2} \int_0^T \mathd r_1 \int_0^T \mathd r_2
+    \frac{\sigma_{r_1} (p_1)^2}{\langle p_1 \rangle^2} \frac{\sigma_{r_2}
+    (p_2)^2}{\langle p_2 \rangle^2} \times\\
+    &  & \times K_i (p_1 + p_2) K_j (k_1 - p_1 - p_2) \left( \int_{r_1 \vee
+    r_2 \vee s_1}^T \frac{\sigma_u (k_1 - p_1 - p_2)^2}{\langle k_1 - p_1 -
+    p_2 \rangle^2} \mathd u \right),\\
+    \tilde{G}^{2 \circ [3]}_{2, q} ((s, k)_1) & = & G^{2 \circ [3]}_{2, q}
+    ((s, k)_1) - 2 \lambda^{- 2} \gamma_T K_q (k_1) e^{i k_1 \cdot x},
+  \end{eqnarray*}
+  where $\tmop{Sh} (k, l)$ is the set of permutations of $\{ 1, \ldots, k + l
+  \}$ keeping the orders $\sigma (1) < \cdots < \sigma (k)$ and $\sigma (k +
+  1) < \cdots < \sigma (k + l)$ and where, for any symbol $z$, we denote with
+  expression of the form $z_{1 \cdots n}$ the vector $(z_1, \ldots, z_n)$.
+  Estimation of $\Delta_q (\mathbbm{W}^2_T \circ \mathbbm{W}^{[3]}_T) (x)$
+  reduces then to estimate each of the three iterated integrals using BDG
+  inequalities to get, for any $p \geqslant 2$,
+  \[ I_{0, q} = \left\{ \mathbbm{E} \left[ \left| \sum_{k_1, \ldots, k_5}
+     \int_{A_T^5} G^{2 \circ [3]}_{0, q} ((s, k)_{1 \cdots 5}) \mathd w_{s_1}
+     (k_1) \cdots \mathd w_{s_5} (k_5) \right|^{2 p} \right] \right\}^{1 / p}
+  \]
+  \[ \lesssim \mathbbm{E} \left[ \left| \sum_{k_1, \ldots, k_5} \int_{A_T^5}
+     G^{2 \circ [3]}_{0, q} ((s, k)_{1 \cdots 5}) \mathd w_{s_1} (k_1) \cdots
+     \mathd w_{s_5} (k_5) \right|^2 \right] \]
+  \[ \lesssim \sum_{k_1, \ldots, k_5} \int_{A_T^5} | G^{2 \circ [3]}_{0, q}
+     ((s, k)_{1 \cdots 5}) |^2 \frac{\sigma_{s_1} (k_1)^2}{\langle k_1
+     \rangle^2} \cdots \frac{\sigma_{s_5} (k_5)^2}{\langle k_5 \rangle^2}
+     \mathd s_1 \cdots \mathd s_5 . \]
+  The kernel $G^{2 \circ [3]}_{0, q} ((s, k)_{1 \cdots 5})$ being a symmetric
+  function of its argument, we can simplify this expression into an integral
+  over $[0, T]^5$:
+  \[ \  \]
+  \[ I_{0, q} \lesssim \sum_{k_1, \ldots, k_5} \int_{[0, T]^5} | G^{2 \circ
+     [3]}_{0, q} ((s, k)_{1 \cdots 5}) |^2 \frac{\sigma_{s_1} (k_1)^2}{\langle
+     k_1 \rangle^2} \cdots \frac{\sigma_{s_5} (k_5)^2}{\langle k_5 \rangle^2}
+     \mathd s_1 \cdots \mathd s_5 . \]
+  Under the measure $\frac{\sigma_{s_5} (k_5)^2}{\langle k_5 \rangle^2} \mathd
+  s_5$, we have
+  \[ \left| \int_{s_{\sigma_5}}^T \frac{\sigma_u (k_{(\sigma_3 \sigma_4
+     \sigma_5)})^2}{\langle k_{(\sigma_3 \sigma_4 \sigma_5)} \rangle^2} \mathd
+     u \right| \lesssim \frac{1}{\langle k_{\sigma_5} \rangle^2} . \]
+  Therefore with some standard estimates we can reduce us to consider
+  \[ I_{0, q} \lesssim \sum_{k_1, \ldots, k_5} \int_{[0, T]^5} \frac{K_q
+     (k_{(1 \cdots 5)})^2}{\langle k_5 \rangle^4} \mathbbm{I}_{k_{(12)} \sim
+     k_{(345)}} \frac{\sigma_{s_1} (k_1)^2}{\langle k_1 \rangle^2} \cdots
+     \frac{\sigma_{s_5} (k_5)^2}{\langle k_5 \rangle^2} \mathd s_1 \cdots
+     \mathd s_5 \]
+  \[ \lesssim \sum_{k_1, \ldots, k_5} \int_{[0, T]^5} \frac{K_q (k_{(1 \cdots
+     5)})^2}{\langle k_5 \rangle^4} \mathbbm{I}_{k_{(12)} \sim k_{(345)}}
+     \frac{\sigma_{s_1} (k_1)^2}{\langle k_1 \rangle^2} \cdots
+     \frac{\sigma_{s_5} (k_5)^2}{\langle k_5 \rangle^2} \mathd s_1 \cdots
+     \mathd s_5 \]
+  \[ \lesssim \sum_{k_1, \ldots, k_5} \frac{K_q (k_{(1 \cdots 5)})^2}{\langle
+     k_5 \rangle^4} \mathbbm{I}_{k_{(12)} \sim k_{(345)}} \frac{1}{\langle k_1
+     \rangle^2} \cdots \frac{1}{\langle k_5 \rangle^2} \]
+  \[ \lesssim \sum_{p_1, p_2} \mathbbm{I}_{p_1 \sim p_2} K_q (p_1 + p_2)^2
+     \sum_{k_1, \ldots, k_5} \frac{1}{\langle k_5 \rangle^4}
+     \mathbbm{I}_{k_{(12)} = p_1, k_{(345)} = p_2} \frac{1}{\langle k_1
+     \rangle^2} \cdots \frac{1}{\langle k_5 \rangle^2} \]
+  \[ \lesssim \sum_{p_1, p_2} \mathbbm{I}_{p_1 \sim p_2} K_q (p_1 + p_2)^2
+     \frac{1}{\langle p_1 \rangle} \frac{1}{\langle p_2 \rangle^4} \lesssim
+     \sum_{p_1, r} K_q (r)^2 \frac{1}{\langle p_1 \rangle} \frac{1}{\langle
+     p_1 + r \rangle^4} \lesssim \sum_r K_q (r)^2 \frac{1}{\langle r
+     \rangle^2} \lesssim 2^q . \]
+  Now by similar reasoning we have also
+  \[ | G^{2 \circ [3]}_{1, q} ((s, k)_{1 \cdots 3}) | \lesssim \sum_{\sigma
+     \in \tmop{Sh} (1, 2)} | K_q (k_{(1 \cdots 3)}) | \sum_{i \sim j} \sum_p
+     \int_0^T \mathd r \frac{\sigma_r (p)^2}{\langle p \rangle^2} | K_i
+     (k_{\sigma_1} + p) K_j (k_{(\sigma_2 \sigma_3)} - p) | \frac{1}{\langle
+     k_{\sigma_1} + p \rangle^2} \]
+  \[ \lesssim \sum_{\sigma \in \tmop{Sh} (1, 2)} | K_q (k_{(1 \cdots 3)}) |
+     \frac{1}{\langle k_{\sigma_1} \rangle} \]
+  so
+  \[ I_{1, q} = \left\{ \mathbbm{E} \left[ \left| \sum_{k_1, \ldots, k_3}
+     \int_{A_T^3} G^{2 \circ [3]}_{1, q} ((s, k)_{1 \cdots 5}) \mathd y_{s_1}
+     (k_1) \cdots \mathd y_{s_3} (k_3) \right|^{2 p} \right] \right\}^{1 / p}
+  \]
+  \[ \lesssim \sum_{k_1, \ldots, k_3} \int_{[0, T]^5} \left| \sum_{\sigma \in
+     \tmop{Sh} (1, 2)} | K_q (k_{(1 \cdots 3)}) | \frac{1}{\langle
+     k_{\sigma_1} \rangle} \right|^2 \frac{\sigma_{s_1} (k_1)^2}{\langle k_1
+     \rangle^2} \cdots \frac{\sigma_{s_3} (k_3)^2}{\langle k_3 \rangle^2}
+     \mathd s_1 \cdots \mathd s_3 \]
+  \[ \lesssim \sum_{k_1, \ldots, k_3} | K_q (k_{(1 \cdots 3)}) |^2
+     \frac{1}{\langle k_1 \rangle^4} \frac{1}{\langle k_2 \rangle^2}
+     \frac{1}{\langle k_3 \rangle^2} \lesssim \sum_r K_q (r)^2
+     \frac{1}{\langle r \rangle^2} \lesssim 2^q . \]
+  Finally we note that the same strategy cannot be applied to the first chaos,
+  since the kernel $G^{2 \circ [3]}_{2, q}$ cannot be uniformly bounded. We
+  let
+  \[ \begin{array}{lll}
+       A_T (s_1, k_1) & = & (24^2) \sum_{i \sim j} \sum_{q_1, q_2} \int_0^T
+       \mathd r_1 \int_0^T \mathd r_2 \frac{\sigma_{r_1} (q_1)^2}{\langle q_1
+       \rangle^2} \frac{\sigma_{r_2} (q_2)^2}{\langle q_2 \rangle^2} \times\\
+       &  & \times K_i (q_1 + q_2) K_j (k_1 - q_1 - q_2) \left( \int_{r_1
+       \vee r_2 \vee s_1}^T \frac{\sigma_u^2 (k_1 - q_1 - q_2)}{\langle k_1 -
+       q_1 - q_2 \rangle^2} \mathd u \right),
+     \end{array} \]
+  so
+  \[ \tilde{G}^{2 \circ [3]}_{2, q} ((s, k)_1) = K_q (k_1) e^{i k_1 \cdot x}
+     [A_T (s_1, k_1) - 2 \lambda^{- 2} \gamma_T] . \]
+  Observe that
+  \[ \begin{array}{lll}
+       A_T (0, 0) & = & (12^2 \cdot 2) \sum_{q_1, q_2} \int_0^T \mathd r_1
+       \int_0^T \mathd r_2 \frac{\sigma_{r_1} (q_1)^2}{\langle q_1 \rangle^2}
+       \frac{\sigma_{r_2} (q_2)^2}{\langle q_2 \rangle^2} \times\\
+       &  & \times \int_{r_1 \vee r_2}^T \frac{\sigma_u^2 (q_1 +
+       q_2)}{\langle q_1 + q_2 \rangle^2} \mathd u \sum_{i \sim j} K_i (q_1 +
+       q_2) K_j (- q_1 - q_2) .
+     \end{array} \]
+  We now choose $\gamma_T$ as
+  \begin{equation}
+    \gamma_T = \lambda^2 A_T (0, 0) = \lambda^2 (12^2 \cdot 2) \sum_{q_1, q_2}
+    \int_0^T \mathd u \int_0^u \mathd r_1 \int_0^u \mathd r_2
+    \frac{\sigma_{r_1} (q_1)^2}{\langle q_1 \rangle^2} \frac{\sigma_{r_2}
+    (q_2)^2}{\langle q_2 \rangle^2} \frac{\sigma_u^2 (q_1 + q_2)}{\langle q_1
+    + q_2 \rangle^2} \label{eq:choice-gamma}
+  \end{equation}
+  where we used the fact that for all $q \in \mathbbm{Z}^d$ we have $\sum_{i
+  \sim j} K_i (q) K_j (q) = 1$, since $\int f \circ g = \int f g$. Note that,
+  as claimed,
+  \[ | \gamma_T | \lesssim \lambda^2 \sum_{q_1, q_2} \frac{\mathbbm{I}_{| q_1
+     |, | q_2 |, | q_1 + q_2 | \lesssim T}}{\langle q_1 \rangle^2 \langle q_2
+     \rangle^2 \langle q_1 + q_2 \rangle^2} \lesssim \lambda^2 \log \langle T
+     \rangle . \]
+  Now
+  \[ A_T (s_1, k_1) - 2 \lambda^{- 2} \gamma_T = (24^2 \cdot 6) \sum_{q_1,
+     q_2} \int_0^T \mathd r_1 \mathd r_2 \frac{\sigma_{r_1} (q_1)^2}{\langle
+     q_1 \rangle^2} \frac{\sigma_{r_2} (q_2)^2}{\langle q_2 \rangle^2} \times
+  \]
+  \[ \times \sum_{i \sim j} K_i (q_1 + q_2) \left( K_j (k_1 - q_1 - q_2)
+     \int_{s_1 \vee r_1 \vee r_2}^T \frac{\sigma_u^2 (k_1 - q_1 -
+     q_2)}{\langle k_1 - q_1 - q_2 \rangle^2} \mathd u - K_j (q_1 + q_2)
+     \int_{r_1 \vee r_2}^T \frac{\sigma_u^2 (q_1 + q_2)}{\langle q_1 + q_2
+     \rangle^2} \mathd u \right) \]
+  so when $| q_1 + q_2 | \gg | k_1 |$ the quantity in round brackets can be
+  estimated by $| k_1 | \langle q_1 + q_2 \rangle^{- 4}$ while when $| q_1 +
+  q_2 | \lesssim | k_1 |$ it is estimated by $\langle q_1 + q_2 \rangle^{- 2}$
+  so we have
+  \[ | A_T (s_1, k_1) - \lambda^{- 2} \gamma_T | \lesssim \sum_{q_1, q_2}
+     \frac{1}{\langle q_1 \rangle^2} \frac{1}{\langle q_2 \rangle^2}
+     \frac{1}{\langle q_1 + q_2 \rangle^2} \left( \mathbbm{I}_{| q_1 + q_2 |
+     \lesssim | k_1 |} +\mathbbm{I}_{| q_1 + q_2 | \gtrsim | k_1 |} \frac{|
+     k_1 |}{\langle q_1 + q_2 \rangle^2} \right) \lesssim \log \langle k_1
+     \rangle . \]
+  And then with this choice of $\gamma_T$ the kernel $\tilde{G}^{2 \circ
+  [3]}_{2, q}$ stays uniformly bounded as $T \rightarrow \infty$ and satisfies
+  \[ | \tilde{G}^{2 \circ [3]}_{2, q} ((s, k)_1) | \lesssim K_q (k_1) \log
+     \langle k_1 \rangle . \]
+  From this we easily deduce that
+  \[ I_{2, q} = \left\{ \mathbbm{E} \left[ \left| \sum_{k_1} \int_{A_T}
+     \tilde{G}^{2 \circ [3]}_{2, q} ((s, k)_{1 \cdots 5}) \mathd y_{s_1} (k_1)
+     \right|^{2 p} \right] \right\}^{1 / p} \lesssim q 2^q, \qquad q \geqslant
+     - 1. \]
+  All together these estimates imply that
+  \[ \mathbbm{E} \| \Delta_q (\mathbbm{W}^2_T \circ \mathbbm{W}^{[3]}_T - 2
+     \lambda^{- 2} \gamma_T W_T) \|_{L^{2 p}}^{2 p} \lesssim (q 2^{q / 2})^{2
+     p}, \qquad q \geqslant - 1. \]
+  Standard argument allows to deduce eq.~(\ref{eq:renorm-1}). The analysis of
+  the other renormalized product proceeds similarly. Let $V (t) \assign J_t
+  \mathbbm{W}^2_t \circ J_t \mathbbm{W}^2_t - 2 \lambda^{- 2} \dot{\gamma}_t$.
+  First note that by Besov embedding we have
+  \[ \mathbbm{E} \left[ \left( \int^{\infty}_0 \| V (t) \|_{\VV^{-
+     \varepsilon}} \mathd t \right)^p \right] \lesssim \mathbbm{E} \left[
+     \left( \int^{\infty}_0 \| V (t) \|_{B^{- \varepsilon - d / r}_{r, r}}
+     \mathd t \right)^p \right] \]
+  \[ \lesssim \mathbbm{E} \left[ \left( \int^{\infty}_0 \left( \sum_q 2^{- q r
+     (\varepsilon + d / r)} \| \Delta_q V (t) \|_{L^r} \right)^{1 / r} \mathd
+     t \right)^p \right] . \]
+  By Minkowski's integral inequality this is bounded by
+  \[ \lesssim \left( \int^{\infty}_0 \mathd t \left\{ \mathbbm{E} \left[
+     \left( \sum_q 2^{- q r (\varepsilon + d / r)} \| \Delta_q V (t)
+     \|_{L^r}^r \right)^{p / r} \right] \right\}^{1 / p} \right)^p . \]
+  When $r \geqslant p$ Jensen's inequality and Fubini's theorem give
+  \[ \lesssim \left( \int^{\infty}_0 \mathd t \left\{ \sum_q 2^{- q r
+     (\varepsilon + d / r)} \int_{\Lambda} \frac{\mathd x}{| \Lambda |}
+     \mathbbm{E} [| \Delta_q V (t) (x) |^r] \right\}^{1 / r} \right)^p . \]
+  Finally hypercontractivity and stationarity allow to reduce this to bound
+  \[ \lesssim \left( \int^{\infty}_0 \mathd t \left\{ \sum_q 2^{- q r
+     (\varepsilon + d / r)}  (\mathbbm{E} [| \Delta_q V (t) (0) |^2])^{r /
+     2} \right\}^{1 / r} \right)^p . \]
+  Letting $I_q (t) =\mathbbm{E} [| \Delta_q V (t) (0) |^2]$ we have
+  \[ \mathbbm{E} \left[ \left( \int^{\infty}_0 \| J_t \mathbbm{W}^2_t \circ
+     J_t \mathbbm{W}^2_t - 2 \lambda^{- 2} \dot{\gamma}_t \|_{\VV^{-
+     \varepsilon}} \mathd t \right)^p \right] \lesssim \left( \int^{\infty}_0
+     \mathd t \left\{ \sum_q 2^{- q r (\varepsilon + d / r)}  (I_q (t))^{r /
+     2} \right\}^{1 / r} \right)^p . \]
+  Now we decompose the random field $\Delta_q (J_t \mathbbm{W}^2_t \circ J_t
+  \mathbbm{W}^2_t - 2 \lambda^{- 2} \dot{\gamma}_t) (x)$ into homogeneous
+  stochastic integral as above. And obtain
+  \[ \Delta_q (\lambda^2 J_t \mathbbm{W}^2_t \circ J_t \mathbbm{W}^2_t - 2
+     \lambda^{- 2} \dot{\gamma}_t) (x) = \sum_{k_1, \ldots, k_4} \int_{A_t^4}
+     G^{J 2 \circ J 2}_{0, q} ((s, k)_{1 \cdots 4}) \mathd w_{s_1} (k_1)
+     \cdots \mathd w_{s_4} (k_4) \]
+  \[ + \sum_{k_1, k_2} \int_{A_t^2} G^{J 2 \circ J 2}_{1, q} ((s, k)_{1 2})
+     \mathd w_{s_1} (k_1) \mathd w_{s_2} (k_2) + G^{J 2 \circ J 2}_{2, q} \]
+  \begin{eqnarray}
+    G^{J 2 \circ J 2}_{0, q} ((s, k)_{1 \cdots 4}) & = & (24^2) K_q (k_{(1
+    \cdots 4)}) e^{i (k_{(1 \cdots 4)}) \cdot x} \times \nonumber\\
+    &  & \times \sum_{\sigma \in \tmop{Sh} (2, 2)} \sum_{i \sim j} K_i
+    (k_{(\sigma_1 \sigma_2)}) K_j (k_{(\sigma_3 \sigma_4)}) \frac{\sigma_t
+    (k_{(\sigma_1 \sigma_2)})}{\langle k_{(\sigma_1 \sigma_2)} \rangle}
+    \frac{\sigma_t (k_{(\sigma_3 \sigma_4)})}{\langle k_{(\sigma_3 \sigma_4)}
+    \rangle} \nonumber\\
+    G^{J 2 \circ J 2}_{1, q} ((s, k)_{12}) & = & (24^2) K_q (k_{(12)}) e^{i
+    (k_{(12)}) \cdot x} \sum_{\sigma \in \tmop{Sh} (1, 1)} \sum_{i \sim j}
+    \sum_q \times \nonumber\\
+    &  & \times \int_0^t \mathd r \frac{\sigma_r^2 (q)}{\langle q \rangle^2}
+    K_i (k_{\sigma_1} + q) K_j (k_{\sigma_2} - q) \left( \frac{\sigma_t
+    (k_{\sigma_1} + q)}{\langle k_{\sigma_1} + q \rangle} \frac{\sigma_t
+    (k_{\sigma_2} - q)}{\langle k_{\sigma_2} - q \rangle} \right) \nonumber\\
+    G^{J 2 \circ J 2}_{2, q} & = & (24^2) \mathbbm{I}_{q = - 1}  \sum_{i \sim
+    j} \sum_{q_1, q_2} \int_0^t \mathd r_1 \int_0^t \mathd r_2 \times
+    \nonumber\\
+    &  & \times \frac{\sigma_{r_1} (q_1)^2}{\langle q_1 \rangle^2}
+    \frac{\sigma_{r_2} (q_2)^2}{\langle q_2 \rangle^2} K_i (q_1 + q_2) K_j (-
+    q_1 - q_2) \frac{\sigma_t (q_1 + q_2)^2}{\langle q_1 + q_2 \rangle^2}
+    \nonumber\\
+    &  & - 2 \dot{\gamma}_t \lambda^{- 2} \mathbbm{I}_{q = - 1} . \nonumber
+  \end{eqnarray}
+  Using our choice of $\gamma_T$ in eq.~(\ref{eq:choice-gamma}) we have that
+  \[ \dot{\gamma}_t = \lambda^2 (12^2 \cdot 2) \sum_{q_1, q_2} \int_0^t \mathd
+     r_1 \int_0^t \mathd r_2 \frac{\sigma_{r_1} (q_1)^2}{\langle q_1
+     \rangle^2} \frac{\sigma_{r_2} (q_2)^2}{\langle q_2 \rangle^2}
+     \frac{\sigma_t^2 (q_1 + q_2)}{\langle q_1 + q_2 \rangle^2} \mathd u, \]
+  which implies also that
+  \[ G^{J 2 \circ J 2}_{2, q} = 0 \]
+  and
+  \[ | \dot{\gamma}_t | \lesssim \lambda^2 \frac{\log \langle t
+     \rangle}{\langle t \rangle}, \]
+  as claimed. We pass now to estimate the other two chaoses. The technique is
+  the same we used above. Consider first
+  \[ I_{0, q} (t) \assign \mathbbm{E} \left[ \left| \sum_{k_1, \ldots, k_4}
+     \int_{A_t^4} G^{J 2 \circ J 2}_{0, q} ((s, k)_{1 \cdots 4}) \mathd
+     w_{s_1} (k_1) \cdots \mathd w_{s_4} (k_4) \right|^2 \right] \]
+  \[ \lesssim \sum_{k_1, \ldots, k_4} \int_{A_t^4} | G^{J 2 \circ J 2}_{0, q}
+     ((s, k)_{1 \cdots 4}) |^2 \frac{\sigma_{s_1} (k_1)^2}{\langle k_1
+     \rangle^2} \cdots \frac{\sigma_{s_4} (k_4)^2}{\langle k_4 \rangle^2}
+     \mathd s_1 \cdots \mathd s_4 \]
+  \[ \lesssim \sum_{k_1, \ldots, k_4} \int_{[0, t]^4} | G^{J 2 \circ J 2}_{0,
+     q} ((s, k)_{1 \cdots 4}) |^2 \frac{\sigma_{s_1} (k_1)^2}{\langle k_1
+     \rangle^2} \cdots \frac{\sigma_{s_4} (k_4)^2}{\langle k_4 \rangle^2}
+     \mathd s_1 \cdots \mathd s_4 \]
+  \[ \lesssim \sum_{k_1, \ldots, k_4} K_q (k_{(1 \cdots 4)})^2 \int_{[0, t]^4}
+     \frac{\sigma_t^2 (k_{(12)})}{\langle k_{(12)} \rangle^2} \frac{\sigma_t^2
+     (k_{(34)})}{\langle k_{(34)} \rangle^2} \frac{\sigma_{s_1}
+     (k_1)^2}{\langle k_1 \rangle^2} \cdots \frac{\sigma_{s_4}
+     (k_4)^2}{\langle k_4 \rangle^2} \mathd s_1 \cdots \mathd s_4 \]
+  \[ \lesssim \sum_{k_1, \ldots, k_4} K_q (k_{(1 \cdots 4)})^2
+     \frac{\sigma_t^2 (k_{(12)})}{\langle k_{(12)} \rangle^2} \frac{\sigma_t^2
+     (k_{(34)})}{\langle k_{(34)} \rangle^2} \frac{1}{\langle k_1 \rangle^2}
+     \cdots \frac{1}{\langle k_4 \rangle^2} \]
+  \[ \lesssim \frac{\mathbbm{I}_{2^q \lesssim t}}{\langle t \rangle^6}
+     \sum_{k_1, \ldots, k_4} K_q (k_{(1 \cdots 4)})^2 \frac{1}{\langle k_1
+     \rangle^2} \frac{1}{\langle k_2 \rangle^2} \frac{1}{\langle k_3
+     \rangle^2} \frac{1}{\langle k_4 \rangle^2} \lesssim
+     \frac{\mathbbm{I}_{2^q \lesssim t}}{\langle t \rangle^6} 2^{4 q} \]
+  where we used that $| \sigma_t (x) | \lesssim t^{- 1 / 2} \mathbbm{I}_{x
+  \sim t}$. Now taking $\varepsilon + d / r > 0$ we have
+  \[ \int^{\infty}_0 \mathd t \left\{ \sum_q 2^{- q r (\varepsilon + d / r)} 
+     (I_{0, q} (t))^{r / 2} \right\}^{1 / r} \lesssim \int^{\infty}_0 \mathd t
+     \left\{ \sum_{q : 2^q \lesssim t}  \frac{2^{q r (2 - \varepsilon - d /
+     r)}}{\langle t \rangle^{3 r}} \right\}^{1 / r} \]
+  \[ \lesssim \int^{\infty}_0 \frac{\mathd t}{\langle t \rangle^{1 +
+     \varepsilon + d / r}} \lesssim 1. \]
+  Taking into account that $| k_1 |, | k_2 | \lesssim t$ we can estimate
+  
+  
+  \[ | G^{J 2 \circ J 2}_{1, q} ((s, k)_{12}) | \lesssim | K_q (k_{(12)}) |
+     \sum_p \frac{\mathbbm{I}_{| p | \lesssim t}}{\langle p \rangle^2} \left(
+     \frac{\sigma_t (k_1 + p)}{\langle k_1 + p \rangle} \frac{\sigma_t (k_2 -
+     p)}{\langle k_2 - p \rangle} \right) \lesssim | K_q (k_{(12)}) | \langle
+     t \rangle^{- 2}, \]
+  from which we deduce that
+  \[ I_{1, q} (t) \assign \mathbbm{E} \left[ \left| \sum_{k_1, k_2}
+     \int_{A_t^2} G^{J 2 \circ J 2}_{1, q} ((s, k)_{12}) \mathd w_{s_1} (k_1)
+     \mathd w_{s_2} (k_2) \right|^2 \right] \]
+  \[ \lesssim \sum_{k_1, k_2} \int_{A_t^2} | G^{J 2 \circ J 2}_{1, q} ((s,
+     k)_{12}) |^2 \frac{\sigma_{s_1} (k_1)^2}{\langle k_1 \rangle^2}
+     \frac{\sigma_{s_2} (k_2)^2}{\langle k_2 \rangle^2} \mathd s_1 \mathd s_2
+  \]
+  \[ \lesssim \langle t \rangle^{- 4} \sum_{k_1, k_2} | K_q (k_{(12)}) |^2
+     \int_{[0, t]^2} \frac{\sigma_{s_1} (k_1)^2}{\langle k_1 \rangle^2}
+     \frac{\sigma_{s_2} (k_2)^2}{\langle k_2 \rangle^2} \mathd s_1 \mathd s_2
+  \]
+  \[ \lesssim \langle t \rangle^{- 4} \sum_{k_1, k_2} | K_q (k_{(12)}) |^2
+     \frac{\mathbbm{I}_{k_1 \lesssim t}}{\langle k_1 \rangle^2}
+     \frac{\mathbbm{I}_{k_2 \lesssim t}}{\langle k_2 \rangle^2} \lesssim
+     \langle t \rangle^{- 4} 2^{2 q} \mathbbm{I}_{2^q \lesssim t}, \]
+  and then, as for $I_{0, q}$, we have
+  
+  
+  \[ \int^{\infty}_0 \mathd t \left\{ \sum_q 2^{- q r (\varepsilon + d / r)} 
+     (I_{1, q} (t))^{r / 2} \right\}^{1 / r} \lesssim \int^{\infty}_0
+     \frac{\mathd t}{\langle t \rangle^2} \left\{ \sum_q 2^{q r (1 -
+     \varepsilon - d / r)} \mathbbm{I}_{2^q \lesssim t} \right\}^{1 / r}
+     \lesssim 1, \]
+  as claimed. From these estimates standard arguments give
+  eq.~(\ref{eq:renorm-2}).
+\end{proof}
+
+\appendix\section{Besov spaces and paraproducts}\label{sec:appendix-para}
+
+In this section we will recall some well known results about Besov spaces,
+embeddings, Fourier multipliers and paraproducts. The reader can find full
+details and proofs
+in~{\cite{bahouri_fourier_2011,gubinelli_paracontrolled_2015}}. First recall
+the definition of Littlewood--Paley blocks. Let $\chi, \varphi$ be smooth
+radial functions $\mathbbm{R}^d \rightarrow \mathbbm{R}$ such that
+\begin{itemize}
+  \item $\tmop{supp} \chi \subseteq B (0, R)$, $\tmop{supp} \varphi \subseteq
+  B (0, 2 R) \setminus B (0, R)$;
+  
+  \item $0 \leqslant \chi, \varphi \leqslant 1$, $\chi (\xi) + \sum_{j \geq 0}
+  \varphi (2^{- j} \xi) = 1$ for any $\xi \in \mathbbm{R}^d$;
+  
+  \item $\tmop{supp} \varphi (2^{- j} \cdot) \cap \tmop{supp} \varphi (2^{- i}
+  \cdot) = \varnothing$ if $| i - j | > 1$.
+\end{itemize}
+Introduce the notations $\varphi_{- 1} = \chi$, $\varphi_j = \varphi (2^{- j}
+\cdot)$ for $j \geqslant 0$. For any $f \in \CS' (\Lambda)$ we define the
+operators $\Delta_j f \assign \mathcal{F}^{- 1} \varphi_j (\xi) \hat{f}
+(\xi)$, $j \geqslant - 1$.
+
+\begin{definition}
+  Let $s \in \mathbbm{R}, p, q \in [1, \infty]$. For a Schwarz distribution $f
+  \in \CS' (\Lambda)$ define the norm
+  \[ \| f \|_{B_{p, q}^s} = \| (2^{j s} \| \Delta_j f \|_{L^p})_{j \geqslant
+     - 1} \|_{\ell^q} \]
+  Then the space $B^s_{p, q}$ is the closure of Schwarz distributions under
+  this norm. We denote $\VV^{\alpha} = B_{\infty, \infty}^{\alpha}$ the
+  Besov--H{\"o}lder space and $H^{\alpha} = B^{\alpha}_{2, 2}$ the Sobolev
+  spaces. \ 
+\end{definition}
+
+\begin{proposition}
+  \label{besovembedding}Let $1 \leqslant p_1 \leqslant p_2 \leqslant \infty, 1
+  \leqslant q_1 \leqslant q_2 \leqslant \infty \text{then } B^s_{p_1, q_1}$ is
+  continuously included in $B_{p_2, q_2}^{s - d \left( \frac{1}{p_1} -
+  \frac{1}{p_2} \right)}$.
+\end{proposition}
+
+\begin{proposition}
+  \label{compactembedding}For any $s_1, s_2 \in \mathbbm{R}$ such that $s_1 <
+  s_2$, any $p, q \in [1, \infty]$ the Besov space $B^{s_1}_{p, q}$ is
+  compactly embedded into $B^{s_2}_{p, q}$.
+\end{proposition}
+
+\begin{definition}
+  Let $ f, g \in \mathcal{\CS} (\Lambda)$. We define the
+  paraproducs
+  \[ f \succ g = \sum_{j < i - 1} \Delta_i f \Delta_j g, \qquad \text{and}
+     \qquad f \prec g = \sum_{j > i + 1} \Delta_i f \Delta_j g = g \succ f. \]
+  Moreover we introduce the resonant product
+  \[ f \circ g = \sum_{| i - j | \leqslant 1} \Delta_i f \Delta_j g. \]
+  Then
+  \[ fg = f \prec g + f \circ g + f \succ g. \]
+\end{definition}
+
+\begin{proposition}
+  \label{paraproductestimate}Let $\alpha < 0, \beta \in \mathbbm{R}$. For
+  $ f, g \in \CS (\Lambda)$ we have the estimates
+  \begin{eqnarray*}
+    \| f \succ g \|_{H^{\beta - \delta}} & \lesssim & \| f \|_{\VV^{\beta}} \|
+    g \|_{L^2},\\
+    \| f \succ g \|_{\VV^{\beta}} & \lesssim & \| f \|_{\VV^{\beta}} \| g
+    \|_{L^{\infty}},\\
+    \| f \succ g \|_{H^{\beta - \alpha}} & \lesssim & \| f \|_{\VV^{\beta}} \|
+    g \|_{H^{\alpha}},\\
+    \| f \succ g \|_{\VV^{\beta}} & \lesssim & \| f \|_{\VV^{\beta}} \| g
+    \|_{\VV^{\alpha}} .
+  \end{eqnarray*}
+  Let $\alpha, \beta \in \mathbbm{R}$ such that $\alpha + \beta > 0$. Then
+  \begin{eqnarray*}
+    \| f \circ g \|_{H^{\alpha + \beta}} & \lesssim & \| f \|_{\VV^{\beta}} \|
+    g \|_{H^{\alpha}},\\
+    \| f \circ g \|_{\VV^{\alpha + \beta}} & \lesssim & \| f \|_{\VV^{\beta}}
+    \| g \|_{\VV^{\alpha}} .
+  \end{eqnarray*}
+  By density the paraproduct and resonant product also extend to bilnear
+  operators on the respective spaces. 
+\end{proposition}
+
+\begin{proposition}
+  \label{commutatorestimate}Let $\alpha \in (0, 1)$ $\beta, \gamma \in
+  \mathbbm{R}$ such that $\beta + \gamma < 0$, $\alpha + \beta + \gamma > 0$.
+  Then for $f, g, h \in \CS$, and for any $\delta > 0$,
+  \[ \| (f \succ g) \circ h - g (f \circ h) \|_{H^{\alpha + \beta + \gamma -
+     \delta}} \lesssim \| f \|_{\VV^{\gamma}} \| h \|_{\VV^{\beta}} \| g
+     \|_{H^{\alpha}}, \]
+  \[ \| (f \succ g) \circ h - g (f \circ h) \|_{\VV^{\alpha + \beta + \gamma}}
+     \lesssim \| f \|_{\VV^{\gamma}} \| h \|_{\VV^{\beta}} \| g
+     \|_{\VV^{\alpha}} . \]
+\end{proposition}
+
+\begin{proposition}
+  \label{adjointparaproduct}Assume $f \in \VV^{\alpha}, g \in H^{\beta}, h \in
+  H^{\gamma}$ and $\alpha + \beta + \gamma = 0$. Then
+  \[ \frac{1}{| \mathbbm{T}^d |} \int_{\mathbbm{T}^d} [(f \succ g) h - (f
+     \circ h) g] \lesssim \| f \|_{\VV^{\alpha}} \| g \|_{H^{\beta}} \| h
+     \|_{H^{\gamma}} . \]
+\end{proposition}
+
+\begin{remark}
+  Proposition~\ref{adjointparaproduct} is not proven in the above references
+  but is quite easy and the reader can fill out a proof.
+\end{remark}
+
+\begin{proposition}
+  \label{paralinearization}Let $F \in C^2 (\mathbbm{R}, \mathbbm{R})$, and
+  assume that $\alpha \in (0, 1)$ then there exists a map $R_F : \VV^{\alpha}
+  \rightarrow \VV^{2 \alpha}$ such that for any $f \in \VV^{\alpha}
+  (\mathbbm{T}^d)$
+  \[ F (f) = f \succ F (f) + R_F (f) . \]
+\end{proposition}
+
+\begin{definition}
+  A smooth function $\eta$ is said to be an $S^m$ multiplier if for every
+  multiindex $\alpha$ there exists a constant $C_{\alpha}$ such that
+  \begin{equation}
+    \label{symbolinq} \forall \xi \in \mathbbm{R}^d \quad \left|
+    \frac{\partial^{\alpha}}{\partial \xi^{\alpha}} f (\xi) \right|
+    \lesssim_{\alpha} (1 + | \xi |)^{m - | \alpha |}
+  \end{equation}
+  We say that a family $\eta_t$ is a uniformly $S^m$ multiplier if
+  (\ref{symbolinq}) is satisfied for every $t$ with $C_{\alpha}$ independent
+  of $t$. 
+\end{definition}
+
+\begin{proposition}
+  \label{multiplierestimate}Let $\eta$ be an $S^m$ multiplier, $s \in
+  \mathbbm{R}$, $p, q \in [1, \infty]$, and $f \in B_{p, q}^s
+  (\mathbbm{T}^d)$, then
+  \[ \| \eta (\mathD) f \|_{B_{p, q}^{s - m}} \lesssim \| f \|_{B_{p, q}^s} .
+  \]
+  Furthermore the constant depends only on $s, p, q, d$ and the constants
+  $C_{\alpha}$ in (\ref{symbolinq}).
+\end{proposition}
+
+\begin{proposition}
+  \label{paraproductleibniz}Assume $m \leqslant 0$, $\alpha \in (0, 1), \beta
+  \in \mathbbm{R}$. Let $\eta$ be an $S^m$ multiplier, $f \in \VV^{\beta}$, $g
+  \in H^{\alpha}$. Then for any $\delta > 0$.
+  \[ \| \eta (\mathD) (f \succ g) - (\eta (\mathD) f \succ g) \|_{H^{\alpha +
+     \beta - m - \delta}} \lesssim \| f \|_{\VV^{\beta}} \| g \|_{H^{\alpha}}
+  \]
+  Again the constant depends only on $\alpha, \beta, \delta$ and the constants
+  in (\ref{symbolinq}).
+\end{proposition}
+
+\begin{thebibliography}{10}
+  \bibitem[1]{albeverio_invariant_2017}Sergio Albeverio  and  Seiichiro
+  Kusuoka. {\newblock}The invariant measure and the flow associated to the
+  \$\textbackslash Phi {\textasciicircum}4\_3\$-quantum field model.
+  {\newblock}Nov 2017.{\newblock}
+  
+  \bibitem[2]{bahouri_fourier_2011}Hajer Bahouri, Jean-Yves Chemin, and 
+  Rapha{\"e}l Danchin. {\newblock}\tmtextit{Fourier Analysis and Nonlinear
+  Partial Differential Equations}. {\newblock}Springer, jan 2011.{\newblock}
+  
+  \bibitem[3]{bauerschmidt_renormalisation_2014}Roland Bauerschmidt,
+  David~C.~Brydges, and  Gordon Slade. {\newblock}A renormalisation group
+  method. III. Perturbative analysis. {\newblock}\tmtextit{ArXiv:1403.7252
+  [math-ph]}, mar 2014. {\newblock}ArXiv: 1403.7252.{\newblock}
+  
+  \bibitem[4]{benfatto_ultraviolet_1980}G.~Benfatto, M.~Cassandro,
+  G.~Gallavotti, F.~Nicol{\'o}, E.~Olivieri, E.~Presutti, and 
+  E.~Scacciatelli. {\newblock}Ultraviolet stability in Euclidean scalar field
+  theories. {\newblock}\tmtextit{Communications in Mathematical Physics},
+  71(2):95--130, jun 1980.{\newblock}
+  
+  \bibitem[5]{boue_variational_1998}Michelle Bou{\'e}  and  Paul Dupuis.
+  {\newblock}A variational representation for certain functionals of Brownian
+  motion. {\newblock}\tmtextit{The Annals of Probability}, 26(4):1641--1659,
+  oct 1998.{\newblock}
+  
+  \bibitem[6]{brydges_mayer_1987}D.~C.~Brydges  and  T.~Kennedy.
+  {\newblock}Mayer expansions and the Hamilton-Jacobi equation.
+  {\newblock}\tmtextit{Journal of Statistical Physics}, 48(1-2):19--49, jul
+  1987.{\newblock}
+  
+  \bibitem[7]{brydges_short_1995}D.~Brydges, J.~Dimock, and  T.~R.~Hurd.
+  {\newblock}The short distance behavior of \$(\textbackslash
+  phi{\textasciicircum}4)\_3\$. {\newblock}\tmtextit{Communications in
+  Mathematical Physics}, 172(1):143--186, 1995.{\newblock}
+  
+  \bibitem[8]{brydges_lectures_2009}David~C.~Brydges. {\newblock}Lectures on
+  the renormalisation group. {\newblock}In \tmtextit{Statistical mechanics}, 
+  volume~16  of \tmtextit{IAS/Park City Math. Ser.},  pages  7--93. Amer.
+  Math. Soc., Providence, RI, 2009.{\newblock}
+  
+  \bibitem[9]{brydges_functional_1993}David~C.~Brydges, Roberto Fern{\'a}ndez,
+  and  Ch- Ecublens. {\newblock}\tmtextit{Functional Integrals and their
+  Applications}. {\newblock}1993.{\newblock}
+  
+  \bibitem[10]{brydges_new_1983}David~C.~Brydges, J{\"u}rg Fr{\"o}hlich, and 
+  Alan~D.~Sokal. {\newblock}A new proof of the existence and nontriviality of
+  the continuum \$\textbackslash varphi {\textasciicircum}4\_2\$ and
+  \$\textbackslash varphi {\textasciicircum}4\_3\$ quantum field theories.
+  {\newblock}\tmtextit{Communications in Mathematical Physics},
+  91(2):141--186, 1983.{\newblock}
+  
+  \bibitem[11]{brydges_renormalisation_2014_3}David~C.~Brydges  and  Gordon
+  Slade. {\newblock}A renormalisation group method. I. Gaussian integration
+  and normed algebras. {\newblock}\tmtextit{ArXiv:1403.7244 [math-ph]}, mar
+  2014. {\newblock}ArXiv: 1403.7244.{\newblock}
+  
+  \bibitem[12]{brydges_renormalisation_2014_2}David~C.~Brydges  and  Gordon
+  Slade. {\newblock}A renormalisation group method. II. Approximation by local
+  polynomials. {\newblock}\tmtextit{ArXiv:1403.7253 [math-ph]}, mar 2014.
+  {\newblock}ArXiv: 1403.7253.{\newblock}
+  
+  \bibitem[13]{brydges_renormalisation_2014_1}David~C.~Brydges  and  Gordon
+  Slade. {\newblock}A renormalisation group method. IV. Stability analysis.
+  {\newblock}\tmtextit{ArXiv:1403.7255 [math-ph]}, mar 2014. {\newblock}ArXiv:
+  1403.7255.{\newblock}
+  
+  \bibitem[14]{brydges_renormalisation_2014}David~C.~Brydges  and  Gordon
+  Slade. {\newblock}A renormalisation group method. V. A single
+  renormalisation group step. {\newblock}\tmtextit{ArXiv:1403.7256 [math-ph]},
+  mar 2014. {\newblock}ArXiv: 1403.7256.{\newblock}
+  
+  \bibitem[15]{catellier_paracontrolled_2013}R{\'e}mi Catellier  and  Khalil
+  Chouk. {\newblock}Paracontrolled Distributions and the 3-dimensional
+  Stochastic Quantization Equation. {\newblock}\tmtextit{ArXiv:1310.6869
+  [math-ph]}, oct 2013. {\newblock}ArXiv: 1310.6869.{\newblock}
+  
+  \bibitem[16]{feldman_lambda_1974}Joel Feldman. {\newblock}The
+  \$\textbackslash lambda \textbackslash varphi {\textasciicircum}4\_3\$ field
+  theory in a finite volume. {\newblock}\tmtextit{Communications in
+  Mathematical Physics}, 37:93--120, 1974.{\newblock}
+  
+  \bibitem[17]{fleming_controlled_2005}Wendell~H.~Fleming  and  Halil~Mete
+  Soner. {\newblock}\tmtextit{Controlled Markov Processes and Viscosity
+  Solutions}. {\newblock}Springer, 2nd  edition, nov 2005.{\newblock}
+  
+  \bibitem[18]{follmer_entropy_1985}H.~F{\"o}llmer. {\newblock}An entropy
+  approach to the time reversal of diffusion processes. {\newblock}In 
+  Prof~M.~Metivier  and  Prof~E.~Pardoux, editors, \tmtextit{Stochastic
+  Differential Systems Filtering and Control},  number~69  in  Lecture Notes
+  in Control and Information Sciences,  pages  156--163. Springer Berlin
+  Heidelberg, 1985.{\newblock}
+  
+  \bibitem[19]{glimm_boson_1968}James Glimm. {\newblock}Boson fields with the
+  \$: \textbackslash Phi{\textasciicircum}\{4\}: \$ interaction in three
+  dimensions. {\newblock}\tmtextit{Communications in Mathematical Physics},
+  10(1):1--47, 1968.{\newblock}
+  
+  \bibitem[20]{glimm_positivity_1973}James Glimm  and  Arthur Jaffe.
+  {\newblock}Positivity of the ${\varphi}_3^4$ Hamiltonian.
+  {\newblock}\tmtextit{Fortschritte der Physik}, 21(7):327--376, jan
+  1973.{\newblock}
+  
+  \bibitem[21]{gubinelli_global_2018}Massimiliano Gubinelli  and  Martina
+  Hofmanov{\'a}. {\newblock}Global solutions to elliptic and parabolic
+  \$\textbackslash Phi{\textasciicircum}4\$ models in Euclidean space.
+  {\newblock}\tmtextit{ArXiv:1804.11253 [math-ph]}, apr 2018.
+  {\newblock}ArXiv: 1804.11253.{\newblock}
+  
+  \bibitem[22]{gubinelli_paracontrolled_2015}Massimiliano Gubinelli, Peter
+  Imkeller, and  Nicolas Perkowski. {\newblock}Paracontrolled distributions
+  and singular PDEs. {\newblock}\tmtextit{Forum of Mathematics. Pi}, 3:0,
+  2015.{\newblock}
+  
+  \bibitem[23]{gulisashvili_exact_1996}Archil Gulisashvili  and  Mark~A.~Kon.
+  {\newblock}Exact Smoothing Properties of Schr{\"o}dinger Semigroups.
+  {\newblock}\tmtextit{American Journal of Mathematics}, 118(6):1215--1248,
+  1996.{\newblock}
+  
+  \bibitem[24]{hairer_theory_2014}M.~Hairer. {\newblock}A theory of regularity
+  structures. {\newblock}\tmtextit{Inventiones mathematicae}, 198(2):269--504,
+  mar 2014.{\newblock}
+  
+  \bibitem[25]{janson_gaussian_1997}Svante Janson.
+  {\newblock}\tmtextit{Gaussian Hilbert Spaces}. {\newblock}Cambridge
+  University Press, jun 1997.{\newblock}
+  
+  \bibitem[26]{kupiainen_renormalization_2016}Antti Kupiainen.
+  {\newblock}Renormalization Group and Stochastic PDEs.
+  {\newblock}\tmtextit{Annales Henri Poincar{\'e}}, 17(3):497--535, mar
+  2016.{\newblock}
+  
+  \bibitem[27]{lehec_representation_2013}Joseph Lehec.
+  {\newblock}Representation formula for the entropy and functional
+  inequalities. {\newblock}\tmtextit{Annales de l'Institut Henri Poincar{\'e}
+  Probabilit{\'e}s et Statistiques}, 49(3):885--899, 2013.{\newblock}
+  
+  \bibitem[28]{magnen_infinite_1976}J.~Magnen  and  R.~S{\'e}n{\'e}or.
+  {\newblock}The infinite volume limit of the \$\textbackslash phi
+  {\textasciicircum}4\_3\$ model. {\newblock}\tmtextit{Ann. Inst. H.
+  Poincar{\'e} Sect. A (N.S.)}, 24(2):95--159, 1976.{\newblock}
+  
+  \bibitem[29]{mourrat_dynamic_2016}Jean-Christophe Mourrat  and  Hendrik
+  Weber. {\newblock}The dynamic \$\textbackslash Phi{\textasciicircum}4\_3\$
+  model comes down from infinity. {\newblock}\tmtextit{ArXiv:1601.01234
+  [math]}, jan 2016. {\newblock}ArXiv: 1601.01234.{\newblock}
+  
+  \bibitem[30]{otto_quasilinear_2016}Felix Otto  and  Hendrik Weber.
+  {\newblock}Quasilinear SPDEs via rough paths.
+  {\newblock}\tmtextit{ArXiv:1605.09744 [math]}, may 2016. {\newblock}ArXiv:
+  1605.09744.{\newblock}
+  
+  \bibitem[31]{park_lambda_1975}Yong~Moon Park. {\newblock}The
+  \$\textbackslash lambda \textbackslash phi{\textasciicircum}4\_3\$ Euclidean
+  quantum field theory in a periodic box. {\newblock}\tmtextit{Journal of
+  Mathematical Physics}, 16(11):2183--2188, 1975.{\newblock}
+  
+  \bibitem[32]{polchinski_renormalization_1984}Joseph Polchinski.
+  {\newblock}Renormalization and effective lagrangians.
+  {\newblock}\tmtextit{Nuclear Physics B}, 231(2):269--295, jan
+  1984.{\newblock}
+  
+  \bibitem[33]{revuz_continuous_2004}Daniel Revuz  and  Marc Yor.
+  {\newblock}\tmtextit{Continuous Martingales and Brownian Motion}.
+  {\newblock}Springer, 3rd  edition, dec 2004.{\newblock}
+  
+  \bibitem[34]{ustunel_variational_2014}Ali~S{\"u}leyman {\"U}st{\"u}nel.
+  {\newblock}Variational calculation of Laplace transforms via entropy on
+  Wiener space and applications. {\newblock}\tmtextit{Journal of Functional
+  Analysis}, 267(8):3058--3083, oct 2014.{\newblock}
+  
+  \bibitem[35]{wilson_renormalization_1983}Kenneth~G.~Wilson. {\newblock}The
+  renormalization group and critical phenomena. {\newblock}\tmtextit{Reviews
+  of Modern Physics}, 55(3):583--600, 1983.{\newblock}
+  
+  \bibitem[36]{zhang_variational_2009}Xicheng Zhang. {\newblock}A variational
+  representation for random functionals on abstract Wiener spaces.
+  {\newblock}\tmtextit{Journal of Mathematics of Kyoto University},
+  49(3):475--490, 2009.{\newblock}
+\end{thebibliography}
+\end{document}

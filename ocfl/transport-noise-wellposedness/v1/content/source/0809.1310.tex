@@ -1,0 +1,2020 @@
+%% versione preprint su arxiv 8 settembre
+\documentclass[a4paper,10pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+
+
+
+\begin{document}
+
+
+\title{
+%Well posedness of transport equations with H\"{o}lder vector fields by stochastic perturbation
+Well-posedness of the transport equation by stochastic
+perturbation }
+\author{F. Flandoli$^{1}$,
+M. Gubinelli$^{2}$, E. Priola$^{3}$\\{\small {(1) Dipartimento di
+Matematica Applicata ``U. Dini'', Universit\`a di Pisa,
+Italia}}\\{\small { (2) CEREMADE  (UMR 7534), Universit\'e Paris
+Dauphine, France}}\\{\small { (3) Dipartimento di Matematica,
+Universit\`a di Torino, Italia }}} \maketitle
+\begin{abstract}
+We consider  the linear transport equation with a globally
+H\"{o}lder continuous and bounded vector field. While this
+deterministic PDE may not be well-posed, we prove that a
+multiplicative stochastic perturbation of Brownian type is enough
+to render the equation well-posed. This seems to be the first
+explicit example of partial differential equation that become
+well-posed under the influece of noise. The key tool is a
+differentiable stochastic flow constructed and analysed by means
+of a special transformation of the drift of Tanaka type.
+\end{abstract}
+
+
+
+
+
+\section{Introduction}
+
+The transport equation in $[0,T]\times\mathbb{R}^{d}$%
+\begin{align*}
+\partial_{t}u(t,x)+b(t,x)\cdot\nabla u(t,x)  &  =0,\quad(t,x)\in
+\lbrack0,T]\times\mathbb{R}^{d},\\
+u(0,x)  &  =u_{0}(x),\quad x\in\mathbb{R}^{d}.
+\end{align*}
+driven by a vector field $b:[0,T]\times\mathbb{R}^{d}\rightarrow\mathbb{R}%
+^{d}$ which is Lipschitz continuous in $x$, uniformly in $t$, can
+be solved in several classical ways and in different function
+spaces. A remarkable extension has been obtained by R.J. Di Perna
+and P.L. Lions~\cite{DiPernaLions} who proved, under the
+assumption $b\in L^{1}( 0,T;W_{loc}^{1,1}(
+\mathbb{R}^{d},\mathbb{R}^{d}))  $ with a linear growth condition
+and ${\mathrm{div}} b \in L^1(0, T; L^{\infty}(\mathbb {R}^d))$,
+that a unique
+ $L^{\infty}( 0,T;L^{\infty }( \mathbb{R}^{d}) ) $ solution exists,
+weak-$*$
+continuous in time, for a given $u_{0}\in L^{\infty}(  \mathbb{R}%
+^{d})  $. Moreover, a generalized notion of flow is introduced and its
+existence and uniqueness is proved under the assumption that the negative part
+of ${\mathrm{div}\,}b$ is $L^{1}(  0,T;L^{\infty}(  \mathbb{R}%
+^{d}) )  $. L. Ambrosio \cite{Ambrosio} extended further the
+theory including in particular the case of vector fields $b\in L^{1}(
+0,T;BV_{loc}(  \mathbb{R}^{d},\mathbb{R}^{d}) )  $ with
+similar conditions on ${\mathrm{div}\,}b$. The literature following
+\cite{DiPernaLions} is wide, see a partial review in \cite{AmbrCrippa}. See
+also a generalization to transport-diffusion equations and the associated
+stochastic differential equations by Figalli \cite{Figalli} (in a direction
+different from the one of the present paper).
+
+In all these results some regularity assumption on $\nabla b$ is
+imposed, at least $L^{1}$ or a signed finite measure. If we assume
+only that $b$ is H\"{o}lder continuous, couterexamples to
+ well-posedness can be constructed.
+
+The aim of this paper is to show that suitable random
+perturbations of the transport equation improve the theory. We
+prove existence and uniqueness of
+$L^{\infty}$-solutions when $b$ is continuous, bounded, globally ${\alpha}%
+$-H\"{o}lder continuous in space, ${\alpha}\in(0,1)$, uniformly in
+time, and satisfy a suitable  integrability condition on
+${\mathrm{div}\,}b$. This result is obtained at the price of
+introducing a multiplicative white noise in the PDE. Precisely, we
+consider the equation
+\begin{equation}
+%\left\{
+\begin{aligned}
+ \partial_{t}u(  t,x)  &+(  b(  t,x)  \cdot\nabla
+u(  t,x) )  dt+\sum_{i=1}^{d}e_{i}\cdot\nabla u( t,x)  \circ
+dW_{t}^{i}=0,\\  u(  0,x) & =u_{0}( x),\;\; x \in \mathbb{R}^d,
+\end{aligned}
+%\right.
+\label{SPDE}%
+\end{equation}
+where $e_{1},...,e_{d}$ is the canonical basis of ${\mathbb{R}}^{d}$ and
+$W_{t}=(W_{t}^{1},...,W_{t}^{d})$ is a standard Brownian motion in
+${\mathbb{R}}^{d}$. The stochastic integration is understood in the
+Stratonovich sense.
+
+This equation  seems to be the first concrete example  of partial
+differential equation that is not well-posed without noise, but is
+well-posed with a suitable noise.
+%is one of the few known examples (perhaps the first concrete one)
+%of partial differential equation that is not wellposed without
+% noise, but is wellposed with a suitable noise.
+This phenomenon is well known for ordinary differential equations
+but it is one of the more interesting direction of investigations
+in SPDEs, where people have in mind the hope to prove
+well-posedness for some relevant equation of fluid dynamics.
+
+The well-posedness of equation~(\ref{SPDE}) relies on two facts.
+The associated stochastic ordinary differential equation (the
+stochastic characteristics)
+\begin{equation}
+dX_{t}^{x}=b\left(  t,X_{t}^{x}\right)  dt+dW_{t},\quad t\geq0,\quad X_{0}%
+^{x}=x\label{SDE intro}%
+\end{equation}
+under the assumption $b(t,\cdot)\in C_{b}^{{\alpha}}({\mathbb{R}}%
+^{d};{\mathbb{R}}^{d})$, uniformly in time, generates a stochastic flow of
+diffeomorphisms. Ultimately, the reason is that integrals of the form
+\begin{equation}
+\int_{0}^{t}f\left(  s,X_{s}^x\right)  ds\label{special integrals}%
+\end{equation}
+ are more regular in $x$ in the case of diffusion processes $X_{s}$ than
+in the case of deterministic solutions to ODEs. The existence
+of a stochastic flow of diffeomorphisms implies the existence of
+ weak solutions to equation~(\ref{SPDE}) in $L^{\infty}$.
+
+The uniqueness of such weak solutions is more difficult and, even
+under the existence of a stochastic flow of diffeomorphisms, it
+must be related to some form of commutator lemma, as in the
+deterministic case (see \cite{DiPernaLions}, \cite{Ambrosio}),
+since we need to perform differential computations on
+regularizations of $L^{\infty}$-solutions. We use a weak form for
+the commutator composed with the flow, which does not require weak
+differentiability of $b(  t,\cdot)  $ but only requires weak
+differentiability of the Jacobian of the flow itself. The Jacobian
+of the flow
+is given by $\exp(  \int_{0}^{t}{\mathrm{div}\,}b(  X_{s}%
+^{x})  ds)  $. In the deterministic case there is no hope to
+differentiate in $x$ without further differentiability assumptions
+on ${\mathrm{div}\,}b$, but in the stochastic case we use again
+the improved regularity of integrals of the form (\ref{special
+integrals}). We have only to impose an integrability condition on
+${\mathrm{div}\,}b$, which turns out to be different from
+ the one required in the deterministic setting \cite{DiPernaLions},
+\cite{Ambrosio}.
+
+The generalization to nonlinear transport equations, where $b$
+depends on $u$ itself, would be a major next step for applications
+to fluid dynamics but it turns out to be a  difficult problem.
+What looks very difficult is to generalize to an adapted random
+field $b(  t,x,\omega)  $. Indeed, it is very easy to
+produce examples, both for the linear SPDE (\ref{SPDE}) and
+for a stochastic version of Euler equation which show that the particular noise we use does not have any regularizing effect.  Thus new ideas are
+necessary to approach nonlinear problems.
+
+\paragraph{Plan.}
+
+In Sect.~\ref{sec:ito} we prove the existence of a global
+stochastic flow associated to eq.~(\ref{SDE intro}) and its
+differentiability properties. In Sect.\ref{sec:transp} we use the
+stochastic flow to prove existence  of weak solutions to the
+SPDE~(\ref{SPDE}).  Sect. 4 and 5 are devoted to prove uniqueness
+for solutions to the SPDE~(\ref{SPDE}). Finally, in
+ Sect.~\ref{sec:counter} we point out the basic difficulty present when trying to
+ use the same approach for non-linear transport equations arising
+ from fluid dynamics.
+
+\paragraph{Notations.}
+
+Let $T>0$ be fixed. For ${\alpha}\in(0,1)$ define the space $C_{b}^{\alpha
+}([0,T]\times{\mathbb{R}}^{d};{\mathbb{R}})$ as the set of all bounded
+continuous functions $f:[0,T]\times{\mathbb{R}}^{d}\rightarrow{\mathbb{R}}$
+for which
+\[
+\lbrack f]_{\alpha,T}:=\sup_{t\in\lbrack0,T]}\sup_{x\neq y\in{\mathbb{R}}^{d}%
+}\frac{|f(t,x)-f(t,y)|}{|x-y|^{\alpha}}<\infty
+\]
+($|\cdot|$ denotes the euclidean norm in ${\mathbb{R}}^{d}$ for every $d$, if
+no confusion may arise). This is a Banach space with respect to the usual norm
+$\Vert f\Vert_{{\alpha},T}=\Vert f\Vert_{0}+[f]_{\alpha,T}$ where $\Vert
+f\Vert_{0}=\sup_{(t,x)\in\lbrack0,T]\times{\mathbb{R}}^{d}}|f(t,x)|$.
+
+We write
+$C_{b}^{\alpha}([0,T]\times{\mathbb{R}}^{d};{\mathbb{R}}^{d})$ or
+simply $C_{b,T}^{{\alpha}}$ for the space of all vector fields
+$f:[0,T]\times {\mathbb{R}}^{d}\rightarrow{\mathbb{R}}^{d}$ having
+all components in
+$C_{b}^{\alpha}([0,T]\times{\mathbb{R}}^{d};{\mathbb{R}})$.
+
+Moreover $f\in C_{b}^{n+{\alpha}}([0,T]\times{\mathbb{R}}^{d};{\mathbb{R}}%
+^{d})$, briefly $f\in C_{b,T}^{n+{\alpha}}$, if for all
+$k=0,\dots,n$, the spatial Fr\'echet derivatives $D^{k}f$ are all
+bounded and $\theta$-H\"{o}lder continuous. Define the
+corresponding norm as
+\[
+\Vert f\Vert_{n+\alpha,T}=\Vert f\Vert_{0}+\sum_{k=1}^{n}\Vert D^{k}f\Vert
+_{0}+[D^{n}f]_{\alpha,T}.
+\]
+The spaces $C_{b}^{n+{\alpha}}=C_{b}^{n+{\alpha}}({\mathbb{R}}^{d}%
+,{\mathbb{R}}^{d})$ are defined as before but only involve functions
+$f:{\mathbb{R}}^{d}\rightarrow{\mathbb{R}}^{d}$ which do not depend on time.
+
+We say  that $f: \mathbb{R} ^d \to \mathbb{R} ^d$ belongs to
+$C^{k, \alpha}$, $k \in \mathbb N$, $\alpha \in (0,1)$, if $f$ is
+continuous on $\mathbb{R} ^d$, $k$-times differentiable with all
+continuous derivatives and  the derivatives of order $k$ are
+locally $\alpha$-H\"older continuous.
+
+Finally, $C^0_0(\mathbb{R} ^d)$ denotes the space of all real
+continuous functions defined on $\mathbb{R} ^d$, having compact
+support and $ C^{\infty}_0(\mathbb{R} ^d)$ its subspace consisting
+of infinitely differentiable functions.
+
+
+
+\vskip 1mm Throughout the paper we will assume a stochastic basis
+with a $d$-dimensional Brownian motion $\left(  \Omega,\left(
+\mathcal{F}{}_{t}\right) ,{}\mathcal{F},P,\left(  W_{t}\right)
+\right)  $ to be given. Denote by $\mathcal{F}_{s,t}$ the
+ completed
+  $\sigma$-algebra generated by $W_{u}-W_{r}$, $s\leq r\leq u\leq
+ t$,
+ for each $0\le s<t$, and set $\mathcal{F}_{s,s} = \{ \varnothing, \Omega
+  \}$.
+
+We will consider the following assumptions.
+
+\begin{hypothesis}
+\label{hy1}
+There exists ${\alpha}\in(0,1)$ such that $b\in C_{b,T}^{{\alpha}}$.
+\end{hypothesis}
+
+\begin{hypothesis}
+\label{hy2}
+There exists $p,  q \in (2, +\infty) $ such that
+ \begin{equation} \label{uni}
+{\mathrm{div}}b \in L^{q} (0,T; L^p(\mathbb{R} ^d))  \;\;\;\;
+\text{with} \;\; \frac{d}{p} + \frac{2}{q} < 1
+ \end{equation}
+(where ${\mathrm{div}\,}b(t,\cdot)$ is understood in distributional sense).
+\end{hypothesis}
+
+
+ \begin{remark} In \cite{Kry-Ro} condition \eqref{uni}
+ is imposed  locally on $b$ in order to prove existence and
+ uniqueness of strong solution to \eqref{SDE intro}.
+  This hypothesis     is satisfied
+if $d \ge 2$ and
+$$
+{\mathrm{div}} b \in L^{\infty} (0,T; L^p(\mathbb{R} ^d))
+\;\;\;\; \text{for some} \;\; p
+>d.
+$$
+\end{remark}
+For a given function $f$ depending on $t\in\lbrack0,T]$ and $x\in{\mathbb{R}%
+}^{d}$, we will also adopt the  notation
+\[
+f_{t}(x)=f(t,x).
+\]
+
+
+\section{Differentiable stochastic flow for an SDE with $C_{b,T}^{{\alpha}}$-drift}
+
+\label{sec:ito}
+
+\textit{In this section we assume that $b$ satisfies  Hypothesis
+\ref{hy1}. }
+
+{Given }$s\in\left[  0,T\right]  $ and $x\in{\mathbb{R}}^{d}$, consider the
+stochastic differential equation in ${\mathbb{R}}^{d}$ :
+\begin{equation}
+dX_{t}=b\left(  t,X_{t}\right)  dt+dW_{t},\quad t\in\left[  s,T\right]  ,\quad
+X_{s}=x. \label{SDE}%
+\end{equation}
+A classical fact is the existence and uniqueness of a weak
+solution, obtained for instance by Girsanov transform.
+Yu.~Veretennikov \cite{V} prove that boundedness of $b$
+(independent on $t$) is enough to have path-wise uniqueness and
+existence of strong probabilistic solutions. For related work see
+also the recent paper~\cite{Kry-Ro} by N.V.~Krylov and
+M.~R\"ockner. Recently, A.M.~Davie has proved that for a.e.
+Brownian path $W$ it is possible to prove uniqueness for
+equation~(\ref{SDE})
+between all deterministic continuous functions which solve equation~(\ref{SDE}%
+) with respect to the choosen $W$ (for any initial condition and
+any bounded measurable and time dependend drift $b$). The analysis
+of the associated flow is however still missing.
+
+\vskip 3mm
+
+Our key result is the existence of a \emph{differentiable} stochastic flow
+$(x,s,t)\mapsto\varphi_{s,t}(x)$ for equation~(\ref{SDE}). Recall the relevant
+definition from H. Kunita~\cite{K}:
+
+\begin{definition}
+A \emph{stochastic flow of diffeomorphisms} (resp. \emph{of class}
+$C^{1,\alpha}$) on $\left(  \Omega,\left(  \mathcal{F}{}_{t}\right)
+,{}\mathcal{F},P,\left(  W_{t}\right)  \right)  $ associated to equation
+(\ref{SDE}) is a map $(s,t,x,\omega)\mapsto\phi_{s,t}(x)\left(  \omega\right)
+$, defined for $0\leq s\leq t\leq T$, $x\in{\mathbb{R}}^{d}$, $\omega\in
+\Omega$ with values in ${\mathbb{R}}^{d}$, such that
+
+\begin{itemize}
+\item [(a)]given any $s\in\left[  0,T\right]  $, $x\in{\mathbb{R}}^{d}$, the
+process $X^{s,x}=\left(  X_{t}^{s,x}\left(  \omega\right)  ,t\in\left[
+s,T\right]  ,\omega\in\Omega\right)  $ defined as $X_{t}^{s,x}=\phi_{s,t}(x)$
+is a continuous $\mathcal{F}_{s,t}$-measurable solution of equation (\ref{SDE})
+
+\item[(b)] $P$-a.s., $\phi_{s,t}$ is a diffeomorphism, for all
+$0\leq s\leq t\leq T$, and the functions $\phi_{s,t}(x)$,
+$\phi_{s,t}^{-1}(x)$, $D\phi_{s,t}(x)$, $D\phi_{s,t}^{-1}(x)$ are
+continuous in $(s,t,x)$ (resp. of class $C^{1,\alpha}$ in $x$
+uniformly in $(s,t)$),
+
+\item[(c)] $P$-a.s., $\phi_{s,t}(x)=\phi_{s,u}(\phi_{u,t}(x))$ for all $0\leq
+s\leq u\leq t\leq T$ and $x\in{\mathbb{R}}^{d}$ and $\phi_{s,s}(x)=x$.
+\end{itemize}
+\end{definition}
+
+ As already mentioned
+the main ingredient  to obtain the regularity of the flow is the
+observation that the time integral
+$\int_{0}^{t}b\left(s,X_{s}^x\right)  ds$ has richer regularity
+properties than expected only on the basis of the regularity of
+$b$; such properties, coming from the interaction between $b$ and
+the local behavior of $W_{t}$, and ultimately related to the local
+time (or occupation measure) of the Brownian motion $W_{t}$, may
+be revealed by the Tanaka approach to the definition of local
+time: the integral $\int_{0}^{t}b\left(  s,X_{s}^x\right)  ds$ may
+be considered as the corrector of an It\^{o} formula, and the
+other terms of the formula have better properties than
+$\int_{0}^{t}b\left( s,X_{s}^x\right)  ds$.
+
+
+
+\medskip
+Let $\lambda>0$ be fixed. Let us extend $b$ to the whole
+$[0,\infty )\times{\mathbb{R}}^{d}$ by setting
+ \begin{equation} \label{bb}
+ b(t,x)=b(T,x),\;\;\;
+t\geq T,\;\;  x\in{\mathbb{R}}^{d}.
+ \end{equation} Given a function
+$f:[0,+\infty)\times{\mathbb{R}} ^{d}\rightarrow{\mathbb{R}}^{d}$
+consider the following parabolic
+ system (collecting $d$ independent equations):
+\begin{equation}
+\partial_{t}u_{\lambda}+L^{b}u_{\lambda}-\lambda u_{\lambda}=f,\;\;\;(t,x)\in
+(0,\infty)\times{\mathbb{R}}^{d} \label{eq:parabolic},
+\end{equation}
+where
+\begin{equation} \label{fr}
+L^{b}u=\frac{1}{2}\Delta u+b\cdot\nabla u
+ \end{equation} and
+ $u:[0,+\infty)\times{\mathbb{R}}
+ ^{d}\rightarrow{\mathbb{R}}^{d}$ (clearly \eqref{fr} has to be interpreted
+ componentwise).
+
+
+
+\vskip 1mm The next  result deals with Schauder estimates and is
+ known even in a more general form
+ (see  \cite{KP} and the references therein). Schauder estimates
+   of the type \eqref{stima} were first proved in  \cite{Br}.
+  We will only sketch a proof for the
+ sake of completeness.
+
+\begin{lemma}
+\label{schaud} Let $\lambda>0$, $b \in C^{\alpha}_{b,T}$, $\alpha
+\in (0,1),$ and $f:[0,+\infty)\times{\mathbb{R}}
+^{d}\rightarrow{\mathbb{R}}^{d}$ be a continuous and bounded such
+that $f(t,\cdot)\in
+C_{b}^{\alpha}({\mathbb{R}}^{d};{\mathbb{R}}^{d})$, $t\geq0$. Then
+there exists a unique bounded classical solution $u = u_{\lambda}$
+to equation
+(\ref{eq:parabolic}). The functions $u:[0,\infty)\times{\mathbb{R}}%
+^{d}\rightarrow{\mathbb{R}^d}$ and $\partial_{t}u$ are continuous.
+Moreover there exists $C>0$ (independent on $u$ and $f$) such that
+\begin{equation}
+\sup_{t\geq0}\Vert u(t,\cdot)\Vert_{C_{b}^{2+\alpha}}\leq
+C\sup_{t\geq0}\Vert f(t,\cdot)\Vert_{C_{b}^{\alpha}} \label{stima}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Uniqueness follows by the maximum principle (see \cite{Kr}). Let us consider existence.
+
+If
+   $L^{b}=\frac{1}{2}\triangle$, then the result follows
+by using the explicit formula
+\begin{equation}
+u(t,x)=\int_{t}^{+\infty}e^{-\lambda(r-t)}P_{r-t}f(r,\cdot)(x)dr=\int
+_{0}^{+\infty}e^{-\lambda s}P_{s}f(t+s,\cdot)(x)ds \label{heat}%
+\end{equation}
+(where $(P_{t})$ denotes the heat semigroup) and well known
+estimates on the spatial derivatives of $P_t g$ when $g \in
+C^{\alpha}_b$ and $t>0$. Let
+$L^{b}=\frac{1}{2}\triangle+b\cdot\nabla$. Thanks to the
+boundedness of $b$ we get easily a-priori estimates for equation
+(\ref{eq:parabolic}) (assuming that there exists a
+ classical bounded solution $u$  such that
+$\sup_{t\geq0}\Vert u(t,\cdot)\Vert_{C_{b}^{2+\alpha}}<\infty$).
+Then a standard continuity method (see for instance \cite{Kr})
+allows to get the existence of the solution which verifies
+equation (\ref{eq:parabolic}). The proof is complete.
+\end{proof}
+
+\vskip 1mm  We also need the following simple lemma.
+
+
+\begin{lemma}
+\label{grad} Under the assumptions of Lemma \ref{schaud}
+ let $u_{\lambda}$ be the solution to  (\ref{eq:parabolic}%
+). Then
+\[
+\sup_{t\geq0}\Vert \nabla u_{\lambda}(t,\cdot)\Vert_{0}\rightarrow
+0,\;\;\;as\;\;\lambda\rightarrow+\infty.
+\]
+\end{lemma}
+
+\begin{proof}
+We write $\partial_{t}u_{\lambda}+\frac{1}{2}\triangle u_{\lambda}-\lambda
+u_{\lambda}=f-b\cdot\nabla u_{\lambda}.$
+
+Using the well known estimate for the heat semigroup $\Vert\nabla P_{t}%
+g\Vert_{0}\leq\frac{C}{t^{\frac{1}{2}}}\Vert g\Vert_{0},$ $g\in C_{b}%
+({\mathbb{R}}^{d}),$ $t>0,$ and, differentiating in equation
+(\ref{eq:parabolic}), we get easily, for any $\lambda>0$,
+\[
+\Vert\nabla u_{\lambda}\Vert_{0}\leq\frac{c}{\lambda^{\frac{1}{2}}}(\Vert
+f\Vert_{0}+\Vert b\cdot\nabla u_{\lambda}\Vert_{0})\leq\frac{c}{\lambda
+^{\frac{1}{2}}}\Vert f\Vert_{0}+\frac{c}{\lambda^{\frac{1}{2}}}\Vert
+b\Vert_{0}\Vert\nabla u_{\lambda}\Vert_{0},
+\]
+where the suprema are taken on $[0,\infty)\times{\mathbb{R}}^{d}$. Considering
+$\lambda>c^{2}\Vert b\Vert_{0}^{2}$, we get
+\[
+(1-\frac{c}{\lambda^{\frac{1}{2}}}\Vert b\Vert_{0})\,\Vert\nabla u_{\lambda
+}\Vert_{0}\leq\frac{c}{\lambda^{\frac{1}{2}}}\Vert f\Vert_{0}%
+\]
+and the assertion follows. The proof is complete.
+\end{proof}
+
+
+\begin{theorem}
+\label{th:flow1} Assume $b\in C_{b,T}^{{\alpha}}$.
+ Then we have the following facts.
+
+\begin{itemize}
+\item [(i)](pathwise uniqueness) For every $s\in\left[  0,T\right]
+$, $x\in{\mathbb{R}}^{d}$, the stochastic equation (\ref{SDE}) has
+a unique continuous adapted solution $X^{s,x}=\left(
+X_{t}^{s,x}\big( \omega\right) ,t\in\left[ s,T\right],$
+$\omega\in\Omega\big)  $.
+
+\item[(ii)] (differentiable flow) There exists a stochastic flow $\phi_{s,t}$
+of diffeomorphisms for equation (\ref{SDE}). The flow is also of class
+$C^{1+{\alpha}^{\prime}}$ for any ${\alpha}^{\prime}<{\alpha}$.
+
+\item[(iii)] (stability) Let $(b^{n})\subset C_{b,T}^{{\alpha}}$
+be a sequence of vector fields and $\phi^{n}$ the corresponding
+stochastic flows. If $b^{n}\rightarrow b$ in $C_{b,T}^{\alpha}$,
+then, for any $p\geq 1$,
+\begin{equation}
+\label{stability1}
+\lim_{n\rightarrow\infty}\sup_{x\in{\mathbb{R}}^{d}} \sup_{0\leq s\leq
+T} E[ \sup_{u \in [s,T]} |\phi_{s,u}^{n}(x)-\phi_{s,u}(x)|^{p}]=0.
+\end{equation}%
+\begin{equation}
+\label{stability2}
+\lim_{n\rightarrow\infty}\sup_{x\in{\mathbb{R}}^{d}}\sup_{0\leq s\leq
+T} E[  \sup_{u \in [s,T]} \Vert D\phi_{s,u}^{n}(x)-D\phi_{s,u}(x)\Vert^{p}]=0.
+\end{equation}
+(here $\Vert\cdot\Vert$ denotes the Hilbert-Schmidt norm).
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1} (auxiliary parabolic systems). For $\lambda>0$ consider the
+(vector valued) solution $\psi$ to the parabolic system
+ \begin{equation} \label{pde}
+\partial_{t}\psi_{\lambda}+L^{b}\psi_{\lambda}-\lambda\psi_{\lambda
+}=-b,\;\;\;(t,x)\in(0,\infty)\times{\mathbb{R}}^{d}%
+\end{equation}
+provided by an application of Lemma~\ref{schaud} (recall
+\eqref{bb}). Define
+\[
+\Psi_{\lambda}(t,x)=x+\psi_{\lambda}(t,x).
+\]
+%Notice that
+%\begin{equation}
+%\partial_{t}\Psi_{\lambda}+L^{b}\Psi_{\lambda}=\lambda\psi_{\lambda}.
+%\label{PDE capital psi}%
+%\end{equation}
+
+\begin{lemma} \label{diff} For  $\lambda $ large enough, such that
+ $\sup_{t\geq0}\Vert \nabla \psi_{\lambda}(t,\cdot)\Vert_{0} <1$ (see
+ Lemma \ref{grad}),
+ the following statements hold:
+
+{{\vskip 2mm \noindent }} (i) Uniformly in $t \in [0,+\infty)$,
+$\Psi_{\lambda}$ has bounded first and second spatial
+ derivatives and moreover  the second (Fr\'echet) derivative $D^2_x
+\Psi_{\lambda}$ is globally $\alpha$-H\"older continuous.
+
+
+{{\vskip 2mm \noindent }} (ii) \ for any  $t \ge 0$,
+ $\Psi_{\lambda} : \mathbb{R} ^d \to \mathbb{R} ^d$ is a diffeomorphism of class $C^2$.
+
+{{\vskip 2mm \noindent }} (iii)  $\Psi_{\lambda}^{-1}$ has bounded
+first and second spatial
+ derivatives, uniformly in $t \in [0,+\infty)$.
+\end{lemma}
+
+\begin{proof} Assertion (i) follows by Lemma \ref{schaud}.
+
+\vskip 2mm (ii) Recall the classical Hadamard theorem (see, for
+instance, \cite[page 330]{protter}): Let $g : \mathbb{R} ^d \to
+\mathbb{R} ^d$  be of class $C^2.$ Suppose that $\lim_{|x| \to
+\infty} |g(x) | = + \infty$ and that the Jacobian matrix $Dg(x)$
+is an isomorphism of $\mathbb{R} ^d$ for all $x \in \mathbb{R}
+^d$. Then $g$ is a
+ $C^2$-diffeomorphism of $\mathbb{R} ^d$.
+Applying this result to $\Psi_{\lambda}$, we get the assertion.
+
+% ci vuole anche la suriettivita'
+%Alternatively,  we can observe that by the inverse function
+%theorem we need only to prove that, for fixed $t$,
+%$\Psi_\lambda(t,\cdot)$ is injective.
+% But assume that $x,y \in \mathbb{R}^d$ satisfy $\Psi_\lambda(t,x)=\Psi_\lambda(t,y)$, then
+%$
+%x-y = \psi_\lambda(t,x)-\psi_\lambda(t,y)
+%$ and since $\psi_\lambda(t,\cdot)$ has a bounded gradient and $\|\nabla \psi_\lambda(t,\cdot)\|_0 < 1$ we obtain
+%$
+%|x-y| \le \|\nabla \psi_\lambda(t,\cdot)\| |x-y|
+% $ and thus $x=y$.
+
+
+\vskip 2mm (iii) We know that $ \Psi_{\lambda}^{-1} $ is of class
+$C^2$. Moreover
+$$
+D \Psi_{\lambda}^{-1}(t,y) = [D\Psi_{\lambda}(t,
+\Psi_{\lambda}^{-1} y)]^{-1} = [I + D\psi_{\lambda}(t,
+\Psi_{\lambda}^{-1} y)]^{-1}
+$$
+$$
+= \sum_{k \ge 0} (- D\psi_{\lambda}(t, \Psi_{\lambda}^{-1}
+y))^k,\;\;\; y \in \mathbb{R} ^d.
+$$
+It follows that
+$$ \sup_{t\geq0}\Vert D \Psi_{\lambda}^{-1}(t, \cdot)
+  \Vert_{0} \le \sum_{k \ge 0} \big (\sup_{t\geq0}
+   \Vert D\psi_{\lambda}(t, \cdot )
+     \Vert_{0} \big )^k < \infty.
+$$
+ This shows the boundedness of the first derivative.
+ Arguing in a similar way we get also the
+ boundedness of the second derivative since
+ $$
+ D^2 \Psi_\lambda^{-1}(t,y) =  -  [D\Psi_{\lambda}(t,
+\Psi_{\lambda}^{-1} y)]^{-1} D^2  \Psi_{\lambda}(t, \Psi_{\lambda}^{-1}(t,y)) \left\{ [D\Psi_{\lambda}(t,
+\Psi_{\lambda}^{-1} y)]^{-1} \right\}^{\otimes 2} .
+ $$
+\end{proof}
+
+\vskip 2mm
+ In the sequel we will use a value of $\lambda$ for which Lemma \ref{diff} holds
+ and simply write $\psi$ and $\Psi$ for $\psi_{\lambda}$ and
+$\Psi_{\lambda}$.
+
+\vskip 2mm \textbf{Step 2} (conjugated SDE). Define
+\[
+\widetilde{b}(t,y)=-\lambda\psi(t,\Psi^{-1}(t,y)),\quad\widetilde{\sigma
+}(t,y)=D\Psi(t,\Psi^{-1}(t,y))
+\]
+and consider, for every $s\in\left[  0,T\right]  $ and
+$y\in{\mathbb{R}}^{d}$,
+the SDE%
+\begin{equation}
+Y_{t}=y+\int_{s}^{t}\tilde{\sigma}(u,Y_{u})dW_{u}+\int_{s}^{t}\widetilde
+{b}(u,Y_{u})du,\qquad t\in\lbrack s,T]. \label{conjugated SDE}
+\end{equation}
+This equation is equivalent to equation (\ref{SDE}), in the
+following sense.\ If $X_{t}$ is a solution to \eqref{SDE}, then
+$Y_{t}=\Psi(t,X_{t})$ verifies equation (\ref{conjugated SDE})
+with $y=\Psi(s,x)$: it is sufficient to apply It\^{o} formula to
+$\Psi(t,X_{t})$ and use equation (\ref{pde}). Viceversa, given a
+solution $Y_{t}$ of equation (\ref{conjugated SDE}), let
+$X_{t}=\Psi^{-1}(t,Y_{t})$; let us prove that $X_{t}$ is a
+solution of \eqref{SDE} with $x=\Psi^{-1}(s,y)$. In the sequel
+summation over repeated indices is understood. We set
+  $\rho(t,\cdot)=\Psi^{-1}(t,\cdot)$. Using Lemma \ref{diff},
+   a direct application of It\^{o} formula gives
+\[
+dX_{t}^{i}=\nabla_{j}\rho_{t}^{i}(Y_{t})\,\widetilde{b}_{t}^{j}(Y_{t}%
+)dt\,+\,\nabla_{j}\rho_{t}^{i}(Y_{t})\widetilde{\sigma}_{t}^{jk}(Y_{t}%
+)dW_{t}^{k}
+$$ $$+\frac{1}{2}\nabla_{j}\nabla_{k}\rho_{t}^{i}(Y_{t})\widetilde
+{\sigma}_{t}^{j\ell}(Y_{t})\widetilde{\sigma}_{t}^{k\ell}(Y_{t})dt+\partial
+_{t}\rho_{t}^{i}(Y_{t})dt
+\]
+and since $(\nabla\rho_{t})^{ij}(y)=\nabla_{j}\rho_{t}^{i}(y)=[((\nabla
+\Psi_{t})(\rho_{t}(y)))^{-1}]^{ij}=[\tilde{\sigma}_{t}(y)^{-1}]^{ij},$
+\[
+\nabla_{k}\nabla_{\ell}\rho_{t}^{i}(y)=-[\tilde{\sigma}_{t}(y)^{-1}%
+]^{im}(\nabla_{a}\nabla_{b}\Psi_{t}^{m})(\rho_{t}(y))[\tilde{\sigma}%
+_{t}(y)^{-1}]^{ak}[\tilde{\sigma}_{t}(y)^{-1}]^{b\ell}%
+\]
+and $\partial_{t}\rho_{t}(y)^{i}=[\tilde{\sigma}_{t}(y)^{-1}]^{ij}\partial
+_{t}\Psi_{t}(\rho_{t}(y))^{j}$. The diffusion coefficient in the equation for
+$dX$ is $\nabla\rho_{t}(y)\widetilde{\sigma}_{t}(y)=I$ while the computation
+of the drift gives:
+\[%
+\begin{split}
+&  \nabla_{j}\rho_{t}(y)^{i}\tilde{b}_{t}(y)^{j}+\frac{1}{2}\nabla_{j}%
+\nabla_{k}\rho_{t}^{i}(y)\widetilde{\sigma}_{t}^{j\ell}(y)\widetilde{\sigma
+}_{t}^{k\ell}(y)+\partial_{t}\rho_{t}^{i}(y)\\
+&  \qquad=[\tilde{\sigma}_{t}(y)^{-1}]^{ij}\left[  -\lambda\psi_{t}(\rho
+_{t}(y))^{j}-\frac{1}{2}(\Delta\psi_{t}^{j})(\rho_{t}(y))+\partial_{t}\psi
+_{t}(\rho_{t}(y))^{j}\right] \\
+&  \qquad=[\tilde{\sigma}_{t}(y)^{-1}]^{ij}\left[  b_{t}(\rho_{t}%
+(y))^{k}(\nabla_{k}\Psi_{t}^{j})(\rho_{t}(y))\right] \\
+&  \qquad=[\tilde{\sigma}_{t}(y)^{-1}]^{ij}\tilde{\sigma}_{t}(\rho
+_{t}(y))^{jk}b_{t}(\rho_{t}(y))^{k}=b_{t}(\rho_{t}(y))^{i}%
+\end{split}
+\]
+so we obtain equation~(\ref{SDE}).
+
+\textbf{Step 3} (proof of (i) and (ii)). We have  clearly
+$\widetilde{b}$ and $\widetilde{\sigma}\in C_{b,T}^{1+{\alpha}}$.
+By classical results (see \cite[Chapter 2]{K}) this implies
+existence and uniqueness of a strong solution $Y$ of equation
+(\ref{conjugated SDE}) and even the existence of a
+$C^{1,\alpha^{\prime}}$ ($\alpha^{\prime}<\alpha$) stochastic flow
+of diffeomorphisms $\varphi_{s,t}$ associated to equation
+(\ref{conjugated SDE}). By the results of steps 1 and 2, these
+facts hold true for equation~(\ref{SDE}) and     $\phi_{s,t} =
+\Psi^{-1}_t \circ \varphi_{s,t} \circ \Psi_s$ is the corresponding
+flow.
+
+
+
+
+
+\vskip 2mm \textbf{Step 4} (proof of (iii)). Let $\psi^{n}$ be the
+solution of the parabolic problem associated to $b_{n}$. Since
+$b^{n}\rightarrow b$ in $C_{b,T}^{\alpha}$. By Lemma~\ref{schaud}
+we have $\psi^{n}\rightarrow\psi$ in $C_{b,T}^{2+{\alpha}}$.
+Consider the flows $\varphi_{s,t}^{n}=\Psi
+_{t}^{n}\circ\phi_{s,t}^{n}\circ(\Psi_{s}^{n})^{-1}$ which satisfy
+\begin{equation}
+\varphi_{s,t}^{n}(y)=y+\int_{s}^{t}\widetilde{b}_{u}^{n}\circ\varphi
+_{s,u}^{n}(y)du+\int_{s}^{t}\widetilde{\sigma}_{u}^{n}\circ\varphi
+_{s,u}^{n}(y)\cdot dW_{u},
+\end{equation}
+We have
+$\widetilde{\sigma}_{u}^{n}\rightarrow\widetilde{\sigma}_{u}$
+ and $\widetilde{b}_{u}^{n}\rightarrow\widetilde {b}_{u}$ in
+$C_{b,T}^{1+{\alpha}}$. By standard argument using the Gronwall
+lemma, the Doob inequality and the Burkholder inequality
+%and Kolmogorov lemma
+%
+%
+%
+%
+%
+%
+%
+(compare, for instance, with the proof of \cite[Theorem
+II.2.1]{K})) we obtain \eqref{stability1}.
+%By an easy comparison
+%argument based on eqn.~(\ref{eq:approx-phi})
+%and~(\ref{eq:approx-Dphi}) we obtain that $\phi^n\to \phi$ in
+%$C^{1}$
+%
+%
+%
+%
+%
+%
+%
+
+Concerning the derivative of the stochastic flow, we first prove
+that
+ there exists $C>0$ such that
+\begin{equation}
+\sup_{x\in{\mathbb{R}}^{d}} \sup_{0\leq s \leq T}  E[\sup_{u \in [s,T]}\Vert D\phi_{s,u}%
+^{n}(x)\Vert^{p}]\leq C, \label{bound}
+\end{equation}
+for any $n\in \mathbb{N}$ and $p\geq 1$ (here $\Vert\cdot\Vert$
+denotes the Hilbert-Schmidt norm).
+
+ Arguing as in the proof of \cite[Theorem II.3.1]{K}, we get the
+ following linear equation for the derivative $D\phi_{s,t}(x)$
+\begin{equation} \label{dove}
+\begin{split}
+ \lbrack D\Psi_{t}(\phi_{s,t}(x))] D\phi_{s,t}(x)  &  =D\Psi_{s}(x)
+  +\int_{s}
+^{t}[D^{2}\Psi_{u} (\phi_{s,u}(x))]D\phi_{s,u}(x)dW_{u}\\
+& -\lambda\int_{s}^{t}[D\psi_{u}(\phi_{s,u}(x))]D\phi_{s,u}(x)du,
+\end{split}
+\end{equation}
+$ 0 \le s\le t \le T, \; x \in \mathbb{R}^d.$ Thanks to
+\eqref{stima}, we get that  $\psi^{n}\rightarrow\psi$ in
+$C_{b,T}^{2+{\alpha}}$. Using this fact together with
+\eqref{bound} and \eqref{dove}, we finally obtain, for any $p\geq
+1$,
+\begin{equation} \label{stima1}
+\lim_{n\rightarrow\infty}\sup_{x\in{\mathbb{R}}^{d}}\sup_{0\leq
+s\leq T} E[\sup_{u \in [s,T]}\Vert
+D\phi_{s,u}^{n}(x)-D\phi_{s,u}(x)\Vert^{p}]=0.
+\end{equation}
+\end{proof}
+
+\vskip 2mm We show now that the inverse flow ${\phi}_{s,t}^{-1}$
+is directly related to the solutions of a simple backward
+stochastic differential equations, of the same form as the
+original one (only the drift has opposite sign). This result will
+be useful   to prove uniqueness for our SPDE.
+
+
+\begin{lemma}\label{fra}
+\bigskip
+Under  Hypothesis \ref{hy1} the process $\left(
+\phi_{s,t}^{-1}\left(  y\right)  \right) _{s\in\left[ 0,t\right]
+}$ is the unique solution of the backward SDE
+\[
+\phi_{s,t}^{-1}\left(  y\right)  =y-\int_{s}^{t}b_{r}\left(  \phi_{r,t}%
+^{-1}\left(  y\right)  \right)  dr-\left[  W_{t}\left(
+\omega\right) -W_{s}\left(  \omega\right)  \right].
+\]
+and
+\begin{equation}
+\sup_{x\in{\mathbb{R}}^{d}} \sup_{0\leq u \leq T}  E[\sup_{s \in [0,u]}\Vert D\phi^{-1}_{s,u}%
+(x)\Vert^{p}]<\infty
+ \label{bound-inv}
+\end{equation}
+for any $p\ge 1$.
+\end{lemma}
+
+\begin{proof} We have%
+\begin{align*}
+\phi_{s,t,\omega}\left(  x\right)   &  =x+\int_{s}^{t}b_{r}\left(
+\phi_{s,r,\omega}\left(  x\right)  \right)  dr+W_{t}\left(
+\omega\right)
+-W_{s}\left(  \omega\right) \end{align*}
+and then
+\begin{align*}
+\phi_{s,t,\omega}\left(  \phi_{s,t,\omega}^{-1}\left(  y\right)
+\right)   & =\phi_{s,t,\omega}^{-1}\left(  y\right)
++\int_{s}^{t}b_{r}\left( \phi_{s,r,\omega}\left(
+\phi_{s,t,\omega}^{-1}\left(  y\right)  \right) \right)
+dr+W_{t}\left(  \omega\right)  -W_{s}\left(  \omega\right)  .
+\end{align*}
+But
+$
+\phi_{s,r,\omega}\circ\phi_{s,t,\omega}^{-1}=\phi_{r,t,\omega}^{-1}%
+$
+and thus
+\[
+y=\phi_{s,t,\omega}^{-1}\left(  y\right)  +\int_{s}^{t}b_{r}\left(
+\phi_{r,t,\omega}^{-1}\left(  y\right)  \right)  dr+W_{t}\left(
+\omega\right)  -W_{s}\left(  \omega\right)  .
+\]
+The proof of the bound~(\ref{bound-inv})  is then similar to that
+of eq.~(\ref{stima1}) once taken into account the backward
+character of the equation.
+\end{proof}
+
+
+
+
+
+
+
+\begin{remark}
+\label{civuole}  Note that, for any $M > 0$ and $s \in[0,T]$, using the
+stability estimates in Th.~\ref{th:flow1}
+%and Lemma \ref{fra}
+and the bounds
+\[
+E \Big [  \int_{|y|\leq M} \sup_{u\in[s,T]}
+ |\phi_{s,u}^{n}(y)-\phi_{s,u}(y)|^{p}dy \, +
+\int_{|y|\leq M} \sup_{u\in[s,T]} \Vert D\phi_{s,u} ^{n}(y)- D
+\phi_{s,u} (y)\Vert^{p}dy \Big]
+\]
+$$ \leq C \Big(
+\sup_{x\in{\mathbb{R}}^{d}}E[ \sup_{u\in[s,T]}  |\phi_{s,u}^{n}%
+(x)-\phi_{s,u}(x)|^{p}] +  \sup_{x\in{\mathbb{R}}^{d}}
+ E[\sup_{u \in [s,T]}\Vert D\phi_{s,u}
+^{n}(x)- D \phi_{s,u} (x)\Vert^{p}] \Big),
+$$
+ with $p \ge 1$, and possibly passing
+ to a subsequence, still denoted by $\phi^{n}$, we have that
+$\phi_{s,t}^{n}(x)$ and $D\phi_{s,t}^{n}(x)$ converge
+ respectively
+  to $\phi_{s,t}(x)$ and $D\phi_{s,t}(x)$, a.s in $x$ with
+$|x|\leq M$,  $P$-a.s. in $\omega\in\Omega$ and uniformly  in
+$t\in\lbrack s,T]$.
+\end{remark}
+
+In the sequel, we will often use the standard \textit{mollifiers
+approximation.} Let $\vartheta: {\mathbb{R}} ^{d} \to{\mathbb{R}}
+$ be a test function such that $0 \le\vartheta(x) \le1$, $x
+\in{\mathbb{R}} ^{d}$, $\vartheta (x)= \vartheta (-x)$,
+$\int_{{\mathbb{R}} ^{d}} \theta(x)dx =1$, Supp$(\vartheta)
+\subset$ $B(2)$, $\vartheta(x) =1, $ $x \in B(1)$ ($B(r)$ denotes
+the euclidean ball centered in 0 and with radius $r>0$). For any
+${\varepsilon} >0$, define $(\vartheta_{{\varepsilon} }) $,
+$\vartheta_{{\varepsilon} } (z) = {{\varepsilon} }^{-d}
+\vartheta(z / {\varepsilon} )$. Let $g : {\mathbb{R}} ^{d}
+\to{\mathbb{R}} ^{n}$ be a measurable function. The mollifiers
+approximation of $g$ is
+\begin{equation} \label{molli}
+g^{{\varepsilon} }(x) = g * \vartheta_{{\varepsilon} } (x) =
+\int_{{\mathbb{R}} ^{d}} g(x-y) \vartheta_{{\varepsilon} } (y)
+dy,\;\;\; x \in{\mathbb{R}} ^{d}.
+\end{equation}
+If $g$ depends also on time $t$, we consider $g^{\varepsilon}(t,
+x) = (g(t, \cdot) * \vartheta_{{\varepsilon} }) (x)$, $t
+\in[0,T]$, $x \in \mathbb{R} ^d$.
+
+{{\vskip2mm \noindent}} Let $\phi_{t} = \phi_{0,t}$ be the
+stochastic flow associated to equation (\ref{SDE}) starting at
+$0$. Let us  define  the Jacobian determinant of the flow $\phi $:
+\[
+J_{s,t}(x) = \det [D \phi_{s,t}(x)],\;\; 0 \le s \le t \le T, \;\;
+\mbox{and}\;\; J_{t}(x) = \det [D \phi_{t}(x)],\;\; t \in [0,T].
+\]
+
+
+
+We finish the section with a result of independent
+interest. It concerns a special situation when the given vector field $b$ is
+of zero distributional divergence and give rise to a measure-preserving flow.
+
+\begin{lemma}
+\label{lemma change} Assume ${\mathrm{div}\,}b(t,\cdot)=0$,
+$t\in\lbrack0,T],$ in the sense of distributions. Then the
+stochastic flow $\phi$ is $P$-a.s. measure-preserving, i.e.,
+$J_{s,t}(x)=1$, for all $0\leq s\leq t\leq T$ and all
+$x\in{\mathbb{R}}^{d}$, $P$-a.s..
+\end{lemma}
+
+\begin{proof}
+Let $b_{n}$ be $C_{b,T}^{\infty}$ vector fields that converges to
+$b$ in $C_{b,T}^{{\alpha}}$ and such that
+${\mathrm{div}\,}b_{n}=0$. The functions $b_{n}$ can be
+constructed as in \eqref{molli}.  Let $\phi^{n}$ be the associated
+smooth diffeomorphism. Applying \cite[Theorem II.3.1]{K} and the
+well known Liouville theorem, we get that the diffeomorphism
+$\phi^{n}$ preserves the Lebsegue measure since $b_{n}$ is a
+divergenceless vector field.
+%and the vector fields associated to the noise are
+%constant (see [Kunita]).
+%
+%
+%
+%
+%
+%
+%
+Then $\det [D\phi_{s,t}^{n}(x)]=1$ for all $0\leq s<t\leq T$ and
+all $x$, $P$-a.s.. Fix $x\in{\mathbb{R}}^{d}$ and $s \in[0,T]$. By
+\eqref{stima1}, there exists a subsequence (possibly depending on
+$x,s$ and still denoted by $D\phi_{s,u}^{n}$) such that $P$-a.s.
+\[
+\sup_{s\leq u\leq T}\Vert D\phi_{s,u}^{n}(x)-D\phi_{s,u}(x)\Vert
+^{2}\rightarrow0,\;\;\mbox{as}\;\;n\rightarrow\infty.
+\]
+We find that $J_{s,t}(x)=1$, for any $x\in{\mathbb{R}}^{d}$,  and
+so $\phi_{s,t}$ is a measure-preserving diffeomorphism $P$-a.s.
+for any $s<t\leq T$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%
+%
+%
+%
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%
+%
+%
+%
+%
+
+\section{Stochastic transport equation. Existence of weak solutions}
+
+\label{sec:transp}
+%Throughout this
+%section we assume the condition $b\in C^{{\alpha}}$ for some ${\alpha}>0$ and
+%$
+%{\mathrm{div}\,}  b \in L^q
+%$
+% for some $q \ge 1$. We let $p$ the conjugate exponent $1/p = 1-1/q$.
+%
+%
+%
+%
+%
+%
+%
+
+%\textbf{METTERE UN REMARK SUL CASO $u_{0} \in L^{p}$}
+
+\begin{definition}
+\label{def solution}Given $u_{0}\in L^{\infty}({\mathbb{R}}^{d})$, a weak
+$L^{\infty}$-solution of the Cauchy problem (\ref{SPDE})\ is a measurable
+function $(u(t,x,\omega),t\geq0,x\in{\mathbb{R}}^{d},\omega\in\Omega)$ such that
+
+\begin{itemize}
+\item [(i)]$\sup_{t\in\lbrack0,T],x\in{\mathbb{R}}^{d},\omega\in\Omega}\left|
+u(t,x,\omega)\right|  <\infty$
+
+\item[(ii)] for any test function $\theta\in C_{0}^{0}({}{\mathbb{R}}^{d})$,
+the process $t\mapsto\int_{{}{\mathbb{R}}^{d}}u(t,x)\theta(x)dx$ is continuous
+and ${}\mathcal{F}_{t}$-adapted;
+
+\item[(iii)] for any test function $\theta\in C_{0}^{\infty}({}{\mathbb{R}%
+}^{d})$, the process $t\mapsto\int_{{}{\mathbb{R}}^{d}}u(t,x)\theta(x)dx$ is
+an ${}\mathcal{F}_{t}$-semimartingale and
+\begin{align*}
+\int_{{\mathbb{R}}{}^{d}}u(t,x)\theta(x)dx  &  =\int_{{\mathbb{R}}{}^{d}}%
+u_{0}(x)\theta(x)dx+\int_{0}^{t}ds\int_{{}{\mathbb{R}}^{d}}u(s,x)[b_{s}%
+(x)\cdot\nabla\theta(x) \\ & +{\mathrm{div}\,}b_s(x)\theta(x)]dx
+  +\sum_{i=1}^{d}\int_{0}^{t}\left(  \int_{{}{\mathbb{R}}^{d}}u(s,x)D_{i}%
+\theta(x)dx\right)  \circ dW_{s}^{i}%
+\end{align*}
+\end{itemize}
+\end{definition}
+
+
+%The following result is well known.({\bf toglierlo??})
+%\begin{proposition}
+%\label{lemma:diff-lp} If $\Phi$ is a diffeomorphism and $f\in
+%L^{p}(\mathbb{R} ^d)$ then $f\circ\Phi\in L^{p}(\mathbb{R} ^d)$,
+%\[
+%\int_{\mathbb{R} ^d}|f(\Phi(x))|^{p}dx=\int_{\mathbb{R} ^d}|f(y)|^{p}|J\Phi^{-1}(y)|dy,
+%\]%
+%\[
+%\int_{\mathbb{R} ^d} f(\Phi(x))g(x)dx=\int_{\mathbb{R} ^d}
+%f(y)g(\Phi^{-1}(y))|J\Phi^{-1}(y)|dy,
+%\]
+%for any continuous function $g$ with compact support. Here
+%$J\Phi^{-1}$ denotes the Jacobian determinant of $D\Phi^{-1}$
+%\end{proposition}
+
+\begin{theorem}
+\label{them SPDE n1} Assume  Hypothesis \ref{hy1} and $
+\mathrm{div}\,  b \in L_{}^{1}\left(   0,T;
+L^1_{loc}(\mathbb{R}^d)\right). $ Given $u_{0}\in
+L^{\infty}({}{\mathbb{R}}^{d})$, the stochastic process $u(t,x)$
+defined as $u(t,x):=u_{0}(\phi_{t}^{-1}(x))$ is a solution of
+(\ref{SPDE}).
+\end{theorem}
+
+\begin{proof}
+The function $u_{0}(\phi_{t}^{-1}(x))$ is bounded and measurable
+in $\left( t,x,\omega\right)  $. If $\theta \in C^0_0(\mathbb{R}
+^d)$, by changing variable we have:
+%from
+% Proposition~\ref{lemma:diff-lp},
+\[
+\int_{{}{\mathbb{R}}^{d}}u(t,x)\theta(x)dx=\int_{{}{\mathbb{R}}^{d}}%
+u_{0}(y)\theta(\phi_{t}(y))J_{t}(y)dy .
+\]
+ This easily yields
+property (ii) of Definition \ref{def solution}.
+
+To prove property (iii) consider the flow  $\phi
+_{t}^{\varepsilon}$ for the regularized vector field
+$b^{\varepsilon}$ (see \eqref{molli}) and let
+$J_{t}^{\varepsilon}(y)$ be its Jacobian determinant. Note that
+$u_0 \circ (\phi^\varepsilon_t)^{-1} \to u_0 \circ \phi_t^{-1}$
+weakly in $L^{\infty}(\mathbb{R}^d)$, uniformly in $t \in [0,T]$
+and $P$-a.s., indeed for $\theta \in C_0^\infty(\mathbb{R} ^d)$ we
+have
+$$
+\int_{{}{\mathbb{R}}^{d}} (u_0 \circ (\phi^\varepsilon_t)^{-1}
+)(y) \theta(y) dy = \int_{{}{\mathbb{R}}^{d}} u_0(y)
+\theta(\phi^{\varepsilon}_t(y)) J_t^\varepsilon(y) dy \to
+\int_{{}{\mathbb{R}}^{d}} u_0(y) \theta(\phi_t(y)) J_t(y) dy
+$$
+using Remark~\ref{civuole}. By density we can extend this
+convergence to any $\theta \in L^1(\mathbb{R} ^d)$. Moreover since
+$b^{\varepsilon}$ is smooth, it is easy to prove that
+\[
+dJ_{t}^{\varepsilon}(y)={\mathrm{div}\,}b^{\varepsilon}_t(\phi_{t}^{\varepsilon
+}(y))J_{t}^{\varepsilon}(y)dt.
+\]
+and by the It\^o formula we find
+\begin{equation} \label{ii}
+\begin{split}
+\int_{{\mathbb{R}}^{d}}u_{0}(y)\theta(\phi_{t}^\varepsilon
+(y))J_{t}^\varepsilon (y)dy  &
+=\int_{{\mathbb{R}}^{d}}u_{0}(y)\theta(y)dy+\int_{0}^{t}ds\int_{{\mathbb{R}%
+}^{d}}u_{0}(y)L^{b^\varepsilon}\theta(\phi_{s}^\varepsilon (y))J_{s}^\varepsilon(y)dy\\
+&
++\int_{0}^{t}ds\int_{{\mathbb{R}}^{d}}u_{0}(y)\theta(\phi_{s}^\varepsilon
+(y)){\mathrm{div}\, }b^\varepsilon_s
+(\phi_{s}^\varepsilon(y))J_{s}^\varepsilon(y)dy\\
+&
++\int_{0}^{t}dW_{s}\cdot\int_{{\mathbb{R}}^{d}}u_{0}(y)\nabla\theta
+(\phi_{s}^\varepsilon(y))J_{s}^\varepsilon(y)dy.
+\end{split}
+\end{equation}
+
+To pass to the limit  as $\varepsilon \to 0$ the only difficulty
+is given by the term
+$$
+\int_{0}^{t}ds\int_{{\mathbb{R}}^{d}}u_{0}(y)\theta(\phi_{s}^\varepsilon
+(y)){\mathrm{div}\, }b^\varepsilon_s
+(\phi_{s}^\varepsilon(y))J_{s}^\varepsilon(y)dy =
+\int_{0}^{t}ds\int_{{\mathbb{R}}^{d}}u_{0}((\phi_{s}^\varepsilon)^{-1}
+(y))\theta(y){\mathrm{div}\, }b^\varepsilon_s (y)dy
+$$
+Now ${\mathrm{div}\, }b^\varepsilon$ converges in  $
+L_{}^{1}\left( 0,T; L^1_{loc}(\mathbb{R}^d)\right)$ to
+${\mathrm{div}\, }b$
+  and, using also the previous weak convergence of
+ $u_0 \circ (\phi^\varepsilon_t)^{-1}$,
+  we can conclude the convergence, for any fixed $\omega$,
+   of this term toward
+$$
+\int_{0}^{t}ds\int_{{\mathbb{R}}^{d}}u_{0}((\phi_{s})^{-1}
+(y))\theta(y){\mathrm{div}\, }b_s (y)dy
+$$
+as required. For the stochastic integral we have
+ $$
+\int_{0}^{t}dW_{s}\cdot\int_{{\mathbb{R}}^{d}}u_{0}(y)\nabla\theta
+(\phi_{s}^\varepsilon(y))J_{s}^\varepsilon(y)dy \, \to \,
+ \int_{0}^{t}dW_{s}\cdot\int_{{\mathbb{R}}^{d}}u_{0}(y)\nabla\theta
+(\phi_{s}(y))J_{s}(y)dy
+ $$
+uniformly on $[0,T]$ in $L^2 (\Omega)$ as $\varepsilon \to 0$.
+Then we get
+\[%
+\begin{split}
+\int_{{\mathbb{R}}^{d}}u_{0}(y)\theta(\phi_{t}(y))J_{t}(y)dy  &
+=\int_{{\mathbb{R}}^{d}}u_{0}(y)\theta(y)dy+\int_{0}^{t}ds\int_{{\mathbb{R}%
+}^{d}}u_{0}(y)L^{b}\theta(\phi_{s}(y))J_{s}(y)dy\\
+&  +\int_{0}^{t}ds\int_{{\mathbb{R}}^{d}}u_{0}(y)\theta(\phi_{s}%
+(y)){\mathrm{div}\,}b(\phi_{s}(y))J_{s}(y)dy\\
+&  +\int_{0}^{t}dW_{s}\cdot\int_{{\mathbb{R}}^{d}}u_{0}(y)\nabla\theta
+(\phi_{s}(y))J_{s}(y)dy.
+\end{split}
+\]
+
+By writing the above formula with $\theta$ replaced by $\nabla_{i}\eta$, where
+$\eta$ is a test function, we discover that $\int_{{\mathbb{R}}^{d}}%
+u_{0}(y)\nabla\theta(\phi_{s}(y))J_{s}(y)dy$ is a semimartingale and so it can
+be integrated in the Stratonovich sense.
+
+Using the Stratonovich version of It\^{o} formula
+\[
+\theta(\phi_{t}(y))=\theta(y)+\int_{0}^{t}b(\phi_{s}(y))\cdot\nabla\theta
+(\phi_{s}(y))ds+\int_{0}^{t}\nabla\theta(\phi_{s}(y))\circ dW_{s}.
+\]
+and a stochastic Fubini theorem (see \cite{IW}) gives finally
+\[%
+\begin{split}
+\int_{{\mathbb{R}}^{d}}u_{0}(y)\theta(\phi_{t}(y))J_{t}(y)dy  &
+=\int_{{\mathbb{R}}^{d}}u_{0}(y)\theta(y)dy\\ & +\int_{0}^{t}ds\int_{{\mathbb{R}%
+}^{d}}u_{0}(y)b(\phi_{s}(y))\cdot\nabla\theta(\phi_{s}(y))J_{s}(y)dy\\
+&  +\int_{0}^{t}ds\int_{{\mathbb{R}}^{d}}u_{0}(y)\theta(\phi_{s}%
+(y)){\mathrm{div}\,}b(\phi_{s}(y))J_{s}(y)dy\\
+&  +\int_{0}^{t}dW_{s}\circ\int_{{\mathbb{R}}^{d}}u_{0}(y)\nabla\theta
+(\phi_{s}(y))J_{s}(y)dy
+\end{split}
+\]
+which is exactly the equation we want to prove.
+\end{proof}
+
+\section{Uniqueness of weak solutions}
+
+In the deterministic case with non-regular vector fields $b$, uniqueness of
+weak $L^{\infty}$-solutions is proved by means of the concept of renormalized
+solutions, see \cite{DiPernaLions}, \cite{Ambrosio}. The technical tool is a
+commutator lemma, where the role of the assumptions on $b$ is immediately visible.
+
+One of the usual forms of the commutator lemma is the following
+one, taken from \cite{Lions}, Chapter 2. Let
+$\vartheta_{\varepsilon}$ be the mollifiers introduced in
+\eqref{molli}; the convolution $\vartheta_{\varepsilon}\ast f$ $=
+\int\vartheta _{\varepsilon}\left( \cdot-x\right) f\left( x\right)
+dx$ is  extended also to
+distributions $f$.
+
+\vskip 1mm Let $\eta : \mathbb{R}^d \to \mathbb{R}^d$ be a
+$C^1$-diffeomorphism; in this section, we will  use the
+ following notation for the Jacobian determinant
+$$
+J \eta (x) = \text{det}[D \eta (x) ],\;\;\; x \in \mathbb{R}^d.
+$$
+
+Given $g\in L_{loc}^{\infty}\left(  \mathbb{R}%
+^{d},\mathbb{R}\right)  $, $v\in L_{loc}^{1}\left(  \mathbb{R}^{d}%
+,\mathbb{R}^{d}\right)  $ , $\mathrm{div}\,  v\in
+L_{loc}^{1}\left( \mathbb{R}^{d},\mathbb{R}\right)  $, denote by
+$v\cdot\nabla g$ the distribution defined on smooth compact
+support test functions $f$ as
+\[
+\left(  v\cdot\nabla g\right)  \left(  f\right)  :=-\int
+gv\cdot\nabla fdx-\int gf\mathrm{div}\,  v \, dx.
+\]
+Define also the commutator $\mathcal{R}_{\varepsilon}\left[  g,v\right]
+\left(  x\right)  $ as the (smooth) function%
+\[
+\mathcal{R}_{\varepsilon}\left[  g,v\right]  \left(  x\right)  =\left[
+\vartheta_{\varepsilon}\ast\left(  v\cdot\nabla g\right)  -v\cdot\nabla\left(
+\vartheta_{\varepsilon}\ast g\right)  \right]  \left(  x\right)  .
+\]
+
+\begin{lemma}
+Given
+\[
+v\in W^{1,1}\left(  \mathbb{R}^{d},\mathbb{R}^{d}\right)  ,\quad g\in
+L^{\infty}\left(  \mathbb{R}^{d},\mathbb{R}\right)  ,
+\]
+we have
+\[
+\int\left|  \mathcal{R}_{\varepsilon}\left[  g,v\right]  \left(  x\right)
+\right|  dx\leq C\left\|  v\right\|  _{W^{1,1}}\left\|  g\right\|
+_{L^{\infty}}%
+\]
+for some $C>0$ independent of $\varepsilon$, $v$ and $g$. Moreover,
+\[
+\lim_{\varepsilon\rightarrow0}\int\left|  \mathcal{R}_{\varepsilon}\left[
+g,v\right]  \left(  x\right)  \right|  dx=0.
+\]
+\end{lemma}
+
+The strong convergence of commutators requires some weak form of
+differentiability of $v$ or $g$. We do not impose it, so we have to use a
+relaxed form of this result. First, essentially with the same proof of the
+previous lemma one gets the following fact: distributional convergence of
+commutators holds under very weak conditions.
+
+{\it Distributional convergence is not sufficient to study the
+ deterministic PDE, while we can work with it in the stochastic
+case, as explained below.}
+
+% Denote
+% by $W_{r}^{1,1}\left(  \mathbb{R}^{d},\mathbb{R}\right)  $ (for $r>0$)
+% the space of $W^{1,1}\left(  \mathbb{R}^{d},\mathbb{R}\right)  $-functions
+
+For any $r>0$ denote by $B\left(  r\right)  $ is the
+ball centered at the origin of radius $r$ and by $C_{r}^{\infty}(  \mathbb{R}^{d},\mathbb{R})  $ the space
+of smooth functions with compact support in $B\left(  r\right)  $.
+Moreover, denote by
+% \begin{equation} \label{rr}
+%\| \cdot \|_{L_{r}^{1}}, \;\;\;  \| \cdot\|_{L^{\infty}_r}
+ %\end{equation}
+$\| \cdot \|_{L_{r}^{1}}$ and $\| \cdot\|_{L^{\infty}_r}$ respectively,  the $L^{1}$-norm and the $L^{\infty}$-norm on
+$B\left( r+1\right) $.
+
+
+\begin{lemma}
+Given
+\begin{align*}
+v  &  \in L_{loc}^{\infty}\left(  \mathbb{R}^{d},\mathbb{R}^{d}\right)
+,\quad{\mathrm{div}}v\in L_{loc}^{1}\left(  \mathbb{R}^{d},\mathbb{R}\right),
+\qquad
+g    \in L_{loc}^{\infty}\left(  \mathbb{R}^{d},\mathbb{R}\right)
+%,\quad \rho\in W_{loc}^{1,1}\left(
+%\mathbb{R}^{d},\mathbb{R}\right) \cap L_{loc}^{\infty}\left(
+%\mathbb{R}^{d},\mathbb{R}\right)
+\end{align*}
+for any $\rho \in C_r^\infty(  \mathbb{R}^{d},\mathbb{R})$ and
+for sufficiently small $\varepsilon$ we have
+\[
+\left|  \int\mathcal{R}_{\varepsilon}\left[  g,v\right]  \left(  x\right)
+\rho\left(  x\right)  dx\right|  \leq2\left\|  g\right\|  _{L_{r}^{\infty}%
+}\left[  \left\|  {\mathrm{div}}v\right\|  _{L_{r}^{1}}\left\|  \rho\right\|
+_{L_{r}^{\infty}}+\left\|  v\right\|  _{L_{r}^{\infty}}\left\|  \nabla
+\rho\right\|  _{L_{r}^{1}}\right]
+\]
+and
+\[
+\lim_{\varepsilon\rightarrow0}\int\mathcal{R}_{\varepsilon}\left[  g,v\right]
+\left(  x\right)  \rho\left(  x\right)  dx=0.
+\]
+\end{lemma}
+
+\begin{proof}
+The proof proceeds as the one of the previous lemma from \cite{Lions}, Chapter
+2: we prove the inequality for regular fields, then one can extend to
+non-regular ones and prove the convergence again first in the regular case. We
+omit the details of the second part and only prove the inequality.
+
+\textbf{Step 1}. Let us rewrite the expressions is a suitable way.
+\begin{equation*}
+\begin{split}
+\int & \mathcal{R}_{\varepsilon}\left[  g,v\right] (  x)  \rho(x) dx  = \int \left[
+\vartheta_{\varepsilon}\ast\left(  v\cdot\nabla g\right)  -v\cdot\nabla\left(
+\vartheta_{\varepsilon}\ast g\right)  \right] (  x) \rho(x) dx
+\\
+& = \iint [-g(x') v(x') \nabla_{x'} \vartheta_{\varepsilon}(x-x')
+- g(x') \vartheta_{\varepsilon}(x-x') \mathrm{div}\,  v(x') ]
+\rho(x) \, dx dx'
+\\ & \qquad +
+ \iint [g(x') v(x)  \vartheta_{\varepsilon}(x-x') \nabla_{x}\rho(x) + g(x')  \rho(x)  \vartheta_{\varepsilon}(x-x') \mathrm{div}\,  v(x) ] \, dx dx'
+\end{split}
+\end{equation*}
+by using $\nabla_{x'} \vartheta_{\varepsilon}(x-x')  = -\nabla_{x}
+\vartheta_{\varepsilon}(x-x') $ and integrating by parts in $x$
+the first term we get
+\begin{equation*}
+\begin{split}
+ & = \iint g(x')   \vartheta_{\varepsilon}(x-x')\nabla_{x}\rho(x)   [v(x)-v(x')]   \, dx dx'
+\\ & \qquad +
+ \iint g(x')  \rho(x)  \vartheta_{\varepsilon}(x-x')[ \mathrm{div}\,  v(x)-\mathrm{div}\,  v(x') ] \, dx dx'
+\end{split}
+\end{equation*}
+
+\textbf{Step 2}. Assume $\varepsilon$ so small that the support of
+$\vartheta_{\varepsilon}$ has diameter less than one. We have (using standard
+estimates on convolutions)
+\[
+\left|\int  \mathcal{R}_{\varepsilon}\left[  g,v\right] (  x)  \rho(x) dx \right|
+ \leq  2\left\|  g\right\|  _{L_{r}^{\infty}} \left\|
+v\right\|  _{L_{r}^{\infty}}\left\|  \nabla\rho\right\|
+_{L_{r}^{1}} + 2 \left\|  \rho\right\| _{L_{r}^{\infty}}\left\|
+g\right\|  _{L_{r}^{\infty}}\left\| \mathrm{div}\,  v\right\|
+_{L_{r}^{1}}
+\]%
+
+The inequality is proved. The second assertion follows using
+standard properties of mollifiers.  The proof is complete.
+\end{proof}
+
+\vskip 2mm In the proof of the uniqueness theorem the
+distributional convergence of commutators is sufficient but the
+commutator must be composed with the flow. This strategy would
+work in the deterministic case as well. But the main difficulty is
+that composition with the flow put into play the first derivatives
+of the Jacobian of the flow. This would impose too much regularity
+on $b$ in the deterministic case. On the contrary, in the
+stochastic case, we have a weakly differentiable Jacobian of the
+flow under mild assumptions on $b$, as explained in the previous
+section.
+
+First, let us write the previous weak commutator lemma in the case when
+commutators are applied to a diffeomorphism.
+
+
+\begin{corollary}
+\label{corollary commutator}Let $\phi$ be a $C^{1}$ diffeomorphism of
+$\mathbb{R}^{d}$. Assume
+\begin{align*}
+v  &  \in L_{loc}^{\infty}\left(
+\mathbb{R}^{d},\mathbb{R}^{d}\right) ,\quad{\mathrm{div}\, }v\in
+L_{loc}^{1}\left(  \mathbb{R}^{d},\mathbb{R}\right),\;\;\; g \in
+L_{loc}^{\infty}\left( \mathbb{R}^{d},\mathbb{R}\right)\\ & \quad
+J\phi^{-1}\in W_{loc}^{1,1}\left(\mathbb{R}^{d},\mathbb{R}\right).
+\end{align*}
+then for any $\rho \in C_r^\infty(  \mathbb{R}^{d},\mathbb{R})$
+\[
+\lim_{\varepsilon\rightarrow0}\int\mathcal{R}_{\varepsilon}\left[  g,v\right]
+\left(  \phi\left(  x\right)  \right)  \rho\left(  x\right)  dx=0.
+\]
+\end{corollary}
+
+\begin{proof}
+%For every $\rho\in C_{r}^{\infty}\left(  \mathbb{R}^{d},\mathbb{R}\right)  $,
+%Assume that the support of $\rho$ is contained in $B(r)$ for some $r > 0$ and
+Set
+$
+R_{r,\phi}:=\left|  \phi\left(  0\right)  \right|  +\left(  r+1\right)
+\left\|  D\phi\right\|  _{L_{r}^{\infty}}
+$.
+Using
+\[
+\left|  \phi\left(  x\right)  \right|  \leq\left|  \phi\left(  0\right)
+\right|  +\left\|  D\phi\right\|  _{L_{\rho}^{\infty}}\left|  x\right|
+\leq\left|  \phi\left(  0\right)  \right|  +r\left\|  D\phi\right\|
+_{L_{\rho}^{\infty}}%
+\]
+we  check that the map $\phi$ send the support of $\rho$ strictly in the ball of radius
+$R_{r,\phi}$.
+%
+%
+%Then there exists  a neighborhood  of the support of the function
+%$\rho\circ\phi^{-1}$ that is contained in $B\left(
+%R_{r,\phi}\right)  $ and for sufficiently small $\varepsilon$ we
+%have
+%\begin{align*}
+%\left|  \int\mathcal{R}_{\varepsilon}\left[  g,v\right]  \left(
+%\phi\left( x\right)  \right)  \rho\left(  x\right)  dx\right|
+%\leq2\left\| g\right\|  _{L_{R_{r,\phi}}^{\infty}}\left\|
+%{\mathrm{div}\, }v\right\| _{L_{R_{r,\phi}}^{1}}\left\|  \rho\right\|
+%_{L_{r}^{\infty}}\left\|
+%J\phi^{-1}\right\|  _{L_{R_{r,\phi}}^{\infty}}\\
+%  +2\left\|  g\right\|  _{L_{R_{r,\phi}}^{\infty}}\left\|  v\right\|
+%_{L_{R_{r,\phi}}^{\infty}}\left( \left\| D\phi^{-1}
+%  \right\|_{L_{R_{r,\phi}}^{\infty}}  \left\|  \nabla\rho\right\|_{L_{r}^1}
+%  +\left\|  \rho\right\|  _{L_{r}^{\infty}}\left\|  \nabla
+%J\phi ^{-1}\right\|  _{L_{R_{r,\phi}}^{1}}\right)
+%\end{align*}
+%and
+Standing this preliminary fact, we simply have
+\[
+\int\mathcal{R}_{\varepsilon}\left[  g,v\right]  \left(  \phi\left(  x\right)
+\right)  \rho\left(  x\right)  dx=\int\mathcal{R}_{\varepsilon}\left[
+g,v\right]  \left(  y\right)  \rho_{\phi}\left(  y\right)  dx
+\]
+where the function
+$
+\rho_{\phi}\left(  y\right)  :=\rho\left(  \phi^{-1}\left(  y\right)  \right)
+J\phi^{-1}\left(  y\right)
+$
+has the support strictly contained in the ball of radius $R_{r,\phi}$. Thus by
+the previous lemma
+$$
+\left|  \int\mathcal{R}_{\varepsilon}\left[  g,v\right]  \left(
+\phi\left( x\right)  \right)  \rho\left(  x\right)  dx\right|
+\leq2\left\|  g\right\| _{L_{R_{r,\phi}}^{\infty}}\Big[  \left\|
+{\mathrm{div}\, }v\right\|
+_{L_{R_{r,\phi}}^{1}}\left\|  \rho_{\phi}\right\|  _{L_{R_{r,\phi}}^{\infty}%
+}$$ $$  +\left\|  v\right\|  _{L_{R_{r,\phi}}^{\infty}}\left\|
+\nabla\rho_{\phi }\right\|  _{L_{R_{r,\phi}}^{1}}\Big]  .
+$$
+To conclude, it is sufficient to notice that
+$
+\left\|  \rho_{\phi}\right\| _{L_{R_{r,\phi}}^{\infty}}\leq
+\left\| \rho\right\| _{L_{r}^{\infty}}\left\|
+J\phi^{-1}\right\| _{L_{R_{r,\phi }}^{\infty}}
+$
+and, denoting by $[D\phi^{-1}(y)]^*$ the adjoint matrix of
+ $[D\phi^{-1}(y)]$,
+\begin{align*}
+\left\|  \nabla\rho_{\phi}\right\|  _{L_{R_{r,\phi}}^{1}}
+\leq\left\| [D\phi^{-1}(\cdot)]^* \left(
+\nabla\rho\circ\phi^{-1}\right)(\cdot) \, J\phi^{-1}\left(
+\cdot\right) \right\| _{L_{R_{r,\phi}}^{1}}\\
++\left\| \left(
+\rho\circ\phi^{-1}\right) \cdot\nabla J\phi^{-1}\right\|
+_{L_{R_{r,\phi}}^{1}}
+ \\
+ \leq  \, \left\| D\phi^{-1}
+  \right\|_{L_{R_{r,\phi}}^{\infty}}   \, \left\|
+\nabla\rho\right\| _{L_{r}^{1}}+
+   \left\|
+\rho\right\|  _{L_{r}^{\infty}}\left\|  \nabla J\phi^{-1}\right\|
+_{L_{R_{r,\phi}}^{1}}.
+\end{align*}
+The proof is complete.
+\end{proof}
+
+\vskip 2mm We can now prove the uniqueness of weak
+$L^{\infty}$-solutions. We postpone
+ the main estimate on the derivatives
+ of the Jacobian of the flow to the next section.
+
+\begin{theorem}
+\label{thm SPDE n2} Under Hypothesis \ref{hy1} and \ref{hy2}, for every $u_{0}\in
+L^{\infty}$ there exists a unique weak $L^{\infty}$-solution of
+the Cauchy problem (\ref{SPDE}). Thus every solution
+$u(t,x,\omega)$ has the form
+$u(t,x,\omega):=u_{0}({\phi}_{t}^{-1}\left(  \omega\right)  x)$.
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1}. By linearity we have to prove that a solution with initial
+condition $u_{0}=0$ vanishes identically. Let us denote by $u$ such a solution.
+
+For $y\in{\mathbb{R}}^{d}$ fixed, ${\varepsilon}>0$, let us choose
+the test function $\theta(x):=\vartheta_{{\varepsilon}}\left(
+y-x\right)  $ in property (iii) of Definition \ref{def solution}.
+Let us define $u_{{\varepsilon}}(t,\cdot) = \vartheta_{{\varepsilon
+}} * u(t,\cdot)$.
+ We get
+\[
+u_{{\varepsilon}}(t,y)=u_{0,{\varepsilon}}(y)+\int_{0}^{t}A_{\varepsilon
+}\left(  s,y\right)  ds+\sum_{i=1}^{d}\int_{0}^{t}B_{\varepsilon}^{\left(
+i\right)  }\left(  s,y\right)  \circ dW_{s}^{i}%
+\]
+where
+\begin{align*}
+A_{\varepsilon}\left(  t,y\right)   &  :=\int_{{}{\mathbb{R}}^{d}%
+}u(t,x)\left\{  b_{t}(x)\cdot\nabla_{x}[\vartheta_{{\varepsilon}%
+}(y-x)]+{\mathrm{div}\, \,}b_{t}(x)\vartheta_{\varepsilon}(y-x)\right\}  dx\\
+B_{\varepsilon}^{\left(  i\right)  }\left(  t,y\right)   &  :=\int
+_{{}{\mathbb{R}}^{d}}u(t,x)D_{x_{i}}[\vartheta_{{\varepsilon}}\left(
+y-x\right)  ]dx.
+\end{align*}
+All these functions of $y$, namely $u_{{\varepsilon}}(t,y)$,
+$u_{0,{\varepsilon}}(y)$, ... , $B_{\varepsilon}^{\left(  i\right)  }\left(
+t,y\right)  $, are continuous in $t$, adapted, smooth (of class $C^{3}$ is
+required for the next computation) in $y$ (from (i) and (ii) of definition
+\ref{def solution}). By the  Stratonovich version of Kunita-It\^{o}-Wentzel formula
+(see~\cite[Th. 8.3 page 188]{K})
+\begin{align*}
+du_{{\varepsilon}}(t,{\phi}_{t}(x))  &  =A_{\varepsilon}\left(  t,{\phi}%
+_{t}(x)\right)  dt+\sum_{i=1}^{d}B_{\varepsilon}^{\left(  i\right)  }\left(
+t,{\phi}_{t}(x)\right)  \circ dW_{t}^{i}\\
+&  +\left(  b\cdot\nabla u_{{\varepsilon}}\right)  (t,{\phi}_{t}%
+(x))dt+\sum_{i=1}^{d}\left(  D_{i}u_{{\varepsilon}}\right)  (t,{\phi}%
+_{t}(x))\circ dW_{t}^{i}%
+\end{align*}
+But
+\[
+\left(  D_{i}u_{{\varepsilon}}\right)  (t,{y})={\int_{{\mathbb{R}}^{d}}%
+}u(t,x)D_{y_{i}}[\vartheta_{{\varepsilon}}\left(  y-x\right)  ]\,dx=-{\int
+_{{\mathbb{R}}^{d}}}u(t,x)D_{x_{i}}[\vartheta_{{\varepsilon}}\left(
+y-x\right)  ]\,dx
+\]
+hence
+\[
+du_{{\varepsilon}}(t,{\phi}_{t}(x))=\left[  A_{\varepsilon}\left(  t,{\phi
+}_{t}(x)\right)  +\left(  b\cdot\nabla u_{{\varepsilon}}\right)  (t,{\phi}%
+_{t}(x))\right]  dt
+\]
+namely (recall that the initial condition is zero)
+\[
+u_{{\varepsilon}}(t,{\phi}_{t}(x))=-
+ \int_{0}^{t}\mathcal{R}_{\varepsilon }\left[
+u_{s},b_{s}\right] \left(  {\phi}_{s}(x)\right)  ds
+\]
+where $\mathcal{R}_{\varepsilon}\left[  u_{s},b_{s}\right]  \left(
+{y}\right)  $ is the commutator defined above.
+
+\vskip 2mm \textbf{Step 2}. For every $\rho\in
+C_{r}^{\infty}({}{\mathbb{R}}^{d})$ (see the definition above) we
+have
+\[
+\int u_{{\varepsilon}}(t,{\phi}_{t}(x))\rho\left(  x\right)  dx=\int
+u_{{\varepsilon}}(t,{y})\rho\left(  {\phi}_{t}^{-1}(y)\right)  J{\phi}%
+_{t}^{-1}(y)dy.
+\]
+Given $t\in\left[  0,T\right]  $, with probability one, $u_{{\varepsilon}%
+}(t,{\cdot})$ converges weak-$*$  to $u(t,{\cdot})$ as $\varepsilon
+\rightarrow0$. With probability one, the function $y\mapsto\rho(  {\phi
+}_{t}^{-1}(y))  $ is at least continuous with compact support, and also
+the function $y\mapsto J{\phi}_{t}^{-1}(y)$ is continuous. Hence, $P$-a.s.,
+\begin{align*}
+\lim_{\varepsilon\rightarrow0}\int u_{{\varepsilon}}(t,{\phi}_{t}%
+(x))\rho\left(  x\right)  dx  &  =\int u(t,{y})\rho\left(  {\phi}_{t}%
+^{-1}(y)\right)  J{\phi}_{t}^{-1}(y)dy\\
+&  =\int u(t,{\phi}_{t}(x))\rho\left(  x\right)  dx.
+\end{align*}
+Therefore $\int\left(  \int_{0}^{t}\mathcal{R}_{\varepsilon}\left[
+u_{s},b_{s}\right]  \left(  {\phi}_{s}(x)\right)  ds\right)  \rho\left(
+x\right)  dx$ converges $P$-a.s. as $\varepsilon\rightarrow0$ and we have
+\[
+\int u(t,{\phi}_{t}(x))\rho\left(  x\right)  dx=\lim_{\varepsilon\rightarrow
+0}\int\left(  \int_{0}^{t}\mathcal{R}_{\varepsilon}\left[  u_{s},b_{s}\right]
+\left(  {\phi}_{s}(x)\right)  ds\right)  \rho\left(  x\right)  dx.
+\]
+The function $\left(  s,x\right)  \mapsto\mathcal{R}_{\varepsilon}\left[
+u_{s},b_{s}\right]  \left(  {\phi}_{s}(x)\right)  \rho\left(  x\right)  $ is
+continuous with compact support, $P$-a.s., hence
+\[
+\int u(t,{\phi}_{t}(x))\rho\left(  x\right)  dx=\lim_{\varepsilon\rightarrow
+0}\int_{0}^{t}\left(  \int\mathcal{R}_{\varepsilon}\left[  u_{s},b_{s}\right]
+\left(  {\phi}_{s}(x)\right)  \rho\left(  x\right)  dx\right)  ds.
+\]
+{\it If we prove that, given $\rho\in
+C_{0}^{\infty}({}{\mathbb{R}}^{d})$ and $t\in\left[  0,T\right] $,
+this $P$-a.s.-limit (which exists) is zero, then we have $u$
+identically zero (because ${\phi}_{t}$ is a bijection).
+}
+
+\vskip 2mm \textbf{Step 3}. Let us check, by means of Corollary
+\ref{corollary commutator}, that $$ s\mapsto\int_{\mathbb{R} ^d}
+\mathcal{R}_{\varepsilon}\left[  u_{s} ,b_{s}\right] \left(
+{\phi}_{s}(x)\right)  \rho\left(  x\right) dx
+$$ satisfies
+the assumptions of Lebesgue dominated convergence theorem
+($P$-a.s.) on $[0,T]$.
+ % the convergence to zero is similar.
+ This will complete
+the proof. For every $s\in\left[  0,T\right]  $ we have (recall
+the notation $R_{r,{\phi }}$ from Corollary \ref{corollary
+commutator})
+
+
+
+\begin{align*}
+\left|  \int\mathcal{R}_{\varepsilon}\left[  u_{s},b_{s}\right]
+\left( {\phi}_{s}\left(  x\right)  \right)  \rho\left(  x\right)
+dx\right| \leq2\left\|  u_{s}\right\|
+_{L_{R_{r,{\phi}_{s}}}^{\infty}}\left\| {\mathrm{div}\,
+}b_{s}\right\|  _{L_{R_{r,{\phi}_{s}}}^{1}}\left\| \rho\right\|
+_{L_{r}^{\infty}}\left\|  J{\phi}_{s}^{-1}\right\|  _{L_{R_{r,{\phi}_{s}}%
+}^{\infty}}\\
+  +2\left\|  u_{s}\right\|  _{L_{R_{r,{\phi}_{s}}}^{\infty}}\left\|
+b_{s}\right\|  _{L_{R_{r,{\phi}_{s}}}^{\infty}}\Big( \left\|
+D\phi^{-1}_s
+  \right\|_{L_{R_{r,\phi_s}}^{\infty}} \left\|
+\nabla \rho\right\|  _{L_{r}^{1}}+\left\| \rho\right\| _{L_{r
+}^{\infty}}\left\|  \nabla J{\phi}_{s}^{-1}\right\|  _{L_{R_{r,{\phi}_{s}}%
+}^{1}}\Big)
+\end{align*}
+\[
+\leq C_{u,\rho}\Big(  1+\left\|  {\mathrm{div}\, }b_{s}\right\|
+_{L_{R_{r,{\phi }_{s}}}^{1}}\left\|  J{\phi}_{s}^{-1}\right\|
+_{L_{R_{r,{\phi}_{s}}}^{\infty }}+ \left\| D\phi^{-1}_s
+  \right\|_{L_{R_{r,\phi_s}}^{\infty}}
+ + \left\|  \nabla J{\phi}_{s}^{-1}\right\|  _{L_{R_{r,{\phi}_{s}}}^{1}%
+}\Big)
+\]
+because of the global boundedness of $u$, $b$, $\rho$.
+
+We know, from the properties of the stochatic flow ${\phi}$, that,
+for any $R>0$,
+\[
+P\left(  \sup_{s\in\left[  0,T\right]  }\left(  \left\|
+D{\phi}_{s}\right\| _{L_{R}^{\infty}}+\left\|  {\phi}_{s}\right\|
+_{L_{R}^{\infty}}\right) <\infty\right)  =1
+\]
+hence (recall the definition of $R_{r,{\phi}_{s}}$) there exists a positive
+random variable $X$, $P$-a.s. finite, such that
+\[
+\left\|  {\mathrm{div}\, }b_{s}\right\|
+_{L_{R_{r,{\phi}_{s}}}^{1}}\left\| J{\phi}_{s}^{-1}\right\|
+_{L_{R_{r,{\phi}_{s}}}^{\infty}}+ \left\| D\phi^{-1}_s
+  \right\|_{L_{R_{r,\phi_s}}^{\infty}}
+ \] \[ +   \left\|  \nabla
+J{\phi}_{s}^{-1}\right\|  _{L_{R_{r,{\phi}_{s}}}^{1}}\leq\left\|
+{\mathrm{div}\, }b_{s}\right\|  _{L_{X}^{1}}\left\|
+J{\phi}_{s}^{-1}\right\| _{L_{X}^{\infty}}+ \left\| D\phi^{-1}_s
+  \right\|_{L_{X}^{\infty}}+
+\left\|  \nabla J{\phi}_{s}^{-1}\right\|  _{L_{X}^{1}},
+\]
+uniformly in $s\in\left[  0,T\right]  $, with probability one. The
+term $\int_{0}^{T}\left\|  {\mathrm{div}\, }b_{s}\right\|
+_{L_{X}^{1}}ds$ is finite ($P$-a.s.). Since $\left(  s,x\right)
+\mapsto D{\phi}_{s}^{-1}\left( x\right)  $ is $P$-a.s. continuous,
+we also have
+$$ \sup_{s\in\left[ 0,T\right]  } \Big( \left\|
+J{\phi}_{s}^{-1}\right\|  _{L_{X}^{\infty}} +
+ \left\| D\phi^{-1}_s
+  \right\|_{L_{X}^{\infty}} \Big) <\infty,
+\;\; \text{P-a.s..}
+$$
+Finally, we just need%
+\begin{equation}
+\int_{0}^{T}\left\|  \nabla J{\phi}_{s}^{-1}\right\|  _{L_{X}^{1}}%
+ds<\infty,\quad P\text{-a.s.} \label{bound on DJ}%
+\end{equation}
+This property is crucial and will be proved in the next section.
+The proof is complete.
+\end{proof}
+
+\section{Estimates on derivatives of the Jacobian}
+
+The aim of this section is to prove the estimate (\ref{bound on DJ}).
+
+
+Since by Lemma \ref{fra} the equation for ${\phi}_{s}^{-1}$ is
+equal to the equation for ${\phi }_{s}$ (up to a sign and
+inversion of time), for simplicity of notations we prove the
+estimate
+\begin{equation}
+\int_{0}^{T}\left\|  \nabla J{\phi}_{s}\right\|  _{L_{X}^{1}}ds<\infty,\quad
+P\text{-a.s.} \label{bound on DJ direct}%
+\end{equation}
+in place of estimate (\ref{bound on DJ}). Here $X$ is a generic
+$P$-a.s. finite random variable. Recall that
+$
+\| \cdot \|_{L_{X}^{1}}
+$
+denotes the $L^{1}$-norm  on the ball $B\left( X+1\right) $.
+
+
+We know that
+\[
+J{\phi}_{t}\left(  x\right)  =e^{\int_{0}^{t}{\mathrm{div}\,
+}b_{s}\left(  {\phi
+}_{s}\left(  x\right)  \right)  ds}%
+\]
+hence%
+\[
+\nabla J{\phi}_{t}\left(  x\right)  =J{\phi}_{t}\left(  x\right)
+\cdot \nabla\int_{0}^{t}{\mathrm{div}\, }b_{s}\left(
+{\phi}_{s}\left(  x\right) \right)  ds
+\]
+if the integral, as a function of $x$, is differentiable (at least
+weakly). The first factor, $J{\phi}_{t}\left(  x\right)  $ is
+$P$-a.s. bounded in $\left(  t,x\right)  $ on $\left[  0,T\right]
+\times B\left(  X +1 \right)  $  (because it is continuous).
+Hence, to prove (\ref{bound on DJ}), it is
+sufficient to prove%
+\begin{equation}
+\int_{0}^{T}\left\|  \nabla\int_{0}^{t}{\mathrm{div}\, }b_{s}\left(  {\phi}%
+_{s}\left(  \cdot \right)  \right)  ds\right\|
+_{L_{X}^{1}}dt<\infty,\quad
+P\text{-a.s.} \label{estimate grad div b}%
+\end{equation}
+
+Again the basic tool is a Tanaka type formula, based on a result
+for parabolic equations proved in \cite[Theorem 1.2]{Kr1} (see
+also \cite[Theorem 10.3]{Kry-Ro}).
+
+
+
+\vskip 2mm We introduce a  function space  from \cite{Kr1}
+ and \cite{Kry-Ro}. For
+$p, q \in (1, + \infty)$,
+%we set $W^{2}_p = W^2_p (\mathbb{R} ^d).$
+% $ $ (1 -
+%\triangle )^{-1}$ $(L^p(\mathbb{R} ^d))$. Note that
+% $W^{2,p}(\mathbb{R} ^d) \subset H^{2}_p $ by the Calderon-Zygmund theorem
+% and that in the Banach space
+%  $H^{2}_p$ an equivalent norm is given by $\| D^2 u \|_{L^p}
+% $ $+ \| u\|_{L^p}$, for $u \in H^2_p$.
+ we consider  the space $H^{2,q}_p(T)$ consisting of all
+ functions
+ $u$ defined on $[0,T]$ with values in distributions on $\mathbb{R} ^d$
+ such that
+ $u\in L^q ([0,T]; W^2_p(\mathbb{R} ^d))$ and there exists  $D_t u
+  \in L^q ([0,T]; L^p(\mathbb{R} ^d))$.
+
+
+\begin{theorem} \label{KR}
+ Under  Hypothesis \ref{hy1} and \ref{hy2},  in the space $
+ H^{2,q}_p(T)$ there exists a unique
+ solution to the
+ parabolic equation
+$$ \left \{ \begin{aligned}
+\frac{\partial F}{\partial t}+L^{b}F={\mathrm{div}\, }b,\;\; \; t
+\in [0,T[
+\\
+F(T,x)=0,\;\;\; x \in \mathbb{R} ^d.
+\end{aligned}
+\right.
+$$
+%with the properties%
+%\[
+%F\left(  0,\cdot\right)  \in W_{loc}^{1,1}\left(  \mathbb{R}^{d}\right)
+%,\quad F\in L^{1}\left(  0,T;W_{loc}^{1,1}\left(  \mathbb{R}^{d}\right)
+%\right)
+%\]%
+%\[
+%\int_{0}^{T}\int_{K}\left|  D^{2}F\left(  s,{x}\right)  \right|
+%^{2+\varepsilon}dxds<\infty
+%\]
+%for some $\varepsilon>0$ and every compact $K\subset\mathbb{R}^{d}$.
+\end{theorem}
+ Writing $\frac{\partial F}{\partial t}+ \frac{1}{2} \triangle
+  F =  - b \cdot \nabla u + {\mathrm{div}\, }b$,
+ this results follows from \cite[Theorem 1.2]{Kr1} (using the fact that
+  $b$ is globally bounded). We mention   that an extension  of
+   \cite[Theorem 1.2]{Kr1} is given in \cite[Theorem
+   10.3]{Kry-Ro}.
+
+
+
+%\begin{remark}
+%\textbf{LA MIA CONGETTURA} \`{e} che serva ${\mathrm{div}}b\in
+%L^{2+\varepsilon^{\prime}}\left(  0,T;L_{loc}^{2+\varepsilon^{\prime}}\right)
+%$) per un qualche $\varepsilon^{\prime}>0$.
+%\end{remark}
+
+\begin{proposition}
+ Under  Hypothesis \ref{hy1} and \ref{hy2}, estimate
+(\ref{estimate grad div b}) holds true.
+\end{proposition}
+
+\begin{proof} The condition $\frac {d}{p} + \frac{2}{q}
+   <1$ implies that if $u \in H^{2,q}_p(T)$ then $u$
+   can be represented by a real  function $u(t,x) $ continuous
+    on $[0,T]
+    \times \mathbb{R} ^d$ such that there exists $\nabla u(t,x)$
+ and is continuous on $[0,T]
+    \times \mathbb{R} ^d$ (see \cite[Lemma 10.1]{Kry-Ro}).
+
+     The following Ito formula holds
+     (it is a special case of  \cite[Theorem 3.7]{Kry-Ro})
+\begin{equation} \label{ito}
+F\left(  t,{\phi}_{t}\left(  x\right)  \right)  =F\left(
+0,x\right) +\int_{0}^{t}\nabla F\left(  s,{\phi}_{s}\left(
+x\right)  \right)  \cdot dW_{s}+\int_{0}^{t}\left(  \frac{\partial
+F}{\partial s}+L_{b}F\right) \left(  s,{\phi}_{s}\left(  x\right)
+\right)  ds.
+\end{equation}
+%In fact the classical It\^{o} formula requires additional regularity, but with
+%some effort of estimates and approximation one can prove this identity anche
+%check that all terms are well defined (the estimates are similar to those
+%developed below). Thus
+Thus
+\begin{align*}
+\nabla\int_{0}^{t}{\mathrm{div}\, }b_{s}\left(  {\phi}_{s}\left(
+x\right) \right)  ds    =\nabla\left[  F\left(  t,{\phi}_{t}\left(
+x\right)  \right) -F\left(  0,x\right)  -\int_{0}^{t}\nabla
+F\left(  s,{\phi}_{s}\left(
+x\right)  \right)  dW_{s}\right] \\
+  =\nabla F\left(  t,{\phi}_{t}\left(  x\right)  \right)  \cdot D{\phi}%
+_{t}\left(  x\right)  -\nabla F\left(  0,x\right)  -\int_{0}^{t}D^{2}F\left(
+s,{\phi}_{s}\left(  x\right)  \right)  D{\phi}_{s}\left(  x\right)  dW_{s}.
+\end{align*}
+From the properties of $F$  we readily have
+\[
+\int_{0}^{T}\left\|  \nabla F\left(  0, \cdot \right)  \right\|
+_{L_{X}^{1} }dt<\infty,\quad P\text{-a.s.}
+\]
+%Moreover we have%
+%\[
+%\int_{0}^{T}\int_{B\left(  Y\right)  }\left|  \nabla F\left(  t,{y}\right)
+%\right|  dydt<\infty,\quad P\text{-a.s.}%
+%\]
+%for every $P$-a.s. finite random variable $Y$, hence also%
+%\[
+%\int_{0}^{T}\int_{B\left(  Y\right)  }\left|  \nabla F\left(  t,{y}\right)
+%\right|  J{\phi}_{t}^{-1}\left(  y\right)  dydt<\infty,\quad P\text{-a.s.}%
+%\]
+Because of the $P$-a.s. continuity of $D{\phi}_{t}\left(  x\right)
+$ in $(  t,x)  $, we get
+%\[
+%\int_{0}^{T}\left\|  \nabla F\left(  t,{\phi}_{t}\left(  x\right)  \right)
+%\right\|  _{L_{X}^{1}}dt<\infty,\quad P\text{-a.s.}%
+%\]
+%by a proper choice of $Y$ with respect to $X$ (using again the $P$-a.s.
+%continuity of $D{\phi}_{t}\left(  x\right)  $ in $\left(  t,x\right)  $). For
+%the same reason, this implies%
+\[
+\int_{0}^{T}\left\|  \nabla F\left(  t,{\phi}_{t}\left( \cdot
+\right) \right) \cdot D{\phi}_{t}\left(  \cdot \right)  \right\|
+_{L_{X}^{1}}dt<\infty,\quad
+P\text{-a.s.}%
+\]
+which is another part of the estimate we need to prove.
+
+Finally, we need to prove%
+\[
+\int_{0}^{T}\left\|  \int_{0}^{t}D^{2}F\left(  s,{\phi}_{s}\left(
+\cdot\right)
+\right)  D{\phi}_{s}\left(  \cdot\right)  dW_{s}\right\|  _{L_{X}^{1}}%
+dt<\infty,\quad P\text{-a.s.}%
+\]
+If we prove that
+\[
+E\left[  \int_{0}^{T}\int_{K}\left|  \int_{0}^{t}D^{2}F\left(  s,{\phi}%
+_{s}\left(  x\right)  \right)  D{\phi}_{s}\left(  x\right)  dW_{s}\right|
+dxdt\right]  <\infty
+\]
+for every (deterministic) compact set $\mathbb{R} ^d$, then it is
+not difficult to deduce the previous property;
+% then the property follows. Up to a constant term
+(using the inequality $\left| a\right|  \leq a^{2}+1$) it is
+sufficient to bound
+\begin{align*}
+&  E\left[  \int_{0}^{T}\int_{K}\left|  \int_{0}^{t}D^{2}F\left(  s,{\phi}%
+_{s}\left(  x\right)  \right)  D{\phi}_{s}\left(  x\right)  dW_{s}\right|
+^{2}dxdt\right] \\
+&  =\int_{0}^{T}\int_{K}E\left[  \left| \int_{0}^{t}D^{2}F\left(
+s,{\phi }_{s}\left(  x\right)  \right) D{\phi}_{s}\left(  x\right)
+dW_{s}\right|
+^{2}\right]  dxdt\\
+&  \leq\int_{0}^{T}\int_{K}E\left[  \int_{0}^{t}\left|
+D^{2}F\left(  s,{\phi }_{s}\left(  x\right)  \right)
+D{\phi}_{s}\left(  x\right)  \right|
+^{2}ds\right]  dxdt\\
+&  \leq T\int_{K}E\left[  \int_{0}^{T}\left|  D^{2}F\left(  s,{\phi}%
+_{s}\left(  x\right)  \right)  D{\phi}_{s}\left(  x\right)  \right|
+^{2}ds\right]  dx.
+\end{align*}
+ Let $p'$ such that $2 < p' < p$ and $2< p' < q$ where $p$ and $q$ are given
+ in Hypothesis \ref{hy2}. Since
+\[
+\int_{K}\left(  \int_{0}^{T}E\left[  \left|  D{\phi}_{s}\left(
+x\right) \right|  ^{r}\right]  ds\right)  dx<\infty,
+\]
+for every $r \ge 1$ (see (\ref{bound})), by the H\"older
+inequality on $\Omega \times K \times [0,T]$,  it is sufficient to
+prove that
+\[
+\int_{K}E\left[  \left(  \int_{0}^{T}\left|  D^{2}F\left(
+s,{\phi}_{s}\left( x\right)  \right)  \right| ^{p'}ds\right)
+\right] dx<\infty.
+\]
+But
+%since
+%$$
+%\int_{\mathbb{R} ^d} f(\phi_s(x)) dx = \int_{\mathbb{R} ^d} \frac{f(y) dy}{ J \phi_s(\phi^{-1}_s(y))}
+%$$
+we have
+\begin{align*}
+E\left[  \left(  \int_{0}^{T}\int_{K}\left|  D^{2}F\left(
+s,{\phi}_{s}\left( x\right)  \right)  \right| ^{p'}dxds\right)
+\right]
+\\
+% =E\left[  \left( \int_{0}^{T}\int_{\phi_s (K)}\frac{\left|
+%D^{2}F\left(  s,{y}\right) \right| ^{p'} dy}{ J \phi_s(\phi^{-1}_s(y))}ds\right) \right]
+ =E\left[  \left( \int_{0}^{T}\int_{\phi_s (K)} \left|
+D^{2}F\left(  s,{y}\right) \right| ^{p'}  J \phi^{-1}_s(y) dyds\right) \right]
+\\
+  \le \int_{0}^{T}\int_{\mathbb{R} ^d}\left|
+D^{2}F\left(  s,{y}\right)  \right| ^{p'}E\left[
+J{\phi}_{s}^{-1}\left(  y\right) \right] dyds.
+\end{align*}
+By the H\"older inequality,
+$$
+\int_{0}^{T}\int_{\mathbb{R} ^d}\left| D^{2}F\left(  s,{y}\right)
+\right| ^{p'}E\left[ J{\phi}_{s}^{-1}\left(  y\right) \right] dyds
+$$
+$$
+\le \int_{0}^{T} \Big ( \int_{\mathbb{R} ^d}\left| D^{2}F\left(
+s,{y}\right) \right| ^{p}dy \Big )^{p'/p} \,
+ \Big ( \int_{\mathbb{R} ^d}  (E\left| J{\phi}_{s}^{-1}\left(
+y\right) \right |)^{\frac{p'}{p' -p}}dy \Big )^{\frac{p'-p}{p'}}
+\, ds.
+$$
+Using the bound~(\ref{bound-inv}) we have
+\[
+ \sup_{x \in \mathbb{R} ^d}  \sup_{s \in [0,T]}  E \left[ \left| J{\phi}_{s}^{-1}\left(
+x\right) \right|^{r}\right]<\infty
+\]
+ it is sufficient to
+have
+$$
+\int_{0}^{T} \Big ( \int_{\mathbb{R} ^d}\left| D^{2}F\left(
+s,{y}\right) \right| ^{p}dy \Big )^{p'/p} ds < \infty.
+$$
+This is true since $p'/p < q/p $ and
+ $D^2 F
+  \in L^q ([0,T]; L^p(\mathbb{R} ^d))$ by    Theorem \ref{KR}.
+The proof is complete.
+\end{proof}
+
+\section{Counterexamples to certain extensions}
+
+  \label{sec:counter} It would be interesting to try to generalize the results of this paper to random
+vectorfields $b( x,t,\omega)$, possibly adapted. However our approach faces a fundamental difficulty:  it is very easy to exibith
+a counterexample which shows that in some cases the regularizing effect disappears. Consider in one dimension the case
+\[
+b\left(  x,t,\omega\right)  =\sqrt{\left|  x-W_{t}\left(  \omega\right)
+\right|  }%
+\]
+namely the stochastic differential equation
+\[
+dX_{t}^{x}=b\left(  X_{t}^{x},t,.\right)  dt+dW_{t},\quad t\geq0,\quad
+X_{0}^{x}=x
+\]
+If $\left(  X_{t}^{x}\right)  $ is a solution, then $Y_{t}^{x}=X_{t}^{x}%
+-W_{t}$ solves
+\[
+dY_{t}^{x}=\sqrt{\left|  Y_{t}^{x}\right|  }dt\quad t\geq0,\quad Y_{0}^{x}=x
+\]
+and viceversa. Hence the non-uniqueness for the latter equation transfer to
+the former. In terms of stochastic transport equation, an equation of the
+form
+\[
+\partial_{t}u\left(  t,x\right)  +\left(  b_{0}\left(  x-W\left(  t\right)
+\right)  \cdot\nabla u\left(  t,x\right)  \right)  dt+\nabla u\left(
+t,x\right)  \circ dW\left(  t\right)  =0
+\]
+may have several pathologies if $b_{0}$ is only H\"{o}lder continuous.
+
+Unfortunately the previous example is not so artificial: something similar
+happens in the nonlinear case. Let us argue only formally. Consider the
+example in $\mathbb{R}^{2}$%
+\[
+\partial_{t}\xi\left(  t,x\right)  +\left(  u\left(  t,x\right)  \cdot
+\nabla\xi\left(  t,x\right)  \right)  dt+\nabla\xi\left(  t,x\right)  \circ
+dW\left(  t\right)  =0
+\]
+where $\xi=\partial_{2}u_{1}-\partial_{1}u_{2} $. This is the vorticity
+equation of a 2D ideal fluid described by a stochastic version of Euler
+equation. Following \cite{MajBar}, this equation is (formally) equivalent to
+the stochastic ordinary equation depending on a parameter $a\in\mathbb{R}^{2}$%
+\[
+dX_{t}^{a}=\left[  \int_{\mathbb{R}^{2}}K( X_{t}^{a}-X_{t}^{a^{\prime}})
+\xi_{0}( X_{t}^{a^{\prime}} ) da^{\prime}\right]  dt+dW_{t}%
+\]
+for a suitable kernel $K$, $\xi_{0}$ being the initial condition of the
+vorticity equation. This problem is equivalent to
+\[
+dY_{t}^{a}=\left[  \int_{\mathbb{R}^{2}}K( Y_{t}^{a}-Y_{t}^{a^{\prime}})
+\xi_{0}( X_{t}^{a^{\prime}}) da^{\prime}\right]  dt
+\]
+by the change of variable $Y_{t}^{a}=X_{t}^{a}-W_{t}$, and the equation for
+$\left(  Y_{t}^{a}\right)  $ corresponds to the classical vorticity equation
+\begin{align*}
+\frac{\partial_{t}\xi^{\prime}\left(  t,x\right)  }{\partial t}+\left(
+u^{\prime}\left(  t,x\right)  \cdot\nabla\xi^{\prime}\left(  t,x\right)
+\right)  dt =0 \qquad\qquad\xi^{\prime} =\partial_{2}u_{1}^{\prime}%
+-\partial_{1}u_{2}^{\prime}%
+\end{align*}
+with initial condition $\xi_{0}$. This means that the stochastic vorticity
+equation is (at least formally) equivalent to the deterministic one. There is
+no advantage to introduce that kind of stochastic perturbation.
+
+%The case could
+%be different for more complex stochastic perturbations for which the present analysis does not apply in a straighforward manner.
+
+
+
+\bigskip
+
+\bigskip
+
+\begin{thebibliography}{99}
+\bibitem{Ambrosio}Ambrosio, L., Transport equation and Cauchy problem for
+$BV$ vector fields, Invent. Math. \textbf{158} (2004), no.~2, 227-260.
+
+\bibitem {AmbrCrippa}Ambrosio, L., Crippa G., Existence, uniqueness,
+stability and differentiability properties of the flow associated to weakly
+differentiable vector fields, UMI-Lecture Notes, to appear.
+
+%\bibitem {B}Bismut J. M., Martingales, the Malliavin Calculus and
+%hypoellipticity general H\"{o}rmander's condition, Z.
+%Wharscheinlichkeitstheorie Gabiele 56 (1981), 469-505.
+
+\bibitem {Br}Brandt A., Interior Schauder estimates for parabolic differential
+(or difference) equations via the maximum principle, Israel J. Math., Vol. 7
+(1969), 254-262.
+
+%\bibitem {Ce}Cerrai, S.: \textit{Second order PDE's in finite and infinite
+%dimensions. A probabilistic approach.}, { Lectures Notes in Math.} 1762,
+%Springer Verlag, 2001.
+
+\bibitem {D}Davie A. M., Uniqueness of solutions of stochatic differential
+equations, preprint (2007) (\texttt{arXiv:0709.4147}).
+
+\bibitem {DiPernaLions}DiPerna, R. J.\ and\ Lions, P.-L., Ordinary
+differential equations, transport theory and Sobolev spaces,
+Invent. Math. \textbf{98} (1989), no.~3, 511-547.
+
+
+
+\bibitem {Figalli} Figalli A., Existence and uniqueness of martingale solutions
+for SDEs with rough or degenerate coefficients, 2007, to appear on \textit{J.
+Funct. Anal.}
+
+%\bibitem {F}Fourni\'{e}, E., Lasry, J.M., Lebuchoux, J., Lions, P.L. and
+%Touzi, N., \textit{Applications of Malliavin calculus to Monte Carlo methods
+%in finance,} Finance Stoch. 3 (1999), 391-412.
+
+\bibitem {Kr}Krylov, N. V., {\it
+ Lectures on elliptic and parabolic equations in
+H\"{o}lder spaces,} Graduate Studies in Mathematics, 12. American
+Mathematical Society, Providence, RI, 1996.
+
+\bibitem{Kr1}  Krylov N. V., The heat equation in $L_q((0, T),L_p)-$spaces with
+weights, SIAM J. on Math. Anal., Vol. 32, No. 5 (2001), 1117-1141.
+
+%\bibitem {Kry2}{ Krylov N. V., } { Parabolic equations in $L_{p}$-spaces with
+% mixed norms\/}, Algebra i Analiz., Vol. 14 (2002) , No. 4, 91-106 in Russian;
+% English translation in St. Petersburg Math. J., Vol. 14 (2003), No. 4, 603-614.
+
+
+
+
+\bibitem {KR}Krylov, N. V.; Rozovskii B. L., Stochastic partial differential
+equations and diffusion processes. (Russian) Uspekhi Mat. Nauk 37 (1982), no.
+6 (228), 75.95.
+
+\bibitem {Kry-Ro}Krylov, N. V.; R\"{o}ckner, M., Strong solutions of stochastic
+equations with singular time dependent drift. Probab. Theory Related Fields
+131 (2005), no. 2, 154--196.
+
+
+\bibitem{KP}Krylov, N. V.;  Priola, E., Elliptic and parabolic
+ second-order PDEs with growing coefficients,  Preprint
+  arXiv.org, June
+ 2008   (http://arxiv.org/abs/0806.3100v1).
+
+
+\bibitem {K}Kunita, H., Stochastic differential equations and stochastic flows
+of diffeomorphisms. Ecole d'\'{e}t\'{e} de probabilit\'{e}s de Saint-Flour,
+XII---1982, 143--303, Lecture Notes in Math., 1097, Springer, Berlin, 1984.
+
+\bibitem {K1}Kunita, H., First order stochastic partial differential
+equations. Stochastic analysis (Katata/Kyoto, 1982), 249-269,
+North-Holland Math. Library, 32, North-Holland, Amsterdam, 1984.
+
+\bibitem {IW}Ikeda, N. and Watanabe, S., { Stochastic Differential Equations
+and Diffusion Processes,} North Holland-Kodansha, 1981.
+
+\bibitem {Lions}P. L. Lions, \textit{Mathematical Topics in Fluid Mechanics.
+Volume 1: Incompressible models}, Oxford Univ. Press, Oxford, 1996.
+
+%\bibitem {L}Lunardi, A.: \textit{Analytic semigroups and Optimal Regularity in
+% Parabolic Problems, } Birkh\"{a}user, 1995.
+
+\bibitem {MajBar}Majda, A. J. \ and\ Bertozzi, A. L.,
+  \textit{Vorticity and
+incompressible flow}, Cambridge Univ. Press, Cambridge, 2002.
+%MR1867882 (2003a:76002)
+%
+
+%\bibitem{Pr} Priola E. : {\it Schauder estimates for a class of degenerate
+% Kolmogorov equations}, Preprint 2008.
+%
+
+\bibitem{protter}
+ Protter, P. E., \textit{ Stochastic Integration and Differential
+Equations, Second Edition,} Springer, 2004.
+
+
+\bibitem {V}Veretennikov, Yu. A., On strong solution and explicit formulas for
+solutions of stochastic integral equations. Math. USSR Sb. 39, 387?403 (1981).
+\end{thebibliography}
+\end{document}

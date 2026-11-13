@@ -1,0 +1,382 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensheaf.org/schemas/opensheaf-object-0.1.schema.json",
+  "title": "OpenSheaf object record (object.json), format opensheaf-object/0.1",
+  "$comment": "Part of OpenSheaf 0.1 (https://opensheaf.org). Dedicated to the public domain under CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/",
+  "type": "object",
+  "required": [
+    "format",
+    "specification",
+    "kind",
+    "archiveId",
+    "objectId",
+    "documentVersion",
+    "status"
+  ],
+  "properties": {
+    "format": {
+      "const": "opensheaf-object/0.1"
+    },
+    "specification": {
+      "const": "0.1"
+    },
+    "kind": {
+      "enum": [
+        "document",
+        "collection"
+      ]
+    },
+    "archiveId": {
+      "type": "string",
+      "format": "uri"
+    },
+    "objectId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 64
+    },
+    "documentVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "mainSource": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceFormat": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourcesMissing": {
+      "$ref": "#/$defs/note"
+    },
+    "renditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "mediaType"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "mediaType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "toolchain": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "version"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "changes": {
+      "$ref": "#/$defs/note"
+    },
+    "stage": {
+      "type": "object",
+      "required": [
+        "scheme",
+        "value"
+      ],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "history": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/objectVersion"
+      }
+    },
+    "notices": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/note"
+          },
+          {
+            "type": "object",
+            "required": [
+              "documentVersion",
+              "date"
+            ],
+            "properties": {
+              "documentVersion": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "date": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "licence": {
+      "$ref": "#/$defs/note"
+    },
+    "agreement": {
+      "type": "object",
+      "required": [
+        "by",
+        "date",
+        "method"
+      ],
+      "properties": {
+        "by": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "method": {
+          "type": "string"
+        }
+      }
+    },
+    "external": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "service",
+          "record"
+        ],
+        "properties": {
+          "role": {
+            "enum": [
+              "deposit",
+              "source"
+            ]
+          },
+          "service": {
+            "type": "string"
+          },
+          "record": {
+            "type": "string"
+          },
+          "doi": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "sha512"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "sha512": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{128}$"
+                },
+                "md5": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "bytes": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "active",
+        "withdrawn"
+      ]
+    },
+    "withdrawal": {
+      "type": "object",
+      "required": [
+        "date",
+        "reason"
+      ],
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "reason": {
+          "$ref": "#/$defs/note"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "note": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mediaType": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "text"
+          ]
+        },
+        {
+          "required": [
+            "path"
+          ]
+        }
+      ],
+      "dependentRequired": {
+        "path": [
+          "mediaType"
+        ]
+      }
+    },
+    "objectVersion": {
+      "type": "string",
+      "pattern": "^v[1-9][0-9]*$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "document"
+          }
+        }
+      },
+      "then": {
+        "anyOf": [
+          {
+            "required": [
+              "mainSource",
+              "sourceFormat"
+            ]
+          },
+          {
+            "required": [
+              "sourcesMissing",
+              "renditions"
+            ],
+            "properties": {
+              "renditions": {
+                "minItems": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "withdrawn"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "withdrawal"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "collection"
+          }
+        }
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "history"
+              ]
+            },
+            {
+              "required": [
+                "stage"
+              ]
+            },
+            {
+              "required": [
+                "notices"
+              ]
+            },
+            {
+              "required": [
+                "changes"
+              ]
+            },
+            {
+              "required": [
+                "sourcesMissing"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

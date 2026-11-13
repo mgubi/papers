@@ -1,0 +1,3748 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage{geometry,amsmath,amssymb,enumerate,hyperref,xcolor,latexsym,theorem,bbm}
+\geometry{a4paper}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\Tau}{\mathrm{T}}
+\newcommand{\assign}{:=}
+\newcommand{\asterisk}{\mathord{*}}
+\newcommand{\backassign}{=:}
+\newcommand{\llangle}{{\langle\!\langle}}
+\newcommand{\mathd}{\mathrm{d}}
+\newcommand{\mathi}{\mathrm{i}}
+\newcommand{\nobracket}{}
+\newcommand{\tmaffiliation}[1]{\\ #1}
+\newcommand{\rrangle}{{\rangle\!\rangle}}
+\newcommand{\tmcolor}[2]{{\color{#1}{#2}}}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\tmscript}[1]{\text{\scriptsize{$#1$}}}
+\newcommand{\tmtextbf}[1]{{\bfseries{#1}}}
+\newcommand{\tmtextit}[1]{{\itshape{#1}}}
+\newenvironment{enumerateroman}{\begin{enumerate}[i.] }{\end{enumerate}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newenvironment{proof*}[1]{\noindent\textbf{#1\ }}{\hspace*{\fill}$\Box$\medskip}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+{\theorembodyfont{\rmfamily}\newtheorem{remark}[theorem]{Remark}}
+\newcommand{\tmkeywords}{\textbf{Keywords:} }
+%%%%%%%%%% End TeXmacs macros
+
+\newcommand{\nbmax}[1]{\tmcolor{blue}{[Max] #1}}
+\newcommand{\nbluigi}[1]{\tmcolor{blue}{[Luigi] #1}}
+\newcommand{\wip}[1]{\tmcolor{red}{[WIP] #1}}
+%
+
+
+\begin{document}
+
+\title{
+  Grassmannian stochastic analysis\\
+  and the stochastic quantization\\
+  of Euclidean Fermions
+}
+
+\author{Sergio Albeverio, Luigi Borasi,\\ Francesco C. De Vecchi, Massimiliano Gubinelli\\[.5em]
+  \tmaffiliation{Hausdorff Center of Mathematics \&\\
+  Institute of Applied Mathematics\\
+  University of Bonn, Germany}\\ 
+  \\
+  \tt{albeverio@iam.uni-bonn.de}\\
+ \tt{ borasi@iam.uni-bonn.de}\\
+  \tt{francesco.devecchi@uni-bonn.de}\\
+ \tt{ gubinelli@iam.uni-bonn.de}
+}
+%\date{April 2020}
+
+\maketitle
+
+\begin{abstract}
+  We introduce a stochastic analysis of Grassmann random variables suitable
+  for the stochastic quantization of Euclidean fermionic quantum field
+  theories. Analysis on Grassmann algebras is developed from the point of view
+  of quantum probability: a Grassmann random variable is a homomorphism of an
+  abstract Grassmann algebra into a quantum probability space, i.e. the von
+  Neumann algebra of bounded operators on a Hilbert space endowed with a
+  suitable state. On the way we define the notion of Gaussian processes,
+  Brownian motion and stochastic differential equations taking values in
+  Grassmann algebras. We use them to study the long time behavior of Langevin
+  Grassmann stochastic differential equations driven by white noise and
+  describe their invariant measures. As an application we give a proof of the
+  stochastic quantization and of the removal of the infrared cutoff for the
+  Euclidean Yukawa model.\\[.4em]
+
+{\small 
+\noindent \tmkeywords{Grassmann algebra, Euclidean Fermions, stochastic quantization,
+non-commutative probability, Yukawa model.}}
+
+\end{abstract}
+
+{\tableofcontents}
+
+\section{Introduction}
+
+The aim of this work is to develop a stochastic quantization of Euclidean
+fermionic quantum field theories (QFTs). This involves defining and studying
+the long time behavior of stochastic equations in Grassmann algebras.
+
+\
+
+Euclidean fermion fields form a Grassmann
+algebra~{\cite{osterwalder_euclidean_1973,osterwalder_euclidean_1973-2}}.
+Their correlation functions (Schwinger functions) are typically represented by
+Berezin integrals~{\cite{kirillov_introduction_1987}} of the type
+\begin{equation}
+  \langle O (\psi, \bar{\psi}) \rangle = \frac{\int \mathd \psi \mathd
+  \bar{\psi} O (\psi, \bar{\psi}) e^{- S_E (\psi, \bar{\psi})}}{\int \mathd
+  \psi \mathd \bar{\psi} e^{- S_E (\psi, \bar{\psi})}} \label{eq:eqft-berezin}
+\end{equation}
+where the fields $\psi, \bar{\psi}$ form a Grassmann algebra, $O$ is a
+functional of $\psi$ and $\bar{\psi}$ generating the \ Schwinger functions,
+and $S_E (\psi, \bar{\psi})$ is the Euclidean action, usually the sum of a
+quadratic part and a polynomial interaction (possibility involving Boson
+fields, which will have to be averaged according to an appropriate probability
+measure)~{\cite{feldman_renormalizable_1986,disertori_continuous_1998,mastropietro_non-perturbative_2008}}.
+Without entering too much into the precise details, let us point out here that
+the formula~{\eqref{eq:eqft-berezin}} is a purely algebraic expression, devoid
+of any analytic meaning and is used as a convenient bookkeeping for various
+kind of expansions used to define and study the properties of the Schwinger
+functions. This is due to the fact that Grassmann algebras do not have a
+natural notion of positivity, nor a norm, associated with them.
+
+\
+
+Stochastic quantization (SQ) is an approach to the construction of the
+correlation functions of an Euclidean QFT that has been introduced by Parisi
+and Wu~{\cite{parisi_perturbation_1981}}. The basic idea is to introduce an
+additional variable (usually a fictitious time) and interpret the Euclidean
+fields $\varphi$, to be constructed, as solutions to stochastic differential
+equations involving the mentioned additional variable and a source of noise
+$\xi$, most commonly Gaussian. One of the advantages of this approach is that
+the fields of the theory are expressed via the stochastic evolutions as
+functionals of the noise, i.e. $\varphi = \varphi (\xi)$, which then allows to
+study them as functionals on $\xi$ exploiting detailed information about the
+law of $\xi$. In this way even interacting fields can be studied
+non-perturbatively exploiting the Gaussian structure of $\xi$. Moreover,
+another conceptual advantage of stochastic quantization is that it is
+insensitive to questions of absolute continuity with respect to a reference
+measure. This, on the other hand, is usually the main difficulty of the
+Gibbsian point of view as expressed in equation~{\eqref{eq:eqft-berezin}}.
+
+\
+
+This strategy has been employed to construct bosonic theories, starting with
+the work~{\cite{jona_lasinio_stochastic_1985}} on the stochastic quantization
+of the $\Phi^4_2$ model for a scalar particle in two dimension with quartic
+interaction. More recently the work of Hairer on regularity
+structures~{\cite{hairer_theory_2014}} opened the way to the study of the
+three dimensional $\Phi^4$ model, see
+also~{\cite{catellier_paracontrolled_2013,kupiainen_renormalization_2016}}.
+These new perspectives on this and related problems led to a series of new
+results on the global space-time control of the stochastic
+dynamics~{\cite{MWcomedown,gubinelli_global_2019,albeverio_invariant_2017,moinat_space_time_2018}}
+and to a novel proof of the constructions of non-Gaussian bosonic Euclidean
+quantum field theories in three dimensions~{\cite{gubinelli_pde_2018}}.
+
+\
+
+One of main differences between the bosonic and the fermionic case is the
+necessity, in the fermionic setting, of considering stochastic processes in a
+non-commutative framework.
+
+\
+
+The interest in studying time evolutions and stochastic processes with values
+in non commutative algebras arose in connection with the development of
+quantum mechanics in the 20s--30s of last century and later in quantum field
+theory, particularly around the 50s. In these theories one associates physical
+observables with operators evolving in time and acting on a, in general
+infinite dimensional, complex Hilbert space. Mathematically, this lead to the
+representation theory of certain operator algebras (CCR-algebras resp.
+CAR-algebras in the case of fermions) that are particular cases of more
+general operator algebras.
+
+\
+
+In this line quantum fields require the study of certain infinite dimensional
+(non-commutative) algebras, the study of which has been particularly
+stimulated by developments in the period 1940-1960, where the principles of
+systems with an infinite number of degrees of freedom, in particular quantum
+fields and statistical mechanics has been worked out mathematically. Let us
+mention the first works on von Neumann algebras by Murray and
+von~Neumann~{\cite{Murray1,Murray2,Murray3,VonNeumann}} and the work on
+$C^{\asterisk}$-algebras developed originally and quite independently by I. M.
+Gelfand and his school (see, e.g.,~{\cite{Gelfand}}), since the beginnings of
+the 40s, and by I. E. Segal and his school (see~{\cite{Segal1,Segalbook}}).
+Both types of algebras are associative and equipped with an involution (the
+adjoint operation). Whereas $C^{\ast}$-algebras are looked upon as abstract
+normed algebras, without necessarily being realized as algebras of operators
+acting in Hilbert spaces , the study of von Neumann algebras (also called
+$W^{\ast}$-algebras) rather involves looking at them as self-adjoint algebras
+of bounded operators in Hilbert spaces,closed in the weak operator topology.
+Both algebras can be looked upon as particular cases of normed algebras, that
+in the case of closedness are called Banach algebras. More precisely,
+$C^{\ast}$-algebras are normed algebras with a unit $\mathbb{I}$ and an
+involution $\cdot^{\ast}$, any element $A$ of which satisfies $\| A A^{\ast}
+\| = \| A \|^2$. Although in principle every von~Neumann algebra can be looked
+upon as a $C^{\ast}$-algebra, structural and conceptual developments in the
+study of von Neumann algebras involve particularly their realizations in
+Hilbert space. The mathematical literature on normed, Banach, $C^{\ast}$ and
+$W^{\ast}$ algebras is very rich and there are a number of excellent
+monographs on them, see, e.g., Naimark~{\cite{Naimark}} and
+Zelazko~{\cite{MR0448079}} for normed spaces and algebras, and Kadison and
+Ringrose~{\cite{Kadison1,Kadison2}} (and references therein) for the other
+type of algebras.
+
+\
+
+For applications in mathematical physics, in particular quantum mechanics,
+quantum field theory and statistical mechanics, there are monographs by
+Bratteli and Robinson~{\cite{Bratteli1,Bratteli2}}, Emch~{\cite{Emch}},
+Baumg{\"a}rtel~{\cite{Baumgartel1}}, as well as Baumg{\"a}rtel and
+Wollenberg~{\cite{Baumgartel2}}, Segal~{\cite{Segalbook2}}; we refer
+particularly to the books by Baez, Segal and Zhou~{\cite{Segalbook}}, and
+Haag~{\cite{Haag1}}, and also the articles by
+Summers~{\cite{summers2012perspective}} and Doplicher~{\cite{Doplicher}}, that
+surveys particularly some recent developments related to such algebras in
+quantum field theory.
+
+Before describing the approach we use in this article, which is based on
+stochastic processes forming a Grassmann algebra, let us mention some works
+about stochastic quantization of fermionic fields not using Grassmann algebras
+but more connected with ideas of the theory of noncommutative processes and
+Markov semigroups. They involve noncommutative Brownian motion and stochastic
+analysis based on on it, in particular also SDEs but with no space variable
+dependence, hence no SPDEs. Pioneering work in this direction has been done by
+Accardi in the 70s, see e.g.~{\cite{accardi_outline_2015}}. Work extending
+SDEs with values in algebras other than Grassmann algebras, like $C^{\ast}$
+and von Neumann algebras are by authors like Streater and
+coworkers~{\cite{Streater1,Streater2,Streater3}}, Applebaum and
+Hudson~{\cite{Applebaum1,Applebaum2}}, Belavkin~{\cite{Belavkin}}, Carlen and
+Kree~{\cite{Carlen1}}, Gordina~{\cite{Gordina}}, Sinha and
+Goswami~{\cite{Sinha}}, K{\"u}mmer {\cite{Kummer}} see also the monographs by
+Meyer~{\cite{Meyerbook}}, Holevo~{\cite{Holevo}}, and the recent survey
+article by Cipriani~{\cite{Cipriani}} and the references therein.
+
+\
+
+In this paper we focus on stochastic quantization of interacting fermions,
+realizing the fermionic fields as non-commutative operator solution of a
+suitable stochastic differential equation taking values in a Grassmann
+sub-algebra of the Banach algebra of all bounded operators acting on a Hilbert
+space (see the precise definition in Section~\ref{sec:grassmann-rv}). Here let
+us mention that Grassmann algebras constitute a class of associative non
+commutative algebras that were discovered by Grassmann in the second half of
+the 19th century. They are connected with Clifford algebras, that in turn are
+the underlying structure to the study of CCR and CAR algebras. All such
+algebras are nowadays part of the general theory of algebra as pioneered by
+E.~Noether in the 20s-40s, see e.g.
+Van~der~Waerden~{\cite{van2003algebra1,van2003algebra2}}.
+
+\
+
+In our paper we use stochastic processes forming a Grassmann algebra, rather
+than Clifford, $C^{\ast}$ or $W^{\ast}$ algebras, since they better relate to
+work done in the context of interesting models of constructive quantum field
+theory involving fermions, in which methods based on integrals on non
+commutative structures like Berezin integrals are involved. Such methods are
+quite essential in most oft the physics literature on fermionic quantum
+fields, including renormalization theory, see, e.g., Feldman, Kn{\"o}rrer and
+Trubowitz~{\cite{MR1905424}}, Salmhofer~{\cite{salmhofer_renormalization}} or
+Zinn-Justin~{\cite{ZinnJustin}}. As for fermions (i.e fields associated with
+particles of half integer spins, like e.g. electrons) stochastic quantization
+ideas have been discussed heuristically, after Parisi and Wu seminal paper, in
+the physics literature, starting with Kakudo et al.~{\cite{kakudo1983gauge}},
+Fukai et al.~{\cite{fukai_stochastic_1983}}, Damgaard and
+Tsokos~{\cite{damgaard_stochastic_1984}} and She-Sheng and
+Ting-Chang~{\cite{she-sheng_stochastic_1985}} \ up to the recent paper of
+Efremov~{\cite{efremov_stochastic_2019}}. These authors stress particularly
+the relations with Grassmann valued random variables, solving partial
+differential equations with Grassmann valued Gaussian white noise. The
+invariant measures of physical interest are here described by averages with
+respect to Berezin integrals, see~{\cite{Berezin1}} (further developed into a
+analysis on Grassmann algebras by the same author, in the form of
+super-analysis~{\cite{Berezin2}}; for super-algebras see also, e.g.,
+Rogers~{\cite{Rogers2007}} and Le\u{\i}tes~{\cite{Leites}}, on a more heuristic
+level also DeWitt~{\cite{DeWitt}}). Berezin integrals have been useful in
+calculating fermionic systems, see e.g. Zinn-Justin~{\cite{ZinnJustin}},
+Izkyson and Zuber~{\cite{Itzykson}}.
+
+\
+
+Rigorous attempts to define Grassmann stochastic quantization were undertaken
+in a series of papers by Scherbakov et
+al.~{\cite{shcherbakov_elements_1993,shcherbakov_elements_1993-1,shcherbakov_elements_1993-2}}
+using the locally convex topology generated by considering all the possible
+correlation functions of the fields and the noise to generate a family of
+semi-norms. Convergence in this setting corresponds to convergence of all the
+correlation functions. \ This approach has the disadvantage of not allowing
+the introduction of norms strong enough to study differential equations via
+standard approaches. However it should be said that these papers define and
+successfully solve equations with finitely many degrees of freedom (i.e. with
+small scale and large scale cut-offs) and then address the convergence when
+the large scale cut-off is removed (infinite volume limit) using cluster
+expansion techniques. Other results in this direction were obtained later on
+by Ignatyuk et al.~{\cite{ignatyuk_convergence_1993}}, with applications in
+statistical mechanics.
+
+\
+
+Our approach here is different and, in our opinion, both simpler and more
+effective. We consider this problem in the context of non-commutative
+probability (sometimes referred to as \tmtextit{quantum} probability), namely
+we will define the relevant Grassmannian objects as non-commutative random
+variables. A non-commutative probability space $(\mathcal{A}, \omega)$ is
+given by a $C^{\ast}$ algebra $\mathcal{A}$ and a state $\omega$, which is a
+linear positive functional, on $\mathcal{A}$. Inspired by the general approach
+of Accardi et al.~{\cite{accardi_quantum_1982}} (see
+also~{\cite{accardi_outline_2015}}) we will define random variables with
+values in a Grassmann algebra $\Lambda$ \ as homomorphisms of $\Lambda$ into
+$\mathcal{A}$ (note however that we will not require the homomorphisms to
+respect the involution, since there is no canonical candidate for that in
+Grassmann algebras).
+
+\
+
+It is useful to keep in mind how classical commutative random variables fit
+in this algebraic approach. Consider a random variable $X : \Omega \rightarrow
+\mathcal{M}$ taking values in a manifold $\mathcal{M}$ and let $\mathcal{B}$
+be the algebra of all measurable, complex bounded function on $\mathcal{M}$.
+Then all the relevant probabilistic information about $X$ is encoded in the
+homomorphisms of algebras $f \in \mathcal{B} \mapsto f (X) \in \mathcal{A}$
+where $\mathcal{A}$ is the algebra of bounded measurable complex random
+variables on $\Omega$ endowed with the linear functional given by the
+expectation $\mathbb{E}$. In particular this is the point of view with which
+SDEs on manifolds are usually defined and
+studied~{\cite{hsu_stochastic_2002}}.
+
+\
+
+The embedding of $\Lambda$ into $\mathcal{A}$ allows to use the norm of
+$\mathcal{A}$ to do analysis on Grassmann algebras. Of course the associated
+analysis will not be \tmtextit{canonical} from the point of view of the
+Grassmann algebra but seems enough to allow us to obtain a satisfactory theory
+of stochastic quantization. Again, an analogy can be helpful to understand
+this setting: the standard approach to study Gaussian processes in Hilbert
+spaces~{\cite{Gross1967}} (see also, e.g.,~{\cite{janson_gaussian_1997}})
+requires to have a non-canonical embedding of the Hilbert space into a larger
+Banach space which supports the Gaussian measure. In our case, the role of
+``bigger'' Banach space is played by a suitable CAR sub-algebra of
+$\mathcal{A}$ which provides us with enough Grassmann generators to realize
+our homomorphisms and has a canonical notion of norm. It will be for us just
+``a place where to hang our (analytic) hat on''. \ \
+
+
+
+Another approach to infinite dimensional Grassmann algebras (and the related
+probability theory) we are aware of is that of
+Rogers~{\cite{rogers_graded_1986}} which essentially consists in looking at
+all the finite dimensional sub-algebras, use the Berezin integral (see,
+e.g,~{\cite{kirillov_introduction_1987}}) to compute averages and require
+certain natural consistency conditions. It is interesting to note however that
+our approach follows Osterwalder and
+Schrader~{\cite{osterwalder_euclidean_1973,osterwalder_euclidean_1973-2}}
+which were the first to do rigorous analysis of Euclidean Fermions: they were
+using the language of Fock space operators and not of Berezin calculus, and
+this allowed them to consider rigorously expressions involving infinite
+dimensional Grassmann algebras. The Fock space approach has also been used in
+discussing supersymmetry in the context of Parisi--Sourlas dimensional
+reduction~{\cite{klein_supersymmetry_1983,klein_supersymmetry_1985}} and
+Euclidean stochastic
+quantization~{\cite{albeverio_elliptic_2018,albeverio_elliptic_2019,de_vecchi_note_2019}}.
+
+\
+
+{\noindent}\tmtextbf{Plan of the paper.} In Section~\ref{sec:grassmann-rv} we
+define Grassmann random variables and various related notions. We then
+introduce Gaussian variables, including white noise and Brownian motion.
+Section~\ref{sec:finite-dim} studies finite dimensional Grassmann differential
+equations with additive noise and prove certain properties of their
+correlation functions, showing in particular that we can construct Grassmann
+Langevin diffusions which have prescribed stationary correlations.
+Section~\ref{sec:infinite-dim} is devoted to extend the previous results to
+SDE in infinite dimensions of the kind relevant for stochastic quantization.
+This allows us to use these processes to represent the correlation functions
+of Euclidean fermionic theories like~{\eqref{eq:eqft-berezin}}. As an
+application we provide in Section~\ref{sec:yukawa} a construction of the
+fermionic sector of the massive Yukawa Euclidean quantum field theory in two
+dimensions, in the weak coupling region and with an ultraviolet cutoff. In
+Appendix~\ref{appendix_Besov} we collect various technical results about
+functional spaces of Banach-valued functions, while in
+Appendix~\ref{app:series} we include some side results about the convergence
+of series expansions for the solution to finite dimensional SDEs.
+
+\
+
+{\noindent}\tmtextbf{Acknowledgements.} This work is supported by DFG via the
+grant AL 214/50-1 \ ``Invariant measures for SPDEs and Asymptotics''.
+
+\
+
+{\noindent}\tmtextbf{Notations.} We denote by $\mathcal{L} (A, B)$ the space
+of linear maps between vector spaces $A$ and $B$, if both $A, B$ have
+topologies we consider all the maps to be continuous. We let $\mathcal{L} (A)
+=\mathcal{L} (A, A)$. With $\tmop{Hom} (A, B)$ we denote homomorphisms between
+algebras $A$ and $B$.
+
+\section{Grassmann random variables}\label{sec:grassmann-rv}
+
+\tmtextit{Algebraic probability.} We consider a complex Hilbert space
+$\mathcal{H}$ (to be fixed later) and denote by $\mathcal{A}=\mathcal{L}
+(\mathcal{H})$ the von Neumann algebra of bounded operators with the operator
+norm. Moreover we assume to have a state $\omega$ on $\mathcal{A}$, that is a
+positive definite functional normalized by the condition that $\omega
+(\mathbb{I}) = 1$, where $\mathbb{I}$ is the identity in $\mathcal{L}
+(\mathcal{H})$. The pair $(\mathcal{A}, \omega)$ is a (non-commutative or
+algebraic) probability space. We do not require the state $\omega$ to be
+either faithful, or tracial.
+
+\
+
+\tmtextit{Grassmann algebras.} Let $V$ be a (finite dimensional or infinite
+dimensional and separable) real Hilbert space. Denote by $\Lambda V$ the
+Grassmann algebra generated by $V$, i.e. the exterior algebra obtained by
+quotienting the tensor algebra $T (V) = \oplus_{n \geqslant 0} V^{\otimes n}$
+by the two-sided ideal generated by elements of the form $x \otimes x$ for $x
+\in V$. We denote the product of two elements $f, g \in \Lambda V$ by $f
+\wedge g$ (or if there is no confusion with other products simply by $f g$).
+
+\
+
+Let $(v_{\alpha})_{\alpha}$ be a fixed basis of $V$. As a consequence
+$\Lambda V$ is spanned by elements of the form $v_A \assign v_{\alpha_1}
+\wedge \cdots \wedge v_{\alpha_n}$ and $A = (\alpha_1, \ldots, \alpha_n)$ is a
+multi-index with the convention that $v_{\emptyset} = 1$ is the unit element
+in $\Lambda V$. When it is clear from the context we will denote the product
+in $\Lambda V$ simply by $v_A = v_{\alpha_1} \ldots v_{\alpha_n}$. We recall
+that $\Lambda V$ is $\mathbb{Z}_2$ graded in the sense that it splits into odd
+and even parts $\Lambda V = \Lambda_{\tmop{odd}} V \oplus
+\Lambda_{\tmop{even}} V$. On $\Lambda V$ there is an Hopf algebra structure
+with coproduct $\Delta : \Lambda V \rightarrow \Lambda V \otimes \Lambda V$
+where $\Lambda V \otimes \Lambda V$ is the $\mathbb{Z}_2$-graded tensor
+product algebra which satisfies
+\[ (f \otimes g) (h \otimes k) = (- 1)^{| g |  | h |} f h \otimes g k, \qquad
+   f, g, h, k \in \Lambda V, \]
+with $| \cdot | : \Lambda V \rightarrow \{ 0, 1 \}$ the even/odd grading. The
+coproduct $\Delta$ is the algebra homomorphism such that $\Delta v = 1 \otimes
+v + v \otimes 1$ for all $v \in V \subseteq \Lambda V$ and the counit
+$\varepsilon : \Lambda V \rightarrow \mathbb{C}$ given by $\varepsilon (v_A)
+=\mathbbm{1}_{A = \emptyset}$.
+
+\
+
+\tmtextit{Random variables.}
+
+\begin{definition}
+  A $V$-Grassmann random variable $\Psi$ is an algebra homomorphism from the
+  Grassmann algebra $\Lambda V$ into $\mathcal{A}$. We denote by $\mathcal{G}
+  (V) = \tmop{Hom} (\Lambda V, \mathcal{A})$ the set of all such
+  homomorphisms. We will always assume that $\Psi \in \mathcal{G} (V)$ comes
+  with a unitary element $U_{\Psi}$ of $\mathcal{A}$ such $U_{\Psi} \Psi (v)
+  U_{\Psi}^{\ast} = \Psi (- v)$ for all $v \in V$. We call the \tmtextit{law}
+  of $\Psi \in \mathcal{G} (V)$ the family of its moments $\omega^{\Psi} (F) :
+  = \omega (\Psi (F))$ for all $F \in \Lambda V$, also represented by the
+  linear functional $\omega^{\Psi} : \Lambda V \rightarrow \mathbb{R}$.
+\end{definition}
+
+Note that $\Psi \in \mathcal{G} (V)$ cannot be assumed a to be
+$\ast$-algebra-homomorphism since $\Lambda V$ has no (natural)
+$\ast$-operation. If $F \in \Lambda V$ has representation $F = \sum_A F_A v_A$
+we shall employ the following dual notation
+\[ F (\Psi) \assign \Psi (F) = \sum_A F_A \Psi^A, \]
+where $\Psi^A \assign \Psi (v_A)$ and $F_A \in \mathbb{R}$. Since $\Psi$ is
+assumed to be an algebra homomorphism, we have e.g. $\Psi^{\alpha}
+\Psi^{\beta} = - \Psi^{\beta} \Psi^{\alpha}$, where $\Psi^{\alpha} = \Psi
+(v_{\alpha})$ and $(v_{\alpha})_{\alpha}$ is a fixed basis of $V$. Moreover,
+$\Psi (\Lambda V)$ is a Grassmann sub-algebra of $\mathcal{A}$ and $\Psi (F)$
+has the same degree (even or odd) as $F$. It is important to note that, as
+shown by arguments in \ {\cite{van2003algebra1,van2003algebra2}}, even if some
+arguments are formulated in a basis dependent way the definition of $\Lambda
+V$ and its characterization by anti-commutation relations is basis
+independent.
+
+\
+
+\tmtextit{Compatibility.} When the context is clear we will abbreviate $X \in
+\mathcal{G} (V)$ as $X \in \mathcal{G}$. Let $X \in \mathcal{G} (V)$ and $Y
+\in \mathcal{G} (W)$, we say that they are \tmtextit{compatible} if the linear
+map $Z : V \oplus W \rightarrow \mathcal{A}$ given by $Z (v) = X (v)$ if $v
+\in V$ and $Z (w) = Y (w)$ if $w \in W$, extends to a homomorphism $Z :
+\Lambda (V \oplus W) \rightarrow \mathcal{A}$. In this case we write $Z \in
+\mathcal{G} (V \oplus W)$ or briefly $(X, Y) \in \mathcal{G}$. Note that we
+have a super- algebra isomorphism $\Lambda (V \oplus W) \approx \Lambda (V)
+\otimes \Lambda (W)$ where tensor product is in the sense of super-algebras.
+From this isomorphism we get in particular $Z (F) = m_{\mathcal{A}} [(X
+\otimes Y) (F)]$ for all $F \in \Lambda (V \oplus W)$ where $m_{\mathcal{A}} :
+\mathcal{A} \otimes \mathcal{A} \rightarrow \mathcal{A}$ denotes the
+multiplication of $\mathcal{A}$. Compatibility can of course be defined for
+$X_1, \ldots, X_n \in \mathcal{G}$ in a corresponding way. We shall express
+that $X_1, \ldots, X_n \in \mathcal{G}$ are compatible by writing $(X_1,
+\ldots, X_n) \in \mathcal{G}$.
+
+\begin{remark}
+  The notion of compatibility which we introduce here in not standard in
+  algebraic probability. A related concept is that of kinematic independence
+  (see e.g. the review of Accardi~{\cite{accardi_outline_2015}}).
+\end{remark}
+
+Given $X, Y \in \mathcal{G} (V)$ which are compatible we define $X + Y \in
+\mathcal{G} (V)$ as
+\[ (X + Y) (F) = F (X + Y) \assign m_{\mathcal{A}} [(X \otimes Y) \Delta F],
+   \qquad F \in \Lambda V, \]
+Note indeed that by compatibility $Z = m_{\mathcal{A}} \circ (X \otimes Y) :
+\Lambda (V \oplus V) \approx \Lambda V \otimes \Lambda V \rightarrow
+\mathcal{A}$ is an algebra homomorphism and therefore \
+\[ (X + Y) (F G) = Z (\Delta (F G)) = Z (\Delta F \Delta G) = Z (\Delta F) Z
+   (\Delta G) = (X + Y) (F) (X + Y) (G) . \]
+The notation is justified from the fact that $(X + Y) (v) = X (v) + Y (v)$ for
+all $v \in V$.
+
+\
+
+\tmtextit{Independence.} If $(X_1, \ldots, X_n) \in \mathcal{G} (V_1 \oplus
+\cdots \oplus V_n)$ are compatible Grassmann variables with values in the
+probability space $(\mathcal{A}, \omega)$, then we say that $X_1, \ldots, X_n$
+are (tensor) independent (with respect to the state $\omega$) if, for all $F_j
+\in \Lambda V_j$, we have that~{\cite{dirksen_noncommutative_2010}}
+\[ \omega \left( \prod_{j = 1}^k \vphantom{\frac{}{}} X_j (F_j) \right) =
+   \prod_{j = 1}^k \omega (X_j (F_j)) . \]
+
+
+For example if $(X, Y) \in \mathcal{G} (V \oplus W)$ are (compatible and)
+independent Grassmann random variables with values in $(\mathcal{A}, \omega)$,
+then for all $v \in V \approx V \oplus 0, w \in W \approx 0 \oplus W$ we have
+$v w \approx ((v \oplus 0) \wedge (0 \oplus w)) \in \Lambda (V \oplus W)
+\approx \Lambda V \otimes \Lambda W$ and
+\[ \omega ((X \otimes Y) (v w)) = \omega (X (v) Y (w)) = \omega (X (v)) \omega
+   (Y (w)) . \]
+Let $X_1 \in \mathcal{G} (V_1)$, $X_2 \in \mathcal{G} (V_2)$ be two Grassmann
+random variables. We want to show how to construct two compatible and
+independent random variables $\tilde{X}_1, \tilde{X}_2$ with the same law as
+$X_1, X_2$. The random variables $X_1$ and $X_2 $ have values in the
+non-commutative probability spaces $(\mathcal{L} (\mathcal{H}_1), \omega_1)$
+and $(\mathcal{L} (\mathcal{H}_2), \omega_2)$ respectively. By a GNS argument
+we can assume that $\omega_1$ is the state associated to a vector $\Omega_1$
+in $\mathcal{H}_1$. Moreover we also assume that $\mathcal{H}_1 =
+\overline{X_1 (\Lambda V) \Omega_1}$ (the bar denotes the closure with respect
+to the Hilbert space topology) since this enough to compute all the quantities
+$\omega_1 (X_1 (F))$ for all $F \in \Lambda V$. Then on $\mathcal{H}_1$ we can
+introduce an involution $R_1$ which act as $R_1 X_1 (F) \Omega_1 = X_1 ((-
+1)^{| F |} F) \Omega_1$ where $| \cdot |$ is the grading on $\Lambda V$. A
+similar construction can be done for the other space $\mathcal{H}_2$. Now we
+take $\mathcal{H}=\mathcal{H}_1 \otimes \mathcal{H}_2$, $\tilde{X}_1 (v) = X_1
+(v) \otimes R_2$ for $v \in V_1$ and $\tilde{X}_2 (w)
+=\mathbbm{1}_{\mathcal{H}_1} \otimes X_2 (w)$ for $w \in V_2$. Then
+$\tilde{X}_1 (v) \tilde{X}_2 (w) = - \tilde{X}_2 (w) \tilde{X}_1 (v)$ and
+since $\Lambda (V_1 \oplus V_2) \approx \Lambda V_1 \otimes \Lambda V_2$ we
+have also that the map $X (v \oplus w) = X_1 (v) + X_2 (w)$ with $v \in V_1, w
+\in V_2$ can be extended to a homomorphism from $\Lambda (V_1 \oplus V_2)$ to
+$\mathcal{A}$ in such a way that $\omega (\tilde{X}_i (F)) = \omega_i (X_i
+(F))$ for all $F \in \Lambda V_i$, $i = 1, 2$.
+
+\subsection{Topology and calculus on Grassmann variables}
+
+\
+
+Before beginning we want to specify the topology we consider on $\mathcal{G}
+(V)$. We consider here only the case where $V$ is finite dimensional, since
+there is a more or less unique natural topology on $\mathcal{G} (V)$. Some
+topologies of $\mathcal{G} (V)$ when $V$ is infinite dimensional are discussed
+in Section \ref{sec:infinite-dim}.
+
+\
+
+When $V$ is finite dimensional all norms on $V$ are equivalent. For this
+reason we choose the norm induced by the pre-Hilbert space inner product
+$\langle \cdot, \cdot \rangle$ (that in the case of $V$ finite dimensional is
+a Hilbert space inner product on $V$) related to the construction of
+$V$-valued Gaussian random variables $X$ (see
+Section~\ref{sec:gaussians}).\quad In this case $\mathcal{G} (V)$ has a
+natural metric topology given by the distance
+\begin{equation}
+  d_{\mathcal{G} (V)} (X, Y) \assign \| X - Y \|_{\mathcal{G} (V)} = \sup_{v
+  \in V, | v |_V = 1} \| X (v) - Y (v) \|_{\mathcal{A}},
+  \label{eq:distrance-g}
+\end{equation}
+where $\| \cdot \|_{\mathcal{A}}$ is the natural norm in the
+$\asterisk$-algebra $\mathcal{A}$.
+
+\begin{remark}
+  \label{remark_infinitenorm}In principle the definition of the distance
+  {\eqref{eq:distrance-g}} and the related norm $\| \cdot \|_{\mathcal{G}
+  (V)}$ does not use in any way the fact that $V$ is finite dimensional. For
+  this reason in the following, when $V$ is a (in general infinite
+  dimensional) per-Hilbert space we will use the notation $\| X
+  \|_{\mathcal{G} (V)}$ for the quantity $\sup_{v \in V, | v |_V = 1} \| X (v)
+  - Y (v) \|_{\mathcal{A}}$.
+\end{remark}
+
+When $V$ is finite dimensional $\mathcal{G} (V)$ is a complete metric space
+with respect to $d_{\mathcal{G} (V)}$, in fact we have:
+
+\begin{lemma}
+  \label{lemma_completeness}The metric $d_{\mathcal{G} (V)}$ makes
+  $\mathcal{G} (V)$ a complete metric space.
+\end{lemma}
+
+\begin{proof}
+  We let $\| \cdot \|_{\mathcal{G} (V)}$ to be the restriction to $\mathcal{G}
+  (V)$ of the natural norm of the Banach space $\mathcal{L} (V, \mathcal{A})$
+  of the continuous linear maps between $V$ and $\mathcal{A}$, then the
+  quantity
+  \[ d_{\mathcal{G} (V)} (X, Y) = \| X - Y \|_{\mathcal{G} (V)} \]
+  where $(X - Y) (v) = X (v) - Y (v)$, satisfies the usual properties of a
+  metric and if $X_n$ is a Cauchy sequence with respect to $d_{\mathcal{G}
+  (V)}$, there is an element $X \in \mathcal{L} (V, \mathcal{A})$ such that
+  $X_n$ converges to $X$ in $\mathcal{L} (V, \mathcal{A})$. The only thing
+  that we have to prove is that the linear map $X \in \mathcal{L} (V,
+  \mathcal{A})$ can be extended to a homomorphism from $\Lambda V$ to
+  $\mathcal{A}$. This is equivalent to prove that for any $v, w \in V$ we have
+  $X (v) X (w) = - X (w) X (v)$ where the product is the natural one in
+  $\mathcal{A}$. On the other hand by the continuity of the product of
+  $\mathcal{A}$ with respect to $\| \cdot \|_{\mathcal{A}}$ we have
+  \[ X (v) X (w) = \lim_{n \rightarrow + \infty} X_n (v) X_n (w) = - \lim_{n
+     \rightarrow + \infty} X_n (w) X_n (v) = - X (w) X (v) . \]
+\end{proof}
+
+\begin{remark}
+  The distance $d_{\mathcal{G} (V)}$ is not the unique reasonable choice in
+  $\mathcal{G} (V)$ and it depends on the topology chosen on $\mathcal{A}$ (in
+  this case we choose the topology of the uniform converge of operators). An
+  essential choice to preserve the non-linear structure of $\mathcal{G} (V)$,
+  exploited in the proof of Lemma~\ref{lemma_completeness}, seems to be that
+  the product on $\mathcal{A}$ is continuous with respect to this topology. 
+\end{remark}
+
+In the following we will denote $\| Y \|_{\mathcal{G} (V)}$ for $Y \in
+\mathcal{G} (V)$ the positive number
+\[ \| Y \|_{\mathcal{G} (V)} \assign \| Y \|_{\mathcal{L} (V, \mathcal{A})} =
+   \sup_{v \in V, \| v \| = 1} \| X (v) \|_{\mathcal{A}}, \]
+i.e. the norm of the restriction of $Y$ to $\mathcal{L} (V, \mathcal{A})$.
+This is useful to formulate a Taylor formula on $\mathcal{G} (V)$. We will sue
+the simpler notation $m$ for the multiplication $m_{\mathcal{A}}$ in
+$\mathcal{A}$.
+
+\
+
+Define the \tmtextit{right derivative} $\partial_R : \Lambda V \rightarrow
+\Lambda V \otimes V$ by
+\begin{equation}
+  \partial_R F \assign (\mathbbm{1} \otimes \Pi_V) (\Delta F) : \Lambda V
+  \rightarrow \Lambda V \otimes V \label{eq:derivativeR}
+\end{equation}
+where $\Pi_V : \Lambda V \rightarrow V$ is the projection from the tensor
+algebra $\Lambda V$ onto $V$. Then
+\[ F (X + Y) - F (X) - m [(X \otimes Y) (\partial_R F)] = m [(X \otimes Y)
+   (\mathbbm{1}-\mathbbm{1} \otimes \varepsilon -\mathbbm{1} \otimes \Pi_V)
+   \Delta F] \]
+for $F \in \Lambda V$, where we used that $F (X) = m [(X \otimes Y)
+(\mathbbm{1} \otimes \varepsilon) \Delta F]$. Given that
+\[ (\mathbbm{1}-\mathbbm{1} \otimes \varepsilon -\mathbbm{1} \otimes \Pi_V)
+   \Delta F \in \Lambda V \otimes \Lambda_{\geqslant 2} V \]
+where $\Lambda_{\geqslant 2} V$ denotes the subspace of $\Lambda V$ of
+elements of degree $\geqslant 2$. We can define recursively the $k$+1-th
+derivative as
+\[ \partial_R^{k + 1} = (\partial_R \otimes 1 \otimes \cdots \otimes 1)
+   \partial_R^k : \Lambda V \rightarrow \Lambda V \otimes V \otimes \cdots
+   \otimes V \]
+where $\partial_R^k$ is the $k$-th order derivative. Note that the right
+derivative $\partial_R : \Lambda V \rightarrow \Lambda V \otimes V$ satisfies
+\[ \partial_R (f_1 \cdots f_n) = \sum_{k = 1}^n (- 1)^{n - k} \left( f_1
+   \cdots \not{f_k} \cdots f_n \right) \otimes f_k, \qquad f_1, \ldots, f_n
+   \in V. \]
+Of course one can define also a left derivative $\partial_L = (\Pi_V \otimes
+\mathbbm{1}) \circ \Delta : \Lambda V \rightarrow V \otimes \Lambda V$ with
+similar properties and
+\[ \partial_L (f_1 \cdots f_n) = \sum_{k = 1}^n (- 1)^{k - 1} \left( f_1
+   \cdots \not{f_k} \cdots f_n \right) \otimes f_k, \qquad f_1, \ldots, f_n
+   \in V. \]
+We will consider $\Lambda V \otimes V$ as a $\Lambda V$-bimodule and in
+particular we define the bilinear form $\langle \cdot, \cdot \rangle :
+(\Lambda V \otimes V) \otimes V \rightarrow \Lambda V$ by
+\begin{equation}
+  \langle f \otimes v, w \rangle = f \langle v, w \rangle, \qquad f \in
+  \Lambda V, v, w \in V. \label{eq:bimodule}
+\end{equation}
+Note that there is no ambiguity on whether $\langle \cdot, \cdot \rangle$
+denotes this bilinear form or whether it denotes the scalar product of $V$.
+
+\begin{remark}
+  \label{remark_infinitederivative}The definition of derivative $\partial_R^k$
+  and the bilinear for {\eqref{eq:bimodule}} do not depend on the fact that
+  $V$ is finite dimensional. For this reason we can define $\partial_R^k$ and
+  the bilinear for {\eqref{eq:bimodule}} also when $V$ is a infinite
+  dimensional pre-Hilbert space.
+\end{remark}
+
+\begin{remark}
+  Note that if $F_{\tmop{odd}} \in \Lambda_{\tmop{odd}} V$ then $\partial_R
+  F_{\tmop{odd}} = \partial_L F_{\tmop{odd}}$. On the other hand, if
+  $F_{\tmop{even}} \in \Lambda_{\tmop{even}} V$ then $\partial_R
+  F_{\tmop{even}} = - \partial_L F_{\tmop{even}}$. In general, if we denote by
+  $\mathbb{P}_{\tmop{odd}}, \mathbb{P}_{\tmop{even}}$ respectively the
+  projection onto the odd and even parts of $\Lambda V$, then $\partial_R =
+  (\mathbb{P}_{\tmop{even}} -\mathbb{P}_{\tmop{odd}}) \partial_L$.
+\end{remark}
+
+We can now state the version of Taylor formula which we will use below.
+
+\begin{lemma}
+  \label{lemma:taylor}Consider $F \in \Lambda V$ and let $X, Y \in \mathcal{G}
+  (V)$ be two compatible Grassmann random variables such that $\| Y
+  \|_{\mathcal{G} (V)} \leqslant 1$, then
+  \begin{equation}
+    F (X + Y) = F (X) + \sum_{k = 1}^n \frac{1}{k!} m [(X \otimes Y \otimes
+    \cdots \otimes Y) (\partial_R^k F)] + O (\| Y \|^{n + 1}_{\mathcal{G}
+    (V)}) \label{eq:taylor}
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  We have
+  \[ F (X + Y) = m [(X \otimes Y) (\Delta F)] = \sum_{k \geqslant 0} m [(X
+     \otimes Y) (1 \otimes \Pi_{\Lambda^k V}) (\Delta F)], \]
+  where the sum is finite since $F \in \Lambda V$ is a finite polynomial.
+  Equation~{\eqref{eq:taylor}} easily follows as soon as we prove that
+  \[ m [(X \otimes Y \otimes \cdots \otimes Y) (\partial_R^k F)] = (k!) m [(X
+     \otimes Y) (1 \otimes \Pi_{\Lambda^k V}) (\Delta F)] . \]
+  We have
+  \begin{eqnarray*}
+    \partial^k_R F & = & (\partial_R \otimes 1 \otimes \cdots \otimes 1)
+    \cdots (\partial_R \otimes 1) \partial_R F\\
+    & = & \left( \vphantom{\tfrac{a}{b}} (1 \otimes \Pi_V) \Delta \otimes 1
+    \otimes \cdots \otimes 1 \right) \cdots \left( \vphantom{\tfrac{a}{b}} (1
+    \otimes \Pi_V) \Delta \otimes 1 \right) \left( \vphantom{\tfrac{a}{b}} 1
+    \otimes \Pi_V \right) \Delta F\\
+    & = & \left( \vphantom{\tfrac{a}{b}} (1 \otimes \Pi_V) \otimes 1 \otimes
+    \cdots \otimes 1 \right) (\Delta \otimes 1 \otimes \cdots \otimes 1)
+    \cdots \left( \vphantom{\tfrac{a}{b}} (1 \otimes \Pi_V) \otimes 1 \right)
+    (\Delta \otimes 1) \left( \vphantom{\tfrac{a}{b}} 1 \otimes \Pi_V \right)
+    \Delta F\\
+    & = & \left( \vphantom{\tfrac{a}{b}} (1 \otimes \Pi_V) \otimes 1 \otimes
+    \cdots \otimes 1 \right) \cdots \left( \vphantom{\tfrac{a}{b}} (1 \otimes
+    \Pi_V) \otimes 1 \right) \left( \vphantom{\tfrac{a}{b}} 1 \otimes \Pi_V
+    \right)  (\Delta \otimes 1 \otimes \cdots \otimes 1) \cdots (\Delta
+    \otimes 1) \Delta F\\
+    & = & \left( \vphantom{\tfrac{a}{b}} 1 \otimes \Pi_V \otimes \Pi_V
+    \otimes \cdots \otimes \Pi_V \right)  (\Delta \otimes 1 \otimes \cdots
+    \otimes 1) \cdots (\Delta \otimes 1) \Delta F.
+  \end{eqnarray*}
+  Let $N \assign \{ 1, \ldots, n \}$, $\#N = n$. For $I = \{ j_1, \ldots, j_k
+  \} \subset N$, we put $v_I \assign v_{j_1} \cdots v_{j_k}$ for $v_j \in V, j
+  \in N$. Let $\tmop{sgn} (N\backslash I)$ be a sign such that $v_N =
+  \tmop{sgn} (N\backslash I) v_{N\backslash I} v_I$ By definition of the
+  coproduct $\Delta$ in the exterior algebra $\Lambda V$, we have
+  \[ \begin{array}{c}
+       (1 \otimes \Pi_V \otimes \cdots \otimes \Pi_V) (\Delta \otimes 1
+       \otimes \cdots \otimes 1) \cdots (\Delta \otimes 1) (\Delta) (v_1
+       \cdots v_n) =\\
+       = \sum_{j_1, \ldots j_n \in N} \tmop{sgn} (N\backslash I)
+       v_{N\backslash \{ j_1, \ldots, j_n \}} \otimes v_{j_1} \otimes \cdots
+       \otimes v_{j_n} .
+     \end{array} \]
+  On the other hand
+  \[ \begin{array}{lll}
+       (1 \otimes \Pi_{\Lambda^k V}) \Delta v_1 \cdots v_n & = & (1 \otimes
+       \Pi_{\Lambda^k V}) \sum_{I \subset N} \tmop{sgn} (N\backslash I) v_{N
+       \setminus I} \otimes v_I\\
+       & = & \frac{1}{k!} \sum_{j_1, \ldots, j_k} \tmop{sgn} (N\backslash I)
+       v_{N\backslash \{ j_1, \ldots, j_k \}} \otimes v_{\{ j_1, \ldots, j_k
+       \}} .
+     \end{array} \]
+  By linearity, we therefore have
+  \[ (1 \otimes m^{(k)}) (\partial^k_R F) = k! (1 \otimes \Pi_{\Lambda^k V})
+     (\Delta F) . \]
+  where $m^{(k)} : V^{\otimes k} \rightarrow \Lambda V$ is the product. Since
+  $X, Y$ are algebra homomorphisms they commute with the product hence we have
+  \begin{eqnarray*}
+    m [(X \otimes Y \otimes \cdots \otimes Y) (\partial_R^k F)] & = & m [(X
+    \otimes Y) (1 \otimes m^{(k)}) (\partial_R^k F)]\\
+    & = & k!m [(X \otimes Y) (1 \otimes \Pi_{\Lambda^k V}) (\Delta F)] .
+  \end{eqnarray*}
+  
+  
+  \
+  
+  This concludes the proof.
+\end{proof}
+
+\subsection{Grassmann Gaussian variables}\label{sec:gaussians}
+
+Let now $V$ be a real pre-Hilbert space with scalar product $\langle \cdot,
+\cdot \rangle$ and with an antisymmetric bounded operator $C : V \rightarrow
+V$. We recall that, by Remark \ref{remark_infinitenorm} and Remark
+\ref{remark_infinitederivative}, we can extend the definitions of $\| \cdot
+\|_{\mathcal{G} (V)}$, $\partial_R^k$ and the bilinear form
+{\eqref{eq:bimodule}} from the finite dimensional case to the generic
+(infinite) pre-Hilbert space $V$.
+
+\begin{definition}
+  A ($V$-)Grassmann (centered) Gaussian variable with correlation $C$ is a
+  random variable $X \in \mathcal{G} (V)$ such that
+  \begin{equation}
+    \omega (X (F) X (f)) = \omega (X (\langle \partial_R F, C f \rangle)),
+    \qquad F \in \Lambda V, f \in V. \label{eq:ibp-r}
+  \end{equation}
+  We also require that $\| X \| < \infty$, i.e that the map $X : V \rightarrow
+  \mathcal{A}$ must be continuous with respect the topology induced on $V$ by
+  the pre-Hilbert product structure and the uniform operator topology on
+  $\mathcal{A}$.
+\end{definition}
+
+If we define $\partial_R X (F) = X (\partial_R F)$, with the understanding
+that $X (g \otimes w) = X (g) \otimes w$, $g \in V$ and $w \in \Lambda V$,
+then we have the more familiar expression (similar to the bosonic counterpart)
+\[ \omega (F (X) X (h)) = \omega (\langle \partial_R F (X), C h \rangle) . \]
+Note that the integration by parts formula determine all the moments of the
+Gaussians. In particular~{\eqref{eq:ibp-r}} implies that $\omega (X (f_1)
+\cdots X (f_n)) = 0$ if $n$ is odd and if $n = 2 k$ is even
+\begin{equation}
+  \omega (X (f_1) \cdots X (f_{2 k})) = \sum_{\sigma} (- 1)^{\sigma} \prod_{i
+  = 1}^k \langle f_{\sigma (2 i - 1)}, C f_{\sigma (2 i)} \rangle_V
+  \label{eq:wick}
+\end{equation}
+where the sum runs over all the pairings $\sigma$ of $\{ 1, \ldots, 2 k \}$
+and $(- 1)^{\sigma}$ is an appropriate sign. The right hand side of
+{\eqref{eq:wick}} can be written as a Pfaffian:
+\[ \omega (X (f_1) \cdots X (f_n)) = \underset{1 \leqslant i, j \leqslant
+   n}{\tmop{Pf}} \langle f_i, C f_j \rangle_V, \]
+where the Pfaffian is defined, for an anti-symmetric $n \times n$ matrix $M$,
+by the relation
+\[ (\underset{1 \leqslant i, j \leqslant n}{\tmop{Pf}} M_{i j})^2 =
+   \underset{1 \leqslant i, j \leqslant n}{\det} M_{i j} . \]
+The existence of a Gaussian variable, in the above sense, implies the
+inequality
+\[ \underset{1 \leqslant i, j \leqslant n}{\det} \langle f_i, C f_j \rangle_V
+   = [\omega (X (f_1) \cdots X (f_n))]^2 \leqslant \| X (f_1) \|^2 \cdots \| X
+   (f_n) \|^2 \leqslant \| X \|^{2 n} \| f_1 \|^2 \cdots \| f_n \|^2 \]
+well known in the mathematical physics literature relative to fermionic
+expansions e.g. see~{\cite{mastropietro_non-perturbative_2008}}.
+
+\begin{remark}
+  The averages of Gaussian variables depend only on the quadratic form $(f, g)
+  \mapsto \langle f, C g \rangle$, however analysis on the Grassmann algebra
+  relies on the scalar product $\langle \cdot, \cdot \rangle$ also via the
+  requirement that $\| X (f) \|_{\mathcal{A}} \leqslant \| f \|_V$. In
+  particular the realization of the Grassmann algebra as a family of bounded
+  operators is not canonical. This is the reason we need to require the above
+  continuity of the map $X : V \rightarrow \mathcal{A}$.
+\end{remark}
+
+In order to construct Grassmann Gaussian variables, we need ``a place to hang
+the hat on'', this place will be a (canonical commuting relations) CAR algebra
+endowed with its vacuum state. \ To allow for arbitrary correlations $C$ we
+can use a standard trick~{\cite{osterwalder_euclidean_1973-2}} which consists
+in doubling the generators of the CAR algebra with respect to the generators
+of the Grassmann algebra.
+
+\begin{lemma}
+  For every antisymmetric and bounded $C : V \rightarrow V$ there exists a
+  ($V$-)Grassmann Gaussian variable $X$ with correlation $C$ (on a suitable
+  probability space $(\mathcal{A}, \omega)$).
+\end{lemma}
+
+\begin{proof}
+  Let us consider $\Lambda V$ itself as a real pre-Hilbert space with respect
+  to the scalar product $\llangle \cdot, \cdot \rrangle$ on $\Lambda V$ given
+  by
+  \[ \llangle v_1 \wedge \cdots \wedge v_n, w_1 \wedge \cdots \wedge w_m
+     \rrangle = \delta_{n m} \underset{1 \leqslant j, k \leqslant n}{\det}
+     \langle v_j, w_k \rangle, \]
+  for $v_j, w_k \in V$, $j = 1, \ldots, n$, $k = 1, \ldots, m$, where $\langle
+  \cdot, \cdot \rangle$ denotes as usual the scalar product on $V$. Note that
+  $\llangle \cdot, \cdot \rrangle$ on $\Lambda^n V$ is simply the restriction
+  of the Hilbert scalar product on the tensor product $V^{\otimes n}$. Let
+  $\mathcal{H}$ be the completion of $\Lambda V$ with respect to $\llangle
+  \cdot, \cdot \rrangle$ and denote by $\Omega$ the element in $\mathcal{H}$
+  which corresponds to $1 \in \Lambda V$. Denote by $\lambda : \Lambda V
+  \rightarrow \tmop{End} (\Lambda V)$ the left action of $\Lambda V$ on itself
+  given by $\lambda (F) G = F \wedge G$, where $F, G \in \Lambda V$. We show
+  that this action extends to a representation of $\Lambda V$ on
+  $\mathcal{H}$. Indeed $\lambda (v)$, $v \in V$ corresponds to a creation
+  operator. Let us denote by $\lambda (v)^{\Tau}$ the adjoint of the operator
+  $\lambda (v)$ with respect to the scalar product $\llangle \cdot, \cdot
+  \rrangle$. A standard computation shows that for $v \in V$ we have
+  \[ \lambda (v)^{\Tau} w_1 \wedge \cdots \wedge w_n = \sum_{\ell = 1}^n (-
+     1)^{\ell - 1} \langle v, w_{\ell} \rangle w_1 \wedge \cdots \wedge
+     \not{w_{\ell}} \wedge \cdots \wedge w_n . \]
+  Namely $\lambda^T (v) x$ can be expressed in terms of the left derivative as
+  $\lambda^T (v) x = \langle v, \partial_L x \rangle$ (recall the definition
+  given in equation~{\eqref{eq:bimodule}}) for all $x \in \Lambda V$. In
+  particular we have
+  \begin{equation}
+    \{ \lambda (v), \lambda (w) \} = \{ \lambda (v)^{\Tau}, \lambda (w)^{\Tau}
+    \} = 0, \qquad \{ \lambda (v)^{\Tau}, \lambda (w) \} = \langle v, w
+    \rangle \mathbb{I}, \qquad v, w \in V, \label{eq:car}
+  \end{equation}
+  where as usual $\{ \cdot, \cdot \}$ denotes the anticommutator. As a
+  consequence we obtain, for any $x \in \Lambda V$
+  \[ \llangle \lambda (v) x, \lambda (v) x \rrangle + \llangle \lambda
+     (v)^{\Tau} x, \lambda (v)^{\Tau} x \rrangle = \llangle x, \{ \lambda
+     (v)^{\Tau}, \lambda (v) \} x \rrangle = \langle v, v \rangle \llangle x,
+     x \rrangle . \]
+  In particular $\lambda (v), \lambda (v)^{\Tau}, v \in V$, extend to bounded
+  operators on $\mathcal{H}$ (still denoted by the same symbol). We now define
+  $X : \Lambda V \rightarrow \mathcal{L} (\mathcal{H})$ to be the algebra
+  homomorphism defined first on $V$ by
+  \[ X (v) = \lambda (C v) + \lambda (v)^{\Tau}, \qquad v \in V. \]
+  Then $X$ is extended in a natural way to $\Lambda V$ (still denoted by the
+  same symbol). Note that $X (x)$, $x \in \Lambda V$, is indeed a bounded
+  operator since it is the sum of products of bounded operators. Finally we
+  define $\omega : \mathcal{L} (\mathcal{H}) \rightarrow \mathbb{R}$ to be the
+  state on $\mathcal{A} =\mathcal{L} (\mathcal{H})$ defined by $\Omega$, that
+  is
+  \[ \omega (T) \assign \llangle \Omega, T \Omega \rrangle, \qquad T \in
+     \mathcal{L} (\mathcal{H}) . \]
+  We claim that $X$ is a Gaussian Grassmann random variable on $(\mathcal{L}
+  (\mathcal{H}), \omega)$. We first show that it is Grassmann:
+  \[ \begin{array}{lll}
+       \{ X (v), X (w) \} & = & \{ \lambda (C v), \lambda (w)^{\Tau} \} + \{
+       \lambda (v)^{\Tau}, \lambda (C w) \}\\
+       & = & \langle C v, w \rangle + \langle v, C w \rangle = \langle v,
+       C^{\Tau} w \rangle + \langle v, C w \rangle = 0,
+     \end{array} \]
+  where $v, w \in \Lambda$, because by assumption $C^{\Tau} = - C$. Now we
+  have also that
+  \begin{eqnarray*}
+    \omega (X (v) X (w)) & = & \llangle \Omega,^{} \lambda (v)^{\Tau} \lambda
+    (C w) \Omega \rrangle\\
+    & = & \llangle \lambda (v) \Omega, \lambda (C w) \Omega \rrangle =
+    \llangle v, C w \rrangle,
+  \end{eqnarray*}
+  where the first equality follows from the fact that $\lambda (v)^{\Tau}
+  \Omega = 0$. More generally using that $X (v) \Omega = \lambda (C v) \Omega$
+  and the commutation relation~{\eqref{eq:car}} we have that, for all $f_1,
+  \ldots, f_{2 k} \in V$
+  \[ \omega (X (f_1) \cdots X (f_{2 k})) = \omega (X (f_1) \cdots X (f_{2 k -
+     1}) \lambda (C f_{2 k})) \]
+  \[ = - \omega (X (f_1) \cdots \lambda (C f_{2 k}) X (f_{2 k - 1})) + \omega
+     (X (f_1) \cdots X (f_{2 k - 2})) \langle f_{2 k - 1}, C f_{2 k} \rangle
+  \]
+  \[ = \cdots = \sum_{\ell = 1}^{2 k - 1} (- 1)^{2 k - 1 - \ell} \omega \left(
+     X (f_1) \cdots \not{X (f_{\ell})} \cdots X (f_{2 k - 1}) \right) \langle
+     f_{\ell}, C f_{2 k} \rangle \]
+  Therefore
+  \[ \omega (X (F) X (f)) = \omega (X (\langle \partial_R F, C f \rangle)),
+     \qquad F \in \Lambda V, f \in V. \]
+  Note that, similarly
+  \begin{equation}
+    \omega (X (f) X (F)) = \omega (X (\langle f, C \partial_L F \rangle)) .
+    \label{eq:ibp-l}
+  \end{equation}
+  
+\end{proof}
+
+\tmtextit{Complex Gaussians.} Later on we will need also complex Grassmann
+Gaussian variables. As in the commutative setting, their definition poses no
+particular problems. Let $V_{\mathbb{C}}$ be a complex pre-Hilbert space with
+a notion of complex conjugation denoted $v \mapsto \bar{v}$ and an Hermitian
+scalar product $(\cdot, \cdot)$ which will be assumed to be anti-linear in the
+left variable. Consider a complex bilinear antisymmetric form $B_{\mathbb{C}}$
+on $V_{\mathbb{C}}$
+\[ B_{\mathbb{C}} : V_{\mathbb{C}} \times V_{\mathbb{C}} \rightarrow
+   \mathbb{C}, \quad B_{\mathbb{C}} : v \times w \mapsto B_{\mathbb{C}} (v,
+   w), \quad v, w \in V_{\mathbb{C}} . \]
+Antisymmetric here means simply that $B_{\mathbb{C}} (v, w) = - B_{\mathbb{C}}
+(w, v)$, $v, w \in V_{\mathbb{C}}$. Define the standard bilinear form of
+$V_{\mathbb{C}}$ to be
+\[ \langle \cdot, \cdot \rangle_{\mathbb{C}} : v \times w \mapsto \langle v, w
+   \rangle_{\mathbb{C}} \assign (\bar{v}, w), \quad v, w \in V_{\mathbb{C}} .
+\]
+The suffix $\mathbb{C}$ in $\langle \cdot, \cdot \rangle_{\mathbb{C}}$ is a
+reminder that this is a bilinear form with complex values. The antisymmetric
+complex bilinear form $B_{\mathbb{C}}$ can be written in terms of a linear
+operator $C_{\mathbb{C}}$ in the following way
+\[ B_{\mathbb{C}} (v, w) = \langle v, C_{\mathbb{C}} w \rangle_{\mathbb{C}} =
+   (\bar{v}, C_{\mathbb{C}} w), \]
+where $C_{\mathbb{C}}$ is a complex operator which is antisymmetric with
+respect to $\langle \cdot, \cdot \rangle_{\mathbb{C}}$, that is, we have
+\[ \langle v, C_{\mathbb{C}} w \rangle = \langle C_{\mathbb{C}}^{\Tau} v, w
+   \rangle = - \langle C_{\mathbb{C}} v, w \rangle, \quad v, w \in
+   V_{\mathbb{C}} . \]
+\begin{definition}
+  A $V_{\mathbb{C}}$-complex Grassmann (centered) Gaussian variable with
+  complex correlation $C_{\mathbb{C}}$ is a random variable $X \in \mathcal{G}
+  (V_{\mathbb{C}})$ such that
+  \[ \omega (X (F) X (h)) = \omega (X (\langle \partial_R F, C_{\mathbb{C}} h
+     \rangle_{\mathbb{C}})), \qquad F \in \Lambda V_{\mathbb{C}}, h \in
+     V_{\mathbb{C}} . \]
+  We require that $\| X \|_{\mathcal{G} (V_{\mathbb{C}})} < \infty$, i.e that
+  the map $X : V_{\mathbb{C}} \rightarrow \mathcal{A}$ is continuous.
+\end{definition}
+
+\tmtextit{White noise.} A relevant example of a random variable taking values
+in an infinite dimensional Grassmann algebra is $d$-dimensional (Gaussian)
+white noise.
+
+\begin{definition}
+  \label{definition_Brownian}A $V$-valued $d$-dimensional (Gaussian) white
+  noise with correlation $C : V \rightarrow V$ is the Grassmann Gaussian
+  variable $\Xi \in \mathcal{G} (L^2 (\mathbb{R}^d) \otimes V)$ with
+  correlation $\tilde{C}$ given by
+  \[ (\tilde{C} f) (x) = C f (x) \]
+  for all $x \in \mathbb{R}^d$ and $f \in L^2 (\mathbb{R}^d) \otimes V \approx
+  L^2 (\mathbb{R}^d ; V)$.
+\end{definition}
+
+Take now a one dimensional white noise $\Xi$ with values in $V$ and let $B_t
+(v) = \Xi (\mathbbm{1}_{[0, t]} \otimes v)$ for $v \in V$. For fixed $t
+\geqslant 0$, $B_t$ extends as homomorphism to all $\Lambda V$ and therefore
+$B_t \in \mathcal{G} (V)$. Note also that
+\begin{equation}
+  \| B_t (v) - B_s (v) \|_{\mathcal{A}} \leqslant | t - s |^{1 / 2} \| v \|_V,
+  \qquad t, s \geqslant 0, v \in V, \label{eq:regularity-B}
+\end{equation}
+so $B (v) \in C (\mathbb{R}_+, \mathcal{A})$ and now note that $B \in
+\tmop{Hom} (\Lambda V, C (\mathbb{R}_+, \mathcal{A}))$. This in particular
+implies that $B_{t_1}, \ldots, B_{t_n}$ is a compatible family and that $B =
+(B_t)_{t \in \mathbb{R}_+}$ is a Gaussian process with continuous
+trajectories. We have that $B_0 (v) = 0$,
+\[ \omega (B_t (v)) = 0, \qquad \omega (B_t (v) B_s (w)) = \langle v, C w
+   \rangle  (t \wedge s), \qquad t, s \geqslant 0, \quad v, w \in V, \]
+where $C$ is the correlation of the Grassmann Gaussian random variable $\Xi$.
+Increments of $B$ are independent and higher order moments can be computed via
+Wick's rule~{\eqref{eq:wick}}. Note in particular that
+\begin{equation}
+  \sup_{0 \leqslant t \leqslant T} \| B_t \|_{\mathcal{G} (V)} < \infty
+  \label{eq:boundedness-B}
+\end{equation}
+for all $T > 0$. Let us remark here that properties~{\eqref{eq:regularity-B}}
+and~{\eqref{eq:boundedness-B}} are very different from the pathwise properties
+of the commutative (bosonic) Brownian motion.
+
+\section{Finite dimensional SDEs}\label{sec:finite-dim}
+
+We want to study simple SDEs taking values in $\Lambda V$ as far as it is
+needed for the purpose of stochastic quantization, that is with additive white
+noise. We refrain to undertake here a general study of Grassmann SDEs, in
+particular no stochastic calculus will be needed below. It seems possible to
+devise such a calculus but we leave it for a future work. More precisely in
+this section we want to study SDEs driven by an additive Brownian motion $B_t$
+when the linear space $V$ is finite dimensional.
+
+\begin{definition}
+  Let $F \in \mathcal{L} (V, \Lambda V)$ and assume that $F (v)$ is odd for
+  all $v \in V$, and let $\Psi_0 \in \mathcal{G} (V)$ be a random variable
+  compatible and independent of the Brownian motion $B \in \mathcal{G} (L^2
+  (\mathbb{R}_+, V))$, then $\Psi \in C^0 ([0, T] ; \mathcal{G} (V))$ is a
+  solution in $[0, T]$ to the (additive) SDE driven by $B$ with drift $F$ and
+  initial condition $\Psi_0$, if,
+  \begin{equation}
+    \Psi_t (v) = \Psi_0 (v) + \int_0^t \Psi_s (F (v)) \mathd s + B_t (v),
+    \qquad t \in [0, T], v \in V, \label{eq:sde}
+  \end{equation}
+  where the integral with respect to the variable $s$ is understood in
+  Bochner's sense (relative to the norm on $\mathcal{G} (V)$ introduced in
+  equation {\eqref{eq:distrance-g}}).
+\end{definition}
+
+\begin{remark}
+  Note that we do not require that $\Psi_t, \Psi_s$ are compatible for $t \neq
+  s$, in particular
+  \[ C^0 ([0, T] ; \mathcal{G} (V)) \neq \tmop{Hom} (\Lambda V ; C ([0, T],
+     \mathcal{A})), \]
+  nor we require any compatibility of $\Psi$ and $B$. It will turn out that
+  such compatibility holds in fact for the unique solution
+  of~{\eqref{eq:sde}}, but is not necessary to put such restriction to
+  formulate the notion of solution.
+\end{remark}
+
+\subsection{The Ornstein--Uhlenbeck motion}
+
+In this section we introduce the Grassmann analog of the Ornstein--Uhlenbeck
+process, that is when $F (v) = A v$ with $A : V \rightarrow V$ is a linear
+operator on $V$. In this case we can write down an explicit formula for the
+solution to equation~{\eqref{eq:sde}}.
+
+\begin{proposition}
+  \label{proposition_linear}Suppose that $A : V \rightarrow V$ and $F (v) = A
+  v$. The unique solution to equation~{\eqref{eq:sde}} is given by
+  \begin{equation}
+    \Psi_t (v) = \Psi_0 (e^{A t} v) + \Xi (\mathbbm{1}_{[0, t]} (\cdot) e^{A (t
+    - \cdot)} v), \qquad t \in \mathbb{R}_+, \label{eq:linear}
+  \end{equation}
+  where $\Xi$ is the Grassmann Gaussian noise related with the Brownian motion
+  $B_t$ (see Definition~\ref{definition_Brownian} and the discussion that
+  follows).
+\end{proposition}
+
+\begin{proof}
+  Let $h (t, v) \in L^2 (\mathbb{R}; V)$ be given by
+  \[ h (t, v) (s) \assign \mathbbm{1}_{[0, t]} (s) e^{A (t - s)} v, \qquad s
+     \in \mathbb{R}. \]
+  Then {\eqref{eq:linear}} reads $\Psi_t (v) = \Psi_0 (e^{A t} v) + \Xi (h (t,
+  v))$. An explicit computation using that
+  \[ h (t, v) (s) -\mathbbm{1}_{[0, t]} (s) v = \int_0^t A h (r, v) (s) \mathd
+     r = \int_0^t h (r, A v) (s) \mathd r, \qquad s \in \mathbb{R}, \]
+  in $L^2 (\mathbb{R}; V)$ gives
+  \[ \Xi (h (t, v)) = B_t (v) + \int_0^t \Xi (h (r, A v)) \mathd r. \]
+  Moreover, by the definition of exponential of a matrix, $\partial_t \Psi_0
+  (e^{A t} v) = \Psi_0 (e^{A t} A v)$ so
+  \[ \Psi_t (v) = \Psi_0 (v) + \int_0^t \Psi_0 (e^{A r} A v) \mathd r + B_t
+     (v) + \int_0^t \Xi (h (r, A v)) \mathd r \]
+  \[ = \Psi_0 (v) + B_t (v) + \int_0^t \Psi_r (A v) \mathd r \]
+  as required by equation {\eqref{eq:linear}} for our assumption on $F$.
+\end{proof}
+
+\begin{remark}
+  In particular this shows that if $(\Psi_0, \Xi)$ is a Grassmann Gaussian
+  process then also the solution $\Psi$ to the SDE~{\eqref{eq:sde}}, is a
+  Grassmann Gaussian process compatible with $(\Psi_0, \Xi)$. In order to
+  prove this fact it is sufficient to prove that any product of the form
+  \begin{equation}
+    \omega (\Psi_{t_1} (v_1) \cdots \Psi_{t_{2 k}} (v_2)) \label{eq:product}
+  \end{equation}
+  can be computed using the products (weighted with a suitable sign due to the
+  anti-commutation of $\Psi$) of the covariance $\omega (\Psi_{t_i} (v_i)
+  \Psi_{t_j} (v_j))$ for any $i, j = 1, \ldots, 2 k$. This properties of the
+  expectation~{\eqref{eq:product}} follows from the fact that
+  \[ \begin{array}{c}
+       \omega ((\Psi_{t_1} (v_1) - \Psi_0) \cdots (\Psi_{t_{2 k}} (v_n) -
+       \Psi_0)) = \omega (\Xi (h (t_1, v_1)) \cdots \Xi (h (t_{2 k}, v_{2
+       k}))) =\\
+       = \sum_{\sigma} (- 1)^{\sigma} \prod_{i = 1}^k \int_0^{\min (t_i, t_j)}
+       \langle e^{A (t_i - s)} v_{\sigma (2 i - 1)}, C e^{A (t_j - s)}
+       v_{\sigma (2 i)} \rangle_V \mathd s
+     \end{array} \]
+  where $C$ is the covariance of $\Xi$. Using the fact that $\Psi_0$ is a
+  Gaussian random variable independent of $\Xi$, and so $\Psi_0 (e^{A (t - s)}
+  v)$ is also a Gaussian random variable independent of $\Xi$, we obtain the
+  Gaussian behavior of $\Psi_t$. The compatibility of $\Psi_t$ with $(\Psi_0,
+  \Xi)$ follows from the fact that $\Psi$ is a linear function of $(\Psi_0,
+  \Xi) .$
+\end{remark}
+
+Let us now study the family of random variables
+\[ \Psi_t^s (v) = \Xi (e^{A (t - \cdot)} v), \qquad t \in \mathbb{R}. \]
+In the next proposition, we will show that this represents the stationary
+solution to the SDE {\eqref{eq:linear}} (this motivates our putting the upper
+index $s$ to $\Psi^s_t$).
+
+\begin{proposition}
+  \label{proposition_linearlimit}Assume that all eigenvalues of $A$ have
+  strictly negative real part less or equal than $- \lambda_A$, where
+  $\lambda_A > 0$. Then, we have $\sup_{t \in \mathbb{R}} \| \Psi^s_t
+  \|_{\mathcal{G} (V)} < + \infty$, furthermore for any $G \in \Lambda V$ and
+  any $t \in \mathbb{R}$ we get
+  \begin{equation}
+    \omega (G (\Psi^s_t)) = \omega (G (X^A)), \label{eq:G}
+  \end{equation}
+  where $X^A \in \mathcal{G} (V)$ is a Gaussian random variable with
+  covariance $C_A$ given by
+  \begin{equation}
+    C_A \assign \int^{\infty}_0 e^{A^{\Tau} s} C e^{A s} \mathd s.
+    \label{eq:ca}
+  \end{equation}
+  where $A^{\Tau}$ denote the transpose matrix.
+\end{proposition}
+
+\begin{remark}
+  Expression {\eqref{eq:G}} in particular show that the independence of $t$ of
+  the expectation $\omega (G (\Psi^s_t))$, expressing the stationarity of
+  $\Psi^s_t$. 
+\end{remark}
+
+\begin{proof*}{Proof of Proposition \ref{proposition_linearlimit}}
+  We have easily by the definition of $\Psi^s_t$:
+  \[ \| \Psi^s_t \|_{\mathcal{G} (V)} \lesssim \| \mathbb{I}_{(- \infty, t]}
+     (\cdot) e^{A (t - \cdot)} \|_{L^2 (\mathbb{R})} \lesssim
+     \frac{1}{\lambda_A}, \]
+  where $\lesssim$ stands for inequality modulo some appropriate positive
+  constant. The random variable $\Psi^s_t$ is Gaussian so it is completely
+  characterized (in term of moments) by its covariance. Note that the
+  covariance of $\Psi_t^s$ can be easily computed as follows
+  \[ \omega (\Psi_t^s (v) \Psi_t^s (w)) = \omega (\Xi (\mathbb{I}_{(- \infty,
+     t]} (\cdot) e^{A (t - \cdot)} v) \Xi (\mathbb{I}_{(- \infty, t]} (\cdot)
+     e^{A (t - \cdot)} w)) = \]
+  \[ = \langle \mathbb{I}_{(- \infty, t]} (\cdot) e^{A (t - \cdot)} v,
+     C\mathbb{I}_{(- \infty, t]} (\cdot) e^{A (t - \cdot)} w \rangle =
+     \int^0_{- \infty} \langle e^{- A^{\Tau} \tau} v, C e^{- A \tau} w \rangle
+     \mathd \tau = \langle v, C_A w \rangle \]
+  with $C_A$ given by~{\eqref{eq:ca}}. The appearance of the transposition is
+  due to the fact that $V$ is a \tmtextit{real} pre-Hilbert space.
+\end{proof*}
+
+Let us point out that
+\begin{equation}
+  A^{\Tau} C_A + C_A A = - C \label{eq:relation-ca}
+\end{equation}
+by a simple integration by parts applied to~{\eqref{eq:ca}}.
+
+\begin{remark}
+  Suppose that $A$ commutes with $C$, then we have that $\Psi_t^s$ is for all
+  $t \in \mathbb{R}$ a Grassmann Gaussian process with correlation $C_A = - (A
+  + A^{\Tau})^{- 1} C$ (the operator $A$ is invertible since all its
+  eigenvalues has strictly negative real part).
+\end{remark}
+
+\subsection{Existence and uniqueness for general drift}
+
+\begin{theorem}
+  \label{theorem_picard}For any $\Psi_0 \in \mathcal{G} (V)$ compatible with
+  $B$, there exists $T > 0$ such that equation~{\eqref{eq:sde}} admits a
+  unique solution $\Psi \in C^0 ([0, T] ; \mathcal{G} (V))$. Moreover $\Psi$
+  is compatible with $\Psi_0 \oplus B$.
+\end{theorem}
+
+\begin{proof}
+  We are going to construct a solution via Picard's iteration. Let $\Psi^0_t =
+  \Psi_0$ for all $t \geqslant 0$ and define the $n + 1$-th Picard's iteration
+  by
+  \[ \Psi_t^{n + 1} (v_{\alpha}) = \Psi_0 (v_{\alpha}) + \int_0^t \Psi_s^n (F
+     (v_{\alpha})) \mathd s + B_t (v_{\alpha}), \qquad t \in [0, T], \]
+  for any basis element $v_{\alpha} \in V$. Then $\Psi^0 \in C^0 ([0, T] ;
+  \mathcal{G} (V))$ and since $\Psi_0$ is compatible with $B$ we have that,
+  for all $t \geqslant 0$, $\Psi^1_t$ belong to the Grassmann algebra
+  generated by $\Psi_0$ and $B$ in $\mathcal{A}$ and there $\Psi^1_t
+  (v_{\alpha})$ is an odd element for all $\alpha$. Therefore $\Psi^1_t \in
+  \mathcal{G} (V)$ for all $t \geqslant 0$ and also $\Psi^1_t$ is compatible
+  with $\Psi_0 \oplus B$. Since it is true for all $t$, by approximation in
+  the operator norm we see that $\Psi^1 \in C^0 ([0, T] ; \mathcal{G} (V))$
+  and that it is compatible with $\Psi_0 \oplus B$. By induction we prove then
+  that $\Psi^n \in C^0 ([0, T] ; \mathcal{G} (V))$ for all $n \geqslant 0$ and
+  that it is compatible with $\Psi_0 \oplus B$.
+  
+  Now observe that $\Psi_s^n (F (v_{\alpha}))$ is a polynomial function of
+  $(\Psi^{n, \alpha}_s)_{\alpha}$ and therefore by a standard contraction
+  argument in the Banach space $\mathcal{A}$ we obtain that $(\Psi^n)_n$
+  converges, as $n \rightarrow + \infty$, in $C^0 ([0, T] ; \mathcal{A})$ for
+  some positive $T$ which depends only on $F$, on $\sup_{\alpha} \|
+  \Psi_0^{\alpha} \|_{\mathcal{A}}$ and on $\sup_{0 \leqslant t \leqslant T,
+  \alpha} \| B_t^{\alpha} \|_{\mathcal{A}}$. If we call $\Psi$ the limit we
+  have that $\Psi \in C ([0, T] ; \mathcal{G} (V))$ by the first part of the
+  proof and we deduce easily that $\Psi$ is compatible with $\Psi_0 \oplus B$.
+\end{proof}
+
+\begin{theorem}
+  \label{th:global-sol}The solution to equation~{\eqref{eq:sde}} exists for
+  all times.
+\end{theorem}
+
+\begin{proof}
+  We will have global existence as soon as we can rule out explosions, that is
+  prove that for all $t \geqslant 0$ we have $\sup_{\alpha} \| \Psi_t^{\alpha}
+  \|_{\mathcal{A}} < \infty$ Let $\Theta_t (v) = \Psi_t (v) - B_t (v)$ and
+  extend this map to a homeomorphism of $\Lambda V$ into $\mathcal{A}$.
+  Observe that
+  \[ \Theta_t (v) = \Theta_0 (v) + \int_0^t m_{\mathcal{A}} [(\Theta_s \otimes
+     B_s) (\Delta F (v_{\alpha}))] \mathd s. \]
+  In particular, if we consider a (linear) basis of $\Lambda V$ denoted by
+  $(e_A)_A$ and let $\Theta^A_t \assign \Theta_t (e_A)$ and $B^A_t \assign B_t
+  (e_A)$ we have
+  \[ \Theta_t^A = \Theta_0^A + \int_0^t \sum_B h_{A, B, C} \Theta_s^B B_s^C
+     \mathd s, \]
+  for real coefficients $(h_{A, B, C})_{A, B, C}$. This is a
+  finite-dimensional, linear system of non-autonomous ODEs in $\mathcal{L}
+  (H)$ for $(\Theta_t^A)_A$ ($\mathcal{H}$ being the Hilbert space the element
+  of $\mathcal{A}$ act, see Section \ref{sec:grassmann-rv}), and
+  \[ \sum_A \| \Theta_t^A \|_{\mathcal{A}} \leqslant \sum_A \| \Theta_0^A
+     \|_{\mathcal{A}} + | h | \int_0^t \sum_B \| \Theta_s^B \|_{\mathcal{A}}
+     \sum_C \| B_s^C \|_{\mathcal{A}} \mathd s, \]
+  with $| h | \assign \sup_{A, B, C} | h_{A, B, C} |$. Therefore by Gronwall
+  inequality
+  \[ \sum_A \| \Theta_t^A \|_{\mathcal{A}} \leqslant \sum_A \| \Theta_0^A
+     \|_{\mathcal{A}} \exp \left( | h | \int_0^t \sum_C \| B_s^C
+     \|_{\mathcal{A}} \mathd s \right) < \infty \]
+  for all $t \geqslant 0$. In particular $\sup_{\alpha} \| \Psi_t (v_{\alpha})
+  \|_{\mathcal{A}} \leqslant \sup_{\alpha} \| \Theta_t (v_{\alpha})
+  \|_{\mathcal{A}} + \sup_{\alpha} \| B_t (v_{\alpha}) \|_{\mathcal{A}} <
+  \infty$ for all $t \geqslant 0$ and the solution to
+  equation~{\eqref{eq:sde}} exists for all times.
+\end{proof}
+
+\subsection{An It{\^o} formula for solutions of SDEs}
+
+We want to prove a kind of It{\^o} formula for the solution to
+equation~{\eqref{eq:sde}}. In order to do that let $Q_C \in \mathcal{L}
+(\Lambda V \otimes V \otimes V, \Lambda V)$ be given by
+\begin{equation}
+  Q_C (f \otimes v \otimes w) = \langle v, C w \rangle f, \qquad f \in \Lambda
+  V, v, w \in V. \label{eq:QC}
+\end{equation}
+For $F \in \mathcal{L} (V, \Lambda V)$ and $G \in \Lambda V \otimes V$ we
+define $G \cdot F \in \Lambda V$ by extending linearly
+\[ (f \otimes v) \cdot F = f F (v), \qquad f \in \Lambda V, v \in V, \]
+where in both sides we have multiplication of elements in $\Lambda V$.
+
+\begin{theorem}
+  For the global solution to equation~{\eqref{eq:sde}} we have
+  \begin{equation}
+    \omega (\Psi_t (G)) = \omega (\Psi_0 (G)) + \int_0^t \omega \left( \Psi_s
+    \left( \partial_R G \cdot F + \frac{1}{2} Q_C (\partial_R^2 G) \right)
+    \right) \mathd s \label{eq:ito-3}
+  \end{equation}
+  for all $G \in \Lambda V$ and $t \geqslant 0$.
+\end{theorem}
+
+\begin{proof}
+  Fix any $T \geqslant 0$. Note that
+  \[ \| B_t - B_s \|_{\mathcal{G} (V)} \lesssim | t - s |^{1 / 2}, \]
+  for all $0 \leqslant s < t \leqslant T$. From that it follows that, if $F$
+  in {\eqref{eq:sde}} is a polynomial of degree $\deg (F)$:
+  \begin{equation}
+    \| (\Psi_t - \Psi_s) - (B_t - B_s) \|_{\mathcal{G} (V)} = \left\| \int_s^t
+    F (\Psi_s) \mathd s \right\|_{\mathcal{G} (V)} \lesssim (1 + \| \Psi
+    \|_{[0, T]})^{\deg (F)} | t - s |, \label{eq:holderreg}
+  \end{equation}
+  where $\| \Psi \|_{[0, T]} \assign \sup_{t \in [0, T]} \| \Psi_s
+  \|_{\mathcal{G} (V)}$ which, by Theorem~\ref{th:global-sol} and the
+  continuity of $\Psi$ with respect to the time $t$, is finite for every $T
+  \in \mathbb{R}_+$. By Taylor formula (see Lemma \ref{lemma:taylor}) applied
+  to polynomial $G$ of degree $\deg (G)$ we have
+  \begin{equation}
+    \begin{array}{c}
+      \nobracket \| G (\Psi_r) - G (\Psi_s) - (\Psi_s \otimes (\Psi_r -
+      \Psi_s)) \partial_R G + \nobracket \nobracket\\
+      \left. \left. + \frac{1}{2} (\Psi_s \otimes (\Psi_r - \Psi_s) \otimes
+      (\Psi_r - \Psi_s)) (\partial_R \partial_R G) \right\|
+      \right._{\mathcal{A}} \lesssim (1 + \| \Psi \|_{[0, T]})^{\deg (F) (\deg
+      (G) - 2)} | r - s |^{3 / 2}
+    \end{array} \label{eq:holderreg2}
+  \end{equation}
+  since by {\eqref{eq:holderreg}} $\| \Psi_t - \Psi_s \|_{\mathcal{G} (V)}
+  \lesssim (1 + \| \Psi \|_{[0, T]})^{\deg (F)} | t - s |^{1 / 2}$. In a
+  similar way it is possible to obtain
+  \begin{equation}
+    \| \langle \partial_R G (\Psi_u), F (\Psi_u) \rangle - \langle \partial_R
+    G (\Psi_s), F (\Psi_u) \rangle \|_{\mathcal{A}} \lesssim (1 + \| \Psi
+    \|_{[0, T]})^{\deg (F) (\deg (G) - 2)} | u - s |^{1 / 2}
+    \label{eq:holderreg3}
+  \end{equation}
+  On the other hand, by {\eqref{eq:holderreg}}, we have
+  \begin{equation}
+    \begin{array}{lll}
+      \omega ((\Psi_s \otimes (\Psi_r - \Psi_s)) \partial_R G) & = & \omega
+      \left( \int_s^r \langle \partial_R G (\Psi_s), F (\Psi_u) \rangle \mathd
+      u \right)\\
+      &  & + \omega ((\Psi_s \otimes (B_r - B_s)) (\partial_R G))\\
+      & = & \omega \left( \int_s^r \langle \partial_R G (\Psi_u), F (\Psi_u)
+      \rangle \mathd u \right)\\
+      &  & + \omega (\langle \partial_R G (\Psi_s), (B_r - B_s) \rangle)\\
+      &  & + O ((1 + \| \Psi \|_{[0, T]})^{\deg (F) (\deg (G) - 2)} | r - s
+      |^{3 / 2})
+    \end{array} \label{eq:holderreg4}
+  \end{equation}
+  In a similar way, using inequality {\eqref{eq:holderreg}} we obtain
+  \begin{equation}
+    \begin{array}{c}
+      \omega ((\Psi_s \otimes (\Psi_r - \Psi_s) \otimes (\Psi_r - \Psi_s))
+      (\partial_R^2 G)) = \omega ((\Psi_s \otimes (B_r - B_s) \otimes (B_r -
+      B_s)) (\partial_R^2 G))\\
+      + O ((1 + \| \Psi \|_{[0, T]})^{\deg (F) (\deg (G) - 2)} | r - s |^{3 /
+      2}) .
+    \end{array}
+  \end{equation}
+  Furthermore using the fact that $\partial_R G (\Psi_s)$ is independent of
+  $(B_r - B_s)$ and $((B_r - B_s) \otimes (B_r - B_s))$ is independent of
+  $\partial_R^2 G (\Psi_s)$ (this is due to the fact that \ $\Psi_s$ is a
+  function of $\nobracket \{ \Psi_0, B_k | \nobracket \nobracket k \in [0, s]
+  \}$ and $B_t$ is independent of $\Psi_0$ and has independent increments, we
+  have:
+  \[ \omega (\langle \partial_R G (\Psi_s), (B_r - B_s) \rangle) = \langle
+     \omega ((B_r - B_s)), \omega (\partial_R G (\Psi_s)) \rangle = 0 \]
+  (where on the r.h.s. we understand that averages w.r.t. $\omega$ are taken
+  componentwise) and
+  \[ \omega [\langle \partial_R \partial_R G (\Psi_s), (B_r - B_s) \otimes
+     (B_r - B_s) \rangle_{V \otimes V}] \]
+  \[ = \langle \omega [(\partial_R \partial_R G (\Psi_s))], \omega [((B_r -
+     B_s) \otimes (B_r - B_s))] \rangle \]
+  \[ = (r - s) \omega [Q_C (\partial_R^2 G (\Psi_s))] . \]
+  By taking a partition $\{ t_i \}_{i \in \{ 0, \ldots, n \}}$, of diameter
+  $\rho_n \rightarrow 0$ as $n \rightarrow + \infty$, of $[0, t]$ and
+  exploiting inequality {\eqref{eq:holderreg2}} we obtain
+  \[ \begin{array}{lll}
+       \omega (G (\Psi_t)) & = & \omega (G (\Psi_0)) + \sum_{i = 0}^{n + 1}
+       \omega (G (\Psi_{t_i})) - \omega (G (\Psi_{t_{i - 1}}))\\
+       & = & \omega (G (\Psi_0)) + \sum_{i = 1}^{n + 1} \omega ((\Psi_{t_{i -
+       1}} \otimes (\Psi_{t_i} - \Psi_{t_{i - 1}})) \partial_R G)\\
+       &  & + \frac{1}{2} \omega ((\Psi_s \otimes (\Psi_r - \Psi_s) \otimes
+       (\Psi_r - \Psi_s)) (\partial_R^2 G)) + O (\rho_n^{1 / 2})\\
+       & = & \omega (G (\Psi_0)) + \omega \left( \int_0^t \partial_R G
+       (\Psi_u) F (\Psi_u) \mathd u \right)\\
+       &  & + \frac{1}{2} \sum_{i = 1}^{n + 1} (t_i - t_{i - 1}) \omega [Q_C
+       (\partial_R^2 G (\Psi_{t_i}))] + O (\rho_n^{1 / 2}),
+     \end{array} \]
+  where the constants in $O$ are proportional to $(1 + \| \Psi \|_{[0,
+  T]})^{\deg (F) \deg (G)}$ and do not depend on the partition. Taking the
+  limit $n \rightarrow + \infty$, and so $\rho_n \rightarrow 0$, and using the
+  fact that $\omega [Q_C (\partial_R^2 G (\Psi_s))]$ is continuous in $s$ ($G
+  (\Psi_s)$ being a continuous function from $\mathbb{R}_+$ to $\mathcal{A}$
+  since $\Psi \in C^0 ([0, T], \mathcal{G} (V))$) we obtain the thesis.
+\end{proof}
+
+\subsection{Invariant measures}
+
+Consider an equation of the following kind
+\begin{equation}
+  \Psi_t (v) = \Psi_0 (v) + \int_0^t (\Psi_s (A v) + \Psi_s (F (v))) \mathd s
+  + B_t (v), \qquad t \geqslant 0, v \in V, \label{eq:sde-langevin-0}
+\end{equation}
+for $\Psi \in C^0 ([0, T] ; \tmop{Hom} (V, \mathcal{A}))$, $F \in \tmop{Hom}
+(V, \Lambda V)$, $A \in \mathcal{L} (V)$, $B$ a Grassmann Brownian motion with
+correlation $C$ and with initial condition $\Psi_0$ distributed as a Grassmann
+Gaussian independent of $B$ with correlation $C_A$ (compare to
+equation~{\eqref{eq:ca}}). Fix $U \in \Lambda V$ even, and consider the linear
+functional $\tilde{\omega} : \mathcal{A} \rightarrow \mathbb{C}$ given by
+\begin{equation}
+  \tilde{\omega} (\cdot) \assign \omega (\cdot e^{- 2 U (\Psi_0)}),
+  \label{eq:gibbs-U}
+\end{equation}
+where $\omega$ is, as before, is the positive state on the $\asterisk$-algebra
+$\mathcal{A} = \mathcal{L} (\mathcal{H})$.
+
+\begin{definition}
+  \label{definition_invariant}We say that the functional $\tilde{\omega}$ is
+  an invariant measure for the equation~{\eqref{eq:sde-langevin-0}} if for any
+  $G \in \Lambda V$ and any $t \in \mathbb{R}_+$ we have
+  \begin{equation}
+    \tilde{\omega} (G (\Psi_t)) = \tilde{\omega} (G (\Psi_0)) .
+    \label{eq:constant}
+  \end{equation}
+\end{definition}
+
+\begin{remark}
+  The functional is invariant in the sense of
+  Definition~\ref{definition_invariant}, only if the expectations of the
+  form~{\eqref{eq:constant}} are constant when expressions of the form $G
+  (\Psi_t)$ are evaluated. This means in particular that only polynomials in
+  $\Psi_t$ are considered.
+\end{remark}
+
+There is a simple condition, analogous to the Fokker--Planck equation for
+commutative SDEs, for checking the invariance of the functional
+$\tilde{\omega}$. Here it is:
+
+\begin{lemma}
+  \label{lemma_invariant}If $\Psi$ is a solution
+  to~{\eqref{eq:sde-langevin-0}} and
+  \begin{equation}
+    \tilde{\omega} (\mathcal{L}G (\Psi_0)) = 0, \qquad G \in \Lambda V
+    \label{eq:inf-invariance},
+  \end{equation}
+  for
+  \[ \mathcal{L}G \assign \partial_R G \cdot F + \frac{1}{2} Q_C (\partial_R^2
+     G), \]
+  then $\tilde{\omega}$ is an invariant measure in the sense of
+  Definition~\ref{definition_invariant}.
+\end{lemma}
+
+\begin{proof}
+  Consider $G = G_A = v_A$ where $(v_A)_A$ is a (finite) linear basis of
+  $\Lambda V$. Then we have $\mathcal{L} (G_A) = \sum_B \kappa_A^B v_B$ for a
+  suitable family $(\kappa_A^B)_{A, B}$ of constants in $\mathbb{R}$. Write
+  $\mathfrak{P}_A (t) \assign \tilde{\omega} (G_A (\Psi_t)) = \omega (G_A
+  (\Psi_t) e^{- 2 U (\Psi_0)})$, due to definition {\eqref{eq:gibbs-U}}. By
+  It{\^o} formula~{\eqref{eq:ito-3}} we have that $\mathfrak{P}_A$ is the
+  unique solution of the system of ODEs
+  \begin{eqnarray}
+    \partial_t \mathfrak{P}_A (t) & = & \partial_t \omega (G_A (\Psi_t) e^{- 2
+    U (\Psi_0)}) = \omega ((\mathcal{L} G_A) (\Psi_t) e^{- 2 U (\Psi_0)})
+    \nonumber\\
+    & = & \sum_B \kappa_A^B \omega (G_B (\Psi_t) e^{- 2 U (\Psi_0)}) = \sum_B
+    \kappa^B_A \mathfrak{P}_B (t), \label{eq:ODE1} 
+  \end{eqnarray}
+  with initial condition $\mathfrak{P}_A (0) = \omega (G_A (\Psi_0) e^{- 2 U
+  (\Psi_0)})$. On the other hand condition~{\eqref{eq:inf-invariance}} implies
+  that
+  \[ \sum_B \kappa^B_A \mathfrak{P}_B (0) = \sum_B \kappa^B_A \omega (G_B
+     (\Psi_0) e^{- 2 U (\Psi_0)}) = \omega (\mathcal{L}G (\Psi_0) e^{- 2 U
+     (\Psi_0)}) = 0 \]
+  which means that $(\mathfrak{P}_A (t))_A$ is constantly zero by uniqueness
+  of solution to the ODEs system~{\eqref{eq:ODE1}}. Since the expectations of
+  the form~{\eqref{eq:constant}} are linear combinations of $(\mathfrak{P}_A
+  (t))_A$ the proof is complete.
+\end{proof}
+
+The following theorem gives a sufficient condition on the
+SDE~{\eqref{eq:sde-langevin-0}} to have the invariant
+measure~{\eqref{eq:gibbs-U}}.
+
+\begin{theorem}
+  \label{th:sq-finite}For any even $U \in \Lambda_{\tmop{even}} V$, the SDE
+  \begin{equation}
+    \Psi_t (v) = \Psi_0 (v) + \int_0^t (\Psi_s (A v) + \Psi_s (\langle C
+    \partial_R U, v \rangle) \nobracket \mathd s + B_t (v) \qquad t \geqslant
+    0, v \in V, \label{eq:sde-langevin}
+  \end{equation}
+  with $B$ a Brownian motion with correlation $C$ and $\Psi_0$ an independent
+  Gaussian initial condition with correlation $C_A$ (defined in equation
+  {\eqref{eq:ca}}) has $\tilde{\omega}$ as invariant measure provided
+  \begin{equation}
+    A^{\Tau} C_A - C_A A = 0. \label{eq:gradient}
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  The proof is a consequence of Lemma~\ref{lemma_invariant}. Denote
+  $\omega^{\Psi_0} (G) \assign \omega (G (\Psi_0))$ the law of $\Psi_0$, and
+  observe that for $H \in \Lambda V \otimes V$ we have the integration by
+  parts formula
+  \[ \omega ((\Psi_0 \otimes \Psi_0) (H)) = \omega (\Psi_0 (Q_{C_A}
+     (\partial_R H))), \]
+  where $Q_C$ is defined in {\eqref{eq:QC}}. Then for all $G \in \Lambda V$
+  and $U \in \Lambda_{\tmop{even}} V$ we have
+  \[ \omega ((\Psi_0 \otimes \Psi_0) (A (\partial_R G) e^{- 2 U (\Psi_0)})) =
+     \omega^{\Psi_0} (Q_{C_A} (\partial_R (A \partial_R G e^{- 2 U
+     (\Psi_0)}))) \]
+  \[ = \omega^{\Psi_0} (Q_{C_A} ((A \otimes 1) \partial_R \partial_R G) e^{- 2
+     U (\Psi_0)}) - 2 \omega^{\Psi_0} (Q_{C_A} ((A \partial_R G) \otimes
+     \partial_R U) e^{- 2 U (\Psi_0)}) . \]
+  Observe that using the equality~{\eqref{eq:relation-ca}} we have
+  \[ Q_{C_A} ((A \otimes 1) \partial_R \partial_R G) = \tmop{Tr} ((A \otimes
+     C_A) \partial_R \partial_R G) \]
+  \[ = \frac{1}{2} \tmop{Tr} ((C_A A + A^{\Tau} C_A) \partial_R \partial_R G)
+     = - \frac{1}{2} Q_C (\partial_R \partial_R G), \]
+  where we have used the trace $\tmop{Tr}$ on $V$ given by $\tmop{Tr} (v
+  \otimes w) = \langle v, w \rangle$. Moreover, from~{\eqref{eq:gradient}} we
+  have also
+  \[ Q_{C_A} ((A \partial_R G) \otimes \partial_R U) = \tmop{Tr} ((A
+     \partial_R G) \otimes (C_A \partial_R U)) = \tmop{Tr} (\partial_R G
+     \otimes (A^{\Tau} C_A \partial_R U)) \]
+  \[ = \tmop{Tr} \left( \partial_R G \otimes \left( \frac{A^{\Tau} C_A + C_A
+     A}{2} \partial_R U \right) \right) + \tmop{Tr} \left( \partial_R G
+     \otimes \left( \frac{A^{\Tau} C_A - C_A A}{2} \partial_R U \right)
+     \right) \]
+  \[ = - \frac{1}{2} \tmop{Tr} (\partial_R G \otimes (C \partial_R U)) = -
+     \frac{1}{2} \langle \partial_R G, C \partial_R U \rangle . \]
+  since we assumed that $A^{\Tau} C_A - C_A A = 0$ and
+  used~{\eqref{eq:relation-ca}} again. Therefore
+  \[ \omega ((\Psi_0 \otimes \Psi_0) (A (\partial_R G) e^{- 2 U (\Psi_0)})) =
+     - \frac{1}{2} \omega^{\Psi_0} (Q_C (\partial_R^2 G) e^{- 2 U (\Psi_0)}) +
+     \omega^{\Psi_0} (\langle \partial_R G, C \partial_R U \rangle e^{- 2 U
+     (\Psi_0)}) . \]
+  Now observing that
+  \[ \mathcal{L}G (\Psi_0) = (\Psi_0 \otimes \Psi_0) (A \partial_R G) + \Psi_0
+     \left( \langle \partial_R G, C \partial_R U \rangle + \frac{1}{2} Q_C
+     (\partial_R \partial_R G) \right) \]
+  we can deduce
+  \[ \omega (\mathcal{L}G (\Psi_0) e^{- 2 U (\Psi_0)}) = \omega ((\Psi_0
+     \otimes \Psi_0) (A \partial_R G) e^{- 2 U (\Psi_0)}) + \]
+  \[ + \omega^{\Psi_0} \left( \left( \langle \partial_R G, C \partial_R U
+     \rangle + \frac{1}{2} Q_C (\partial_R \partial_R G)  \right) e^{- 2 U
+     (\Psi_0)} \right) = 0. \]
+  
+\end{proof}
+
+\subsection{Long-time behavior for small non-linearity}
+
+We will now investigate the existence of solutions which are globally bounded
+in time. In the commutative setting, non-linear equations can have globally
+bounded solutions only if the non-linearity stays uniformly small or if it
+shows some coercivity. Like all notions of positivity, also coercivity however
+does not apply well in the Grassmann setting. The only kind of coercive term
+we have identified is a linear drift with a negative sign. This is a very mild
+coercive term, but it turns out to be enough provided the non-linearity is
+small enough.
+
+\
+
+Consider the equation
+\begin{equation}
+  \Psi_t (v) = \Psi_0 (v) + \int_0^t (\Psi_s (A v) + \lambda \Psi_s (F (v)))
+  \mathd s + B_t (v), \qquad t \geqslant 0, v \in V, \label{eq:sde-lambda}
+\end{equation}
+for $\Psi \in C ([0, T] ; \tmop{Hom} (V, \mathcal{A}))$, with $\lambda
+\geqslant 0$ and $F \in \tmop{Hom} (V, \Lambda V)$ where $A$ is an operator
+with eigenvalues having strictly negative real part less then $- \lambda_A <
+0$. In this setting we introduce the notion of stationary solution to
+equation~{\eqref{eq:sde-lambda}}.
+
+\begin{definition}
+  We say that $\Psi^s_t \in C^0 (\mathbb{R}, \mathcal{G} (V))$ is a stationary
+  solution to equation~{\eqref{eq:sde-lambda}} of norm at most $K \in
+  \mathbb{R}_+$ if the following two conditions hold:
+  \begin{enumerate}
+    \item $\sup_{t \in \mathbb{R}} \| \Psi^s_t \| < K$,
+    
+    \item $(\Psi^s_t)_{t \in \mathbb{R}}$ solves the following integral
+    equation
+    \begin{equation}
+      \Psi^s_t = \lambda \int_{- \infty}^t \Psi^s_{\tau} (F (e^{A \tau} v))
+      \mathd \tau + B^A_t \label{eq:stationary} \qquad t \in \mathbb{R}
+    \end{equation}
+    where \ $B^A_t (v) = \Xi (e^{A (t - \cdot)} (v))$.
+  \end{enumerate}
+\end{definition}
+
+Hereafter we write
+\[ L (A, C) = \sup_{t \in \mathbb{R}} \| B^A_t \|_{\mathcal{G} (V)}, \]
+and we denote by $\mathfrak{K}_K \subset C^0 (\mathbb{R}, \mathcal{G} (V))$
+the set of $\Psi \in C^0 (\mathbb{R}, \mathcal{G} (V))$ such that
+\[ \sup_{t \in \mathbb{R}} \| \Psi_t \|_{\mathcal{G} (V)} \leqslant K_{}, \]
+for some constant $K > 0$.
+
+\begin{theorem}
+  \label{theorem_stationary}Assume $K \geqslant 3 L (A, C)$ and suppose that
+  all the eigenvalues of $A$ have negative real part that are less or equal
+  than $- \lambda_A$, then there exists $\lambda_0 (K, L, F)$ depending on
+  $K$, $L (A, C)$ and $F$ such that if $| \lambda | \leqslant 2 \lambda_0 (K,
+  L, F)$ there exists a unique stationary solution of norm at most $K$ to
+  equation~{\eqref{eq:sde-lambda}}.
+\end{theorem}
+
+\begin{proof}
+  It is a simple application of the Banach fix point theorem by noting that
+  the map
+  \[ \mathcal{K}_{\lambda} (\Psi)_t \assign \lambda \int_{- \infty}^t
+     \Psi_{\tau} (F (e^{A (t - \tau)} v)) \mathd \tau + B^A_t, \qquad t \in
+     \mathbb{R}, \]
+  is a contraction in $\mathfrak{K}_K$. Indeed, if $\Psi \in \mathfrak{K}_K$
+  we have
+  \[ \| \mathcal{K}_{\lambda} (\Psi)_t \|_{\mathcal{G} (V)} \leqslant |
+     \lambda |  \| F \| (1 + K)^{\deg (F)} \int_{- \infty}^t e^{- \lambda_A (t
+     - \tau)} \mathd \tau + L (A, C), \]
+  where we use the notation $\| F \|$ for the smallest constant such that
+  \[ \sup_{v : \| v \| \leqslant 1}  \| \psi (F (v)) \|_{\mathcal{A}}
+     \leqslant \| F \| \deg (F) (1 + \| \psi \|_{\mathcal{G} (V)})^{\deg (F)}
+     \qquad \psi \in \mathcal{G} (V) . \]
+  If we request that
+  \begin{equation}
+    2 \lambda_0 \frac{\| F \| (1 + K)^{\deg (F)}}{\lambda_A} + 2 L < K,
+    \label{eq:contraction2}
+  \end{equation}
+  (where $\lambda_0 \assign \lambda_0 (K, L, F)$) for $| \lambda | \leqslant 2
+  \lambda_0$ small enough we have that $\mathcal{K}_{\lambda}$ maps
+  $\mathfrak{K}_K$ into itself. Furthermore
+  \[ \| \mathcal{K}_{\lambda} (\Psi_1)_t - \mathcal{K}_{\lambda} (\Psi_2)_t
+     \|_{\mathcal{G} (V)} \leqslant \frac{| \lambda |}{\lambda_A} \|
+     \partial_R F \| (1 + K)^{\deg (F) - 1} \| \Psi_{1, t} - \Psi_{2, t}
+     \|_{\mathcal{G} (V)} . \]
+  Therefore, if we take
+  \begin{equation}
+    \frac{2 \lambda_0}{\lambda_A} \| \partial_R F \| (1 + K)^{\deg (F) - 1} <
+    1 \label{eq:contraction}
+  \end{equation}
+  the map $\mathcal{K}_{\lambda}$ is a strict contraction. The fact that
+  $\mathfrak{K}_K \neq \emptyset$ will be a consequence of the Lemma
+  (\ref{lemma_bound}) below.
+\end{proof}
+
+\begin{remark}
+  \label{remark_lambda0}The function $\lambda_0$ in
+  Theorem~\ref{theorem_stationary} can be taken to be a decreasing function of
+  the parameters $L$ and $K$.
+\end{remark}
+
+We introduce an approximation for the solution to
+equation~{\eqref{eq:stationary}}. Let $X \in \mathcal{G} (V)$ independent of
+$B^A_t$ and consider the element $\Psi_{- T, t}^X \in C^0 (\mathbb{R},
+\mathcal{G} (V))$ which is $\Psi_{- T, t}^X = X$ if $t \leqslant - T$, for
+some $T > 0$, and is a solution to the SDE
+\[ \Psi_{- T, t}^X = X (e^{A (t + T)} v) + \lambda \int_{- T}^t F (\Psi_{- T,
+   t}^X (e^{A (t - \tau)} v)) + B^A_t - B^A_{- T} (e^{A (t + T)} v), \]
+when $t > - T$.
+
+\begin{lemma}
+  \label{lemma_bound}Under the assumptions of
+  Theorem~\ref{theorem_stationary}, take $\| X \|_{\mathcal{G} (V)} <
+  \frac{1}{6} K$, then, for any $| \lambda | \leqslant \frac{1}{2} \lambda_0
+  (K, L, F)$, we have that $\Psi_{- T, t}^X \in \mathfrak{K}_K$.
+\end{lemma}
+
+\begin{proof}
+  Let $\tau \in \mathbb{R}$ then we have the bound
+  \begin{eqnarray}
+    \sup_{t \in (- \infty, \tau]} \| \Psi^X_{- T, t} \|_{\mathcal{G} (V)} &
+    \leqslant & e^{- \lambda_A \tau} (\| X \|_{\mathcal{G} (V)} + \| B_{- T}^A
+    \|_{\mathcal{G} (V)}) + \nonumber\\
+    &  & + \| F \| \frac{| \lambda |}{\lambda_A} (1 + \sup_{t \in (- \infty,
+    \tau]} \| \Psi_{- T, t}^X \|_{\mathcal{G} (V)})^{\deg (F)} + L (A, C) .
+    \nonumber
+  \end{eqnarray}
+  On the other hand by definition of $\lambda_0$ we have, for any $\tau > 0$
+  \[ e^{- \lambda_A \tau} \left( \frac{1}{3} K + \frac{1}{6} K \right) + \| F
+     \| \frac{| \lambda |}{\lambda_A} (1 + K)^{\deg (F)} + L (A, C) < K. \]
+  Let $R_{\tau} \assign \sup_{t \in (- \infty, \tau]} \| \Psi_{- T, t}^X
+  \|_{\mathcal{G} (V)}$ and consider the set $Z = \left\{ \tau \in \mathbb{R}:
+  R_{\tau} \leqslant \frac{2 K}{3} \right\}$. The set $Z$ is non-empty, since
+  $R_{\tau} < \frac{1}{2} K$ when $\tau \leqslant - T$, open since $\tau
+  \mapsto R_{\tau}$ is an increasing continuous function of $\tau$ and closed
+  since $\tau \rightarrow R_{\tau}$ is continuous. Then we must have $Z
+  =\mathbb{R}$ and
+  \[ \sup_{t \in \mathbb{R}} \| \Psi_{- T, t}^X \|_{\mathcal{G} (V)}
+     \leqslant \frac{2}{3} K, \]
+  for $| \lambda | \leqslant \lambda_0$.
+\end{proof}
+
+\begin{theorem}
+  \label{theorem_approximation}Under the hypotheses of Lemma~\ref{lemma_bound}
+  we have that $\Psi_{- T, t}^X$ converges to $\Psi^s_t$ in $\mathcal{G} (V)$
+  as $T \rightarrow + \infty$, uniformly on compact subsets of $\mathbb{R}$.
+\end{theorem}
+
+\begin{proof}
+  If $t \geqslant - T$ we have that
+  \begin{eqnarray}
+    \| \Psi_{- T, t}^X - \Psi_t^s \|_{\mathcal{G} (V)} & \lesssim & e^{-
+    \lambda_A (t + T)} (\| X \|_{\mathcal{G} (V)} + \| B_{- T}^A
+    \|_{\mathcal{G} (V)}) + | \lambda | \| F \| (1 + K)^{\deg (F)} \times
+    \nonumber\\
+    &  & \times \int_{- \infty}^{- T} e^{- \lambda_A (t - \tau)} \mathd \tau
+    + | \lambda | \| \partial_R F \| (1 + K)^{\deg (F) - 1} \times \nonumber\\
+    &  & \times \int_{- T}^t e^{- \lambda_A (t - s)} \| \Psi_{- T, \tau}^X -
+    \Psi_{\tau}^s \| \mathd \tau . \nonumber
+  \end{eqnarray}
+  By Gronwall lemma we obtain
+  \begin{eqnarray}
+    \| \Psi_{- T, t}^X - \Psi_t^s \|_{\mathcal{G} (V)} & \leqslant & e^{-
+    \lambda_A T} \left( \| X \|_{\mathcal{G} (V)} + \frac{K}{3} + \frac{|
+    \lambda | \| F \| (1 + K)^{\deg (F)}}{\lambda_A} \right) \times
+    \nonumber\\
+    &  & \times (1 + \exp (- (\lambda_A - | \lambda | (\| \partial_R F \|
+    K)^{\deg (F) - 1}) \nobracket (t + T)) . \nonumber
+  \end{eqnarray}
+  Since $\lambda_A - | \lambda | (\| \partial_R F \| K)^{\deg (F) - 1} > 0$,
+  by the condition~{\eqref{eq:contraction}}, we have that
+  \[ \| \Psi_{- T, t}^X - \Psi_t^s \|_{\mathcal{G} (V)} \lesssim e^{-
+     \lambda_A T} \]
+  uniformly in $T$ when $t > P > - T$ for any such fixed $P$. This proves that
+  $\Psi_{- T, t}^X$ converges to $\Psi_t^s$ uniformly on compact sets.
+\end{proof}
+
+An important consequence of Theorem~\ref{theorem_approximation} is the
+following one.
+
+\begin{theorem}
+  \label{theorem_invariant2}Under the hypotheses and notations of
+  Theorem~\ref{theorem_stationary} and Theorem~\ref{theorem_approximation}, if
+  $\| X \|_{\mathcal{G} (V)} < \frac{1}{3} K$, $| \lambda | \leqslant
+  \lambda_0 (K, L, F)$ and if $\omega (\cdot e^{- 2 U (X)})$ is an invariant
+  measure for equation~{\eqref{eq:sde-lambda}} (in the sense of
+  Definition~\ref{definition_invariant}), for any $t \in \mathbb{R}$ and for
+  any $G \in \Lambda V$, we have that
+  \[ \frac{\omega (G (X) e^{- 2 U (X)})}{\omega (e^{- 2 U (X)})} = \omega (G
+     (\Psi^s_t)) . \]
+\end{theorem}
+
+\begin{proof}
+  Under the previous notation by Definition~\ref{definition_invariant}, we
+  have that, for any $t \geqslant - T$,
+  \[ \omega (G (X) e^{- 2 U (X)}) = \omega (G (\Psi_{- T, - T}^X) e^{- 2 U
+     (X)}) = \omega (G (\Psi_{- T, t}^X) e^{- 2 U (X)}) . \]
+  By Theorem~\ref{theorem_approximation} we can take the limit at the right
+  hand side as $T \rightarrow + \infty$, obtaining
+  \[ \omega (G (X) e^{- 2 U (X)}) = \omega (G (\Psi^s_t) e^{- 2 U (X)}) . \]
+  Since $X$ is independent of $B^A_t$ and since $\Psi^s_t$ is a function only
+  of $B^A$ we get
+  \[ \omega (G (X) e^{- 2 U (X)}) = \omega (G (\Psi^s_t)) \omega (e^{- 2 U
+     (X)}), \]
+  from which the thesis follows.
+\end{proof}
+
+\begin{remark}
+  \label{remark_invariant2}By Theorem~\ref{th:sq-finite},
+  Theorem~\ref{theorem_invariant2} applies to the case $\lambda F (v) =
+  \lambda \langle C \partial_R U, v \rangle$ for $\lambda$ small enough.
+\end{remark}
+
+\section{Infinite dimensional SDEs}\label{sec:infinite-dim}
+
+We want to study SDEs of the form
+\begin{equation}
+  \mathd \Psi_t = (A \Psi_t + \lambda F (\Psi_t)) \mathd t + \mathd B_t
+  \label{eq:infinite5}
+\end{equation}
+in the case where $\Psi$ takes values in $\mathcal{G} (V)$ and $V =\mathcal{S}
+(\mathbb{R}^d) \otimes \mathbb{R}^n,$ or $\mathcal{S} (\mathbb{R}^d) \otimes
+\mathbb{C}^n$, or $C^{\infty} (\mathbb{T}^d) \otimes \mathbb{R}^n$ for some $n
+\in \mathbb{N}_0$ and with $A$ a (possibly unbounded) linear operator on $V$.
+We discuss in detail the case $V = \mathcal{S} (\mathbb{R}^d)$, but every
+reasoning can be easily generalized to the other cases or more generally to
+any nuclear space of smooth functions.
+
+\
+
+The main difference between the finite and infinite dimensional case for
+Grassmann SDEs is that in general there is no natural topology on $\mathcal{G}
+(V)$. The space $V = \mathcal{S} (\mathbb{R}^d)$ is a Fr{\'e}chet space. Since
+not every element of $\mathcal{G} (V)$ is continuous with respect to this
+topology we consider here the space $\mathcal{G}^{- \infty} (V) \subset
+\mathcal{G} (V)$, the subset of $\mathcal{G} (V)$ for which $X \in
+\mathcal{G}^{- \infty} (V)$ if and only if $X$ restricted to $V \subset
+\Lambda V$ is a continuous linear map from $V$ to $\mathcal{A}$. Hereafter we
+always consider $X \in \mathcal{G}^{- \infty} (V)$ both as a homomorphism
+from the algebra $\Lambda V$ into $\mathcal{A}$, and as a continuous linear
+map from $V$ into $\mathcal{A}$.
+
+\
+
+Since $V$ is a nuclear space whose dual is nuclear the set of continuous
+linear maps from $V$ into $\mathcal{A}$ can be identified with the tensor
+product $V^{\asterisk} \otimes \mathcal{A} = \mathcal{S}' (\mathbb{R}^n)
+\otimes \mathcal{A}$ (where $V^{\asterisk}$ the topological dual of $V$, the
+Schwartz space of tempered distribution $\mathcal{S}' (\mathbb{R}^d)$). In
+other words we can look upon $\mathcal{G}^{- \infty} (V)$ as the subset of
+elements of $\mathcal{S}' (V) \otimes \mathcal{A}$ that can be extended to a
+homomorphism from $\Lambda V$ into $\mathcal{A}$.
+
+\
+
+Using a reasoning similar to the one exploited in
+Lemma~\ref{lemma_completeness}, it is possible to prove that $\mathcal{G}^{-
+\infty} (V)$ is a closed subset of $V^{\asterisk} \otimes \mathcal{A}$ with
+respect to the strong topology (of both $V^{\asterisk} = \mathcal{S}'
+(\mathbb{R}^d)$ and $\mathcal{A}$), i.e. if $(X_{\nu})_{\nu}$ is a net in
+$\mathcal{G}^{- \infty} (V)$ converging to $X$ in the topology of
+$V^{\asterisk} \otimes \mathcal{A}$, then $X$ can be extended to an
+homomorphism from $\Lambda V$ into $\mathcal{A}$. Working on $\mathcal{G}^{-
+\infty} (V)$ is not so easy since $\mathcal{S}' (V) \otimes \mathcal{A}$ is
+not even a Fr{\'e}chet space. For this reason we introduce now some subsets of
+$\mathcal{G}^{- \infty} (V)$ (which are analogous to Besov spaces) which \
+admit a stronger metric topology.
+
+\
+
+We recall here only the definition of the Besov norm for functions taking
+values in a Banach space, further references and details are given in Appendix
+\ref{appendix_Besov} (see also {\cite{Amann1997,Amann2019}}). Let $K_i \in
+\mathcal{S} (\mathbb{R}^d)$, with $i \geqslant - 1$, be the functions
+corresponding to the Littlewood--Paley blocks used in the definition of Besov
+spaces $B^s_{p, q} \assign B^s_{p, q} (\mathbb{R}^d, \mathbb{R})$, where $s
+\in \mathbb{R}$ and $p, q \in [1, + \infty]$. If $X \in \mathcal{G}^{- \infty}
+(V)$ we define
+\[ \Delta_i X (x) = X (K_i (x - \cdot)), \qquad x \in \mathbb{R}^d, i
+   \geqslant - 1. \]
+The function $\Delta_i X : \mathbb{R}^d \rightarrow \mathcal{A}$ can be
+identified with an element $\Delta_i X \in \mathcal{S} (\mathbb{R}^d) \otimes
+\mathcal{A} = \mathcal{S} (\mathbb{R}^d, \mathcal{A})$ and we define
+\[ \| X \|_{B^s_{p, q} (\mathbb{R}^d, \mathcal{A})} \assign \left[ \sum_{i
+   \geqslant - 1} 2^{q i s} \left( \int_{\mathbb{R}^d} \| \Delta_i X (x)
+   \|_{\mathcal{A}}^p \mathd x \right)^{q / p}_{} \right]^{1 / q} . \]
+Given $s \in \mathbb{R}$, we say that $X \in \mathcal{G}^s (V)$ when $X \in
+\mathcal{G}^{- \infty} (V)$ and $\| X \|_{B^s_{\infty, \infty} (\mathbb{R}^d,
+\mathcal{A})} < + \infty$. Thus we introduce the natural metric
+$d_{\mathcal{G}^s (V)} (X, Y) = \| X - Y \|_{B^s_{\infty, \infty}
+(\mathbb{R}^d, \mathcal{A})}$. Hereafter we always use the notation
+$\mathcal{C}^s (\mathbb{R}^d, \mathcal{A}) = B^s_{\infty, \infty}
+(\mathbb{R}^d, \mathcal{A})$ and $\mathcal{C}^s = \mathcal{C}^s (\mathbb{R}^d,
+\mathbb{R})$. Moreover $\mathcal{C}^{s \asterisk}$ will denote the topological
+dual of $\mathcal{C}^s$.
+
+\begin{lemma}
+  The set $\mathcal{G}^s (V)$ with the metric $d_{\mathcal{G}^s (V)}$ is a
+  complete metric space.
+\end{lemma}
+
+\begin{proof}
+  The proof is analogous to that of Lemma~\ref{lemma_completeness}.
+\end{proof}
+
+The case $s > 0$ can be understood more easily. In this case the elements $X
+\in \mathcal{G}^s (V)$ can be identified with some continuous function
+$\dot{X} : \mathbb{R}^d \rightarrow \mathcal{A}$. Under this identification if
+$f \in \mathcal{S} (\mathbb{R}^d)$ we have that
+\[ X (f) = \int_{\mathbb{R}^d} f (x) \dot{X} (x) \mathd x, \]
+where the integral is taken in Bochner sense. If $X \in \mathcal{G}^s (V)$,
+with $s > 0$, we can obtain the function $\dot{X}$ in the following way. Let
+$\mathfrak{a} : \mathbb{R}^d \rightarrow \mathbb{R}$ be a smooth mollifier and
+define $\mathfrak{a}_{x, \varepsilon} (y) = \varepsilon^{- d} \mathfrak{a}
+\left( \frac{y - x}{\varepsilon} \right)$, where $x, y \in \mathbb{R}^d$ and
+$\varepsilon > 0$. Then we have that
+\[ \dot{X} (x) = \lim_{\varepsilon \rightarrow 0} X
+   (\mathfrak{a}_{\varepsilon, x}) = X (\delta_x), \]
+where the limit is taken with respect to the strong topology of $\mathcal{A}$,
+and where $\delta_x$ is the Dirac delta with unit mass at the point $x \in
+\mathbb{R}^d$. More generally, if $X \in \mathcal{G}^s (V)$ and $g \in
+\mathcal{C}^{s \asterisk}$, for any sequence $(g_n)_n \subset \mathcal{S}
+(\mathbb{R}^d)$ converging to $g$ with respect to the natural topology of
+$\mathcal{C}^{s \asterisk}$ we have that $(X (g_n))_n$ converges in
+$\mathcal{A}$ to a unique element
+\[ X (g) \assign \lim_{n \rightarrow + \infty} X (g_n) . \]
+The map $X$ now defined on all of $\mathcal{C}^{s \asterisk}$ is continuous.
+In other words, if $X \in \mathcal{G}^s (V)$ then it can be identified with an
+element of $\mathcal{L} (\mathcal{C}^{s \asterisk}, \mathcal{A})$. Furthermore
+it is simple to prove, using suitable $\mathcal{S} (\mathbb{R}^d)$
+approximations, that if $g, h \in \mathcal{C}^{s \asterisk}$, we have
+\begin{equation}
+  X (g) X (h) = - X (h) X (g) . \label{eq:anticomgeneral}
+\end{equation}
+In particular we have
+\[ \dot{X} (x_1) \dot{X} (x_2) = - \dot{X} (x_2) \dot{X} (x_1), \qquad x_1,
+   x_2 \in \mathbb{R}^d . \]
+The relation~{\eqref{eq:anticomgeneral}} has important consequences. For any
+$n \geqslant 1$, let
+\[ \begin{array}{cc}
+     \Lambda^n_{\pi} \mathcal{C}^{s \asterisk} \subset &
+     \underbrace{\mathcal{C}^{s \asterisk} \otimes_{\pi} \mathcal{C}^{s
+     \asterisk} \otimes_{\pi} \cdots \otimes_{\pi} \mathcal{C}^{s
+     \asterisk}}\\
+     & \text{$n$ times}
+   \end{array} \]
+be the completion of $\Lambda^n \mathcal{C}^{s \asterisk}$ in $\otimes^n_{\pi}
+\mathcal{C}^{s \asterisk}$. Here $\otimes_{\pi}$ is the projective tensor
+product of Banach spaces whose norm is defined as follows: if $f \in \otimes^n
+\mathcal{C}^{s \asterisk}$ then
+\[ \| f \|_{\otimes^n_{\pi} \mathcal{C}^{s \asterisk}} \assign \inf \left\{
+   \sum_{i = 1}^k \prod_{j = 1}^n \| f^i_j \|_{\mathcal{C}^{s \asterisk}},
+   \tmop{where} f = \sum_{i = 1}^k f^i_1 \otimes \cdots \otimes f^i_n \right\}
+   . \]
+\begin{lemma}
+  \label{remark_regularity}If $X \in \mathcal{G}^s (V)$ then it can be
+  extended to a continuous homomorphism from $\bigoplus_{i = 1}^n
+  \Lambda_{\pi}^n \mathcal{C}^{s \asterisk}$ into $\mathcal{A}$ for any $n >
+  0$.
+\end{lemma}
+
+\begin{proof}
+  The proof is based on the fact that $X$ can be identified with an element of
+  $\mathcal{L} (\mathcal{C}^{s \asterisk}, \mathcal{A})$ and on the
+  relation~{\eqref{eq:anticomgeneral}}.
+\end{proof}
+
+In the case $s > 0$, we have for example that
+\[ X (\delta_{x_1} \wedge \cdots \wedge \delta_{x_n}) = \dot{X} (x_1) \cdots
+   \dot{X} (x_n), \qquad x_1, \ldots, x_n \in \mathbb{R}^d \]
+We want now to define a natural notion of function $F$ of an element $X \in
+\mathcal{G}^s (V)$. For example, if $s > 0$, and we write $Y = F_n (X)$, we
+want to be able to take $F_n$ of the form
+\begin{equation}
+  \dot{Y} (x) = \sum_{(k_1, \ldots, k_n) \in D} K_{(k_1, \ldots, k_n)} \dot{X}
+  (x + k_1) \dot{X} (x + k_2) \cdots \dot{X} (x + k_n)
+  \label{eq:examplefinite},
+\end{equation}
+where $D \subset \mathbb{R}^{d n}$ is some finite set and $K_{(k_1, \ldots,
+k_n)} \in \mathbb{R}$. When $n$ is odd, the important property of the function
+$F_n$ defined before is that $Y = F (X) \in \mathcal{C}^s (\mathbb{R}^d,
+\mathcal{A})$ and furthermore for any $g, h \in \mathcal{C}^{s \asterisk}$ we
+have
+\begin{equation}
+  \begin{array}{c}
+    Y (g) Y (h) = - Y (h) Y (g)\\
+    Y (g) X (h) = - X (h) Y (g) .
+  \end{array} \label{eq:anticom2}
+\end{equation}
+We want to consider some more general setting than the one considered in
+equation~{\eqref{eq:examplefinite}} that maintains the important
+property~{\eqref{eq:anticom2}}.
+
+\
+
+Consider $F_n \in \mathcal{L} (\mathcal{S} (\mathbb{R}^d), \Lambda^n_{\pi}
+\mathcal{C}^{s \asterisk})$, then $F_n$ can be seen as an element of
+$\mathcal{S}' (\mathbb{R}^d) \otimes \Lambda^n_{\pi} \mathcal{C}^{s
+\asterisk}$. Using the same technique as before we can introduce the Banach
+space $\mathcal{C}^s (\mathbb{R}^d, \Lambda^n_{\pi} \mathcal{C}^{s \asterisk})
+\subset \mathcal{S}' (\mathbb{R}^d) \otimes \Lambda^n_{\pi} \mathcal{C}^{s
+\asterisk}$ equipped with its natural norm. In this case we will we use the
+notation
+\begin{equation}
+  F_n (X) \assign X \circ F_n, \label{eq:composition}
+\end{equation}
+where $(X \circ F_n) (v) = X (F_n (v)) \in \mathcal{A}$ for any $v \in
+\mathcal{S} (\mathbb{R}^d)$.
+
+\begin{definition}
+  \label{definition-F1}We say that the linear function $F \in \mathcal{C}^s
+  \left( \mathbb{R}^d, \bigoplus_{j = 0}^k \Lambda^{2 j + 1}_{\pi}
+  \mathcal{C}^{s \asterisk} \right)$ is a standard odd function of degree $2 k
+  + 1$ if there is a sequence of functions $F^n \in \mathcal{C}^s \left(
+  \mathbb{R}^d, \bigoplus_{j = 0}^k \Lambda^{2 j + 1} \mathcal{C}^{s
+  \asterisk} \right)$ (where $\Lambda^{2 j + 1} \mathcal{C}^{s \asterisk} =
+  \underbrace{\mathcal{C}^{s \asterisk} \otimes \mathcal{C}^{s \asterisk}
+  \otimes \cdots \otimes \mathcal{C}^{s \asterisk}}_{\text{$2 j + 1$ times}}$
+  and $\otimes$ is the algebraic tensor product) such that for any $g \in V$
+  we have $F^n (g) \rightarrow F (g)$, as $n \rightarrow + \infty$, in
+  $\bigoplus_{j = 0}^k \Lambda^{2 j + 1}_{\pi} \mathcal{C}^{s \asterisk}$
+  equipped with its standard topology.
+\end{definition}
+
+\begin{remark}
+  When $s > 0$, an example of a function $F$ satisfying
+  Definition~\ref{definition-F1} is
+  \[ F (X) (\delta_x) = \dot{X} (x) \int_{\mathbb{R}^d} \mathcal{G}_1 (x - y)
+     \dot{X} (y) \mathd y \int_{\mathbb{R}^d} \mathcal{G}_2 (x - y) \dot{X}
+     (y) \mathd y, \]
+  where $\mathcal{G}_1, \mathcal{G}_2 \in \mathcal{C}^{s + \epsilon}$ are
+  functions that decrease faster than any polynomial at infinity. We note that
+  a finite dimensional approximation of $F (X) (\delta_x)$ is given by
+  \[ F^n (X) (\delta_x) = \sum_{D_i \in \mathcal{P}_n} \sum_{D_j \in
+     \mathcal{P}_n} \dot{X} (x) \dot{X} (x - x_i) \dot{X} (x - x_j) \int_{D_i}
+     \mathcal{G}_1 (y) \mathd y \int_{D_j} \mathcal{G}_2 (y) \mathd y, \]
+  where $\mathcal{P}_n$ is sequence of increasing partitions of $\mathbb{R}^d$
+  for which $\sup_i \left| \int_{D_i} \mathcal{G}_1 (y) \mathd y \right|
+  \rightarrow 0$ and $\sup_j \left| \int_{D_j} \mathcal{G}_2 (y) \mathd y
+  \right| \rightarrow 0$.
+\end{remark}
+
+\begin{theorem}
+  \label{theorem_F}Let $s \in \mathbb{R}$, let $F \in \mathcal{C}^s \left(
+  \mathbb{R}^d, \bigoplus_{j = 0}^k \Lambda^{2 j + 1}_{\pi} \mathcal{C}^{s
+  \asterisk} \right)$ be a standard odd function of degree $2 k + 1$ (see
+  Definition~\ref{definition-F1}), and consider $X \in \mathcal{G}^s (V)$.
+  Then $F (X) \in \mathcal{C}^s (\mathbb{R}^d, \mathcal{A})$, furthermore for
+  any $v_1, v_2 \in \mathcal{C}^{s \asterisk}$ we have
+  \begin{equation}
+    \begin{array}{c}
+      F (X) (v_1) F (X) (v_2) = - F (X) (v_2) F (X) (v_1)\\
+      F (X) (v_1) X (v_2) = - X (v_2) F (X) (v_1) .
+    \end{array} \label{eq:anticommutation}
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  The fact that $F (X) \in \mathcal{C}^s (\mathbb{R}^d, \mathcal{A})$ follows
+  from Remark~\ref{remark_regularity}. The
+  relations~{\eqref{eq:anticommutation}} are obvious when $F \in \mathcal{C}^s
+  \left( \mathbb{R}^d, \bigoplus_{j = 0}^k \Lambda^{2 j + 1} \mathcal{C}^{s
+  \asterisk} \right)$. Using a finite dimensional approximation $F^n$
+  converging to $F$ the relations~{\eqref{eq:anticommutation}} are extended to
+  the more general case.
+\end{proof}
+
+\begin{remark}
+  An important consequence of Theorem~\ref{theorem_F} is that if $X \in
+  \mathcal{G}^s (V)$ and $F$ satisfies the hypotheses of
+  Theorem~\ref{theorem_F}, $F (X)$ can be extended to a Grassmann random
+  variable (which in the following we denote by the same symbol $F (X)$) in
+  $\mathcal{G}^s (V)$. Furthermore $F (X)$ and $X$ are compatible (in the
+  sense of the corresponding definition of Section \ref{sec:grassmann-rv}).
+\end{remark}
+
+We are \ now in the position to give a precise meaning to
+equation~{\eqref{eq:infinite5}} and to the various hypotheses on its data. Let
+the operator $A$ be the (generally unbounded) generator of a strongly
+continuous and exponentially contractive semigroup $(e^{A t})_{t \geqslant 0}$
+on $L^2 (\mathbb{R}^d)$. Moreover consider the stationary Ornstein-Uhlenbeck
+motion
+\begin{equation}
+  B^A_t (v) = \Xi (\mathbbm{1}_{(- \infty, t]} \otimes e^{A (t - \cdot)} v),
+  \qquad t \in \mathbb{R}, v \in \mathcal{S} (\mathbb{R}^d), \label{eq:ba}
+\end{equation}
+where $\Xi$ is a Grassmann Gaussian noise on $\mathcal{G} (C^{\infty}
+(\mathbb{R}_+) \otimes \mathcal{S} (\mathbb{R}^d))$ with covariance
+$\mathbbm{1} \otimes C$ (we consider on $C^{\infty}_c (\mathbb{R}_+) \otimes
+\mathcal{S} (\mathbb{R}^d)$ the pre-Hilbert space structure given by the
+natural inclusion of $C^{\infty}_c (\mathbb{R}_+) \otimes \mathcal{S}
+(\mathbb{R}^d)$ in $L^2 (\mathbb{R}_+ \times \mathbb{R}^d)$).
+
+\begin{definition}
+  \label{definition_F2}We say that the process $\Psi \in C^0 ([0, T],
+  \mathcal{G}^s (V))$ satisfies equation~{\eqref{eq:infinite5}} with initial
+  condition $\Psi_0$ if $F$ is \ a standard odd function of finite degree,
+  $\Psi_0 \in \mathcal{G}^s (V)$ is independent of $\Xi$, and for any $t \in
+  [0, T]$ and any $v \in V$ we have
+  \begin{equation}
+    \Psi_t (v) = \Psi_0 (e^{A t} v) + \lambda \int_0^t F (\Psi_s) (e^{A (t -
+    s)} v) \mathd s + B^A_t (v) - B_0^A (e^{A t} v) \label{eq:infinite2},
+  \end{equation}
+  where the integral in the variable $s$ is taken in Bochner sense with
+  respect the norm of $\mathcal{A}$.
+\end{definition}
+
+We introduce some conditions on $F$, $A$ and $\Xi$ in order to prove a result
+on existence and uniqueness of solutions to~{\eqref{eq:infinite2}}.
+
+\begin{definition}
+  \label{definition_drift}Let $F$ be a standard odd function of degree $2 k +
+  1$. We say that $F$ is a regular map on $\mathcal{C}^s (\mathbb{R}^d,
+  \mathcal{A})$ if it is a locally bounded and Lipschitz function, i.e. it
+  satisfies the following conditions:
+  \begin{enumerateroman}
+    \item There is a continuous non-decreasing function $f : \mathbb{R}_+
+    \rightarrow \mathbb{R}_+$ such that for every $X \in \mathcal{G}^s (V)$ we
+    have
+    \begin{equation}
+      \| F (X) \|_{\mathcal{C}^s (\mathbb{R}^d, \mathcal{A})} \leqslant f (\|
+      X \|_{\mathcal{C}^s (\mathbb{R}^d, \mathcal{A})}) . \label{eq:bound1}
+    \end{equation}
+    \item The map $F$ is locally Lipschitz continuous and there is a
+    continuous non-decreasing function $g : \mathbb{R}_+ \rightarrow
+    \mathbb{R}_+$ such that, for any $X, Y \in \mathcal{G}^s (V)$:
+    \begin{equation}
+      d_{\mathcal{G}^s (V)} (F (X), F (Y)) \leqslant g (\max (\| X
+      \|_{\mathcal{C}^s (\mathbb{R}^d, \mathcal{A})}, \| Y \|_{\mathcal{C}^s
+      (\mathbb{R}^d, \mathcal{A})})) d_{\mathcal{G}^s (V)} (X, Y) .
+      \label{eq:bound2}
+    \end{equation}
+  \end{enumerateroman}
+\end{definition}
+
+\begin{definition}
+  \label{definition_infinitelinear}We say that the unbounded operator $A$ on
+  $L^2 (\mathbb{R}^d)$, and the Gaussian noise $\Xi$ with covariance $C$ are
+  adapted to the space $\mathcal{G}^s (V)$, if
+  \begin{enumerateroman}
+    \item The operator $A$ generates a contraction semigroup on $\mathcal{C}^s
+    (\mathbb{R}^d)$ such that $\| e^{A t} \|_{\mathcal{L} (\mathcal{C}^s
+    (\mathbb{R}^d), \mathcal{C}^s (\mathbb{R}^d))} \lesssim e^{- \lambda_A t}$
+    for some strictly positive constant $\lambda_A > 0$.
+    
+    \item The Gaussian process $B^A$ defined by~{\eqref{eq:ba}} belongs to
+    $C^0 (\mathbb{R}, \mathcal{G}^s (V))$ and furthermore we have $\sup_{t \in
+    \mathbb{R}} \| B_t^A \|_{\mathcal{C}^s (\mathbb{R}^d, \mathcal{A})} < +
+    \infty$.
+  \end{enumerateroman}
+\end{definition}
+
+\begin{theorem}
+  \label{theorem_existence2}Suppose that $F$ satisfies
+  Definition~\ref{definition_drift} and $A, \Xi$ satisfy
+  Definition~\ref{definition_infinitelinear} and let $X$ be a variable in
+  $\mathcal{G}^s (V)$ independent of the Grassmann Gaussian noise $\Xi$. Then
+  there exists a $T > 0$ such that there is a unique solution $\Psi \in C^0
+  ([0, T], \mathcal{G}^s (V))$ to equation~{\eqref{eq:infinite2}}. Furthermore
+  $\Psi_t$ is compatible with $(\Psi_0, \Xi, \Psi_s)$ for every $t, s \in [0,
+  T]$.
+\end{theorem}
+
+\begin{proof}
+  The proof is a straightforward generalization of that of
+  Theorem~\ref{theorem_picard} for the case of our infinite dimensional
+  setting.
+\end{proof}
+
+In order to obtain solutions for all times it is not possible to extend
+directly Theorem~\ref{th:global-sol}, since its proof was essentially based on
+the hypothesis that $V$ is finite dimensional. On the other hand the proofs of
+Theorem~\ref{theorem_stationary}, Lemma~\ref{lemma_bound} and
+Theorem~\ref{theorem_approximation} do not depend on the dimension. For this
+reason we introduce the space $\mathfrak{K}_K \subset C^0 (\mathbb{R},
+\mathcal{G}^s (V))$ defined as the set of functions $\Psi_t \in C^0
+(\mathbb{R}, \mathcal{G}^s (V))$ such that
+\[ \sup_{t \in \mathbb{R}} \| \Psi_t \|_{\mathcal{C}^s (\mathbb{R}^d,
+   \mathcal{A})} < K, \]
+for some constant $K > 0$, the function $L$ being given by
+\[ L (A, C) = \sup_{t \in \mathbb{R}} \| B^A_t \|_{\mathcal{C}^s
+   (\mathbb{R}^d, \mathcal{A})}, \]
+and the equation for stationary solutions corresponding to
+{\eqref{eq:infinite2}} as
+\begin{equation}
+  \Psi_t^s = \lambda \int_{- \infty}^t F (\Psi_{\tau}^s (e^{A (t - \tau)}))
+  \mathd \tau + B^A_t \label{eq:stationary2} \qquad t \in \mathbb{R}.
+\end{equation}
+We also denote by $\Psi_{- T, t}^X$ the Grassmann process defined by $\Psi_{-
+T, t}^X = X$ if $t \leqslant - T$ and such that $\Psi_{- T, t}^X$ is the
+solution to equation~{\eqref{eq:infinite2}} with initial condition $X$ at time
+$t = - T$. \
+
+\begin{theorem}
+  \label{theorem_longtime2}Suppose that $F$ satisfies
+  Definition~\ref{definition_drift} and $A, \Xi$ satisfy
+  Definition~\ref{definition_infinitelinear} and let $K > 2 L (A, C)$. Then
+  there exists a function $\lambda_0 (K, L, F)$ such that for any $| \lambda |
+  \leqslant 2 \lambda_0 (K, L, F)$ there exists a unique (stationary) solution
+  to equation~{\eqref{eq:stationary2}} in $\mathfrak{K}_K$. Furthermore for
+  any $| \lambda | \leqslant \lambda_0 (K, L, F)$ and for any random variable
+  $X \in \mathcal{G}^s_{\mathcal{}} (V)$, independent of $B^A_t$ and such that
+  $\| X \|_{\mathcal{C}^s (\mathbb{R}^d, \mathcal{A})} < \frac{1}{3} K$, we
+  have that $\Psi^X_{- T, t}$ converges, as $T \rightarrow + \infty$, in
+  $\mathcal{G}^s (V)$ to $\Psi^s_t$ uniformly on compact subsets of
+  $\mathbb{R}$.
+\end{theorem}
+
+\begin{proof}
+  Due to our appropriate infinite dimensional setting the proof is a
+  straightforward generalization of Theorem~\ref{theorem_stationary},
+  Lemma~\ref{lemma_bound} and Theorem~\ref{theorem_approximation}.
+\end{proof}
+
+\begin{remark}
+  The function $\lambda_0$ defined in Theorem~\ref{theorem_longtime2} has to
+  satisfy the following inequalities
+  \begin{equation}
+    \frac{2 \lambda_0 (K, L, F) f_F (K)}{\lambda_A} + 2 L < K
+    \label{eq:contraction3},
+  \end{equation}
+  \begin{equation}
+    \frac{2 \lambda_0 (K, L, F)}{\lambda_A} g_F (K) < 1
+    \label{eq:contraction4}
+  \end{equation}
+  where $f_F$, $g_F$ and $\lambda_A$ are the quantities introduced in
+  Definition~\ref{definition_drift} and
+  Definition~\ref{definition_infinitelinear} respectively.
+\end{remark}
+
+\section{The Yukawa$_2$ model}\label{sec:yukawa}
+
+We are now in position to study the stochastic quantization for an Euclidean
+fermionic QFT. We consider the Euclidean counterpart of the Yukawa model
+describing the interaction of a scalar field with a spin $1 / 2$ field in a $1
++ 1$ Minkowski space-time. However we will not attempt here to remove the UV
+cutoff so the dimension of the space will not play any fundamental role. The
+Yukawa$_2$ model contains already the main features of a large class of
+Euclidean fermionic theories. It will be clear from the considerations below
+that more general results are easily derivable at the price of heavier
+notation. For the sake of readability we choose to stick to a definite model.
+
+\subsection{Osterwalder--Schrader fields}
+
+We define the Euclidean Yukawa$_2$ quantum field theory following Osterwalder
+and Schrader~{\cite{osterwalder_euclidean_1973-2}}. In the language of this
+paper, the Euclidean free Fermions introduced by Osterwalder and Schrader
+(compare with~{\cite{osterwalder_euclidean_1973-2}} page~282 and
+equation~(3.3) page ~284) are given by a quadruplet $\tilde{\psi} = (\psi,
+\bar{\psi}) \in \mathcal{G} (\mathcal{S} (\mathbb{R}^2) \otimes \mathbb{C}^4)$
+of complex Grassmann Gaussian fields on the complex pre-Hilbert space
+$\mathcal{S} (\mathbb{R}^2) \otimes \mathbb{C}^4 \subseteq L^2 (\mathbb{R}^2)
+\otimes \mathbb{C}^4$ with an Hermitian scalar product denoted $(\cdot,
+\cdot)$, a standard bilinear form $\langle \cdot, \cdot \rangle_{\mathbb{C}}$
+(defined by $\langle f, g \rangle \assign (\bar{f}, g)$, for $f, g \in
+\mathcal{G} (\mathcal{S} (\mathbb{R}^2) \otimes \mathbb{C}^4)$) and the
+correlations
+\begin{equation}
+  \omega (\tilde{\psi} (f) \tilde{\psi} (g)) = \langle f, K g
+  \rangle_{\mathbb{C}}, \label{eq:free-corrrelation} \qquad f, g \in
+  \mathcal{S} (\mathbb{R}^2) \otimes \mathbb{C}^4,
+\end{equation}
+where $K$ is the bounded operator on $L^2 (\mathbb{R}^2) \otimes \mathbb{C}^4$
+given by
+\[ K = (m_f^2 - \Delta)^{- 1} \left(\begin{array}{cc}
+     0 & \left( \not{\nabla} + m_f \right)\\
+     - \left( \not{\nabla} + m_f \right)^{\Tau} & 0
+   \end{array}\right), \]
+where $\Delta$ is the Laplacian on $\mathbb{R}^2$, $m_f > 0$ is a constant
+interpreted as the mass of the fermionic particle associated with the
+fermionic fields $(\psi, \bar{\psi})$. As before, $[\cdots]^{\Tau}$ denotes
+real transposition, that is $[\cdots]^{\Tau} = \overline{[\cdots]}^{\ast}$.
+Moreover $\not{\nabla} \assign \gamma_1 \nabla_1 + \gamma_2 \nabla_2$ with
+$\nabla_i$ the partial derivatives with respect to $x_i$, $i = 1, 2$, and with
+Euclidean Dirac matrices $\gamma_1, \gamma_2 : \mathbb{C}^2 \rightarrow
+\mathbb{C}^2$ given by
+\[ \gamma_1 = \left(\begin{array}{cc}
+     0 & 1\\
+     1 & 0
+   \end{array}\right), \quad \gamma_2 = \left(\begin{array}{cc}
+     0 & - \mathi\\
+     \mathi & 0
+   \end{array}\right), \]
+and such that
+\[ \gamma_a \gamma_b + \gamma_b \gamma_a = 2 \delta_{a b}, \qquad a, b = 1, 2.
+\]
+Note that $K$ is complex anti-symmetric: $K^{\Tau} = - K$, but not Hermitian
+nor anti-Hermitian. Indeed $K = (m_f^2 - \Delta)^{- 1 / 2} U$ with $U$ an
+unitary operator in $L^2 (\mathbb{R}^2) \otimes \mathbb{C}^4$. Hence the
+correlation matrix of the field $\tilde{\psi}$ can also be written as
+\[ \omega (\tilde{\psi} (f) \tilde{\psi} (g)) = \langle (m_f^2 - \Delta)^{- 1
+   / 4} f, U (m_f^2 - \Delta)^{- 1 / 4} g \rangle_{\mathbb{C}} . \]
+Therefore we can realize $\tilde{\psi}$ as
+\[ \tilde{\psi} (f) \assign \zeta ((m_f^2 - \Delta)^{- 1 / 4} f), \qquad f \in
+   \mathcal{S} (\mathbb{R}^2) \otimes \mathbb{C}^4, \]
+where $\tilde{\zeta} \in \mathcal{G} (\mathcal{S} (\mathbb{R}^2) \otimes
+\mathbb{C}^4)$ is the complex Grassmann Gaussian field with the bounded
+covariance
+\[ \omega (\tilde{\zeta} (f) \tilde{\zeta} (g)) = \langle f, U g
+   \rangle_{\mathbb{C}} . \]
+As a consequence, in this specific realization, we have
+\begin{equation}
+  \| \tilde{\psi} (f) \| = \| \tilde{\zeta} ((m_f^2 - \Delta)^{- 1 / 4} f) \|
+  \lesssim \| (m_f^2 - \Delta)^{- 1 / 4} f \|_{L^2 (\mathbb{R}^2) \otimes
+  \mathbb{C}^4}, \label{eq:dirac-reg}
+\end{equation}
+where the constant, in the inequality, depends only on $m_f$.
+
+\
+
+In order to describe the Yukawa$_2$ model we need also to introduce an
+Euclidean boson field $\varphi$ of mass $m_b > 0$: it is the centered Gaussian
+field on $\mathbb{R}^2$ with covariance $(m^2_b - \Delta)^{- 1}$ where $m_b >
+0$ is looked upon as a fixed parameter and $\Delta$ is the Laplacian on
+$\mathbb{R}^2$. We can realize $\varphi$ as the canonical multiplication
+operator on the Hilbert space $\mathcal{H}_{\varphi} = L^2 \left(
+\mathcal{C}^{- \kappa}_{\text{loc}} (\mathbb{R}^2), \nu \right)$ where $\nu$
+is the centered Gaussian measure on $\mathcal{C}^{- \kappa}_{\text{loc}}
+(\mathbb{R}^2)$ (the local version of the $\mathcal{C}^{- \kappa}$ Besov
+space) with covariance $(m^2_b - \Delta)^{- 1}$ and $\kappa > 0$ is any small
+positive quantity. We shall denote by $\omega_{\varphi}$ the state associated
+with $\nu$ and $\mathcal{C}^{- \kappa}_{\text{loc}} (\mathbb{R}^2)$.
+
+\
+
+In addition, large scale and small scale cutoffs are introduced as follows.
+Fix a smooth positive functions $h \in C^{\infty} (\mathbb{R}^2)$ with compact
+support and let $\mathfrak{a}$ be a regular enough (see below for the precise
+regularity) continuous function with compact support such that $\mathfrak{a}
+(0) = 1$. Take $\varepsilon > 0$ and let $\mathfrak{a}_{\varepsilon} (x) =
+\mathfrak{a} (x / \varepsilon) \varepsilon^{- 2}$. Then we define new
+Grassmann variables
+\[ \tilde{\psi}_{\varepsilon} (x) \assign \tilde{\psi}
+   (\mathfrak{a}_{\varepsilon} (\cdot - x)), \qquad x \in \mathbb{R}^2 . \]
+Then $\tilde{\psi}_{\varepsilon} \in \mathcal{G}^s (\mathcal{S} (\mathbb{R}^2)
+\otimes \mathbb{C}^4)$ for some $s > 0$ (in general depending on the
+regularity of $\mathfrak{a}$ see below).
+
+\
+
+Following the argument of Section~6 of~{\cite{osterwalder_euclidean_1973-2}}
+we define the Euclidean Yukawa$_2$ model as follows.
+
+\begin{definition}
+  \label{def:yukawa2}The approximate fermionic Schwinger functions
+  $(\rho^n_{\varepsilon, h})_n$ of the Yukawa$_2$ model on $\mathbb{R}^2$ with
+  infrared (IR) cutoff $h$ and ultraviolet (UV) fermion cutoff $\varepsilon$
+  are given by the Euclidean averages
+  \begin{equation}
+    \rho^n_{\varepsilon, h} (f_1, \ldots, f_n) = \frac{\omega \otimes
+    \omega_{\varphi} (\tilde{\psi}_{\varepsilon} (f_1) \cdots
+    \tilde{\psi}_{\varepsilon} (f_n) e^{- V_{\varepsilon, h}
+    (\varphi)})}{\omega \otimes \omega_{\varphi} (e^{- V_{\varepsilon}})}
+    \label{eq:euclidean-yukawa-main}
+  \end{equation}
+  with potential given by the unbounded (non-self-adjoint) operator on
+  $\mathcal{H} \otimes \mathcal{H}_{\varphi}$, where $\mathcal{H}$ is the
+  fermionic Hilbert space,
+  \begin{equation}
+    V_{\varepsilon, h} (\varphi) = \lambda \int_{\mathbb{R}^2} \mathd x h (x)
+    (\bar{\psi}_{\varepsilon} (x) \cdot \psi_{\varepsilon} (x)) \varphi (x),
+    \label{eq:yukawa-potential-boson}
+  \end{equation}
+  and $\lambda \in \mathbb{R}$ is a coupling constant.
+\end{definition}
+
+The potential $V_{\varepsilon, h} (\varphi)$ can be expressed in terms of the
+fields $\tilde{\psi}_{\varepsilon}$ as follows
+\[ V_{\varepsilon, h} (\varphi) = \frac{\lambda}{2} \int_{\mathbb{R}^2} \mathd
+   x h (x) (\tilde{\psi}_{\varepsilon} (x) \cdot J
+   \widetilde{\psi}_{\varepsilon} (x)) \varphi (x), \]
+where
+\[ J \assign \left( \begin{array}{cc}
+     0 & -\mathbbm{1}_{}\\
+     \mathbbm{1} & 0
+   \end{array} \right) . \]
+$\text{}$
+
+Note that there is no difficulty in making sense
+of~{\eqref{eq:euclidean-yukawa-main}}, due to the following observations (see
+also~{\cite{osterwalder_euclidean_1973-2}}). The map $x \in \mathbb{R}^2
+\mapsto \tilde{\psi}_{\varepsilon} (x) \in \mathcal{A}= \mathcal{L}
+(\mathcal{H})$ is $\mathcal{C}^s$ due to the presence of the regularization
+$\varepsilon > 0$ and the regularity of the Euclidean field $\tilde{\psi}$
+given in~{\eqref{eq:dirac-reg}}. The massive Gaussian free field $\varphi$ has
+(local) regularity $\mathcal{C}^{- \kappa}_{\tmop{loc}}$ for arbitrarily small
+$\kappa$, therefore, taking $s > \kappa$, by a standard Besov estimates for
+Banach valued functions, we have, for any \tmtextit{fixed} $\varphi \in
+\mathcal{C}^{- \kappa}_{\tmop{loc}} (\mathbb{R}^2)$
+\[ \| V_{\varepsilon, h} (\varphi) \|_{\mathcal{A}} \lesssim \lambda \|
+   \tilde{\psi}_{\varepsilon} \|^2_{\mathcal{C}^{\kappa} (\mathcal{A})} \| h
+   \varphi \|_{B^{- \kappa}_{1, 1} (\mathbb{R}^2)} \lesssim \lambda \| h
+   \varphi \|_{\mathcal{C}^{- \kappa} (\mathbb{R}^2)} . \]
+It is also not difficult to see that the map $V_{\varepsilon, h} :
+\mathcal{C}^{- \kappa} \rightarrow \mathcal{A}$ given by $V_{\varepsilon, h} :
+\varphi \mapsto V_{\varepsilon, h} (\varphi)$ is linear and continuous in
+$\varphi$, therefore measurable and that
+\[ \omega \otimes \omega_{\varphi} (\tilde{\psi} (f_1) \cdots \tilde{\psi}
+   (f_n) e^{- V_{\varepsilon, h} (\varphi)}) = \omega (\tilde{\psi} (f_1)
+   \cdots \tilde{\psi} (f_n) \omega_{\varphi} (e^{- V_{\varepsilon, h}
+   (\varphi)})) \]
+e.g. by proving this first for a piecewise approximations of $\varphi$ and
+then taking the limit. Moreover we have (by the properties of the Bochner
+integral)
+\[ \| \omega_{\varphi} (e^{- V_{\varepsilon, h} (\varphi)}) \|_{\mathcal{A}}
+   \leqslant \omega_{\varphi} (\exp (C | \lambda | \| h \varphi
+   \|_{\mathcal{C}^{- \kappa}})) < \infty, \]
+for all $\lambda \in \mathbb{R}$. We conclude that the averages
+in~{\eqref{eq:euclidean-yukawa-main}} are well defined since
+\[ | (\omega \otimes \omega_{\varphi}) (\tilde{\psi} (f_1) \cdots
+   \tilde{\psi} (f_n) e^{- V_{\varepsilon, h}}) | \leqslant \| \tilde{\psi}
+   (f_1) \cdots \tilde{\psi} (f_n) \omega_{\varphi} (e^{- V_{\varepsilon, h}
+   (\varphi)}) \|_{\mathcal{A}} < \infty . \]
+By expanding the quantity $\omega_{\varphi} (e^{- V_{\varepsilon, h}
+(\varphi)}) \in \mathcal{A}$ in power series and integrating away the Gaussian
+field we obtain
+\[ \omega_{\varphi} (e^{- V_{\varepsilon, h} (\varphi)}) =
+   e^{\mathcal{V}_{\varepsilon, h}}, \]
+with a purely fermionic potential given by
+\[ \mathcal{V}_{\varepsilon, h} (\tilde{\psi}_{\varepsilon}) = \lambda^2
+   \int_{(\mathbb{R}^2)^2} (h \bar{\psi}_{\varepsilon} \cdot
+   \psi_{\varepsilon}) (x) \mathcal{G} (x - y) (h \bar{\psi}_{\varepsilon}
+   \cdot \psi_{\varepsilon}) (y) \mathd x \mathd y. \]
+Here $\mathcal{G} = (m^2_b - \Delta)^{- 1}$ is the Green function of the
+operator $(m^2_b - \Delta)$ and $m_b$ is the boson mass. This gives us the
+purely fermionic representation of the Schwinger functions
+{\eqref{eq:euclidean-yukawa-main}} given by:
+\begin{equation}
+  \rho^n_{\varepsilon, h} (f_1, \ldots, f_n) = \frac{\omega (\tilde{\psi}
+  (f_1) \cdots \tilde{\psi} (f_n) e^{\mathcal{V}_{\varepsilon, h}})}{\omega
+  (e^{\mathcal{V}_{\varepsilon, h}})} . \label{eq:euclidean-yukawa-fermion}
+\end{equation}
+Perturbation theory suggests that the boson field requires a mass
+renormalization $a_{\varepsilon}$ which depends on the fermion cutoff. In
+theory one would need to modify the Gaussian field covariance to include a
+mass renormalization and let $\varphi$ have covariance $(m^2_b - \Delta +
+a_{\varepsilon})^{- 1}$. However in this paper we will not discuss the removal
+of the UV cutoff and keep $\varepsilon > 0$ fixed. Therefore, for simplicity,
+we ignore this mass renormalization.
+
+\subsection{Stochastic quantization}
+
+The Grassmann SPDEs associated to the measure $\tilde{\omega} (\cdot) = \omega
+(\cdot e^{\mathcal{V}_{\varepsilon, h}})$ is formally
+\begin{equation}
+  \mathd \tilde{\Psi}_{\varepsilon, t}^h = ((m_f^2 - \Delta)
+  \tilde{\Psi}_{\epsilon, t}^h + \lambda^2 F_{\varepsilon, h, Y}
+  (\tilde{\Psi}_{\varepsilon, t}^h)) \mathd t + \mathd \tilde{B}_{\varepsilon,
+  t} \label{eq:stochasticquantization}
+\end{equation}
+where $\tilde{\Psi}_{\varepsilon, t}^h = (\Psi_{\varepsilon, t}^h,
+\bar{\Psi}_{\varepsilon, t}^h)$,
+\[ F_{\varepsilon, h, Y} (\tilde{\Psi}_{\varepsilon, t}^h) = C_f \left(
+   \begin{array}{l}
+     \mathfrak{a}_{\varepsilon}^{\asterisk 2} \ast \left( h
+     \bar{\Psi}_{\varepsilon, t}^h \int \mathcal{G} (y - \cdot) h (y)
+     \Psi_{\varepsilon, t}^h (y) \bar{\Psi}_{\varepsilon, t}^h (y) \mathd y
+     \right)\\
+     \mathfrak{a}_{\varepsilon}^{\asterisk 2} \ast \left( h \Psi_{\varepsilon,
+     t}^h \int \mathcal{G} (y - \cdot) h (y) \Psi_{\varepsilon, t}^h (y)
+     \bar{\Psi}_{\varepsilon, t}^h (y) \mathd y \right)
+   \end{array} \right), \]
+with
+\[ C_f = \left(\begin{array}{cc}
+     0 & \left( \not{\nabla} + m_f \right)\\
+     - \left( \not{\nabla} + m_f \right)^{\Tau} & 0
+   \end{array}\right), \]
+and where $\mathfrak{a}_{\varepsilon} (x) = \varepsilon^{- 2} \mathfrak{a}
+\left( \frac{x}{\varepsilon} \right)$, $\varepsilon > 0$, $\mathfrak{a} :
+\mathbb{R}^2 \rightarrow \mathbb{R}^2$ is the regular enough function with
+compact support (see below for the more precise requirements) considered
+before, $\mathfrak{a}_{\varepsilon}^{\asterisk 2} = \mathfrak{a}_{\varepsilon}
+\asterisk \mathfrak{a}_{\varepsilon}$, $h$ is a smooth function (in the
+beginning with compact support, later on we will consider $h \equiv 1$).
+
+The Brownian motion $\tilde{B}$ is described as follows. Let $\tilde{\Xi}$ be
+the white noise on the pre-Hilbert space $L^2 (\mathbb{R}_+) \otimes
+\mathcal{S} (\mathbb{R}^2) \otimes \mathbb{C}^4 \subseteq L^2 (\mathbb{R}_+)
+\otimes B_{2, 2}^{- 1 / 2} (\mathbb{R}^2) \otimes \mathbb{C}^4$ equipped with
+the scalar product
+\begin{equation}
+  ((f, g)) = ((m_f^2 - \Delta)^{- 1 / 4} f, (m_f^2 - \Delta)^{- 1 / 4} g)_{L^2
+  (\mathbb{R}_+ \times \mathbb{R}^2) \otimes \mathbb{C}^4}
+  \label{eq:scalarproduct} \qquad f, g \in L^2 (\mathbb{R}_+) \otimes
+  \mathcal{S} (\mathbb{R}^2) \otimes \mathbb{C}^4,
+\end{equation}
+and having bounded covariance
+\[ \tilde{C}_f = (m^2_f - \Delta)^{- 1 / 2} C_f . \]
+The (two-sided) Brownian motion $\tilde{B}$ on $\mathcal{S} (\mathbb{R}^2)
+\otimes \mathbb{C}^4$ is defined by
+\[ \tilde{B}_t (v) = \Xi ((\mathbbm{1}_{t > 0} -\mathbbm{1}_{t < 0}) \otimes v),
+   \qquad t \in \mathbb{R}, v \in \mathcal{S} (\mathbb{R}^2) \otimes
+   \mathbb{C}^4 . \]
+We set $\tilde{B}_{\varepsilon} = \mathfrak{a}_{\varepsilon} \asterisk
+\tilde{B}$.
+
+\
+
+According to Definition~\ref{definition_F2} the stationary version of
+equation~{\eqref{eq:stochasticquantization}} is the solution to the following
+integral problem
+\begin{equation}
+  \tilde{\Psi}^{h, s}_{\varepsilon, t} (v) = \lambda^2 \int_{- \infty}^t
+  F_{\varepsilon, h, Y} (\tilde{\Psi}_{\varepsilon, \tau}^{h, s}) (e^{A (t -
+  \tau)} v) \mathd \tau + \tilde{B}^A_t (v) - \tilde{B}^A_0 (e^{A t} v),
+  \label{eq:yukawas} \qquad t \in \mathbb{R}, v \in \mathbb{C}^4,
+\end{equation}
+where we take $A = \Delta - m_f^2$ and
+\[ \tilde{B}^A_t (v) = \Xi (\mathbbm{1}_{[0, t]} \otimes e^{A t} v), \qquad t
+   \in \mathbb{R}, v \in \mathcal{S} (\mathbb{R}^2) \otimes \mathbb{C}^4 . \]
+
+
+From now on we will make the following assumption. We fix $\delta > 0$ and
+$\gamma > 0$, let \ $\alpha = \gamma + 1 / 2 + 2 \delta$ and take
+$\mathfrak{a} \in B^{\alpha}_{1, \infty} (\mathbb{R}^2) \cap
+\mathcal{C}^{\alpha} (\mathbb{R}^2)$. Again we recall that $\varepsilon > 0$
+will be fixed in all our study.
+
+\
+
+The main theorem of this section concerns the construction of a stochastic
+quantization for~{\eqref{eq:euclidean-yukawa-fermion}} and the removal of the
+IR cutoff $h$ for $\lambda$ small.
+
+\begin{theorem}
+  \label{theorem_main1}If $| \lambda |$ is small enough and $h$ is a smooth
+  function with compact support, then, for any $k \geqslant 1$, $f_1, \ldots,
+  f_k \in C^{\infty}_c (\mathbb{R}^2) \otimes \mathbb{C}^4$ and $t \in
+  \mathbb{R}$, we have
+  \begin{equation}
+    \frac{\omega (\tilde{\psi} (f_1) \cdots \tilde{\psi} (f_k)
+    e^{\mathcal{V}_{\varepsilon, h}})}{\omega (e^{\mathcal{V}_{\varepsilon,
+    h}})} = \omega (\tilde{\Psi}_{\varepsilon, t}^{h, s} (f_1) \cdots
+    \tilde{\Psi}_{\varepsilon, t}^{h, s} (f_k)) .
+  \end{equation}
+\end{theorem}
+
+We are also able to obtain the following result on the removal of the IR
+cutoff.
+
+\begin{theorem}
+  \label{theorem_main2}If $| \lambda |$ is small enough and if we denote by
+  $\tilde{\Psi}_{\varepsilon, t}^s$ the solution to
+  equation~{\eqref{eq:yukawas}} with $h \equiv 1$, we have that for any $f_1,
+  \ldots, f_k \in C^{\infty}_c (\mathbb{R}^2) \otimes \mathbb{C}^4$ and for
+  any $t \in \mathbb{R}$
+  \begin{equation}
+    \lim_{h_n \rightarrow 1} \frac{\omega \left( \tilde{\psi} (f_1) \cdots
+    \tilde{\psi} (f_k) e^{\mathcal{V}_{\varepsilon, h_n}} \right)}{\omega
+    \left( e^{\mathcal{V}_{\varepsilon, h_n}} \right)} = \omega
+    (\tilde{\Psi}_{\varepsilon, t}^s (f_1) \cdots \tilde{\Psi}_{\varepsilon,
+    t}^s (f_k)) .
+  \end{equation}
+  where $(h_n)_{n \geqslant 1}$ is any sequence of smooth functions with
+  compact support converging to $1$ uniformly in $\mathcal{C}^{\gamma +
+  \delta}$ (see below the definition of $\delta$) on compact subsets of
+  $\mathbb{R}^2$.
+\end{theorem}
+
+The rest of the section focus on the proof of these two theorems. For the
+moment we record here two technical lemmas.
+
+\begin{lemma}
+  \label{lemma_noise}We have $\tilde{B}^A_{\varepsilon} \in
+  \mathcal{C}^{\delta} (\mathbb{R}, \mathcal{C}^{\gamma} (\mathbb{R}^2,
+  \mathcal{A}) \otimes \mathbb{C}^4)$ and
+  \[ \sup_{t \in \mathbb{R}} \| \tilde{B}^A_{\varepsilon, t}
+     \|_{\mathcal{C}^{\gamma + 2 \delta} (\mathbb{R}^2, \mathcal{A}) \otimes
+     \mathbb{C}^4} < + \infty ._{} \]
+\end{lemma}
+
+\begin{proof}
+  It is sufficient to prove the lemma for $\varepsilon = 0$ and $\gamma = -
+  \frac{1}{2} - 2 \delta$, since for $\varepsilon > 0$ we have
+  $\mathfrak{a}_{\varepsilon} \asterisk : \mathcal{C}^s \rightarrow
+  \mathcal{C}^{s + \alpha}$ by Theorem~\ref{theorem_convolution} in Appendix
+  \ref{appendix_Besov}. By definition of Grassmann Gaussian random variables,
+  if $K_i \in \mathcal{S} (\mathbb{R}^2)$ is the function corresponding to the
+  Littlewood--Paley block $\Delta_i$ (see Appendix \ref{appendix_Besov} for
+  the definition), we have
+  \[ \sup_{x \in \mathbb{R}^2} \| \Delta_i \tilde{B}_{0, t} - \Delta_i
+     \tilde{B}_{0, s} \|_{\mathcal{A} \otimes \mathbb{C}^4} \lesssim \left.
+     \left\| \int_{- \infty}^t e^{(\Delta - m_f^2) (t - \tau)} (- \Delta +
+     m^2)^{1 / 4} (K_i) \mathd \tau + \right. \right. \]
+  \[ \left. \left. - \int_{- \infty}^s e^{(\Delta - m_f^2) (s - \tau)} (m^2_f
+     - \Delta)^{1 / 4} (K_i) \mathd \tau \right\| \right._{L^2 (\mathbb{R}^2)}
+     \lesssim \]
+  \[ \lesssim \left\| \int_s^t e^{(\Delta + m_f^2) (t - \tau)} (m^2_f -
+     \Delta)^{1 / 4} (K_i) \mathd \tau \right\| + \| (e^{(\Delta - m_f^2) (t -
+     s)} - 1) (m^2_f - \Delta)^{1 / 4} (K_i) \|_{L^2} \lesssim \]
+  \[ \lesssim \left( \int_{\mathbb{R}^2} \left( \phi_i (p) \left( \int_0^{t -
+     s} | p |^2 e^{- k (| p |^2 + m^2_f)} \mathd k \right) \right)^2 | p |
+     \mathd p \right) \lesssim \]
+  \[ \lesssim \left( \int_{2^{i - 1} \lesssim | p | \lesssim 2^i} \left(
+     \int_0^{t - s} \frac{\mathd k}{k^{(1 - \delta)}} \right)^2 | p |^{1 + 4
+     \delta} \mathd p \right)^{1 / 2} \lesssim 2^{i \left( \frac{1}{2} + 2
+     \delta \right)} | t - s |^{\delta} . \]
+  From this the thesis follows from the definition of the norm of the Besov
+  space $\mathcal{C}^{\gamma} (\mathbb{R}^2, \mathcal{A})$.
+\end{proof}
+
+\begin{lemma}
+  \label{lemma_drift}For any $s > 0$, the function $F_{\varepsilon, h, Y}$ is
+  well defined on $\mathcal{C}^s (\mathbb{R}^d, \mathcal{A})$ into itself, it
+  satisfies Definition~\ref{definition-F1} and
+  Definition~\ref{definition_drift}. Furthermore the functions $f_F, g_F$ in
+  equations~{\eqref{eq:bound1}} and~{\eqref{eq:bound2}} (of
+  Definition~\ref{definition_drift}) can be chosen to be independent of $h$
+  when $h \in \mathcal{C}^s$ has the norm bounded by some constant $C > 0.$
+\end{lemma}
+
+\begin{proof}
+  Since for $s > 0$ we have $\mathcal{C}^s (\mathbb{R}^d, \mathcal{A}) \subset
+  C^0_b (\mathbb{R}^d, \mathcal{A})$ we have that the function
+  \[ x \mapsto \int \mathcal{G} (y - x) h (y) \Psi_{\varepsilon, t}^h (y)
+     \bar{\Psi}_{\varepsilon, t}^h (y) \mathd y \]
+  is well defined and continuous. Since $\mathcal{C}^s (\mathbb{R}^d,
+  \mathcal{A})$ is an algebra, this proves that $F_{\varepsilon, h, Y}$ is
+  well defined, continuous and locally bounded. This proves that
+  $F_{\varepsilon, h, Y}$ satisfies Definition~\ref{definition_drift}. The
+  bounds required on $F_{\varepsilon, h, Y}$ are uniform in $h$ indeed
+  \[ \| F_{\varepsilon, h, Y} \|_{\mathcal{C}^s} \lesssim \| \tilde{\Psi}^h
+     \|_{\mathcal{C}^s} \left\| \int \mathcal{G} (x - y) h (y) \Psi^h (y)
+     \bar{\Psi}^h (y) \mathd y \right\|_{\mathcal{C}^s} \lesssim \|
+     \tilde{\Psi}^h \|_{\mathcal{C}^s} \| \Psi^h \bar{\Psi}^h
+     \|_{\mathcal{C}^s} \lesssim \| \tilde{\Psi}^h \|_{\mathcal{C}^s}^3 . \]
+  Since $F_{\varepsilon, h, Y}$ is of third degree, we need only to prove that
+  it can be approximated with finite dimensional operators. This can be done
+  using the fact that when $s > 0$, $\tilde{\Psi}_{\varepsilon, t}$ is
+  H{\"o}lder continuous in space and that $\mathcal{G}$ decreases
+  exponentially at infinity. This means that if $\mathcal{P}_n$ is a sequence
+  of increasing (finite) partition of the plane we can approximate the
+  integral by the sum
+  \[ S_n = \sum_{D_i \in \mathcal{P}_n} h (x - x_i) \Psi^h (x - x_i)
+     \bar{\Psi}^h (x - x_i) \int_{D_i} \mathcal{G} (y) \mathd y, \]
+  where $x_i \in D_i$ is any point in $D_i$. If we choose the sequence of
+  partitions $\mathcal{P}_n$ in such a way that $\lim_{n \rightarrow + \infty}
+  \left\{ \sup_i \left( \int_{D_i} \mathcal{G} (y) \mathd y \right) \right\} =
+  0$, we have that
+  \[ S_n \rightarrow \int \mathcal{G} (y - x) h (y) \Psi_{\varepsilon, t}^h
+     (y) \bar{\Psi}_{\varepsilon, t}^h (y) \mathd y \]
+  in $\mathcal{C}^{s'} (\mathbb{R}^d, \mathcal{A})$, where $s' < s$.
+\end{proof}
+
+Using the previous two lemmas we can prove the following theorem.
+
+\begin{theorem}
+  \label{theorem_main3}Equation~{\eqref{eq:stochasticquantization}} admits a
+  unique (local in time) solution, starting from $0$ in $\mathcal{G}^{\gamma}
+  (V)$ ($\gamma$ being defined before Theorem~\ref{theorem_main1} and
+  Theorem~\ref{theorem_main2}). Furthermore if $| \lambda |$ is small enough,
+  there exists a unique solution to the stationary
+  equation~{\eqref{eq:yukawas}} (associated with
+  {\eqref{eq:stochasticquantization}}) which is uniformly bounded in
+  $\mathcal{C}^{\gamma} (\mathbb{R}^d, \mathcal{A}) \otimes \mathbb{C}^4$ by
+  some constant $K > 0$ (that can be chosen independent of $h$ when $\| h
+  \|_{\mathcal{C}^{\gamma}} < C$ for some $C > 0$).
+\end{theorem}
+
+\begin{proof}
+  The proof is based on Theorem~\ref{theorem_existence2} and
+  Theorem~\ref{theorem_longtime2} whose hypotheses are satisfied in this
+  setting because of Lemma~\ref{lemma_noise} and Lemma~\ref{lemma_drift}.
+\end{proof}
+
+\subsection{Finite dimensional approximations in finite volume}
+
+The first step in order to prove Theorem~\ref{theorem_main1} and
+Theorem~\ref{theorem_main2} is to introduce finite dimensional approximations
+of the Yukawa model. Consider the torus $\mathbb{T}_R^2 =\mathbb{R}^2
+\backslash (2 \pi L\mathbb{Z})^2$ for $R > 0$ and the periodic version
+$\tilde{\psi}_R$ of the Fermion field $\tilde{\psi}$ defined by
+\[ \tilde{\psi}_R (f) \assign \sum_{n \in \mathbb{Z}^2} \tilde{\psi} (f (\cdot
+   - 2 \pi R n)), \]
+for all $f \in \mathcal{S} (\mathbb{R}^2) \otimes \mathbb{C}^4$. Then letting
+$\tilde{\psi}_{R, \varepsilon} (x) \assign \tilde{\psi}_R
+(\mathfrak{a}_{\varepsilon} (\cdot - x))$ we have that the function $x \in
+\mathbb{T}^2_R \mapsto \tilde{\psi}_{R, \varepsilon} (x)$ is well defined and
+$\mathcal{C}^{\gamma + 2 \delta} (\mathbb{T}^2, \mathcal{A})$. Moreover
+$\tilde{\psi}_{R, \varepsilon} (x)$ is uniformly bounded in $\mathcal{A} =
+\mathcal{L} (\mathcal{H})$ and
+\[ \| \tilde{\psi}_{R, \varepsilon} (x) - \tilde{\psi}_{\varepsilon} (x)
+   \|_{\mathcal{C}^{\gamma + 2 \delta} (K, \mathcal{A} \otimes \mathbb{C}^4)}
+   \rightarrow 0, \]
+uniformly on compacts as $R \rightarrow \infty$. As a consequence we have
+\begin{equation}
+  \frac{\omega (\tilde{\psi} (f_1) \cdots \tilde{\psi} (f_n)
+  e^{\mathcal{V}_{\varepsilon, h}})}{\omega (e^{\mathcal{V}_{\varepsilon,
+  h}})} = \lim_{R \rightarrow \infty} \frac{\omega (\tilde{\psi}_R (f_1)
+  \cdots \tilde{\psi}_R (f_n) e^{\mathcal{V}_{R, \varepsilon, h}})}{\omega
+  (e^{\mathcal{V}_{R, \varepsilon, h}})}
+  \label{eq:euclidean-yukawa-fermion-periodic}
+\end{equation}
+with
+\[ \mathcal{V}_{R, \varepsilon, h} \assign \lambda^2 \int_{\mathbb{R}^4}
+   \mathd x (h \bar{\psi}_{R, \varepsilon} \cdot \psi_{R, \varepsilon}) (x)
+   \mathcal{G} (x - y) (h \bar{\psi}_{R, \varepsilon} \cdot \psi_{R,
+   \varepsilon}) (y) \mathd x \mathd y, \]
+for all compactly supported $f_1, \ldots, f_n, h \in \mathcal{S}
+(\mathbb{R}^2)$.
+
+\
+
+Let now $(e_k)_{k \in \mathbb{Z}^2}$ be the orthonormal Fourier basis of (the
+complex) $L^2 (\mathbb{T}_R^2)$ and $P_N : L^2 (\mathbb{T}_R^2) \rightarrow
+L^2 (\mathbb{T}_R^2)$ the orthogonal projection to the closed subspace
+generated by $\{ e_k : k \in \mathbb{Z}^2, | k | \leqslant N \}$. Let
+$\tilde{\psi}_{N, R, \varepsilon} = P_N \tilde{\psi}_{R, \varepsilon}$ and
+observe again that $\| \tilde{\psi}_{N, R, \varepsilon} (x) - \tilde{\psi}_{R,
+\varepsilon} (x) \|_{\mathcal{C}^{\alpha} (\mathbb{R}^2)} \rightarrow 0$ as $N
+\rightarrow \infty$, for any $\alpha > 0$. \ Defining
+\[ \mathcal{V}_{N, R, \varepsilon, h} \assign \lambda^2 \int_{\mathbb{R}^4} (h
+   \bar{\psi}_{N, R, \varepsilon} \cdot \psi_{N, R, \varepsilon}) (x)
+   \mathcal{G}_{\varepsilon} (x - y) (h \bar{\psi}_{N, R, \varepsilon} \cdot
+   \psi_{N, R, \varepsilon}) (y) \mathd x \mathd y \]
+and we easily conclude that
+\begin{equation}
+  \frac{\omega (\tilde{\psi} (f_1) \cdots \tilde{\psi} (f_n)
+  e^{\mathcal{V}_{\varepsilon, h}})}{\omega (e^{\mathcal{V}_{\varepsilon,
+  h}})} = \lim_{R \rightarrow \infty} \lim_{N \rightarrow \infty} \frac{\omega
+  (\tilde{\psi}_{N, R} (f_1) \cdots \tilde{\psi}_{N, R} (f_n)
+  e^{\mathcal{V}_{N, R, \varepsilon, h}})}{\omega (e^{\mathcal{V}_{N, R,
+  \varepsilon, h}})} \label{eq:euclidean-yukawa-fermion-periodic-galerkin} .
+\end{equation}
+Now consider the finite set $\Lambda_N = \{ k \in \mathbb{Z}^2 : | k |
+\leqslant N \}$ and let
+\[ \tilde{\theta} (k) \assign \int_{\mathbb{T}_R^2} \overline{e_k (x)}
+   \tilde{\psi}_{N, R} (x) \mathd x, \qquad k \in \Lambda_N . \]
+We can show easily that $(\tilde{\theta} (k))_{k \in \Lambda_N}$ is a
+Grassmann Gaussian vector with correlation given by
+\begin{equation}
+  \omega (\tilde{\theta}_{\alpha} (k) \tilde{\theta}_{\beta} (\ell)) =
+  \delta_{k + \ell = 0} \left(\begin{array}{cc}
+    0 & \left( i \not{k} + m_f \right)^{- 1}\\
+    - \left( i \not{k} + m_f \right)^{- 1\mathrm{T}} & 0
+  \end{array}\right)_{\alpha, \beta}
+  \label{eq:free-corrrelation-fourier-galerkin}
+\end{equation}
+where $\alpha, \beta = 1, \ldots, 4$ denote the canonical coordinates in
+$\mathbb{C}^4$ and $k, \ell \in \Lambda_N$. Moreover
+\[ \tilde{\psi}_{N, R} (x) = \sum_{k \in \Lambda_N} e_k (x) \tilde{\theta}
+   (k), \qquad x \in \mathbb{T}^2_R \]
+and $\tilde{\psi}_{N, R, \varepsilon} = \mathfrak{a}_{\varepsilon}
+\ast_{\mathbb{T}_R^2} \tilde{\psi}_{N, R}$ where the convolution is done on
+$\mathbb{T}^2_R$ as indicated.
+
+\
+
+At this point we have reduced via two subsequent approximations the number of
+degrees of freedom to a finite amount, described by the Grassmann random
+variable $\tilde{\theta} \in \mathcal{G} (\Lambda_N \otimes \mathbb{C}^4)$.
+
+\
+
+We introduce the following equation
+\begin{equation}
+  \tilde{\Psi}^{h_R, s}_{\varepsilon, N, R, t} (v) = \lambda^2 \int_{-
+  \infty}^t P_N (F_{\varepsilon, h_R, Y} (P_N (\tilde{\Psi}_{\varepsilon, N,
+  R, \tau}^{h_R, s}))) (e^{(\Delta - m^2_f) (t - \tau)} v) \mathd \tau +
+  \tilde{B}_{\varepsilon, R, t}^A (v) \label{eq:finitedimensional}
+\end{equation}
+where $(\tilde{B}_{\varepsilon, R, t}^A)_{t \in \mathbb{R}}$ is the
+Ornstein--Uhlenbeck motion on $\mathbb{T}^2_R$ obtained from
+$(\tilde{B}_{\varepsilon, t}^A)_{t \in \mathbb{R}}$ via the restriction from
+$\mathbb{R}^2$ to $\mathbb{T}^2$ of the periodicization
+\[ \tilde{B}_{\varepsilon, R, t}^A (f) \assign \sum_{n \in \mathbb{Z}^2}
+   \tilde{B}_{\varepsilon, t}^A (f (\cdot - 2 \pi R n)), \qquad f \in
+   \mathcal{S} (\mathbb{R}^2), \]
+and
+\[ h_R (z) \assign \sum_{n \in \mathbb{Z}^2} h (z - 2 \pi R n) . \]
+Obviously we have that
+\[ (I - P_N) \tilde{\Psi}_{\varepsilon, N, R, t}^{h_R, s} = (I - P_N)
+   \tilde{B}^A_{\varepsilon, R, t} . \]
+This implies that $P_N (\tilde{\Psi}_{\varepsilon, N, R, t}^{h_R, s})$ solves
+a finite dimensional Grassmann SDE. Furthermore the drifts $P_N
+(F_{\varepsilon, h_R, Y} (P_N (\tilde{\Psi}_{\varepsilon, N, R, t}^{h_R,
+s})))$ can be seen as the differentials of the function
+\[ U (P_N (\tilde{\Psi})) = \int_{\mathbb{T}_L^4} h_L (x) h_L (y) (P_N (\Psi)
+   P_N (\bar{\Psi})) (x) \mathcal{G} (x - y) (P_N (\Psi) P_N (\bar{\Psi})) (y)
+   \mathd x \mathd y. \]
+times the matrix $P_N \mathfrak{a}_{\varepsilon}^{\asterisk 2} \asterisk C_f$
+(that is the covariance of the finite dimensional Brownian motion $P_N
+(\tilde{B}_{\varepsilon, R, t})$). This implies the following key lemma.
+
+\begin{lemma}
+  \label{lemma_finite1}For any $k \geqslant 1$ and $f_1, \ldots, f_k$ some
+  linear combination of $e_1, \ldots, e_N$ then, for $| \lambda |$ small
+  enough (that can be chosen in a way independent of $h$) we have for any $t
+  \in \mathbb{R}$
+  \[ \frac{\omega (\tilde{\psi}_{N, R} (f_1) \cdots \tilde{\psi}_{N, R} (f_k)
+     e^{\mathcal{V}_{N, R, \varepsilon, h}})}{\omega (e^{\mathcal{V}_{N, R,
+     \varepsilon, h}})} = \omega (\tilde{\Psi}_{\varepsilon, N, R, t}^{h_R, s}
+     (f_1) \cdots \tilde{\Psi}_{\varepsilon, N, R, t}^{h_R, s} (f_k)) . \]
+  
+\end{lemma}
+
+\begin{proof}
+  The proof is based on the fact that for any linear combination $f_i$ of
+  $e_1, \ldots, e_N$ we have $\tilde{\Psi}_{\varepsilon, N, R, + \infty}^{h_L,
+  s} (f_i) = P_N (\tilde{\Psi}_{\varepsilon, N, R, + \infty}^{h_R, s}) (f_i)$.
+  Thus the thesis follows from Theorem~\ref{theorem_invariant2} and Remark
+  \ref{remark_invariant2} by noting that $\mathcal{V}_{N, R, \varepsilon, h}
+  (\tilde{\psi}) = \lambda^2 U (\tilde{\psi})$.
+\end{proof}
+
+\subsection{The infinite dimensional equation in finite volume}
+
+Consider the equation
+\begin{equation}
+  \tilde{\Psi}_{\varepsilon, R, t}^{h_R, s} (v) = \lambda^2 \int_{- \infty}^t
+  F_{\varepsilon, h_R, Y} (\tilde{\Psi}_{\varepsilon, R, \tau}^{h_R, s})
+  (e^{(\Delta - m^2_f)} v) \mathd t + \tilde{B}^A_{\varepsilon, R, t}
+  \label{eq:infinite1} .
+\end{equation}
+This is a modification of {\eqref{eq:finitedimensional}} where the finite
+dimensional projections $P_N$ are removed from the non-linearity
+$F_{\varepsilon, h_R, Y}$.
+
+\begin{remark}
+  Lemma~\ref{lemma_drift} holds for the drift of
+  equation~{\eqref{eq:infinite1}}, and it is easy to generalize
+  Lemma~\ref{lemma_noise} to the OU motion $(\tilde{B}_{\varepsilon, R,
+  t}^A)_{t \in \mathbb{R}}$. This implies that it is possible to generalize
+  Theorem~\ref{theorem_main3} to equation~{\eqref{eq:infinite1}} proving
+  existence and uniqueness of its global solution (when $| \lambda |$ is small
+  enough). Finally, it is important to note that the bound $K$ on the solution
+  $\tilde{\Psi}_{\varepsilon, R, t}^{h_R, s}$ to
+  equation~{\eqref{eq:infinite1}}, and the bounds on the constant $| \lambda
+  |$ can be chosen independent of $h$ when $\| h \|_{\mathcal{C}^{\gamma}} <
+  C$ for some constant $C > 0$.
+\end{remark}
+
+Equation~{\eqref{eq:infinite1}} is infinite dimensional and in order to
+generalize Lemma~\ref{lemma_finite1} we cannot apply directly the finite
+dimensional results contained in Theorem~\ref{theorem_invariant2} and
+Remark~\ref{remark_invariant2}. For this reason we need to prove that the
+solution to equation~{\eqref{eq:finitedimensional}} converges, as $N
+\rightarrow + \infty$, to the solution to equation~{\eqref{eq:infinite1}}.
+
+\begin{theorem}
+  \label{theorem_convergence1}For any $0 < q < \gamma$ we have that
+  $\tilde{\Psi}_{\varepsilon, N, R, t}^{h_R, s} \rightarrow
+  \tilde{\Psi}_{\varepsilon, R, t}^{h_R, s}$, in $\mathcal{G}^q (C^{\infty}
+  (\mathbb{T}^d) \otimes \mathbb{C}^4)$ when $N \rightarrow + \infty$ and
+  uniformly in $t$.
+\end{theorem}
+
+\begin{proof}
+  We have that the difference $\Psi_{\varepsilon, N, R, t}^{h_R, s} -
+  \Psi_{\varepsilon, R, t}^{h_R, s} $ satisfies the following inequality
+  \begin{eqnarray}
+    \frac{\| \tilde{\Psi}_{\varepsilon, N, R, t}^{h_R, s} -
+    \tilde{\Psi}_{\varepsilon, R, t}^{h_R, s} \|_{\mathcal{C}^q}}{\lambda^2} &
+    \lesssim & \int_{- \infty}^t e^{- \lambda_A (t - \tau)} \| (I - P_N)
+    F_{\varepsilon, h_R, Y} (P_N (\tilde{\Psi}_{\varepsilon, N, R, \tau}^{h_R,
+    s})) \|_{\mathcal{C}^q} \mathd \tau + \nonumber\\
+    &  & + \int_{- \infty}^t e^{- \lambda_A (t - \tau)} g_F (\max (\|
+    \tilde{\Psi}_{\varepsilon, N, R, \tau}^{h_R, s} \|_{\mathcal{C}^q}, \| P_N
+    \tilde{\Psi}_{\varepsilon, N, R, \tau}^{h_R, s} \|_{\mathcal{C}^q}))
+    \times \nonumber\\
+    &  & \times (\| \tilde{\Psi}_{\varepsilon, N, R, \tau}^{h_R, s} - P_N
+    \tilde{\Psi}_{\varepsilon, N, R, \tau}^{h_R, s} \|_{\mathcal{C}^q}) \mathd
+    \tau + \nonumber\\
+    &  & + \int_{- \infty}^t e^{- \lambda_A (t - \tau)} g_F (\max (\|
+    \tilde{\Psi}_{\varepsilon, N, R, \tau}^{h_R, s} \|_{\mathcal{C}^q}, \|
+    \tilde{\Psi}_{\varepsilon, R, \tau}^{h_R, s} \|_{\mathcal{C}^q})) \times
+    \nonumber\\
+    &  & \times \| \tilde{\Psi}_{\varepsilon, N, R, \tau}^{h_R, s} -
+    \tilde{\Psi}_{\varepsilon, R, \tau}^{h_R, s} \|_{\mathcal{C}^q} \mathd
+    \tau . \nonumber
+  \end{eqnarray}
+  Using Gronwall inequality we obtain that
+  \[ \| \tilde{\Psi}_{\varepsilon, N, R, t}^{h_R, s} -
+     \tilde{\Psi}_{\varepsilon, R, t}^{h_R, s} \|_{\mathcal{C}^q} \lesssim (\|
+     I - P_N \|_{\mathcal{L} (\mathcal{C}^{\gamma}, \mathcal{C}^q)}) \times \]
+  \[ \times \left( 1 + \int_{- \infty}^t \exp (- (\lambda_A - \lambda^2 g_F
+     (K)) (t - \tau)) \mathd \tau \right) . \]
+  Since $\lambda$ is small we have that $\lambda_A - \lambda^2 g_F (K) > 0$
+  (this is exactly the request~{\eqref{eq:contraction4}} for $| \lambda | <
+  \lambda_0 (K, L, F)$). This means that
+  \[ \| \tilde{\Psi}_{\varepsilon, N, R, t}^{h_R, s} -
+     \tilde{\Psi}_{\varepsilon, R, t}^{h_R, s} \|_{\mathcal{C}^q} \lesssim (\|
+     I - P_N \|_{\mathcal{L} (\mathcal{C}^{\gamma}, \mathcal{C}^q)}) . \]
+  On the other hand, since, \ $\gamma > q$ by assumption, we have $\| I - P_N
+  \|_{\mathcal{L} (\mathcal{C}^{\gamma}, \mathcal{C}^q)} \rightarrow 0$ as $N
+  \rightarrow + \infty$. The thesis is proven noting that the convergence
+  $\tilde{\Psi}_{\varepsilon, N, R, t}^{h_R, s} \rightarrow
+  \tilde{\Psi}_{\varepsilon, R, t}^{h_R, s}$ is uniform in $t$.
+\end{proof}
+
+An easy corollary of Theorem~\ref{theorem_convergence1},
+Lemma~\ref{lemma_finite1}, and the
+convergence~{\eqref{eq:euclidean-yukawa-fermion-periodic-galerkin}} is the
+following.
+
+\begin{corollary}
+  \label{corollary_formula}For $| \lambda |$ small enough (that can be chosen
+  independent of $h$ when $\| h \|_{\mathcal{C}^{\gamma}} < C$ where $C > 0$),
+  for any $k \geqslant 1$, $f_1, \ldots, f_k \in C^{\infty} (\mathbb{T}^d_L)
+  \otimes \mathbb{C}^4$ and any $t \in \mathbb{R}$ we have
+  \[ \frac{\omega (\tilde{\psi}_R (f_1) \cdots \tilde{\psi}_R (f_k)
+     e^{\mathcal{V}_{R, \varepsilon, h}})}{\omega (e^{\mathcal{V}_{R,
+     \varepsilon, h}})} = \omega (\tilde{\Psi}_{\varepsilon, R, t}^{h_R, s}
+     (f_1) \cdots \tilde{\Psi}_{\varepsilon, R, t}^{h_R, s} (f_k)) . \]
+\end{corollary}
+
+\subsection{The infinite volume limit}
+
+In order to tackle the infinite volume limit and prove
+Theorem~\ref{theorem_main1} and Theorem~\ref{theorem_main2} we have to
+introduce weighted Besov spaces (see the Appendix~\ref{appendix_Besov}
+and~{\cite{TriebelIII}} for the details). Let $\ell \in \mathbb{R}$ and
+consider $\rho_{\ell} : \mathbb{R}^d \rightarrow \mathbb{R}_+$ defined by
+$\rho_{\ell} (x) = (1 + | x |^2)^{(- \ell / 2)}$. Consider the following norm
+on $\mathcal{S}' (\mathbb{R}^d) \otimes \mathcal{A}$ (where as before
+$\mathcal{A} = \mathcal{L} (\mathcal{H})$ and $\mathcal{H}$ is the fermionic
+Hilbert space)
+\[ \| u \|_{\mathcal{C}^s_{\ell} (\mathbb{R}^d, \mathcal{A})} = \sup_{j
+   \geqslant - 1} \sup_{x \in \mathbb{R}^d} 2^{j s} \| \Delta_j u (x)
+   \rho_{\ell} (x) \|_{\mathcal{A}} . \]
+Define the space $\mathcal{C}^s_{\ell} (\mathbb{R}^d, \mathcal{A})$ as the
+subspace of $\mathcal{S}' (\mathbb{R}^d) \otimes \mathcal{A}$ where $\| \cdot
+\|_{\mathcal{C}^s_{\ell} (\mathbb{R}^d, \mathcal{A})}$ is finite. We define
+also $\mathcal{G}^s_{\ell} (V) = \mathcal{C}^s_{\ell} (\mathbb{R}^d,
+\mathcal{A}) \cap \mathcal{G}^{- \infty} (V)$ (recall that $V =\mathcal{S}
+(\mathbb{R}^d) \otimes \mathbb{R}^n$ or $\mathcal{S} (\mathbb{R}^d) \otimes
+\mathbb{C}^n$ for some $n \geqslant 1$) and the distance
+$d_{\mathcal{G}^s_{\ell} (V)} (X - Y) = \| X - Y \|_{\mathcal{C}^s_{\ell}
+(\mathbb{R}^d, \mathcal{A})}$.
+
+\begin{remark}
+  \label{remark_weight}It is important to note that, by
+  Theorem~\ref{theorem_weight},
+  \[ \sup_{x \in \mathbb{R}^d} \| \Delta_j u (x) \rho_{\ell} (x)
+     \|_{\mathcal{A}} \sim \sup_{x \in \mathbb{R}^d} \| \Delta_j (\rho_{\ell}
+     u) (x) \|_{\mathcal{A}}, \]
+  where $\sim$ means that both quantities considered can be bounded from above
+  and from below by some positive constant times the other quantity.
+\end{remark}
+
+\begin{lemma}
+  \label{lemma_convergenceB}Let $\gamma, \delta$ be as stated just before
+  Theorem~\ref{theorem_main1}, for any $s < \gamma + 2 \delta$ and any $\ell >
+  0$ we have that
+  \[ \sup_{t \in \mathbb{R}} d_{\mathcal{G}^s_{\ell} (V)}
+     (\tilde{B}_{\varepsilon, t}^A, \tilde{B}^A_{\varepsilon, R, t})
+     \rightarrow 0 \]
+  when $R \rightarrow + \infty$.
+\end{lemma}
+
+\begin{proof}
+  Let $v$ be a function on $\mathbb{R}^2$ decreasing faster then any
+  polynomial at infinity. Then we have
+  \[ \tilde{B}_{\varepsilon, t}^A (v) - \tilde{B}^A_{\varepsilon, L, t} (v) =
+     \tilde{\Xi}_{\varepsilon} (\mathbb{I}_{| x |_{\infty} > R} (\cdot) e^{A
+     (t - \cdot)} v) - \tilde{\Xi}_{\varepsilon, L} (\mathbb{I}_{| x
+     |_{\infty} > R} (\cdot) e^{A (t - \cdot)} v) . \]
+  This means that $\tilde{B}^A_{\varepsilon, t}$ and
+  $\tilde{B}^A_{\varepsilon, R, t}$ coincide on the set $\{ | x |_{\infty} < R
+  \} \subset \mathbb{R}^2$. Using Remark~\ref{remark_weight}, this implies
+  that
+  \[ \| \Delta_i (\tilde{B}_{\varepsilon, t}^A - \tilde{B}^A_{\varepsilon, R,
+     t}) \rho_{\ell} \|_{\mathcal{A} \otimes \mathbb{C}^4} \lesssim \|
+     \Delta_i (\rho_{\ell} (\tilde{B}_{\varepsilon, t}^A -
+     \tilde{B}^A_{\varepsilon, R, t})) \|_{\mathcal{A} \otimes \mathbb{C}^4}
+     \lesssim \]
+  \[ \lesssim R^{- \ell} \| \Delta_i (\tilde{B}_{\varepsilon, t}^A -
+     \tilde{B}^A_{\varepsilon, R, t}) \|_{\mathcal{A} \otimes \mathbb{C}^4}
+     \lesssim R^{- \ell} 2^{j (- 2 \delta - \gamma)}, \]
+  which implies that $\sup_{t \in \mathbb{R}} \| \tilde{B}_{\varepsilon, t}^A
+  - \tilde{B}^A_{\varepsilon, R, t} \|_{\mathcal{C}^s_{\ell} (\mathbb{R}^2,
+  \mathcal{A} \otimes \mathbb{C}^4)} \lesssim R^{- \ell} \rightarrow 0$, when
+  $\ell > 0$ as $R \rightarrow + \infty$.
+\end{proof}
+
+We now prove the analogue of Theorem~\ref{theorem_convergence1} in this case.
+
+\begin{theorem}
+  \label{theorem_torusplane}Let \ $0 < q < \gamma$, then
+  $\tilde{\Psi}_{\varepsilon, R, t}^{h_R, s} \rightarrow
+  \tilde{\Psi}_{\varepsilon, t}^{h, s}$, in $\mathcal{G}^q_{\ell} (\mathcal{S}
+  (\mathbb{R}^2) \otimes \mathbb{C}^4)$ uniformly in $t \in \mathbb{R}$, when
+  $R \rightarrow + \infty$.
+\end{theorem}
+
+\begin{proof}
+  The proof is based on the fact that for any $\tilde{\Psi}_1, \tilde{\Psi}_2
+  \in \mathcal{} \mathcal{G}^{\gamma}_0 (\mathcal{S} (\mathbb{R}^2) \otimes
+  \mathbb{C}^4)$ (it is important to note that in these spaces we take the
+  constant weight) we have, by Theorem~\ref{theorem_multiplication} in
+  Appendix \ref{appendix_Besov},
+  \[ \| F_{\varepsilon, h_R, Y} (\tilde{\Psi}_1) - F_{\varepsilon, h, Y}
+     (\tilde{\Psi}_2) \|_{\mathcal{C}^q_{\ell} (\mathbb{R}^2, \mathcal{A}
+     \otimes \mathbb{C}^4)} \lesssim g_F (\max (\| h_R \tilde{\Psi}_1
+     \|_{\mathcal{C}^q}, \| h \tilde{\Psi}_1 \|_{\mathcal{C}^q}, \| h
+     \tilde{\Psi}_2 \|_{\mathcal{C}^q})) \times \]
+  \begin{equation}
+    \times (\| h \|_{\mathcal{C}^q} \| \tilde{\Psi}_1 - \tilde{\Psi}_2
+    \|_{\mathcal{C}^q_{\ell} (\mathbb{R}^2, \mathcal{A} \otimes \mathbb{C}^4)}
+    + \| \Psi_1 \|_{\mathcal{C}^q_0 (\mathbb{R}^2, \mathcal{A} \otimes
+    \mathbb{C}^4)} \| h_R - h \|_{\mathcal{C}^q_{\ell}})
+    \label{eq:inequalityh},
+  \end{equation}
+  where $g_F$ is the function in Definition~\ref{definition_drift} and being
+  $h$ the IR cut-off in Definition~\ref{def:yukawa2}. Using a reasoning
+  similar to the one exploited in the proof of
+  Theorem~\ref{theorem_convergence1} we get
+  \[ \| \tilde{\Psi}_{\varepsilon, R, t}^{h_R, s} -
+     \tilde{\Psi}_{\varepsilon, t}^{h, s} \|_{\mathcal{C}^q_{\ell}
+     (\mathbb{R}^2, \mathcal{A} \otimes \mathbb{C}^4)} \lesssim (\| h_R - h
+     \|_{\mathcal{C}^q_{\ell}} + \sup_{\tau \in \mathbb{R}} \|
+     \tilde{B}_{\varepsilon, \tau}^A - \tilde{B}^A_{\varepsilon, R, \tau}
+     \|_{\mathcal{C}^q_{\ell} (\mathbb{R}^2, \mathcal{A} \otimes
+     \mathbb{C}^4)}) \times \]
+  \[ \times \left( 1 + \int_{- \infty}^t \exp (- (\lambda_A - \lambda^2 g_F
+     (K)) (t - \tau)) \mathd \tau \right) . \]
+  By $| \lambda |$ small enough, this converges to $0$ as $R \rightarrow +
+  \infty$ uniformly in $t$, since, by Lemma~\ref{lemma_convergenceB},
+  \[ \lim_{R \rightarrow + \infty} \sup_{\tau \in \mathbb{R}} \|
+     \tilde{B}_{\varepsilon, \tau}^A - \tilde{B}^A_{\varepsilon, R, \tau}
+     \|_{\mathcal{C}^q_{\ell} (\mathbb{R}^2, \mathcal{A} \otimes
+     \mathbb{C}^4)} \rightarrow 0 \]
+  and $\| h_R - h \|_{\mathcal{C}^q_{\ell}} \rightarrow 0$, as $R \rightarrow
+  + \infty$, by the definition of $h_R$.
+\end{proof}
+
+Hereafter we denote by $\tilde{\Psi}_{\varepsilon, t}^s$ the solution to
+equation~{\eqref{eq:stochasticquantization}} with $h \equiv 1$ (so with the
+spatial cut-off $h$ removed).
+
+\begin{theorem}
+  \label{theorem_cutoffh}Using the previous notations and hypotheses, let
+  $(h_n : \mathbb{R}^2 \rightarrow \mathbb{R}^{}_{})_{n \geqslant 1}$ be a
+  sequence of smooth functions with compact supports converging to $1$
+  uniformly on compacts in the norm of $\mathcal{C}^{\gamma}$, $\gamma > 0$,
+  and with uniformly bound in $\mathcal{C}^{\gamma}$. For any $0 < q < \gamma$
+  we have
+  \[ \tilde{\Psi}_{\varepsilon, t}^{h_n, s} \rightarrow
+     \tilde{\Psi}_{\varepsilon, t}^s \]
+  in $\mathcal{G}^q_{\ell} (\mathcal{S} (\mathbb{R}^2) \otimes \mathbb{C}^4)$,
+  for any $\ell > 0$ and uniformly in $t \in \mathbb{R}$ when $n \rightarrow +
+  \infty$.
+\end{theorem}
+
+\begin{proof}
+  The proof is analogous to the one of Theorem~\ref{theorem_torusplane} where
+  in inequality~{\eqref{eq:inequalityh}} we have $\| h_n - 1
+  \|_{\mathcal{C}^q_{\ell}}$ (instead of $\| h_R - h
+  \|_{\mathcal{C}^q_{\ell}}$) which converges to $0$, as $n \rightarrow +
+  \infty$, by hypothesis when $\ell > 0$.
+\end{proof}
+
+\begin{proof*}{Proof of Theorem~\ref{theorem_main1} and
+Theorem~\ref{theorem_main2}}
+  The proof is analogous to the one of Corollary~\ref{corollary_formula} where
+  Theorem~\ref{theorem_convergence1} is replaced by
+  Theorem~\ref{theorem_torusplane} and Theorem~\ref{theorem_cutoffh}
+  respectively.
+\end{proof*}
+
+\appendix\section{Besov spaces of Banach algebras}\label{appendix_Besov}
+
+In this section we want to recall some results about Besov spaces of functions
+(or distributions) from $\mathbb{R}^d$ taking values in a Banach algebra
+$\mathcal{A}$. All the results of this section can be found
+in~{\cite{Amann1997,Amann2019}} for the theory of Besov spaces taking values
+in a Banach space and~{\cite{TriebelIII}} for weighted Besov spaces. We
+present here only the $\mathbb{R}^d$ case. The definition of Besov spaces on
+$\mathbb{T}^d$ is similar, and all the results announced here also hold on
+$\mathbb{T}^d$.
+
+\
+
+We denote by $\mathcal{S} (\mathbb{R}^d)$ the set of smooth functions $f \in
+\mathcal{S} (\mathbb{R}^d)$ such that
+\[ \| f \|_{\ell, \alpha} \assign \| (1 + | x |)^{\ell} | D^{\alpha} f |
+   \|_{L^{\infty} (\mathbb{R}^d)} < + \infty \]
+where $\ell \in \mathbb{R}_+$ and $\alpha \in \mathbb{N}^d$. We denote by
+$\mathcal{S}' (\mathbb{R}^d)$ the strong dual of $\mathcal{S} (\mathbb{R}^d)$
+(equipped with the topology of the semi-norms $\| \cdot \|_{\ell, \alpha}$)
+and by $\mathcal{O}_M (\mathbb{R}^d)$ the set of smooth functions $f \in
+\mathcal{O}_M (\mathbb{R}^d)$ such that for any $\alpha \in \mathbb{N}^d$
+there exists $\ell_{\alpha} \in \mathbb{R}_+$ for which
+\[ \| (1 + | x |)^{- \ell_{\alpha}} | D^{\alpha} f | \|_{L^{\infty}
+   (\mathbb{R}^d)} < + \infty . \]
+We use the notations
+\[ \mathcal{S} (\mathbb{R}^d, \mathcal{A}) = \mathcal{S} (\mathbb{R}^d)
+   \otimes \mathcal{A}, \quad \mathcal{S}' (\mathbb{R}^d, \mathcal{A}) =
+   \mathcal{S}' (\mathbb{R}^d) \otimes \mathcal{A}, \quad \mathcal{O}_M
+   (\mathbb{R}^d, \mathcal{A}) = \mathcal{O}_M (\mathbb{R}^d) \otimes
+   \mathcal{A}, \]
+where $\mathcal{A}$ is a Banach algebra. It is important to note that
+\[ \mathcal{S} (\mathbb{R}^d, \mathcal{A}) \overset{d}{\hookrightarrow}
+   \mathcal{O}_M (\mathbb{R}^d, \mathcal{A}) \overset{d}{\hookrightarrow}
+   \mathcal{S}' (\mathbb{R}^d, \mathcal{A}) \]
+where the arrows mean that each space is continuously embedded and dense in
+the following one.
+
+\begin{theorem}
+  It is possible to define uniquely $\langle \cdot, \cdot \rangle :
+  \mathcal{S} (\mathbb{R}^d, \mathcal{A}) \times \mathcal{S}' (\mathbb{R}^d,
+  \mathcal{A}) \rightarrow \mathcal{A}$, $\cdot : \mathcal{S} (\mathbb{R}^d,
+  \mathcal{A}) \times \mathcal{S}' (\mathbb{R}^d, \mathcal{A}) \rightarrow
+  \mathcal{S}' (\mathbb{R}^d, \mathcal{A})$, $\cdot : \mathcal{S}
+  (\mathbb{R}^d) \times \mathcal{S}' (\mathbb{R}^d, \mathcal{A}) \rightarrow
+  \mathcal{S}' (\mathbb{R}^d, \mathcal{A})$, $\asterisk : \mathcal{S}
+  (\mathbb{R}^d) \times \mathcal{S}' (\mathbb{R}^d, \mathcal{A}) \rightarrow
+  \mathcal{O}_M (\mathbb{R}^d, \mathcal{A})$ and $D^{\alpha} : \mathcal{S}'
+  (\mathbb{R}^d, \mathcal{A}) \rightarrow \mathcal{S}' (\mathbb{R}^d,
+  \mathcal{A})$ (where $\alpha \in \mathbb{N}^d$) which extend in a
+  epicontinuous way the following operations: any $f \in \mathcal{S}
+  (\mathbb{R}^d)$, $u \in \mathcal{S}' (\mathbb{R}^d)$ and $a_1, a_2 \in
+  \mathcal{A}$ we have
+  \[ \begin{array}{rll}
+       \langle f \otimes a_1, u \otimes a_2 \rangle & = & \langle f, u \rangle
+       a_1 a_2\\
+       (f \otimes a_1) \cdot (u \otimes a_2) & = & (f u) \otimes (a_1 a_2)\\
+       f \cdot (u \otimes a_2) & = & (f u) \otimes a_1\\
+       f \asterisk (u \otimes a_2) & = & (f \asterisk u) \otimes a_1\\
+       D^{\alpha} (u \otimes a_1) & = & (D^{\alpha} u) \otimes a_1
+     \end{array} \]
+  where $\langle f, u \rangle$ is the normal pairing in $\mathcal{S}
+  (\mathbb{R}^d) \times \mathcal{S}' (\mathbb{R}^d)$, $(f u)$ is the product
+  in $\mathcal{S} (\mathbb{R}^d) \times \mathcal{S}' (\mathbb{R}^d)$, $(f
+  \asterisk u)$ is the convolution in $\mathcal{S} (\mathbb{R}^d) \times
+  \mathcal{S}' (\mathbb{R}^d)$ and $D^{\alpha}$ is the $\alpha$ derivatives in
+  $\mathcal{S}' (\mathbb{R}^d)$.
+\end{theorem}
+
+\begin{proof}
+  The proof of this theorem can be found in~{\cite{Amann2019}} Appendix~1.
+\end{proof}
+
+We recall the definition of Littlewood--Paley blocks: let $\chi, \varphi$ be
+smooth non-negative functions from $\mathbb{R}^n$ into $\mathbb{R}$ such that
+\begin{itemize}
+  \item $\tmop{supp} (\chi) \subset B_{\frac{4}{3}} (0)$ and $\tmop{supp}
+  (\varphi) \subset B_{\frac{8}{3}} (0) \setminus B_{\frac{3}{4}} (0)$,
+  
+  \item $\chi, \varphi \leq 1$ and $\chi (y) + \sum_{j \geq 0} \varphi (2^{-
+  j} y) = 1$ for any $y \in \mathbb{R}^n$,
+  
+  \item $\tmop{supp} (\chi) \cap \tmop{supp} (\varphi (2^{- i} \cdot)) =
+  \emptyset$ for $i \geqslant 1$,
+  
+  \item $\tmop{supp} (\varphi (2^{- j} \cdot)) \cap \tmop{supp} (\varphi (2^{-
+  i} \cdot)) = \emptyset$ if $| i - j | > 1$,
+\end{itemize}
+where by $B_r (x)$ we denote the ball of center $x \in \mathbb{R}^n$ and
+radius $r > 0$. We introduce the following notations: $\varphi_{- 1} = \chi$,
+$\varphi_j (\cdot) = \varphi (2^{- j} \cdot)$, $K_j = \hat{\varphi}_j$ and,
+for any $\ell > 0$, we define $\rho_{\ell} (y) = (1 + | x |^2)^{- \ell / 2}$.
+
+\
+
+If $v \in \mathcal{S}' (\mathbb{R}^d, \mathcal{A})$ and if $i \in
+\mathbb{Z}$, $i \geqslant - 1$ we define $i$-th Littlewood--Paley block as
+follows
+\[ \Delta_i v = K_i \asterisk v \in \mathcal{O}_M (\mathbb{R}^d, \mathcal{A})
+   . \]
+Then, if $s \in \mathbb{R}$, $p, q \in [1, + \infty]$ and $\ell \in
+\mathbb{R}$ we define the function
+\[ \| v \|_{B^s_{p, q, \ell} (\mathbb{R}^d, \mathcal{A})} = \left( \sum_{j = -
+   1}^{+ \infty} 2^{j s q} \| \Delta_j v \|_{L^p_{\ell} (\mathbb{R}^d,
+   \mathcal{A})}^q \right)^{1 / q}, \]
+when $q \in [1, + \infty)$ and $\| v \|_{B^s_{p, + \infty, \ell}
+(\mathbb{R}^d, \mathcal{A})} = \sup_j (2^{j s} \| \Delta_j v \|_{L^p_{\ell}
+(\mathbb{R}^d, \mathcal{A})})$, where $\| \cdot \|_{L^p_{\ell} (\mathbb{R}^d,
+\mathcal{A})}$ is the norm in the space $L_{\ell}^p (\mathbb{R}^d,
+\mathcal{A})$ that is
+\[ \| f \|_{L^p_{\ell} (\mathbb{R}^d, \mathcal{A})} = \left(
+   \int_{\mathbb{R}^n} (\| f (y) \|_{\mathcal{A}} \rho_{\ell} (y))^p \mathd y
+   \right)^{1 / p}, \]
+if $p \in [1, + \infty)$ and
+\[ \| f \|_{L^{\infty}_{\ell} (\mathbb{R}^d, \mathcal{A})} = \sup_{y \in
+   \mathbb{R}^d} (\| f (y) \|_{\mathcal{A}} \rho_{\ell} (y)), \]
+if $p = + \infty$. For any $v \in \mathcal{S} (\mathbb{R}^d, \mathcal{A})$ the
+norm $\| v \|_{B^s_{p, q, \ell} (\mathbb{R}^d, \mathcal{A})} < + \infty$ is
+finite. Then we look at $B^s_{p, q, \ell} (\mathbb{R}^d, \mathcal{A})$ as the
+closure of $\mathcal{S} (\mathbb{R}^d, \mathcal{A})$ in $\mathcal{S}'
+(\mathbb{R}^d, \mathcal{A})$ with respect to the norm $\| \cdot \|_{B^s_{p, q,
+\ell} (\mathbb{R}^d, \mathcal{A})}$. Hereafter, if $s \in \mathbb{R}$, $p, q
+\in [1, + \infty]$ and $\ell \in \mathbb{R}$, we use the following notations
+$\mathcal{C}^s_{\ell} (\mathbb{R}^d, \mathcal{A}) \assign B^s_{\infty, \infty,
+\ell} (\mathbb{R}^d, \mathcal{A})$, $B^s_{p, q} (\mathbb{R}^d, \mathcal{A}) =
+B^s_{p, q, 0} (\mathbb{R}^d, \mathcal{A})$, $\mathcal{C}^s (\mathbb{R}^d,
+\mathcal{A}) \assign B^s_{\infty, \infty, 0} (\mathbb{R}^d, \mathcal{A})$,
+$B^s_{p, q, \ell} \assign B^s_{p, q, \ell} (\mathbb{R}^d, \mathbb{R})$ etc.
+
+\
+
+In this paper we need only the next three results.
+
+\begin{theorem}
+  \label{theorem_weight}For any $s, \ell \in \mathbb{R}$ and $v \in
+  \mathcal{C}^s_{\ell} (\mathbb{R}^d, \mathcal{A})$ we have that $\rho_{\ell}
+  v \in \mathcal{C}^s (\mathbb{R}^d, \mathcal{A})$ and
+  \[ \| v \|_{\mathcal{C}^s_{\ell} (\mathbb{R}^d, \mathcal{A})} \sim \|
+     \rho_{\ell} v \|_{\mathcal{C}^s (\mathbb{R}^d, \mathcal{A})} . \]
+\end{theorem}
+
+\begin{proof}
+  By Theorem~6.5 in~{\cite{TriebelIII}} for weighted Besov spaces on
+  $\mathbb{R}^d$ with polynomial-like weights, the theorem for a general
+  Banach algebra $\mathcal{A}$ is a straightforward generalization.
+\end{proof}
+
+\begin{theorem}
+  \label{theorem_convolution}Let $\alpha > 0$ and consider $\mathfrak{a} \in
+  B^{\alpha}_{1, \infty}$ then we have that the convolution $\mathfrak{a}
+  \asterisk$ can be extended in a unique continuous way from an operator from
+  $\mathcal{S} (\mathbb{R}^d, \mathcal{A})$ into itself, into an operator from
+  $\mathcal{C}^s (\mathbb{R}^d, \mathcal{A})$ into $\mathcal{C}^{s + \alpha}
+  (\mathbb{R}^d, \mathcal{A})$.
+\end{theorem}
+
+\begin{proof}
+  Using the notations of~{\cite{Amann1997}}, if $\mathfrak{a \in}
+  B^{\alpha}_{1, \infty}$ then $((- \Delta + 1)^{\alpha / 2} (\mathfrak{a}))
+  \in \mathcal{F} L_1$, then the thesis follows from Corollary~6.4
+  in~{\cite{Amann1997}}.
+\end{proof}
+
+\begin{theorem}
+  \label{theorem_multiplication}Let $s > 0$ and $\ell_1, \ell_2 \in
+  \mathbb{R}$ we have that the product $\cdot : \mathcal{S} (\mathbb{R}^d,
+  \mathcal{A}) \times \mathcal{S} (\mathbb{R}^d, \mathcal{A}) \rightarrow
+  \mathcal{S} (\mathbb{R}^d, \mathcal{A})$ can be (uniquely) extended in a
+  continuous way from $\mathcal{C}^s_{\ell_1} (\mathbb{R}^d, \mathcal{A})
+  \times \mathcal{C}^s (\mathbb{R}^d, \mathcal{A})$ into
+  $\mathcal{C}^s_{\ell_1 + \ell_2} (\mathbb{R}^d, \mathcal{A})$, furthermore
+  for any $v_1 \in \mathcal{C}^s_{\ell_1} (\mathbb{R}^d, \mathcal{A})$ and
+  $v_2 \in \mathcal{C}^s_{\ell_2} (\mathbb{R}^d, \mathcal{A})$ we have
+  \[ \| v_1 \cdot v_2 \|_{\mathcal{C}^s_{\ell_1 + \ell_2} (\mathbb{R}^d,
+     \mathcal{A})} \lesssim \| v_1 \|_{\mathcal{C}^s_{\ell_1} (\mathbb{R}^d,
+     \mathcal{A})}  \| v_2 \|_{\mathcal{C}^s_{\ell_2} (\mathbb{R}^d,
+     \mathcal{A})}, \]
+\end{theorem}
+
+\begin{proof}
+  The proof can be found in~{\cite{Amann2019}} in the unweighted case. The
+  proof in the Besov spaces with polynomial weights $\rho_{\ell}$ is similar.
+\end{proof}
+
+\section{Series expansion of solutions}\label{app:series}
+
+In this appendix we sketch some implications of the exclusion principle for
+the existence of global solutions to finite-dimensional Grassmann SDEs. In
+principle some of these considerations also apply to some more realistic
+models like the Yukawa$_2$ model however, to our surprise, stochastic
+quantization, at least in the perturbative regime, can be carried on without
+establishing them.
+
+\
+
+The solutions to the non-linear equation~{\eqref{eq:sde-lambda}} can be
+represented via a series. We investigate now the properties of this series and
+its absolute convergence. The explicit control of the series is not needed for
+the development of the theory of stochastic quantization as we have
+shown.\quad For simplicity let us assume that $(v_{\alpha})_{\alpha = 1,
+\ldots, N}$ is a finite basis of $V$ and that $F \in \tmop{Hom} (V, \Lambda
+V)$ is given by a sum of cubic monomials
+\[ F (v_{\alpha}) = \sum_{\alpha_1, \alpha_2, \alpha_3}
+   \lambda^{\alpha}_{\alpha_1 \alpha_2 \alpha_3} \psi (v_{\alpha_1}) \psi
+   (v_{\alpha_2}) \psi (v_{\alpha_2}) \]
+where $\psi \in \tmop{Hom} (V, \Lambda V)$ is the canonical injection of $V$
+into $\Lambda V$ and $(\lambda^{\alpha}_{\alpha_1 \alpha_2 \alpha_3})$ a
+family of coefficients in $\mathbb{R}$. Moreover we take $A = -\mathbb{I}$.
+equation~{\eqref{eq:sde-lambda}} has then the integral formulation given by
+\begin{equation}
+  \Psi_t (v) = \Phi_t (v) + \int_0^t \Psi_s (e^{- (t - s)} F (v)) \mathd s,
+  \qquad t \geqslant 0, v \in V. \label{eq:mild}
+\end{equation}
+where
+\[ \Phi_t (v) \assign \Psi_0 (e^{- t} v) + B^A_t (v) - B^A_0 (e^{- t} v),
+   \qquad t \geqslant 0, v \in V. \]
+By iteratively expanding $\Psi_s$ on the right hand side of~{\eqref{eq:mild}}
+we obtain a series expansion for $\Psi_t$ of the form
+\[ \Psi_t = \sum_{\tau} J_{\tau} (\Phi) (t) \]
+\[ = J_{\bullet} (\Phi) (t) + J_{[\bullet \bullet \bullet]} (\Phi) (t) +
+   J_{[[\bullet \bullet \bullet] \bullet \bullet]} (\Phi) (t) + \cdots +
+   J_{[[\bullet \bullet \bullet] [\bullet [\bullet \bullet [\bullet \bullet
+   \bullet]] \bullet] \bullet]} (\Phi) (t) + \cdots \]
+The series is indexed by (planar) trees $\tau$ which have branches of order 3
+and where $J$ is a multilinear integral operator such that
+\[ J_{\bullet} (\Phi) (t)^{\alpha} = \Phi_t (v_{\alpha}) \]
+\[ J_{[\tau_1 \tau_2 \tau_3]} (\Phi) (t)^{\alpha} = \sum_{\alpha_1, \alpha_2,
+   \alpha_3} \int_0^t e^{- (t - s)} \lambda^{\alpha}_{\alpha_1, \alpha_2,
+   \alpha_3} J_{\tau_1} (\Phi) (s)^{\alpha_1} J_{\tau_2} (\Phi) (s)^{\alpha_2}
+   J_{\tau_3} (\Phi) (s)^{\alpha_3} \mathd s \]
+where $\bullet$ denotes the simple tree and $[\tau_1, \ldots, \tau_3]$ the
+tree with branches $\tau_1, \ldots, \tau_3$. Our goal is to prove that the
+above series converges for all times and derive estimates for the norm $\|
+\Psi_t \|$ of the solution $\Psi$. Expanding the expression for $J_{\tau}
+(\Phi)$ we have
+\[ J_{\tau} (\Phi) = \int \left( \prod_{p \in I (\tau)}
+   \lambda^{\alpha_p}_{\alpha_{p_1} \alpha_{p_2} \alpha_{p_3}} \right) \left(
+   \prod_{p \in L (\tau)} \Phi^{\alpha_p} (s_{p_-}) \right) \left( \prod_{p
+   \in I (\tau)} \mathd s_p \right) \]
+where $I (\tau)$ denotes the internal nodes, $L (\tau)$ the leaves, $p$ the
+parent node and $p_1, p_2, p_3$ the three children of every internal node and
+$\Phi^{\alpha} (t) = \Phi_t (v_{\alpha})$. We have $| \tau | = | L (\tau) | +
+| I (\tau) |$, $| \tau | = 1 + 3 | I (\tau) |$, $| L (\tau) | = 1 + 3 | I
+(\tau) | - | I (\tau) | = 1 + 2 | I (\tau) |$.
+
+\
+
+Note that $(\Phi^{\alpha}_t)^2 = 0$ and that the increments $\Phi^{\alpha}
+(t, s) \assign \Phi^{\alpha}_t - \Phi^{\alpha}_s$ have the norm bound
+\[ \| \Phi^{\alpha} (t, s) \|^2 \leqslant \int_s^t e^{- (t - r)} \mathd r + |
+   e^{- (t - s)} - 1 |^2 \leqslant 2 (1 - e^{- (t - s)}) \backassign H (t - s)
+\]
+which can be estimated as
+\[ \| \Phi^{\alpha} (t, s) \| \leqslant | t - s |^{1 / 2} . \]
+The following Lemma~uses $(\Phi^{\alpha}_t)^2 = 0$ (Pauli exclusion principle)
+to derive good estimates for products of fields.
+
+\begin{lemma}
+  Assume $m \geqslant 1$. For any $n \geqslant 1$ and any $t_1, \ldots, t_n
+  \in [0, T]$, $\alpha_1, \ldots, \alpha_n \in \{ 1, \ldots, N \}$ we have
+  \[ \| \Phi^{\alpha_1}_{t_1} \cdots \Phi^{\alpha_n}_{t_n} \| \leqslant
+     \frac{C^{n + 1} T^{n / 2}}{(n!)^{1 / 2}} \]
+  where $C$ is a universal constant depending only on $N$.
+\end{lemma}
+
+\begin{proof}
+  Partition $[0, T]$ in $r = n / (2 N)$ equal intervals $(I_k)_k$ and let
+  $(s_k)_k$ be the centers of those intervals. Now in the product replace each
+  $\Phi^{\alpha_i}_{t_1}$ by $\Phi^{\alpha_i}_{t_1} = \Phi^{\alpha_i}_{s_k} +
+  \Phi^{\alpha_i} (t_i, s_k)$ where $s_k$ is the nearest to $t_i$ of the
+  centers. By doing so we rewrite $\Phi^{\alpha_1}_{t_1} \cdots
+  \Phi^{\alpha_n}_{t_n}$ as a sum $S$ of $2^n$ products of fields which are
+  either $\Phi^{\alpha_i}_{s_k}$ or \ $\Phi^{\alpha_i} (t_i, s_k)$, moreover
+  for a given $I_k$ there cannot be more than $N$ factors
+  $\Phi^{\alpha_i}_{s_k}$ by the exclusion principle. Denote by $n_k$ the
+  number of $(t_i)_i$ in $I_k$. Then $n = \sum_k n_k$ and using the estimate
+  $\| \Phi^{\alpha_i} (t_i, s_k) \| \leqslant | t_i - s_k | \leqslant | I_k |
+  = (2 N T) / n$ and the fact that in each cell we have at most $n_k - N$
+  increments, we have
+  \[ \| S \| \leqslant 2^n \prod_{k = 1}^r | I_k |^{n_k - N} \leqslant 2^n
+     \left( \frac{2 N T}{n} \right)^{n - N r} = 2^n \left( \frac{2 N T}{n}
+     \right)^{n / 2} \leqslant \frac{C^{n + 1} T^{n / 2}}{(n!)^{1 / 2}} . \]
+\end{proof}
+
+Using this lemma above we can estimate
+\[ \| J_{\tau} (\Phi) (t) \| \leqslant \int \left( \prod_{p \in I (\tau)}
+   \left| \lambda^{\alpha_p}_{\alpha_{p_1} \alpha_{p_2} \alpha_{p_3}} \right|
+   \right) \left\| \prod_{p \in L (\tau)} \Phi^{\alpha_p}_{s_{p_-}} \right\|
+   \left( \prod_{p \in I (\tau)} \mathd s_p \right) \]
+\[ \lesssim | \lambda |^{| I (\tau) |} N^{| L (\tau) |} \frac{C^{| L (\tau) |
+   + 1} t^{| L (\tau) | / 2}}{(| L (\tau) | !)^{1 / 2}} \]
+where we estimated all the integrals by constants uniformly in $t$ due to the
+presence of the exponential factors. The number of trees $\tau$ with a given
+number of nodes $| \tau | = n$ is no more than $D^n$ for some $n$ and $D > 0$
+and $| L (\tau) | = 1 + 2 | I (\tau) | = 1 + (2 / 3) (| \tau | - 1) = 1 / 3 +
+2 | \tau | / 3$ so we obtain at the end for the solution $\Psi_t$ of
+{\eqref{eq:mild}}
+\[ \| \Psi_t \| \leqslant \sum_{\tau} \| J_{\tau} (\Phi) (t) \| \lesssim
+   \sum_{n \geqslant 0} D^n | \lambda |^{(2 / 3) (n - 1)} N^{2 n / 3}
+   \frac{C^{2 n / 3} t^{n / 3 + 1 / 6}}{(n / 3 + 1 / 6) !} \]
+which is a series which converges for all $t$ (with some stretched exponential
+behavior).
+
+\begin{theorem}
+  There exists an increasing function $E (t)$ depending on $N, | \lambda |, m$
+  such that for all $m > 0$,
+  \[ \sup_{s \leqslant t} \| \Psi_s \| \leqslant E (t) . \]
+\end{theorem}
+
+In particular this shows again that explosion is not possible for this kind of
+SDEs, unlike their bosonic analogs.
+
+\
+
+Our goal now is to remove the time dependence on our estimate for the
+solution exploiting the exponential decay. Let us partition the interval $[0,
+\infty]$ into intervals $(I_h)_{h \geqslant 0}$ of size $1$. In each of these
+intervals we will use the finer partition of the previous lemma to estimate
+products, which will then not depend on $T$ anymore. Of course now the problem
+is that we have a bound of the form
+\[ \| \Phi^{\alpha_1} (t_1) \cdots \Phi^{\alpha_n} (t_n) \| \leqslant \prod_{h
+   \geqslant 0} \frac{C^{n_h + 1}}{(n_h !)^{1 / 2}} \]
+where $n_h$ is the number of time variables in $I_h$ and $\sum_{h \geqslant 0}
+n_h = n$, and so far there is no useful upper bound on this (since we observe
+that we can have the situation where $n_h = 1$ for all $h$ and so we loose the
+factorial contribution). Let $Q$ be the number of intervals with $n_h > 0$. In
+the expression for $J_{\tau} (\Phi) (t)$ there are at least $Q$ factors of the
+form $e^{- (s - s')}$, $s' < s$, for which the sum of the quantities $s - s'$
+is at least $Q$. So we have the bounds
+\[ \| J_{\tau} (\Phi) (t) \| \leqslant | \lambda |^{(2 / 3) (n - 1)} N^n
+   \sum_{Q \geqslant 1} e^{- Q / 2} \prod_{h : n_h > 0} \frac{C^{n_h +
+   1}}{(n_h !)^{1 / 2}} \leqslant \frac{C^n | \lambda |^{(2 / 3) (n -
+   1)}}{(n!)^{1 / 2}} \sum_{Q \geqslant 1} e^{- Q / 2} Q^{n / 2} \]
+where we used that
+\[ \prod_{h : n_h > 0} \frac{1}{n_h !} \leqslant \frac{1}{n!}
+   \sum_{\tmscript{\begin{array}{c}
+     k_1, \ldots, k_Q \geqslant 1\\
+     k_1 + \cdots + k_Q = n
+   \end{array}}} \frac{n!}{k_1 ! \cdots k_Q !} = \frac{1}{n!} Q^n . \]
+Now, using the bound $\sum_{Q \geqslant 1} e^{- Q / 2} Q^{n / 2} \lesssim c^n
+(n!)^{1 / 2}$ we obtain that
+\[ \| J_{\tau} (\phi) (t) \| \lesssim | \lambda |^{(2 / 3) (n - 1)} C^n \]
+so provided $| \lambda |$ is small enough (depending on our choice of $N$) we
+conclude that the uniform bound $\sup_{t \geqslant 0} \| \Psi_t \| \lesssim 1$
+holds.
+
+\begin{thebibliography}{10}
+  \bibitem[1]{accardi_outline_2015}L.~Accardi. {\newblock}An outline of
+  quantum probability. {\newblock}2015. {\newblock}Preprint
+  \url{http://rgdoi.net/10.13140/RG.2.1.3078.3844}.{\newblock}
+  
+  \bibitem[2]{accardi_quantum_1982}L.~Accardi, A.~Frigerio, and  J.~T.~Lewis.
+  {\newblock}Quantum stochastic processes. {\newblock}\tmtextit{Kyoto
+  University. Research Institute for Mathematical Sciences. Publications},
+  18(1):97--133, 1982.{\newblock}
+  
+  \bibitem[3]{albeverio_elliptic_2018}S.~Albeverio, F.~C.~De Vecchi, and 
+  M.~Gubinelli. {\newblock}Elliptic stochastic quantization.
+  {\newblock}\tmtextit{ArXiv:1812.04422 [math-ph]}, dec 2018.
+  {\newblock}ArXiv: 1812.04422.{\newblock}
+  
+  \bibitem[4]{albeverio_elliptic_2019}S.~Albeverio, F.~C.~De Vecchi, and 
+  M.~Gubinelli. {\newblock}The elliptic stochastic quantization of some two
+  dimensional Euclidean QFTs. {\newblock}\tmtextit{ArXiv:1906.11187
+  [math-ph]}, jun 2019. {\newblock}ArXiv: 1906.11187.{\newblock}
+  
+  \bibitem[5]{albeverio_invariant_2017}S.~Albeverio  and  S.~Kusuoka.
+  {\newblock}The invariant measure and the flow associated to the
+  $\Phi^4_3$-quantum field model. {\newblock}\tmtextit{Annali della Scuola
+  Normale di Pisa - Classe di Scienze}, 2018.
+  {\newblock}\href{Https://doi.org/10.2422/2036-2145.201809_008}{}10.2422/2036-2145.201809\_008.{\newblock}
+  
+  \bibitem[6]{Amann1997}H.~Amann. {\newblock}Operator-valued Fourier
+  multipliers, vector-valued Besov spaces, and applications.
+  {\newblock}\tmtextit{Math. Nachr.}, 186:5--56, 1997.{\newblock}
+  
+  \bibitem[7]{Amann2019}H.~Amann. {\newblock}\tmtextit{Linear and quasilinear
+  parabolic problems. Vol. II},  volume  106  of \tmtextit{Monographs in
+  Mathematics}. {\newblock}Birkh{\"a}user/Springer, Cham, 2019.
+  {\newblock}Function spaces.{\newblock}
+  
+  \bibitem[8]{Applebaum2}D.~B.~Applebaum  and  R.~L.~Hudson.
+  {\newblock}Fermion It{\^o}'s formula and stochastic evolutions.
+  {\newblock}\tmtextit{Comm. Math. Phys.}, 96(4):473--496, 1984.{\newblock}
+  
+  \bibitem[9]{Applebaum1}D.~Applebaum  and  R.~L.~Hudson. {\newblock}Fermion
+  diffusions. {\newblock}\tmtextit{J. Math. Phys.}, 25(4):858--861,
+  1984.{\newblock}
+  
+  \bibitem[10]{Segalbook}J.~C.~Baez, I.~E.~Segal, and  Z.-F.~Zhou.
+  {\newblock}\tmtextit{Introduction to algebraic and constructive quantum
+  field theory}. {\newblock}Princeton Series in Physics. Princeton University
+  Press, Princeton, NJ, 1992.{\newblock}
+  
+  \bibitem[11]{Doplicher}D.~Bahns, S.~Doplicher, G.~Morsella, and 
+  G.~Piacitelli. {\newblock}Quantum spacetime and algebraic quantum field
+  theory. {\newblock}In \tmtextit{Advances in algebraic quantum field theory},
+  Math. Phys. Stud.,  pages  289--329. Springer, Cham, 2015.{\newblock}
+  
+  \bibitem[12]{Streater3}C.~Barnett, R.~F.~Streater, and  I.~F.~Wilde.
+  {\newblock}The It{\^o}-Clifford integral. {\newblock}\tmtextit{J. Functional
+  Analysis}, 48(2):172--212, 1982.{\newblock}
+  
+  \bibitem[13]{Streater2}C.~Barnett, R.~F.~Streater, and  I.~F.~Wilde.
+  {\newblock}The It{\^o}-Clifford integral. II. Stochastic differential
+  equations. {\newblock}\tmtextit{J. London Math. Soc. (2)}, 27(2):373--384,
+  1983.{\newblock}
+  
+  \bibitem[14]{Streater1}C.~Barnett, R.~F.~Streater, and  I.~F.~Wilde.
+  {\newblock}The It{\^o}-Clifford integral. III. The Markov property of
+  solutions to stochastic differential equations. {\newblock}\tmtextit{Comm.
+  Math. Phys.}, 89(1):13--17, 1983.{\newblock}
+  
+  \bibitem[15]{Baumgartel1}H.~Baumg{\"a}rtel. {\newblock}\tmtextit{Operator
+  algebraic methods in quantum field theory}. {\newblock}Akademie Verlag,
+  Berlin, 1995. {\newblock}A series of lectures.{\newblock}
+  
+  \bibitem[16]{Baumgartel2}H.~Baumg{\"a}rtel  and  M.~Wollenberg.
+  {\newblock}\tmtextit{Causal nets of operator algebras},  volume~80  of
+  \tmtextit{Mathematische Lehrb{\"u}cher und Monographien, II. Abteilung:
+  Mathematische Monographien [Mathematical Textbooks and Monographs, Part II:
+  Mathematical Monographs]}. {\newblock}Akademie-Verlag, Berlin, 1992.
+  {\newblock}Mathematical aspects of algebraic quantum field
+  theory.{\newblock}
+  
+  \bibitem[17]{Belavkin}V.~P.~Belavkin. {\newblock}Quantum stochastic calculus
+  and quantum nonlinear filtering. {\newblock}\tmtextit{J. Multivariate
+  Anal.}, 42(2):171--201, 1992.{\newblock}
+  
+  \bibitem[18]{Berezin1}F.~A.~Berezin. {\newblock}\tmtextit{The method of
+  second quantization}. {\newblock}Translated from the Russian by Nobumichi
+  Mugibayashi and Alan Jeffrey. Pure and Applied Physics, Vol. 24. Academic
+  Press, New York-London, 1966.{\newblock}
+  
+  \bibitem[19]{kirillov_introduction_1987}F.~A.~Berezin.
+  {\newblock}\tmtextit{Introduction to Superanalysis}. {\newblock}Mathematical
+  Physics and Applied Mathematics. Springer Netherlands, 1987.{\newblock}
+  
+  \bibitem[20]{Berezin2}F.~A.~Berezin. {\newblock}\tmtextit{Introduction to
+  superanalysis},  volume~9  of \tmtextit{Mathematical Physics and Applied
+  Mathematics}. {\newblock}D. Reidel Publishing Co., Dordrecht, 1987.
+  {\newblock}Edited and with a foreword by A. A. Kirillov, With an appendix by
+  V. I. Ogievetsky, Translated from the Russian by J. Niederle and R.
+  Koteck{\'y}, Translation edited by Dimitri Le\u{\i}tes.{\newblock}
+  
+  \bibitem[21]{Bratteli1}O.~Bratteli  and  D.~W.~Robinson.
+  {\newblock}\tmtextit{Operator algebras and quantum statistical mechanics.
+  1}. {\newblock}Texts and Monographs in Physics. Springer-Verlag, New York,
+  Second  edition, 1987. {\newblock}$C^{\ast}$- and $W^{\ast}$-algebras,
+  symmetry groups, decomposition of states.{\newblock}
+  
+  \bibitem[22]{Bratteli2}O.~Bratteli  and  D.~W.~Robinson.
+  {\newblock}\tmtextit{Operator algebras and quantum statistical mechanics.
+  2}. {\newblock}Texts and Monographs in Physics. Springer-Verlag, Berlin,
+  Second  edition, 1997. {\newblock}Equilibrium states. Models in quantum
+  statistical mechanics.{\newblock}
+  
+  \bibitem[23]{Carlen1}E.~Carlen  and  P.~Kr{\'e}e. {\newblock}$L^p$ estimates
+  on iterated stochastic integrals. {\newblock}\tmtextit{Ann. Probab.},
+  19(1):354--368, 1991.{\newblock}
+  
+  \bibitem[24]{catellier_paracontrolled_2013}R.~Catellier  and  K.~Chouk.
+  {\newblock}Paracontrolled distributions and the 3-dimensional stochastic
+  quantization equation. {\newblock}\tmtextit{The Annals of Probability},
+  46(5):2621--2679, 2018.
+  {\newblock}\href{Https://doi.org/10.1214/17-AOP1235}{}10.1214/17-AOP1235.{\newblock}
+  
+  \bibitem[25]{Cipriani}F.~Cipriani. {\newblock}Noncommutative potential
+  theory: a survey. {\newblock}\tmtextit{J. Geom. Phys.}, 105:25--59,
+  2016.{\newblock}
+  
+  \bibitem[26]{damgaard_stochastic_1984}P.~Damgaard  and  K.~Tsokos.
+  {\newblock}Stochastic quantization with fermions.
+  {\newblock}\tmtextit{Nuclear Physics B}, 235(1):75--92, may 1984.{\newblock}
+  
+  \bibitem[27]{de_vecchi_note_2019}F.~C.~De Vecchi  and  M.~Gubinelli.
+  {\newblock}A note on supersymmetry and stochastic differential equations.
+  {\newblock}\tmtextit{ArXiv:1912.04830 [math-ph]}, dec 2019.
+  {\newblock}ArXiv: 1912.04830.{\newblock}
+  
+  \bibitem[28]{DeWitt}B.~DeWitt. {\newblock}\tmtextit{Supermanifolds}.
+  {\newblock}Cambridge Monographs on Mathematical Physics. Cambridge
+  University Press, Cambridge, Second  edition, 1992.{\newblock}
+  
+  \bibitem[29]{dirksen_noncommutative_2010}S.~Dirksen.
+  {\newblock}Noncommutative stochastic integration through decoupling.
+  {\newblock}\tmtextit{Journal of Mathematical Analysis and Applications},
+  370(1):200--223, oct 2010.{\newblock}
+  
+  \bibitem[30]{disertori_continuous_1998}M.~Disertori  and  V.~Rivasseau.
+  {\newblock}Continuous Constructive Fermionic Renormalization.
+  {\newblock}\tmtextit{ArXiv:hep-th/9802145}, apr 1998.{\newblock}
+  
+  \bibitem[31]{efremov_stochastic_2019}A.~N.~Efremov. {\newblock}Stochastic
+  Quantization of Massive Fermions. {\newblock}\tmtextit{International Journal
+  of Theoretical Physics}, 58(4):1150--1156, apr 2019.{\newblock}
+  
+  \bibitem[32]{Emch}G.~G.~Emch. {\newblock}\tmtextit{Mathematical and
+  conceptual foundations of 20th-century physics},  volume  100  of
+  \tmtextit{North-Holland Mathematics Studies}. {\newblock}North-Holland
+  Publishing Co., Amsterdam, 1984. {\newblock}Notas de Matem{\'a}tica
+  [Mathematical Notes], 100.{\newblock}
+  
+  \bibitem[33]{MR1905424}J.~Feldman, H.~Kn{\"o}rrer, and  E.~Trubowitz.
+  {\newblock}\tmtextit{Fermionic functional integrals and the renormalization
+  group},  volume~16  of \tmtextit{CRM Monograph Series}. {\newblock}American
+  Mathematical Society, Providence, RI, 2002.{\newblock}
+  
+  \bibitem[34]{feldman_renormalizable_1986}J.~Feldman, J.~Magnen,
+  V.~Rivasseau, and  R.~S{\'e}n{\'e}or. {\newblock}A renormalizable field
+  theory: The massive Gross-Neveu model in two dimensions.
+  {\newblock}\tmtextit{Commun.Math. Phys.}, 103(1):67--103, mar
+  1986.{\newblock}
+  
+  \bibitem[35]{fukai_stochastic_1983}T.~Fukai, H.~Nakazato, I.~Ohba, K.~Okano,
+  and  Y.~Yamanaka. {\newblock}Stochastic Quantization Method of Fermion
+  Fields. {\newblock}\tmtextit{Progress of Theoretical Physics},
+  69(5):1600--1616, may 1983.{\newblock}
+  
+  \bibitem[36]{Gelfand}I.~Gelfand  and  M.~Neumark. {\newblock}On the
+  imbedding of normed rings into the ring of operators in Hilbert space.
+  {\newblock}\tmtextit{Rec. Math. [Mat. Sbornik] N.S.}, 12(54):197--213,
+  1943.{\newblock}
+  
+  \bibitem[37]{Gordina}M.~Gordina. {\newblock}Stochastic differential
+  equations on noncommutative $L^2$. {\newblock}In \tmtextit{Finite and
+  infinite dimensional analysis in honor of Leonard Gross (New Orleans, LA,
+  2001)},  volume  317  of \tmtextit{Contemp. Math.},  pages  87--98. Amer.
+  Math. Soc., Providence, RI, 2003.{\newblock}
+  
+  \bibitem[38]{Gross1967}L.~Gross. {\newblock}Abstract Wiener spaces.
+  {\newblock}In \tmtextit{Proc. Fifth Berkeley Sympos. Math. Statist. and
+  Probability (Berkeley, Calif., 1965/66), Vol. II: Contributions to
+  Probability Theory, Part 1},  pages  31--42. Univ. California Press,
+  Berkeley, Calif., 1967.{\newblock}
+  
+  \bibitem[39]{gubinelli_pde_2018}M.~Gubinelli  and  M.~Hofmanov{\'a}.
+  {\newblock}A PDE construction of the Euclidean \$\textbackslash
+  Phi{\textasciicircum}4\_3\$ quantum field theory.
+  {\newblock}\tmtextit{ArXiv:1810.01700 [math-ph]}, oct 2018.
+  {\newblock}ArXiv: 1810.01700.{\newblock}
+  
+  \bibitem[40]{gubinelli_global_2019}M.~Gubinelli  and  M.~Hofmanov{\'a}.
+  {\newblock}Global Solutions to Elliptic and Parabolic $\Phi^4$ Models in
+  Euclidean Space. {\newblock}\tmtextit{Communications in Mathematical
+  Physics}, 368(3):1201--1266, 2019.{\newblock}
+  
+  \bibitem[41]{Haag1}R.~Haag. {\newblock}\tmtextit{Local quantum physics}.
+  {\newblock}Texts and Monographs in Physics. Springer-Verlag, Berlin, Second 
+  edition, 1996. {\newblock}Fields, particles, algebras.{\newblock}
+  
+  \bibitem[42]{hairer_theory_2014}M.~Hairer. {\newblock}A theory of regularity
+  structures. {\newblock}\tmtextit{Inventiones mathematicae}, 198(2):269--504,
+  2014.
+  {\newblock}\href{Https://doi.org/10.1007/s00222-014-0505-4}{}10.1007/s00222-014-0505-4.{\newblock}
+  
+  \bibitem[43]{Holevo}A.~Holevo. {\newblock}\tmtextit{Probabilistic and
+  statistical aspects of quantum theory},  volume~1  of
+  \tmtextit{Quaderni/Monographs}. {\newblock}Edizioni della Normale, Pisa,
+  Second  edition, 2011. {\newblock}With a foreword from the second Russian
+  edition by K. A. Valiev.{\newblock}
+  
+  \bibitem[44]{hsu_stochastic_2002}E.~P.~Hsu. {\newblock}\tmtextit{Stochastic
+  Analysis on Manifolds}. {\newblock}Graduate Studies in Mathematics 38.
+  American Mathematical Society, 2002.{\newblock}
+  
+  \bibitem[45]{ignatyuk_convergence_1993}I.~A.~Ignatyuk, V.~A.~Malyshev, and 
+  V.~Sidoravi{\v c}ius. {\newblock}Convergence of a Method of the Stochastic
+  Quantization II. {\newblock}\tmtextit{Theory of Probability \& Its
+  Applications}, 37(4):599--620, jan 1993.{\newblock}
+  
+  \bibitem[46]{Itzykson}C.~Itzykson  and  J.~B.~Zuber.
+  {\newblock}\tmtextit{Quantum field theory}. {\newblock}McGraw-Hill
+  International Book Co., New York, 1980. {\newblock}International Series in
+  Pure and Applied Physics.{\newblock}
+  
+  \bibitem[47]{janson_gaussian_1997}S.~Janson. {\newblock}\tmtextit{Gaussian
+  Hilbert Spaces}. {\newblock}Cambridge University Press, jun 1997.{\newblock}
+  
+  \bibitem[48]{jona_lasinio_stochastic_1985}G.~Jona-Lasinio  and 
+  P.~K.~Mitter. {\newblock}On the stochastic quantization of field theory.
+  {\newblock}\tmtextit{Communications in Mathematical Physics (1965-1997)},
+  101(3):409--436, 1985.{\newblock}
+  
+  \bibitem[49]{Kadison2}R.~V.~Kadison  and  J.~R.~Ringrose.
+  {\newblock}\tmtextit{Fundamentals of the theory of operator algebras. Vol.
+  I},  volume~15  of \tmtextit{Graduate Studies in Mathematics}.
+  {\newblock}American Mathematical Society, Providence, RI, 1997.
+  {\newblock}Elementary theory, Reprint of the 1983 original.{\newblock}
+  
+  \bibitem[50]{Kadison1}R.~V.~Kadison  and  J.~R.~Ringrose.
+  {\newblock}\tmtextit{Fundamentals of the theory of operator algebras. Vol.
+  II},  volume~16  of \tmtextit{Graduate Studies in Mathematics}.
+  {\newblock}American Mathematical Society, Providence, RI, 1997.
+  {\newblock}Advanced theory, Corrected reprint of the 1986
+  original.{\newblock}
+  
+  \bibitem[51]{kakudo1983gauge}Y.~Kakudo, Y.~Taguchi, A.~Tanaka, and 
+  K.~Yamamoto. {\newblock}Gauge-independent calculation of s-matrix elements
+  in quantum electrodynamics. {\newblock}\tmtextit{Progress of Theoretical
+  Physics (Kyoto)}, 69(4):1225--1235, 1983.{\newblock}
+  
+  \bibitem[52]{klein_supersymmetry_1985}A.~Klein. {\newblock}Supersymmetry and
+  a two-dimensional reduction in random phenomena. {\newblock}In
+  \tmtextit{Quantum probability and applications, II (Heidelberg, 1984)}, 
+  volume  1136  of \tmtextit{Lecture Notes in Math.},  pages  306--317.
+  Springer, Berlin, 1985.{\newblock}
+  
+  \bibitem[53]{klein_supersymmetry_1983}A.~Klein  and  J.~Fernando Perez.
+  {\newblock}Supersymmetry and dimensional reduction: A non-perturbative
+  proof. {\newblock}\tmtextit{Physics Letters B}, 125(6):473--475, jun
+  1983.{\newblock}
+  
+  \bibitem[54]{Kummer}B.~K{\"u}mmerer. {\newblock}Survey on a theory of
+  noncommutative stationary Markov processes. {\newblock}In \tmtextit{Quantum
+  probability and applications, III (Oberwolfach, 1987)},  volume  1303  of
+  \tmtextit{Lecture Notes in Math.},  pages  154--182. Springer, Berlin,
+  1988.{\newblock}
+  
+  \bibitem[55]{kupiainen_renormalization_2016}A.~Kupiainen.
+  {\newblock}Renormalization Group and Stochastic PDEs.
+  {\newblock}\tmtextit{Annales Henri Poincar{\'e}}, 17(3):497--535, 2016.
+  {\newblock}\href{Https://doi.org/10.1007/s00023-015-0408-y}{}10.1007/s00023-015-0408-y.{\newblock}
+  
+  \bibitem[56]{Leites}D.~A.~Le\u{\i}tes. {\newblock}Introduction to the theory of
+  supermanifolds. {\newblock}\tmtextit{Uspekhi Mat. Nauk}, 35(1(211)):3--57,
+  1980.{\newblock}
+  
+  \bibitem[57]{mastropietro_non-perturbative_2008}V.~Mastropietro.
+  {\newblock}\tmtextit{Non-Perturbative Renormalization}. {\newblock}World
+  Scientific Publishing Co Pte Ltd, Hackensack, NJ, 2008.{\newblock}
+  
+  \bibitem[58]{Meyerbook}P.-A.~Meyer. {\newblock}\tmtextit{Quantum probability
+  for probabilists},  volume  1538  of \tmtextit{Lecture Notes in
+  Mathematics}. {\newblock}Springer-Verlag, Berlin, 1993.{\newblock}
+  
+  \bibitem[59]{moinat_space_time_2018}A.~Moinat  and  H.~Weber.
+  {\newblock}Space-time localisation for the dynamic $\Phi^4_3$ model.
+  {\newblock}\tmtextit{ArXiv:1811.05764}, nov 2018. {\newblock}ArXiv:
+  1811.05764.{\newblock}
+  
+  \bibitem[60]{MWcomedown}J.-C.~Mourrat  and  H.~Weber. {\newblock}The dynamic
+  $\Phi^4_3$ model comes down from infinity. {\newblock}\tmtextit{Comm. Math.
+  Phys.}, 356(3):673--753, 2017.{\newblock}
+  
+  \bibitem[61]{Murray1}F.~J.~Murray  and  J.~Von Neumann. {\newblock}On rings
+  of operators. {\newblock}\tmtextit{Ann. of Math. (2)}, 37(1):116--229,
+  1936.{\newblock}
+  
+  \bibitem[62]{Murray2}F.~J.~Murray  and  J.~von~Neumann. {\newblock}On rings
+  of operators. II. {\newblock}\tmtextit{Trans. Amer. Math. Soc.},
+  41(2):208--248, 1937.{\newblock}
+  
+  \bibitem[63]{Murray3}F.~J.~Murray  and  J.~von~Neumann. {\newblock}On rings
+  of operators. IV. {\newblock}\tmtextit{Ann. of Math. (2)}, 44:716--808,
+  1943.{\newblock}
+  
+  \bibitem[64]{Naimark}M.~A.~Na\u{\i}mark. {\newblock}\tmtextit{Normed algebras}.
+  {\newblock}Wolters-Noordhoff Publishing, Groningen, Third  edition, 1972.
+  {\newblock}Translated from the second Russian edition by Leo F. Boron,
+  Wolters-Noordhoff Series of Monographs and Textbooks on Pure and Applied
+  Mathematics.{\newblock}
+  
+  \bibitem[65]{osterwalder_euclidean_1973}K.~Osterwalder. {\newblock}Euclidean
+  fermi fields. {\newblock}In \tmtextit{Constructive Quantum Field Theory},
+  Lecture Notes in Physics,  pages  326--331. Springer, Berlin, Heidelberg,
+  1973.{\newblock}
+  
+  \bibitem[66]{osterwalder_euclidean_1973-2}K.~Osterwalder  and  R.~Schrader.
+  {\newblock}Euclidean Fermi fields and a Feynman-Kac formula for
+  Boson-Fermions models. {\newblock}\tmtextit{Helvetica Physica Acta},
+  46:277--302, 1973.{\newblock}
+  
+  \bibitem[67]{parisi_perturbation_1981}G.~Parisi  and  Y.~S.~Wu.
+  {\newblock}Perturbation theory without gauge fixing.
+  {\newblock}\tmtextit{Scientia Sinica. Zhongguo Kexue}, 24(4):483--496,
+  1981.{\newblock}
+  
+  \bibitem[68]{rogers_graded_1986}A.~Rogers. {\newblock}Graded manifolds,
+  supermanifolds and infinite-dimensional Grassmann algebras.
+  {\newblock}\tmtextit{Communications in Mathematical Physics},
+  105(3):375--384, sep 1986.{\newblock}
+  
+  \bibitem[69]{Rogers2007}A.~Rogers. {\newblock}\tmtextit{Supermanifolds}.
+  {\newblock}World Scientific Publishing Co. Pte. Ltd., Hackensack, NJ, 2007.
+  {\newblock}Theory and applications.{\newblock}
+  
+  \bibitem[70]{salmhofer_renormalization}M.~Salmhofer.
+  {\newblock}\tmtextit{Renormalization: An Introduction}. {\newblock}Springer,
+  Berlin ; New York, 1st Corrected ed. 1999, Corr. 2nd printing 2007 edition 
+  edition, sep 2007.{\newblock}
+  
+  \bibitem[71]{Segal1}I.~E.~Segal. {\newblock}A non-commutative extension of
+  abstract integration. {\newblock}\tmtextit{Ann. of Math. (2)}, 57:401--457,
+  1953.{\newblock}
+  
+  \bibitem[72]{Segalbook2}I.~E.~Segal. {\newblock}\tmtextit{Mathematical
+  problems of relativistic physics},  volume  1960  of \tmtextit{With an
+  appendix by George W. Mackey. Lectures in Applied Mathematics (proceedings
+  of the Summer Seminar, Boulder, Colorado}. {\newblock}American Mathematical
+  Society, Providence, R.I., 1963.{\newblock}
+  
+  \bibitem[73]{shcherbakov_elements_1993-2}V.~V.~Shcherbakov.
+  {\newblock}Elements of stochastic analysis for the case of Grassmann
+  variables. I. Grassmann stochastic integrals and random processes.
+  {\newblock}\tmtextit{Theoretical and Mathematical Physics}, 96(1):792--800,
+  jul 1993.{\newblock}
+  
+  \bibitem[74]{shcherbakov_elements_1993-1}V.~V.~Shcherbakov.
+  {\newblock}Elements of stochastic analysis for the case of Grassmann
+  variables. II. Stochastic partial differential equations for Grassmann
+  processes. {\newblock}\tmtextit{Theoretical and Mathematical Physics},
+  97(2):1229--1235, nov 1993.{\newblock}
+  
+  \bibitem[75]{shcherbakov_elements_1993}V.~V.~Shcherbakov.
+  {\newblock}Elements of stochastic analysis for the case of Grassmann
+  variables. III. Correlation functions. {\newblock}\tmtextit{Theoretical and
+  Mathematical Physics}, 97(3):1323--1332, dec 1993.{\newblock}
+  
+  \bibitem[76]{she-sheng_stochastic_1985}X.~She-Sheng  and  H.~Ting-chang.
+  {\newblock}Stochastic quantization of fermions on lattice.
+  {\newblock}\tmtextit{Chinese Physics Letters}, 2(10):474--476, oct
+  1985.{\newblock}
+  
+  \bibitem[77]{Sinha}K.~B.~Sinha  and  D.~Goswami.
+  {\newblock}\tmtextit{Quantum stochastic processes and noncommutative
+  geometry},  volume  169  of \tmtextit{Cambridge Tracts in Mathematics}.
+  {\newblock}Cambridge University Press, Cambridge, 2007.{\newblock}
+  
+  \bibitem[78]{summers2012perspective}S.~J.~Summers. {\newblock}A perspective
+  on constructive quantum field theory. {\newblock}\tmtextit{ArXiv preprint
+  arXiv:1203.3991}, 2012.{\newblock}
+  
+  \bibitem[79]{TriebelIII}H.~Triebel. {\newblock}\tmtextit{Theory of function
+  spaces. III},  volume  100  of \tmtextit{Monographs in Mathematics}.
+  {\newblock}Birkh{\"a}user Verlag, Basel, 2006.{\newblock}
+  
+  \bibitem[80]{van2003algebra1}B.~van der~Waerden.
+  {\newblock}\tmtextit{Algebra: Volume I}. {\newblock}Algebra : based in part
+  on lectures by E. Artin and E. Noether. Springer New York, 2003.{\newblock}
+  
+  \bibitem[81]{van2003algebra2}B.~van der~Waerden.
+  {\newblock}\tmtextit{Algebra: Volume II}. {\newblock}Algebra : based in part
+  on lectures by E. Artin and E. Noether. Springer New York, 2003.{\newblock}
+  
+  \bibitem[82]{VonNeumann}J.~von~Neumann. {\newblock}On rings of operators.
+  III. {\newblock}\tmtextit{Ann. of Math. (2)}, 41:94--161, 1940.{\newblock}
+  
+  \bibitem[83]{MR0448079}W.~{\.Z}elazko. {\newblock}\tmtextit{Banach
+  algebras}. {\newblock}Elsevier Publishing Co., Amsterdam-London-New York;
+  PWN--Polish Scientific Publishers, Warsaw, 1973. {\newblock}Translated from
+  the Polish by Marcin E. Kuczma.{\newblock}
+  
+  \bibitem[84]{ZinnJustin}J.~Zinn-Justin. {\newblock}\tmtextit{Quantum field
+  theory and critical phenomena},  volume~85  of \tmtextit{International
+  Series of Monographs on Physics}. {\newblock}The Clarendon Press, Oxford
+  University Press, New York, Second  edition, 1993. {\newblock}Oxford Science
+  Publications.{\newblock}
+\end{thebibliography}
+
+\end{document}

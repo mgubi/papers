@@ -1,0 +1,2256 @@
+\documentclass[a4paper,12pt,reqno]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 20060908 v.1.1          first public version
+% 20060914 v.1.2          added a remark on the relation between B and \beta
+% 20060929 v.1.3          typos + polishing for arXiv submission 
+% 20060929 arxiv          arxiv version
+% 20061213 cpde           submission to cpde
+% 20070629 corrected      amend error on the admissible region
+% 20070710 corrected      added Euler scheme
+ 
+\usepackage{amsmath,amsfonts}
+%\usepackage{mathpazo}
+%\usepackage{pdfsync}
+%\usepackage{showkeys}
+%\oddsidemargin 0.15in  \evensidemargin 0.15in  \textwidth 6.3in
+\usepackage[width=6.3in,height=24cm]{geometry} 
+\DeclareMathOperator{\expect}{{\mathbb E}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ott}{[0,T]}
+%\newcommand{\qed}{\hfill$\square$}
+%\newcommand{\proof}{{\sc Proof.}\hspace{0.3cm}}
+\makeatletter
+\newcommand{\eqcolon}{\mathrel{\mathord{=}\raise.2\p@\hbox{:}}}
+\newcommand{\coloneq}{\mathrel{\raise.2\p@\hbox{:}\mathord{=}}}
+\makeatother
+\newcommand{\der}{\delta}
+\newcommand{\XX}{\mathbb{X}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\TT}{\mathbb{T}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\CA}{\mathcal{A}}
+\newcommand{\QQ}{\mathcal{Q}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\OCC}{\Omega \mathcal{C}}
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\Norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\Abs}[1]{\left\lvert #1\right\rvert}
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+
+\newcommand{\cZ}{\mathcal{Z}}
+\DeclareMathOperator{\id}{\text{Id}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+\begin{document}
+\title{Rough solutions for the\\ periodic Korteweg--de~Vries equation}
+\author{
+  { Massimiliano Gubinelli}              \\
+%  {\small\it Dipartimento di Matematica Applicata,
+%Universit\`{a} di Pisa}    \\[-0.1cm]
+%  {\small\it and}          \\[-0.1cm]
+{\small\it Equipe de probabilit\'es, statistique et mod\'elisation }\\[-0.1cm]
+  {\small\it  Universit\'e Paris Sud}          \\[-0.1cm]
+%  {\small\it Via Bonanno 25B, I-56126 Pisa, Italia.}          \\[-0.1cm]
+{\small \it 91 405 Orsay cedex, France}\\[-0.1cm] 
+ {\small  {\tt gubinell@math.u-psud.fr}}   
+}
+%\date{September 2006 (v.1.2)}
+\maketitle
+
+%\cite{*}
+
+\begin{abstract}
+The one dimensional Korteweg--de~Vries (KdV) equation on a periodic
+domain and with initial condition in negative Sobolev spaces is
+studied using ideas from the theory of rough paths. We discuss
+convergence of Galerkin approximations, a modified Euler scheme and the presence of a random force of white-noise type in time.  
+\end{abstract}
+
+In this note we consider the Cauchy problem for the
+ classical   Korteweg--de~Vries (KdV) equation:
+\begin{equation}
+  \label{eq:kdv-real}
+\partial_t u(t,\xi) + \partial^3_\xi u(t,\xi) +
+\frac12 \partial_\xi u(t,\xi)^2 = 0,\quad u(0,\xi) = u_0(\xi), \qquad
+(t,\xi)\in\RR\times \TT  
+\end{equation}
+where  the initial condition $u_0$ belongs to some Sobolev space $H^\alpha(\TT)$
+of the torus $\TT = [-\pi,\pi]$. Since the works of Bourgain~\cite{MR1215780,MR1423623} and
+Kenig--Ponce--Vega~\cite{MR1329387,MR1230283,MR1086966}, it is known that eq.~(\ref{eq:kdv-real})  admits local
+solutions starting from initial conditions in $H^\alpha$ for any
+$\alpha >-1/2$.  Later Colliander--Keel--Staffilani--Takaoka--Tao~\cite{MR1969209} proved global well posedness for $\alpha \ge -1/2$. The existence of solutions in negative Sobolev spaces is possible due to the
+regularizing effect of the dispersive linear term. This regularization
+is more effective in the whole line and there global solutions exists for any $\alpha > -3/4$~\cite{MR1230283,MR1969209}. Other references on the analysis of the KdV equation are~\cite{MR1019307,MR759907}.
+More recently  Kappeler--Topalov, taking advantage of the complete integrability of this model, extended the well-posedness to any $\alpha \ge -1$ using the inverse scattering method~\cite{MR2181576}.  
+
+Inspired by the theory of \emph{rough paths} we will look for an alternative approach to the
+construction of (local) solutions of eq.~(\ref{eq:kdv-real}).  
+
+Rough paths (introduced by Lyons in~\cite{MR1654527,MR2036784}) allows the study of differential
+equations driven by irregular functions. They have been applied to the
+path-wise study of stochastic differential equations driven by
+Brownian motion, by fractional Brownian motion of any index $H>1/4$~\cite{MR1883719}
+and other stochastic processes~\cite{MR2164030,fvsubell}. Part of the theory has been reformulated in terms of the sub-Riemmannian geometry of certain Carnot groups~\cite{fvgeo}. 
+In~\cite{MR2091358} we showed how to reinterpret the work of Lyons in the terms of a
+cochain complex of finite increments and a related integration
+theory. The key step is the introduction of a map (called
+$\Lambda$) which encodes a basic fact of rough path theory.
+We exploited this point of view 
+ to treat stochastic partial differential
+equations of evolution type~\cite{youngspde,TindelGubinelli} and to
+study the initial value problem for a partial differential  equation
+modeling the approximate evolution of random vortex filaments in 3d
+fluids~\cite{evolution}. 
+
+We would like to show that the concepts of the theory can be used
+fruitfully for problems not related to stochastic processes.
+% the analysis of some  infinite dimensional differential
+%equation.
+The periodic Korteweg--de Vries equation is used as a case study for our
+ideas. The point of view here developed should be applicable also to KdV on
+the full  real line or other dispersive semi-linear equations like the
+modified KdV or the non-linear Schr\"odinger equation.  
+
+No previous knowledge of rough paths theory is required nor any
+ result on the periodic KdV is used in the following. We took care to
+make the paper, as much as possible, self-contained. Since the
+arguments are similar to those used in finite dimensions
+in~\cite{MR2091358},  the reader can refer to this last paper to gain a wider perspective
+on the technique and on the stochastic applications of rough paths. 
+
+Our method suggests natural ways to numerically approximate
+ solutions of KdV with irregular initial conditions or with random
+ forcing. We describe a numerical scheme for KdV following the lines of the numerical study of SDEs driven by rough paths~\cite{davie,MR1470933,fveuler}.
+
+\bigskip
+The plan of the paper is as follows. In Sect.~\ref{sec:intro} we start by recasting the KdV
+eq.~(\ref{eq:kdv-real}) in its mild form and to perform some
+manipulation to motivate the finite-increment equation which we will study
+in Sect.~\ref{sec:rough}  where we prove  existence and uniqueness of
+local solutions. Then we prove a-priori estimates necessary
+show that global rough solutions
+exists for initial conditions in $L^2$ (Sect.~\ref{sec:global}).
+In
+Sect.~\ref{sec:galerkin} we  prove that the rough solutions are
+limits of Galerkin approximations making rigorous the link between our
+finite-increment problem and the classical form of the KdV
+equation. Moreover in Sect.~\ref{sec:euler} we introduce a
+time discretization scheme and prove its convergence.
+ The
+equation that we study is just one of a stack of finite-increment equations that can be
+generated starting from KdV. In Sect.~\ref{sec:more} we derive the
+next member of this hierarchy. Finally
+Sect.~\ref{sec:stoch} addresses the problem of the presence of an
+additive stochastic forcing.
+
+We collect some longer and technical proofs in the Appendix.
+
+\bigskip
+
+\section{Formulation of the problem}
+\label{sec:intro}
+The mild form of eq.~(\ref{eq:kdv-real})  is
+\begin{equation}
+\label{eq:kdv-mild}
+u(t,\xi) = U(t) u_0(\xi) + \frac{1}{2} \int_0^t U(t-s) \partial_\xi
+u(s,\xi)^2\, ds ,\qquad t \in[0,T], \xi \in \TT  
+\end{equation}
+where $T>0$ is a fixed horizon and  $U(t)$ is the Airy group of isometries of any $H^\alpha$ given by the
+solution of the linear part of eq.~(\ref{eq:kdv-real}). If we denote with
+$\wh \varphi$ the Fourier coefficients of a function $\varphi : \TT \to
+\RR$:
+$
+\varphi(\xi) = \sum_{k \in \ZZ} \wh \varphi(k) e^{i k \xi}
+$
+then the group $U(t)$ acts on $\varphi$ as
+$
+\wh{U(t) \varphi}(k) = e^{i k^3 t} \wh \varphi(k)
+$.
+Passing to Fourier variables in eq.~(\ref{eq:kdv-real}) and assuming
+that the initial condition satisfy $\wh u_0(0) = 0$ we obtain the
+integral equation
+\begin{equation}
+  \label{eq:kdv-spectral}
+\wh u(t,k) = e^{i k^3 t} \wh u_0(k) + \frac{ik}2 \int_0^t e^{i k^3 (t-s)}
+\sum'_{k_1} \wh u(s,k_1) \wh u(s,k-k_1) \, ds, \quad t \in [0,T], k \in \ZZ_* 
+\end{equation}
+where $\ZZ_* = \ZZ \backslash \{ 0 \} $ and where we use the
+convention that the primed summation over $k_1 \in \ZZ$ does not include the
+terms when $k_1 = 0$ or $k_1 = k$. Indeed  if
+$\wh u_0(0) = 0$ then we will have $\wh u(t,0) = 0$ for any $t \ge 0$.
+
+A last transformation of the original equation consist in using as
+unknowns the variables $v(t,k) = e^{-ik^3 t} \wh u(t,k)$. The integral
+equations which result is then
+\begin{equation}
+  \label{eq:kdv-base}
+ v(t,k) =   v_0(k) + \frac{ik}2 \sum'_{k_1} \int_0^t e^{- i 3 k k_1 k_2 s}
+  v(s,k_1) v(s,k_2) \, ds, \quad t \in [0,T], k \in \ZZ_* 
+\end{equation}
+where $k_2 = k-k_1$ and $v_0(k) = u_0(k)$. In obtaining this equation
+we have used the algebraic identity $k^3 - k_1^3 - k_2^3 = 3 k k_1
+k_2$ valid for any triple $k,k_1,k_2$ such that $k = k_1 + k_2$.
+
+In the rest of the paper we will concentrate on the study of solution
+to eq.~(\ref{eq:kdv-base}) with the fixed point method. Moreover since
+we will always work in Fourier space we will consider $H^\alpha$ as a space
+of sequences indexed by $\ZZ$ with prescribed degree of summability. 
+
+Let us fix some notations:
+we define the spaces $H^\alpha = H^\alpha(\TT)$ as the completion of the space
+of  functions $\varphi:\ZZ \to\CC$ with a finite number of non-zero
+values and such that $\varphi(-k) = \overline{\varphi(k)}, k \in \ZZ$ with respect to the norm
+$
+| \varphi |^2_\alpha \coloneq \sum_{k \in \ZZ} (1+|k|)^{2\alpha} | \varphi(k)|^2
+$.
+Moreover we denote $H_0^\alpha$ the subspace of $H^\alpha$ which consists of
+sequences $\varphi$ such that $\varphi(0) = 0$. Note that on $H_0^\alpha$ a norm equivalent
+to $|\cdot |_\alpha$ is given by
+$
+\varphi \mapsto (\sum_{k \in \ZZ_*} |k|^{2\alpha} |\varphi(k)|^2)^{1/2}
+$.
+For convenience we will usually use the latter instead that the more
+usual one. The symbol $C$ in the r.h.s. of  estimates denote a positive constant which can be different from line to line. 
+
+\subsection{Generalized integration}
+In trying to solve eq.~(\ref{eq:kdv-real}) we must face two
+difficulties: the presence of the $k$ factor and of the
+convolution, both will come into play when trying to get
+estimates for the nonlinear term in some $H^\alpha$ space. 
+The only hope we have to regularize both contributions is
+to exploit the oscillatory character of the phase factor $e^{-i 3 k k_1
+  k_2 s}$. However it is not evident how to bound the integral
+taking into account the cancellations due to this multiplier. 
+
+To gain some insights we would like to perform a Taylor expansion of
+the eq.~(\ref{eq:kdv-base}). Before  doing this we take a more
+general perspective and instead of solving eq.~(\ref{eq:kdv-base}) we
+will try to solve the following problem:
+find a function $ v$ such
+that $ v(0,k) =  v_0(k)$ and 
+\begin{equation}
+  \label{eq:kdv-base-2}
+ v(t,k) =   v(s,k) + \frac{ik}2 \sum'_{k_1} \int_s^t e^{- i 3 k k_1 k_2 \sigma}
+  v(\sigma,k_1)  v(\sigma,k_2) \, d\sigma, \quad (t,s) \in [0,T]^2, k \in \ZZ_*. 
+\end{equation}
+Of course if we can solve eq.~(\ref{eq:kdv-base-2}) we will have a
+solution of eq.~(\ref{eq:kdv-base}). Moreover
+eq.~(\ref{eq:kdv-base-2}) encodes the fact that we expect any ``piece''
+of the solution to solve the same integral equation with the right
+initial condition.
+Now we can perform an expansion of the r.h.s of
+eq.~(\ref{eq:kdv-base-2}) by substituting to each occurrence of $
+v(\sigma,k)$ the corresponding expression given by the integral
+constraint: a first substitution results in
+\begin{equation}
+  \label{eq:kdv-base-remainder}
+  \begin{split}
+ v(t,k) & =   v(s,k) + \frac{ik}2 \sum'_{k_1} \int_s^t e^{-i 3 k k_1 k_2 \sigma}
+  d\sigma  v(s,k_1)  v(s,k_2)  + r(t,s,k)
+  \end{split}
+\end{equation}
+where
+\begin{equation*}
+ % \label{eq:kdv-base-step-1}
+  \begin{split}
+ r(t,s,k) & = 2 \frac{ik}2 \sum'_{k_1} \int_s^t e^{-i 3 k k_1 k_2 \sigma}
+  v(\sigma,k_1) \left( \frac{ik_2}2 \sum'_{k_{21}} \int_s^\sigma
+   e^{- i 3 k_2 k_{21} k_{22} \sigma_1}
+  v(\sigma_1,k_{21})  v(\sigma_1,k_{22}) \, d\sigma_1 \right)  \, d\sigma   
+\\ &   + \frac{ik}2 \sum'_{k_1} \int_s^t e^{-i 3 k k_1 k_2 \sigma}
+\left( \frac{ik_1}2 \sum'_{k_{11}} \int_s^\sigma e^{-i 3 k_1 k_{11} k_{12} \sigma_1}
+  v(\sigma_1,k_{11})  v(\sigma_1,k_{12}) \, d\sigma_1 \right)
+\\ &\qquad \qquad  \times
+\left( \frac{ik_2}2 \sum'_{k_{21}} \int_s^\sigma e^{-i 3 k_2 k_{21} k_{22} \sigma_2}
+  v(\sigma_2,k_{21})  v(\sigma_2,k_{22}) \, d\sigma_2 \right)\, d\sigma.
+  \end{split}
+\end{equation*}
+This equation shows already an interesting pattern: the expansion
+allowed us to take out from the $\sigma$-integral the unknown at the
+price of introducing a correction term $r(t,s,k)$ in the form of multiple
+\emph{iterated integrals}. 
+ Let us pretend
+for a moment that this $r$ term is   irrelevant  and let us concentrate in the analysis of the
+remaining term. The oscillatory integral can now be  explicitly
+evaluated:
+\begin{equation}
+  \label{eq:integral}
+  \frac{ik}2  \int_s^t e^{-i 3 k k_1 k_2 \sigma}
+  d\sigma = \frac{e^{-i 3 k k_1 k_2 s}-e^{-i 3 k k_1 k_2 t}}{6 k_1 k_2}.
+\end{equation}
+The $k_i$ factors at the denominator will give the regularization
+which we were looking for. Introduce the symmetric bilinear operator
+$X_{ts} : H^\alpha\times H^\alpha \to H^\alpha$ such that
+\begin{equation}
+  \label{eq:phi-op}
+  X_{ts}(\varphi_1,\varphi_2)(k)  \coloneq \sum'_{k_1} \frac{e^{-i 3 k k_1 k_2
+      s}-e^{-i 3 k k_1 k_2 t}}{6 k_1 k_2} \varphi_1(k_1)
+  \varphi_2(k_2) .
+\end{equation}
+An important remark is that the family of operators $\{X_{ts},(t,s) \in
+[0,T]^2\}$ satisfy the algebraic equation
+\begin{equation}
+  \label{eq:X-chain}
+X_{ts}(\varphi_1,\varphi_2) - X_{tu}(\varphi_1,\varphi_2) -
+X_{us}(\varphi_1,\varphi_2) = 0, \quad (t,u,s) \in [0,T]^3  
+\end{equation}
+as can be easily checked using the definition.
+
+Define the set $\DD$ of pairs $(\gamma,\alpha)$ as $\DD = \{(\gamma,\alpha) \in [0,1/2]\times \RR  :
+\gamma-\alpha < 1, 3\gamma-\alpha-3/2 < 0 \}$.
+Moreover, given two Banach spaces $V,W$, denote with $\LL(V,W)$ the Banach space of bounded linear operators from $V$ to $W$ endowed with the operator norm.  
+
+\begin{lemma}
+\label{lemma:X}
+For any couple
+$(\gamma,\alpha) \in \DD$ and for any $\eps \ge 0$ sufficiently small,
+the operator $X_{ts}$ is bounded from $H^{\alpha-\eps}\times H^{\alpha-\eps}$ to
+$H^{\alpha+\eps}$ and
+$
+|X_{ts}|_{\LL((H^{\alpha-\eps})^2,H^{\alpha+\eps})} \le C_{\gamma,\alpha} |t-s|^\gamma
+$
+where the constant $C_{\gamma,\alpha}$ depends only on $\alpha$ and $\gamma$.
+\end{lemma}
+
+The proof of this lemma is postponed to Appendix~\ref{sec:reg}  .
+
+\begin{remark}
+In most of the arguments we take $\eps = 0$. A positive $\eps$ will be useful in proving convergence of Galerkin approximations below.
+\end{remark}
+
+\subsection{Computing the remainder}
+
+Eq.~(\ref{eq:kdv-base-remainder}) has the following abstract form
+\begin{equation}
+  \label{eq:abs-step-1}
+\der v_{ts}  = X_{ts}(v_s,v_s) + r_{ts}  
+\end{equation}
+where $\der v_{ts} = v_t - v_s$ and $v_t(k) = v(t,k)$ (the index
+notation being more comfortable for the following discussion). The
+first object on the r.h.s. is well understood thanks to
+Lemma~\ref{lemma:X}, while as we have seen the $r$ term is more
+complex. What is noteworthy however is that, due to the particular
+structure of eq.~(\ref{eq:abs-step-1}) the $r$ term must satisfy a simple
+algebraic equation. To obtain this equation, note that, for any triple
+$(t,u,s) \in [0,T]^3$ we have
+$
+\der v_{ts} - \der v_{tu} - \der v_{us} = 0
+$; substituting eq.~(\ref{eq:abs-step-1}) in this relation we get
+$$
+ r_{ts} -
+r_{tu} - r_{us}   = 
+- X_{ts}(v_s,v_s) + X_{tu}(v_u,v_u) + X_{us}(v_s,v_s).   
+$$
+Using eq.~(\ref{eq:X-chain}) the expression in the r.h.s. can be
+simplified in
+\begin{equation}
+\label{eq:pre-lambda}
+  \begin{split}
+ r_{ts} -
+r_{tu} - r_{us}  & = 
+- X_{tu}(v_s,v_s) + X_{tu}(v_u,v_u)   
+    \\  & = 
+ X_{tu}(\der v_{us},v_s) + X_{tu}(v_u,\der v_{us})   
+  \end{split}
+\end{equation}
+The main observation contained in the work~\cite{MR2091358} is that  sometimes this
+last linear equation determines $r$ uniquely.
+
+
+\subsection{The $\Lambda$-map}
+To explain the conditions under which we can solve
+eq.~(\ref{eq:pre-lambda}) we need some more notation. 
+Given a normed vector space $(V,|\cdot|)$ introduce the vector space
+$\CC_n V \subset C([0,T]^n;V)$ such that $a \in \CC_n V$ iff $ a_{t_1, \dots,t_n} = 0$ when $t_i
+  = t_j$ for some $1 \le i < j \le n$. We have already introduced the
+  operator $\der : \CC_1 V \to \CC_2 V$ defined as $\der f_{ts} = f_t
+  - f_s$, moreover is useful to introduce
+another operator $\der : \CC_2 V \to \CC_3 V$ defined on
+continuous functions of \emph{two} parameters 
+on a vector space $V$ as
+$ \der a_{tus} = a_{ts} - a_{tu} - a_{us} $. The two operators satisfy
+the relation $\der \der f = 0$ for any $f \in \CC_1 V$. Moreover if $a
+\in \CC_2 V$ is such that $\der a = 0$ then  there exists $f \in \CC_1 V$ such that $ a = \der f$. Denote
+$\cZ \CC_3 V = \CC_3 V \cap \text{Im} \der$.
+
+We measure the size of elements in $\CC_n V$ for $n=2,3$  by H\"older-like norms
+defined in the following way: for $f \in \CC_2 V $ let
+$$
+\norm{f}_{\mu} =
+\sup_{s,t\in\ott}\frac{|f_{ts}|}{|t-s|^\mu},
+\quad\mbox{and}\quad
+\CC_1^\mu V =\{ f \in \CC_2 V;\, \norm{f}_{\mu}<\infty  \}.
+$$
+In the same way, for $h \in \CC_3 V$, set
+\begin{eqnarray}
+  \label{eq:normOCC2}
+  \norm{h}_{\gamma,\rho} &=& \sup_{s,u,t\in\ott} 
+\frac{|h_{tus}|}{|u-s|^\gamma |t-u|^\rho}\\
+%\quad\mbox{and}\quad
+\|h\|_\mu &= &
+\inf\left \{\sum_i \|h_i\|_{\rho_i,\mu-\rho_i} ;\, h =
+ \sum_i h_i,\, 0 < \rho_i < \mu \right\} ,\nonumber
+\end{eqnarray}
+where the last infimum is taken over all sequences $\{h_i \in \CC_3 V  \}$ such that $h
+= \sum_i h_i$ and for all choices of the numbers $\rho_i \in (0,z)$.
+Then  $\|\cdot\|_\mu$ is easily seen to be a norm on $\CC_3 V$, and we set
+$
+\CC_3^\mu V =\{ h\in\CC_3 V ;\, \|h\|_\mu<\infty \}
+$.
+Eventually,
+let $\CC_n^{1+} V  = \cup_{\mu > 1} \CC_n^\mu V $ for $n =2,3$
+and remark that the same kind of norms can be considered on the
+spaces $\cZ \CC_3 V $, leading to the definition of the spaces
+$\cZ \CC_3^\mu V $ and $\cZ \CC_3^{1+} V $. 
+
+\vspace{0.3cm}
+
+The following proposition is the basic result which allows the
+solution of equations in the form~(\ref{eq:pre-lambda}).
+
+\begin{proposition}[The $\Lambda$-map]
+\label{prop:Lambda}
+There exists a unique linear map $\Lambda: \cZ \CC^{1+}_3 V 
+\to \CC_2^{1+} V $ such that 
+$$
+\delta \Lambda  = \id_{\cZ \CC_3 V }.
+$$
+Furthermore, for any $\mu > 1$, 
+this map is continuous from $\cZ \CC^{\mu}_3 V $
+to $\CC_2^{\mu} V $ and we have
+\begin{equation}\label{ineqla}
+\|\Lambda h\|_{\mu} \le \frac{1}{2^\mu-2} \|h\|_{\mu} ,\qquad h \in
+\cZ \CC^{1+}_3 V . 
+\end{equation}
+\end{proposition}
+
+This proposition has been first proved in~\cite{MR2091358}. A simplified proof is contained in~\cite{TindelGubinelli}.
+
+
+\medskip
+Using the notations just introduced, eq.~(\ref{eq:pre-lambda}) take
+the form
+\begin{equation}
+  \label{eq:r-1}
+\der r_{tus} = X_{tu}(\der v_{us},v_s) + X_{tu}(v_u, \der v_{us}) = [X(\der v,v) + X(v, \der v)]_{tus},
+\qquad (t,u,s) \in [0,T]^3  
+\end{equation}
+where, by construction, the r.h.s. belongs to $\cZ \CC_3 H^\alpha$. If
+we can prove that  it actually belongs to $ \cZ \CC^z_3 H^\alpha$
+for some $z >1$, Prop.~\ref{prop:Lambda} will give us the possibility to state that the
+unique solution of eq.~(\ref{eq:r-1}) in $\CC^{1+}_2 H^\alpha$ is given by
+$r = \Lambda [X(\der v,v) + X(v, \der v)]$. 
+
+\subsection{$\Lambda$ equations}
+
+Let us come back to our initial problem. Since we aim to work in distributional spaces the rigorous meaning of eq.~(\ref{eq:kdv-base-2}) is not clear (even in a weak sense). By formal manipulations we have been able to recast the initial problem in a finite-difference equation involving the $\Lambda$ map which reads:
+\begin{equation}
+  \label{eq:abs-lambda}
+\der v = X(v,v) + \Lambda[X(\der v, v) + X(v, \der v)]   
+\end{equation}
+where we used an abbreviated notation since all the terms have been
+already described in detail. Note that in this equation the $\Lambda$ map has replaced the integral
+ so we
+will call this kind of equations: \emph{$\Lambda$-equations}. Instead
+of solving the integral equation 
+%(for which we do not have useful estimates) 
+we would like to  solve, by fixed-point
+methods, the $\Lambda$-equation~(\ref{eq:abs-lambda}). Afterwards we will show rigorously that solution to such $\Lambda$-equations gives generalized solutions to KdV.
+
+\bigskip
+  Unfortunately,
+for the particular form of our $X$ operator, we are not able to show
+that this equation has solutions. Recall  Lemma~\ref{lemma:X} where we showed that $X$ belongs to 
+$\CC_2^\gamma \LL(H^\alpha,H^\alpha)$ for $(\gamma,\alpha) \in \DD$ so we
+must expect that $\der v \in \CC_2^\gamma  H^\alpha$ since the
+$\Lambda$ term will belong (at worst) to $\CC_2^{1+} H^\alpha$. But then we have
+$$
+X(\der v,v) + X(v,\der v) \in \CC_3^{2\gamma} H^\alpha
+$$ 
+so that we must require $2\gamma > 1$ in order for this term to be in
+the domain of $\Lambda$. The  set $\DD$ however contains only
+values of $\gamma \le 1/2$ so we are not able to study
+eq.~(\ref{eq:abs-lambda}) in $\CC_1^\gamma H^\alpha$ for
+$(\gamma,\alpha) \in \DD$.
+
+This difficulty can be overcome by pursuiting further the expansion of
+eq.~(\ref{eq:kdv-base-2}). By looking at
+eq.~(\ref{eq:kdv-base-remainder}) we see that the next step in the
+expansion will generate the following expression
+\begin{equation}
+  \label{eq:exp-step-2}
+  \begin{split}
+ v(t,k) & =   v(s,k) + \frac{ik}2 \sum'_{k_1} \int_s^t e^{-i 3 k k_1 k_2 \sigma}
+  d\sigma\,  v(s,k_1)  v(s,k_2)    
+\\ &   - 2 \sum'_{k_1,k_{21}}  \frac{k k_2}4  \int_s^t e^{-i 3 k k_1 k_2 \sigma}
+    \int_s^\sigma
+   e^{- i 3 k_2 k_{21} k_{22} \sigma_1}
+ \, d\sigma_1   \, d\sigma\,  v(s,k_1)   v(s,k_{21})  v(s,k_{22})  
+\\ &   + r^{(2)}(t,s,k)
+  \end{split}
+\end{equation}
+where the new remainder $r^{(2)}$ is even more cumbersome that the
+previous one and here we do not bother to write it down explicitly. In this equation a new (trilinear) operator
+appear. Define $X^2 \in \CC_2 \LL((H^\alpha)^3, H^\alpha)$ as
+\begin{equation}
+  \label{eq:X2}
+X^2_{ts}(\varphi_1,\varphi_2,\varphi_3)(k) =  
+- 2 \sum'_{k_1,k_{21}}  \frac{k k_2}4  \int_s^t  \int_s^\sigma e^{-i 3
+  k k_1 k_2 \sigma
+- i 3 k_2 k_{21} k_{22} \sigma_1}
+ \, d\sigma   d\sigma_1\,  \varphi_1(k_1)   \varphi_2(k_{21})  \varphi_3(k_{22})  
+\end{equation}
+and note that it satisfy the algebraic relation
+\begin{equation}
+  \label{eq:area-eq}
+  \der X^2(\varphi_1,\varphi_2,\varphi_3)_{tus} = 2 X_{tu}(\varphi_1,X_{us}(\varphi_2,\varphi_3))
+\qquad t,u,s \in [0,T]
+\end{equation}
+which show that $X^2$ is related to the previously defined operator
+$X$ by a ``quadratic'' relationship which motivates the abuse of the superscript $2$
+in the
+definition of $X^2$.  
+
+
+
+\begin{remark}
+\label{rem:repr}
+Define the unbounded bilinear operator $\dot X_s : (H^\alpha)^2 \to
+H^\alpha$, $s\in[0,T]$ as
+$$
+\dot X_s(\varphi_1,\varphi_2) (k) = \frac{ik}{2}\sum'_{k_1} e^{-3k k_1 k_2
+  s}\varphi_1(k_1) \varphi_2(k_2).
+$$
+Then for sufficiently regular $\varphi_1,\varphi_2$ we have the representations
+$$
+X_{ts}(\varphi_1,\varphi_2) = \int_s^t \dot
+X_\sigma(\varphi_1,\varphi_2) d\sigma,
+$$
+and
+$$
+X^2_{ts}(\varphi_1,\varphi_{21},\varphi_{22}) = 2 \int_s^t \int_s^\sigma
+\dot
+X_\sigma(\varphi_1,\dot X_{\sigma_1}(\varphi_{21},\varphi_{22}))
+d\sigma d\sigma_1,
+$$
+for any $(t,s) \in [0,T]^2$.
+\end{remark}
+
+The proof of the following lemma is postponed to Appendix~\ref{sec:reg}.
+\begin{lemma}
+\label{lemma:X2}
+There exists unbounded operators $\hat X^2: (H^\alpha)^3 \to H^\alpha, \Phi:  (H^\alpha)^2 \to \mathbb{C}$ such that
+$$
+X^2_{ts} (\varphi_1,\varphi_2,\varphi_3) = \hat X^2_{ts} (\varphi_1,\varphi_2,\varphi_3) + \Phi_{ts}(\varphi_1,\varphi_2) \varphi_3  + \Phi_{ts}(\varphi_1,\varphi_3) \varphi_2.
+$$
+Furthermore   when $\alpha \ge 1/2$ we have $|\Phi_{ts}|_{\LL((H^{\alpha})^2,\mathbb{C})} \le C |t-s|$ and for any couple
+$(\gamma,\alpha) \in  \DD$
+we have
+$
+|\hat X^2_{ts}|_{\LL((H^{\alpha})^3,H^{\alpha})} \le C |t-s|^{2\gamma}
+$
+where the constant $C$ depends only on $\alpha$ and $\gamma$.
+Then 
+$
+| X^2_{ts}|_{\LL((H^{\alpha})^3,H^{\alpha})} \le C'_{\gamma,\alpha} |t-s|^{2\gamma}
+$
+for any couple $(\gamma,\alpha) \in  \DD' = \DD \cap \{\alpha\ge 1/2\} $. Call $\DD'$ the set of \emph{allowed pairs}.
+\end{lemma}
+
+
+\begin{remark}
+Note that the full operator $X^2$ can be controlled only in the smaller
+region $\DD'$ of the $(\gamma,\alpha)$ plane. This limitation has some
+relation with the low regularity ill-posedness discussed in~\cite{MR2018661}.     
+\end{remark}
+
+\bigskip
+Abstractly we write eq.~(\ref{eq:exp-step-2}) as
+\begin{equation}
+  \label{eq:abs-step-2-ur}
+\der v = X(v,v) + X^2(v,v,v) + r^{(2)}.  
+\end{equation}
+To infer the corresponding $\Lambda$-equation  we simply apply the $\der$ operator to
+eq.~(\ref{eq:abs-step-2-ur}). After some tedious but explicit
+computations we get
+\begin{equation}
+  \label{eq:abs-step-2-ur-rem}
+  \begin{split}
+\der r^{(2)}_{tus} = & 2 X_{tu}(\der v_{us}- X_{us}(v_s,v_s),v_s) 
++ X_{tu}(\der v_{us},\der v_{us}) 
+\\ & + X^2_{tu}(\der v_{us},v_s,v_s) +
+X^2_{tu}(v_u,\der v_{us},v_s) + X^2_{tu}( v_u,v_u,\der v_{us}).     
+  \end{split}
+\end{equation}
+
+\section{Rough solutions of KdV}
+\label{sec:rough}
+From eq.~(\ref{eq:abs-step-2-ur-rem}) we can write down
+ a second $\Lambda$-equation (beside eq.~(\ref{eq:abs-lambda})) associated to the KdV equation:
+\begin{equation}
+  \label{eq:abs-step-2}
+\der v = X(v,v) + X^2(v,v,v) + v^\flat.  
+\end{equation}
+with
+$$
+v^\flat = \Lambda[ 2 X(\der v- X(v,v),v) 
++ X(\der v,\der v) 
+ + X^2(\der v,v,v) +
+X^2(v,\der v,v) + X^2( v,v,\der v)   ].
+$$
+
+An alternative form of eq.~(\ref{eq:abs-step-2}) is
+\begin{equation}
+  \label{eq:abs-step-2-compact}
+\der v = (\id - \Lambda \der)[X(v,v)+X^2(v,v,v)]
+\end{equation}
+(also eq.~(\ref{eq:abs-lambda}) can be written in the same
+form). While more compact this latter form is not very useful for
+analysis. However it makes evident why the r.h.s. belongs to $\text{Ker} \der = \text{Im} \der$.
+
+To give a well-defined meaning to eq.~(\ref{eq:abs-step-2}) it will be enough that the argument of $\Lambda$ belongs actually to its domain. Given an allowed pair $(\gamma,\alpha) \in \DD'$ which fixes the regularity of $X$ and $X^2$ sufficient (and natural) requirements for $v$ are
+\begin{equation}
+  \label{eq:requirements}
+\sup_{t\in[0,T]}|v_t|_\alpha <\infty,\qquad  \der v \in \CC^\gamma_1 H^\alpha,\qquad \der v - X(v,v) \in \CC^{2\gamma}_2 H^\alpha.   
+\end{equation}
+Under these conditions $X(\der v- X(v,v),v) \in \CC^{3\gamma}_2 H^\alpha$ and also $X^2(\der v,v,v) +
+X^2(v,\der v,v) + X^2( v,v,\der v) \in \CC^{3\gamma}_2 H^\alpha$. They are in the domain of $\Lambda$ if $3\gamma > 1$ i.e. $\gamma > 1/3$. This fixes the limiting time regularity for the $\Lambda$ eq.~(\ref{eq:abs-step-2}).
+
+Then to define solutions of eq.~(\ref{eq:abs-step-2}) let us introduce a suitable  space to enforce the all the conditions in eq.~(\ref{eq:requirements}).
+For any $0 < \eta \le \gamma$ and consider the complete metric space $\QQ_\eta$ whose elements are triples $(y,y',y^\sharp)$
+where $y \in \CC_1^\eta H^\alpha$, $y' \in \CC_1^\eta H^\alpha$, $y'_0 = y_0$ and $y^\sharp \in \CC_2^{2\eta}
+H^\alpha$. Additional requirement is that they satisfy the equation $\der y = X(y',y') +
+y^\sharp$.  The distance $d_{\QQ,\eta}$ on $\QQ_\eta$ is defined by
+$$
+d_{\QQ,\eta}(y,z) = |y_0-z_0| + \|y-z\|_{\eta} + \|y'-z'\|_{\eta} + \|y^\sharp-z^{\sharp}\|_{\eta}. 
+$$
+for any two elements $y,z \in \QQ_\eta$. 
+
+With abuse of notations we will denote a triple
+$(y,y',y^\sharp) \in \QQ_\eta$ using simply its first component.
+Moreover  we denote with $y_0$ also the constant path in $\QQ_\eta$ with value $(y_0,0,0)$. 
+
+The main result of the paper is the following theorem.
+
+\begin{theorem}
+\label{thm:main}
+Fix $\gamma \in (1/3,1/2)$ and $\alpha > 3\gamma -3/2$. Then, for any
+$v_0 \in H^\alpha$ 
+the $\Lambda$-equation~(\ref{eq:abs-step-2}) admits a unique solution
+$v \in \QQ_\gamma$ on a small
+interval $[0,T^*]$ where $T^*$ depends only on the norm of $v_0$.
+
+If we write $v = \Theta(X,X^2,v_0)$ for the map 
+$$
+\Theta: \CC^\gamma_2 \LL((H^\alpha)^2,H^\alpha) \times \CC^{2\gamma}_2 \LL((H^\alpha)^3,H^\alpha) \times H^\alpha \to \QQ_\gamma
+$$ which send the data to this unique local solution, then $\Theta$ is a locally Lipschitz map w.r.t. $(X,X^2,v_0) \in \CC^\gamma_2 \LL((H^\alpha)^2,H^\alpha) \times \CC^{2\gamma}_2 \LL((H^\alpha)^3,H^\alpha) \times H^\alpha$. 
+\end{theorem}
+
+
+The restriction on $\gamma$ and $\alpha$ ensure that the couple $(\gamma,\alpha) \in \DD'$. Then $X$ and $X^2$ are regular enough so that the proof of the theorem can
+follow essentially the pattern of a similar result
+in~\cite{MR2091358}.
+The following is an  almost self-contained proof.
+
+\begin{proof} Fix $\eta \in (0,\gamma)$ and
+ define
+a map $\Gamma: \QQ_\eta \to \QQ_\eta$ by $z = \Gamma(y)$ where
+\begin{equation}
+  \label{eq:gamma}
+z_0 = y_0, \qquad \der z = X(y,y) + X^2(y,y,y) + z^\flat
+\end{equation}
+with
+$$
+z^\flat = \Lambda[ 2 X(y^\sharp,y) 
++ X(\der y,\der y) 
+ + X^2(\der y,y,y) +
+X^2(y,\der y,y) + X^2( y,y,\der y)   ].
+$$
+and we set $z' = y$ and $z^\sharp = X^2(y,y,y) + z^\flat$. For the map
+$\Gamma$ to be well defined it is enough that $(\gamma,\alpha) \in
+\DD$ and that $\eta > 1/3$. Indeed if $y \in \QQ_\eta$ then all the
+terms in the argument of the $\Lambda$-map belongs to
+$\CC_2^{3\eta}H^\alpha$.
+ 
+We will proceed in three steps. First we will prove that there exists
+$T_*\in(0,1]$  depending only on $|v_0|$ such that for any $T\le T_* $, $\Gamma$ maps a closed ball $B_T$ of $\QQ_{\eta}$ in
+itself. Then we will prove that if $T$ is sufficiently small, $\Gamma$
+is actually a contraction on this ball proving the existence  of a
+fixed-point. Finally uniqueness will follow from a standard argument.
+
+
+\paragraph{Boundedness.}
+The key observation to prove (below) that $\Gamma$
+is a contraction for $T$ sufficiently small is that $\Gamma(y)$
+belongs actually to $\QQ_\gamma$, indeed $z' = y \in \CC_1^\gamma
+H^\alpha$ and $z^\sharp \in \CC_2^{2\gamma} H^\alpha$. 
+
+Let us assume that $T \le 1$.
+First we will prove that
+\begin{equation}
+  \label{eq:bound-on-Gamma}
+  d_{\QQ,\gamma}(\Gamma(y),0) = d_{\QQ,\gamma}(z,0) \le C (1+d_{\QQ,\eta}(y,0))^3.
+\end{equation}
+Since $3\eta > 1$ using Prop.~\ref{prop:Lambda} we have
+\begin{equation}
+\label{eq:flat-bound}
+  \begin{split}
+\|z^{\flat}\|_{3\eta} & \le C \|2 X(y^\sharp,y) 
++ X(\der y,\der y) 
+ + X^2(\der y,y,y) +
+X^2(y,\der y,y) + X^2( y,y,\der y) \|_{3\eta}
+\\ & \le C \left[ 2\| X(y^\sharp,y) \|_{3\eta}
++ \|X(\der y,\der y)\|_{3\eta} 
+\right. \\ & \qquad \left. + \|X^2(\der y,y,y)\|_{3\eta} +
+\|X^2(y,\der y,y)\|_{3\eta} + \|X^2( y,y,\der y) \|_{3\eta}\right]
+  \end{split}
+\end{equation}
+The first term is bounded by
+$$
+\| X(y^\sharp,y) \|_{3\eta} \le \|X\|_{\eta} \|y^\sharp\|_{2\eta} \|y\|_{\infty}
+$$
+where the H\"older norm $\|X\|_{\eta}$ is considered with respect to
+the operator norm on $\LL((H^\alpha)^2,H^\alpha)$. Now
+$\|X\|_\eta \le \|X\|_\gamma$ since we assume $\eta < \gamma$, while
+$\|y^\sharp\|_{2\eta} \le d_{\QQ,\eta}(y,0)$ and finally 
+remark that $\|y\|_{\infty} = |y_0|+ \|y\|_{\eta} \le
+d_{\QQ,\eta}(y,0)$ since we assumed $T \le 1$. So  
+$
+\| X(y^\sharp,y) \|_{3\eta} \le C d_{\QQ,\eta}(y,0)^2
+$.
+
+ Each of the
+other terms in eq.~(\ref{eq:flat-bound}) can be bounded similarly.
+ Then 
+\begin{equation}
+\label{eq:flat-bound-final}
+  \begin{split}
+\|z^{\flat}\|_{3\eta} & \le C (1+d_{\QQ,\eta}(y,0))^3
+  \end{split}
+\end{equation}
+This implies 
+\begin{equation*}
+  \begin{split}
+\|z^\sharp\|_{2\gamma} & = \|X^2(y,y,y) + z^\flat\|_{2\gamma}   
+%\\ &
+ \le \|X^2(y,y,y)\|_{2\gamma} + \|z^\flat\|_{2\gamma}
+\\ & \le C \|y\|_{\infty}^3 + \|z^\flat\|_{2\gamma}     
+  \end{split}
+\end{equation*}
+By hypothesis we have $2\gamma < 1 < 3\eta$ so $\|z^\flat\|_{2\gamma}
+\le  \|z^\flat\|_{3\eta}$ and again we obtain
+$
+\|z^\sharp\|_{2\gamma} \le C (1+d_{\QQ,\eta}(y,0))^3
+$.
+Finally we have to bound $z'$ and $z$:
+\begin{equation*}
+  \begin{split}
+\|z'\|_{\gamma} & = \|y\|_{\gamma} \le \|X(y',y')+y^\sharp\|_{\gamma} \le
+C \|y'\|_{\infty}^2 + \|y^\sharp\|_{2\gamma}
+\\  & \le
+C (|y_0|^2 + \|y'\|_{\gamma}^2) + \|y^\sharp\|_{2\gamma}
+%\\& 
+\le C (1+d_{\QQ,\eta}(y,0))^2    
+  \end{split}
+\end{equation*}
+Similarly we can bound $z$ as $\|z\|_\gamma \le C
+(1+d_{\QQ,\eta}(y,0))^3$.
+Putting these bounds together we prove eq.~(\ref{eq:bound-on-Gamma}).
+Let $\eps = \gamma-\eta > 0$ and observe that
+\begin{equation*}
+  \begin{split}
+    d_{\QQ,\eta}(\Gamma(y),0) &= |z_0| +
+    \|z\|_\eta+\|z'\|_{\eta}+\|z^\sharp\|_{2\eta} 
+\\ & \le |z_0| +
+     T^\eps\left[ \|z\|_\gamma+\|z'\|_{\gamma}+\|z^\sharp\|_{2\gamma}\right]
+\\ & \le |y_0| +
+     T^\eps d_{\QQ,\gamma}(\Gamma(y),0)
+  \end{split}
+\end{equation*}
+So 
+\begin{equation}
+\label{eq:boundedness}
+    d_{\QQ,\eta}(\Gamma(y),0) \le |y_0|+ C T^\eps (1+d_{\QQ,\eta}(y,0))^3
+\end{equation}
+Let $B_T = \{ y \in \QQ_{\eta} : d_{\QQ,\eta}(y,0) \le b_T, y_0 = v_0
+\}$ be a closed ball of elements in $\QQ_{\eta}$ with initial
+condition $v_0$. Let $b_T > 0$ be the solution of the algebraic equation
+$
+b_T = |v_0|+ C T^\eps (1+b_T)^3
+$
+which exists whenever $T \le T_*(|v_0|)$ where $T_*(|v_0|)$ is a
+strictly positive time which depends only on $|v_0|$. 
+If $T \le T_*(|v_0|)$ and $y \in B_T$ then by eq.~(\ref{eq:boundedness}) we have
+$
+d_{\QQ,\eta}(\Gamma(y),0) \le |v_0| + C T^\eps (1+b_T)^3 = b_T
+$    
+which implies that $\Gamma$ maps $B_T$ onto itself.
+
+\paragraph{Contraction.}
+By argument similar to those used above we can prove that if $y^{(1)},
+y^{(2)}$ are two elements of $\QQ_{\eta}$ then
+\begin{equation}
+  \label{eq:Gamma-contraction}
+  d_{\QQ,\gamma}(\Gamma(y^{(1)}),\Gamma(y^{(2)})) \le C d_{\QQ,\eta}(y^{(1)},y^{(2)}) (1+d_{\QQ,\eta}(y^{(1)},0)+d_{\QQ,\eta}(y^{(2)},0))^2 
+\end{equation}
+Then 
+\begin{equation}
+  \label{eq:Gamma-contraction-2}
+   d_{\QQ,\eta}(\Gamma(y^{(1)}),\Gamma(y^{(2)})) \le
+  |y^{(1)}_0-y^{(2)}_0| 
+  + C T^\eps  d_{\QQ,\eta}(y^{(1)},y^{(2)}) (1+ d_{\QQ,\eta}(y^{(1)},0)+ d_{\QQ,\eta}(y^{(2)},0))^2 
+\end{equation}
+Taking $y_1,y_2 \in B_T$ we have
+\begin{equation}
+  \label{eq:Gamma-contraction-3}
+  d_{\QQ,\eta}(\Gamma(y^{(1)}),\Gamma(y^{(2)})) \le
+   C (1+2 b_T)^2 T^\eps d_{\QQ,\eta}(y^{(1)},y^{(2)})
+\end{equation}
+Let $T_{**} < T_*$ and such that  $C (1+2 b_T)^2 T_{**}^\eps < 1$, eq.~(\ref{eq:Gamma-contraction-3}) implies that
+$\Gamma$ is a strict contraction on $B_{T_{**}}$ with a unique fixed-point
+(in $B_{T_{**}}$).
+
+A standard argument allows to extend the solution 
+to the larger time interval $T_*$.
+
+\paragraph{Uniqueness.} Now assume to have two solutions 
+$v^{(1)},v^{(2)} \in \QQ_\eta$ of eq.~(\ref{eq:abs-step-2}), i.e. such
+that $v^{(i)} = \Gamma(v^{(i)})$, $v^{(i)}_0 = v_0$ for
+$i=1,2$. Eq.~(\ref{eq:Gamma-contraction}) applied to the distance between $\Gamma(v^{(1)})
+$ and $\Gamma(v^{(2)})$ implies
+\begin{equation*}
+%  \label{eq:1}
+ d_{\QQ,\gamma}(v^{(1)},v^{(2)}) \le C  d_{\QQ,\eta}(v^{(1)},v^{(2)}) (1+ d_{\QQ,\eta}(v^{(1)},0)+ d_{\QQ,\eta}(v^{(2)},0))^2   
+\end{equation*}
+If we denote $\QQ_{\eta,T}$ the space $\QQ_{\eta}$ considered for
+functions on $[0,T]$ and with $ d_{\QQ,\eta,T}(\cdot,\cdot)$ the
+corresponding distance, then we have for $S \le T$
+$
+ d_{\QQ,\eta,S}(y,0) \le   d_{\QQ,\eta,T}(y,0)
+$ for any $y \in \QQ_{\eta,T}$. Then
+\begin{equation*}
+%  \label{eq:1}
+ d_{\QQ,\eta,S}(v^{(1)},v^{(2)}) \le C  d_{\QQ,\eta,S}(v^{(1)},v^{(2)}) (1+ d_{\QQ,\eta,S}(v^{(1)},0)+ d_{\QQ,\eta,S}(v^{(2)},0))^2   
+\end{equation*}
+and so
+\begin{equation*}
+%  \label{eq:1}
+ d_{\QQ,\eta,S}(v^{(1)},v^{(2)}) \le C S^\eps  d_{\QQ,\eta,S}(v^{(1)},v^{(2)}) (1+ d_{\QQ,\eta,S}(v^{(1)},0)+ d_{\QQ,\eta,S}(v^{(2)},0))^2   
+\end{equation*}
+so when $S$ is small enough that $C S^\eps
+(1+ d_{\QQ,\eta,S}(v^{(1)},0)+ d_{\QQ,\eta,S}(v^{(2)},0))^2  \le 1/2  $ we
+must have that $ d_{\QQ,\eta,S}(v^{(1)},v^{(2)}) = 0$ and then
+$v^{(1)}_t = v^{(2)}_t$ for any $t \in [0,S]$. By repeating this
+argument  we conclude that the two solution coincide in the whole interval
+$[0,T]$.
+
+\paragraph{Lipschitz continuity.}
+Modulo some technicalities due to the local character of the solution, the proof of the Lipschitz continuity of the map $\Theta$ follows the line of the finite dimensional situation. See~\cite{MR2091358} for details.
+\end{proof}
+
+
+\subsection{$L^2$ conservation law and global solutions}
+\label{sec:global}
+It is well known that the KdV equation formally conserves the $L^2 =
+H^0$ norm of the solution. This conservation law can be used to show
+existence of global solution when the initial condition is in $H^0$. 
+
+%\subsection{Conservative increments}
+ 
+Denote with $\langle \cdot,\cdot \rangle$ the $L^2$ scalar product:
+$
+\langle \varphi,\psi \rangle = \sum_k \overline{\varphi(k)} \psi(k) =
+\sum_k \varphi(-k) \psi(k)
+$.
+
+\begin{lemma}[$L^2$ differential conservation law]
+For regular $\varphi_1,\varphi_2,\varphi_3$ we have
+\label{lemma:basic-symmetry}
+$$
+\langle \varphi_1, \dot X_s(\varphi_2,\varphi_3)\rangle 
++\langle \varphi_2, \dot X_s(\varphi_1,\varphi_3)\rangle 
++\langle \varphi_3, \dot X_s(\varphi_2,\varphi_1)\rangle 
+= 0, \qquad s \in[0,T]
+$$  
+\end{lemma}
+\begin{proof}
+  \begin{equation}
+    \label{eq:cons-1}
+\langle \varphi_1, \dot X_s(\varphi_2,\varphi_3)\rangle  =
+\sum_{\substack{k,k_1,k_2\\ k=k_1+k_2}} \frac{ik}{2}e^{-i3k k_1 k_2
+  s}  \varphi_{1}(-k)  \varphi_2(k_1) \varphi_3(k_2)
+  \end{equation}
+Make the change of variables $k \to -k$ to get
+$$
+- \sum_{k+k_1+k_2=0} \frac{ik}{2}e^{i3k k_1 k_2
+  s}  \varphi_{1}(k)  \varphi_2(k_1) \varphi_3(k_2)
+$$
+Now since $k = -k_1-k_2$ this last quantity is equal to
+$$
+ \sum_{k+k_1+k_2=0} \frac{ik_1}{2}e^{i3k k_1 k_2
+  s}  \varphi_{1}(k)  \varphi_2(k_1) \varphi_3(k_2)
++ \sum_{k+k_1+k_2=0} \frac{ik_2}{2}e^{i3k k_1 k_2
+  s}  \varphi_{1}(k)  \varphi_2(k_1) \varphi_3(k_2)
+$$
+%In the first sum make the change of variables $k_1 \to -k_1$ and in
+%the second $k_2 \to -k_2$ to get
+%$$
+%- \sum_{k+k_2=k_1} \frac{ik_1}{2}e^{3k k_1 k_2
+%  s}  \varphi_{1}(k)  \varphi_2(-k_1) \varphi_3(k_2)
+%- \sum_{k+k_1=k_2} \frac{ik_2}{2}e^{3k k_1 k_2
+%  s}  \varphi_{1}(k)  \varphi_2(k_1) \varphi_3(-k_2)
+%$$
+%which is equal to
+If 
+in the first sum we make the change of variables $k_1 \to -k_1$ and in
+the second $k_2 \to -k_2$ we finally get to
+$
+- \langle \varphi_2, \dot X_s(\varphi_1,\varphi_3)\rangle - \langle \varphi_3, \dot X_s(\varphi_2,\varphi_1)\rangle
+$,
+proving the statement.
+\end{proof}
+
+
+\begin{corollary} For $\varphi \in L^2$,
+\label{cor:more-symmetry}
+$$
+2 \langle \varphi, X^2_{ts}(\varphi,\varphi,\varphi)\rangle
++   \langle X_{ts}(\varphi,\varphi), X_{ts}(\varphi,\varphi)\rangle = 0.
+$$  
+\end{corollary}
+\begin{proof}
+Note that Lemma~\ref{lemma:basic-symmetry} implies that
+$
+\langle \varphi_1 , \dot X_s(\varphi_2,\varphi_2) \rangle  =
+-2 \langle \varphi_2 , \dot X_s(\varphi_1,\varphi_2) \rangle 
+$
+so  we can compute
+  \begin{equation}
+    \label{eq:cons-law-3}
+    \begin{split}
+  & \langle \varphi, X^2_{ts}(\varphi,\varphi,\varphi)\rangle = 
+2 \int_s^t d\sigma \int_s^\sigma  d\sigma_1  
+  \langle \varphi, \dot X_\sigma(\varphi,\dot
+  X_{\sigma_1}(\varphi,\varphi))\rangle 
+\\ & \qquad 
+=- 
+\int_s^t d\sigma \int_s^\sigma  d\sigma_1  
+  \langle \dot
+  X_{\sigma_1}(\varphi,\varphi), \dot X_\sigma(\varphi,\varphi)\rangle        
+\\ & \qquad 
+=- \frac12
+\int_s^t d\sigma \int_s^t  d\sigma_1  
+  \langle \dot
+  X_{\sigma_1}(\varphi,\varphi), \dot X_\sigma(\varphi,\varphi)\rangle        
+\\ & \qquad 
+=- \frac12
+  \langle 
+  X_{ts}(\varphi,\varphi),  X_{ts}(\varphi,\varphi)\rangle        
+    \end{split}
+  \end{equation}
+which is what we wanted to prove.
+\end{proof}
+
+
+\begin{theorem}[Integral conservation law]
+If $v$ is a solution of eq.~(\ref{eq:abs-step-2}) in $[0,T_*]$ with initial condition $v_0 \in L^2$ then $|v_t|^2_0 = |v_0|_0^2$ for any $t \in [0,T_*]$.
+\end{theorem}
+\begin{proof}
+We will prove that $\der \langle v,v \rangle  = 0$. Let us compute explicitly this finite increment:
+\begin{equation*}
+  \begin{split}
+[\der \langle v,v \rangle]_{ts}  & = \langle v_t,v_t \rangle - \langle v_s,v_s \rangle
+=  2 \langle \der v_{ts},v_s \rangle + \langle \der v_{ts},\der v_{ts} \rangle    
+  \end{split}
+\end{equation*}
+Substituting in this expression the $\Lambda$-equation~(\ref{eq:abs-step-2}) we get
+\begin{equation*}
+  \begin{split}
+[\der \langle v,v \rangle]_{ts}
+& = 2  \langle X_{ts}(v_s,v_s)+X^2_{ts}(v_s,v_s,v_s) + v^\flat_{ts},v_s \rangle 
+\\ & \qquad + \langle X_{ts}(v_s,v_s),X_{ts}(v_s,v_s) \rangle 
++ 2 \langle X_{ts}(v_s,v_s),v^{\sharp}_{ts} \rangle    
++  \langle v^{\sharp}_{ts},v^{\sharp}_{ts} \rangle    
+  \end{split}
+\end{equation*}
+where we set $v^\sharp = X^2(v,v,v) +
+v^\flat$. Lemma~\ref{lemma:basic-symmetry} implies that $\langle v_s,
+X_{ts}(v_s,v_s) \rangle = 0$ while Corollary~\ref{cor:more-symmetry}
+allows to cancel the $X^2$ term with the quadratic $X$ term. After the
+cancellations the increment of the $L^2$ norm squared is  
+\begin{equation*}
+  \begin{split}
+[\der \langle v,v \rangle]_{ts}
+& = 2  \langle  v^\flat_{ts},v_s \rangle 
++ 2 \langle X_{ts}(v_s,v_s),v^{\sharp}_{ts} \rangle    
++  \langle v^{\sharp}_{ts},v^{\sharp}_{ts} \rangle    
+  \end{split}
+\end{equation*}
+Each term  on the r.h.s. belongs at least to $\CC_2^{3\eta} \RR$ and
+since $3\eta > 1$ this implies that the function $t \mapsto |v_t|^2_0$
+is an H\"older function of index greater than $1$ hence it
+must be constant.
+\end{proof}
+
+
+\begin{corollary}[$L^2$ global solutions]
+If $v_0 \in L^2$ there exist a unique global solutions to the $\Lambda$-equation~(\ref{eq:abs-step-2}).  
+\end{corollary}
+\begin{proof}
+By Thm.~\ref{thm:main} there exists a unique local solution up to a time
+$T_*$ which depends only on $|v_0|_0$. Since $|v_{T_*}|_0 = |v_{0}|_0$
+we can start from $T_*$ and extend uniquely this solution to the interval
+$[0,2T_*]$ and then on any interval.
+\end{proof}
+
+\subsection{Galerkin approximations}
+\label{sec:galerkin}
+Let $P_N$ the projection on the Fourier modes $|k| \le N$. Consider the approximate KdV equation
+\begin{multline}
+  \label{eq:kdv-real-N}
+\partial_t u^{(N)}(t,\xi) + \partial^3_\xi u^{(N)}(t,\xi) +
+\frac12 P_N \partial_\xi u^{(N)}(t,\xi)^2 = 0,\\ u^{(N)}(0,\xi) = u^{(N)}_0(\xi), \qquad
+(t,\xi)\in\RR\times \TT  
+\end{multline}
+where $u^{(N)}_0 = P_N u_0$. Is not difficult to show that the unique solution of this equation satisfy the $\Lambda$-equation
+\begin{equation}
+  \label{eq:abs-step-2-compact-N}
+\der v^{(N)} = (\id - \Lambda \der)[X^{(N)}(v^{(N)},v^{(N)})+X^{(N),2}(v^{(N)},v^{(N)},v^{(N)})]
+\end{equation}
+where $v^{(N)}_t(k) = e^{-ik^3 t}\wh{u^{(N)}}(t,k)$,
+$X^{(N)} = P_N X ( P_N \times P_N )$ and where the operator $X^{(N),2}$ is defined as
+\begin{equation}
+  \label{eq:X2-galerkin}
+X^{(N),2}_{ts}(\varphi_1,\varphi_2,\varphi_3) = 2 \int_s^t d\sigma \int_s^\sigma d\sigma_1 P_N \dot X_\sigma(P_N \varphi_1,P_N \dot X_{\sigma_1}(P_N \varphi_2,P_N \varphi_3))  
+\end{equation}
+so that 
+$$
+\der X^{(N),2}(\varphi_1,\varphi_2,\varphi_3) = 2 X^{(N)}(\varphi_1,X^{(N)}(\varphi_2,\varphi_3)).
+$$
+These are just multi-linear operators in
+a finite-dimensional space and to have convergence of the Galerkin
+approximation it would be enough that both converge strongly to their
+infinite-dimensional analogs $X,X^2$. Unfortunately it is not difficult to see that $X^{(N),2}$ cannot converge strongly.
+ Indeed a
+decomposition for   $X^{(N),2}$ analogous to that of $X^2$ described
+in Lemma~\ref{lemma:X2} holds:
+\begin{equation}
+  \label{eq:decomp-gal}
+X^{(N),2}(\varphi_1,\varphi_2,\varphi_3) = \hat X^{(N),2}(\varphi_1,\varphi_2,\varphi_3) + \Phi^{(N)}(\varphi_1,\varphi_2) P_N\varphi_3 + \Phi^{(N)}(\varphi_1,\varphi_3)P_N \varphi_2  
+\end{equation}
+where 
+$$
+\Phi^{(N)}(\varphi_1,\varphi_2) = \Phi(P_N \varphi_1,P_N \varphi_2).
+$$
+and we will prove in the appendix that 
+\begin{lemma}
+\label{lemma:gal}
+Assume $(\gamma,\alpha) \in \DD$. Then as  $N \to \infty$, $X^{(N)} \to X$ strongly in $\CC_2^\gamma
+\LL((H^\alpha)^2,H^\alpha)$ and $\hat X^{(N),2} \to X^2$ strongly in $\CC_2^\gamma
+\LL((H^\alpha)^3,H^\alpha)$. 
+\end{lemma}
+
+Then we see that the strong convergence of $X^{(N),2}$ would imply that of the maps
+$$
+(\varphi_1,\varphi_2,\varphi_3) \mapsto \Phi(P_N \varphi_1,P_N \varphi_2) P_N\varphi_3 + \Phi(P_N \varphi_1,P_N \varphi_3) P_N \varphi_2
+$$
+and this is clearly not possible.
+
+However the decomposition~(\ref{eq:decomp-gal}) allows us to write another $\Lambda$ equation for $v^{(N)}$
+\begin{equation}
+  \label{eq:abs-step-2-compact-N-bis}
+\der v^{(N)} = (\id - \Lambda \der)[X^{(N)}(v^{(N)},v^{(N)})+\hat X^{(N),2}(v^{(N)},v^{(N)},v^{(N)})+ 2 \Phi(v^{(N)},v^{(N)}) v^{(N)}]
+\end{equation}
+note that, since $P_N v^{(N)} = v^{(N)}$, in this equation the
+operator $\Phi$ appears at the place of $\Phi^{(N)}$. Of course a
+similar equation holds for the solution $v$ of the full problem with
+the couple $X,\hat X^2$ instead of $ X^{(N)},\hat X^{(N),2}$. 
+
+As a consequence, the Lipschitz continuity of the solution of the
+$\Lambda$-equation~(\ref{eq:abs-step-2-compact-N-bis}) w.r.t $X,\hat X^2$ and $v_0$ implies
+the following convergence result.
+
+\begin{corollary}
+\label{cor:galerkin}
+As $N \to \infty$ the Galerkin approximations $v^{(N)}$ converges in $\CC_1^\gamma H^\alpha$ to
+the solution $v$ of the $\Lambda$-equation~(\ref{eq:abs-step-2}) up to
+a strictly positive time $T^*$ which depends only on the norm of
+$v_0,X,\hat X^2, \Phi$.  
+\end{corollary}
+
+This result is important in that it justifies the identification of
+solutions to the $\Lambda$-equation~(\ref{eq:abs-lambda}) as
+generalized solutions of the  KdV equation~(\ref{eq:kdv-real}). 
+
+
+
+\subsection{A numerical scheme}
+\label{sec:euler}
+The solution described by the
+$\Lambda$-equation~(\ref{eq:abs-step-2-compact}) can be approximated
+by a discrete Euler-like scheme defined as follows. For any $n >0$ let $y^n_0=v_0$
+and 
+$$
+y^n_i = X_{0, 1/n}(y^n_{i-1},y^n_{i-1}) + X^2_{0, 1/n}(y^n_{i-1},y^n_{i-1},y^n_{i-1})
+$$
+for $i\ge 1$. 
+
+The combination of  this scheme with the Galerkin approximation
+discussed before is an effective  numerical  approximation scheme for the
+solutions of KdV with low regularity initial conditions. Indeed the next theorem  can  be combined with
+Cor.~\ref{cor:galerkin} to obtain effective rates of convergence.
+
+\begin{theorem}
+Let $\Delta^n_i = y^n_i-y_{i/n}$ and let $T>0$ be the existence time of the
+solution described in Thm.~\ref{thm:main}, then
+\begin{equation}
+  \label{eq:euler-bound}
+\sup_{0\le i< j\le nT} \frac{|\Delta^n_i-\Delta^n_j|_\alpha}{|i-j|^\gamma} = O(n^{1-3\gamma}) . 
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $T$ be the existence time for the solution $v$ described in theorem~\ref{thm:main} and let $N = \lfloor nT \rfloor$.
+We begin by proving some uniform bounds on the sequence
+$\{y^n_i,i=0,\dots,N\}$.   Let
+$$
+q^n_{ij} = X_{i/n, j/n}(y^n_{i},y^n_{i}) + X^2_{i/n, j/n}(y^n_{i},y^n_{i},y^n_{i})
+$$
+so that $y^n_k =\sum_{i=0}^{k-1} q_{i,i+1}$. Given $0\le i<j\le N$ let
+$\tau^1_0=i, \tau^1_1=j$ and define recursively  $\tau^k_l$, $k >
+0$, $l =0,\dots,2^k$ such that $\tau^{k+1}_{2l} = \tau^k_l$  for
+$l=0,\dots,2^k$ and 
+$\tau^{k+1}_{2l+1}<\lfloor (\tau^{k}_{l}+\tau^{k}_{l+1})/2\rfloor$ for
+$l=0,\dots,2^k-1$. 
+Then we have $|\tau^k_{l+1}-\tau^k_l|\le 1 \vee (j-i)/2^k$
+and
+$
+y^n_j-y^n_i =\sum_{l=0}^{2^K} q^n_{\tau^k_l,\tau^k_{l+1}} 
+$
+ where $K$ is such that
+$(j-i)/2^K \le 1$. Using the triangular array $\tau^k_l$ we 
+rewrite the above expression as a telescopic sum:
+\begin{equation*}
+  \begin{split}
+y^n_j-y^n_i & = q^n_{ij} + \sum_{k=1}^K \sum_{l=0}^{2^{K-1}} (q^n_{\tau^k_{2l},\tau^k_{2l+2}}-q^n_{\tau^k_{2l},\tau^k_{2l+1}}-q^n_{\tau^k_{2l+1},\tau^k_{2l+2}}) 
+  \\ & = q^n_{ij} + \sum_{k=1}^K \sum_{l=0}^{2^{k-1}} (\der q^n)_{\tau^k_{2l},\tau^k_{2l+1},\tau^k_{2l+2}}   
+  \end{split}
+\end{equation*}
+Up to $T$, the solution $v$ satisfy the equation
+$
+\der v = X(v,v) + X^2(v,v,v) + v^\flat
+$
+where $\sup_{t\in[0,T]}|v_t|_\alpha+\|v^\flat\|_{3\gamma}\le C$ so
+\begin{equation*}
+v_{j/n}-v_{i/n} = \sum_{l=i}^{j-1} p_{l,l+1} + \sum_{l=i}^{j-1} v^\flat_{l/n,(l+1)/n}
+\end{equation*}
+where $p_{ij}=X_{i/n,j/n}(v_{i/n},v_{i/n})+X^2_{i/n,j/n}(v_{i/n},v_{i/n},v_{i/n})$.
+Then
+\begin{equation*}
+\Delta^n_{j}-\Delta^n_{i} =  q^n_{ij}-p_{ij}  + \sum_{k=1}^K \sum_{l=0}^{2^{k-1}} (\der
+q^n- \der p)_{\tau^k_{2l},\tau^k_{2l+1},\tau^k_{2l+2}}  - r_{ij}
+\end{equation*}
+where
+$
+r_{ij}=  \sum_{l=i}^{j-1} v^\flat_{l/n,(l+1)/n}
+$.
+This last term is readily estimated by
+$$
+|r_{ij}| \le \sum_{l=i}^{j-1} \|v^\flat\|_{3\gamma} n^{-3\gamma}
+ \le C \left(\frac{j-i}{ n}\right) n^{1-3\gamma}
+$$
+uniformly in $n$.
+Let 
+$$
+M^n_\ell = \sup_{0\le i < j \le \ell} \left(\frac{j-i}{ n}\right)^{-1} |\Delta^n_{j}-\Delta^n_{i} -  q^n_{ij}+p_{ij}+r_{ij}|
+$$
+we want to show that $M^n_N \le A n^{1-3\gamma}$ uniformly in $n$ for some constant
+$A$ depending only on the data of the problem: this will imply the
+statement of the theorem since then
+$$
+|\Delta^n_{i}| \le |q^n_{0i}-p_{0i}| + |r_{0i}| + A n^{1-3\gamma}
+\left(\frac{i}{ n}\right)  \le |r_{0i}| + A n^{1-3\gamma}
+\left(\frac{i}{ n}\right) \le Cn^{1-3\gamma}
+$$
+for any $i \le N$ and
+$$
+|\Delta^n_{j}-\Delta^n_{i}| \le |q^n_{ij}-p^{ij}| + |r_{ij}| + A n^{1-3\gamma}
+\left(\frac{j-i}{ n}\right)  \le C n^{1-3\gamma} \left(\frac{j-i}{ n}\right)^\gamma
+$$
+for any $0\le i<j\le N$.
+
+
+ We proceed by
+induction on $\ell$. For $\ell=1$ the statement is clearly true since
+$\Delta^n_{1}-\Delta^n_{0} -  q^n_{0,1}+p_{0,1}+r_{0,1}=0$, moreover
+for the same reason we have, for all $l$ that
+$\Delta^n_{l+1}-\Delta^n_{l} -  q^n_{l,l+1}+p_{l,l+1}+r_{l,l+1}=0$.
+ Assume then
+that $M^n_{\ell-1} \le A$ for some $\ell> 0$. The basic observation is that when $|i-j|\le \ell$
+the sums
+$$
+\Delta^n_{j}-\Delta^n_{i} -  q^n_{ij}+p_{ij}+r_{ij} = \sum_{k=1}^K \sum_{l=0}^{2^{k-1}} (\der
+q^n- \der p)_{\tau^k_{2l},\tau^k_{2l+1},\tau^k_{2l+2}}
+$$
+can be estimated in terms of $M^n_{\ell-1}$ and various norms of
+$v$,$X$,$X^2$ much like in the proof of Thm.~\ref{thm:main}. The bound
+has the form
+$$
+|(\der
+q^n- \der p)_{\tau^k_{2l},\tau^k_{2l+1},\tau^k_{2l+2}}| \le C
+\left(\frac{j-i}{2^k n}\right)^{3\gamma} (1+M^n_{\ell-1})^3 (M^n_{\ell-1}+n^{1-3\gamma})
+$$
+where $C=C(v_0,X,X^2)$ and where the factor $n^{1-3\gamma}$ is due to
+the previous estimate on $r_{ij}$. Then since $3\gamma > 1$ and
+$$
+\sum_{k=1}^K \sum_{l=0}^{2^{k-1}}
+\left(\frac{j-i}{2^k n}\right)^{3\gamma}  \le \left(\frac{j-i}{
+    n}\right)^{3\gamma} \sum_{k=1}^\infty 2^{k(1-3\gamma)} \le C  \left(\frac{j-i}{
+    n}\right)^{3\gamma} \le C \left(\frac{\ell}{
+    n}\right)^{3\gamma-1}  \left(\frac{j-i}{
+    n}\right) 
+$$
+we get
+$$
+M^n_\ell \le C
+(1+M^n_{\ell-1})^4 \sum_{k=1}^K \sum_{l=0}^{2^{k-1}}
+\left(\frac{j-i}{2^k n}\right)^{3\gamma} \le C (1+M^n_{\ell-1})^3 (M^n_{\ell-1}+n^{1-3\gamma}) \left(\frac{\ell}{
+    n}\right)^{3\gamma-1} 
+$$
+Let $m^n_\ell = n^{3\gamma-1} M^{n}_\ell$, then, for $n$ large enough
+$m^n_\ell \le F(m^n_{\ell-1})$ where
+$F$ is the increasing map
+$$
+\RR_+ \ni m \mapsto F(m)= C (1+m)^4 \left(\frac{\ell}{
+    n}\right)^{3\gamma-1} \in \RR_+
+$$
+which, for $\ell/n$ small enough
+has a unique attracting fix-point under iteration starting from $0$. 
+ In particular the
+iterations stay bounded and if we  set $x_{i+1}=F(x_i)$, $x_0=0$ we
+have $A = \sup_i F(x_i)  <
+\infty$ and $m^n_\ell \le x_\ell \le A$. By repeating this argument it is easy to prove that the
+bound holds for all $\ell \le nT$, i.e. in the whole existence
+interval found in Thm.~\ref{thm:main}.
+\end{proof}
+
+\begin{remark}
+With a bit more of work it is possible to prove the existence of
+the solution stated in Thm.~\ref{thm:main} using directly the discrete
+approximation as done by Davie~\cite{davie} for rough
+differential equations.
+\end{remark}
+
+
+\subsection{Higher order $\Lambda$ equations}
+\label{sec:more}
+Further expansion of eq.~(\ref{eq:exp-step-2}) generate a hierarchy of
+$\Lambda$-equations for KdV. The next one is given by
+\begin{equation}
+  \label{eq:hier-next}
+  \der v = (\id-\Lambda\der) [X(v^{\times 2}) + X^2 (v^{\times 3}) + X^{3a}(v^{\times 4}) + X^{3b}(v^{\times 4})]
+\end{equation}
+where $v^{\times n} = (v,\dots,v)$ ($n$ times) and where $X^{3a},X^{3b}$ are operators increments respectively defined as
+\begin{equation}
+  \label{eq:X3a}
+  X^{3a}_{ts}(\varphi_1,\varphi_2,\varphi_3,\varphi_4) = \int_s^t
+  d\sigma_1 \dot
+  X_{\sigma_1}(\varphi_1,\int_s^{\sigma_1}d\sigma_2 \dot X_{\sigma_2}(\varphi_2,
+\int_s^{\sigma_2}d\sigma_3 \dot X_{\sigma_3}(\varphi_3,\varphi_4)))
+\end{equation}
+and
+\begin{equation}
+  \label{eq:X3b}
+  X^{3b}_{ts}(\varphi_1,\varphi_2,\varphi_3,\varphi_4) = \int_s^t
+  d\sigma_1 \dot
+  X_{\sigma_1}(\int_s^{\sigma_1}d\sigma_2 \dot
+  X_{\sigma_2}(\varphi_1,\varphi_2),
+\int_s^{\sigma_1}d\sigma_3 \dot
+  X_{\sigma_3}(\varphi_3,\varphi_4))
+\end{equation}
+which satisfy the following relations with $X$ and $X^2$:
+\begin{equation}
+  \label{eq:deltaX3a}
+  \der X^{3a}(\varphi_1,\varphi_2,\varphi_3,\varphi_4) =
+  X(\varphi_1,X^2(\varphi_2,\varphi_3,\varphi_4)) + X^2(\varphi_1,\varphi_2,X(\varphi_3,\varphi_4))
+\end{equation}
+and
+\begin{equation}
+  \label{eq:deltaX3b}
+  \begin{split}
+  \der X^{3b}(\varphi_1,\varphi_2,\varphi_3,\varphi_4) & =
+  X(X(\varphi_1,\varphi_2),X(\varphi_3,\varphi_4)) +
+  X^2(\varphi_3,\varphi_4,X(\varphi_1,\varphi_2))
+\\ & \qquad  + X^2(\varphi_1,\varphi_2,X(\varphi_3,\varphi_4))    
+  \end{split}
+\end{equation}
+
+As we report elsewhere~\cite{trees}  the Hopf algebra of rooted trees is
+the natural language to describe this hierarchy of equations and the
+algebraic relations between the various operators. In this special
+case however these relations can be easily checked by direct 
+ computations. 
+
+Using Lemmas~\ref{lemma:X} and~\ref{lemma:X2} we can show that the r.h.s. of
+the eqns.~(\ref{eq:deltaX3a}) and~(\ref{eq:deltaX3b}) belongs to the
+domain of $\Lambda$ and so the equations can be used to express
+$X^{3a},X^{3b}$ in function of $X,X^2$ and prove that
+
+\begin{corollary}
+For $(\gamma,\alpha) \in\DD'$ with $\gamma>1/3$ we have
+$X^{3a},X^{3b} \in \CC_2^\gamma \LL((H^{\alpha})^4,H^{\alpha}).$ 
+\end{corollary}
+
+
+
+
+\section{Additive stochastic forcing}
+\label{sec:stoch}
+As another application of this approach we would like to discuss the presence of an additive random force in the KdV eq.~(\ref{eq:kdv-real}):
+\begin{equation}
+  \label{eq:kdv-real-stoch}
+\partial_t u(t,\xi) + \partial^3_\xi u(t,\xi) +
+\frac12 \partial_\xi u(t,\xi)^2 = \Phi \partial_t  \partial_\xi B(t,\xi)
+\end{equation}
+where $\Phi$ is a bounded linear operator on $H^0$ and
+$\partial_t \partial_\xi B$ a white noise on $\RR\times\TT$.
+We assume that $\Phi$ is diagonal in Fourier space: $\Phi e_k =
+\lambda_k e_k$ where $\{e_k \}_{k\in\ZZ}$ is the orthonormal basis
+$e_k(\xi) = e^{ik\xi}/\sqrt{2\pi}$ and that $\lambda_0 = 0$.  In this
+way the noise does not affect the zero mode.
+
+For the rest of this section  fix and allowed pair $(\gamma,\alpha)
+\in \DD'$ such that $\gamma \in (1/3,1/2)$ and assume that
+\begin{equation}
+  \label{eq:lambda-bound}
+\sum_{q \in \ZZ_*}  |q|^{2\alpha} \lambda_q^2 < \infty.
+\end{equation}
+which implies that $\Phi$ is  Hilbert-Schmidt  from $L^2$ to
+$H^\alpha$.
+
+The transformed integral equation (analogous to
+eq.~(\ref{eq:kdv-base})) associated to~(\ref{eq:kdv-real-stoch}) is
+\begin{equation}
+  \label{eq:kdv-base-stoch}
+ v(t,k) =   v_0(k) + \lambda_k \beta^k_t +  \int_0^t \dot X_s(
+  v(s), v(s))(k) \, ds, \quad t \in [0,T], k \in \ZZ_* 
+\end{equation}
+where $\{\beta^k_\cdot\}_{k \in \ZZ_*}$ is a family of 
+complex-valued, zero mean, Brownian motions such that $\beta^{-k} =
+\overline{\beta^k}$ and with covariance
+$\expect[\overline \beta^k_t \beta^q_s] = \delta_{k,q} (t\wedge s)$. 
+The relation between the initial noise $B$ and the family $\{\beta^k_\cdot\}_{k \in \ZZ_*}$ is given by 
+$
+\beta^k_t = \langle e_k, \int_0^t U(-s) \partial_\xi \partial_s B(s,\cdot) ds \rangle_{H^0} 
+$.
+
+Eq.~(\ref{eq:kdv-base-stoch}) can be expanded in the same
+way as we have done before and the first
+interesting $\Lambda$-equation which appears is the following:
+\begin{equation}
+  \label{eq:lambda-eq-stoch}
+  \der v = (\id-\Lambda\der)[X(v,v) + \der w + X^{2}(v,v,v) + X^{w}(v)].
+\end{equation}
+Here $\der w(k)_{ts} = \lambda_k (\beta^k_t-\beta^k_s)$ and  the
+random operator $X^w_{ts}: H^\alpha\to H^\alpha$ is given by
+\begin{equation}
+  \label{eq:Xw}
+  X^w_{ts}(\varphi) = \int_s^t d\sigma \dot X_\sigma(\varphi, \der
+  w_{\sigma s})
+\end{equation}
+and satisfy the equation
+\begin{equation}
+  \label{eq:deltaXw}
+  \der X^w_{tus} = X_{tu}(\varphi,\der w_{us}).
+\end{equation}
+
+From condition~(\ref{eq:lambda-bound}) we have that $w$ is a.s. a Brownian
+motion with values in $H^{\alpha}$ and then by classical results that $\der w \in
+\CC^{\rho}_2 H^\alpha$ for any $\rho < 1/2$ and a-fortiori $\der w \in
+\CC^{\gamma}_2 H^\alpha$ by choosing $\rho \in [\gamma,1/2)$. 
+
+To prove that a sufficiently regular version of the Gaussian stochastic process $X^w$ exists
+we will use a generalization of the classic Garsia-Rodemich-Rumsey lemma
+which has been proved in~\cite{MR2091358}.
+\begin{lemma}
+\label{lemma:besov}
+For any $\theta > 0$ and $p \ge 1$,  there exists a constant
+$C$ such that for any $R \in \CC_{2} V$ ($(V,|\cdot|)$ some Banach space), we have 
+\begin{equation}
+\label{eq:generalboundxx}
+\|R\|_{\theta} \le C (U_{\theta+2/p,p}(R)+\|\der R\|_{\theta}),
+\end{equation}
+where
+\begin{equation*}
+ U_{\theta,p}(R) = \left[ \int_{[0,T]^2}
+ \left(\frac{|R_{t s}|}{|t-s|^\theta}\right)^p dt ds \right]^{1/p}.
+\end{equation*}
+\end{lemma}
+
+We would like that $X^w$ behaves not worser than $X^2$. 
+This is indeed the case as stated in the next lemma.
+
+\begin{lemma}
+\label{lemma:Xw}
+Under condition~(\ref{eq:lambda-bound})
+we have $X^w \in \CC^{2\gamma}_2 \LL(H^\alpha,H^\alpha)$ a.s..
+\end{lemma}
+\begin{proof}
+After an integration by parts, $X^w$ can be rewritten as
+\begin{equation}
+  \label{eq:Xw-2}
+  X^w_{ts}(\varphi) = X_{ts}(\varphi,\der w_{ts}) - \int_s^t X_{\sigma
+  s}(\varphi,dw_\sigma) = X_{ts}(\varphi,\der w_{ts}) + I_{ts} 
+\end{equation}
+The first term in the r.h.s. belongs to $\CC_2^{2\gamma}
+\LL(H^\alpha,H^\alpha)$ path-wise:
+$$
+|X_{ts}(\varphi,\der w_{ts})|_{\alpha} \le
+|X_{ts}|_{\LL(H^\alpha\times H^\alpha,H^\alpha)} |\der w_{ts}|_\alpha
+|\varphi|_\alpha \le 
+\|X\|_\gamma \|\der
+w\|_\gamma |\varphi|_\alpha |t-s|^{2\gamma}.
+$$
+Let us estimate the Wiener integral $I_{ts}$. Take $\gamma_1 < \gamma$ so that $(\gamma_1,\alpha)$ is still an allowed pair,
+\begin{equation*}
+  \begin{split}
+\expect \left|I_{ts}\right|^2_\alpha & = 
+\sum_q \lambda_q^2 \int_s^t |X_{\sigma s}(e_q,\varphi)|_\alpha^2
+d\sigma
+\\ & \le C \sum_q \lambda_q^2 \int_s^t |\sigma-s|^{2\gamma_1} d\sigma \sum_k
+|k|^{2\alpha}
+\left|\sum_{k_1} |k|^{\gamma_1} |k_1|^{\gamma_1-1} |k_2|^{\gamma_1-\alpha-1}
+  e_q(k_1) \psi(k_2)\right|^2    
+\\ & \le C \sum_q \lambda_q^2 \int_s^t |\sigma-s|^{2\gamma_1} d\sigma \sum_k
+|k|^{2\alpha+2\gamma_1} |q|^{2\gamma_1-2} |k-q|^{2\gamma_1-2\alpha-2}
+  |\psi(k-q)|^2    
+  \end{split}
+\end{equation*}
+where we used a bound for the kernel of $X$ which has been introduced
+in the proof of Lemma~\ref{lemma:X} and where $\psi(k) =
+|k|^{\alpha}\varphi(k)$. 
+The function $k \mapsto
+|k|^{2\alpha+2\gamma_1} |k-q|^{2\gamma_1-2\alpha-2}$ is bounded by $C
+|q|^{2\alpha+2\gamma_1}$ so 
+\begin{equation*}
+  \begin{split}
+\expect \left|I_{ts}\right|^2_\alpha &  \le C \sum_q \lambda_q^2  |q|^{4\gamma_1+2\alpha-2} 
+|t-s|^{1+2\gamma_1} |\psi|_0^2
+  \end{split}
+\end{equation*}
+Choosing $\gamma_1 = 2\gamma-1/2+\eps/4\le \gamma$ (with $\eps>0$ small enough) we obtain
+\begin{equation*}
+  \begin{split}
+\expect \left|I_{ts}\right|^2_\alpha &  \le C \sum_q \lambda_q^2  |q|^{8\gamma+2\alpha-4+\eps} 
+|t-s|^{4\gamma+\eps/2} |\varphi|_\alpha^2  \le C |t-s|^{4\gamma+\eps/2} |\varphi|_\alpha^2
+  \end{split}
+\end{equation*}
+The $q$ sum is bounded
+since we can choose $\eps>0$ small enough so that $8\gamma-4+\eps \le
+0$ which allows us to bound $|q|^{8\gamma+2\alpha-4+\eps}  \le
+|q|^{2\alpha}$ and then conclude using
+condition~(\ref{eq:lambda-bound}) on the summability of $\lambda_q$.
+
+Since the Wiener integral $I_{ts}$ is a Gaussian r.v.  the $L^2$ bound is
+enough to obtain an $L^p$ bound for any $p\ge 2$:
+\begin{equation*}
+  \begin{split}
+\expect \left|I_{ts}\right|^p_\alpha &  \le C_p  |\varphi|_\alpha^p |t-s|^{2p\gamma+p \eps /4}
+  \end{split}
+\end{equation*}
+From this bound we deduce that, choosing $p$ sufficiently large, we
+have $U_{2\gamma+2/p,p}(I) < \infty$ a.s.. Moreover $\der I_{tus}(\varphi)
+= X_{tu}(\varphi,\der w_{us})$ so that $\der I$ can be bounded
+path-wise in $\CC_3^{2\gamma} \LL(H^{\alpha},H^{\alpha})$.  
+Then Lemma~\ref{lemma:besov} implies that 
+$
+\|I\|_{2\gamma} \le C(U_{2\gamma+2/p,p}(I)+\|\der I\|_{2\gamma}) < \infty
+$ a.s.
+ending the proof.
+\end{proof}
+
+Modifying a bit the proof of Thm.~\ref{thm:main} is not
+difficult to prove the following.
+
+\begin{theorem}
+\label{th:eq-stoch}
+Eq.~(\ref{eq:lambda-eq-stoch}) has a unique local solution in $\CC^\gamma H^\alpha$ for any initial
+condition in $H^\alpha$.  
+\end{theorem}
+
+Since we can take $\gamma$ arbitrarily close to $1/3$ we obtain
+solutions for noises with values in $H^\alpha$ for any  $\alpha > -1/2$.
+In this way we essentially cover the result of
+De~Bouard-Debussche-Tsutsumi~\cite{MR2111917}. Their approach consist
+in modifying Bourgain's method to handle  Besov spaces in order to compensate
+for the insufficient  Sobolev time regularity of Brownian motion.
+
+
+\section*{Acknowledgment}
+I would like to thank A. Debussche which  delivered a series of interesting
+lectures on stochastic dispersive equations  during a 2006
+semester on Stochastic Analysis at Centro de Giorgi, Pisa. They
+constituted the motivation for the investigations reported in this
+note. I'm also greatly indebited with J.Colliander for  some
+interesting remarks which have been instrumental in  discovering an error in  an earlier version of the
+paper.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+\section{Regularity of $X$ and $X^2$}
+\label{sec:reg}
+
+
+Some elementary calculus results needed in the proofs of this appendix are the
+subject of the next lemma.
+
+\begin{lemma}
+\label{lemma:sums}
+If $\zeta > 1$ 
+$$
+\sum_{n\in \ZZ \backslash \{0, m \}}
+    |n|^{-\zeta} |n-m|^{-\zeta} \le C_\zeta |m|^{-\zeta}
+$$
+and for any $\theta < 2\zeta-1$
+$$
+\sum_{n\in \ZZ \backslash \{0,\pm m \}}
+    |n+m|^{-\zeta} |n|^{\theta} |n-m|^{-\zeta} \le C_{\zeta,\theta} |m|^{\theta-\zeta}
+$$  
+\end{lemma}
+
+\subsection{Proof of Lemma~\ref{lemma:X}}
+
+\begin{proof}[]
+We must prove that, for $(\gamma,\alpha) \in \DD$ there exists $\eps > 0$ such that
+$$
+\left[
+\sum_{k \in \ZZ_*} |k|^{2\alpha+2\eps} \left|\sum'_{k_1} \frac{e^{-i 3 k k_1 k_2
+      s}-e^{-i 3 k k_1 k_2 t}}{6 k_1 k_2} \varphi_1(k_1)\varphi_2(k_2)
+\right|^2 \right]^{1/2}\le C |t-s|^\gamma |\varphi_1|_{\alpha-\eps} |\varphi_2|_{\alpha-\eps}
+$$
+To begin we bound
+$$
+\left| \frac{e^{-i 3 k k_1 k_2
+      s}-e^{-i 3 k k_1 k_2 t}}{6 k_1 k_2}\right| \le C |t-s|^\gamma
+|k|^\gamma |k_1|^{\gamma-1} |k_2|^{\gamma-1}
+$$
+for any $\gamma \in[0,1]$.
+We use the conventions that, if $\beta < 0$ then  $|0|^\beta =
+0$ (with integer argument). The constant in this bound is independent on anything else.
+By duality it will be enough to prove that, for any $\rho,\psi_1,\psi_2 \in
+H^0_0$ we have
+\begin{equation}
+  \label{eq:dual-bound-1}
+\sum_{k, k_1}  |k|^{\alpha+\eps+\gamma} |k_1 k_2|^{\gamma-\alpha+\eps-1} 
+|\rho(k)| |\psi_1(k_1)| |\psi_2(k_2)| \le C |\rho|_0 |\psi_1|_{0} |\psi_2|_{0}.  
+\end{equation}
+where we understand that summations are done over $\ZZ$ excluding
+values for which $k_1 = 0$ or $k = 0$ or $k_2 = 0$.
+ 
+To prove eq.~(\ref{eq:dual-bound-1}) for any couple
+$(\gamma,\alpha)\in \DD$ we proceed in three steps: we will
+prove first that it holds for $(\gamma,\alpha)$ in two regions
+$\DD_1,\DD_2 \subset \RR^2 $ and then by interpolation we will
+extend its validity to the convex hull of $\DD_1 \cup
+\DD_2$ which will result to be exactly $\DD$. 
+
+\paragraph{First region.}
+Let $\DD_1 = \{(\gamma,\alpha) : \gamma-\alpha < 1/2, \gamma
+\in [0,1/2) \}$ and  in this paragraph fix $(\gamma,\alpha) \in \DD_1$.
+Applying  Cauchy-Schwarz inequality w.r.t the $k_1$ summation on the
+l.h.s. of
+eq.~(\ref{eq:dual-bound-1})  we obtain
+\begin{equation}
+\label{eq:dual-bound-2}
+  \sum_{k}  |k|^{\alpha+\gamma+\eps} |\rho(k)|  \left[\sum_{k_1}
+    |k_1 k_2|^{2\gamma-2\alpha+2\eps-2}  \right]^{1/2}
+  \left[\sum_{k_1 } |\psi_1(k_1)|^2 |\psi_2(k_2)|^2 \right]^{1/2} 
+\end{equation}
+Observe that, since $2\gamma-2\alpha-1 < 0$, 
+Lemma~\ref{lemma:sums} allows us to bound the sum over $k_1$ as
+$$
+\sum_{k_1}
+    |k_1 k_2|^{2\gamma-2\alpha+2\eps-2} \le C |k|^{2\gamma-2\alpha+2\eps-2}
+$$
+for sufficiently small $\eps > 0$.
+Injecting this bound in eq.~(\ref{eq:dual-bound-2}) we find
+\begin{equation}
+\label{eq:dual-bound-2bis}
+ C  \sum_{k}  |k|^{2\gamma-1+4\eps} |\rho(k)|   \left[\sum_{k_1 }
+    |\psi_1(k_1)|^2 |\psi_2(k_2)|^2 \right]^{1/2} 
+\end{equation}
+Given that $\gamma < 1/2$ we have $|k|^{2\gamma-1+4\eps} \le 1$ if we choose $\eps$ small enough. Taking this
+into account in the last bound and applying Cauchy-Schwarz w.r.t to
+the $k$ summation we can bound our initial expression by
+$ C  |\rho|_0   [\sum_{k, k_1 }
+    |\psi_1(k_1)|^2 |\psi_2(k_2)|^2 ]^{1/2} $. But now observe that a
+    change of variables is enough to estimate this last double
+    summation:
+$$
+\sum_{k, k_1 }
+    |\psi_1(k_1)|^2 |\psi_2(k_2)|^2 = \sum_{k_2  k_1 }
+    |\psi_1(k_1)|^2 |\psi_2(k_2)|^2 = |\psi_1|_0^2 |\psi_2|_0^2
+$$
+so that we have proven eq.~(\ref{eq:dual-bound-1}) in the case of
+$(\gamma,\alpha) \in \DD_1$.
+
+\paragraph{Second region.}
+Let $\DD_2 = \{(\gamma,\alpha)\in\RR^2 : \gamma \in[ 0,1/2),  \gamma-\alpha < 1, \gamma
++\alpha < -1/2 \}$ and fix $(\gamma,\alpha) \in \DD_2$.
+Apply Cauchy-Schwartz to the l.h.s. of eq.~(\ref{eq:dual-bound-1}) to obtain
+$$
+\left[\sum_k |k|^{2\gamma+2\alpha+2\eps}\right]^{1/2}
+\left[\sum_k |\rho(k)|^2 \left(\sum_{k_1} 
+    |k_1 k_2|^{\gamma-\alpha-1+2\eps} |\psi_1(k_1)|  |\psi_2(k_2)| \right)^2\right]^{1/2}
+$$
+Choose $\eps$ small enough so that $\gamma+\alpha+\eps < -1/2$ and $\gamma-\alpha+\eps \le 1$. Then these two inequalities imply that the first sum over $k$ is bounded and that we can discard the powers of $k_1$ and $k_2$ in the second factor. Finally we get
+$$
+C
+\left[\sum_k |\rho(k)|^2 \left(\sum_{k_1} |\psi_1(k_1)|  |\psi_2(k_2)| \right)^2\right]^{1/2}
+$$
+Now observe that $ \sum_{k_1} |\psi_1(k_1)|  |\psi_2(k_2)| \le
+|\psi_1|_0 |\psi_2|_0$ and then we can bound the last display by
+$
+|\rho|_0 |\psi_1|_0 |\psi_2|_0
+$, proving eq.~(\ref{eq:dual-bound-1}) in the region $\DD_2$.
+
+\paragraph{Interpolation.}
+Let $(\gamma_1,\alpha_1) \in \DD_1 \cup \DD_2$ and  $(\gamma_2,\alpha_2)
+\in  \DD_1 \cup \DD_2$, consider for $t\in[0,1]$,  $\gamma(t)=t \gamma_1 +
+(1-t) \gamma_2$,  $\alpha(t)=t \alpha_1 +
+(1-t) \alpha_2$. Moreover let $\eps$ be the smaller of the two $\eps$ related to the couple $(\gamma_1,\alpha_1)$ and $(\gamma_2,\alpha_2)$.
+Let
+$$
+A(\gamma,\alpha) = \sum_{k, k_1}  |k|^{\alpha+\eps+\gamma} |k_1|^{\gamma-\alpha+\eps-1} |k_2|^{\gamma-\alpha+\eps-1}
+|\rho(k)| |\psi_1(k_1)| |\psi_2(k_2)|.
+$$ 
+By using H\"older inequality with conjugate exponents $p = 1/t$ and $q
+= 1/(1-t)$ we have
+$$
+A(\gamma(t),\alpha(t)) \le A(\gamma_1,\alpha_1)^{1/p} A(\gamma_2,\alpha_2)^{1/q}
+$$
+so since we have
+$
+A(\gamma_i,\alpha_i) \le C_{\gamma_i,\alpha_i} |\psi_1|_0 |\psi_2|_0 |\rho|_0
+$
+for $i=1,2$, we obtain
+$$
+A(\gamma(t),\alpha(t)) \le C_{\gamma_1,\alpha_1}^{t}
+C_{\gamma_2,\alpha_2}^{1-t} |\psi_1|_0 |\psi_2|_0 |\rho|_0
+$$
+thus proving eq.~(\ref{eq:dual-bound-1}) for the couple
+$(\gamma(t),\alpha(t))$ for any $t\in [0,1]$. This implies that the
+bound~(\ref{eq:dual-bound-1}) holds for any couple $(\gamma,\alpha)$
+in the convex hull of the set $\DD_1 \cup \DD_2$. 
+It is not difficult to see that this convex hull corresponds to the
+region $\DD$ of the statement. This conclude the proof. 
+\end{proof}
+
+
+
+\subsection{Proof of Lemma~\ref{lemma:X2}}
+
+\begin{proof}[]
+We start the argument  as in the proof of Lemma~\ref{lemma:X}.
+Let $\Psi_{ts}=X_{ts}(\varphi_1,\varphi_{21},\varphi_{22})$, then
+$$
+\Psi_{ts}(k) = - 2 \sum'_{k_1,k_{21}}  \frac{k k_2}4  \int_s^t  \int_s^\sigma e^{-i 3
+  k k_1 k_2 \sigma
+- i 3 k_2 k_{21} k_{22} \sigma_1}
+ \, d\sigma   d\sigma_1\,  \varphi_1(k_1)   \varphi_{21}(k_{21})  \varphi_{22}(k_{22}).
+$$  
+Note that it is enough to restrict the sums over the set of $k_i$ for  which $k k_1 k_2 \neq 0$ and $k_2 k_{21} k_{22}\neq 0$. Then
+the multiplier
+\begin{equation}
+  \label{eq:M-mult}
+M = -   \frac{k k_2}2  \int_s^t  \int_s^\sigma e^{-i 3
+  k k_1 k_2 \sigma
+- i 3 k_2 k_{21} k_{22} \sigma_1} \, d\sigma   d\sigma_1;  
+\end{equation}
+has two different behaviors depending on the quantity $h = k k_1 k_2 + k_2 k_{21} k_{22}$ being zero or not. 
+Split $\Psi$ accordingly and let
+$$
+\Psi^1_{ts}(k) = - 2 \sum'_{k_1,k_{21}: h= 0} M \,  \varphi_1(k_1)   \varphi_{21}(k_{21})  \varphi_{22}(k_{22})  
+$$  
+and $\Psi^2 = \Psi - \Psi^1$. We have $h=k_2(k_1+k_{21})(k-k_{21})$ so in the sum for $\Psi^1$ the only relevant contributions came from the case where $k_1+k_{21}=0$ or $k-k_{21}=0$. In the first case we have $k_{22}=k$ while in the second $k_{22}=-k_1$ so defining
+$$
+\Phi_{ts}(\varphi_1,\varphi_{21})(k) = - 2 \sum'_{k_1} M|_{k_{21}=-k_1,k_{22}=k} \,  \varphi_1(k_1)   \varphi_{21}(-k_{1})  
+$$
+we have $\Psi_{ts} = \Psi^{2}_{ts} + \Phi_{ts}(\varphi_1,\varphi_{21}) \varphi_{22} + \Phi_{ts}(\varphi_1,\varphi_{22}) \varphi_{21} $.
+
+In Lemma~\ref{lemma:M-bounds} below we prove that, if $\gamma \le 1/2$ and $h \neq 0$ then
+$
+|M| \le C (A_1+A_2)  |t-s|^{2\gamma} 
+$
+where 
+$$
+A_1 = |k| |k_2| |k k_1 k_2|^{\gamma-1} |k_2 k_{21} k_{22}|^{\gamma-1}
+$$
+and
+$$
+A_2 = |k|^{1-\gamma} |k_2|^{2\gamma-1} |k_1|^{-\gamma}
+|k-k_{21}|^{2\gamma-1} 
+|k_1+k_{21}|^{2\gamma-1} |k_{21}|^{\gamma-1} |k_{22}|^{\gamma-1}
+$$
+while if $h=0$,
+$
+|M| \le C |k_1|^{-1}  |t-s| 
+$.
+
+\textbf{Bound for $\Phi$.}
+We have
+ $|\Phi(\varphi_1,\varphi_{21})| \le C |t-s| \Xi_0$ where
+\begin{equation*}
+\Xi_0 =  \sum_{k_1} |k_1|^{-2\alpha-1} |\rho(k)| |\psi_1(k_1)| |\psi_{21}(-k_1)|
+\end{equation*}
+It is clear that these expressions can be controlled with the $L^2$ norms of the test functions as soon as $-2\alpha-1 \le 0$.
+
+\textbf{Bound for $\Psi^2$.}
+In order to bound $\Psi^2$ it will be enough to bound separately
+the forms
+$$
+\Xi_1 = \sum_{k,k_1,k_{21}} A_1 |k|^{\alpha} |k_1|^{-\alpha}
+|k_{21}|^{-\alpha} |k_{22}|^{-\alpha} |\rho(k)| |\psi_1 (k_1)|   |\psi_{21}(k_{21})|  |\psi_{22}(k_{22})|  
+$$
+and
+$$
+\Xi_2 = \sum_{k,k_1,k_{21}} A_2 |k|^{\alpha} |k_1|^{-\alpha}
+|k_{21}|^{-\alpha} |k_{22}|^{-\alpha} |\rho(k)| |\psi_1(k_1)|   |\psi_{21}(k_{21})|  |\psi_{22}(k_{22})|  
+$$
+in terms of the $L^2$ norms of the functions $\rho,\psi_1,\psi_{21},\psi_{22}$.
+
+The expression $A_1$ is nicely factorized in its dependence on the
+couple $k_{21},k_{22}$ and  the form $\Xi_1$ can be easily bounded
+using (twice and iteratively) the same arguments as in
+Lemma~\ref{lemma:X}.
+We will concentrate on the form $\Xi_2$ which require  different
+estimates. 
+
+Write $\Xi_2$ as
+$$
+\Xi_2 = \sum_{k,k_1,k_{21}} |k|^{1-\gamma+\alpha} A_3
+ |\rho(k)| |\psi_1(k_1)|   |\psi_{21}(k_{21})|  |\psi_{22}(k_{22})|  
+$$
+where
+$
+A_3 =    |k_1|^{-\gamma-\alpha}
+|k_2(k-k_{21})(k_1+k_{21})|^{2\gamma-1} 
+ |k_{21} k_{22}|^{\gamma-\alpha-1}
+$
+and use Cauchy-Schwartz on the double sum over $k_1,k_{21}$ to bound
+$$
+\Xi_2 \le \sum_{k} |k|^{1-\gamma+\alpha} 
+ |\rho(k)|   
+ \left[\sum_{k_1,k_{21}}A_3^2\right]^{1/2}
+\left[\sum_{k_1,k_{21}} |\psi_1(k_1)|^2   |\psi_{21}(k_{21})|^2  |\psi_{22}(k_{22})|^2\right]^{1/2}
+$$
+Now Lemma~\ref{lemma:sum-bound} below states that for $(\gamma,\alpha) \in \DD$ we
+have
+$
+\sup_{k\in\ZZ_*} |k|^{1-\gamma+\alpha} 
+ [\sum_{k_1,k_{21}}A_3^2]^{1/2} \le C
+$
+so that
+$$
+\Xi_2 \le C \sum_{k}
+ |\rho(k)|   
+\left[\sum_{k_1,k_{21}} |\psi_1(k_1)|^2   |\psi_{21}(k_{21})|^2  |\psi_{22}(k_{22})|^2\right]^{1/2}.
+$$
+Then using again  Cauchy-Schwartz (on the $k$ summation) we end up with
+$$
+\Xi_2 \le C |\rho|_0
+\left[\sum_{k,k_1,k_{21}} |\psi_1(k_1)|^2   |\psi_{21}(k_{21})|^2
+  |\psi_{22}(k_{22})|^2\right]^{1/2} = C|\rho|_0 |\psi_1|_0
+|\psi_{21}|_0 |\psi_{22}|_0
+$$
+where the last equality is obtained after a simple change of variables
+in the summations. This ends the proof of the statement.
+\end{proof}
+
+\bigskip
+It remains to prove some complementary results. We will use the
+notation introduced above in the proof of Lemma~\ref{lemma:X2}.
+
+\begin{lemma}
+\label{lemma:M-bounds}
+If $\gamma \in[0,1/2]$ and $h \neq 0$ we have
+$$
+|M| \le C (A_1+A_2)  |t-s|^{2\gamma} 
+$$  
+If $h=0$
+$$
+|M| \le C |k_1|^{-1}  |t-s|
+$$  
+\end{lemma}
+\begin{proof}
+  Take two numbers $a,b \in \RR$ and let 
+$
+m = \int_s^t \int_s^\sigma e^{i a \sigma} e^{i b \sigma_1} d\sigma d\sigma_1 
+$.
+An explicit integration gives
+$$
+m = \frac{e^{i(a+b)s}-e^{i(a+b)t}}{b (a+b)} 
++\frac{e^{i bs+iat}-e^{i(a+b)s}}{ab}.
+$$
+Then
+\begin{equation}
+  \label{eq:m-bound-1}
+|m| \le \frac{1}{|b||a+b|}+\frac{1}{|a||b|}
+\end{equation}
+moreover
+\begin{equation*}
+|m| \le  \int_s^t \left|\int_s^\sigma  e^{i b \sigma_1}
+  d\sigma_1\right| d\sigma \le \frac{|t-s|}{|b|}  
+\end{equation*}
+and symmetrically $|m| \le |t-s| |a|^{-1}$. These last bounds imply
+that  $|m| \le |t-s||ab|^{-1/2}$ and moreover imply the bound in the case $h=0$.
+Otherwise, since $2\gamma \in [0,1]$,  interpolating between this bound and
+eq.~(\ref{eq:m-bound-1}) we get
+\begin{equation}
+  \label{eq:m-bound-3}
+ |m| \le \frac{|t-s|^{2\gamma}}{|ab|^{\gamma}}
+ \left(\frac{1}{|b||a+b|}+\frac{1}{|a||b|}\right)^{1-2\gamma} \le 
+\frac{|t-s|^{2\gamma}}{|b|^{\gamma}|a|^{1-\gamma}|a+b|^{1-2\gamma}}+\frac{|t-s|^{2\gamma}}{|a|^{1-\gamma}|b|^{1-\gamma}}
+\end{equation}
+which, setting $a = 3k k_1 k_2$ and $b = 3 k_2 k_{21} k_{22}$ implies
+the statement we had to prove.
+\end{proof}
+
+
+\begin{lemma}
+\label{lemma:sum-bound}
+Let
+$$
+S_\eps(k) =  \sum_{k_1,k_{21}}   |k_2|^{4\gamma-2+2\eps} |k_1|^{-2\gamma-2\alpha+2\eps}
+|(k-k_{21})(k_1+k_{21})|^{4\gamma-2} 
+ |k_{21} k_{22}|^{2\gamma-2\alpha+2\eps-2}
+$$
+Then if $(\gamma,\alpha) \in \DD$, there exists $\eps > 0$ such that
+$$
+ |k|^{2-2\gamma+2\alpha+\eps} S_{\eps}(k)
+ \le C
+$$  
+uniformly on $k \in \ZZ_*$.
+\end{lemma}
+\begin{proof}
+We will prove the statement for $\eps = 0$, the extension for a positive but small $\eps$ being a straightforward modification of the resulting argument.
+
+First we bound the double sum by a planar integral. Define the integration region $\cR(z,a)$ with $a>0$, $z\in\RR$ as the set of points $(x,y) \in \RR^2$ such that
+$$
+|x|>a, |y| > a, |x-z|>a, |y-z|>a, |x+y|>a, |x+y-z|>a
+$$
+Then 
+$$
+S_0(k) \le C \int_{\cR(k,1)} dx dy |k-x|^{4\gamma-2} |x|^{-2\gamma-2\alpha}
+|(k-y)(x+y)|^{4\gamma-2} 
+ |y (k-x-y)|^{2\gamma-2\alpha-2}
+$$
+which, by scaling away $|k|$ and by reflection symmetry, is equivalent to
+$$
+S_0(k) \le C |k|^{2(4\gamma-2)+3(2\gamma-2\alpha-2)+2} I(\cR(1,|k|^{-1}))
+$$
+with
+$$
+I(\mathcal{A}) =
+\int_{\mathcal{A}} dx dy |1-x|^{4\gamma-2} |x|^{-2\gamma-2\alpha}
+|(1-y)(x+y)|^{4\gamma-2} 
+ |y (1-x-y)|^{2\gamma-2\alpha-2}.
+$$
+To prove the original statement we must show that
+$
+|a|^{2(3-6\gamma+2\alpha)} I(\cR(1,a)) \le C
+$ uniformly in $a \to 0$.
+
+We start by showing that $I(\cR(1,a))$ is actually finite for any $a > 0$. Then we will find estimates for $I(a)$ as $a \to 0$.
+
+\paragraph{Boundedness}
+Note that, when $|x|+|y|$ is large we can bound the integrand of $I(\cR(1,a))$ by
+$$
+C |x|^{2\gamma-2\alpha-2}
+|y(x+y)|^{6\gamma-2\alpha-24}
+$$
+Then since in $\cR(1,a)$ we have $|x|>a$ we can bound this last integrand by
+$C |a|^{2\gamma-2\alpha-2}
+|y(x+y)|^{6\gamma-2\alpha-4}$. Using the fact  that $6\gamma-2\alpha-4 < -1$ in $\DD$, the integral
+$
+\int_{\cR(1,a)} |y(x+y)|^{6\gamma-2\alpha-4} dx dy
+$ can be shown to be finite.
+
+\paragraph{Asymptotics} When $a \to 0$ the integral can blow up due to contributions from the sub-domain $\cR'(a) = \cR(1,a) \backslash \cR(1,a')$ where $a'>0$ is a small but fixed quantity.  Denote with $B(z,r) \subset \RR^2$ the ball  centered in $z$ and of radius $r$. The region $\cR'(a)$ can be covered by the union of the  seven sets 
+$$
+\cB_i = \cR'(a) \cap B(z_i, a'),\,\, i=A,\dots,F\,\,, \qquad \cR''(a) = \cR'(a)\backslash \left[\cup_{i=A,\dots,F} \cB_i \right]
+$$
+where $z_i$,$i=A,\dots,F$ are the following points
+$$
+z_A = (-1,1),\, z_B = (0,1),\, z_C=(1,1),\, z_D=(0,0),\, z_E=(1,0),\, z_F=(1,-1).
+$$
+We will study the contributions to $I(\cR'(a))$ due to $I(\cB_i)$, $i=A,\dots,F$. It is not difficult then to show that $I(\cR''(a))$ gives smaller contributions to the $a\to 0$ limit.
+
+Let us show how to handle $I(\cB_A)$. First bound
+$$
+I(\cB_A) \le C \int_{\cB_A} 
+|(1-y)(x+y)|^{4\gamma-2} d x\, d y
+$$
+the other factors being bounded as $a \to 0$ for $(x,y) \in \cB_A$. By a change of variables we can reduce this integral to the following  form (eventually increasing the integration domain)
+$
+I(\cB_A) \le C \int_{a}^{a''} |x y|^{4\gamma-2} dx dy
+$
+where $a''>a$ is another fixed constant. Then we easily compute the factorized integral and finally  bound the original expression with
+$$
+I(\cB_A) \le C a^{-2(1-4\gamma)_+} = C a^{\zeta_A}
+$$
+where $(\cdot)_+$ denotes the positive part. The constant $C$ in this expression does not depend on $a$. 
+
+The treatment of all $I(\cB_i)$ for $i=B,\dots,F$ follows similar lines. To simplify the argument it is not difficult to see that $I(\cB_i)$ for $i=A,C,F$  have the same asymptotic bound. The same is true for $I(\cB_i)$ for $i=B,D$ where
+$$
+I(\cB_{B,D}) \le C \int_{\cB_B} 
+|x|^{-2\gamma-2\alpha}|(1-y)|^{4\gamma-2} |x+y-1|^{2\gamma-2\alpha-2} d x\, d y
+$$
+Moreover
+$$
+I(\cB_{E}) \le C\int_{\cB_E} |x-1|^{4\gamma-2} |y|^{2\gamma-2\alpha-2} |x+y-1|^{2\gamma-2\alpha-2} dx\, dy
+$$
+and since $-2\gamma-2\alpha > 2\gamma-2\alpha-2$ for $\gamma \in [0,1/2)$ we have also
+$
+I(\cB_{B,D}) \le C I(\cB_E)
+$.
+Since we already have established the behavior of $I(\cB_A)$ it remains only to understand that of $I(\cB_E)$. We have two possibilities.
+The first is to bound $|x+y-1|^{2\gamma-2\alpha-2} \le |a|^{2\gamma-2\alpha-2}$ in $\cB_E$, then
+\begin{equation*}
+  \begin{split}
+I(\cB_{E}) & \le C |a|^{2\gamma-2\alpha-2} \int_{\cB_E} |x-1|^{4\gamma-2} |y|^{2\gamma-2\alpha-2}  dx\, dy
+\\ & \le C |a|^{2\gamma-2\alpha-2 - (1-4\gamma)_+ - (1-2\gamma+2\alpha)_+}  = C a^{\zeta_{E,1}}  
+  \end{split}
+\end{equation*}
+by reasoning as in the case of $I(\cB_A)$ above. The second is to bound $|x-1|^{4\gamma-2}\le |a|^{4\gamma-2}$ to obtain
+\begin{equation*}
+  \begin{split}
+I(\cB_{E}) & \le C |a|^{4\gamma-2} \int_{\cB_E} |x+y-1|^{2\gamma-2\alpha-2} |y|^{2\gamma-2\alpha-2}  dx\, dy
+\\ & \le C |a|^{4\gamma-2 - 2(1-2\gamma+2\alpha)_+}  = C a^{\zeta_{E,2}}  
+  \end{split}
+\end{equation*}
+and let $\zeta_E = \max(\zeta_{E,1},\zeta_{E,2})$.
+
+In the same way it is not difficult to show that $I(\cR''(a)) \le C (|a|^{\zeta_A}+ |a|^{\zeta_E})$. Putting all these estimates together we get
+$
+I(\cR(1,a)) \le C (|a|^{\zeta_A}+ |a|^{\zeta_E})
+$. It remains to prove that
+\begin{equation}
+  \label{eq:cases-res}
+\zeta'_{A,E} = 2(3-6\gamma+2\alpha)+\zeta_{A,E}  \ge 0  
+\end{equation}
+for any admissible couple $(\gamma,\alpha)$.
+We proceed by considering three different regions $C_{1,2,3}$ of admissible couples:
+\begin{itemize}
+\item[$C_1$]: $\gamma \in [0,1/4)$, $1-2\gamma+2\alpha < 0$. Here $\zeta_A = -2(1-4\gamma)$ and $\zeta_E = \zeta_{E,1} = 6\gamma-2\alpha-3$. Then $\zeta'_A = 2(2-2\gamma+2\alpha)$ and $\zeta'_E = 3-6\gamma+2\alpha$;
+
+\item[$C_2$]: $\gamma \in [0,1/4)$, $1-2\gamma+2\alpha > 0$. Here $\zeta_A = -2(1-4\gamma)$ and $\zeta_E= \zeta_{E,1} = 8\gamma-4\alpha-4$. Here $\zeta'_A = 2(2-2\gamma+2\alpha)$ and $\zeta'_E = 2(1-2\gamma)$;
+ 
+\item[$C_3$]: $\gamma \in [1/4,1/2)$, $1-2\gamma+2\alpha > 0$. Here $\zeta_A = 0$ and $\zeta_E = \zeta_{E,2} =  4\gamma-4\alpha-3$. Here $\zeta'_A = 2(3-6\gamma+2\alpha)$ and $\zeta'_E = 2(1-2\gamma)$.
+
+\end{itemize}
+We can check that in the three regions $C_{1,2,3}$ and for $(\gamma,\alpha) \in \DD$ we always end up with $\zeta'_{A,E} > 0$. By interpolation between these three regions we  prove the claim for couples in their convex hull which coincide with $\DD$.
+
+To treat the case of small positive $\eps$ we just retrace this argument and take $\eps$ small enough so that all relevant inequalities are still satisfied. 
+\end{proof}
+
+
+
+\subsection{Proof of Lemma~\ref{lemma:gal}}
+
+
+\begin{proof}
+Let us work out the details for $X$, first.
+Since $(\gamma,\alpha) \in \DD$, by Lemma~\ref{lemma:X} there exists $\eps > 0$ such that $X \in \CC_2^\gamma \LL((H^{\alpha-\eps})^2,H^{\alpha+\eps})$.
+By definition
+$$
+|X^{(N)}_{ts}(\varphi_1,\varphi_2)|_{\alpha} = | P_N  X_{ts}(P_N \varphi_1, P_n \varphi_2)|_\alpha
+$$  
+Then
+\begin{equation}
+\label{eq:gal1}
+  \begin{split}
+ | (X^{(N)}_{ts}-X_{ts})(\varphi_1,\varphi_2)|_{\alpha} & \le 
+|\wt P_N X_{ts}(P_N \varphi_1,P_N \varphi_2)|_\alpha + |X_{ts}(\wt P_N \varphi_1,P_N \varphi_2)|_\alpha 
+\\ & \qquad + |X_{ts}( \varphi_1,\wt P_N \varphi_2)|_\alpha 
+  \end{split}
+\end{equation}
+where $\wt P_N = \text{Id}-P_N$ is the projector over modes with $|k| > N$. Now note that, for $\varphi \in H^{\alpha}$ we have 
+$
+|\wt P_N \varphi|_{\alpha-\eps} \le N^{-\eps} |\varphi|_\alpha
+$
+so the three terms in eq.~(\ref{eq:gal1}) can be bounded as follows.
+The first as
+\begin{equation*}
+  \begin{split}
+|\wt P_N X_{ts}(P_N \varphi_1,P_N \varphi_2)|_\alpha & \le N^{-\eps} |X_{ts}(P_N \varphi_1,P_N \varphi_2)|_{\alpha+\eps} 
+\\ & \le C N^{-\eps} |P_N \varphi_1|_{\alpha-\eps} |P_N \varphi_2|_{\alpha-\eps}   
+\le C N^{-\eps} |\varphi_1|_{\alpha} |\varphi_2|_{\alpha}     ,  
+  \end{split}
+\end{equation*}
+the second as
+\begin{equation*}
+  \begin{split}
+|X_{ts}(\wt P_N \varphi_1,P_N \varphi_2)|_\alpha  \le C  |\wt P_N \varphi_1|_{\alpha-\eps} |P_N \varphi_2|_{\alpha-\eps} 
+ \le C  N^{-\eps} |\varphi_1|_{\alpha} |\varphi_2|_{\alpha} ,
+  \end{split}
+\end{equation*}
+ and a similar bound for the third.
+Then
+\begin{equation}
+\label{eq:gal2}
+  \begin{split}
+ | (X^{(N)}_{ts}-X_{ts})(\varphi_1,\varphi_2)|_{\alpha} & \le C N^{-\eps} |\varphi_1|_{\alpha} |\varphi_2|_{\alpha}
+  \end{split}
+\end{equation}
+which implies the claimed convergence.
+
+Now consider the convergence of $\hat X^{(N),2}$ to $\hat X^{(2)}$. We want to show that
+\begin{equation}
+\label{eq:gal-X2-1}
+  \begin{split}
+ | (\hat X^{(N),2}_{ts}-\hat X^2_{ts})(\varphi_1,\varphi_2,\varphi_3)|_{\alpha} & \le C N^{-\eps} |\varphi_1|_{\alpha} |\varphi_2|_{\alpha} |\varphi_3|_{\alpha}
+  \end{split}
+\end{equation}
+for some $\eps > 0$, this will imply the claim. 
+Define a multiplier $\Theta$ as
+$$
+\Theta =  \chi_N(k) \chi_N(k_1) \chi_N(k_2) \chi_N(k_{21}) \chi_N(k_{22})-1  
+$$
+where $\chi_N(k) = 1_{|k|\le N}$ is the kernel in the Fourier basis of the  operator $P_N$.
+By duality we need to bound the form
+\begin{equation}
+\label{eq:form-bound}
+  \begin{split}
+\sum_{k,k_1,k_{21}} |M| |\Theta| |k|^{\alpha} |k_1|^{-\alpha}
+|k_{21}|^{-\alpha} |k_{22}|^{-\alpha} |\rho(k)| |\psi_1(k_1)|   |\psi_{21}(k_{21})|  |\psi_{22}(k_{22})|  
+  \end{split}
+\end{equation}
+with $C N^{-\eps} |t-s|^{2\gamma} |\rho|_0 |\psi_1|_0 |\psi_{21}|_0 |\psi_{22}|_0$. Recall that the multiplier $M$ has been defined in eq.~(\ref{eq:M-mult}). 
+The $\Theta$ multiplier can be rewritten as a telescopic sum
+\begin{equation*}
+  \begin{split}
+\Theta & = [\chi_N(k)-1] \chi_N(k_1) \chi_N(k_2) \chi_N(k_{21}) \chi_N(k_{22}) +
+[\chi_N(k_1)-1] \chi_N(k_2) \chi_N(k_{21}) \chi_N(k_{22})
+\\ & +  [\chi_N(k_2)-1] \chi_N(k_{21}) \chi_N(k_{22}) +  [\chi_N(k_{21})-1] \chi_N(k_{22}) + [\chi_N(k_{22})-1]    
+  \end{split}
+\end{equation*}
+and then can be bounded as
+$$
+|\Theta| \le |\chi_N(k)-1|+|\chi_N(k_1)-1|+|\chi_N(k_2)-1|+|\chi_N(k_{21})-1|+|\chi_N(k_{22})-1|
+$$
+Moreover since
+$$
+|\chi_N(k)-1| \le |\chi_N(k)-1| \frac{|k|^\eps}{N^\eps} \le N^{-\eps} |k|^\eps 
+$$
+for any $\eps \ge 0$ we have that
+$$
+|\Theta| \le N^{-\eps}(|k|^\eps+|k_{1}|^\eps+|k_{2}|^\eps+|k_{21}|^\eps+|k_{22}|^\eps)
+\le N^{-\eps} |k k_1 k_2 k_{21} k_{22}|^\eps
+$$
+Then to obtain the required $N$ dependence of the bound for the form~(\ref{eq:form-bound}) it is enough to bound the new $N$-independent  form
+\begin{equation}
+\label{eq:form-bound-new}
+  \begin{split}
+\sum_{k,k_1,k_{21}} |M|  |k|^{\alpha+\eps} |k_1|^{-\alpha+\eps} |k_2|^{\eps}
+|k_{21}|^{-\alpha+\eps} |k_{22}|^{-\alpha+\eps} |\rho(k)| |\psi_1(k_1)|   |\psi_{21}(k_{21})|  |\psi_{22}(k_{22})|  
+  \end{split}
+\end{equation}
+with a quantity like $C  |t-s|^{2\gamma} |\rho|_0 |\psi_1|_0 |\psi_{21}|_0 |\psi_{22}|_0$. By retracing the proof of Lemma~\ref{lemma:X2} and using the $\eps>0$ version of Lemma~\ref{lemma:sum-bound} we can prove that such bound holds for all admissible couples $(\gamma,\alpha)$. 
+
+This completes the proof of the statement.
+
+\end{proof}
+
+
+%\bibliographystyle{plain}
+%\bibliography{kdv}
+
+
+\begin{thebibliography}{10}
+
+\bibitem{evolution}
+Hakima Bessaih, Massimiliano Gubinelli, and Francesco Russo.
+\newblock The evolution of a random vortex filament.
+\newblock {\em Ann. Probab.}, 33(5):1825--1855, 2005.
+
+\bibitem{MR1215780}
+J.~Bourgain.
+\newblock Fourier transform restriction phenomena for certain lattice subsets
+  and applications to nonlinear evolution equations. {II}. {T}he
+  {K}d{V}-equation.
+\newblock {\em Geom. Funct. Anal.}, 3(3):209--262, 1993.
+
+\bibitem{MR2018661}
+Michael Christ, James Colliander, and Terrence Tao.
+\newblock Asymptotics, frequency modulation, and low regularity ill-posedness
+  for canonical defocusing equations.
+\newblock {\em Amer. J. Math.}, 125(6):1235--1293, 2003.
+
+\bibitem{MR1969209}
+J.~Colliander, M.~Keel, G.~Staffilani, H.~Takaoka, and T.~Tao.
+\newblock Sharp global well-posedness for {K}d{V} and modified {K}d{V} on
+  {$\mathbb{R}$} and {$\mathbb{T}$}.
+\newblock {\em J. Amer. Math. Soc.}, 16(3):705--749 (electronic), 2003.
+
+\bibitem{MR2164030}
+Laure Coutin and Antoine Lejay.
+\newblock Semi-martingales and rough paths theory.
+\newblock {\em Electron. J. Probab.}, 10:no. 23, 761--785 (electronic), 2005.
+
+\bibitem{MR1883719}
+Laure Coutin and Zhongmin Qian.
+\newblock Stochastic analysis, rough path analysis and fractional {B}rownian
+  motions.
+\newblock {\em Probab. Theory Related Fields}, 122(1):108--140, 2002.
+
+\bibitem{davie}
+A.~M. Davie.
+\newblock Differential equations driven by rough signals: an approach via
+  discrete approximation.
+\newblock preprint, 2003.
+
+\bibitem{MR2111917}
+A.~De~Bouard, A.~Debussche, and Y.~Tsutsumi.
+\newblock Periodic solutions of the {K}orteweg-de {V}ries equation driven by
+  white noise.
+\newblock {\em SIAM J. Math. Anal.}, 36(3):815--855 (electronic), 2004/05.
+
+\bibitem{fvgeo}
+P.~Friz and N.~Victoir.
+\newblock A note on the notion of geometric rough paths.
+\newblock to appear in Prob. Th. Rel. Fields, 2004.
+
+\bibitem{fveuler}
+P.~Friz and N.~Victoir.
+\newblock Euler estimates for rough differential equations.
+\newblock preprint, 2006.
+
+\bibitem{fvsubell}
+P.~Friz and N.~Victoir.
+\newblock On uniformly subelliptic operators and stochastic area.
+\newblock preprint, 2006.
+
+\bibitem{MR1470933}
+J.~G. Gaines and T.~J. Lyons.
+\newblock Variable step size control in the numerical solution of stochastic
+  differential equations.
+\newblock {\em SIAM J. Appl. Math.}, 57(5):1455--1484, 1997.
+
+\bibitem{MR1019307}
+J.~Ginibre and Y.~Tsutsumi.
+\newblock Uniqueness of solutions for the generalized {K}orteweg-de {V}ries
+  equation.
+\newblock {\em SIAM J. Math. Anal.}, 20(6):1388--1425, 1989.
+
+\bibitem{MR1423623}
+Jean Ginibre.
+\newblock Le probl\`eme de {C}auchy pour des {EDP} semi-lin\'eaires
+  p\'eriodiques en variables d'espace (d'apr\`es {B}ourgain).
+\newblock {\em Ast\'erisque}, (237):Exp.\ No.\ 796, 4, 163--187, 1996.
+\newblock S\'eminaire Bourbaki, Vol.\ 1994/95.
+
+\bibitem{MR2091358}
+M.~Gubinelli.
+\newblock Controlling rough paths.
+\newblock {\em J. Funct. Anal.}, 216(1):86--140, 2004.
+
+\bibitem{trees}
+M.~Gubinelli.
+\newblock Branched rough paths.
+\newblock in prepraration, 2006.
+
+\bibitem{TindelGubinelli}
+M.~Gubinelli and S.~Tindel.
+\newblock Rough evolution equations.
+\newblock 2006.
+
+\bibitem{MR2181576}
+T.~Kappeler and P.~Topalov.
+\newblock Well-posedness of {K}d{V} on {$H\sp {-1}(\mathbb{T})$}.
+\newblock In {\em Mathematisches Institut, Georg-August-Universit\"at
+  G\"ottingen: Seminars 2003/2004}, pages 151--155. Universit\"atsdrucke
+  G\"ottingen, G\"ottingen, 2004.
+
+\bibitem{MR759907}
+Tosio Kato.
+\newblock On the {C}auchy problem for the (generalized) {K}orteweg-de {V}ries
+  equation.
+\newblock In {\em Studies in applied mathematics}, volume~8 of {\em Adv. Math.
+  Suppl. Stud.}, pages 93--128. Academic Press, New York, 1983.
+
+\bibitem{MR1086966}
+Carlos~E. Kenig, Gustavo Ponce, and Luis Vega.
+\newblock Well-posedness of the initial value problem for the {K}orteweg-de
+  {V}ries equation.
+\newblock {\em J. Amer. Math. Soc.}, 4(2):323--347, 1991.
+
+\bibitem{MR1230283}
+Carlos~E. Kenig, Gustavo Ponce, and Luis Vega.
+\newblock The {C}auchy problem for the {K}orteweg-de {V}ries equation in
+  {S}obolev spaces of negative indices.
+\newblock {\em Duke Math. J.}, 71(1):1--21, 1993.
+
+\bibitem{MR1329387}
+Carlos~E. Kenig, Gustavo Ponce, and Luis Vega.
+\newblock A bilinear estimate with applications to the {K}d{V} equation.
+\newblock {\em J. Amer. Math. Soc.}, 9(2):573--603, 1996.
+
+\bibitem{youngspde}
+Antoine Lejay, Massimiliano Gubinelli, and Samy Tindel.
+\newblock Young integrals and {SPDE}s.
+\newblock {\em Pot. Anal.}, 2006.
+
+\bibitem{MR2036784}
+Terry Lyons and Zhongmin Qian.
+\newblock {\em System control and rough paths}.
+\newblock Oxford Mathematical Monographs. Oxford University Press, Oxford,
+  2002.
+\newblock Oxford Science Publications.
+
+\bibitem{MR1654527}
+Terry~J. Lyons.
+\newblock Differential equations driven by rough signals.
+\newblock {\em Rev. Mat. Iberoamericana}, 14(2):215--310, 1998.
+
+\end{thebibliography}
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

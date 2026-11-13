@@ -1,0 +1,1205 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[width=17cm,height=24cm]{geometry}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,mathrsfs,latexsym}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\mathD}{\mathrm{D}}
+\newcommand{\mathd}{\mathrm{d}}
+\newcommand{\nobracket}{}
+\newcommand{\tmaffiliation}[1]{\\ #1}
+\newcommand{\tmem}[1]{{\em #1\/}}
+\newcommand{\tmemail}[1]{\\ \textit{Email:} \texttt{#1}}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\tmscript}[1]{\text{\scriptsize{$#1$}}}
+\newcommand{\tmtextit}[1]{{\itshape{#1}}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+%%%%%%%%%% End TeXmacs macros
+
+\newcommand{\cS}{\mathscr{S}}
+\newcommand{\cN}{N}
+\newcommand{\cA}{A}
+\newcommand{\cQ}{Q}
+\newcommand{\cC}{\mathscr{C}}
+\newcommand{\cR}{R}
+\newcommand{\cM}{M}
+\newcommand{\FF}{\mathscr{F}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\cyl}{\mathcal{C} \tmop{yl}}
+\newcommand{\JJ}{\mathcal{J}}
+%
+
+%
+
+%
+
+
+\begin{document}
+
+\title{Energy solutions of KPZ are unique}
+
+\author{
+  M. Gubinelli
+  \tmaffiliation{
+  Hausdorff Center for Mathematics\\
+   \& Institute for Applied Mathematics\\
+   Universit{\"a}t Bonn}
+%  \tmemail{}
+  \and
+  N. Perkowski
+  \tmaffiliation{Humboldt-Universit{\"a}t zu Berlin\\
+  Institut f{\"u}r Mathematik }
+  \tmemail{perkowsk@math.hu-berlin.de}
+}
+
+\date{September 2015}
+
+\maketitle
+
+\begin{abstract}
+Energy solutions is a weak notion of solution to the KPZ equation which was
+introduced by Gon{\c c}alves and Jara [ARMA 212 (2013)] to describe the large
+scale fluctuations of a wide class of weakly asymmetric particle systems. In
+this paper we prove that energy solutions of the periodic, stationary,
+stochastic Burgers equation are unique and in particular they coincide with
+the Hopf--Cole solution. To obtain uniqueness we use the reformulation of the
+energy solution concept given by Gubinelli and Jara [SPDE--AC 1 (2013)] and
+an observation by Funaki and Quastel [ArXiv:1407.7310]. 
+\end{abstract}
+
+\section{Introduction}
+
+Energy
+solutions~{\cite{goncalves_nonlinear_2013,gubinelli_regularization_2013,gubinelli_lectures_2015}}
+are a tool to give meaning to (stationary) solutions to the periodic
+stochastic Burgers equation (SBE)
+\begin{equation}
+  \partial_t u = \Delta u + \partial_x u^2 + \partial_x \xi \label{eq:sbe}
+\end{equation}
+defined on the torus $\mathbb{T}=\mathbb{R}/ (2 \pi \mathbb{Z})$ with
+initial condition $u_0 \sim \mu$ where $\mu$ is the white noise on $L^2_0
+(\mathbb{T})$ (the space of square integrable functions on $\mathbb{T}$ with
+zero mean), $\Delta$ is the periodic Laplacian and $\partial_t, \partial_x$
+denote the time and space derivative respectively. The term $\xi$ is a
+gaussian centered space--time white noise with covariance $\mathbb{E} [\xi
+(t, x) \xi (s, y)] = \delta (t - s) \delta (x - y)$.
+
+Energy solutions were introduced by Gon{\c c}alves and
+Jara~{\cite{goncalves_nonlinear_2013}} in order to describe the \ fluctuations
+of a large class of weakly asymmetric interacting particle system.
+Subsequently Gubinelli and Jara~{\cite{gubinelli_regularization_2013}} used
+the language of controlled paths to give a more abstract framework where
+energy solutions are seen as some kind of ``weak solutions'' to the SBE. An
+introductory exposition is present in the lecture
+notes~{\cite{gubinelli_lectures_2015}} of Gubinelli and Perkowski.
+
+The main difficulty in eq.~(\ref{eq:sbe}) is due to the interpretation of the
+nonlinearity $\partial_x u^2$. Indeed any reasonable candidate solution
+to~(\ref{eq:sbe}) features trajectories which, at fixed time and as functions
+of the space variable, look like white noise on $\mathbb{T}$ so that the term
+$\partial_x u^2$ does not have an obvious definition.
+
+Bertini and Giacomin~{\cite{BertiniGiacomin1997}} determined the fluctuations
+of the weakly asymmetric exclusion process (WASEP) by heavily exploiting the
+fact that it is expected that any reasonable solution to~(\ref{eq:sbe}) should
+be obtained as the Cole--Hopf transform $u = \partial_x \log \psi$ where
+$\psi$ is the solution of the stochastic (linear, multiplicative) heat
+equation (SHE):
+\begin{equation}
+  \mathd \psi = \Delta \psi + \psi \xi \label{eq:she}
+\end{equation}
+where $\xi$ is the space--time white noise and where the product $\psi \xi$
+has to be understood as an Ito product between $\psi$ and a the
+time--differential $\mathd W$ of a cylindrical Brownian motion on $L^2
+(\mathbb{T})$~{\cite{prato_stochastic_2008}}. This last equation can be
+solved via standard stochastic techniques giving a unique strong solution
+$\psi$ which is space--time H{\"o}lder continuous and stricly positive for
+positive times. In this way the relation $u = \partial \log \psi$ identifies a
+unique generalized process which is called the Cole--Hopf solution of the
+SBE~(\ref{eq:sbe}). Using a microscopic version of the Cole--Hopf transform
+due to G{\"a}rtner, Bertini and Giacomin~{\cite{BertiniGiacomin1997}} were
+able to prove that after rescaling and recentering the fluctuation field of
+the WASEP converged to a process having the law of the Cole--Hopf solution.
+This result relies on the precise structure of the WASEP and on the
+availability of a Cole--Hopf correspondence at the microscopic level. However
+it is expected (as {\tmem{the weak KPZ conjecture}} goes) that the fluctuation
+field of a large class of microscopic non--equilibrium one--dimensional
+particle system should likewise converge to the same object Hopf--Cole
+solution. Gon{\c c}alves and Jara~{\cite{goncalves_nonlinear_2013}} were able
+to prove the tightness of the fluctuation field of a large class of weakly
+asymmetric interacting particle systems which do not enjoy a microscopic
+Hopf--Cole transformation. The difficulty they encountered is that
+caracterizing the limiting fluctuation field $u$ without the Hopf--Cole
+correspondence hits the difficulty of describing the dynamics of $u$ in term
+of~(\ref{eq:sbe}) which is not a well--posed equation as it stands, even
+interpreted as a weak solution in the PDE sense. Their way out of this impasse
+has been to give a new notion of solution which however, up to know, were not
+know of enjoy uniqueness. In this way they were able to give a partial
+caracterization of the accumulation points of the fluctuation field $u$
+without being able to describe exactly the limit.
+
+Note that in the meanwhile Hairer~{\cite{hairer_solving_2011}} has found a
+notion of solution to the KPZ equation
+\begin{equation}
+  \partial_t h = \Delta h + (\partial_x h)^2 - \infty + \xi \label{eq:kpz}
+\end{equation}
+which enjoy a good existence and uniqueness theory and from which solution of
+the SBE can be reobtained as $u = \partial_x h$, solving a long standing
+problem of mathematical physics. The problem with Hairer's solution theory for
+KPZ is that it is not simple to check that the limiting fluctuation fields of
+the microscopic models satisfy the conditions of the theory. This difficulty
+persists also in other recent (but, in this case, mostly equivalent) methods
+of giving a meaning to the SBE: Hairer's regularity
+structures~{\cite{Hairer2014Regularity}} or Gubinelli, Imkeller and
+Perkowski's paracontrolled
+distributions~{\cite{gubinelli_paracontrolled_2015,gubinelli_lectures_2015}}.
+
+The aim of the present work is to show that stationary energy solutions
+of~(\ref{eq:sbe}), as defined by Gubinelli and Jara
+in~{\cite{gubinelli_regularization_2013}}, are unique and coincide with the
+Hopf--Cole solution. Existence was already obtained by standard Galerkin
+methods~{\cite{gubinelli_regularization_2013}}. In this way we fill a gap
+which could lead to possibly estabilish the weak KPZ universality conjecture
+in a quite large extent, at least in the stationary situation.
+
+Our proof was motivated by the recent paper of Funaki and
+Quastel~{\cite{funaki_kpz_2014}} in which they estabilish the invariance of
+the white noise for the Hopf--Cole solution. In our framework invariance comes
+for free from Galerkin approximations but their strategy can be adapted to
+show that energy solution can be transformed via Hopf--Cole to give solutions
+of the SHE. Uniqueness for the SHE then implies easily uniqueness for energy
+solutions. In this way the full power of the weak formulation comes into play
+since even if Hopf--Cole is not available at the microscopic level (or for
+other kind of approximations, like Galerkin) the limiting energy solution does
+allow the Hopf--Cole transformation. Note that our results does not seems to
+apply to the original formulation of Gon{\c c}alves and Jara since it is not
+clear how to perform in their setting the computations leading to the control
+of the remainder in the Hopf--Cole transformation.
+
+Extension of the uniqueness result in $\mathbb{R}$ is in progress and we do
+not expect additional difficulties. Applications to the convergence toward KPZ
+of the stationary version of the model considered by Hairer and
+Quastel~{\cite{hairer-quastel}} are under investigation. \ \ \
+
+\
+
+\paragraph{Notation.}Let $\cS$ the space of $C^{\infty}$ functions on
+$\mathbb{T}$ and by $\cS'$ the dual space of distributions. For $k \in
+\mathbb{Z}$ we denote by $e_k (x) = \exp (- i k x) / (2 \pi)^{1 / 2}$ the
+Fourier basis. For any $f \in \cS'$ let $\hat{f} = \FF f$ the Fourier
+transform defined by $\FF f (k) = \langle e_k, f \rangle$. We have also $f (x)
+= \sum_k \langle e_k, f \rangle e_k (x)$ and Plancherel formula $\langle f, g
+\rangle_{L^2} = \sum_{k \in \mathbb{Z}} (\FF f (k))^{\ast} \FF g (k)$. Let
+$\Pi_0$ the projection from $L^2 (\mathbb{T})$ to $L^2_0 (\mathbb{T})$ and
+$\Pi^N_0$ the projection on the span of $(e_k)_{0 < | k | \leqslant N}$ and by
+$\Pi^N$ the projection on the the span of $(e_k)_{0 \leqslant | k | \leqslant
+N}$. Let $H^{\alpha}$ the standard Sobolev spaces on $\mathbb{T}$ of index
+$\alpha \in \mathbb{R}$ and $H^{\alpha}_0 = \Pi_0 H^{\alpha}$ their
+mean--zero counterparts.
+
+The white noise $\mu$ can be realized on $H^{- \alpha}_0$ for some $\alpha > 1
+/ 2$. If $u_0 \sim \mu$ then for all $k \in \mathbb{Z}\backslash \{ 0 \}$
+$\FF u_0 (k)$ is a complex Gaussian variable such that $\FF u_0 (k)^{\ast} =
+\FF u_0 (- k)$ and $\mathbb{E} \left| \FF u_0 (k) \right|^2 = 2$.
+
+Denote $\cC_T V = C ([0, T], V)$ the space of continuous functions from $[0,
+T]$ to the Banach space $V$ endowed with the supremum norm and with
+$\cC^{\gamma}_T V = C^{\gamma} ([0, T], V)$ the subspace of
+$\gamma$-H{\"o}lder continuous functions in $\cC_T V$ with the
+$\gamma$-H{\"o}lder norm.
+
+We introduce also a fixed family of smoothing operators indexed by $L
+\geqslant 1$. Let $q : \mathbb{T} \rightarrow \mathbb{R}_+$ be a even smooth
+function of compact support around $0$ and such that $\int_{\mathbb{T}} q (x)
+\mathd x = 1$. Let $\delta^L (y) = Lq (L y)$, $\delta^L_x (y) = \delta^L (x -
+y)$, $\rho^L_x = \delta^L_x - 1 / (2 \pi)$ and $\JJ^L_0 f = \rho^L_{} \ast f$.
+We let also $\rho^{\infty}_x (y) = \delta_x (y) - 1 / (2 \pi)$ and then $\JJ_0
+f = \rho^{\infty} \ast f = \Pi_0 f$.
+
+\
+
+\section{Controlled processes and energy solutions}
+
+In this section we define stationary energy solutions of~(\ref{eq:sbe}),
+following~{\cite{gubinelli_regularization_2013}}. We introduce first a class
+of processes $u$ which at fixed time are distributed like the (zero--mean)
+white noise on $\mathbb{T}$ but for which the nonlinear term $\partial_x u^2$
+is defined as a space--time distribution. In this class of processes it makes
+then sense to look for solutions of the SBE~(\ref{eq:sbe}).
+
+\begin{definition}
+  [Controlled process]\label{def:controlled}Denote with $\mathcal{Q}$ the
+  space of pairs $(u, \mathcal{A})_{0 \leqslant t \leqslant T}$ of generalized
+  stochastic processes with continuous paths in $\cS'$ such that
+  \begin{itemize}
+    \item[i)] the law of $u_t$ is the white noise $\mu$ for all $t \in [0,
+    T]$;
+    
+    \item[ii)] For any test function $\varphi \in \cS$ the process $t \mapsto
+    \mathcal{A}_t (\varphi)$ is a.s. of zero quadratic variation,
+    $\mathcal{A}_0 (\varphi) = 0$ and the pair $(u (\varphi), \mathcal{A}
+    (\varphi))_{0 \leqslant t \leqslant T} $ satisfies the equation
+    \begin{equation}
+      \label{eq:controlled-decomposition} u_t (\varphi) = u_0 (\varphi) +
+      \int_0^t u_s (\Delta \varphi) \mathd s +\mathcal{A}_t (\varphi) +
+      \partial_x M_t (\varphi)
+    \end{equation}
+    where $(M_t (\varphi))_{0 \leqslant t \leqslant T}$ is a martingale with
+    respect to the filtration generated by $(u, \mathcal{A})_{0 \leqslant t
+    \leqslant T}$ with quadratic variation $[M (\varphi)]_t = 2 t \| \varphi
+    \|_{L^2 (\mathbb{T})}^2$;
+    
+    \item[iii)] the reversed processes $\hat{u}_t = u_{T - t}$,
+    $\hat{\mathcal{A}}_t = - (\hat{\mathcal{A}}_T -\mathcal{A}_{T - t})$
+    satisfies the same equation with respect to its own filtration.
+  \end{itemize}
+\end{definition}
+
+When $\mathcal{A}= 0$ the process $(X, 0) \in \mathcal{Q}$ is the stationary
+Ornstein--Uhlenbeck (OU) process with invariant measure $\mu$. It is the
+unique solution of the SPDE
+\[ \mathd X = \Delta X \mathd t + \partial_x \mathd M \]
+with initial condition $u_0 \sim \mu$. Allowing $\mathcal{A} \neq 0$ has the
+intuitive meaning of considering perturbation of the OU process with zero
+quadratic variation antisymmetric drifts. In this sense we say that a couple
+$(u, \mathcal{A}) \in \mathcal{Q}$ is a process {\tmem{controlled}} by the
+Ornstein--Uhlenbeck process.
+
+\
+
+Controlled processes allow the definition of some interesting non--linear
+functionals. We do not insists on generality here, all we need is that the
+Burgers drift makes sense as a space--time distribution:
+
+\begin{theorem}
+  Assume that $(u, \mathcal{A}) \in \mathcal{Q}$ and \ for any $N \geqslant 1$
+  and $0 \leqslant t \leqslant T$. Let
+  \[ \mathcal{B}^N_t (\varphi) = \int_0^t \partial_x \left( \JJ^N_0 u_s
+     \right)^2 (\varphi) \mathd s \]
+  then $(\mathcal{B}^N_t)_{N \geqslant 1}$ converges in probability in $C^{1 /
+  2 +} H^{- 1 -} \cap C^{0 +} H^{0 -}$, we denote the limit by
+  \[ \int_0^t \partial_x u_s^2 (\varphi) \mathd s. \]
+\end{theorem}
+
+\begin{proof}
+  The proof can be found
+  in~{\cite{gubinelli_regularization_2013,gubinelli_lectures_2015}} for
+  approximations given by $\tilde{\mathcal{B}}^N_t (\varphi) = \int_0^t
+  \partial_x (\Pi^N_0 u_s)^2 (\varphi) \mathd s$. The estimates required to go
+  from $\tilde{\mathcal{B}}^N_t$ to $\mathcal{B}^N_t$ simply uses the fact
+  that $(s, x) \mapsto \JJ^N_0 u_s (x) - \Pi^N_0 u_s (x)$ is a smooth Gaussian
+  random field which converges to zero as a continuous space-time function. 
+\end{proof}
+
+We are ready to give a rigorous meaning to the SBE~(\ref{eq:sbe}) in the class
+of controlled processes:
+
+\begin{definition}
+  A controlled process $(u, \mathcal{A}) \in \mathcal{Q}$ is an energy
+  solution of SBE iff
+  \[ \mathcal{A}_t (\varphi) = \int_0^t \partial_x u_s^2 (\varphi) \mathd s.
+  \]
+  almost surely for all $t \in [0, T]$ and $\varphi \in \cS$.
+\end{definition}
+
+Existence of energy solutions of SBE can be proved via Galerkin approximations
+or approximation of the non--linear term as done
+in~{\cite{gubinelli_regularization_2013,gubinelli_lectures_2015}}. The aim of
+this note is to show that energy solutions of SBE are in fact adapted to the
+noise $M$ and pathwise unique. In order to state the result let $I u_0$ the
+unique centered Gaussian random field such that $\partial_x I u_0 = u_0$ and
+$\int_{\mathbb{T}} I u_0 (x) \mathd x = 0$.
+
+\begin{theorem}
+  \label{th:uniqueness}There exists only one energy solution $u$ of SBE and it
+  is given by the Cole--Hopf transformation
+  \[ u_t (x) = \partial_x \log \psi_t (x) \]
+  where $\psi$ is the (It{\^o}) solution of SHE :
+  \[ \mathd \psi_t = \Delta \psi_t + \psi_t \mathd M_t \]
+  with the inital condition given by $\psi_0 (x) = \exp (I u_0 (x))$.
+\end{theorem}
+
+The rest of the paper is devoted to the proof of this theorem.
+
+\section{Regularization by noise for controlled processes}
+
+In this section $u$ will always denote a generic controlled process in
+$\mathcal{Q}$, not necessarily an energy solution to SBE. Controlled processes
+have regularization properties coming from the fast decorrelation in time of
+the OU process associated to the Laplacian $\Delta$. Using an It{\^o} formula
+and following the classic approach of Kipnis--Varadhan, we can replace
+time--averages of some functional with a sum of forward and backward
+martingales whose quadratic variation is controlled in terms of a more regular
+(or smaller) functional.
+
+For any test function $\varphi \in \cS$ the processes $(u_t (\varphi))_{t \in
+[0, T]}$ and $(\hat{u}_t (\varphi))_{t \in [0, T]}$ are Dirichlet processes:
+the sum of a martingale and a zero quadratic variation process. This is
+compatible with the regularity of our solutions and there is no clue that
+solutions of SBE are distributional semimartingales. Dirichlet processes
+(wheter Markov or not) can be handled via the stochastic calculus via
+regularization developed by Russo and Vallois~{\cite{russo_elements_2007}}. In
+this approach the It{\^o} formula holds also for Dirichlet processes and if $X
+= (X^i)_{i = 1, \ldots, k}$ is an $\mathbb{R}^k$ valued Dirichlet process and
+$g$ is a $C^2 (\mathbb{R}^k ; \mathbb{R})$ function then we have
+\begin{equation}
+  g (X_t) = g (X_0) + \sum_{i = 1}^k \int_0^t \partial_i g (X_s) \mathd^-
+  X^i_s + \frac{1}{2}  \sum_{i, j = 1}^k \int_0^t \partial^2_{i, j} g (X_s)
+  \mathd^- [X^i, X^j]_s \label{eq:ito-fv}
+\end{equation}
+where $\mathd^-$ denotes the forward integral and $[X, X]$ the quadratic
+covariation of the vector process $X$. Decomposing $X = M + N$ as the sum of a
+martingale $M$ and a zero quadratic variation process $N$ we have $[X, X] =
+[M, M]$ and
+\[ g (X_t) = g (X_0) + \sum_{i = 1}^k \int_0^t \partial_i g (X_s) \mathd^-
+   M^i_s + \sum_{i = 1}^k \int_0^t \partial_i g (X_s) \mathd^- N^i_s \]
+\[ + \sum_{i, j = 1}^k \frac{1}{2}  \int_0^t \partial^2_{i, j} g (X_s)
+   \mathd^- [M^i, M^j]_s \]
+where now $\mathd^- M$ coincide with the usual It{\^o} integral and $[M, M]$
+is the usual quadratic variation of the martingale $M$. The integral $\int_0^t
+\partial_i g (X_s) \mathd^- N^i_s$ is well-defined due to the fact that all
+the other terms in this formula are well defined. The case the function $g$
+depends explicitly on time can be handled by the above formula by considering
+time as an additional ($0$-th) component of the process $X$ and using the fact
+that $[X^i, X^0] = 0$ for all $i = 1, .., k$. In the computations which
+follows we will only need to apply the It{\^o} formula to smooth functions.
+
+\
+
+On $H = L^2_0 (\mathbb{T})$ we consider the space of smooth cylinder
+functions $\cyl$ which depends only on finitely many coordinates on the basis
+$\{e_k \}_{k \in \mathbb{Z}_0}$ and we consider the Malliavin derivative $D :
+L^2 (\mu) \to L^2 (\mu) \otimes H$ defined as $D \varphi (x) = \sum_{k \in
+\mathbb{Z}_0} \partial_{x_k} \varphi (x) e_k$ for $\varphi \in \cyl$ where
+$x_k = \langle e_k, x \rangle$ are the coordinates of $x$. We let $D_k \varphi
+= \langle e_k, D \varphi \rangle$.
+
+\
+
+With this notations we can write the generator $L_0$ of the
+Ornstein-Uhlenbeck process associated to the operator $\Delta$ as
+\begin{equation}
+  \label{eq:generator-ou} L_0 \varphi (x) = \sum_{| k | > 0} |k|^2  \left( -
+  x_k D_k \varphi (x) + \tfrac{1}{2} D_{- k} D_k \varphi (x) \right) .
+\end{equation}
+
+
+For any smooth cylinder function $h : [0, T] \times \JJ_N H \to \mathbb{R}$
+the It{\^o} formula for the finite quadratic variation process $(u^N_t =
+\Pi^N_0 u_t)_t$ gives
+\[ h (t, u^N_t) = h (0, u^N_0) + \int_0^t (\partial_s + L^N_0) h (s, u^N_s)
+   \mathd s + \int_0^t Dh (s, u^N_s) \mathd \JJ^N \mathcal{A}_s + M^+_t \]
+where
+\[ L^N_0 h (s, x) = \sum_{0 < |k| \le N} |k|^2  (- x_k D_k h (s, x) +
+   \frac{1}{2} D_k D_{- k} h (s, x)) \]
+is the restriction of the operator $L_0$ to $\Pi^N H$ and where the martingale
+part denoted $M^+$ has quadratic variation given by $[M^+]_t = \int_0^t
+\mathcal{E}^N (h (s, \cdot)) (u^N_s) \mathd s$, where
+\[ \mathcal{E}^N (\varphi) (x) = \frac{1}{2}  \sum_{0 < |k| \le N} |k|^2  |D_k
+   \varphi (x) |^2 = \left\| \JJ_0^N D \varphi \right\|_{H^1_0}^2, \]
+is the density of the Dirichlet form associated to the generator $L_0^N$. The
+It{\^o} formula on the backward process reads
+\[ h (T - t, u^N_{T - t}) = h (T, u^N_T) + \int_0^t (- \partial_s + L^N_0) h
+   (T - s, u^N_{T - s}) \mathd s \]
+\[ - \int_0^t Dh (T - s, u^N_{T - s}) \mathd \JJ^N \mathcal{A}_{T - s} + M^-_t
+\]
+with $[M^-]_t = \int_0^t \mathcal{E}^N (h (T - s, \cdot)) (u^N_{T - s}) \mathd
+s$. Adding the two It{\^o} formulas we have the key equality
+\begin{equation}
+  \label{eq:key-representation} \int_0^t 2 L_0^N h (s, u^N_s) \mathd s = -
+  M^+_t + M^-_{T - t} - M^-_T .
+\end{equation}
+which allows us to represent the time integral of $2 L_0^N h$ as a sum of
+martingales which allows better control since their quadratic variation
+depends only on $\mathcal{E}^N (h)$. From this we can prove easily
+(see~{\cite{gubinelli_regularization_2013}}) the following lemma.
+
+\begin{lemma}
+  [It{\^o} trick]\label{lemma:ito-trick}Let $h : [0, T] \times \Pi_N H \to
+  \mathbb{R}$ be a cylinder function. Then for any $p \geq 1$,
+  \begin{equation}
+    \label{eq:ito-trick} \left\| \sup_{t \in [0, T]} \left| \int_0^t L_0 h (s,
+    u_s) \mathd s \right| \right\|_{L^p (\mathbb{P}_{\mu})} \lesssim_p T^{1 /
+    2} \sup_{s \in [0, T]} \| \mathcal{E}(h (s, \cdot)) \nobracket \|^{1 /
+    2}_{L^{p / 2} (\mu)}
+  \end{equation}
+  where $\mathcal{E} (\varphi) (x) = \frac{1}{2}  \sum_{| k | > 0} |k|^2  |D_k
+  \varphi (x) |^2$. In the particular case $h (s, x) = e^{a (T - s)} \tilde{h}
+  (x)$ for some $a \in \mathbb{R}$ we have the improved estimate
+  \begin{equation}
+    \left\| \int_0^T e^{a (T - s)} L_0  \tilde{h} (u_s) \mathd s \right\|_{L^p
+    (\mathbb{P}_{\mu})} \lesssim_p \left( \frac{1 - e^{2 aT}}{2 a} \right)^{1
+    / 2} \| \mathcal{E}(\tilde{h}) \|^{1 / 2}_{L^{p / 2} (\mu)} .
+    \label{eq:ito-trick-conv}
+  \end{equation}
+\end{lemma}
+
+If we take $p = 2$ in Lemma~\ref{lemma:ito-trick} we have
+\[ \mathbb{E} \left[ \sup_{t \in [0, T]} \left| \int_0^t L_0 h (u_s) \mathd s
+   \right|^2_{} \right] \lesssim T \| h \|_1^2 \]
+where
+\[ \| h \|_1^2 =\mathbb{E}\mathcal{E} (h (u_0)) =\mathbb{E} \| \mathD h
+   (u_0) \|_{H^1}^2 \]
+is the Dirichlet form of the OU process.
+
+\
+
+We denote by $\HH^1$ the completion of the space of smooth cylinder functions
+with respect to the norm $\| \ast \|_1$ and denote with $\HH^{- 1}$ the dual
+of $\HH^1$ with norm
+\[ \| f \|_{- 1} = \sup_{g \in L^2 (\mu)} (2 \langle f, g \rangle - \| g
+   \|^2_1) \]
+(see~{\cite{fluctuations_2012}}, Chap.~2 for details).
+
+\
+
+In order to exploit the It{\^o} trick of Lemma~\ref{lemma:ito-trick} we need
+to be able to solve the Poisson equation $L_0 h_f = f$ for given function $f$.
+Sometimes we can do it explicitly and estimate directly the Dirichlet energy
+of the solution. In other situations however it is preferable to have a bound
+involving directly $f$ without need to find $h_f$ explicitly. (In order not to
+bother us with domain considerations the reader can think of cylindrical and
+smooth $f, h$ since this will be enough for our purposes.) Fix an arbitrary
+$h$ and consider the decomposition
+\[ f = L_0 h + L_0 h - f \]
+then
+\[ \left\| \sup_{t \in [0, T]} \left| \int_0^t f (u_s) \mathd s \right|
+   \right\|_{L^2 (\mathbb{P})} \leqslant \left\| \sup_{t \in [0, T]} \left|
+   \int_0^t L_0 h (u_s) \mathd s \right| \right\|_{L^2 (\mathbb{P})} +
+   \left\| \sup_{t \in [0, T]} \left| \int_0^t (L_0 h - f) (u_s) \mathd s
+   \right| \right\|_{L^2 (\mathbb{P})} \text{} \]
+\[ \leqslant \left\| \sup_{t \in [0, T]} \left| \int_0^t L_0 h (u_s) \mathd s
+   \right| \right\|_{L^2 (\mathbb{P})} + \int_0^T \| (L_0 h - f) (u_s)
+   \|_{L^2 (\mathbb{P})} \mathd s \]
+\[ \leqslant C T^{1 / 2}  \| h \|_1 + T \| L_0 h - f \|_{L^2 (\mu)} \]
+Now note that, for fixed $\lambda > 0$ a solution $h_{\lambda}$ to $(\lambda -
+L_0) h_{\lambda} = - f$ is given explicitly by
+\[ h_{\lambda} (x) = - \int_0^{\infty} e^{- \lambda s} (P_s^{\tmop{OU}} f) (x)
+   \mathd s \]
+where $P^{\tmop{OU}}$ is the contraction semigroup generated by $L_0$ on $L^2
+(\mu)$. Then
+\[ \langle h_{\lambda}, - f \rangle = \langle h_{\lambda}, (\lambda - L_0)
+   h_{\lambda}, \rangle = \lambda \| h_{\lambda} \|^2_{L^2} + \| h_{\lambda}
+   \|_1^2 \]
+and if $f \in \HH^{- 1}$ we have
+\[ \lambda \| h_{\lambda} \|^2_{L^2} + \| h_{\lambda} \|_1^2 = | \langle
+   h_{\lambda}, f \rangle | \leqslant \| f \|_{- 1} \| h_{\lambda} \|_1 \]
+which implies $\| h_{\lambda} \|_1 \leqslant \| f \|_{- 1}$ and $\|
+h_{\lambda} \|_{L^2} \leqslant \lambda^{- 1 / 2} \| f \|_{- 1}$. So noting
+that $L_0 h_{\lambda} - f = \lambda h_{\lambda}$ we have
+
+
+\[ C T^{1 / 2}  \| h_{\lambda} \|_1 + T \| L_0 h_{\lambda} - f \|_{L^2 (\mu)}
+   = C T^{1 / 2}  \| h_{\lambda} \|_1 + T \| \lambda h_{\lambda} \|_{L^2
+   (\mu)} \leqslant C T^{1 / 2} \| f \|_{- 1} + T \lambda^{1 / 2} \| f \|_{-
+   1} . \]
+Taking $\lambda \rightarrow 0$ we end up with the following lemma which
+extends the Kipnis--Varadhan lemma (cfr. Lemma 2.4
+in~{\cite{fluctuations_2012}}) \ to controlled processes :
+
+\begin{lemma}
+  \label{lemma:kv}Assume that $f \in \HH^{- 1}$ then for every controlled
+  process $u$ we have
+  \[ \left\| \sup_{t \in [0, T]} \left| \int_0^t f (u_s) \mathd s \right|
+     \right\|_{L^2 (\mathbb{P})} \leqslant C T^{1 / 2} \| f \|_{- 1} . \]
+  with some constant $C$ which does not depends on $u$.
+\end{lemma}
+
+\section{Mapping to the SHE}
+
+The strategy to prove Theorem~\ref{th:uniqueness} is the following. Fix $L
+\geqslant 1$ and consider the process $\phi_t^L (x) = \exp (I u_t^L (x))$
+where $u_t^L = \JJ^L_0 u_t$ and $I = \partial_x^{- 1}$ is the antiderivative
+defined on $L^2_0 (\mathbb{T})$ by $\partial_x I \varphi = \varphi$ for all
+$\varphi \in L^2_0 (\mathbb{T})$. Let $I^{\ast} = - I$ the adjoint of $I$ and
+$\rho_x^L = \JJ^L_0 \delta_x$ is a smooth test function of zero mean. Now $I
+\rho^L_x (y) = (\delta^L \ast \Theta) (y - x)$ where $\Theta : \mathbb{T}
+\rightarrow R$ is the odd periodic function given by $\Theta (y) = \frac{1}{2}
+\tmop{sgn} (y) - y / (2 \pi)$ for $y \in (- \pi, \pi]$ with $\Theta (0) = 0$.
+
+The process $(\phi_t^L (x))_{t, x}$ is smooth in $x$ and of finite quadratic
+variation in $t$. Note that $\phi_t^L (x) = \exp (I u_t^L (x)) = \exp (u_t
+(I^{\ast} \rho^L_x))$ is not a cylindrical function but by a direct
+approximation procedure we can pretend it is and since $(u_t, \mathcal{A})$ is
+controlled we have
+\[ \mathd (I u_t^L) (x) = \mathd u_t (I^{\ast} \rho^L_x) = u_t (\Delta
+   I^{\ast} \rho^L_x) \mathd t + \mathd \mathcal{A}_t (I^{\ast} \rho^L_x) -
+   \mathd M_t (\partial_x I^{\ast} \rho^L_x) . \]
+The It{\^o} formula for Dirichlet processes~(\ref{eq:ito-fv}) gives
+\[ \mathd \phi_t^L (x) = \phi_t^L (x) (u_t (\Delta I^{\ast} \rho^L_x) \mathd t
+   + \mathd \mathcal{A}_t (I^{\ast} \rho^L_x) - \mathd M_t (\partial_x
+   I^{\ast} \rho^L_x)) + \phi_t (x) \langle \partial_x I^{\ast} \rho^L_x,
+   \partial_x I^{\ast} \rho^L_x \rangle \mathd t \]
+\[ = \phi_t^L (x) (u_t (\Delta I^{\ast} \rho^L_x) \mathd t + \mathd
+   \mathcal{A}_t (I^{\ast} \rho^L_x) + \mathd M_t (\rho^L_x)) + \phi_t (x)
+   \langle \rho^L_x, \rho^L_x \rangle \mathd t \]
+Moreover since $\rho^L_x (y) = \rho^L_0 (y - x)$ we have $\Delta (I^{\ast}
+\rho^L_x) = \Delta_x (I^{\ast} \rho^L_x)$ and
+\[ \phi_t^L (x) u_t (\Delta I^{\ast} \rho^L_x) = \phi_t^L (x) \Delta_x u_t
+   (I^{\ast} \rho^L_x) = \Delta_x \phi_t^L (x) - \phi_t^L (x) (\partial_x u_t
+   (I^{\ast} \rho^L_x))^2 \]
+\[ = \Delta_x \phi_t^L (x) - \phi_t^L (x) (u_t (\partial_x I^{\ast}
+   \rho^L_x))^2 = \Delta_x \phi_t^L (x) - \phi_t^L (x) (u_t (\rho^L_x))^2 . \]
+Being $\phi_t^L$ is smooth in space we can rewrite this as an approximate
+stochastic heat equation (SHE)
+\[ \mathd \phi_t^L (x) = \Delta_x \phi_t^L (x) \mathd t + \phi_t^L (x) (K^L -
+   Q_t^L) \mathd t + \phi_t^L (x) \mathd M_t (\rho_x^L) + \mathd R_t^L (x) \]
+where the remainder $R^L$ is given by
+\[ R_t^L (x) = \int_0^t \phi_s^L (x) (\mathd \mathcal{A}_s (I^{\ast} \rho^L_x)
+   - \JJ_0 (u_s (\rho^L_{\ast}))^2 (x) \mathd s - K^L \mathd s) \]
+and where we introduced a constant $K^L$ and the one--dimensional process
+\[ Q_t^L = \frac{1}{2 \pi} \int_{\mathbb{T}} [(u_t (\rho^L_x))^2 - \langle
+   \rho^L_x, \rho^L_x \rangle] \mathd x \]
+By definition of energy solution of SBE we have also
+\begin{equation}
+  \mathcal{A}_t (I^{\ast} \rho_x^L) = - \lim_{N \rightarrow 0} \int_0^t \left(
+  \JJ^N_0 u_s \right)^2 (\partial_x I^{\ast} \rho^L_x) \mathd s = \lim_{N
+  \rightarrow 0} \int_0^t \left( \JJ^N_0 u_s \right)^2 (\rho^L_x) \mathd s
+  \label{eq:A-limit}
+\end{equation}
+Thanks to eq.~(\ref{eq:A-limit}) we can define for any $N \geqslant 1$ the
+process
+\[ R_t^{L, N} (x) = \int_0^t \phi_s^L (x) (\left( \JJ^N_0 u_s \right)^2
+   (\rho^L_x) - \JJ_0 \left( (\JJ^L_0 u_s)^2 \right) (x) - K^{L, N}) \mathd s
+\]
+\[ = \int_0^t \phi_s^L (x) (\JJ^L_0 \left( \JJ^N_0 u_s \right)^2 (x) - \JJ_0
+   \left( (\JJ^L_0 u_s)^2 \right) (x) - K^{L, N}) \mathd s \]
+and observe that $\lim_{N \rightarrow \infty} R^{L, N} = R^L$ if we choose the
+sequence of constants $K^{L, N}$ so that $K^{L, N} \rightarrow K^L$. In
+Sec.~\ref{sec:remainder} below we prove the following lemma which is the key
+for the convergence
+
+\begin{lemma}
+  \label{lemma:key}There exists a choice of $K^{L, N}$ such that for any
+  $\varphi \in \cS$ we have $\mathbb{E} [R^{L, N}_t (\varphi)] = 0$ and
+  \[ \lim_{L \rightarrow \infty} \lim_{N \rightarrow \infty} \mathbb{E}
+     [\sup_{0 \leqslant t \leqslant T} (R^{L, N}_t (\varphi))^2] = 0 \]
+  where $R^{L, N}_t (\varphi) = \langle R^{L, N}_t, \varphi \rangle_{L^2
+  (\mathbb{T})}$. Moreover $K^{L, N} \rightarrow K^L$ as $N \rightarrow +
+  \infty$ and $K^L \rightarrow K = - 1 / 12$ as $L \rightarrow + \infty$.
+\end{lemma}
+
+We are now ready to prove our main result.
+
+\begin{proof}
+  (of Theorem~\ref{th:uniqueness}) We have
+  \[ R^L_t (\varphi) = \phi_t^L (\varphi) - \phi_0^L (\varphi) - \int_0^t
+     \phi_s^L (\Delta \varphi) \mathd s - \int_0^t \phi_s^L (\varphi) (K^L -
+     Q_s^L) \mathd s - \int_0^t \int_{\mathbb{T}} \phi_s^L (x) \varphi (x)
+     \mathd M_s (\rho_x^L) \mathd x \]
+  We already know that the family $(\phi_t^L (x))_{t, x}$ convergences in the
+  space of continuous paths on $[0, T] \times \mathbb{T}$ to $\phi_t (x) =
+  \exp ((I u_t) (x))$. It is not difficult also to show that the process
+  $(Q_s^L)_s$ converges in $L^2 ([0, T])$ to a limit which we call $Q$. The
+  quadratic variation of the martingale part converges also, so we have that,
+  for fixed $\varphi \in \cS$
+  \[ R_t (\varphi) = \lim_{L \rightarrow \infty} R^L_t (\varphi) \]
+  \[ = \phi_t (\varphi) - \phi_0 (\varphi) - \int_0^t \phi_s (\Delta \varphi)
+     \mathd s - \int_0^t \phi_s (\varphi) (K - Q_s) \mathd s - \int_0^t
+     \int_{\mathbb{T}} \phi_s (x) \varphi (x) \mathd \left( \JJ_0 M_s \right)
+     (x) \mathd x \]
+  as a continuous process in $t \in [0, T]$. But from Lemma~\ref{lemma:key} we
+  have also by Fatou
+  \[ \mathbb{E} [\sup_{0 \leqslant t \leqslant T} (R^{}_t (\varphi))^2]
+     \leqslant \liminf_{L \rightarrow \infty} \mathbb{E} [\sup_{0 \leqslant t
+     \leqslant T} (R^L_t (\varphi))^2] \leqslant \liminf_{L \rightarrow
+     \infty} \liminf_{N \rightarrow \infty} \mathbb{E} [\sup_{0 \leqslant t
+     \leqslant T} (R^{L, N}_t (\varphi))^2] = 0 \]
+  so we conclude that $\phi$ satisfy
+  \[ \phi_t (\varphi) - \phi_0 (\varphi) - \int_0^t \phi_s (\Delta \varphi)
+     \mathd s - \int_0^t \phi_s (\varphi) (K - Q_s) \mathd s - \int_0^t
+     \int_{\mathbb{T}} \phi_s (x) \varphi (x) \mathd \left( \JJ_0 M_s \right)
+     (x) \mathd x = 0 \]
+  almost surely for all $\varphi \in \cS$ and $t \in [0, T]$. Note also that
+  the process
+  \[ \tilde{\phi}_t (x) = \phi_t (x) \exp \left( M_t (1) - \frac{t}{2} + Kt -
+     \int_0^t Q_s \mathd s \right) = \exp \left( (I u_t) (x) + M_t (1) -
+     \frac{t}{2} + Kt - \int_0^t Q_s \mathd s \right) \]
+  satisfies
+  \[ \tilde{\phi}_t (\varphi) - \tilde{\phi}_0 (\varphi) - \int_0^t
+     \tilde{\phi}_s (\Delta \varphi) \mathd s - \int_0^t \int_{\mathbb{T}}
+     \tilde{\phi}_s (x) \varphi (x) \mathd M_s (x) \mathd x = 0. \]
+  However we also know that there exists a unique strictly positive solution
+  $\psi$ for this equation which is adapted to the filtration generated by
+  $M$, so we must have $\tilde{\phi}_t (x) = \psi_t (x)$ and in particular
+  \[ (I u_t) (x) + M_t (1) - \frac{t}{2} + Kt - \int_0^t Q_s \mathd s = \log
+     \tilde{\phi}_t (x) = \log \psi_t (x) \]
+  By differentiating this equality (in the sense of distributions) and
+  projecting away the constants we get
+  \[ u_t (x) = \partial_x \log \psi_t (x) \]
+  which shows that the only energy solution of the SBE is the Cole--Hopf
+  solution obtained from solving the SHE associated to the noise $M$.
+\end{proof}
+
+\section{Convergence of the remainder}\label{sec:remainder}
+
+Let
+\[ r^{L, N} (u_s, x) = \phi_s^L (x) (\JJ^L_0 \left( \JJ^N_0 u_s \right)^2 (x)
+   - \JJ_0 (\JJ^L_0 u_s)^2 (x) - K^{L, N}) \]
+so that $R_t^{L, N} (x) = \int_0^t r^{L, N} (u_s, x) \mathd s$. Using
+Lemma~\ref{lemma:kv} we can estimate
+\[ \mathbb{E} [\sup_{0 \leqslant t \leqslant T} (R^{L, N}_t (\varphi))^2]
+   \lesssim T \| r^{L, N} (\cdot, \varphi) \|_{- 1}^2 \]
+where
+\[ \| r^{L, N} (\cdot, \varphi) \|_{- 1}^2 = \sup_{\Phi \in L^2 (\mu)}
+   2\mathbb{E} [r^{L, N} (u_0, \varphi) \Phi (u_0)] - \| \Phi \|_1^2 \]
+with $\| \Phi \|_1^2 =\mathbb{E} \| \mathD \Phi \|_{H^1}^2$ in terms of the
+Malliavin derivative $D$ associated to the measure $\mu$. We prove below that
+we can choose $K^{L, N}$ so that $\mathbb{E} [r^{L, N} (u_t, x)] =\mathbb{E}
+[r^{L, N} (u_0, x)] = 0$ for all $x \in \mathbb{T}$. This is necessary in
+order for $\| r^{L, N} (\cdot, \varphi) \|_{- 1}$ to be finite for all
+$\varphi$. At this point everything boils down to control
+\[ \mathbb{E} [r^{L, N} (u_0, \varphi) \Phi (u_0)] \]
+and show that it goes to zero as $N \rightarrow + \infty$ and $L \rightarrow +
+\infty$ where $\varphi$ is a smooth test function and $\Phi \in L^2 (\mu)$ is
+such that $\| \Phi \|_1 < + \infty$.
+
+\
+
+For any $n \geqslant 1$ we denote by
+\[ W_n (h) = \int_{\mathbb{T}^n} h (z_1, \ldots, z_n) W (\mathd z_1 \cdots
+   \mathd z_n) \]
+the $n$-th chaos of the white noise $u_0$. \ It is also possible to check that
+when $\Psi$ is in the domain of the Malliavin derivative $D$ we can partially
+integrate by parts in the expression $\mathbb{E} [W_n (h) \Psi]$ to obtain
+the equality
+\[ \mathbb{E} [W_n (h) \Psi] = \int_{\mathbb{T}} \mathbb{E} [W_{n - 1} (h
+   (z_1, \cdot, \ldots, \cdot)) D_{z_1} \Psi] \mathd z_1 \]
+this will be used repeatedly below.
+
+\
+
+Observe that the random variable $(\JJ^L_0 \left( \JJ^N_0 u_0 \right)^2 (x) -
+\JJ_0 \left( (\JJ^L_0 u_0)^2 \right) (x))$ is an element of the second chaos
+of $u_0$. Let us compute its kernel:
+\[ \JJ^L_0 \left( \JJ^N_0 u_0 \right)^2 (x) = \int_{\mathbb{T}^2} \left[
+   \int_{\mathbb{T}} \mathd y \rho_x^L (y) \rho^N_y (z_1) \rho^N_y (z_2)
+   \right] W (\mathd z_1 \mathd z_2) \]
+and
+\[ \JJ_0 \left( (\JJ^L_0 u_0)^2 \right) (x) = \int_{\mathbb{T}^2} \left[
+   \int_{\mathbb{T}} \mathd y \rho_x^{\infty} (y) \rho^L_y (z_1) \rho^L_y
+   (z_2) \right] W (\mathd z_1 \mathd z_2) \]
+where
+\[ \rho_x^{\infty} (y) = \lim_{K \rightarrow \infty} \rho^K_y (y) = \delta_x
+   (y) - \frac{1}{2 \pi} \]
+is the distributional kernel of $\JJ_0$. Let
+\[ g_x^{L, N} (z_1, z_2) = \int_{\mathbb{T}} \mathd y (\rho_x^L (y) \rho^N_y
+   (z_1) \rho^N_y (z_2) - \rho_x^{\infty} (y) \rho^L_y (z_1) \rho^L_y (z_2))
+\]
+so that
+\[ (\JJ^L_0 \left( \JJ^N_0 u_0 \right)^2 (x) - \JJ_0 \left( (\JJ^L_0 u_0)^2
+   \right) (x)) = W_2 (g_x^{L, N}) = \int_{\mathbb{T}^2} g_x^{L, N} (z_1,
+   z_2) W (\mathd z_1 \mathd z_2) . \]
+We let also
+\[ W_1 (g_x^{L, N} (z_1, \cdot)) = \int_{\mathbb{T}} g_x^{L, N} (z_1, z_2) W
+   (\mathd z_2) . \]
+Consider now
+\[ \mathbb{E} [r^{\varepsilon} (u_0, \varphi) \Phi (u_0)] =
+   \int_{\mathbb{T}} \varphi (x) \mathbb{E} [(W_2 (g_x^{L, N}) - K^{L, N})
+   \phi_0^L (x) \Phi (u_0)] \mathd x \]
+Partially integrating by parts $W_2$ we have
+\[ \mathbb{E} [W_2 (g_x^{L, N}) \phi_0^L (x) \Phi (u_0)] = \int_{\mathbb{T}}
+   \mathbb{E} [W_1 (g_x^{L, N} (z_1, \cdot)) \mathD_{z_1} [\phi_0^L (x) \Phi
+   (u_0)]] \mathd z_1 \]
+\[ = \int_{\mathbb{T}} \mathbb{E} [W_1 (g_x^{L, N} (z_1, \cdot)) \phi_0^L
+   (x) \mathD_{z_1} \Phi (u_0)] \mathd z_1 + \int_{\mathbb{T}} \mathbb{E}
+   [W_1 (g_x^{L, N} (z_1, \cdot)) \mathD_{z_1} \phi_0^L (x) \Phi (u_0)] \mathd
+   z_1 \]
+The second term can be again integrated by parts to obtain
+\[ \int_{\mathbb{T}} \mathbb{E} [W_1 (g_x^{L, N} (z_1, \cdot)) \mathD_{z_1}
+   \phi_0^L (x) \Phi (u_0)] \mathd z_1 = \int_{\mathbb{T}^2} g_x^{L, N} (z_1,
+   z_2) \mathbb{E} [\mathD_{z_1, z_2}^2 \phi_0^L (x) \Phi (u_0)] \mathd z_1
+   \mathd z_2 \]
+\[ + \int_{\mathbb{T}^2} g_x^{L, N} (z_1, z_2) \mathbb{E} [\mathD_{z_1}
+   \phi_0^L (x) \mathD_{z_2} \Phi (u_0)] \mathd z_1 \mathd z_2 . \]
+while the first can be written as
+\[ \int_{\mathbb{T}} \mathbb{E} [W_1 (g_x^{L, N} (z_1, \cdot)) \phi_0^L (x)
+   \mathD_{z_1} \Phi (u_0)] \mathd z_1 = \int_{\mathbb{T}} \mathbb{E} [(W_1
+   (g_x^{L, N} (z_1, \cdot)) \diamond \phi_0^L (x)) \mathD_{z_1} \Phi (u_0)]
+   \mathd z_1 \]
+\[ + \int_{\mathbb{T}^2} g_x^{L, N} (z_1, z_2) \mathbb{E} [\mathD_{z_2}
+   \phi_0^L (x) \mathD_{z_1} \Phi (u_0)] \mathd z_1 \mathd z_2 . \]
+where
+\[ (W_1 (g_x^{L, N} (z_1, \cdot)) \diamond \phi_0^L (x)) = W_1 (g_x^{L, N}
+   (z_1, \cdot)) \phi_0^L (x) - \int_{\mathbb{T}} g_x^{L, N} (z_1, z_2)
+   \mathD_{z_2} \phi_0^L (x) \mathd z_2 \]
+is a (partial) Wick contraction of the two terms. In the end we have the
+decomposition
+\[ \mathbb{E} [r^{L, N} (u_0, \varphi) \Phi (u_0)] = A^{L, N} + B^{L, N} +
+   C^{L, N} \]
+where
+\[ A^{L, N} = \int_{\mathbb{T}} \varphi (x) \int_{\mathbb{T}} \mathbb{E}
+   [(W_1 (g_x^{L, N} (z_1, \cdot)) \diamond \phi_0^L (x)) \mathD_{z_1} \Phi
+   (u_0)] \mathd z_1 \mathd x \]
+\[ B^{L, N} = \int_{\mathbb{T}} \varphi (x) \left[ \int_{\mathbb{T}^2}
+   g_x^{L, N} (z_1, z_2) \mathbb{E} \left[ (\mathD_{z_1, z_2}^2 \phi_0^L (x))
+   \Phi \left( u_0 \right) \right] \mathd z_1 \mathd z_2 - K^{L, N}
+   \mathbb{E} [^{} \phi_0^L (x) \Phi (u_0)] \right] \mathd x \]
+and
+\[ C^{L, N} = 2 \int_{\mathbb{T}} \varphi (x) \int_{\mathbb{T}^2} g_x^{L, N}
+   (z_1, z_2) \mathbb{E} [(\mathD_{z_1} \phi_0^L (x)) \mathD_{z_2} \Phi
+   (u_0)] \mathd z_1 \mathd z_2 \mathd x. \]
+\[ \  \]
+So we can bound these three terms independently. In order to proceed, observe
+that
+\[ \mathD_{z_1} \phi_0^L (x) = \phi_0^L (x) (I^{\ast} \rho_x^L) (z_1) \]
+and
+\[ \mathD_{z_1, z_2}^2 \phi_0^L (x) = \phi_0^L (x) (I^{\ast} \rho_x^L) (z_1)
+   (I^{\ast} \rho_x^L) (z_2) \]
+so
+\[ B^{L, N} = \int_{\mathbb{T}} \varphi (x) \left[ \int_{\mathbb{T}^2}
+   g_x^{L, N} (z_1, z_2) (I^{\ast} \rho_x^L) (z_1) (I^{\ast} \rho_x^L) (z_2)
+   \mathd z_1 \mathd z_2 - K^{L, N} \right] \mathbb{E} [\phi_0^L (x) \Phi
+   (u_0)] \mathd x \]
+and
+\[ C^{L, N} = 2 \int_{\mathbb{T}} \varphi (x) \int_{\mathbb{T}^2} g_x^{L, N}
+   (z_1, z_2) (I^{\ast} \rho_x^L) (z_1) \mathbb{E} [\phi_0^L (x) \mathD_{z_2}
+   \Phi (u_0)] \mathd z_1 \mathd z_2 \mathd x . \]
+Let
+\[ K^{L, N} = \int_{\mathbb{T}^2} g_x^{L, N} (z_1, z_2) (I^{\ast} \rho_x^L)
+   (z_1) (I^{\ast} \rho_x^L) (z_2) \mathd z_1 \mathd z_2 \]
+to have $B^{L, N} = 0$. From the expression of $A^{L, N}$ and $C^{L, N}$ we
+deduce that with this choice
+\[ \mathbb{E} [r^{L, N} (u_0, \varphi)] = 0 \]
+as required. By Cauchy--Schwarz we have
+\[ (A^{L, N})^2 \leqslant \mathbb{E} \left\| \int_{\mathbb{T}} \varphi (x)
+   (W_1 (g_x^{L, N} (z_1, \cdot)) \diamond \phi_0^L (x)) \mathd x
+   \right\|_{H^{- 1}_{z_1}}^2 \mathbb{E} \| \mathD_{z_1} \Phi (u_0)
+   \|_{H^1_{z_1}}^2 = (A_1^{L, N})^2 \| \Phi \|_1^2 \]
+where
+\[ (A_1^{L, N})^2 =\mathbb{E} \left\| \int_{\mathbb{T}} \varphi (x) W_1
+   (g_x^{L, N} (z_1, \cdot)) \diamond \phi_0^L (x) \mathd x \right\|_{H^{-
+   1}_{z_1}}^2 \]
+\[ = \int_{\mathbb{T}^2} \varphi (x) \varphi (x') \mathbb{E} \left[ \langle
+   \phi_0^L (x) \diamond W_1 (g_x^{L, N} (z_1, \cdot)), \phi_0^L (x') \diamond
+   W_1 (g_{x'}^{L, N} (z_1, \cdot)) \rangle_{H^{- 1}_{z_1}} \right] \mathd x
+   \mathd x' \]
+and
+\[ (C^{L, N})^2 \lesssim \mathbb{E} \left\| \int_{\mathbb{T}} \varphi (x)
+   \phi^L_0 (x) \int_{\mathbb{T}} g_x^{L, N} (z_1, z_2) (I^{\ast} \rho_x^L)
+   (z_1) \mathd z_1 \mathd x \right\|_{H^{- 1}_{z_2}}^2 \mathbb{E} \|
+   \mathD_{z_2} \Phi (u_0) \|_{H^1_{z_2}}^2 \]
+\[ \lesssim (C_1^{L, N})^2 \| \Phi \|_1^2 \]
+with
+\[ (C_1^{L, N})^2 =\mathbb{E} \left\| \int_{\mathbb{T}} \varphi (x) \phi^L_0
+   (x) \int_{\mathbb{T}} g_x^{L, N} (z_1, z_2) (I^{\ast} \rho_x^L) (z_1)
+   \mathd z_1 \mathd x \right\|_{H^{- 1}_{z_2}}^2 \]
+So we have proven
+
+\begin{lemma}
+  We have
+  \[ | \mathbb{E} [r^{L, N} (u_0, \varphi) \Phi (u_0)] | \lesssim \| \Phi
+     \|_1 (A_1^{L, N} + C_1^{L, N}) \]
+  and in particular
+  \[ \| r^{L, N} (u_0, \varphi) \|_{- 1} \lesssim A_1^{L, N} + C_1^{L, N} . \]
+\end{lemma}
+
+Then it remains to bound each of these constants to show that they vanish in
+the limit $N, L \rightarrow + \infty$ and to study the limit of $K^{L, N}$.
+This is the aim of the following lemmas.
+
+\begin{lemma}
+  We have $\lim_{N \rightarrow + \infty} K^{L, N} = K^L$ and $\lim_{L
+  \rightarrow + \infty} K^L = K = - 1 / 12$.
+\end{lemma}
+
+\begin{proof}
+  Since
+  \[ \int_{\mathbb{T}} (I^{\ast} \rho_x^L) (z_1) \rho^N_y (z_1) \mathd z_1 =
+     \left\langle I^{\ast} \JJ^L_0 \delta_x, \JJ^N_0 \delta_y
+     \right\rangle_{L^2} = \left\langle \delta_x, I \JJ^L_0  \JJ^N_0 \delta_y
+     \right\rangle_{L^2} = \left( I \JJ^L_0  \JJ^N_0 \delta_y \right) (x) \]
+  we have
+  \[ K^{L, N} = \int_{\mathbb{T}^2} g_x^{L, N} (z_1, z_2) (I^{\ast} \rho_x^L)
+     (z_1) (I^{\ast} \rho_x^L) (z_2) \mathd z_1 \mathd z_2 \]
+  \[ = \int_{\mathbb{T}} \mathd y (\rho_x^L (y) \left( I \JJ^{L \wedge N}_0
+     \delta_y \right) (x)^2 - \rho_x^{\infty} (y) \left( I \JJ^L_0 \delta_y
+     \right) (x)^2) . \]
+  Taking $N \rightarrow \infty$ we get
+  \[ K^{L, N} \rightarrow K^L = \int_{\mathbb{T}} \mathd y (\rho_x^L (y)
+     \left( I \JJ^L_0 \delta_y \right) (x)^2 - \rho_x^{\infty} (y) \left( I
+     \JJ^L_0 \delta_y \right) (x)^2) . \]
+  Now note that the integral of the first term in the expression of $K^L$
+  vanishes, indeed:
+  \[ \int_{\mathbb{T}} \mathd y \rho_x^L (y) \left( I \JJ^L_0 \delta_y
+     \right) (x)^2 = \int_{\mathbb{T}} \mathd y \rho_x^L (y) \left( I \JJ^L_0
+     \delta_x \right) (y)^2 \]
+  \[ = \int_{\mathbb{T}} \mathd y \left( \partial_y I \JJ_0^L \delta_x
+     \right) (y) \left( I \JJ^L_0 \delta_x \right) (y)^2 = \frac{1}{3}
+     \int_{\mathbb{T}} \mathd y \partial_y \left( I \JJ^L_0 \delta_x \right)
+     (y)^3 = 0. \]
+  Moreover the second term satisfies
+  \[ \int_{\mathbb{T}} \mathd y \rho_x^{\infty} (y) \left( I \JJ^L_0 \delta_y
+     \right) (x)^2 = \left( I \JJ^L_0 \delta_x \right) (x)^2 - \frac{1}{2 \pi}
+     \int_{\mathbb{T}} \mathd y \left( I \JJ^L_0 \delta_y \right) (x)^2 \]
+  since $\rho_x^{\infty} = \delta_x - 1 / 2 \pi$. By symmetry also the $\left(
+  I \JJ^L_0 \delta_x \right) (x)^2$ contribution vanishes, since
+  \[ \left( I \JJ^L_0 \delta_x \right) (x) = \left( I^{\ast} \JJ^L_0 \delta_x
+     \right) (x) = - \left( I^{} \JJ^L_0 \delta_x \right) (x) = 0. \]
+  So we ends up with
+  \[ K^L = - \frac{1}{2 \pi} \int_{\mathbb{T}} \mathd y \left( I \JJ^L_0
+     \delta_x \right) (y)^2 = - \frac{1}{2 \pi} \left\langle I \JJ^L_0
+     \delta_x, I \JJ^L_0 \delta_x \right\rangle = - \frac{1}{4 \pi^2} \sum_{0
+     < | k |} \frac{| \hat{\rho}^L (k) |^2}{| k |^2} \]
+  since
+  \[ \FF \left( I \JJ^L_0 \delta_x \right) (k) = \frac{\hat{\rho}^L (k)}{ik}
+     e_k (x)^{\ast} . \]
+  And as $L \rightarrow \infty$ we obtain $\hat{\rho}^L (k) \rightarrow 1$ for
+  all $k \neq 0$ so
+  \[ K^L \rightarrow - \frac{1}{2 \pi^2} \sum_{n = 1}^{\infty} \frac{1}{n^2} =
+     - \frac{1}{12} = K. \]
+  
+\end{proof}
+
+\begin{lemma}
+  We have $A_1^{L, N} \rightarrow 0$ as $N \rightarrow \infty$ and $L
+  \rightarrow \infty$.
+\end{lemma}
+
+\begin{proof}
+  
+  \[ (A_1^{L, N})^2 =\mathbb{E} \left\| \int_{\mathbb{T}} \varphi (x) W_1
+     (g_x^{L, N} (z_1, \cdot)) \diamond \phi_0^L (x) \mathd x \right\|_{H^{-
+     1}_{z_1}}^2 \]
+  \[ = \int_{\mathbb{T}^2} \varphi (x) \varphi (x') \mathbb{E} \left[
+     \langle \phi_0^L (x) \diamond W_1 (g_x^{L, N} (z_1, \cdot)), \phi_0^L
+     (x') \diamond W_1 (g_{x'}^{L, N} (z_1, \cdot)) \rangle_{H^{- 1}_{z_1}}
+     \right] \mathd x \mathd x' \]
+  Integrating by parts the $W_1$ terms and taking into account the
+  cancellations due to the partial $\diamond$ contractions we get
+  \[ \mathbb{E} \left[ \langle \phi_0^L (x) \diamond W_1 (g_x^{L, N} (z_1,
+     \cdot)), \phi_0^L (x') \diamond W_1 (g_{x'}^{L, N} (z_1, \cdot))
+     \rangle_{H^{- 1}_{z_1}} \right] \]
+  \[ =\mathbb{E} [\phi_0^L (x) \phi_0^L (x')] \int_{\mathbb{T}^2} \langle
+     g_x^{L, N} (z_1, z_2), g_{x'}^{L, N} (z_1, z_2) \rangle_{H^{- 1}_{z_1}}
+     \mathd z_2 \]
+  \[ + \int_{\mathbb{T}^2} \mathbb{E} [(\mathD_{z_3} \phi_0^L (x))
+     (\mathD_{z_2} \phi_0^L (x'))] \langle g_x^{L, N} (z_1, z_2), g_{x'}^{L,
+     N} (z_1, z_3) \rangle_{H^{- 1}_{z_1}} \mathd z_2 \mathd z_3 \]
+  The second term can be written as
+  \[ \mathbb{E} [\phi_0^L (x) \phi_0^L (x')] \int_{\mathbb{T}^2} (I^{\ast}
+     \rho_x^L) (z_3) (I^{\ast} \rho_{x'}^L) (z_2) \langle g_x^{L, N} (z_1,
+     z_2), g_{x'}^{L, N} (z_1, z_3) \rangle_{H^{- 1}_{z_1}} \mathd z_2 \mathd
+     z_3 \]
+  so letting
+  \[ V^L (x, x') = \varphi (x) \varphi (x') \mathbb{E} [_{} \phi_0^L (x)
+     \phi_0^L (x')] \]
+  we have
+  \[ (A_1^{L, N})^2 = \int_{\mathbb{T}^2} V^L (x, x') \int_{\mathbb{T}^2}
+     (I^{\ast} \rho_x^L) (z_3) (I^{\ast} \rho_{x'}^L) (z_2) \langle g_x^{L, N}
+     (z_1, z_2), g_{x'}^{L, N} (z_1, z_3) \rangle_{H^{- 1}_{z_1}} \mathd z_2
+     \mathd z_3 \mathd x \mathd x' \]
+  \[ + \int_{\mathbb{T}^2} V^L (x, x') \int_{\mathbb{T}^2} \langle g_x^{L,
+     N} (z_1, z_2), g_{x'}^{L, N} (z_1, z_2) \rangle_{H^{- 1}_{z_1}} \mathd
+     z_2 \mathd x \mathd x' 
+   = A_{1, 1} + A_{1, 2} \]
+  Let us consider $A_{1, 1}$ first :
+  \[ A_{1, 1} = \int_{\mathbb{T}^4} V^L (x, x') \langle G_{x, x'}, G_{x', x}
+     \rangle_{H^{- 1}} \mathd x \mathd x' \]
+  where
+  \[ G_{x, x'} (z_1) = \int_{\mathbb{T}} (I^{\ast} \rho_{x'}^L) (z_2) g_x^{L,
+     N} (z_1, z_2) \mathd z_2 . \]
+  Now observe that
+  \[ G_{x, x'} (z_1) = \int_{\mathbb{T}} \mathd y \rho_x^L (y) \rho^N_y (z_1)
+     (\JJ^N_0 I^{\ast} \rho_{x'}^L) (y) - \int_{\mathbb{T}} \mathd y
+     \rho_x^{\infty} (y) \rho^L_y (z_1) (I^{\ast} \rho_{x'}^L) (y) \]
+  so the $H^{- 1}$ scalar product in $A_{1, 1}$ can be expanded as
+  \[ \langle G_{x, x'}, G_{x', x} \rangle_{H^{- 1}} = \int_{\mathbb{T}}
+     \mathd y \rho_x^L (y) (\JJ^N_0 I^{\ast} \rho_{x'}^L) (y)
+     \int_{\mathbb{T}} \mathd y' \rho_{x'}^L (y') (\JJ^N_0 I^{\ast} \rho_x^L)
+     (y') \langle \rho^N_y (z_1), \rho^N_{y'} (z_1) \rangle_{H^{- 1}_{z_1}} \]
+  \[ - \int_{\mathbb{T}} \mathd y \rho_x^{\infty} (y) (I^{\ast} \rho_{x'}^L)
+     (y) \int_{\mathbb{T}} \mathd y' \rho_{x'}^L (y') (\JJ^N_0 I^{\ast}
+     \rho_x^L) (y') \langle \rho^L_y (z_1), \rho^N_{y'} (z_1) \rangle_{H^{-
+     1}_{z_1}} \]
+  \[ - \int_{\mathbb{T}} \mathd y \rho_x^L (y) (\JJ^N_0 I^{\ast} \rho_{x'}^L)
+     (y) \int_{\mathbb{T}} \mathd y' \rho_{x'}^{\infty} (y') (I^{\ast}
+     \rho_x^L) (y') \langle \rho^N_y (z_1), \rho^L_{y'} (z_1) \rangle_{H^{-
+     1}_{z_1}} \]
+  \[ + \int_{\mathbb{T}} \mathd y \rho_x^{\infty} (y) (I^{\ast} \rho_{x'}^L)
+     (y) \int_{\mathbb{T}} \mathd y' \rho_{x'}^{\infty} (y') (I^{\ast}
+     \rho_x^L) (y') \langle \rho^L_y (z_1), \rho^L_{y'} (z_1) \rangle_{H^{-
+     1}_{z_1}} \]
+  Taking $N \rightarrow \infty$ we get
+  \[ \langle G_{x, x'}, G_{x', x} \rangle_{H^{- 1}} \rightarrow
+     \int_{\mathbb{T}} \mathd y \rho_x^L (y) (I^{\ast} \rho_{x'}^L) (y)
+     \int_{\mathbb{T}} \mathd y' \rho_{x'}^L (y') (I^{\ast} \rho_x^L) (y')
+     \langle \rho^{\infty}_y (z_1), \rho^{\infty}_{y'} (z_1) \rangle_{H^{-
+     1}_{z_1}} \]
+  \[ - \int_{\mathbb{T}} \mathd y \rho_x^{\infty} (y) (I^{\ast} \rho_{x'}^L)
+     (y) \int_{\mathbb{T}} \mathd y' \rho_{x'}^L (y') (I^{\ast} \rho_x^L)
+     (y') \langle \rho^L_y (z_1), \rho^{\infty}_{y'} (z_1) \rangle_{H^{-
+     1}_{z_1}} \]
+  \[ - \int_{\mathbb{T}} \mathd y \rho_x^L (y) (I^{\ast} \rho_{x'}^L) (y)
+     \int_{\mathbb{T}} \mathd y' \rho_{x'}^{\infty} (y') (I^{\ast} \rho_x^L)
+     (y') \langle \rho^{\infty}_y (z_1), \rho^L_{y'} (z_1) \rangle_{H^{-
+     1}_{z_1}} \]
+  \[ + \int_{\mathbb{T}} \mathd y \rho_x^{\infty} (y) (I^{\ast} \rho_{x'}^L)
+     (y) \int_{\mathbb{T}} \mathd y' \rho_{x'}^{\infty} (y') (I^{\ast}
+     \rho_x^L) (y') \langle \rho^L_y (z_1), \rho^L_{y'} (z_1) \rangle_{H^{-
+     1}_{z_1}} \]
+  \[ = \left\langle I \JJ_0 (\rho^L_x (I^{\ast} \rho_{x'}^L)), I \JJ_0
+     (\rho_{x'}^L (I^{\ast} \rho_x^L)) \right\rangle - \left\langle I \JJ_0^L
+     (\rho^{\infty}_x (I^{\ast} \rho_{x'}^L)), I \JJ_0 (\rho_{x'}^L (I^{\ast}
+     \rho_x^L)) \right\rangle \]
+  \[ - \left\langle I \JJ_0 (\rho^L_x (I^{\ast} \rho_{x'}^L)), I \JJ_0^L
+     (\rho_{x'}^{\infty} (I^{\ast} \rho_x^L)) \right\rangle + \left\langle I
+     \JJ_0^L (\rho^{\infty}_x (I^{\ast} \rho_{x'}^L)), I \JJ_0^L
+     (\rho_{x'}^{\infty} (I^{\ast} \rho_x^L)) \right\rangle . \]
+  The point is to show that, as $L \rightarrow + \infty$,
+  \[ \left\langle I \JJ_0 (\rho^L_x (I^{\ast} \rho_{x'}^L)), I \JJ_0
+     (\rho_{x'}^L (I^{\ast} \rho_x^L)) \right\rangle \rightarrow \left\langle
+     I \JJ_0 (\rho^{\infty}_x (I^{\ast} \rho_{x'}^{\infty})), I \JJ_0
+     (\rho_{x'}^{\infty} (I^{\ast} \rho_x^{\infty})) \right\rangle \]
+  and the same limit for the other three quantities. Writing things in Fourier
+  space we have
+  \[ J_L (x - x') = \left\langle I \JJ_0 (\rho^L_x (I^{\ast} \rho_{x'}^L)), I
+     \JJ_0 (\rho_{x'}^L (I^{\ast} \rho_x^L)) \right\rangle \]
+  \[ = \frac{1}{2 \pi} \sum_{\tmscript{\begin{array}{c}
+       0 < | k_1 |, | k_2 |, | k_3 |, | k_4 |\\
+       k_1 + k_2 + k_3 + k_4 = 0
+     \end{array}}} \frac{\mathbb{I}_{k_1 + k_2 \neq 0}}{(k_1 + k_2)^2}
+     e^{ik_1 x} \frac{e^{ik_2 x'}}{- ik_2} e^{ik_3 x'} \frac{e^{ik_4 x}}{-
+     ik_4} \hat{\rho}^L (k_1) \hat{\rho}^L (k_2) \hat{\rho}^L (k_3)
+     \hat{\rho}^L (k_4) \]
+  \[ = \frac{1}{2 \pi} \sum_{\tmscript{\begin{array}{c}
+       0 < | k_1 |, | k_2 |, | k_3 |, | k_4 |\\
+       k_1 + k_2 + k_3 + k_4 = 0
+     \end{array}}} \frac{\mathbb{I}_{k_1 + k_2 \neq 0}}{(k_1 + k_2)^2}
+     \frac{e^{i (k_2 + k_3) (x' - x)}}{- ik_2} \frac{1}{- ik_4} \hat{\rho}^L
+     (k_1) \hat{\rho}^L (k_2) \hat{\rho}^L (k_3) \hat{\rho}^L (k_4) \]
+  Now taking Littlewood--Paley blocks $(\Delta_q)_{q \geqslant - 1}$ of this
+  quantity we get
+  \[ \Delta_q J_L (x) = \frac{1}{2 \pi} \sum_{\tmscript{\begin{array}{c}
+       0 < | k_1 |, | k_2 |, | k_3 |, | k_4 |\\
+       k_1 + k_2 + k_3 + k_4 = 0
+     \end{array}}} \frac{\mathbb{I}_{k_1 + k_2 \neq 0}}{(k_1 + k_2)^2}
+     \frac{e^{i (k_2 + k_3) (x' - x)}}{- ik_2} \frac{\theta_q (k_2 + k_3)}{-
+     ik_4} \hat{\rho}^L (k_1) \hat{\rho}^L (k_2) \hat{\rho}^L (k_3)
+     \hat{\rho}^L (k_4) . \]
+  Where $\theta_q$ is the Fourier multiplier associated to $\Delta_q$ by
+  $\Delta_q = \theta_q (\mathD)$. Taking into accout that $\sup_k |
+  \hat{\rho}^L (k) | < + \infty$ if we show that the quantity
+  \[ S_q = \frac{1}{2 \pi} \sum_{\tmscript{\begin{array}{c}
+       0 < | k_1 |, | k_2 |, | k_3 |, | k_4 |\\
+       k_1 + k_2 + k_3 + k_4 = 0
+     \end{array}}} \mathbb{I}_{k_1 + k_2 \neq 0} \frac{\theta_q (k_2 +
+     k_3)}{(k_1 + k_2)^2 | k_2 |  | k_3 |} \]
+  is finite then we can conclude by dominated convergence. Note that
+  \[ S_q \lesssim 2^{q \varepsilon} \sum_{0 < | k_1 |, | k_2 |, | k_3 |}
+     \frac{\mathbb{I}_{k_1 + k_2 \neq 0, k_2 + k_3 \neq 0}}{(k_1 + k_2)^2 |
+     k_2 |  | k_3 | | k_2 + k_3 |^{\varepsilon}} \]
+  for any $\varepsilon > 0$ since
+  \[ | \theta_q (k) | = | \theta (2^{- q} k) | \lesssim (1 + | 2^{- q} k |)^{-
+     \varepsilon} \lesssim 2^{q \varepsilon} | k |^{- \varepsilon} \]
+  due to the fact that the function $\theta$ is supported in a ball of finite
+  radius. We can now perform the sum over $k_3$ and get
+  \[ S_q \lesssim 2^{q \varepsilon} \sum_{0 < | k_1 |, | k_2 |}
+     \frac{\mathbb{I}_{k_1 + k_2 \neq 0}}{(k_1 + k_2)^2 | k_2 | } \]
+  since
+  \[ \sum_{0 < | k_3 |} \frac{\mathbb{I}_{k_2 + k_3 \neq 0}}{| k_3 | | k_2 +
+     k_3 |^{\varepsilon}} \lesssim \frac{1}{| k_2 |^{\varepsilon}} \]
+  uniformly in $k_2 \neq 0$ and $L$. Now performing the other two sums we show
+  simply that
+  \[ S_q \lesssim 2^{q \varepsilon} \sum_{0 < | k_2 |} \frac{1}{| k_2 |^{1 +
+     \varepsilon} } \lesssim 2^{q \varepsilon} \]
+  where we used the fact that
+  \[ \sum_{0 < | k_1 |} \frac{\mathbb{I}_{k_1 + k_2 \neq 0}}{(k_1 + k_2)^2 }
+     \leqslant \sum_{k_1 \in \mathbb{Z}} \frac{\mathbb{I}_{k_1 + k_2 \neq
+     0}}{(k_1 + k_2)^2 } = \sum_{k_1 \in \mathbb{Z}} \frac{\mathbb{I}_{k_1
+     \neq 0}}{(k_1)^2 } \lesssim 1. \]
+  By dominated convergence we can conclude that
+  \[ \left\langle I \JJ_0 (\rho^L_x (I^{\ast} \rho_{x'}^L)), I \JJ_0
+     (\rho_{x'}^L (I^{\ast} \rho_x^L)) \right\rangle \rightarrow \left\langle
+     I \JJ_0 (\rho^{\infty}_x (I^{\ast} \rho_{x'}^{\infty})), I \JJ_0
+     (\rho_{x'}^{\infty} (I^{\ast} \rho_x^{\infty})) \right\rangle \]
+  as distributions of arbitrarily small negative order of the variable $x -
+  x'$. This is ok since we test this quantity against the function $V^L$ which
+  belongs to $C^{1 / 2 -} (\mathbb{T}^2)$ uniformly in $L$. The other terms
+  can be handled similarly and thus we conclude that $A_{1, 1} \rightarrow 0$.
+  
+  \
+  
+  Let us turn now to $A_{1, 2}$. The relevant computation is the following:
+  \[ \int_{\mathbb{T}^2} \langle g_x^{L, N} (z_1, z_2), g_{x'}^{L, N} (z_1,
+     z_2) \rangle_{H^{- 1}_{z_1}} \mathd z_2 = \]
+  \[ \int_{\mathbb{T}} \mathd y \rho_x^L (y) \int_{\mathbb{T}} \mathd y'
+     \rho_{x'}^L (y') \langle \rho^N_y (z_1), \rho^N_{y'} (z_1) \rangle_{H^{-
+     1}_{z_1}} \langle \rho^N_y (z_2), \rho^N_{y'} (z_2) \rangle_{L^2_{z_2}}
+  \]
+  \[ - \int_{\mathbb{T}} \mathd y \rho_x^L (y) \int_{\mathbb{T}} \mathd y'
+     \rho_{x'}^{\infty} (y') \langle \rho^N_y (z_1), \rho^L_{y'} (z_1)
+     \rangle_{H^{- 1}_{z_1}} \langle \rho^N_y (z_2), \rho^L_{y'} (z_2)
+     \rangle_{L^2_{z_2}} \]
+  \[ - \int_{\mathbb{T}} \mathd y \rho_x^{\infty} (y) \int_{\mathbb{T}}
+     \mathd y' \rho_{x'}^L (y') \langle \rho^L_y (z_1), \rho^N_{y'} (z_1)
+     \rangle_{H^{- 1}_{z_1}} \langle \rho^L_y (z_2), \rho^N_{y'} (z_2)
+     \rangle_{L^2_{z_2}} \]
+  \[ + \int_{\mathbb{T}} \mathd y \rho_x^{\infty} (y) \int_{\mathbb{T}}
+     \mathd y' \rho_{x'}^{\infty} (y') \langle \rho^L_y (z_1), \rho^L_{y'}
+     (z_1) \rangle_{H^{- 1}_{z_1}} \langle \rho^L_y (z_2), \rho^L_{y'} (z_2)
+     \rangle_{L^2_{z_2}} \]
+  Now consider one of the terms:
+  \[ \int_{\mathbb{T}} \mathd y \rho_x^L (y) \int_{\mathbb{T}} \mathd y'
+     \rho_{x'}^L (y') \langle \rho^N_y (z_1), \rho^N_{y'} (z_1) \rangle_{H^{-
+     1}_{z_1}} \langle \rho^N_y (z_2), \rho^N_{y'} (z_2) \rangle_{L^2_{z_2}}
+  \]
+  \[ = \int_{\mathbb{T}} \mathd y \rho_x^L (y) \int_{\mathbb{T}} \mathd y'
+     \rho_{x'}^L (y') \rho^N_y (y') (I^{\ast} I \rho^N_y) (y') \]
+  since
+  \[ \langle \rho^N_y (z_1), \rho^N_{y'} (z_1) \rangle_{H^{- 1}_{z_1}} =
+     \langle I \rho^N_y, I \rho^N_{y'} \rangle_{L^2} = \langle I^{\ast} I
+     \rho^N_y, \delta_{y'} \rangle_{L^2} = (I^{\ast} I \rho^N_y) (y') \]
+  As $N \rightarrow \infty$ this quantity becomes
+  \[ \rightarrow \int_{\mathbb{T}} \mathd y \rho_x^L (y) \int_{\mathbb{T}}
+     \mathd y' \rho_{x'}^L (y') \rho^{\infty}_y (y') (I^{\ast} I
+     \rho^{\infty}_y) (y') \]
+  \[ = \int_{\mathbb{T}} \mathd y \rho_x^L (y) \rho_{x'}^L (y) (I^{\ast} I
+     \rho^{\infty}_y) (y) - \frac{1}{2 \pi} \int_{\mathbb{T}} \mathd y
+     \rho_x^L (y) \int_{\mathbb{T}} \mathd y' \rho_{x'}^L (y') (I^{\ast} I
+     \rho^{\infty}_y) (y') \]
+  \[ = (I^{\ast} I \rho^{\infty}_0) (0) \int_{\mathbb{T}} \mathd y \rho_x^L
+     (y) \rho_{x'}^L (y) - \frac{1}{2 \pi} (I^{\ast} I \rho^L_x) (x') \]
+  \[ = (I^{\ast} I \rho^{\infty}_0) (0) \rho_x^L (x') - \frac{1}{2 \pi}
+     (I^{\ast} I \rho^L_x) (x') \]
+  since $(I^{\ast} I \rho^{\infty}_y) (y) = (I^{\ast} I \rho^{\infty}_0) (0)$.
+  As $L \rightarrow \infty$ we obtain
+  \[ = (I^{\ast} I \rho^{\infty}_0) (0) \rho_x^{\infty} (x') - \frac{1}{2 \pi}
+     (I^{\ast} I \rho^{\infty}_x) (x') \]
+  For the other terms the discussion of the convergence is similar and the
+  limit is the same so we obtain that
+  \[ \int_{\mathbb{T}^2} \langle g_x^{L, N} (z_1, z_2), g_{x'}^{L, N} (z_1,
+     z_2) \rangle_{H^{- 1}_{z_1}} \mathd z_2 \rightarrow 0 \]
+  as a distribution in the $x, x'$ variables and we conclude that $A_{1, 2}
+  \rightarrow 0$.
+\end{proof}
+
+\begin{lemma}
+  We have $C_1^{L, N} \rightarrow 0$ as $N \rightarrow \infty$ and $L
+  \rightarrow \infty$.
+\end{lemma}
+
+\begin{proof}
+  Let
+  \[ G_x (z_2) = \int_{\mathbb{T}} g_x^{L, N} (z_1, z_2) (I^{\ast} \rho_x^L)
+     (z_1) \mathd z_1 = G_{x, x} (z_2) \]
+  and recall that
+  \[ (C_1^{L, N})^2 =\mathbb{E} \left\| \int_{\mathbb{T}} \varphi (x)
+     \phi^L_0 (x) G_x (z_2) \mathd x \right\|_{H^{- 1}_{z_2}}^2 =
+     \int_{\mathbb{T}^2} V^L (x, x') \langle G_x, G_{x'} \rangle_{H^{- 1}}
+     \mathd x \mathd x' \]
+  In order to estimate the scalar product can take $f \in H^1$ and consider
+  $\int G_{x, x} (z) f (z) \mathd z$ instead. Recall that
+  
+  
+  \[ \int G_{x, x} (z) f (z) \mathd z = \int_{\mathbb{T}} \mathd y \rho_x^L
+     (y) \JJ^N_0 f (y) (\JJ^N_0 I^{\ast} \rho_x^L) (y) - \int_{\mathbb{T}}
+     \mathd y \rho_x^{\infty} (y) \JJ^L_0 f (y) (I^{\ast} \rho_x^L) (y) \]
+  replace $\rho^{\infty}_x (y)$ by $\delta_x (y) - 1 / 2 \pi$ and $\rho^L_x
+  (y)$ by $\delta_x^L (y) - 1 / 2 \pi$ to get
+  \[ = \int_{\mathbb{T}} \mathd y \delta_x^L (y) \left( \JJ^N_0 f (y) \right)
+     (\JJ^N_0 I^{\ast} \rho_x^L) (y) - \left( \JJ^L_0 f (x) \right) (I^{\ast}
+     \rho_x^L) (x) \]
+  \[ - \frac{1}{2 \pi} \int_{\mathbb{T}} \mathd y \JJ^N_0 f (y) (\JJ^N_0
+     I^{\ast} \rho_x^L) (y) + \frac{1}{2 \pi} \int_{\mathbb{T}} \mathd y
+     \JJ^L_0 f (y) (I^{\ast} \rho_x^L) (y) \]
+  \[ = \int_{\mathbb{T}} \mathd y \delta_x^L (y) \left( \JJ^N_0 f (y) -
+     \JJ^N_0 f (x) \right) (\JJ^N_0 I^{\ast} \rho_x^L) (y) \]
+  \[ + \left( \JJ^N_0 f (x) \right) (I^{\ast} \left( \delta^L \ast \JJ^N_0
+     \rho_x^L \right)) (x) - \left( \JJ^L_0 f (x) \right) (I^{\ast} \rho_x^L)
+     (x) \]
+  \[ - \frac{1}{2 \pi} \int_{\mathbb{T}} \mathd y \JJ^N_0 f (y) (\JJ^N_0
+     I^{\ast} \rho_x^L) (y) + \frac{1}{2 \pi} \int_{\mathbb{T}} \mathd y
+     \JJ^L_0 f (y) (I^{\ast} \rho_x^L) (y) . \]
+  We note that, by symmetry,
+  \[ \left( \JJ^N_0 f (x) \right) (I^{\ast} \left( \delta^L \ast \JJ^N_0
+     \rho_x^L \right)) (x) = \left( \JJ^L_0 f (x) \right) (I^{\ast} \rho_x^L)
+     (x) = 0 \]
+  and moreover that in this expression we have that
+  \[ \sup_x \left| \left\langle \JJ^L_0 f, I^{\ast} \rho_x^L \right\rangle -
+     \langle f, \Theta_x^{} \rangle \right| + \sup_x \left| \left\langle
+     \JJ^N_0 f, \JJ^N_0 I^{\ast} \rho_x^L \right\rangle - \langle f,
+     \Theta_x^{} \rangle \right| \lesssim \| f \|_{H^1} o (1)
+  \]
+ as $L\wedge N \to \infty$. Finally it remains to bound
+  \[ H = \int_{\mathbb{T}} \mathd y \delta_x^L (y) \left( \JJ^N_0 f (y) -
+     \JJ^N_0 f (x) \right) (\JJ^N_0 I^{\ast} \rho_x^L) (y) \]
+  However using $H^1 \subseteq C^{1 / 2}$ compactly and that $\left\| \JJ^N_0
+  I^{\ast} \rho^L_x \right\|_{\infty} < + \infty$ uniformy in $x, L, N$ we
+  have
+  \[ | H | \lesssim \left\| \JJ^N_0 f \right\|_{H^1} \int_{\mathbb{T}} \mathd
+     y \delta_x^L (y) | y - x |^{1 / 2} \lesssim \| f \|_{H^1} L^{- 1 / 2}
+     \rightarrow 0. \]
+  In conclusion
+  \[ \sup_{x \in \mathbb{T}} \left| \int G_{x, x'} (z) f (z) \mathd z
+     \right|_{} \lesssim \| f \|_{H^1} o (1) \]
+  which implies
+  $\sup_{x \in \mathbb{T}} \langle G_{x, x}, G_{x, x} \rangle_{H^{- 1}} = o
+     (1) $
+  and thus we can conclude that $C_1^{L, N} \rightarrow 0$.
+\end{proof}
+
+\begin{thebibliography}{10}
+  \bibitem[1]{BertiniGiacomin1997}Lorenzo~Bertini  and 
+  Giambattista~Giacomin.{\newblock} Stochastic Burgers and KPZ equations from
+  particle systems.{\newblock} \tmtextit{Comm. Math. Phys.}, 183(3):571--607,
+  1997.{\newblock}
+  
+  \bibitem[2]{funaki_kpz_2014}Tadahisa~Funaki  and  Jeremy~Quastel.{\newblock}
+  KPZ equation, its renormalization and invariant measures.{\newblock}
+  \tmtextit{ArXiv:1407.7310 [math]}, , jul 2014.{\newblock} ArXiv:
+  1407.7310.{\newblock}
+  
+  \bibitem[3]{goncalves_nonlinear_2013}Patr$\acute{\text{{\i}}}$cia~Gon{\c
+  c}alves  and  Milton~Jara.{\newblock} Nonlinear Fluctuations of Weakly
+  Asymmetric Interacting Particle Systems.{\newblock} \tmtextit{Archive for
+  Rational Mechanics and Analysis}, 212(2):597--644, dec 2013.{\newblock}
+  
+  \bibitem[4]{gubinelli_regularization_2013}M.~Gubinelli  and 
+  M.~Jara.{\newblock} Regularization by noise and stochastic Burgers
+  equations.{\newblock} \tmtextit{Stochastic Partial Differential Equations:
+  Analysis and Computations}, 1(2):325--350, jun 2013.{\newblock}
+  
+  \bibitem[5]{gubinelli_lectures_2015}M.~Gubinelli  and 
+  N.~Perkowski.{\newblock} Lectures on singular stochastic PDEs.{\newblock}
+  \tmtextit{ArXiv:1502.00157 [math]}, , jan 2015.{\newblock} ArXiv:
+  1502.00157.{\newblock}
+  
+  \bibitem[6]{gubinelli_paracontrolled_2015}Massimiliano~Gubinelli,
+  Peter~Imkeller  and  Nicolas~Perkowski.{\newblock} Paracontrolled
+  distributions and singular PDEs.{\newblock} \tmtextit{Forum of Mathematics,
+  Pi}, 3, 2015.{\newblock}
+  
+  \bibitem[7]{hairer_solving_2011}Martin~Hairer.{\newblock} Solving the KPZ
+  equation.{\newblock} \tmtextit{Ann. Math.}, 178(2):559--664,
+  2013.{\newblock}
+  
+  \bibitem[8]{Hairer2014Regularity}Martin~Hairer.{\newblock} A theory of
+  regularity structures.{\newblock} \tmtextit{Invent. Math.}, 198(2):269--504,
+  2014.{\newblock}
+  
+  \bibitem[9]{hairer-quastel}Martin~Hairer  and  Jeremy~Quastel.{\newblock}
+  Weak universality of the kpz equation.{\newblock} Announcement,
+  2014.{\newblock}
+  
+  \bibitem[10]{prato_stochastic_2008}Guiseppe Da~Prato  and 
+  Jerzy~Zabczyk.{\newblock} \tmtextit{Stochastic Equations in Infinite
+  Dimensions}.{\newblock} Cambridge University Press, feb 2008.{\newblock}
+  
+  \bibitem[11]{russo_elements_2007}Francesco~Russo  and 
+  Pierre~Vallois.{\newblock} Elements of Stochastic Calculus via
+  Regularization.{\newblock} In  Catherine~Donati-Martin, Michel~{\'E}mery,
+  Alain~Rouault  and  Christophe~Stricker , editors , \tmtextit{S{\'e}minaire
+  de Probabilit{\'e}s XL},  volume  1899  of \tmtextit{Lecture Notes in
+  Mathematics},  pages  147--185. Springer Berlin / Heidelberg,
+  2007.{\newblock}
+  
+  \bibitem[12]{fluctuations_2012}\tmtextit{Fluctuations in Markov Processes:
+  Time Symmetry and Martingale Approximation}.{\newblock} Springer, Heidelberg
+  Germany ; New York, 2012 edition  edition , jul 2012.{\newblock}
+\end{thebibliography}
+
+\end{document}
