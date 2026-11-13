@@ -7318,7 +7318,7 @@
     <reference|proposition:potential-kernel-estimates>.
   </proof>
 
-  <\bibliography|bib|tm-plain|Documents/notes/broadening/invariant_measures/library1>
+  <\bibliography|bib|tm-plain|library1>
     <\bib-list|46>
       <bibitem*|1><label|bib-abdesselam2020>Abdelmalek Abdesselam.
       <newblock>A second-quantized kolmogorov\Uchentsov theorem via the

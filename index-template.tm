@@ -12,8 +12,9 @@
 
   Preprints by Massimiliano Gubinelli and co-authors, each with its TeXmacs
   sources, an HTML version and a PDF. The archive follows the
-  <hlink|OpenSheaf|https://opensheaf.org> format, where its structure and
-  metadata are described.
+  <hlink|OpenSheaf|https://opensheaf.org> format (version 0.1), where its
+  structure and metadata are described; programs can start from its discovery
+  document <hlink|opensheaf.json|opensheaf.json>.
 
   All rights to the papers are reserved to their authors.
 

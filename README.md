@@ -1,58 +1,64 @@
 # papers
 
-Preprints of Massimiliano Gubinelli and co-authors, deposited here as an
-alternative to the usual archives (experimental). Browse them at
+Preprints of Massimiliano Gubinelli and co-authors, with their TeXmacs
+sources, HTML versions and PDFs. Browse them at
 <https://mgubi.opensheaf.org/>, or open `index.tm` in
 [TeXmacs](https://www.texmacs.org).
 
-**Copyright.** All rights to the papers are reserved to their authors; see
-the `copyright` field of each paper's metadata. Nothing in this repository
-grants a licence to copy, modify or redistribute them.
+This repository is the first archive in [OpenSheaf](https://opensheaf.org), an
+open format for document archives and collections, and follows its
+specification, version 0.1. Programs can start from the discovery document
+[`opensheaf.json`](opensheaf.json).
+
+**Copyright.** All rights to the papers are reserved to their authors (see
+the `rightsList` of each paper's `datacite.json`). The metadata (`datacite.json`,
+`provenance.json`, `members.json`, the inventories and `opensheaf.json`) is
+placed under CC0. The tools and style files are licensed under the GNU General
+Public License, version 3 or later.
 
 ## Layout
 
-- `index.json`: the index, the entry point for programs. For each paper it
-  gives the path and SHA-256 hash of its current metadata file (and, for
-  convenience, title, authors, date and version).
-- `index.tm` / `index.html`: the readable index, generated from
-  `index.json` and the template `index-template.tm` (the surrounding text;
-  edit it in TeXmacs).
-- `metadata.tm` / `metadata.html`: the format of the metadata files.
-- `CNAME`: the GitHub Pages custom domain, `mgubi.opensheaf.org`.
+- `opensheaf.json`: the discovery document (archive identifier
+  `tag:opensheaf.org,2026:mgubi`, storage root, main collection, objects).
+- `ocfl/`: the OCFL 1.1 storage root, with the flat-direct layout. Each paper
+  is an object (`ocfl/<id>/`) whose versions hold the TeXmacs source
+  `<id>.tm`, the PDF `paper.pdf`, `datacite.json` and `provenance.json`. The
+  collection `collection-papers` lists the papers, each pinned by version and
+  by the SHA-512 digest of that version's inventory.
+- `site/<id>/`: the HTML version of each paper (presentation, regenerated
+  from the sources, not part of the deposit).
+- `index.tm`, `index.html`: the readable index, generated from the collection
+  and the template `index-template.tm`.
+- `notes-meta.ts`, `paper-html.ts`, `resources/`: style packages, stylesheets,
+  scripts and fonts of the pages.
+- `tools/papers.py`, `tools/schemas/`: the tools of the archive and the
+  OpenSheaf JSON Schemas used to check it.
+- `.texmacs-noconvert`: tells TeXmacs' website converter (with the `max-html`
+  plugin) to leave the repository alone; `.gitattributes`: keeps git from
+  converting the files that must be served byte for byte.
 
-This repository is the first archive in [OpenSheaf](https://opensheaf.org),
-an open format for document archives and collections (OCFL storage, DataCite
-metadata, Zenodo deposits, composable collections). It still uses an earlier
-prototype layout, described in `metadata.tm`, which will be migrated to the
-OpenSheaf 0.1 layout.
-- `SLUG/sources/`: the deposited TeXmacs sources, byte for byte, and the
-  metadata files `metadata-vN.json` (one per version, each pointing to the
-  previous one by path and SHA-256).
-- `SLUG/html/`: the HTML version; `SLUG/SLUG.pdf`: the PDF.
-- `resources/`: stylesheets, scripts and fonts of the pages.
-- `notes-meta.ts`, `paper-html.ts`: the TeXmacs style packages of the pages.
-- `.texmacs-noconvert`: tells TeXmacs' website converter (with the
-  `max-html` plugin) to leave the repository alone.
+The prototype layout used before OpenSheaf 0.1 is kept on the branch
+`prototype`.
 
 ## Depositing a paper
 
-The tool `tools/papers.py` needs TeXmacs and its `notes` and `max-html`
-plugins, linked in `~/.TeXmacs/plugins` (from the website repository,
-`plugins/`); it runs TeXmacs with a private profile in `texmacs_home/`.
+The tools need TeXmacs and its `notes` and `max-html` plugins, linked in
+`~/.TeXmacs/plugins` (from the author's website repository, `plugins/`);
+TeXmacs runs with a private profile in `texmacs_home/` (not committed).
 
-1. `tools/papers.py deposit SLUG SOURCE.tm --title "…" --author "Name|Affiliation" … [--date YYYY-MM-DD] [--related arxiv=ID]`
-   copies the source byte for byte, typesets the PDF from a copy, exports
-   the HTML from another copy with `paper-html.ts` added to its style, and
-   writes the next `metadata-vN.json`. It does not regenerate
-   bibliographies: check that the PDF has no `??` and a complete
-   bibliography.
-2. `tools/papers.py index` writes `index.json` from the metadata files,
-   generates `index.tm` from it and `index-template.tm` (newest deposits
-   first, with the abstracts of TeXmacs papers in a fold), and exports
-   `index.html` and `metadata.html`.
-3. `tools/papers.py verify` checks `index.json`, every hash and version
-   chain, and that `index.tm` and `index.html` show the same hashes;
-   `python3 -m unittest discover -s tools` runs the same check.
+1. `tools/papers.py deposit ID SOURCE.tm --title "..." --author "Family, Given|Affiliation" ... [--date YYYY-MM-DD] [--related arxiv=ID] [--rights "..."]`
+   deposits a paper, or a new version of it: the source is copied byte for
+   byte, the PDF is typeset from a copy (bibliographies are not regenerated:
+   check that the PDF has no `??` and a complete bibliography), and the
+   object gets a new OCFL version with `datacite.json` and `provenance.json`.
+   The HTML version is exported to `site/ID/`.
+2. `tools/papers.py collect` makes a new version of the collection, pinning
+   the newest version of every paper.
+3. `tools/papers.py index` writes `opensheaf.json`, `index.tm` and
+   `index.html`.
+4. `tools/papers.py verify` checks the archive; with the Python packages
+   `jsonschema` and `ocfl-py` installed, it also validates the JSON files
+   against the schemas and the storage root with the OCFL validator.
+   `python3 -m unittest discover -s tools` runs the same checks.
 
-A correction is a new deposit under the same SLUG (a new version); never
-edit deposited files or metadata in place.
+Deposited files are never changed: a correction is a new version.
