@@ -16,7 +16,7 @@
     </src-title>
   </active*>
 
-  <assign|notes-main-dir|https://mgubi.github.io/docs>
+  <assign|notes-main-dir|https://mgubi.org/docs>
 
   <assign|notes-meta-name|papers>
 
@@ -26,7 +26,7 @@
     </src-comment>
   </active*>
 
-  <assign|notes-header-links|<macro|[<hlink|main|https://mgubi.github.io/docs/main.html>]
+  <assign|notes-header-links|<macro|[<hlink|main|https://mgubi.org/docs/main.html>]
   [<hlink|papers|index.tm>] [<hlink|OpenSheaf|https://opensheaf.org>]>>
 
   <\active*>

@@ -59,13 +59,13 @@ SPEC = "0.1"
 ARCHIVE = {
     "archiveId": "tag:opensheaf.org,2026:mgubi",
     "name": "Papers of Massimiliano Gubinelli",
-    "contact": "https://mgubi.github.io/docs/main.html",
+    "contact": "https://mgubi.org/docs/main.html",
     "baseUrl": "https://mgubi.opensheaf.org/",
     "profiles": ["texmacs"],
     "mainCollection": "collection-papers",
     "curator": {"name": "Gubinelli, Massimiliano", "givenName": "Massimiliano",
                 "familyName": "Gubinelli", "affiliation": "Mathematical Institute, University of Oxford"},
-    "depositor": {"name": "Massimiliano Gubinelli", "address": "https://mgubi.github.io/docs/main.html"},
+    "depositor": {"name": "Massimiliano Gubinelli", "address": "https://mgubi.org/docs/main.html"},
 }
 LAYOUT = "0002-flat-direct-storage-layout"
 ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
