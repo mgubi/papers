@@ -28,6 +28,8 @@ Commands:
     papers.py collect     new version of the main collection if any document
                           has a new head version
     papers.py index       write opensheaf.json, index.tm and the HTML pages
+    papers.py zenodo ID   deposit the current document version on Zenodo (appendix A;
+                          sandbox on a copy unless --production; see tools/zenodo.py)
     papers.py verify      check the archive (sections 5 to 14 of the
                           specification; JSON Schemas and the OCFL validator
                           ocfl-py are used when installed)
@@ -1180,6 +1182,8 @@ def main():
     i.add_argument("--no-html", action="store_true")
     i.set_defaults(func=index)
     sub.add_parser("verify").set_defaults(func=verify)
+    import zenodo
+    zenodo.add_parser(sub, sys.modules[__name__])
     args = p.parse_args()
     args.func(args)
 
