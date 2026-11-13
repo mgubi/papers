@@ -199,7 +199,8 @@ def run_texmacs(calls):
         '("texmacs->html:mathjax" "on")\n'
         '("texmacs->html:mathml" "off")\n')
     # style-clear-cache: TeXmacs caches style environments in the profile.
-    cmd = (f"(begin (catch #t (lambda () (style-clear-cache) {calls}) (lambda args"
+    init = ROOT / "tools" / "texmacs-init.scm"
+    cmd = (f"(begin (load \"{init}\") (catch #t (lambda () (style-clear-cache) {calls}) (lambda args"
            f" (display \"SCHEME-ERROR \") (write args) (newline))) (quit-TeXmacs))")
     out = subprocess.run([tm, "-headless", "-x", cmd], env=env, capture_output=True,
                          text=True, errors="replace", timeout=1200)
