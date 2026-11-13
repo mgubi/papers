@@ -10,13 +10,17 @@
   <notes-abstract|Preprints deposited here as an alternative to the usual
   archives (experimental).>
 
-  Preprints by Massimiliano Gubinelli and co-authors, each with its TeXmacs
-  sources, an HTML version and a PDF. The archive follows the
+  Papers by Massimiliano Gubinelli and co-authors, every version kept with
+  its sources and its PDF: the TeXmacs sources and an HTML version for the
+  papers written with TeXmacs, the LaTeX sources and PDFs received by arXiv
+  for the others. The archive follows the
   <hlink|OpenSheaf|https://opensheaf.org> format (version 0.1), where its
   structure and metadata are described; programs can start from its discovery
   document <hlink|opensheaf.json|opensheaf.json>.
 
-  All rights to the papers are reserved to their authors.
+  Each version keeps its own licence, given on the page of its paper: the
+  licence under which arXiv distributes it, an open licence such as CC BY, or
+  all rights reserved to the authors.
 
   <paper-index>
 
