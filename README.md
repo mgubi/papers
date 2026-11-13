@@ -10,6 +10,12 @@ open format for document archives and collections, and follows its
 specification, version 0.1. Programs can start from the discovery document
 [`opensheaf.json`](opensheaf.json).
 
+> [!WARNING]
+> **Draft.** OpenSheaf 0.1 is a draft specification. Until version 1.0, any
+> revision may change the format in incompatible ways, and this archive may be
+> rebuilt or migrated when it does (it was rebuilt once already, when
+> `provenance.json` became `object.json`).
+
 **Copyright.** Each version of each paper carries its own licence, in the
 `rightsList` of its `datacite.json` (for versions imported from arXiv, the
 licence arXiv gives that version). The metadata (`datacite.json`,
