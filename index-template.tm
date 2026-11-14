@@ -16,7 +16,9 @@
   for the others. The archive follows the
   <hlink|OpenSheaf|https://opensheaf.org> format (version 0.1), where its
   structure and metadata are described; programs can start from its discovery
-  document <hlink|opensheaf.json|opensheaf.json>.
+  document <hlink|opensheaf.json|opensheaf.json>, and the
+  <hlink|OpenSheaf Explorer|https://opensheaf.org/explorer/?url=https://mgubi.org/papers/>
+  shows it, and checks it, in the browser.
 
   Each version keeps its own licence, given on the page of its paper: the
   licence under which arXiv distributes it, an open licence such as CC BY, or
