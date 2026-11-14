@@ -420,7 +420,7 @@
   <paragraph|Acknowledgements.>M.G. acknowledges support from the UKRI
   Frontier Research / EPSRC grant \PStochastic Analysis of Quantum fields\Q
   (EP/Z534328/1) and of the Simons Collaboration on \PProbabilistic QFT\Q.
-  This paper has been written in TEXMACS (<href|www.texmacs.org>).
+  This paper has been written in TEXMACS (<href|https://www.texmacs.org>).
 
   <paragraph|AI disclosure statement.>An AI model helped with the derivation
   of the random-walk estimates stated in Lemmas<nbsp><reference|lem:jump-kernel>

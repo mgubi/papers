@@ -780,7 +780,7 @@
     Excellence Strategy - GZ 2047/1, project-id 390685813. PD acknowledges
     the support by the grant \<#2018\>Sonata Bis\<#2019\> 2019/34/E/ST1/00053
     of the National Science Centre, Poland. This paper has been written with
-    GNU <TeXmacs> (<hlink|www.texmacs.org|www.texmacs.org>).
+    GNU <TeXmacs> (<hlink|www.texmacs.org|https://www.texmacs.org>).
   </acknowledgments*>
 
   <subsection|<with|color|black|Preliminaries and

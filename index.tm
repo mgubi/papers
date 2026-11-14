@@ -38,7 +38,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 12 November 2026; version 1, 12 November 2026<next-line>pin:
-    <hlink|<verbatim|4e39c74a664c14f0791e676ba19cbca2...>|ocfl/fractional-phi42-mass-gap/v4/inventory.json>>
+    <hlink|<verbatim|b9879f5468b83168f6846cbfdcfd5b49...>|ocfl/fractional-phi42-mass-gap/v4/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -57,7 +57,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 10 November 2026; version 1, 12 November 2026<next-line>pin:
-    <hlink|<verbatim|6e5d5d38be95cd0f3ecf62b3befdcd6e...>|ocfl/sine-gordon-composite-observables/v2/inventory.json>>
+    <hlink|<verbatim|8699d71c97115dbc6ffd5cc07cad3118...>|ocfl/sine-gordon-composite-observables/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -247,7 +247,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 31 March 2023; version 5 (arXiv v5), 12 November 2026<next-line>arXiv comments: 136 pages, published version<next-line>pin:
-    <hlink|<verbatim|2e2ec1a6de4ed5ea66ed36d9469c8d1c...>|ocfl/fractional-phi43/v5/inventory.json>>
+    <hlink|<verbatim|b29c4abd310ee0b9ac514a1a6b5a2b85...>|ocfl/fractional-phi43/v5/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
