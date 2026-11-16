@@ -40,7 +40,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 12 November 2026; version 1, 12 November 2026<next-line>pin:
-    <hlink|<verbatim|b9879f5468b83168f6846cbfdcfd5b49...>|ocfl/fractional-phi42-mass-gap/v4/inventory.json>>
+    <hlink|<verbatim|6c761128c8ccee9dedf88e0e04566e6b...>|ocfl/fractional-phi42-mass-gap/v4/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -59,7 +59,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 10 November 2026; version 1, 12 November 2026<next-line>pin:
-    <hlink|<verbatim|8699d71c97115dbc6ffd5cc07cad3118...>|ocfl/sine-gordon-composite-observables/v2/inventory.json>>
+    <hlink|<verbatim|b3728ff3fe2df8b3817810f6c937aa3a...>|ocfl/sine-gordon-composite-observables/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -78,7 +78,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 9 July 2026; version 1 (arXiv v1), 9 July 2026<next-line>arXiv comments: 61 pages<next-line>pin:
-    <hlink|<verbatim|92560e3a720d4f57ef3a11ff0eb1294d...>|ocfl/modulated-dispersion-3/v2/inventory.json>>
+    <hlink|<verbatim|3fe89f669d76c2ae4372c187f74e03be...>|ocfl/modulated-dispersion-3/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -97,7 +97,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 23 October 2025; version 2 (arXiv v2), 12 December 2025<next-line>arXiv comments: 71 pages, 3 figures, minor changes<next-line>pin:
-    <hlink|<verbatim|a005d0975cf6e0559916f562775e9f2c...>|ocfl/large-field-problem/v2/inventory.json>>
+    <hlink|<verbatim|e67d50577bbbadcf27c5558166e4b89f...>|ocfl/large-field-problem/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -116,7 +116,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 30 May 2025; version 2 (arXiv v2), 24 February 2026<next-line>arXiv comments: 40 pages. Minor revision. To appear in Peking Math. J<next-line>pin:
-    <hlink|<verbatim|ae0150a43dbd2caa23f6108417147229...>|ocfl/modulated-dispersion-4/v3/inventory.json>>
+    <hlink|<verbatim|5ad4316ecf3be1e55601f2e4c9dc136f...>|ocfl/modulated-dispersion-4/v3/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -135,7 +135,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 20 December 2024; version 1 (arXiv v1), 20 December 2024<next-line>pin:
-    <hlink|<verbatim|e7deee9499f0617e92139b4ecbd93dc3...>|ocfl/sine-gordon-simple-construction/v1/inventory.json>>
+    <hlink|<verbatim|0b51490c222959102aca233441b2ae46...>|ocfl/sine-gordon-simple-construction/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -154,7 +154,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 24 January 2024; version 3 (arXiv v3), 17 June 2026<next-line>arXiv comments: 95 pages, reverted the assumption on the perturbation g for Lemma 2.6, minor typographical changes<next-line>pin:
-    <hlink|<verbatim|40889c2b2b4111a869e28cfa35debe93...>|ocfl/sine-gordon-fbsde/v3/inventory.json>>
+    <hlink|<verbatim|25e9384d1baa4f81986d89ea1c694908...>|ocfl/sine-gordon-fbsde/v3/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -173,7 +173,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 21 July 2023; version 1 (arXiv v1), 21 July 2023<next-line>arXiv comments: 8 pages<next-line>pin:
-    <hlink|<verbatim|3897b8923f5d3a094063e862ba0603c2...>|ocfl/wilson-ito-diffusions/v1/inventory.json>>
+    <hlink|<verbatim|252cfe8f967d9b044c0589f7c53adbd8...>|ocfl/wilson-ito-diffusions/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -192,7 +192,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 19 May 2023; version 2 (arXiv v2), 14 April 2024<next-line>arXiv comments: 30 pages - accepted version<next-line>pin:
-    <hlink|<verbatim|af7b8b762c158ec7253c948f6b8b41df...>|ocfl/correlations-decay-exponential/v3/inventory.json>>
+    <hlink|<verbatim|2dc1fad2a18d9d3d10e94ad6b6f0b54c...>|ocfl/correlations-decay-exponential/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -211,7 +211,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 15 May 2023; version 1 (arXiv v1), 15 May 2023<next-line>arXiv comments: 59 pages<next-line>pin:
-    <hlink|<verbatim|2a2a31cee6bac34750b21d6328c69c41...>|ocfl/noncommutative-lp-grassmann/v1/inventory.json>>
+    <hlink|<verbatim|0628acbad4cffe39b4d1c927759cced0...>|ocfl/noncommutative-lp-grassmann/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -230,7 +230,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 12 April 2023; version 2 (arXiv v2), 16 October 2023<next-line>arXiv comments: 68 pages, 4 figures. A mistake in an earlier version has been corrected<next-line>pin:
-    <hlink|<verbatim|12b3c533f5f2b42f873f56161543a152...>|ocfl/burgers-gaussian-fluctuations/v2/inventory.json>>
+    <hlink|<verbatim|77329e577db3b48bd7dd8e4b08e79d46...>|ocfl/burgers-gaussian-fluctuations/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -249,7 +249,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 31 March 2023; version 5 (arXiv v5), 12 November 2026<next-line>arXiv comments: 136 pages, published version<next-line>pin:
-    <hlink|<verbatim|b29c4abd310ee0b9ac514a1a6b5a2b85...>|ocfl/fractional-phi43/v5/inventory.json>>
+    <hlink|<verbatim|277caf59a84c6983a3dfef60c5e02250...>|ocfl/fractional-phi43/v5/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -268,7 +268,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 11 December 2022; version 1 (arXiv v1), 11 December 2022<next-line>arXiv comments: 78 pages<next-line>pin:
-    <hlink|<verbatim|1f1008793eaac7df2e2ff37ce6d52eea...>|ocfl/exponential-model-ibp/v1/inventory.json>>
+    <hlink|<verbatim|669815b2875e1f99fb6253ee27533641...>|ocfl/exponential-model-ibp/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -287,7 +287,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 26 October 2022; version 2 (arXiv v2), 20 June 2024<next-line>arXiv comments: The errors in some proofs have been corrected and some typos have been fixed. Accepted for publication in Annals of Probability<next-line>pin:
-    <hlink|<verbatim|abb1020de790d83d98311b2121baf0b9...>|ocfl/fermionic-field-theories/v2/inventory.json>>
+    <hlink|<verbatim|96aa0dd93813875c95da691d305e793b...>|ocfl/fermionic-field-theories/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -306,7 +306,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 9 December 2021; version 2 (arXiv v2), 21 November 2022<next-line>arXiv comments: 39 pages, some corrections and remarks on the FBSDE formulation<next-line>pin:
-    <hlink|<verbatim|2507e42a7ca8a841d7ead096d6da81e0...>|ocfl/variational-infinite-volume/v3/inventory.json>>
+    <hlink|<verbatim|af48fd3fb0743ae505aa2f7ffbd45fa3...>|ocfl/variational-infinite-volume/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -325,7 +325,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 26 July 2021; version 2 (arXiv v2), 21 June 2023<next-line>arXiv comments: 32 pages, final accepted version<next-line>pin:
-    <hlink|<verbatim|b1d9efefeadb5f446960638a16fe4fef...>|ocfl/rough-shear-flows-mixing/v2/inventory.json>>
+    <hlink|<verbatim|4ab6d7a4979b565da83b4c096f6e39c8...>|ocfl/rough-shear-flows-mixing/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -344,7 +344,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 20 April 2020; version 4 (arXiv v4), 1 February 2022<next-line>arXiv comments: 72 pages, the introduction and Section 5 have been revised, former Appendix A and Appendix E have been removed, some typos and other minor errors have been corrected, some references have been added<next-line>pin:
-    <hlink|<verbatim|778c4bed60f2b5c4f685de94e93928a0...>|ocfl/grassmann-stochastic-analysis/v4/inventory.json>>
+    <hlink|<verbatim|e33be01c6b30478e4152723bdd27294d...>|ocfl/grassmann-stochastic-analysis/v4/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -363,7 +363,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 3 April 2020; version 2 (arXiv v2), 20 May 2020<next-line>arXiv comments: 28 pages, no figures, some typos corrected<next-line>pin:
-    <hlink|<verbatim|711787a1dd671b37a9a6a4b7967345c7...>|ocfl/phi43-girsanov/v2/inventory.json>>
+    <hlink|<verbatim|9735dbab4d3a87c7f2c1060473e03a2e...>|ocfl/phi43-girsanov/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -382,7 +382,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 2 April 2020; version 2 (arXiv v2), 20 April 2023<next-line>arXiv comments: Final accepted version<next-line>pin:
-    <hlink|<verbatim|4c9090dacc00f6f59d16b8364c55585e...>|ocfl/rho-irregularity-prevalence/v2/inventory.json>>
+    <hlink|<verbatim|7a436b96508b9120557a5d651a7a7f01...>|ocfl/rho-irregularity-prevalence/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -401,7 +401,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 31 March 2020; version 2 (arXiv v2), 12 December 2020<next-line>arXiv comments: Remark 21 and Section 5.2 revisited; Remark 11 added; typos corrected, references added<next-line>pin:
-    <hlink|<verbatim|fcbf26b8db0b99518b5574c26a2db1ec...>|ocfl/noiseless-regularisation/v2/inventory.json>>
+    <hlink|<verbatim|4ae634e13c7b0653a9925568b747d94f...>|ocfl/noiseless-regularisation/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -420,7 +420,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 14 December 2019; version 2 (arXiv v2), 17 April 2020<next-line>arXiv comments: 30 pages, no figures, added discussion for the full space<next-line>pin:
-    <hlink|<verbatim|358746ffe506da8691fd6c35508e8081...>|ocfl/hyperviscous-navier-stokes/v2/inventory.json>>
+    <hlink|<verbatim|9772971517791e1d6d9d2c5ca316cc86...>|ocfl/hyperviscous-navier-stokes/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -439,7 +439,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 10 December 2019; version 1 (arXiv v1), 10 December 2019<next-line>pin:
-    <hlink|<verbatim|18b13be13c95971a27b371903325d9a9...>|ocfl/supersymmetry-sdes/v1/inventory.json>>
+    <hlink|<verbatim|a9fcadcc6e8eea7d679b8a28d0b1aa20...>|ocfl/supersymmetry-sdes/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -458,7 +458,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 26 June 2019; version 4 (arXiv v4), 31 July 2020<next-line>arXiv comments: There was an important error in Lemma 26 of the previous version which has been fixed in the present one. In order to correct the error, the interval of admissible "charge parameters" has been reduced<next-line>pin:
-    <hlink|<verbatim|5c94b3f8c55e7f8b647b51d36ff6132b...>|ocfl/elliptic-quantisation-2d/v4/inventory.json>>
+    <hlink|<verbatim|2688e33b9be03df4d1c18622f81336ee...>|ocfl/elliptic-quantisation-2d/v4/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -477,7 +477,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 11 December 2018; version 2 (arXiv v2), 5 August 2019<next-line>arXiv comments: 51 pages, an appendix added<next-line>pin:
-    <hlink|<verbatim|0ecc3af100e45ed6cd807750b76ebfc0...>|ocfl/elliptic-stochastic-quantisation/v2/inventory.json>>
+    <hlink|<verbatim|beb21a72e85b56770c5dbc71e3eef175...>|ocfl/elliptic-stochastic-quantisation/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -496,7 +496,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 19 November 2018; version 3 (arXiv v3), 22 June 2021<next-line>arXiv comments: 52 pages. To appear in J. Eur. Math. Soc. Minor updates<next-line>pin:
-    <hlink|<verbatim|113f3bc9888bccc6df817615a39cb31b...>|ocfl/stochastic-wave-3d/v4/inventory.json>>
+    <hlink|<verbatim|03c32fba0aae7dad0709edfc8d1bb781...>|ocfl/stochastic-wave-3d/v3/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -515,7 +515,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 29 October 2018; version 1 (arXiv v1), 29 October 2018<next-line>arXiv comments: 47 pages<next-line>pin:
-    <hlink|<verbatim|57693837a24c52c6eca6596fe91f37f5...>|ocfl/burgers-generator/v1/inventory.json>>
+    <hlink|<verbatim|29e03779d01f8bec3a78a13ed6e4ba96...>|ocfl/burgers-generator/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -534,7 +534,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 3 October 2018; version 4 (arXiv v4), 7 January 2021<next-line>pin:
-    <hlink|<verbatim|4051e2f020beefbbd4f48eed7ec1879f...>|ocfl/phi43-pde-construction/v5/inventory.json>>
+    <hlink|<verbatim|b561b39140667f63b4a36068089082ef...>|ocfl/phi43-pde-construction/v4/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -553,7 +553,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 18 July 2018; version 1 (arXiv v1), 18 July 2018<next-line>pin:
-    <hlink|<verbatim|ea5f85d87efbc0eaf8408b1261121203...>|ocfl/anderson-semilinear-evolution/v1/inventory.json>>
+    <hlink|<verbatim|b21307d156c919ec3964c44a8b5fb84b...>|ocfl/anderson-semilinear-evolution/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -572,7 +572,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 28 May 2018; version 2 (arXiv v2), 8 April 2019<next-line>arXiv comments: 47 pages, added proof of Gamma-convergence, title changed<next-line>pin:
-    <hlink|<verbatim|f214a3cc3ed9fa20e6fc939743896a22...>|ocfl/phi43-variational/v2/inventory.json>>
+    <hlink|<verbatim|d3d6f8e6722b4f663b545e3433ce030f...>|ocfl/phi43-variational/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -591,7 +591,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 30 April 2018; version 2 (arXiv v2), 25 January 2019<next-line>arXiv comments: 63 pages<next-line>pin:
-    <hlink|<verbatim|1595a28d72d19008ef4093777c8375c0...>|ocfl/phi4-global-solutions/v3/inventory.json>>
+    <hlink|<verbatim|f5baf54b23523dfa46b89eea9339a68f...>|ocfl/phi4-global-solutions/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -610,7 +610,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 10 August 2017; version 3 (arXiv v2), 26 January 2018<next-line>arXiv comments: 51 pages, exposition substantially improved<next-line>pin:
-    <hlink|<verbatim|6882a50a0b486aac165cfdb72007d2b4...>|ocfl/phi43-weak-universality/v3/inventory.json>>
+    <hlink|<verbatim|a50c52d9ef43c7880b84f2198ab46e7a...>|ocfl/phi43-weak-universality/v3/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -629,7 +629,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 16 March 2017; version 2 (arXiv v2), 23 May 2018<next-line>arXiv comments: 24 pages, Typos corrected. To appear in Trans. Amer. Math. Soc<next-line>pin:
-    <hlink|<verbatim|ac0b2c11ca0771300f7ff0f91febd9c1...>|ocfl/stochastic-wave-2d/v2/inventory.json>>
+    <hlink|<verbatim|3627cf36b28c8acf88d7e6166a1393b3...>|ocfl/stochastic-wave-2d/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -648,7 +648,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 10 February 2017; version 1 (arXiv v1), 10 February 2017<next-line>arXiv comments: 25 pages<next-line>pin:
-    <hlink|<verbatim|0c30335c1bbb2b91919006829f698429...>|ocfl/singular-spde-introduction/v1/inventory.json>>
+    <hlink|<verbatim|ca8a0fb1f2b745a65f2694621e550320...>|ocfl/singular-spde-introduction/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -667,7 +667,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 25 January 2017; version 1 (arXiv v1), 25 January 2017<next-line>arXiv comments: 12 pages<next-line>pin:
-    <hlink|<verbatim|f95e93bc32a4a8d640f3da950503f29b...>|ocfl/burgers-probabilistic/v1/inventory.json>>
+    <hlink|<verbatim|5e82a0204b1c95f004a91bdc0646b878...>|ocfl/burgers-probabilistic/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -686,7 +686,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 25 October 2016; version 4 (arXiv v4), 9 November 2017<next-line>arXiv comments: 30 pages. Reworded the introduction, added more details in some key proofs<next-line>pin:
-    <hlink|<verbatim|4b47c22e92c3c813e59bee3d8d2957d2...>|ocfl/paracontrolled-quasilinear/v4/inventory.json>>
+    <hlink|<verbatim|efc25b35777bd2248a78124e65df7306...>|ocfl/paracontrolled-quasilinear/v4/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -705,7 +705,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 24 October 2016; version 1 (arXiv v1), 24 October 2016<next-line>pin:
-    <hlink|<verbatim|b63170f738e6f708469312b0e60f01a9...>|ocfl/reflected-rough-equations/v1/inventory.json>>
+    <hlink|<verbatim|0f43a818b80c96451e2d25a38da3f4c4...>|ocfl/reflected-rough-equations/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -724,7 +724,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 7 June 2016; version 1 (arXiv v1), 7 June 2016<next-line>pin:
-    <hlink|<verbatim|29732a9ce06e1fab322c2ec7a626f4cd...>|ocfl/kpz-weakly-asymmetric-limit/v1/inventory.json>>
+    <hlink|<verbatim|d27afb0e975b84d97069869296463b88...>|ocfl/kpz-weakly-asymmetric-limit/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -743,7 +743,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 1 April 2016; version 4 (arXiv v4), 22 February 2018<next-line>arXiv comments: 55 pages, substantially revised version<next-line>pin:
-    <hlink|<verbatim|eb7f0d1c557f2d4a24921831b1b66083...>|ocfl/rough-conservation-laws/v5/inventory.json>>
+    <hlink|<verbatim|f96124a0b64fa825762e80e92d33b8f7...>|ocfl/rough-conservation-laws/v4/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -762,7 +762,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 7 February 2016; version 1 (arXiv v1), 7 February 2016<next-line>arXiv comments: 12 pages, submitted to the Proceedings of the "RIMS Symposium on Stochastic Analysis on Large Scale Interacting Systems", October 2015, Kyoto, Japan<next-line>pin:
-    <hlink|<verbatim|3b242609db55bfb294ec4d8674b1e083...>|ocfl/hairer-quastel-equilibrium/v2/inventory.json>>
+    <hlink|<verbatim|884a98983bbe2f66dba8b3cc7fed655a...>|ocfl/hairer-quastel-equilibrium/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -781,7 +781,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 31 August 2015; version 2 (arXiv v2), 8 August 2016<next-line>arXiv comments: 38 pages, added the proof in the case of the full line<next-line>pin:
-    <hlink|<verbatim|3e24323a634dc1066777bd63275003fc...>|ocfl/kpz-energy-uniqueness/v2/inventory.json>>
+    <hlink|<verbatim|bacf5b2f34aec477be6922a1c5820086...>|ocfl/kpz-energy-uniqueness/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -800,7 +800,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 16 August 2015; version 1 (arXiv v1), 16 August 2015<next-line>arXiv comments: 111 pages<next-line>pin:
-    <hlink|<verbatim|288a7198d543df4daee9a62d383cd4e4...>|ocfl/kpz-reloaded/v1/inventory.json>>
+    <hlink|<verbatim|66acd26536cf016cf7bf3c0a66f6f490...>|ocfl/kpz-reloaded/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -819,7 +819,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 31 January 2015; version 3 (arXiv v2), 29 July 2017<next-line>arXiv comments: 73 pages, 4 figures<next-line>pin:
-    <hlink|<verbatim|777be179553095dbbf02f1087376a025...>|ocfl/singular-spde-lectures/v4/inventory.json>>
+    <hlink|<verbatim|92c21b94ae6dc86d4667c87d3b4de5eb...>|ocfl/singular-spde-lectures/v3/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -838,7 +838,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 9 January 2015; version 4 (arXiv v4), 23 June 2017<next-line>arXiv comments: 38 pages. some improvements and precisions<next-line>pin:
-    <hlink|<verbatim|5088860f57ccf11c54517b828ccdefc0...>|ocfl/unbounded-rough-drivers/v4/inventory.json>>
+    <hlink|<verbatim|15642c42db83707d81adad37670f7e35...>|ocfl/unbounded-rough-drivers/v4/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -857,7 +857,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 30 June 2014; version 5 (arXiv v5), 5 November 2026<next-line>arXiv comments: 94 pages. Updated funding info. To appear in Mem. Eur. Math. Soc<next-line>pin:
-    <hlink|<verbatim|e8c7d582953168fac86f3d96db2affe7...>|ocfl/modulated-dispersion-2/v5/inventory.json>>
+    <hlink|<verbatim|7d6c4f6a9012d646072ab7f731c3e59f...>|ocfl/modulated-dispersion-2/v5/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -876,7 +876,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 30 June 2014; version 1 (arXiv v1), 30 June 2014<next-line>arXiv comments: 53 pages<next-line>pin:
-    <hlink|<verbatim|ab56cbeb0a711ade744f3717c4737121...>|ocfl/rough-sheets/v1/inventory.json>>
+    <hlink|<verbatim|f0820ec9b70007c16a48c917322361ef...>|ocfl/rough-sheets/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -895,7 +895,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 12 March 2014; version 1 (arXiv v1), 12 March 2014<next-line>pin:
-    <hlink|<verbatim|d0de11eff2b330d85e3ba9785beded73...>|ocfl/controlled-viscosity-solutions/v2/inventory.json>>
+    <hlink|<verbatim|0f157d74284f27c48d21768b8d4b0c7f...>|ocfl/controlled-viscosity-solutions/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -914,7 +914,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 7 January 2014; version 3 (arXiv v3), 29 October 2019<next-line>arXiv comments: 64 pages, 1 figure, comments are welcome<next-line>pin:
-    <hlink|<verbatim|79969383012aa42fb177e89f6f5c703f...>|ocfl/critical-drift-regularity/v3/inventory.json>>
+    <hlink|<verbatim|7c0b2820aba4c4a244dc2b9ef2df3a50...>|ocfl/critical-drift-regularity/v3/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -933,7 +933,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 24 April 2013; version 2 (arXiv v2), 4 October 2013<next-line>arXiv comments: 28 pages, revision of section 2 and typos corrected<next-line>pin:
-    <hlink|<verbatim|31f8d03ca447774d459f29444998d73f...>|ocfl/nelson-uv-renormalisation/v2/inventory.json>>
+    <hlink|<verbatim|ec0b3511af4054910fa8e544a311b429...>|ocfl/nelson-uv-renormalisation/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -952,7 +952,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 4 March 2013; version 3 (arXiv v3), 29 January 2015<next-line>arXiv comments: 27 pages. Extensive reorganisation of the material and typos corrected<next-line>pin:
-    <hlink|<verbatim|8416442081c11b0ffa6fb6b1ff443f43...>|ocfl/modulated-dispersion-1/v4/inventory.json>>
+    <hlink|<verbatim|82bd2ef165dcf108549125dcca9da98c...>|ocfl/modulated-dispersion-1/v3/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -971,7 +971,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 17 January 2013; version 1 (arXiv v1), 17 January 2013<next-line>arXiv comments: arXiv admin note: text overlap with arXiv:0809.1310<next-line>pin:
-    <hlink|<verbatim|e10300b0e25c4fd2baf3f5c12e1193dc...>|ocfl/stochastic-transport-holder/v1/inventory.json>>
+    <hlink|<verbatim|55804390ba7972f51b9aeae9592fabee...>|ocfl/stochastic-transport-holder/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -990,7 +990,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 9 October 2012; version 5 (arXiv v4), 15 August 2017<next-line>arXiv comments: published version<next-line>pin:
-    <hlink|<verbatim|4ec8cfcb5fec48405d25a78ff1d70ba7...>|ocfl/paracontrolled-distributions/v5/inventory.json>>
+    <hlink|<verbatim|07db5eb2e13e617d1bcdca6d1cad2ebf...>|ocfl/paracontrolled-distributions/v5/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1009,7 +1009,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 31 August 2012; version 2 (arXiv v2), 9 April 2013<next-line>arXiv comments: clarifications and small corrections<next-line>pin:
-    <hlink|<verbatim|734ea2ba5a2b3bc54167eb603c811545...>|ocfl/burgers-regularisation-by-noise/v2/inventory.json>>
+    <hlink|<verbatim|24be8ba5562af9e13ea81dd695992773...>|ocfl/burgers-regularisation-by-noise/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1028,7 +1028,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 8 May 2012; version 4 (arXiv v4), 4 February 2016<next-line>arXiv comments: 49 pages, small typos and minor corrections<next-line>pin:
-    <hlink|<verbatim|a6f0c38660729431d4b5ca82855679a7...>|ocfl/averaging-irregular-curves/v5/inventory.json>>
+    <hlink|<verbatim|55b5384fbba099ea305397f85a0153dd...>|ocfl/averaging-irregular-curves/v5/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1047,7 +1047,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 5 August 2010; version 5 (arXiv v5), 4 July 2013<next-line>arXiv comments: 19 pages; minor revisions<next-line>pin:
-    <hlink|<verbatim|d42505b3d56028979c77c09770df1002...>|ocfl/random-vortex-filament-evolution/v5/inventory.json>>
+    <hlink|<verbatim|b3e59e8e8dd66c486c424109eacd1b0e...>|ocfl/random-vortex-filament-evolution/v5/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1066,7 +1066,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 8 April 2010; version 1 (arXiv v1), 8 April 2010<next-line>arXiv comments: 23 pages<next-line>pin:
-    <hlink|<verbatim|32fe07bec20476b3c1f525335fb1b7e9...>|ocfl/point-vortices-noise/v1/inventory.json>>
+    <hlink|<verbatim|93e147dc78deaabf8b3da0290f84d452...>|ocfl/point-vortices-noise/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1085,7 +1085,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 3 November 2009; version 1 (arXiv v1), 3 November 2009<next-line>arXiv comments: 36 pages<next-line>pin:
-    <hlink|<verbatim|fc9d238118e157c1eea6500cabe7b9b9...>|ocfl/rough-heat-equations/v1/inventory.json>>
+    <hlink|<verbatim|b896045a43fec281cdb306463c6d189b...>|ocfl/rough-heat-equations/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1104,7 +1104,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 21 July 2009; version 1 (arXiv v1), 21 July 2009<next-line>arXiv comments: 21 pages<next-line>pin:
-    <hlink|<verbatim|a4b15132f2caf93b78d8fe5d7223a229...>|ocfl/sde-flows-unbounded-drift/v1/inventory.json>>
+    <hlink|<verbatim|dbd7757708717e1bceed174afc36982c...>|ocfl/sde-flows-unbounded-drift/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1123,7 +1123,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 14 May 2009; version 1 (arXiv v1), 14 May 2009<next-line>arXiv comments: 20 pages<next-line>pin:
-    <hlink|<verbatim|0e93197ef38f94c095616dea64da402b...>|ocfl/rde-global-existence/v2/inventory.json>>
+    <hlink|<verbatim|686f12cc0cd82f717d56262227f9cf85...>|ocfl/rde-global-existence/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1142,7 +1142,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 10 September 2008; version 1 (arXiv v1), 10 September 2008<next-line>arXiv comments: 17 pages<next-line>pin:
-    <hlink|<verbatim|bb03e0017ac659ce06e0184dd73e17da...>|ocfl/abstract-integration-trees/v1/inventory.json>>
+    <hlink|<verbatim|33da9c2af2fce86e58e49a160fe32a65...>|ocfl/abstract-integration-trees/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1161,7 +1161,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 8 September 2008; version 2 (arXiv v2), 8 May 2009<next-line>arXiv comments: Addition of new parts<next-line>pin:
-    <hlink|<verbatim|a84d9cd6bad95c8b52d8dda4b1ee4267...>|ocfl/transport-noise-wellposedness/v2/inventory.json>>
+    <hlink|<verbatim|34148174739acbf09594a4977077515c...>|ocfl/transport-noise-wellposedness/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1180,7 +1180,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 26 July 2008; version 2 (arXiv v2), 20 December 2008<next-line>arXiv comments: 24 pages, 1 figure; corrected typos, added French abstract; accepted version to appear in Annales de l'Institut Henri Poincaré<next-line>pin:
-    <hlink|<verbatim|e9f029f8ea013001bc013f14459d0911...>|ocfl/semiflexible-heteropolymers/v2/inventory.json>>
+    <hlink|<verbatim|0de95de1e27c00fbf0bab17ef5cfa128...>|ocfl/semiflexible-heteropolymers/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1199,7 +1199,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 4 March 2008; version 2 (arXiv v2), 26 January 2010<next-line>arXiv comments: Published in at http://dx.doi.org/10.1214/08-AOP437 the Annals of Probability (http://www.imstat.org/aop/) by the Institute of Mathematical Statistics (http://www.imstat.org)<next-line>pin:
-    <hlink|<verbatim|a023f46d57d7f54d8b733ca227354a48...>|ocfl/rough-evolution-equations/v3/inventory.json>>
+    <hlink|<verbatim|ad3cee284c34b96e5f3f31079212d668...>|ocfl/rough-evolution-equations/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1218,7 +1218,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 24 April 2007; version 1 (arXiv v1), 24 April 2007<next-line>arXiv comments: 51 pages<next-line>pin:
-    <hlink|<verbatim|85182a07beffd8efe5909efe31ab2368...>|ocfl/gibbs-brownian-currents/v1/inventory.json>>
+    <hlink|<verbatim|0bf83cb2eb5b9c07b5fe62bb207d72ec...>|ocfl/gibbs-brownian-currents/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1237,7 +1237,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 9 October 2006; version 1 (arXiv v1), 9 October 2006<next-line>arXiv comments: 28 pages<next-line>pin:
-    <hlink|<verbatim|72154a0a72630e5a0b289f306c70cd9b...>|ocfl/ramification-rough-paths/v1/inventory.json>>
+    <hlink|<verbatim|baab9adf493597c95660cb16fc17b659...>|ocfl/ramification-rough-paths/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1256,7 +1256,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 30 September 2006; version 3 (arXiv v3), 20 July 2009<next-line>arXiv comments: 24 pages, no figures, major changes and discussion of $FL^{\<#3B1\>,p}$ spaces<next-line>pin:
-    <hlink|<verbatim|3376b14a0153428b041622e9725e71ee...>|ocfl/rough-periodic-kdv/v4/inventory.json>>
+    <hlink|<verbatim|8f8bb57d0d887364ce5e0a6145e0a95a...>|ocfl/rough-periodic-kdv/v3/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1275,7 +1275,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 22 November 2005; version 2 (arXiv v2), 7 March 2006<next-line>arXiv comments: 15 pages, no figures; typos, details added to the proofs<next-line>pin:
-    <hlink|<verbatim|5576c843972d4e5099982f2fba61e993...>|ocfl/self-interacting-wiener-paths/v2/inventory.json>>
+    <hlink|<verbatim|fe813ab809499055a7c27adccbf0963e...>|ocfl/self-interacting-wiener-paths/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1294,7 +1294,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 10 November 2005; version 2 (arXiv v2), 6 March 2006<next-line>arXiv comments: 11 pages<next-line>pin:
-    <hlink|<verbatim|91a62e32f7ce086d5c041a5eecbfc544...>|ocfl/rooted-trees-navier-stokes/v2/inventory.json>>
+    <hlink|<verbatim|3b070d5efc2d920f30572337c6eae352...>|ocfl/rooted-trees-navier-stokes/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1313,7 +1313,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 28 October 2005; version 1 (arXiv v1), 28 October 2005<next-line>arXiv comments: 22 pages, no figures<next-line>pin:
-    <hlink|<verbatim|b7b0d4b21e4946d7a96be6ee1dba6e3d...>|ocfl/vortex-filaments-blobs-loops/v1/inventory.json>>
+    <hlink|<verbatim|c14378c4e2ed394376f8361cfa459244...>|ocfl/vortex-filaments-blobs-loops/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1332,7 +1332,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 28 September 2005; version 1 (arXiv v1), 28 September 2005<next-line>arXiv comments: accepted for publication on J. Stat. Phys<next-line>pin:
-    <hlink|<verbatim|6420e8da711fc06a15f99af096789ca7...>|ocfl/copolymers-selective-interfaces/v1/inventory.json>>
+    <hlink|<verbatim|63ba4db11f67b8d822d6cbd130a659a4...>|ocfl/copolymers-selective-interfaces/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1351,7 +1351,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 26 July 2005; version 1 (arXiv v1), 26 July 2005<next-line>arXiv comments: 4 pages, 4 figures<next-line>pin:
-    <hlink|<verbatim|9e05757fa1352559d47d74b30ece96d5...>|ocfl/randomly-driven-lattice-gas/v1/inventory.json>>
+    <hlink|<verbatim|8dfbfc7d927100e15598ed6caa57c5b3...>|ocfl/randomly-driven-lattice-gas/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1370,7 +1370,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 18 July 2005; version 1 (arXiv v1), 18 July 2005<next-line>arXiv comments: 40 pages, 2 figures<next-line>pin:
-    <hlink|<verbatim|5bfae4d8c4c966393351d3f20b5dc2df...>|ocfl/k41-scaling-law/v1/inventory.json>>
+    <hlink|<verbatim|b4559b7a3999d7a535fedc5a5fa5da97...>|ocfl/k41-scaling-law/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1389,7 +1389,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 16 July 2004; version 1 (arXiv v1), 16 July 2004<next-line>arXiv comments: 22 pages, no figures<next-line>pin:
-    <hlink|<verbatim|0775190dae8b002a5e6e61f286d97803...>|ocfl/young-integrals-spdes/v1/inventory.json>>
+    <hlink|<verbatim|0e48b1601007c60a11c176c4bf63dd75...>|ocfl/young-integrals-spdes/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1408,7 +1408,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 8 July 2004; version 2 (arXiv v2), 2 December 2004<next-line>arXiv comments: 25 pages, no figures, some additions, to appear in Ann. Probab<next-line>pin:
-    <hlink|<verbatim|6b28263342b4d5ad61c3f85653e8efb4...>|ocfl/random-vortex-filament/v2/inventory.json>>
+    <hlink|<verbatim|44bd40f718c241b761f4ac7b1425345d...>|ocfl/random-vortex-filament/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1427,7 +1427,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 6 July 2004; version 1 (arXiv v1), 6 July 2004<next-line>arXiv comments: 36 pages, no figures<next-line>pin:
-    <hlink|<verbatim|b154718be46d9b954d62b3bf39767805...>|ocfl/vortex-filament-statistics/v1/inventory.json>>
+    <hlink|<verbatim|af1b42a6d4c9caed68182310db63a860...>|ocfl/vortex-filament-statistics/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1446,7 +1446,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 8 December 2003; version 1 (arXiv v1), 8 December 2003<next-line>arXiv comments: 40 pages, in honour of G. Jona-Lasinio<next-line>pin:
-    <hlink|<verbatim|21a7527c2d75e88e7197c402727a325d...>|ocfl/driven-lattice-gas-scaling/v1/inventory.json>>
+    <hlink|<verbatim|c238851be6bca5059f97246494f1f27b...>|ocfl/driven-lattice-gas-scaling/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1465,7 +1465,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 30 June 2003; version 2 (arXiv v2), 28 October 2003<next-line>arXiv comments: 43 pages, no figures, corrected a proof in Sec. 6<next-line>pin:
-    <hlink|<verbatim|436e907e543a1c68ab7ecf94ee6ccf97...>|ocfl/controlling-rough-paths/v2/inventory.json>>
+    <hlink|<verbatim|b260f0c97876334cf291776a29c36f83...>|ocfl/controlling-rough-paths/v2/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1484,7 +1484,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 9 May 2003; version 1 (arXiv v1), 9 May 2003<next-line>arXiv comments: 1 page<next-line>pin:
-    <hlink|<verbatim|140859b3ab423c8f9baff376cb7dd274...>|ocfl/driven-lattice-gas-comment/v1/inventory.json>>
+    <hlink|<verbatim|dfc13206a703044bae57afa6051a689c...>|ocfl/driven-lattice-gas-comment/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1503,7 +1503,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 12 April 2003; version 1 (arXiv v1), 12 April 2003<next-line>arXiv comments: 21 pages, 4 figures<next-line>pin:
-    <hlink|<verbatim|3831411e29c153da3c77ca43e442b0a7...>|ocfl/anisotropic-finite-size-shape/v1/inventory.json>>
+    <hlink|<verbatim|8c32112886920e7ad286ff552b750b26...>|ocfl/anisotropic-finite-size-shape/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1522,7 +1522,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 29 November 2002; version 1 (arXiv v1), 29 November 2002<next-line>arXiv comments: 30 pages, no figures<next-line>pin:
-    <hlink|<verbatim|0b4b48331a993afe76d4442ab3ad4aa9...>|ocfl/stochastic-currents/v1/inventory.json>>
+    <hlink|<verbatim|1916b1b19b7cfbf9f77ad921e2397b92...>|ocfl/stochastic-currents/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1541,7 +1541,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 28 November 2002; version 1 (arXiv v1), 28 November 2002<next-line>pin:
-    <hlink|<verbatim|39e99f62f5bd4f31bd4f47ff82710722...>|ocfl/driven-lattice-gas-fluctuations/v1/inventory.json>>
+    <hlink|<verbatim|bc8ca607ab0e72b276754224ca5739f2...>|ocfl/driven-lattice-gas-fluctuations/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1560,7 +1560,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 12 June 2001; version 1 (arXiv v1), 12 June 2001<next-line>arXiv comments: laTeX2e, 38 pages, 13 eps figures<next-line>pin:
-    <hlink|<verbatim|5568f5c784a003ca05783987634d0c59...>|ocfl/driven-lattice-gas-finite-size/v1/inventory.json>>
+    <hlink|<verbatim|fc1ee775c715763f9453c01f7b1f0caf...>|ocfl/driven-lattice-gas-finite-size/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1579,7 +1579,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 30 October 2000; version 1 (arXiv v1), 30 October 2000<next-line>arXiv comments: 19 pages, Latex2e<next-line>pin:
-    <hlink|<verbatim|f199a9808ac52515005a3f0f4c66eec1...>|ocfl/finite-size-scaling-violations/v1/inventory.json>>
+    <hlink|<verbatim|4c998eb70ccd123006f820feb034b66a...>|ocfl/finite-size-scaling-violations/v1/inventory.json>>
   </notes-news-item>
 
   <\notes-news-item>
@@ -1598,7 +1598,7 @@
     </html-div-class>>>
 
     <with|font-size|0.84|par-mode|left|first issued 5 September 2000; version 2 (arXiv v2), 1 November 2000<next-line>arXiv comments: 32 pages, submitted to Prob. Th. and Rel. Fields, minor typo corrections<next-line>pin:
-    <hlink|<verbatim|535b5a7916899a5df16119f8677efcc9...>|ocfl/vortex-filament-gibbs-ensemble/v2/inventory.json>>
+    <hlink|<verbatim|f35997c0c68fcbc85bd34a3d97332ede...>|ocfl/vortex-filament-gibbs-ensemble/v2/inventory.json>>
   </notes-news-item>
 
 </body>
