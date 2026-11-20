@@ -14,7 +14,7 @@
   its sources and its PDF: the TeXmacs sources and an HTML version for the
   papers written with TeXmacs, the LaTeX sources and PDFs received by arXiv
   for the others. The archive follows the
-  <hlink|OpenSheaf|https://opensheaf.org> format (version 0.1), where its
+  <hlink|OpenSheaf|https://opensheaf.org> format (version 0.2), where its
   structure and metadata are described; programs can start from its discovery
   document <hlink|opensheaf.json|opensheaf.json>, and the
   <hlink|OpenSheaf Explorer|https://opensheaf.org/explorer/?url=https://mgubi.org/papers/>
