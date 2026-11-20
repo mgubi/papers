@@ -29,8 +29,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -45,7 +60,7 @@
 <p class="paper-meta">First issued 2 April 2020 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/slovngpp4boo6cgckdvvhmkpbytwasp7pszm6fbj5pzmdnhg3taa/v2/content/paper.pdf">PDF</a></p>
 
 
-<p class="small">Line <code>sheaf:slovngpp4boo6cgckdvvhmkpbytwasp7pszm6fbj5pzmdnhg3taa:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:slovngpp4boo6cgc:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:slovngpp4boo6cgckdvvhmkpbytwasp7pszm6fbj5pzmdnhg3taa:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:slovngpp4boo6cgc:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We show that generic Hölder continuous functions are $\rho$-irregular. The property of $\rho$-irregularity has been first introduced by Catellier and Gubinelli (Stoc. Proc. Appl. 126, 2016) and plays a key role in the study of well-posedness for some classes of perturbed ODEs and PDEs. Genericity here is understood in the sense of prevalence. As a consequence we obtain several results on regularisation by noise &quot;without probability&quot;, i.e. without committing to specific assumptions on the statistical properties of the perturbations. We also establish useful criteria for stochastic processes to be $\rho$-irregular and study in detail the geometric and analytic properties of $\rho$-irregular functions.</p>
 <h2>Versions</h2>
@@ -69,7 +84,7 @@
 <p class="cite">Lucio Galeati and Massimiliano Gubinelli. Prevalence of $\rho$-irregularity and related properties. Papers of Massimiliano Gubinelli, 2020, version 2. <code class="copy">sheaf:slovngpp4boo6cgckdvvhmkpbytwasp7pszm6fbj5pzmdnhg3taa:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v2?sha512=dde5fa60b19d52bf1fbbf166332fac04e879c5a803b9566f3a98998c886c341945ddaac2f848f36da80d6ebd09fb4df59082b95ed78bb38f542cd9f26449055e</code>. <a href="https://mgubi.org/papers/paper/rho-irregularity-prevalence/">https://mgubi.org/papers/paper/rho-irregularity-prevalence/</a></p>
 <p class="small">Licence: <a href="http://arxiv.org/licenses/nonexclusive-distrib/1.0/">arXiv.org perpetual, non-exclusive license to distribute; all other rights reserved to the authors</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/slovngpp4boo6cgckdvvhmkpbytwasp7pszm6fbj5pzmdnhg3taa/v2/inventory.json"><code>dde5fa60b19d52bf1fbbf166332fac04e879c5a803b9566f3a98998c886c341945ddaac2f848f36da80d6ebd09fb4df59082b95ed78bb38f542cd9f26449055e</code></a></p>
+<code class="copy">dde5fa60b19d52bf1fbbf166332fac04e879c5a803b9566f3a98998c886c341945ddaac2f848f36da80d6ebd09fb4df59082b95ed78bb38f542cd9f26449055e</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/slovngpp4boo6cgckdvvhmkpbytwasp7pszm6fbj5pzmdnhg3taa/v2/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

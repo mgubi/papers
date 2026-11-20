@@ -30,8 +30,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -46,7 +61,7 @@
 <p class="paper-meta">First issued 11 December 2018 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/htym7ypzljiwm57w4imkw4wxvorm45n36ievc5iwywmcpbetgsva/v2/content/paper.pdf">PDF</a> · <a href="../../site/elliptic-stochastic-quantisation/elliptic-stochastic-quantisation.html">HTML</a></p>
 
 
-<p class="small">Line <code>sheaf:htym7ypzljiwm57w4imkw4wxvorm45n36ievc5iwywmcpbetgsva:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:htym7ypzljiwm57w:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:htym7ypzljiwm57w4imkw4wxvorm45n36ievc5iwywmcpbetgsva:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:htym7ypzljiwm57w:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We prove an explicit formula for the law in zero of the solution of a class of elliptic SPDE in $\mathbb{R}^2$. This formula is the simplest instance of dimensional reduction, discovered in the physics literature by Parisi and Sourlas (1979), which links the law of an elliptic SPDE in $d + 2$ dimension with a Gibbs measure in $d$ dimensions. This phenomenon is similar to the relation between an $\mathbb{R}^{d + 1}$ dimensional parabolic SPDE and its $\mathbb{R}^d$ dimensional invariant measure. As such, dimensional reduction of elliptic SPDEs can be considered a sort of elliptic stochastic quantisation procedure in the sense of Nelson (1966) and Parisi and Wu (1981). Our proof uses in a fundamental way the representation of the law of the SPDE as a supersymmetric quantum field theory. Dimensional reduction for the supersymmetric theory was already established by Klein et al. (1984). We fix a subtle gap in their proof and also complete the dimensional reduction picture by providing the link between the elliptic SPDE and the supersymmetric model. Even in our $d = 0$ context the arguments are non-trivial and a non-supersymmetric, elementary proof seems only to be available in the Gaussian case.</p>
 <h2>Versions</h2>
@@ -70,7 +85,7 @@
 <p class="cite">Sergio Albeverio, Francesco C. De Vecchi and Massimiliano Gubinelli. Elliptic stochastic quantization. Papers of Massimiliano Gubinelli, 2018, version 2. <code class="copy">sheaf:htym7ypzljiwm57w4imkw4wxvorm45n36ievc5iwywmcpbetgsva:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v2?sha512=196fac7d594a8ad288106a4ae40a1a9c5a310f4a9f98d80a8de1707621c1b4192580583ed37290128bb9f752817e3dea28ee393ea40ece20a8eca0faa9bad561</code>. <a href="https://mgubi.org/papers/paper/elliptic-stochastic-quantisation/">https://mgubi.org/papers/paper/elliptic-stochastic-quantisation/</a></p>
 <p class="small">Licence: <a href="http://arxiv.org/licenses/nonexclusive-distrib/1.0/">arXiv.org perpetual, non-exclusive license to distribute; all other rights reserved to the authors</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/htym7ypzljiwm57w4imkw4wxvorm45n36ievc5iwywmcpbetgsva/v2/inventory.json"><code>196fac7d594a8ad288106a4ae40a1a9c5a310f4a9f98d80a8de1707621c1b4192580583ed37290128bb9f752817e3dea28ee393ea40ece20a8eca0faa9bad561</code></a></p>
+<code class="copy">196fac7d594a8ad288106a4ae40a1a9c5a310f4a9f98d80a8de1707621c1b4192580583ed37290128bb9f752817e3dea28ee393ea40ece20a8eca0faa9bad561</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/htym7ypzljiwm57w4imkw4wxvorm45n36ievc5iwywmcpbetgsva/v2/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

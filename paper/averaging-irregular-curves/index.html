@@ -29,8 +29,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -45,7 +60,7 @@
 <p class="paper-meta">First issued 8 May 2012 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/mrp5fyghyqu2ybfgd5me7qpymjmt7ecxcwappv6cwpojgtkdiwha/v4/content/paper.pdf">PDF</a></p>
 
 
-<p class="small">Line <code>sheaf:mrp5fyghyqu2ybfgd5me7qpymjmt7ecxcwappv6cwpojgtkdiwha:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:mrp5fyghyqu2ybfg:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:mrp5fyghyqu2ybfgd5me7qpymjmt7ecxcwappv6cwpojgtkdiwha:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:mrp5fyghyqu2ybfg:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We consider the ordinary differential equation (ODE) $dx_{t} =b(t,x_{t} ) dt+ dw_{t}$ where $w$ is a continuous driving function and $b$ is a time-dependent vector field which possibly is only a distribution in the space variable. We quantify the regularising properties of an arbitrary continuous path $w$ on the existence and uniqueness of solutions to this equation. In this context we introduce the notion of $\rho$-irregularity and show that it plays a key role in some instances of the regularisation by noise phenomenon. In the particular case of a function $w$ sampled according to the law of the fractional Brownian motion of Hurst index $H \in (0,1)$, we prove that almost surely the ODE admits a solution for all $b$ in the Besov–Hölder space $B^{\alpha+1}_{\infty , \infty}$ with $\alpha &gt;-1/2H$. If $\alpha &gt;1-1/2H$ then the solution is unique among a natural set of continuous solutions. If $H&gt;1/3$ and $\alpha &gt;3/2-1/2H$ or if $\alpha &gt;2-1/2H$ then the equation admits a unique Lipschitz flow. Note that when $\alpha &lt;0$ the vector field $b$ is only a distribution, nonetheless there exists a natural notion of solution for which the above results apply.</p>
 <h2>Versions</h2>
@@ -83,7 +98,7 @@
 <p class="cite">R. Catellier and M. Gubinelli. Averaging along irregular curves and regularisation of ODEs. Papers of Massimiliano Gubinelli, 2012, version 4. <code class="copy">sheaf:mrp5fyghyqu2ybfgd5me7qpymjmt7ecxcwappv6cwpojgtkdiwha:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v4?sha512=e121f89fc9185d6e2ac04f281685335255ff80cef713803c35273be3bbf3b7e3083f09e34be50a63bb970ac36ac813ced84291647ad1cff0fcf5d7d28e3cb51e</code>. <a href="https://mgubi.org/papers/paper/averaging-irregular-curves/">https://mgubi.org/papers/paper/averaging-irregular-curves/</a></p>
 <p class="small">Licence: <a href="http://arxiv.org/licenses/nonexclusive-distrib/1.0/">arXiv.org perpetual, non-exclusive license to distribute; all other rights reserved to the authors</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/mrp5fyghyqu2ybfgd5me7qpymjmt7ecxcwappv6cwpojgtkdiwha/v5/inventory.json"><code>e121f89fc9185d6e2ac04f281685335255ff80cef713803c35273be3bbf3b7e3083f09e34be50a63bb970ac36ac813ced84291647ad1cff0fcf5d7d28e3cb51e</code></a></p>
+<code class="copy">e121f89fc9185d6e2ac04f281685335255ff80cef713803c35273be3bbf3b7e3083f09e34be50a63bb970ac36ac813ced84291647ad1cff0fcf5d7d28e3cb51e</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/mrp5fyghyqu2ybfgd5me7qpymjmt7ecxcwappv6cwpojgtkdiwha/v5/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

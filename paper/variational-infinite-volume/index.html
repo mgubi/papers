@@ -29,8 +29,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -45,7 +60,7 @@
 <p class="paper-meta">First issued 9 December 2021 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/l22lpsw3ogmmnivrpzb5sbr4h7rfaokryb4tzsmdhvnbqt6udnja/v2/content/paper.pdf">PDF</a> · <a href="../../site/variational-infinite-volume/variational-infinite-volume.html">HTML</a></p>
 
 
-<p class="small">Line <code>sheaf:l22lpsw3ogmmnivrpzb5sbr4h7rfaokryb4tzsmdhvnbqt6udnja:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:l22lpsw3ogmmnivr:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:l22lpsw3ogmmnivrpzb5sbr4h7rfaokryb4tzsmdhvnbqt6udnja:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:l22lpsw3ogmmnivr:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We investigate the infinite volume limit of the variational description of Euclidean quantum fields introduced in a previous work. Focussing on two dimensional theories for simplicity, we prove in details how to use the variational approach to obtain tightness of $\varphi^4_2$ without cutoffs and a corresponding large deviation principle for any infinite volume limit. Any infinite volume measure is described via a forward–backwards stochastic differential equation in weak form (wFBSDE). Similar considerations apply to more general $P (\varphi)_2$ theories. We consider also the $\exp (\beta \varphi)_2$ model for $\beta^2 &lt; 8 \pi$ (the so called full $L^1$ regime) and prove uniqueness of the infinite volume limit and a variational characterization of the unique infinite volume measure. The corresponding characterization for $P (\varphi)_2$ theories is lacking due to the difficulty of studying the stability of the wFBSDE against local perturbations.</p>
 <h2>Versions</h2>
@@ -69,7 +84,7 @@
 <p class="cite">Nikolay Barashkov and Massimiliano Gubinelli. On the variational method for Euclidean quantum fields in infinite volume. Papers of Massimiliano Gubinelli, 2021, version 2. <code class="copy">sheaf:l22lpsw3ogmmnivrpzb5sbr4h7rfaokryb4tzsmdhvnbqt6udnja:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v2?sha512=9dc02400893d1c6d3fb3248c097a21bc5134d2bd70c32fbdcef45eae5691875a02be662228d838f77e0d34ae51813f5c8b707fcfbf2bee6b606b972352185cf5</code>. <a href="https://mgubi.org/papers/paper/variational-infinite-volume/">https://mgubi.org/papers/paper/variational-infinite-volume/</a></p>
 <p class="small">Licence: <a href="http://arxiv.org/licenses/nonexclusive-distrib/1.0/">arXiv.org perpetual, non-exclusive license to distribute; all other rights reserved to the authors</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/l22lpsw3ogmmnivrpzb5sbr4h7rfaokryb4tzsmdhvnbqt6udnja/v2/inventory.json"><code>9dc02400893d1c6d3fb3248c097a21bc5134d2bd70c32fbdcef45eae5691875a02be662228d838f77e0d34ae51813f5c8b707fcfbf2bee6b606b972352185cf5</code></a></p>
+<code class="copy">9dc02400893d1c6d3fb3248c097a21bc5134d2bd70c32fbdcef45eae5691875a02be662228d838f77e0d34ae51813f5c8b707fcfbf2bee6b606b972352185cf5</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/l22lpsw3ogmmnivrpzb5sbr4h7rfaokryb4tzsmdhvnbqt6udnja/v2/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

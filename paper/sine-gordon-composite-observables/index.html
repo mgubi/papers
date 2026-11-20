@@ -29,8 +29,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -45,7 +60,7 @@
 <p class="paper-meta">First issued 10 November 2026 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/xfvnn4spmhht2q6rhk6ietyogwb2het7auiakc22c33nyj7sdpnq/v1/content/paper.pdf">PDF</a> · <a href="../../site/sine-gordon-composite-observables/sine-gordon-composite-observables.html">HTML</a></p>
 
 
-<p class="small">Line <code>sheaf:xfvnn4spmhht2q6rhk6ietyogwb2het7auiakc22c33nyj7sdpnq:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:xfvnn4spmhht2q6r:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:xfvnn4spmhht2q6rhk6ietyogwb2het7auiakc22c33nyj7sdpnq:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:xfvnn4spmhht2q6r:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We develop a rigorous framework for the description of general local composite observables in Euclidean quantum field theories. The approach is nonperturbative and combines renormalisation group ideas with techniques of stochastic analysis. Via renormalisation dictated by sufficiently precise approximate solution theory of corresponding flow equations, we construct various local observables of the sine–Gordon model on the full space up to $\beta^{2}&lt;6\pi$, including highly singular ones such as vertex fields $exp(i\alpha\phi(y))$ in the optimal Wick regime $|\Re e(\alpha)|&lt;4\pi/\beta$ and derivatives of arbitrarily high order, i.e. $\partial^{\mu}\phi(y)$ for any multiindex $\mu\in\mathbb{N}^{2}_{0}$. Applications of the approach include a direct proof of smoothness of observable-inserted correlation functions, and verification that the constructed objects satisfy a version of the prefactorization algebra axioms adapted to our setting.</p>
 <h2>Versions</h2>
@@ -61,7 +76,7 @@
 <p class="cite">Massimiliano Gubinelli and Peter Paulovics. Composite local observables of sine-Gordon via stochastic analysis. Papers of Massimiliano Gubinelli, 2026, version 1. <code class="copy">sheaf:xfvnn4spmhht2q6rhk6ietyogwb2het7auiakc22c33nyj7sdpnq:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v1?sha512=8743919754eaca3df9db6e76142e8bef4578b02010bd877971a326ae67623e7d9f5a0cc3ea367b14455005a36be4297ea6e17c99953f91f70e755a9c4915897a</code>. <a href="https://mgubi.org/papers/paper/sine-gordon-composite-observables/">https://mgubi.org/papers/paper/sine-gordon-composite-observables/</a></p>
 <p class="small">Licence: <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/xfvnn4spmhht2q6rhk6ietyogwb2het7auiakc22c33nyj7sdpnq/v2/inventory.json"><code>8743919754eaca3df9db6e76142e8bef4578b02010bd877971a326ae67623e7d9f5a0cc3ea367b14455005a36be4297ea6e17c99953f91f70e755a9c4915897a</code></a></p>
+<code class="copy">8743919754eaca3df9db6e76142e8bef4578b02010bd877971a326ae67623e7d9f5a0cc3ea367b14455005a36be4297ea6e17c99953f91f70e755a9c4915897a</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/xfvnn4spmhht2q6rhk6ietyogwb2het7auiakc22c33nyj7sdpnq/v2/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

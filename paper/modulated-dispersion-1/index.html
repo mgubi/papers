@@ -29,8 +29,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -45,7 +60,7 @@
 <p class="paper-meta">First issued 4 March 2013 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/zqfqb364gotucmqflqizauvruso7fzhapiy7bdylg3hgtgjge4qq/v3/content/paper.pdf">PDF</a></p>
 
 
-<p class="small">Line <code>sheaf:zqfqb364gotucmqflqizauvruso7fzhapiy7bdylg3hgtgjge4qq:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:zqfqb364gotucmqf:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:zqfqb364gotucmqflqizauvruso7fzhapiy7bdylg3hgtgjge4qq:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:zqfqb364gotucmqf:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We start a study of various nonlinear PDEs under the effect of a modulation in time of the dispersive term. In particular in this paper we consider the modulated non-linear Schrödinger equation (NLS) in dimension 1 and 2 and the derivative NLS in dimension 1. We introduce a deterministic notion of &quot;irregularity&quot; for the modulation and obtain local and global results similar to those valid without modulation. In some situations, we show how the irregularity of the modulation improves the well–posedness theory of the equations. We develop two different approaches to the analysis of the effects of the modulation. A first approach is based on novel estimates for the regularising effect of the modulated dispersion on the non-linear term using the theory of controlled paths. A second approach is an extension of a Strichartz estimated first obtained by Debussche and Tsutsumi in the case of the Brownian modulation for the quintic NLS.</p>
 <h2>Versions</h2>
@@ -75,7 +90,7 @@
 <p class="cite">K. Chouk and M. Gubinelli. Nonlinear PDEs with modulated dispersion I: Nonlinear Schrödinger equations. Papers of Massimiliano Gubinelli, 2013, version 3. <code class="copy">sheaf:zqfqb364gotucmqflqizauvruso7fzhapiy7bdylg3hgtgjge4qq:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v3?sha512=4b6a20c51ce56b16d2774b2f760bd895e95d0d0dbecb3f40fbf63aa95c524a868b84d1510160d570491f63a0ecd5263155d139ee8b6346b031b53f8eb2693020</code>. <a href="https://mgubi.org/papers/paper/modulated-dispersion-1/">https://mgubi.org/papers/paper/modulated-dispersion-1/</a></p>
 <p class="small">Licence: <a href="http://arxiv.org/licenses/nonexclusive-distrib/1.0/">arXiv.org perpetual, non-exclusive license to distribute; all other rights reserved to the authors</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/zqfqb364gotucmqflqizauvruso7fzhapiy7bdylg3hgtgjge4qq/v3/inventory.json"><code>4b6a20c51ce56b16d2774b2f760bd895e95d0d0dbecb3f40fbf63aa95c524a868b84d1510160d570491f63a0ecd5263155d139ee8b6346b031b53f8eb2693020</code></a></p>
+<code class="copy">4b6a20c51ce56b16d2774b2f760bd895e95d0d0dbecb3f40fbf63aa95c524a868b84d1510160d570491f63a0ecd5263155d139ee8b6346b031b53f8eb2693020</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/zqfqb364gotucmqflqizauvruso7fzhapiy7bdylg3hgtgjge4qq/v3/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

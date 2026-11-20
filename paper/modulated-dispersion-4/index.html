@@ -31,8 +31,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -47,7 +62,7 @@
 <p class="paper-meta">First issued 30 May 2025 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/h7hfx5ymovddcutucwnbbaq426pnifjsnje3yumfi65xs5ofvbxa/v2/content/paper.pdf">PDF</a></p>
 
 
-<p class="small">Line <code>sheaf:h7hfx5ymovddcutucwnbbaq426pnifjsnje3yumfi65xs5ofvbxa:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:h7hfx5ymovddcutu:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:h7hfx5ymovddcutucwnbbaq426pnifjsnje3yumfi65xs5ofvbxa:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:h7hfx5ymovddcutu:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We study the modulated Korteweg–de Vries equation (KdV) on the circle with a time non-homogeneous modulation acting on the linear dispersion term. By adapting the normal form approach to the modulated setting, we prove sharp unconditional uniqueness of solutions to the modulated KdV in $L^2(\mathbb T)$ if a modulation is sufficiently irregular. For example, this result implies that if the modulation is given by a sample path of a fractional Brownian motion with Hurst index $0 &lt; H &lt; \frac 25$, the modulated KdV on the circle is unconditionally well-posed in $L^2(\mathbb T)$. Our normal form approach provides the construction of solutions to the modulated KdV (and the associated nonlinear Young integral) without assuming any positive regularity in time. As an interesting byproduct of our normal form approach, we extend the construction of the nonlinear Young integral to a much larger class of functions, and obtain an improved Euler approximation scheme as compared to the classical sewing lemma approach. We also establish analogous sharp unconditional uniqueness results for the modulated Benjamin-Ono equation and the modulated derivative nonlinear Schrödinger equation (NLS) with a quadratic nonlinearity. In the appendix, we prove sharp unconditional uniqueness of the cubic modulated NLS on the circle in $H^{\frac 16}(\mathbb T)$.</p>
 <h2>Versions</h2>
@@ -71,7 +86,7 @@
 <p class="cite">Massimiliano Gubinelli, Guopeng Li, Jiawei Li and Tadahiro Oh. Nonlinear PDEs with modulated dispersion IV: normal form approach and unconditional uniqueness. Papers of Massimiliano Gubinelli, 2025, version 2. <code class="copy">sheaf:h7hfx5ymovddcutucwnbbaq426pnifjsnje3yumfi65xs5ofvbxa:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v2?sha512=b5f6bac6a7ee7ac3c4dcf3be5692a60fa53883ad1b97bfc7efe19d93fdfa61f7f29e60d4bb8176c221d549bccfbc1d0a7975e782adb3eb052985c8e5684b57e1</code>. <a href="https://mgubi.org/papers/paper/modulated-dispersion-4/">https://mgubi.org/papers/paper/modulated-dispersion-4/</a></p>
 <p class="small">Licence: <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/h7hfx5ymovddcutucwnbbaq426pnifjsnje3yumfi65xs5ofvbxa/v3/inventory.json"><code>b5f6bac6a7ee7ac3c4dcf3be5692a60fa53883ad1b97bfc7efe19d93fdfa61f7f29e60d4bb8176c221d549bccfbc1d0a7975e782adb3eb052985c8e5684b57e1</code></a></p>
+<code class="copy">b5f6bac6a7ee7ac3c4dcf3be5692a60fa53883ad1b97bfc7efe19d93fdfa61f7f29e60d4bb8176c221d549bccfbc1d0a7975e782adb3eb052985c8e5684b57e1</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/h7hfx5ymovddcutucwnbbaq426pnifjsnje3yumfi65xs5ofvbxa/v3/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

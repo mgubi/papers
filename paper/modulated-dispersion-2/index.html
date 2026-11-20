@@ -32,8 +32,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -48,7 +63,7 @@
 <p class="paper-meta">First issued 30 June 2014 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/ulqs6m74c27kq3ugvyznqzv5wbkyeu7j3vl5us3frxxdijedveua/v5/content/paper.pdf">PDF</a></p>
 
 
-<p class="small">Line <code>sheaf:ulqs6m74c27kq3ugvyznqzv5wbkyeu7j3vl5us3frxxdijedveua:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:ulqs6m74c27kq3ug:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:ulqs6m74c27kq3ugvyznqzv5wbkyeu7j3vl5us3frxxdijedveua:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:ulqs6m74c27kq3ug:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>(Due to the limit on the number of characters for an abstract set by arXiv, the full abstract can not be displayed here. See the abstract in the paper.) We study dispersive equations with a time non-homogeneous modulation acting on the linear dispersion term. As primary models, we consider the Korteweg-de Vries equation (KdV) and related equations such as the Benjamin-Ono equation (BO) and the intermediate long wave equation (ILW), imposing certain irregularity conditions on the time non-homogeneous modulation. In this work, we establish phenomena called regularization by noise in three-folds: (i) When the modulation is sufficiently irregular, we show that the modulated KdV on both the circle and the real line is locally well-posed in the regime where the (unmodulated) KdV equation is known to be ill-posed. In particular, given any $s \in \mathbb R$, we show that the modulated KdV on the circle with a sufficiently irregular modulation is locally well-posed in $H^s(\mathbb T)$. Moreover, by adapting the $I$-method to the current modulated setting, we prove global well-posedness of the modulated KdV in negative Sobolev spaces. (ii) It is known that certain (semilinear) dispersive equations such as BO and ILW exhibit quasilinear nature. We show that sufficiently irregular modulations make the modulated versions of these equations semilinear by establishing their local well-posedness by a contraction argument, providing local Lipschitz continuity of the solution map. (iii) We also prove nonlinear smoothing for these modulated equations, where we show that a gain of regularity of the nonlinear part becomes (arbitrarily) larger for more irregular modulations. As applications of our approach, we also include further examples.</p>
 <h2>Versions</h2>
@@ -93,7 +108,7 @@
 <p class="cite">Khalil Chouk, Massimiliano Gubinelli, Guopeng Li, Jiawei Li and Tadahiro Oh. Nonlinear PDEs with modulated dispersion II: Korteweg-de Vries equation. Papers of Massimiliano Gubinelli, 2014, version 5. <code class="copy">sheaf:ulqs6m74c27kq3ugvyznqzv5wbkyeu7j3vl5us3frxxdijedveua:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v5?sha512=fc951721e3b8f2036366fbd8f1f5d37a2092ac34d5a95029b6f073374829af645e48f6990b236314746fe62ce75bb5c6f823f3301c506a1790c5eef1d822e7b7</code>. <a href="https://mgubi.org/papers/paper/modulated-dispersion-2/">https://mgubi.org/papers/paper/modulated-dispersion-2/</a></p>
 <p class="small">Licence: <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/ulqs6m74c27kq3ugvyznqzv5wbkyeu7j3vl5us3frxxdijedveua/v5/inventory.json"><code>fc951721e3b8f2036366fbd8f1f5d37a2092ac34d5a95029b6f073374829af645e48f6990b236314746fe62ce75bb5c6f823f3301c506a1790c5eef1d822e7b7</code></a></p>
+<code class="copy">fc951721e3b8f2036366fbd8f1f5d37a2092ac34d5a95029b6f073374829af645e48f6990b236314746fe62ce75bb5c6f823f3301c506a1790c5eef1d822e7b7</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/ulqs6m74c27kq3ugvyznqzv5wbkyeu7j3vl5us3frxxdijedveua/v5/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

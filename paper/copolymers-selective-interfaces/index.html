@@ -30,8 +30,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -46,7 +61,7 @@
 <p class="paper-meta">First issued 28 September 2005 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/5vsbpk6d22q7mikbafu7mkfddimqhhmfml3hwjbnfvqdcxhcow5q/v1/content/paper.pdf">PDF</a></p>
 
 
-<p class="small">Line <code>sheaf:5vsbpk6d22q7mikbafu7mkfddimqhhmfml3hwjbnfvqdcxhcow5q:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:5vsbpk6d22q7mikb:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:5vsbpk6d22q7mikbafu7mkfddimqhhmfml3hwjbnfvqdcxhcow5q:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:5vsbpk6d22q7mikb:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We consider a model of a random copolymer at a selective interface which undergoes a localization/delocalization transition. In spite of the several rigorous results available for this model, the theoretical characterization of the phase transition has remained elusive and there is still no agreement about several important issues, for example the behavior of the polymer near the phase transition line. From a rigorous viewpoint non coinciding upper and lower bounds on the critical line are known. In this paper we combine numerical computations with rigorous arguments to get to a better understanding of the phase diagram. Our main results include: - Various numerical observations that suggest that the critical line lies strictly in between the two bounds. - A rigorous statistical test based on concentration inequalities and super-additivity, for determining whether a given point of the phase diagram is in the localized phase. This is applied in particular to show that, with a very low level of error, the lower bound does not coincide with the critical line. - An analysis of the precise asymptotic behavior of the partition function in the delocalized phase, with particular attention to the effect of rare atypical stretches in the disorder sequence and on whether or not in the delocalized regime the polymer path has a Brownian scaling. - A new proof of the lower bound on the critical line. This proof relies on a characterization of the localized regime which is more appealing for interpreting the numerical data.</p>
 <h2>Versions</h2>
@@ -63,7 +78,7 @@
 <p class="cite">F. Caravenna, G. Giacomin and M. Gubinelli. A numerical approach to copolymers at selective interfaces. Papers of Massimiliano Gubinelli, 2005, version 1. <code class="copy">sheaf:5vsbpk6d22q7mikbafu7mkfddimqhhmfml3hwjbnfvqdcxhcow5q:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v1?sha512=36710e77bb581010723c5dc0f0dee2cdbf0141cbca45639e901962f1a04d1d088775d0d655348c15b5d6c7cbd39cee60e3018cbbfc6411d89fbccdf1f0e13a31</code>. <a href="https://mgubi.org/papers/paper/copolymers-selective-interfaces/">https://mgubi.org/papers/paper/copolymers-selective-interfaces/</a></p>
 <p class="small">Licence: <a href="http://arxiv.org/licenses/assumed-1991-2003/">arXiv.org non-exclusive license to distribute, assumed for submissions of 1991-2003; all other rights reserved to the authors</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/5vsbpk6d22q7mikbafu7mkfddimqhhmfml3hwjbnfvqdcxhcow5q/v1/inventory.json"><code>36710e77bb581010723c5dc0f0dee2cdbf0141cbca45639e901962f1a04d1d088775d0d655348c15b5d6c7cbd39cee60e3018cbbfc6411d89fbccdf1f0e13a31</code></a></p>
+<code class="copy">36710e77bb581010723c5dc0f0dee2cdbf0141cbca45639e901962f1a04d1d088775d0d655348c15b5d6c7cbd39cee60e3018cbbfc6411d89fbccdf1f0e13a31</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/5vsbpk6d22q7mikbafu7mkfddimqhhmfml3hwjbnfvqdcxhcow5q/v1/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

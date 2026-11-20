@@ -29,8 +29,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -45,7 +60,7 @@
 <p class="paper-meta">First issued 31 August 2012 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/7sk47l3efyftcfsxcdoruyieke3g5xupza2r54vaamnckpj5672a/v2/content/paper.pdf">PDF</a></p>
 
 
-<p class="small">Line <code>sheaf:7sk47l3efyftcfsxcdoruyieke3g5xupza2r54vaamnckpj5672a:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:7sk47l3efyftcfsx:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:7sk47l3efyftcfsxcdoruyieke3g5xupza2r54vaamnckpj5672a:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:7sk47l3efyftcfsx:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We study a generalized 1d periodic SPDE of Burgers type: $ \partial_t u =- A^\theta u + \partial_x u^2 + A^{\theta/2} \xi $ where $\theta &gt; 1/2$, $-A$ is the 1d Laplacian, $\xi$ is a space-time white noise and the initial condition $u_0$ is taken to be (space) white noise. We introduce a notion of weak solution for this equation in the stationary setting. For these solutions we point out how the noise provide a regularizing effect allowing to prove existence and suitable estimates when $\theta&gt;1/2$. When $\theta&gt;5/4$ we obtain pathwise uniqueness. We discuss the use of the same method to study different approximations of the same equation and for a model of stationary 2d stochastic Navier-Stokes evolution.</p>
 <h2>Versions</h2>
@@ -68,7 +83,7 @@
 <p class="cite">M. Gubinelli and M. Jara. Regularization by noise and stochastic Burgers equations. Papers of Massimiliano Gubinelli, 2012, version 2. <code class="copy">sheaf:7sk47l3efyftcfsxcdoruyieke3g5xupza2r54vaamnckpj5672a:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v2?sha512=34ce8921d22c7218800d3aedacf9e578a23690ab6e849474f0b26eeb43b4aa05e2bdafdd99dd3b4e6cfd7c85e82e910eaa3fb77b578f694748fc1d132697ed88</code>. <a href="https://mgubi.org/papers/paper/burgers-regularisation-by-noise/">https://mgubi.org/papers/paper/burgers-regularisation-by-noise/</a></p>
 <p class="small">Licence: <a href="http://arxiv.org/licenses/nonexclusive-distrib/1.0/">arXiv.org perpetual, non-exclusive license to distribute; all other rights reserved to the authors</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/7sk47l3efyftcfsxcdoruyieke3g5xupza2r54vaamnckpj5672a/v2/inventory.json"><code>34ce8921d22c7218800d3aedacf9e578a23690ab6e849474f0b26eeb43b4aa05e2bdafdd99dd3b4e6cfd7c85e82e910eaa3fb77b578f694748fc1d132697ed88</code></a></p>
+<code class="copy">34ce8921d22c7218800d3aedacf9e578a23690ab6e849474f0b26eeb43b4aa05e2bdafdd99dd3b4e6cfd7c85e82e910eaa3fb77b578f694748fc1d132697ed88</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/7sk47l3efyftcfsxcdoruyieke3g5xupza2r54vaamnckpj5672a/v2/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

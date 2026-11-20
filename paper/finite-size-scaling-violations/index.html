@@ -31,8 +31,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -47,7 +62,7 @@
 <p class="paper-meta">First issued 30 October 2000 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/i6zps2edu3zyy2glf3ugpx6h33morh7acj6y3a6o5a67aib3j22a/v1/content/paper.pdf">PDF</a></p>
 
 
-<p class="small">Line <code>sheaf:i6zps2edu3zyy2glf3ugpx6h33morh7acj6y3a6o5a67aib3j22a:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:i6zps2edu3zyy2gl:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:i6zps2edu3zyy2glf3ugpx6h33morh7acj6y3a6o5a67aib3j22a:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:i6zps2edu3zyy2gl:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We address the problem of the definition of the finite-volume correlation length. First, we study the large-N limit of the N-vector model, and we show the existence of several constraints on the definition if regularity of the finite-size scaling functions and correct anomalous behaviour above the upper critical dimension are required. Then, we study in detail a model in which the zero mode in prohibited. Such a model is a generalization of the fixed-magnetization Ising model which is equivalent to the lattice gas. Also in this case, we find that the finite-volume correlation length must satisfy appropriate constraints in order to obtain regular finite-size scaling functions, and, above the upper critical dimension, an anomalous scaling behaviour. The large-N results are confirmed by a one-loop calculation in the lattice $\phi^4$ theory.</p>
 <h2>Versions</h2>
@@ -64,7 +79,7 @@
 <p class="cite">Sergio Caracciolo, Andrea Gambassi, Massimiliano Gubinelli and Andrea Pelissetto. Finite-Size Correlation Length and Violations of Finite-Size Scaling. Papers of Massimiliano Gubinelli, 2000, version 1. <code class="copy">sheaf:i6zps2edu3zyy2glf3ugpx6h33morh7acj6y3a6o5a67aib3j22a:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v1?sha512=3267e18f57b0349fbb8bae796caefb331ec8ce7d89d7f6c318249af0e6e77deca0710f55b3cc0ba482fe6a6bfa1895339699bb0a534130848dd6417ff1718760</code>. <a href="https://mgubi.org/papers/paper/finite-size-scaling-violations/">https://mgubi.org/papers/paper/finite-size-scaling-violations/</a></p>
 <p class="small">Licence: <a href="http://arxiv.org/licenses/assumed-1991-2003/">arXiv.org non-exclusive license to distribute, assumed for submissions of 1991-2003; all other rights reserved to the authors</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/i6zps2edu3zyy2glf3ugpx6h33morh7acj6y3a6o5a67aib3j22a/v1/inventory.json"><code>3267e18f57b0349fbb8bae796caefb331ec8ce7d89d7f6c318249af0e6e77deca0710f55b3cc0ba482fe6a6bfa1895339699bb0a534130848dd6417ff1718760</code></a></p>
+<code class="copy">3267e18f57b0349fbb8bae796caefb331ec8ce7d89d7f6c318249af0e6e77deca0710f55b3cc0ba482fe6a6bfa1895339699bb0a534130848dd6417ff1718760</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/i6zps2edu3zyy2glf3ugpx6h33morh7acj6y3a6o5a67aib3j22a/v1/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

@@ -29,8 +29,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -45,7 +60,7 @@
 <p class="paper-meta">First issued 30 April 2018 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/uzqm7xmgicvdehc6dc6mp7tz6in7svhcmq4kl6ts4jqkqhmacora/v2/content/paper.pdf">PDF</a></p>
 
 
-<p class="small">Line <code>sheaf:uzqm7xmgicvdehc6dc6mp7tz6in7svhcmq4kl6ts4jqkqhmacora:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:uzqm7xmgicvdehc6:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:uzqm7xmgicvdehc6dc6mp7tz6in7svhcmq4kl6ts4jqkqhmacora:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:uzqm7xmgicvdehc6:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We prove existence of global solutions to singular SPDEs on $\mathbb{R}^d$ with cubic nonlinearities and additive white noise perturbation, both in the elliptic setting in dimensions $d=4,5$ and in the parabolic setting for $d=2,3$. We prove uniqueness and coming down from infinity for the parabolic equations. A motivation for considering these equations is the construction of scalar interacting Euclidean quantum field theories. The parabolic equations are related to the $\Phi^4_d$ Euclidean quantum field theory via Parisi–Wu stochastic quantization, while the elliptic equations are linked to the $\Phi^4_{d-2}$ Euclidean quantum field theory via the Parisi–Sourlas dimensional reduction mechanism.</p>
 <h2>Versions</h2>
@@ -69,7 +84,7 @@
 <p class="cite">Massimiliano Gubinelli and Martina Hofmanová. Global solutions to elliptic and parabolic $\Phi^4$ models in Euclidean space. Papers of Massimiliano Gubinelli, 2018, version 2. <code class="copy">sheaf:uzqm7xmgicvdehc6dc6mp7tz6in7svhcmq4kl6ts4jqkqhmacora:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v2?sha512=6459a825db3058a375a6f7b0964a5ec06c1b1ec57afe71c0d2db8f728216c756d557dcbc707311dd7524aca84fda8a3231786ba66970ffeae938e5b9d1421012</code>. <a href="https://mgubi.org/papers/paper/phi4-global-solutions/">https://mgubi.org/papers/paper/phi4-global-solutions/</a></p>
 <p class="small">Licence: <a href="http://arxiv.org/licenses/nonexclusive-distrib/1.0/">arXiv.org perpetual, non-exclusive license to distribute; all other rights reserved to the authors</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/uzqm7xmgicvdehc6dc6mp7tz6in7svhcmq4kl6ts4jqkqhmacora/v2/inventory.json"><code>6459a825db3058a375a6f7b0964a5ec06c1b1ec57afe71c0d2db8f728216c756d557dcbc707311dd7524aca84fda8a3231786ba66970ffeae938e5b9d1421012</code></a></p>
+<code class="copy">6459a825db3058a375a6f7b0964a5ec06c1b1ec57afe71c0d2db8f728216c756d557dcbc707311dd7524aca84fda8a3231786ba66970ffeae938e5b9d1421012</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/uzqm7xmgicvdehc6dc6mp7tz6in7svhcmq4kl6ts4jqkqhmacora/v2/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

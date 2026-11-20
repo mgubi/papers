@@ -32,8 +32,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -48,7 +63,7 @@
 <p class="paper-meta">First issued 9 July 2026 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/dnvhzggbkkhxx5bdfgoz65bqaywldhu5wol2bd23zjmq562xarbq/v1/content/paper.pdf">PDF</a></p>
 
 
-<p class="small">Line <code>sheaf:dnvhzggbkkhxx5bdfgoz65bqaywldhu5wol2bd23zjmq562xarbq:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:dnvhzggbkkhxx5bd:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:dnvhzggbkkhxx5bdfgoz65bqaywldhu5wol2bd23zjmq562xarbq:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:dnvhzggbkkhxx5bd:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We investigate pathwise well-posedness of the stochastic modulated Korteweg-de Vries equation (KdV) on the circle with a multiplicative noise, where a time non-homogeneous modulation acts on the linear dispersion term. (i) In the Young case (= fractional-in-time case with Hurst parameter greater than $\frac 12$), we establish a new regularization-by-noise phenomenon on the stochastic convolution in a pathwise manner, where a gain of spatial regularity becomes (arbitrarily) larger for more irregular modulations. We then prove that, given any $s \in \mathbb R$ and any multiplicative Young noise, however rough it is in space, the stochastic modulated KdV is pathwise locally well-posed in $H^s(\mathbb T)$, provided that the modulation is sufficiently irregular. (ii) In the rough case (= white-in-time case), irregularity of the modulation does not induce any smoothing on the stochastic convolution, and in fact, there is a slight loss in the spatial regularity. In this case, by slightly regularizing the multiplicative noise term, we prove pathwise local well-posedness in $H^s(\mathbb T)$ for any given $s \in \mathbb R$, provided that the noise is sufficiently smooth in space. We achieve these goals by combining (i) the sewing lemma approach to the nonlinear Young integration theory, introduced by Chouk and the second author (2014), and (ii) the pathwise construction of stochastic convolutions as Young or rough integrals via the random tensor estimate and the sewing lemma, introduced by the first, fourth, and fifth authors (2026). In the appendix, we also present an example of regularization by noise for a stochastic modulated Schrödinger equation with a multiplicative Young noise.</p>
 <h2>Versions</h2>
@@ -65,7 +80,7 @@
 <p class="cite">Andreia Chapouto, Massimiliano Gubinelli, Guopeng Li, Jiawei Li and Tadahiro Oh. Nonlinear PDEs with modulated dispersion III: multiplicative noises. Papers of Massimiliano Gubinelli, 2026, version 1. <code class="copy">sheaf:dnvhzggbkkhxx5bdfgoz65bqaywldhu5wol2bd23zjmq562xarbq:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v1?sha512=2545e63dc746e5aac9e1cbfcb4ba5b2e4e655a87788e4584b8fe490766b6f910bb42447bea289771b28b32a881819ac10ddb874aaea7575a081b5a4a6d7b20fc</code>. <a href="https://mgubi.org/papers/paper/modulated-dispersion-3/">https://mgubi.org/papers/paper/modulated-dispersion-3/</a></p>
 <p class="small">Licence: <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/dnvhzggbkkhxx5bdfgoz65bqaywldhu5wol2bd23zjmq562xarbq/v1/inventory.json"><code>2545e63dc746e5aac9e1cbfcb4ba5b2e4e655a87788e4584b8fe490766b6f910bb42447bea289771b28b32a881819ac10ddb874aaea7575a081b5a4a6d7b20fc</code></a></p>
+<code class="copy">2545e63dc746e5aac9e1cbfcb4ba5b2e4e655a87788e4584b8fe490766b6f910bb42447bea289771b28b32a881819ac10ddb874aaea7575a081b5a4a6d7b20fc</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/dnvhzggbkkhxx5bdfgoz65bqaywldhu5wol2bd23zjmq562xarbq/v1/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>

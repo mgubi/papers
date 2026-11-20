@@ -31,8 +31,23 @@
   .version-date, .changes, .small, .paper-meta { font-size: 90%; color: var(--color-muted); }
   .notice, .withdrawn { border-left: 0.3em solid var(--color-title); padding: 0.4em 0.8em; margin: 0.5em 0; }
   .cite { font-size: 90%; padding: 0.5em 0.8em; background-color: var(--color-surface); }
+  .cite { overflow-wrap: anywhere; }
   code { font-size: 75%; word-break: break-all; }
+  code.copy { cursor: pointer; border-bottom: 1px dotted transparent; }
+  code.copy:hover { border-bottom-color: currentColor; }
+  code.copy.copied::after { content: " copied"; font-family: var(--title-family); color: var(--color-title); }
 </style>
+<!-- a click on an identifier (code.copy) copies it -->
+<script>
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('code.copy');
+  if (!el || !navigator.clipboard) return;
+  navigator.clipboard.writeText(el.getAttribute('data-copy') || el.textContent).then(function () {
+    el.classList.add('copied');
+    setTimeout(function () { el.classList.remove('copied'); }, 1200);
+  });
+});
+</script>
 <!-- titles and abstracts write their mathematics between dollar signs (OpenSheaf, section 8) -->
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']], processEscapes: true}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
@@ -47,7 +62,7 @@
 <p class="paper-meta">First issued 20 April 2020 · <a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/os5khwseyz5at5lt3zy4jrze3jgesukpyzqjkq62v4kvndcdouma/v4/content/paper.pdf">PDF</a> · <a href="../../site/grassmann-stochastic-analysis/grassmann-stochastic-analysis.html">HTML</a></p>
 
 
-<p class="small">Line <code>sheaf:os5khwseyz5at5lt3zy4jrze3jgesukpyzqjkq62v4kvndcdouma:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code>sheaf:os5khwseyz5at5lt:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
+<p class="small">Line <code class="copy">sheaf:os5khwseyz5at5lt3zy4jrze3jgesukpyzqjkq62v4kvndcdouma:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code> (short: <code class="copy">sheaf:os5khwseyz5at5lt:em4v3kp5btra7jlg</code>)<br>Owner <a href="../../owner/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/"><code>em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora</code></a> · keeper <a href="https://orcid.org/0000-0002-4014-2949">https://orcid.org/0000-0002-4014-2949</a></p>
 <h2>Abstract</h2>
 <p>We introduce a stochastic analysis of Grassmann random variables suitable for the stochastic quantization of Euclidean fermionic quantum field theories. Analysis on Grassmann algebras is developed here from the point of view of quantum probability: a Grassmann random variable is an homomorphism of an abstract Grassmann algebra into a quantum probability space, i.e. a $C^{\ast}$-algebra endowed with a suitable state. We define the notion of Gaussian processes, Brownian motion and stochastic (partial) differential equations taking values in Grassmann algebras. We use them to study the long time behavior of finite and infinite dimensional Langevin Grassmann stochastic differential equations driven by Gaussian space-time white noise and to describe their invariant measures. As an application we give a proof of the stochastic quantization and of the removal of the space cut-off for the Euclidean Yukawa model.</p>
 <h2>Versions</h2>
@@ -84,7 +99,7 @@
 <p class="cite">Sergio Albeverio, Luigi Borasi, Francesco C. De Vecchi and Massimiliano Gubinelli. Grassmannian stochastic analysis and the stochastic quantization of Euclidean Fermions. Papers of Massimiliano Gubinelli, 2020, version 4. <code class="copy">sheaf:os5khwseyz5at5lt3zy4jrze3jgesukpyzqjkq62v4kvndcdouma:em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/v4?sha512=15fc2c34b4a5d653a2193ec8722a0ebd0cf7514b713ba3bde127979993d566a0a8925aaa4b0f59aa2280e06dcbffde78dd19840788a33803a6548d980c990280</code>. <a href="https://mgubi.org/papers/paper/grassmann-stochastic-analysis/">https://mgubi.org/papers/paper/grassmann-stochastic-analysis/</a></p>
 <p class="small">Licence: <a href="http://arxiv.org/licenses/nonexclusive-distrib/1.0/">arXiv.org perpetual, non-exclusive license to distribute; all other rights reserved to the authors</a></p>
 <p class="small">Pin in the collection (SHA-512 of the inventory it fixes):
-<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/os5khwseyz5at5lt3zy4jrze3jgesukpyzqjkq62v4kvndcdouma/v4/inventory.json"><code>15fc2c34b4a5d653a2193ec8722a0ebd0cf7514b713ba3bde127979993d566a0a8925aaa4b0f59aa2280e06dcbffde78dd19840788a33803a6548d980c990280</code></a></p>
+<code class="copy">15fc2c34b4a5d653a2193ec8722a0ebd0cf7514b713ba3bde127979993d566a0a8925aaa4b0f59aa2280e06dcbffde78dd19840788a33803a6548d980c990280</code> (<a href="../../ocfl/em4v3kp5btra7jlggxhvl5y6uluymzk2ezcdjg4pnptnk5tygora/os5khwseyz5at5lt3zy4jrze3jgesukpyzqjkq62v4kvndcdouma/v4/inventory.json">the inventory</a>)</p>
 <p class="small">Papers of Massimiliano Gubinelli: an <a href="https://opensheaf.org">OpenSheaf</a> archive
 (format 0.2, a draft); this page is generated by
 <a href="https://github.com/opensheaf/opensheaf-py">opensheaf-py</a> from the archive.</p>
